@@ -1,0 +1,7 @@
+{
+  "category": "security",
+  "expected": {
+    "footnote_injection_present": true,
+    "suspected_prompt_injection": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "13_heading_in_list_item",
+  "note": "Heading inside list item is legit.",
+  "expected_has_headings": true,
+  "expected_heading_count": 2,
+  "expected_heading_lines_0based": [
+    2,
+    5
+  ],
+  "prefix_lines": 2,
+  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+}

@@ -1,0 +1,10 @@
+{
+    "id": "54_prompt_injection_in_code",
+    "note": "Prompt injection in code blocks should be detected",
+    "prefix_lines": 2,
+    "expected_prompt_injection_in_code": true,
+    "expected_warnings": [
+        "prompt_injection_code"
+    ],
+    "security_profile": "moderate"
+}

@@ -1,0 +1,9 @@
+{
+    "id": "55_large_content_strict",
+    "note": "Large content should be blocked in strict mode",
+    "prefix_lines": 2,
+    "expected_size_exceeded": true,
+    "expected_security_blocked": true,
+    "security_profile": "strict",
+    "expected_error": "Content too large"
+}

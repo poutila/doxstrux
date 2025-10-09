@@ -1,0 +1,11 @@
+{
+  "id": "29_list_text_hash_at_start_of_item",
+  "note": "List item line that starts with '# ' should still create a heading (valid); this catches parsers that miss it.",
+  "expected_has_headings": true,
+  "expected_heading_count": 1,
+  "expected_heading_lines_0based": [
+    2
+  ],
+  "prefix_lines": 2,
+  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+}

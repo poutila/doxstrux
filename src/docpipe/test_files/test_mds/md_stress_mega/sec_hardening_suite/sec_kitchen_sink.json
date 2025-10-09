@@ -1,0 +1,13 @@
+{
+  "category": "security",
+  "expected": {
+    "has_html_block": true,
+    "has_script": true,
+    "event_handler_attrs": true,
+    "has_data_uri_images": true,
+    "link_schemes": {
+      "malformed": 1
+    },
+    "suspected_prompt_injection": true
+  }
+}

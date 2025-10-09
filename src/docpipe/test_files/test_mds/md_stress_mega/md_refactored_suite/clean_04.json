@@ -1,0 +1,24 @@
+{
+  "id": "clean_04",
+  "kind": "clean",
+  "features": {
+    "headings": 4,
+    "lists": 5,
+    "tables": 6,
+    "fences": 0,
+    "indented_code_lines": 1,
+    "images": 0,
+    "links": 8,
+    "math_blocks": 0,
+    "html_blocks": 0,
+    "footnote_refs": 0,
+    "footnote_defs": 0,
+    "admonitions": 0,
+    "definition_list": 0
+  },
+  "intended_flags": [
+    "broken-links",
+    "file-links",
+    "ragged-table"
+  ]
+}

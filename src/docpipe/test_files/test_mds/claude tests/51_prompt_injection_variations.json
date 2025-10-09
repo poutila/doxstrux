@@ -1,0 +1,10 @@
+{
+    "id": "51_prompt_injection_variations",
+    "note": "Prompt injection variations should be detected",
+    "prefix_lines": 2,
+    "expected_suspected_prompt_injection": true,
+    "expected_warnings": [
+        "prompt_injection"
+    ],
+    "security_profile": "moderate"
+}

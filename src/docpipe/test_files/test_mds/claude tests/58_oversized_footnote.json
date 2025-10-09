@@ -1,0 +1,10 @@
+{
+    "id": "58_oversized_footnote",
+    "note": "Oversized footnotes should be detected",
+    "prefix_lines": 2,
+    "expected_oversized_footnotes": true,
+    "expected_warnings": [
+        "oversized_footnote"
+    ],
+    "security_profile": "moderate"
+}

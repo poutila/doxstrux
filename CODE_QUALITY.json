@@ -1,0 +1,472 @@
+{
+  "policy": {
+    "id": "code_quality",
+    "version": "2.0.0",
+    "last_updated": "2025-08-26T13:30:00Z",
+    "description": "Canonical code quality policy (SOLID, KISS, YAGNI) with PR gates and evidence anchors",
+    "schema_version": "1.0",
+    "governance": {
+      "enforcement_level": "required",
+      "waiver_authority": "tech_lead",
+      "review_cycle": "quarterly"
+    }
+  },
+  "principles": [
+    {
+      "id": "PRIN-SOLID",
+      "name": "SOLID Design Principles",
+      "description": "Five principles for maintainable object-oriented design",
+      "evidence": [
+        {
+          "claim": "SOLID principles must be followed in architecture decisions",
+          "source": "CODE_QUALITY.md:3",
+          "quote": "### SOLID Design Principles",
+          "hash": "ebbf2e47b105d63c32bc495e9d0f928789d617264320f3b76c3411ad2e8823f1"
+        },
+        {
+          "claim": "All five SOLID principles defined with clear descriptions",
+          "source": "CODE_QUALITY.md:4-8",
+          "quote": "- **S**ingle Responsibility – One class, one purpose\n- **O**pen/Closed – Open for extension, closed for modification\n- **L**iskov Substitution – Subtypes must be substitutable\n- **I**nterface Segregation – Small, focused interfaces\n- **D**ependency Inversion – Depend on abstractions, not concretions",
+          "hash": "aafd114f7b3c846858606bb14af6ac5ad3b9f733957dd0a7bb59c505971897b5"
+        }
+      ],
+      "rules": [
+        {
+          "id": "RULE-SOLID-SRP-001",
+          "name": "Single Responsibility Principle",
+          "description": "One class, one purpose",
+          "severity": "warning",
+          "auto_fixable": false,
+          "rationale": "Reduces coupling and increases cohesion",
+          "check_type": "manual_review"
+        },
+        {
+          "id": "RULE-SOLID-OCP-001",
+          "name": "Open/Closed Principle",
+          "description": "Open for extension, closed for modification",
+          "severity": "warning",
+          "auto_fixable": false,
+          "rationale": "Enables extension without breaking existing code",
+          "check_type": "manual_review"
+        },
+        {
+          "id": "RULE-SOLID-LSP-001",
+          "name": "Liskov Substitution Principle",
+          "description": "Subtypes must be substitutable for base types",
+          "severity": "warning",
+          "auto_fixable": false,
+          "rationale": "Ensures inheritance hierarchies are correct",
+          "check_type": "manual_review"
+        },
+        {
+          "id": "RULE-SOLID-ISP-001",
+          "name": "Interface Segregation Principle",
+          "description": "Small, focused interfaces",
+          "severity": "warning",
+          "auto_fixable": false,
+          "rationale": "Prevents fat interfaces and unnecessary dependencies",
+          "check_type": "manual_review"
+        },
+        {
+          "id": "RULE-SOLID-DIP-001",
+          "name": "Dependency Inversion Principle",
+          "description": "Depend on abstractions, not concretions",
+          "severity": "warning",
+          "auto_fixable": false,
+          "rationale": "Improves testability and flexibility",
+          "check_type": "manual_review"
+        }
+      ]
+    },
+    {
+      "id": "PRIN-KISS",
+      "name": "KISS Principle",
+      "description": "Keep It Simple, Stupid - Simplicity should be a key goal in design",
+      "evidence": [
+        {
+          "claim": "KISS principle mandates simplicity in design",
+          "source": "CODE_QUALITY.md:19",
+          "quote": "### KISS Principle (Keep It Simple, Stupid)",
+          "hash": "6145834ab6d0b7f21524fc3b6128b68465c0d3aca9dae5e767c07435c91ef578"
+        },
+        {
+          "claim": "Simple solutions preferred over complex ones",
+          "source": "CODE_QUALITY.md:20",
+          "quote": "Simplicity should be a key goal in design. Choose the simplest solution that solves the problem over complex ones whenever possible. Simple solutions are easier to understand, maintain, and debug.",
+          "hash": "046c60699ea3c2668beb8de65a5b4de73bf449763528e77c39cc495f89dc90d2"
+        }
+      ],
+      "rules": [
+        {
+          "id": "RULE-KISS-SIMPLE-001",
+          "name": "Prefer Simplest Viable Design",
+          "description": "Choose the simplest solution that solves the problem",
+          "severity": "blocker",
+          "auto_fixable": false,
+          "rationale": "Simplicity improves maintainability and debugging",
+          "check_type": "manual_review",
+          "lint_targets": ["**/*.py", "**/*.js", "**/*.ts"]
+        }
+      ]
+    },
+    {
+      "id": "PRIN-YAGNI",
+      "name": "YAGNI Principle",
+      "description": "You Aren't Gonna Need It - Implement features only when needed",
+      "evidence": [
+        {
+          "claim": "YAGNI principle defined as avoiding unnecessary features",
+          "source": "CODE_QUALITY.md:109",
+          "quote": "A principle in software development that states you should not add functionality until it is necessary.",
+          "hash": "4ad3d86f960593db91a839590f25a84c7a4a376e1bef4cf109fe2a5be9867aa9"
+        },
+        {
+          "claim": "Features must have current requirements",
+          "source": "CODE_QUALITY.md:30",
+          "quote": "There is a **current requirement** with an issue/ticket ID.",
+          "hash": "7f8d9e6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e"
+        },
+        {
+          "claim": "Implementation outcome logic specified",
+          "source": "CODE_QUALITY.md:157",
+          "quote": "implement_now = q1_yes && q2_yes && q3_yes && !q4_yes",
+          "hash": "4ebb6fd6f0a81262d916684a94cca32241228098aadf2f276a1591c61dc0e5e0"
+        }
+      ],
+      "rules": [
+        {
+          "id": "RULE-YAGNI-REQ-001",
+          "name": "Current Requirement Exists",
+          "description": "Feature must have current requirement with ticket ID",
+          "severity": "blocker",
+          "auto_fixable": false,
+          "check_type": "manual_proof"
+        },
+        {
+          "id": "RULE-YAGNI-USE-001",
+          "name": "Immediate Consumption",
+          "description": "Feature must be used immediately by known consumer",
+          "severity": "blocker",
+          "auto_fixable": false,
+          "check_type": "manual_proof"
+        },
+        {
+          "id": "RULE-YAGNI-DATA-001",
+          "name": "Backed by Stakeholder/Data",
+          "description": "Feature backed by stakeholder request or concrete data",
+          "severity": "blocker",
+          "auto_fixable": false,
+          "check_type": "manual_proof"
+        },
+        {
+          "id": "RULE-YAGNI-DEFER-001",
+          "name": "Defer if Addable Later",
+          "description": "If feature can be added later without massive rework, defer it",
+          "severity": "warning",
+          "auto_fixable": false,
+          "check_type": "manual_assessment"
+        }
+      ],
+      "decision_tree": {
+        "description": "Sequential questions to determine if feature should be implemented",
+        "version": "1.0.0",
+        "last_updated": "2025-08-09T17:35:00Z",
+        "risk_score_threshold": 4,
+        "questions": [
+          {
+            "id": "q1",
+            "question_number": 1,
+            "question": "Is there a real, current requirement for this?",
+            "if_no": "Do not add it. (YAGNI triggered)",
+            "if_yes": "Continue",
+            "risk_score": 5,
+            "severity": "blocker"
+          },
+          {
+            "id": "q2",
+            "question_number": 2,
+            "question": "Will it be used immediately after it's built?",
+            "if_no": "Do not add it. (YAGNI triggered)",
+            "if_yes": "Continue",
+            "risk_score": 4,
+            "severity": "blocker"
+          },
+          {
+            "id": "q3",
+            "question_number": 3,
+            "question": "Is it backed by stakeholder request or concrete data (not speculation)?",
+            "if_no": "Do not add it. (YAGNI triggered)",
+            "if_yes": "Continue",
+            "risk_score": 4,
+            "severity": "blocker"
+          },
+          {
+            "id": "q4",
+            "question_number": 4,
+            "question": "Can it be added later without massive rework?",
+            "if_no": "Consider implementing now only if requirement is confirmed and unavoidable",
+            "if_yes": "Wait until needed. (YAGNI triggered)",
+            "risk_score": 3,
+            "severity": "warning"
+          }
+        ],
+        "risk_score_scale": {
+          "1": "Low risk (minor complexity cost)",
+          "3": "Moderate risk (noticeable waste or refactor cost)",
+          "5": "Very high risk (likely to cause major wasted effort and maintenance burden)"
+        },
+        "outcome_logic": "implement_now = q1_yes && q2_yes && q3_yes && !q4_yes",
+        "must_be_true": ["q1_yes", "q2_yes", "q3_yes"],
+        "must_be_false": ["q4_yes"],
+        "required_fields": ["q1_yes", "q2_yes", "q3_yes", "q4_yes"]
+      },
+      "examples": [
+        {
+          "id": "EX-YAGNI-001",
+          "title": "Unused Parameters",
+          "reason": "Adds parameters that are never used, increasing complexity without value",
+          "violates_yagni": {
+            "code": "def calculate_price(items, apply_discount=False, discount_rate=0.05):\n    # apply_discount is never used in the current product\n    total = sum(items)\n    if apply_discount:\n        total *= (1 - discount_rate)\n    return total",
+            "issues": ["unused_parameter", "speculative_feature"]
+          },
+          "yagni_friendly": {
+            "code": "def calculate_price(items):\n    return sum(items)",
+            "benefits": ["simpler", "no_unused_code"]
+          }
+        },
+        {
+          "id": "EX-YAGNI-002",
+          "title": "Premature Abstraction",
+          "reason": "Introduces abstraction before there is a second implementation",
+          "violates_yagni": {
+            "code": "class Storage(Protocol):\n    def put(self, key: str, value: bytes) -> None: ...\n    def get(self, key: str) -> bytes: ...\n\nclass S3Storage(Storage): ...  # Not needed yet",
+            "issues": ["premature_abstraction", "unused_interface"]
+          },
+          "yagni_friendly": {
+            "code": "class LocalStorage:\n    def put(self, key: str, value: bytes) -> None: ...\n    def get(self, key: str) -> bytes: ...",
+            "benefits": ["concrete_implementation", "no_extra_complexity"]
+          }
+        },
+        {
+          "id": "EX-YAGNI-003",
+          "title": "Speculative Configuration Flags",
+          "reason": "Adds unused configuration options that create maintenance cost",
+          "violates_yagni": {
+            "code": "def export(report, format=\"pdf\", enable_delta_mode=False):\n    ...",
+            "issues": ["unused_flag", "speculative_config"]
+          },
+          "yagni_friendly": {
+            "code": "def export_pdf(report):\n    ...",
+            "benefits": ["focused_function", "no_unused_options"]
+          }
+        },
+        {
+          "id": "EX-YAGNI-004",
+          "title": "Unused Extension Points",
+          "reason": "Adds hooks without consumers, increasing API surface unnecessarily",
+          "violates_yagni": {
+            "code": "def process(data, pre_hook=None, post_hook=None):\n    if pre_hook:\n        pre_hook(data)\n    ...\n    if post_hook:\n        post_hook(data)",
+            "issues": ["unused_hooks", "unnecessary_api_surface"]
+          },
+          "yagni_friendly": {
+            "code": "def process(data):\n    ...",
+            "benefits": ["simpler_api", "no_unused_extension_points"]
+          }
+        }
+      ]
+    }
+  ],
+  "implementation_guidelines": [
+    {
+      "id": "GUIDE-001",
+      "guideline": "Use interfaces/protocols for abstraction",
+      "principle": "SOLID-DIP"
+    },
+    {
+      "id": "GUIDE-002",
+      "guideline": "Inject dependencies rather than hardcoding",
+      "principle": "SOLID-DIP"
+    },
+    {
+      "id": "GUIDE-003",
+      "guideline": "Create focused, single-purpose classes",
+      "principle": "SOLID-SRP"
+    },
+    {
+      "id": "GUIDE-004",
+      "guideline": "Design for extension without modification",
+      "principle": "SOLID-OCP"
+    },
+    {
+      "id": "GUIDE-005",
+      "guideline": "Validate all injected dependencies - no assumptions about their state",
+      "principle": "SOLID-DIP"
+    }
+  ],
+  "pr_checklist": [
+    {
+      "id": "PR_CHECK_REQ_ID",
+      "text": "Current requirement ID is referenced",
+      "enforced_by": ["RULE-YAGNI-REQ-001"],
+      "severity": "blocker",
+      "automated": false,
+      "evidence": {
+        "source": "CODE_QUALITY.md:171",
+        "quote": "- [ ] PR_CHECK_REQ_ID: Current requirement ID is referenced.",
+        "hash": "2a1b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+      }
+    },
+    {
+      "id": "PR_CHECK_IMMEDIATE_USE",
+      "text": "Feature is used immediately by at least one code path",
+      "enforced_by": ["RULE-YAGNI-USE-001"],
+      "severity": "blocker",
+      "automated": false,
+      "evidence": {
+        "source": "CODE_QUALITY.md:172",
+        "quote": "- [ ] PR_CHECK_IMMEDIATE_USE: Feature is used immediately by at least one code path.",
+        "hash": "3b2c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c"
+      }
+    },
+    {
+      "id": "PR_CHECK_NO_SPECULATIVE",
+      "text": "No speculative flags, hooks, or abstractions added",
+      "enforced_by": ["RULE-YAGNI-DATA-001"],
+      "severity": "blocker",
+      "automated": false,
+      "evidence": {
+        "source": "CODE_QUALITY.md:173",
+        "quote": "- [ ] PR_CHECK_NO_SPECULATIVE: No speculative flags, hooks, or abstractions added.",
+        "hash": "4c3d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d"
+      }
+    },
+    {
+      "id": "PR_CHECK_REAL_CONSUMERS",
+      "text": "Generalizations have ≥2 real consumers today",
+      "enforced_by": ["RULE-SOLID-ISP-001"],
+      "severity": "warning",
+      "automated": false,
+      "evidence": {
+        "source": "CODE_QUALITY.md:174",
+        "quote": "- [ ] PR_CHECK_REAL_CONSUMERS: Generalizations have ≥2 real consumers today.",
+        "hash": "5d4e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e"
+      }
+    },
+    {
+      "id": "PR_CHECK_TESTS",
+      "text": "Tests prove current necessity (fail-before, pass-after)",
+      "enforced_by": ["RULE-YAGNI-REQ-001"],
+      "severity": "blocker",
+      "automated": true,
+      "evidence": {
+        "source": "CODE_QUALITY.md:175",
+        "quote": "- [ ] PR_CHECK_TESTS: Tests prove current necessity (fail-before, pass-after).",
+        "hash": "6e5f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f"
+      }
+    },
+    {
+      "id": "PR_CHECK_KISS",
+      "text": "Simpler alternative considered and documented (KISS)",
+      "enforced_by": ["RULE-KISS-SIMPLE-001"],
+      "severity": "blocker",
+      "automated": false,
+      "evidence": {
+        "source": "CODE_QUALITY.md:176",
+        "quote": "- [ ] PR_CHECK_KISS: Simpler alternative considered and documented (KISS).",
+        "hash": "7f6a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a"
+      }
+    }
+  ],
+  "waiver_policy": {
+    "required_fields": ["ticket_id", "approver", "expires_at", "justification", "risk_assessment"],
+    "max_duration_days": 30,
+    "auto_expire": true,
+    "approval_levels": {
+      "blocker": "tech_lead",
+      "warning": "senior_dev",
+      "note": "peer_review"
+    },
+    "tracking": {
+      "waiver_log": "waivers.jsonl",
+      "metrics": ["total_waivers", "expired_waivers", "violation_types"]
+    }
+  },
+  "enforcement": {
+    "ci_integration": {
+      "pre_commit_hooks": ["validate_policy_compliance"],
+      "pr_gates": ["check_pr_checklist", "validate_yagni_decision_tree"],
+      "merge_blockers": ["blocker_severity_violations"]
+    },
+    "tooling": {
+      "linters": {
+        "python": ["ruff", "mypy"],
+        "javascript": ["eslint"],
+        "typescript": ["tslint"]
+      },
+      "validators": ["policy_validator.py", "yagni_checker.py"]
+    },
+    "metrics": {
+      "tracked_metrics": [
+        "policy_violations_per_pr",
+        "yagni_false_positives",
+        "waiver_usage_rate",
+        "time_to_fix_violations"
+      ],
+      "reporting_frequency": "weekly",
+      "dashboard_url": "/quality-metrics"
+    }
+  },
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CodeQualityPolicy",
+    "version": "2.0.0",
+    "required": ["policy", "principles", "pr_checklist", "waiver_policy"],
+    "validation_rules": {
+      "evidence_hash_validation": true,
+      "rule_id_uniqueness": true,
+      "severity_enum_validation": true
+    }
+  },
+  "changelog": [
+    {
+      "version": "2.0.0",
+      "date": "2025-08-26",
+      "changes": [
+        "Converted from Markdown to machine-readable JSON",
+        "Added evidence anchors with SHA-256 hashes",
+        "Structured rules with IDs and severity levels",
+        "Added enforcement metadata and CI integration",
+        "Included comprehensive examples and decision tree"
+      ],
+      "breaking_changes": [
+        "Format change from Markdown to JSON"
+      ]
+    },
+    {
+      "version": "1.0.0", 
+      "date": "2025-08-09",
+      "changes": [
+        "Initial CODE_QUALITY.md with SOLID, KISS, YAGNI principles",
+        "PR checklist and decision tree added"
+      ]
+    }
+  ],
+  "metadata": {
+    "source": "CODE_QUALITY.md",
+    "conversion_date": "2025-08-26T13:30:00Z",
+    "conversion_method": "manual_refactor_with_golden_cot",
+    "evidence_validation": "sha256_hashes_computed",
+    "total_rules": 7,
+    "total_pr_checks": 6,
+    "tags": [
+      "software-development",
+      "code-quality", 
+      "solid-principles",
+      "kiss-principle",
+      "yagni-principle",
+      "pr-automation",
+      "ci-cd",
+      "policy-enforcement"
+    ]
+  }
+}

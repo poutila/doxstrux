@@ -1,0 +1,10 @@
+{
+  "id": "valid_02_list_numbers",
+  "expected_is_yaml_frontmatter": true,
+  "reason": "mapping_with_sequence_and_scalar_numbers",
+  "expect_keys": [
+    "title",
+    "version",
+    "tags"
+  ]
+}

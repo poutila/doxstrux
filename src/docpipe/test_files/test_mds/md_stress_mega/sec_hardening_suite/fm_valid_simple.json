@@ -1,0 +1,11 @@
+{
+  "category": "frontmatter",
+  "expected": {
+    "accepted": true,
+    "reason": "bof_yaml",
+    "expect_keys": [
+      "title",
+      "author"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "category": "table",
+  "expected": {
+    "is_rectangular": false,
+    "ragged": false,
+    "align_mismatch": false,
+    "note": "Inside code, not a table"
+  }
+}

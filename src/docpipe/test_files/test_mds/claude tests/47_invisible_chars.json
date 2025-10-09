@@ -1,0 +1,11 @@
+{
+    "id": "47_invisible_chars",
+    "note": "Invisible Unicode characters should be detected",
+    "prefix_lines": 2,
+    "expected_unicode_risk_score": 1,
+    "expected_invisible_chars": true,
+    "expected_warnings": [
+        "invisible_characters"
+    ],
+    "security_profile": "moderate"
+}

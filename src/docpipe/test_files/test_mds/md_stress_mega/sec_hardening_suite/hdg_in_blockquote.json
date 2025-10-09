@@ -1,0 +1,10 @@
+{
+  "category": "heading",
+  "expected": {
+    "doc_level_count": 0,
+    "in_list_count": 0,
+    "in_blockquote_count": 1,
+    "total_count": 1,
+    "notes": "Scoped to quote"
+  }
+}

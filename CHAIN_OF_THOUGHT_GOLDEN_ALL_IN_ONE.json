@@ -1,0 +1,296 @@
+{
+  "version": "1.2.1",
+  "format": "golden_egg_all_in_one",
+  "description": "Golden CoT with reflection loop, strict evidence anchors, explicit thinking/execution boundaries, and embedded semantic types.",
+  "cognitive_dna": {
+    "decision_chains": [
+      {
+        "what": "[What to do]",
+        "why": ["[Evidence-based reason]"],
+        "why_not": null,
+        "impact": null
+      },
+      {
+        "what": "[Primary action]",
+        "why": ["[Evidence-based reason]"],
+        "why_not": {"alternative": "[Alt] because [reason]"},
+        "impact": "[Consequence]"
+      }
+    ],
+    "evidence_anchors": [
+      {
+        "claim": "[assertion]",
+        "claim_id": "CLM-001",
+        "evidence_id": "EVD-101",
+        "source": "file.ext:123",
+        "quote": "\"<exact text>\"",
+        "context": "\"<±3 lines for clarity>\"",
+        "hash": "<sha256-of-quote>"
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "thinking": [
+          "--- THINKING ---",
+          "- Assumptions",
+          "- Risks",
+          "- Trade-offs"
+        ],
+        "execution": [
+          "--- EXECUTION ---",
+          "Command: <exact command>",
+          "Output: <expected file/result>",
+          "Validation: <how to verify>"
+        ],
+        "language": "markdown"
+      }
+    ],
+    "failure_paths": [
+      {
+        "try_action": "primary_approach",
+        "catch_condition": "execution_failure",
+        "rollback": "[rollback action]"
+      }
+    ],
+    "success_criteria": [
+      {
+        "criteria": "All TRANSFORM templates include ≥1 worked example",
+        "verify_command": "python scripts/golden_validate.py --rule transform-content",
+        "measurable": true
+      },
+      {
+        "criteria": "Every evidence anchor has valid sha256 hash",
+        "verify_command": "python scripts/golden_validate.py --rule evidence-hash",
+        "measurable": true
+      }
+    ]
+  },
+  "governance": {
+    "rules": {
+      "golden_only": true,
+      "evidence_required": true,
+      "schema_validation": true,
+      "stop_on_ambiguity": true,
+      "separate_thinking_and_execution": true,
+      "reflection_loop_required": true
+    },
+    "thresholds": {
+      "confidence_min": 0.8,
+      "token_budget_ratio": 0.9
+    }
+  },
+  "stop_rules": {
+    "conditions": [
+      "confidence < governance.thresholds.confidence_min",
+      "missing required evidence fields (claim | source | quote)",
+      "schema validation failure for evidence or trace links"
+    ],
+    "template_block": {
+      "type": "STOP_CLARIFICATION_REQUIRED",
+      "reason": "<why we cannot proceed>",
+      "blocking": "<which element is missing/ambiguous>",
+      "needed": "<minimal info to continue>",
+      "next_step_after_unblock": "<what will be executed once provided>"
+    },
+    "on_stop": {
+      "action": "return_stop_block",
+      "rollback": "undo partial changes / do not execute commands"
+    }
+  },
+  "schemas": {
+    "evidence_anchor_schema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "EvidenceAnchor",
+      "type": "object",
+      "required": ["claim", "source"],
+      "properties": {
+        "claim": {"type": "string", "minLength": 1},
+        "claim_id": {"type": "string"},
+        "evidence_id": {"type": "string"},
+        "source": {"type": "string", "minLength": 1},
+        "quote": {"type": "string"},
+        "context": {"type": "string"},
+        "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "allOf": [
+        {
+          "anyOf": [
+            {"required": ["quote"]},
+            {"required": ["evidence_id"]}
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "trace_link_schema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "TraceLink",
+      "type": "object",
+      "required": ["decision", "evidence_claims", "impact"],
+      "properties": {
+        "decision": {"type": "string", "minLength": 1},
+        "decision_id": {"type": "string"},
+        "impact": {"type": "string", "minLength": 1},
+        "evidence_claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["claim", "source", "quote_hash"],
+            "properties": {
+              "claim": {"type": "string"},
+              "source": {"type": "string"},
+              "quote_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+            }
+          }
+        },
+        "related": {
+          "type": "object",
+          "properties": {
+            "claims": {"type": "array", "items": {"type": "string"}},
+            "facts": {"type": "array", "items": {"type": "string"}},
+            "assumptions": {"type": "array", "items": {"type": "string"}},
+            "risks": {"type": "array", "items": {"type": "string"}},
+            "mitigations": {"type": "array", "items": {"type": "string"}}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "semantic_types": {
+    "notes": "Canonical shapes for reasoning objects",
+    "$defs": {
+      "Assumption": {
+        "type": "object",
+        "required": ["id", "statement"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      },
+      "Claim": {
+        "type": "object",
+        "required": ["id", "statement"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"},
+          "scope": {"type": "string"}
+        }
+      },
+      "Evidence": {
+        "type": "object",
+        "required": ["id", "source", "quote"],
+        "properties": {
+          "id": {"type": "string"},
+          "source": {"type": "string"},
+          "quote": {"type": "string"},
+          "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "quality": {"type": "string", "enum": ["low","medium","high"]}
+        }
+      },
+      "Fact": {
+        "type": "object",
+        "required": ["id", "statement", "is_verifiable"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"},
+          "is_verifiable": {"type": "boolean"}
+        }
+      },
+      "Signal": {
+        "type": "object",
+        "required": ["id", "observation"],
+        "properties": {
+          "id": {"type": "string"},
+          "observation": {"type": "string"},
+          "strength": {"type": "string", "enum": ["weak","moderate","strong"]}
+        }
+      },
+      "Risk": {
+        "type": "object",
+        "required": ["id", "description", "likelihood", "impact"],
+        "properties": {
+          "id": {"type": "string"},
+          "description": {"type": "string"},
+          "likelihood": {"type": "string", "enum": ["low","medium","high"]},
+          "impact": {"type": "string", "enum": ["low","medium","high"]}
+        }
+      },
+      "Mitigation": {
+        "type": "object",
+        "required": ["id", "action"],
+        "properties": {
+          "id": {"type": "string"},
+          "action": {"type": "string"}
+        }
+      },
+      "Constraint": {
+        "type": "object",
+        "required": ["id", "rule"],
+        "properties": {
+          "id": {"type": "string"},
+          "rule": {"type": "string"}
+        }
+      },
+      "Goal": {
+        "type": "object",
+        "required": ["id", "outcome"],
+        "properties": {
+          "id": {"type": "string"},
+          "outcome": {"type": "string"}
+        }
+      },
+      "Question": {
+        "type": "object",
+        "required": ["id", "text"],
+        "properties": {
+          "id": {"type": "string"},
+          "text": {"type": "string"}
+        }
+      },
+      "Hypothesis": {
+        "type": "object",
+        "required": ["id", "proposition"],
+        "properties": {
+          "id": {"type": "string"},
+          "proposition": {"type": "string"}
+        }
+      },
+      "HypothesisTestResult": {
+        "type": "object",
+        "required": ["id", "hypothesis_id", "result"],
+        "properties": {
+          "id": {"type": "string"},
+          "hypothesis_id": {"type": "string"},
+          "result": {"type": "string", "enum": ["supported","inconclusive","refuted"]}
+        }
+      },
+      "Counterclaim": {
+        "type": "object",
+        "required": ["id", "statement"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"}
+        }
+      }
+    }
+  },
+  "validation": {
+    "pipeline": [
+      "1. Build decision_chain",
+      "2. Attach evidence_anchors (must pass schema)",
+      "3. Create trace links (must pass schema)",
+      "4. If confidence < threshold OR schema fails → STOP",
+      "5. Separate --- THINKING --- from --- EXECUTION ---",
+      "6. Reflect: assess if evidence + decisions satisfy success_criteria; if not, issue STOP",
+      "7. Cross-ref: validate any *_id fields against semantic_types.$defs"
+    ]
+  },
+  "defaults": {
+    "confidence": 0.9,
+    "verify_command": "python scripts/golden_validate.py"
+  }
+}

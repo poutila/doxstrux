@@ -1,0 +1,9 @@
+{
+  "id": "valid_01_simple",
+  "expected_is_yaml_frontmatter": true,
+  "reason": "well_formed_yaml_between_top_fences",
+  "expect_keys": [
+    "title",
+    "author"
+  ]
+}

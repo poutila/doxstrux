@@ -1,0 +1,12 @@
+{
+  "id": "11_mixed_legit_and_traps",
+  "note": "Has real headings plus traps nearby.",
+  "expected_has_headings": true,
+  "expected_heading_count": 2,
+  "expected_heading_lines_0based": [
+    2,
+    8
+  ],
+  "prefix_lines": 2,
+  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+}

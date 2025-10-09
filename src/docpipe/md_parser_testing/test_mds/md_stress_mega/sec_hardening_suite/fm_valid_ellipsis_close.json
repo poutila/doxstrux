@@ -1,0 +1,10 @@
+{
+  "category": "frontmatter",
+  "expected": {
+    "accepted": true,
+    "reason": "ellipsis_close",
+    "expect_keys": [
+      "k"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "category": "security",
+  "expected": {
+    "link_schemes": {
+      "internal": 1
+    },
+    "path_traversal_pattern": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "valid_04_block_scalar_literal",
+  "expected_is_yaml_frontmatter": true,
+  "reason": "literal_block_scalar_pipe",
+  "expect_keys": [
+    "title",
+    "summary"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": "35_event_handlers_onclick",
+    "note": "Event handlers should be detected",
+    "prefix_lines": 2,
+    "expected_security_blocked": false,
+    "expected_has_event_handlers": true,
+    "expected_warnings": [
+        "event_handlers"
+    ],
+    "security_profile": "moderate"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "valid_09_type_tag_str",
+  "expected_is_yaml_frontmatter": true,
+  "reason": "yaml_type_tag",
+  "expect_keys": [
+    "version"
+  ]
+}

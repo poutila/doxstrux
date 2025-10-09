@@ -1,0 +1,29 @@
+{
+  "id": "mixed_encoding_29",
+  "title": "Mixed Encoding 29",
+  "md_file": "case_29.md",
+  "md_flavor": "commonmark",
+  "allows_html": false,
+  "scenario_note": "i18n-longline",
+  "feature_counts": {
+    "headings": 0,
+    "blockquotes": 0,
+    "unordered_list_items": 0,
+    "ordered_list_items": 0,
+    "task_items": 0,
+    "tables": 0,
+    "code_fences": 0,
+    "indented_code": 0,
+    "inline_code": 0,
+    "links": 0,
+    "ref_links": 0,
+    "images": 0,
+    "html_blocks": 0,
+    "footnotes": 0,
+    "autolinks": 0,
+    "hrules": 2
+  },
+  "intended_errors": [
+    "front-matter-only"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+    "id": "36_event_handlers_various",
+    "note": "Various event handler types should be detected",
+    "prefix_lines": 2,
+    "expected_has_event_handlers": true,
+    "expected_warnings": [
+        "event_handlers"
+    ],
+    "security_profile": "moderate"
+}

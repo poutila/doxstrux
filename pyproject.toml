@@ -1,0 +1,218 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docpipe"
+version = "0.2.0"
+description = "A comprehensive markdown enrichment tool for humans and AI systems"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    { name = "Docpipe Contributors", email = "docpipe@example.com" }
+]
+maintainers = [
+    { name = "Docpipe Team", email = "docpipe@example.com" }
+]
+keywords = [
+    "markdown",
+    "documentation",
+    "analysis",
+    "enrichment",
+    "ai-preprocessing",
+    "code-extraction",
+    "nested-lists",
+    "requirements-extraction"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+]
+dependencies = [
+    "click",
+    "typing-extensions",
+    "types-pyyaml>=6.0.12.20250516",
+    "pyyaml>=6.0.2",
+    "markdown-it-py>=3.0.0",
+    "mdit-py-plugins>=0.5.0",
+    "bleach>=6.2.0",
+    "rich>=14.1.0",
+    "typer>=0.16.0",
+    "linkify-it-py>=2.0.3",
+    "jsonschema>=4.25.0",
+    "openai>=1.99.9",
+    "anthropic>=0.64.0",
+    "pydantic>=2.9.2",
+    "python-dotenv>=1.1.1",
+    "ptool",
+]
+
+[project.urls]
+Homepage = "https://github.com/docpipe/docpipe"
+Documentation = "https://docpipe.readthedocs.io"
+Repository = "https://github.com/docpipe/docpipe.git"
+Issues = "https://github.com/docpipe/docpipe/issues"
+Changelog = "https://github.com/docpipe/docpipe/blob/main/CHANGELOG.md"
+
+[project.scripts]
+docpipe = "docpipe.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pytest-asyncio",
+    "pytest-mock",
+    "mypy",
+    "ruff",
+    "black",
+    "bandit",
+    "safety",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "nox",
+    "vulture",
+    "pipreqs",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["docpipe*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"docpipe" = [
+  "py.typed",
+  "loaders/test_mds/*.md",
+  "loaders/*.json",
+]
+
+[tool.setuptools.exclude-package-data]
+"docpipe" = ["*.DS_Store"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = [
+    "--strict-markers",
+    "--cov=src/docpipe",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-fail-under=80",  # Maintain 80% minimum coverage (currently 84.86%)
+]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "sentence_transformers.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "rapidfuzz.*"
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+fix = true
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "C", "B", "UP", "S", "A", "DTZ", "ICN", "PIE", "PT", "RET", "SIM", "TID", "TCH", "ARG", "PTH", "PL"]
+ignore = ["E501", "PLR0913"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "ARG", "PLR2004"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["docpipe"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+include = '\.pyi?$'
+
+[tool.coverage.run]
+source = ["docpipe"]
+omit = [
+    "tests/*",
+    "*/migrations/*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/virtualenv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if __name__ == .__main__.:",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs"]
+skips = ["B101"]
+
+[tool.vulture]
+exclude = ["*/test_*.py", "tests/"]
+min_confidence = 60
+ignore_names = ["model_config", "metadata", "field_validator"]
+
+[tool.uv.workspace]
+members = [
+    ".",
+]
+
+
+[dependency-groups]
+dev = [
+    "build>=1.3.0",
+    "docpipe",
+    "hypothesis>=6.138.2",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+]
+
+[tool.project_paths.paths]
+batchs = "src/ptool_test/batchs"
+
+
+[tool.project_paths.files]
+existing_file_1 = "src/ptool_test/important_file.some"
+
+[tool.project_paths.file_validators]
+some_file_validator = "some_file_validator.py"
+
+[tool.uv.sources]
+ptool = { path = "../PTOOL_SERENA", editable = true }
+docpipe = { workspace = true }

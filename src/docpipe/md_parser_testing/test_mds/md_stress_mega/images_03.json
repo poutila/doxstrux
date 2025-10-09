@@ -1,0 +1,23 @@
+{
+  "id": "images_03",
+  "kind": "images",
+  "features": {
+    "headings": 1,
+    "lists": 0,
+    "tables": 0,
+    "fences": 0,
+    "indented_code_lines": 0,
+    "images": 3,
+    "links": 8,
+    "math_blocks": 0,
+    "html_blocks": 0,
+    "footnote_refs": 0,
+    "footnote_defs": 0,
+    "admonitions": 0,
+    "definition_list": 0
+  },
+  "intended_flags": [
+    "broken-links",
+    "file-links"
+  ]
+}

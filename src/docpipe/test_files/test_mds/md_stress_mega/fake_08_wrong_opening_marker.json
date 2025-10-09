@@ -1,0 +1,5 @@
+{
+  "id": "fake_08_wrong_opening_marker",
+  "expected_is_yaml_frontmatter": false,
+  "reason": "invalid_opening_marker"
+}

@@ -1,0 +1,13 @@
+{
+  "category": "security",
+  "expected": {
+    "link_schemes": {
+      "external": 1,
+      "email": 1,
+      "file": 1,
+      "malformed": 1,
+      "anchor": 1,
+      "internal": 1
+    }
+  }
+}

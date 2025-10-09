@@ -1,0 +1,46 @@
+{
+    "hooks": {
+      "afterEdit": "bash scripts/validate_edited_file.sh ${file}",
+      "beforeCommit": "bash scripts/validate_edited_file.sh ${file}"
+    },
+  
+    "env": {
+      "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+      "NODE_ENV": "development",
+      "PYTHONPATH": ".venv/bin/python"
+    },
+    "permissions": {
+      "defaultMode": "acceptEdits",
+      "disableBypassPermissionsMode": "disable",
+      "additionalDirectories": [],
+      "allow": [
+        "Task",
+        "Bash",
+        "Edit",
+        "Glob",
+        "Grep",
+        "LS",
+        "MultiEdit",
+        "NotebookEdit",
+        "NotebookRead",
+        "Read",
+        "TodoRead",
+        "TodoWrite",
+        "WebFetch",
+        "WebSearch",
+        "Write"
+      ],
+      "deny": [
+        "Bash(rm -rf /)",
+        "Bash(sudo rm -rf /*)",
+        "Bash(:(){ :|:& };:)",
+        "Edit(/etc/passwd)",
+        "Edit(/etc/shadow)",
+        "Edit(**/pyproject.toml)",
+        "Edit(**/.claude/settings.local.json)",
+        "Edit(**/.vscode)",
+        "Edit(**/quality_tests)",
+        "Write(/etc/**)"
+      ]
+    }
+  }

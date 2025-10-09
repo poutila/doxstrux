@@ -1,0 +1,6 @@
+{
+  "category": "security",
+  "expected": {
+    "has_html_comment": true
+  }
+}
