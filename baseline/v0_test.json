@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "timestamp": "2025-10-11T17:49:46.728511Z",
+    "python_version": "3.12.3",
+    "profile": "moderate",
+    "corpus_path": "README.md",
+    "corpus_file_count": 1,
+    "seed": 1729,
+    "config": {
+      "preset": "commonmark",
+      "allows_html": false,
+      "plugins": [
+        "table",
+        "strikethrough"
+      ]
+    },
+    "git_commit": "8e37e4c0",
+    "markdown_it_py_version": "3.0.0"
+  },
+  "performance": {
+    "runs_cold": 1,
+    "runs_warm": 1,
+    "timings_ms": [
+      32.22443099366501,
+      0.9366390004288405
+    ],
+    "memory_peak_mb": [
+      0.17646312713623047,
+      0.016757965087890625
+    ],
+    "median_ms": 32.22443099366501,
+    "p95_ms": 32.22443099366501,
+    "median_memory_mb": 0.17646312713623047
+  },
+  "outputs": {
+    ".": {
+      "hash": "a32392782f3b8c41ce4d6a4de398711f47078bff588b93d5de86b45f22669db2",
+      "size_bytes": 17,
+      "line_count": 4,
+      "output": {
+        "metadata": {
+          "total_lines": 4,
+          "total_chars": 14,
+          "has_sections": true,
+          "has_code": false,
+          "has_tables": false,
+          "has_lists": false,
+          "node_counts": {
+            "root": 1,
+            "heading": 1,
+            "inline": 1,
+            "text": 1
+          },
+          "has_frontmatter": false,
+          "security": {
+            "warnings": [],
+            "statistics": {
+              "frontmatter_at_bof": false,
+              "ragged_tables_count": 0,
+              "allowed_schemes": [
+                "http",
+                "https",
+                "mailto",
+                "tel"
+              ],
+              "table_align_mismatches": 0,
+              "nested_headings_blocked": 0,
+              "has_html_block": false,
+              "has_html_inline": false,
+              "has_script": false,
+              "has_event_handlers": false,
+              "has_data_uri_images": false,
+              "confusables_present": false,
+              "nbsp_present": false,
+              "zwsp_present": false,
+              "path_traversal_pattern": false,
+              "link_schemes": {},
+              "unicode_risk_score": 0
+            },
+            "summary": {
+              "ragged_tables_count": 0,
+              "total_warnings": 0,
+              "has_dangerous_content": false,
+              "unicode_risk_score": 0
+            },
+            "profile_used": "moderate"
+          }
+        },
+        "content": {
+          "raw": "# 📦 Docpipe\n\n\n",
+          "lines": [
+            "# 📦 Docpipe",
+            "",
+            "",
+            ""
+          ]
+        },
+        "structure": {
+          "sections": [
+            {
+              "id": "section_docpipe",
+              "level": 1,
+              "title": "📦 Docpipe",
+              "slug": "docpipe",
+              "start_line": 0,
+              "end_line": 3,
+              "start_char": 0,
+              "end_char": 14,
+              "parent_id": null,
+              "child_ids": [],
+              "raw_content": "# 📦 Docpipe\n\n\n",
+              "text_content": "📦 Docpipe"
+            }
+          ],
+          "paragraphs": [],
+          "lists": [],
+          "tables": [],
+          "code_blocks": [],
+          "headings": [
+            {
+              "id": "heading_docpipe",
+              "level": 1,
+              "text": "📦 Docpipe",
+              "line": 0,
+              "slug": "docpipe",
+              "parent_heading_id": null,
+              "start_char": 0,
+              "end_char": 12
+            }
+          ],
+          "links": [],
+          "images": [],
+          "blockquotes": [],
+          "html_blocks": [],
+          "html_inline": []
+        },
+        "mappings": {
+          "line_to_type": {
+            "0": "prose",
+            "1": "prose",
+            "2": "prose",
+            "3": "prose"
+          },
+          "line_to_section": {
+            "0": "section_docpipe",
+            "1": "section_docpipe",
+            "2": "section_docpipe",
+            "3": "section_docpipe"
+          },
+          "prose_lines": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "code_lines": [],
+          "code_blocks": []
+        }
+      },
+      "timings_ms": [
+        32.22443099366501,
+        0.9366390004288405
+      ],
+      "memory_peaks_bytes": [
+        185035,
+        17572
+      ]
+    }
+  }
+}

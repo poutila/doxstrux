@@ -1,0 +1,10 @@
+{
+  "id": "term_with_multiple_blocks",
+  "category": "definition_lists",
+  "plugin_required": true,
+  "expected": {
+    "terms": 1,
+    "definitions": 2,
+    "contains_indented_code_block": true
+  }
+}

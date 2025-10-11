@@ -1,0 +1,13 @@
+{
+  "id": "note_warning_nested",
+  "category": "admonitions_containers",
+  "plugin_required": true,
+  "expected": {
+    "outer_container": "note",
+    "inner_container": "warning",
+    "titles": [
+      "Title here"
+    ],
+    "nesting_depth": 2
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "tight_vs_loose",
+  "category": "lists",
+  "expected": {
+    "has_tight_list": true,
+    "has_loose_list": true
+  }
+}

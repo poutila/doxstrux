@@ -1,0 +1,13 @@
+{
+  "id": "gfm_strike_and_hr",
+  "category": "strikethrough_hr",
+  "expected": {
+    "has_del_inline": true,
+    "hr_count": 3,
+    "hr_styles": [
+      "---",
+      "***",
+      "___"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "stress_100_tasks",
+  "category": "tasklists",
+  "expected": {
+    "checked": 30,
+    "unchecked": 70,
+    "nested_tasks_present": true,
+    "ordered_steps_under_task": false,
+    "allows_inline_formatting": false
+  }
+}

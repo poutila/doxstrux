@@ -1,0 +1,10 @@
+{
+  "id": "deep_nesting_and_skips",
+  "category": "toc_invariants",
+  "expected": {
+    "max_depth": 4,
+    "skipped_levels_detected": [
+      2
+    ]
+  }
+}

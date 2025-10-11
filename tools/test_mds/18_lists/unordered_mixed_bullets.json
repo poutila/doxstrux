@@ -1,0 +1,13 @@
+{
+  "id": "unordered_mixed_bullets",
+  "category": "lists",
+  "expected": {
+    "uses_markers": [
+      "-",
+      "*",
+      "+"
+    ],
+    "nested_levels": 3,
+    "separate_list_after_blank": true
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "no_language_specified",
+  "category": "fenced_code_info",
+  "expected": {
+    "lang": null
+  }
+}

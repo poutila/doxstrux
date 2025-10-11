@@ -1,0 +1,10 @@
+{
+  "id": "ref_style_links_images",
+  "category": "images_references",
+  "expected": {
+    "reference_links": 1,
+    "reference_images": 1,
+    "link_title_present": true,
+    "image_title_present": true
+  }
+}

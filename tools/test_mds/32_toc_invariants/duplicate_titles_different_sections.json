@@ -1,0 +1,8 @@
+{
+  "id": "duplicate_titles_different_sections",
+  "category": "toc_invariants",
+  "expected": {
+    "duplicate_titles": 3,
+    "dedup_suffixes_applied": true
+  }
+}

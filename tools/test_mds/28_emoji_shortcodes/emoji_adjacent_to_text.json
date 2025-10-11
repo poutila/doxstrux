@@ -1,0 +1,10 @@
+{
+  "id": "emoji_adjacent_to_text",
+  "category": "emoji_shortcodes",
+  "plugin_required": true,
+  "expected": {
+    "emoji_count": 1,
+    "no_intraword_activation": true,
+    "double_colons_literal": true
+  }
+}

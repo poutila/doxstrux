@@ -1,0 +1,10 @@
+{
+  "id": "link_terms_and_titles",
+  "category": "definition_lists",
+  "plugin_required": true,
+  "expected": {
+    "terms": 2,
+    "inline_markup_in_def": true,
+    "html_term_detected": true
+  }
+}

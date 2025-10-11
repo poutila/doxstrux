@@ -1,0 +1,9 @@
+{
+  "id": "case_sensitivity_and_special_chars",
+  "category": "images_references",
+  "expected": {
+    "case_insensitive_refs": true,
+    "percent_encoded_chars": true,
+    "links_used": 2
+  }
+}

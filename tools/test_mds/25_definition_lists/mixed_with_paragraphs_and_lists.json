@@ -1,0 +1,10 @@
+{
+  "id": "mixed_with_paragraphs_and_lists",
+  "category": "definition_lists",
+  "plugin_required": true,
+  "expected": {
+    "terms": 2,
+    "list_between_def_terms": true,
+    "paragraph_before_list": true
+  }
+}

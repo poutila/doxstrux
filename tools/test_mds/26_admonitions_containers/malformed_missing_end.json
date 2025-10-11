@@ -1,0 +1,8 @@
+{
+  "id": "malformed_missing_end",
+  "category": "admonitions_containers",
+  "plugin_required": true,
+  "expected": {
+    "malformed_container": true
+  }
+}

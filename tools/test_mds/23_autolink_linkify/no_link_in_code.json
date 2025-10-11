@@ -1,0 +1,8 @@
+{
+  "id": "no_link_in_code",
+  "category": "autolink_linkify",
+  "expected": {
+    "links_in_codespan": 0,
+    "links_in_codeblock": 0
+  }
+}

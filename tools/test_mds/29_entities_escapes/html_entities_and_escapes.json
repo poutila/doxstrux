@@ -1,0 +1,14 @@
+{
+  "id": "html_entities_and_escapes",
+  "category": "entities_escapes",
+  "expected": {
+    "decoded_entities": [
+      " ",
+      "•",
+      "©"
+    ],
+    "unknown_entity_left_literal": true,
+    "escaped_punct_rendered_literal": true,
+    "amp_encoded_once": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "highlight_lines_meta",
+  "category": "fenced_code_info",
+  "expected": {
+    "lang": "js",
+    "highlight_lines": [
+      2,
+      4,
+      5
+    ]
+  }
+}

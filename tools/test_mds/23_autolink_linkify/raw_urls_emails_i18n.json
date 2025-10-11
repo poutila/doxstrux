@@ -1,0 +1,10 @@
+{
+  "id": "raw_urls_emails_i18n",
+  "category": "autolink_linkify",
+  "expected": {
+    "autolink_urls": 4,
+    "autolink_emails": 1,
+    "idn_url_present": true,
+    "edge_punct_trimmed": true
+  }
+}

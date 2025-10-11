@@ -1,0 +1,13 @@
+{
+  "id": "malformed_indentation",
+  "category": "lists",
+  "expected": {
+    "uses_markers": [
+      "-"
+    ],
+    "nested_levels": 3,
+    "explicit_start_num": null,
+    "has_tight_list": false,
+    "has_loose_list": false
+  }
+}

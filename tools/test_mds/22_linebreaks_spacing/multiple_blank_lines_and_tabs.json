@@ -1,0 +1,9 @@
+{
+  "id": "multiple_blank_lines_and_tabs",
+  "category": "linebreaks_spacing",
+  "expected": {
+    "multiple_blank_lines": true,
+    "tab_indentation_present": true,
+    "nested_levels": 2
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "blockquote_with_code_and_hr",
+  "category": "blockquotes",
+  "expected": {
+    "fenced_code_in_quote": true,
+    "hr_in_quote": true,
+    "language_hint": "python"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mixed_delimiter_types",
+  "category": "inline_formatting",
+  "expected": {
+    "italic_variants": 7,
+    "bold_variants": 9,
+    "bolditalic_variants": 2,
+    "nested_ok": true,
+    "escapes_ok": false,
+    "code_spans_ok": false,
+    "no_intraword_underscore_emphasis": true,
+    "handles_adjacent_punctuation": false
+  }
+}

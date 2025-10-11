@@ -1,0 +1,8 @@
+{
+  "id": "duplicate_and_non_ascii",
+  "category": "heading_ids_slugs",
+  "expected": {
+    "duplicate_slug_suffixing": true,
+    "non_ascii_slug_normalized": true
+  }
+}

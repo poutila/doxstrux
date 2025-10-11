@@ -1,0 +1,7 @@
+{
+  "id": "email_variations",
+  "category": "autolink_linkify",
+  "expected": {
+    "emails_detected": 2
+  }
+}

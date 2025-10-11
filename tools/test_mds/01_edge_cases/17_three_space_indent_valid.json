@@ -1,0 +1,11 @@
+{
+  "id": "17_three_space_indent_valid",
+  "note": "Headings indented by up to 3 spaces remain headings.",
+  "expected_has_headings": true,
+  "expected_heading_count": 1,
+  "expected_heading_lines_0based": [
+    2
+  ],
+  "prefix_lines": 2,
+  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+}

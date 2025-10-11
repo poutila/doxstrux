@@ -1,0 +1,5 @@
+{
+  "id": "fake_01_single_line_inline",
+  "expected_is_yaml_frontmatter": false,
+  "reason": "inline_triple_dash_not_a_fence"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "ordered_custom_start",
+  "category": "lists",
+  "expected": {
+    "uses_markers": [],
+    "nested_levels": 1,
+    "explicit_start_num": 5,
+    "has_tight_list": false,
+    "has_loose_list": false
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "id": "fake_04_horizontal_rule",
+  "expected_is_yaml_frontmatter": false,
+  "reason": "horizontal_rule_not_frontmatter"
+}

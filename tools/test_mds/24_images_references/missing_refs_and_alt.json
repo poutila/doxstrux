@@ -1,0 +1,10 @@
+{
+  "id": "missing_refs_and_alt",
+  "category": "images_references",
+  "expected": {
+    "missing_reference_count": 2,
+    "empty_image_href": 1,
+    "alt_text_required": true,
+    "image_with_title": 1
+  }
+}

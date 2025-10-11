@@ -1,0 +1,10 @@
+{
+  "id": "nested_definitions",
+  "category": "definition_lists",
+  "plugin_required": true,
+  "expected": {
+    "terms": 2,
+    "definitions_for_term1": 3,
+    "nested_definitions_for_subterm": 2
+  }
+}

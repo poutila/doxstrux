@@ -1,0 +1,11 @@
+{
+  "id": "multiple_paragraphs_per_item",
+  "category": "lists",
+  "expected": {
+    "uses_markers": [],
+    "nested_levels": 1,
+    "explicit_start_num": 2,
+    "has_tight_list": false,
+    "has_loose_list": true
+  }
+}

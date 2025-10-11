@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "total_lines": 7,
+    "total_chars": 67,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 2,
+      "paragraph": 1,
+      "blockquote": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "flags": [],
+      "statistics": {
+        "has_html": false,
+        "has_script": false,
+        "has_style": false,
+        "has_iframe": false,
+        "has_script_event_handlers": false,
+        "has_data_uri": false,
+        "link_count": 0,
+        "image_count": 0
+      }
+    }
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_0",
+        "level": 1,
+        "title": "Empty blockquote test",
+        "start_line": 0,
+        "end_line": 6,
+        "content": "Normal paragraph after empty quotes."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "paragraph_0",
+        "start_line": 6,
+        "end_line": 6,
+        "content": "Normal paragraph after empty quotes."
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_0",
+        "level": 1,
+        "text": "Empty blockquote test",
+        "slug": "empty-blockquote-test",
+        "line": 0
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "id": "blockquote_0",
+        "start_line": 2,
+        "end_line": 2,
+        "content": "",
+        "nesting_level": 1
+      },
+      {
+        "id": "blockquote_1",
+        "start_line": 4,
+        "end_line": 4,
+        "content": "",
+        "nesting_level": 1
+      }
+    ],
+    "footnotes": {
+      "references": [],
+      "definitions": []
+    },
+    "html": {
+      "blocks": [],
+      "inline": []
+    }
+  }
+}

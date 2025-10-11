@@ -1,0 +1,9 @@
+{
+  "id": "basic_tasklist_states",
+  "category": "tasklists",
+  "expected": {
+    "unchecked": 2,
+    "checked": 2,
+    "allows_inline_formatting": true
+  }
+}

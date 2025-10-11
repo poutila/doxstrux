@@ -1,0 +1,8 @@
+{
+  "id": "emoji_in_headings_and_long_text",
+  "category": "heading_ids_slugs",
+  "expected": {
+    "emoji_normalized_in_slug": true,
+    "long_heading_slug_truncated": true
+  }
+}

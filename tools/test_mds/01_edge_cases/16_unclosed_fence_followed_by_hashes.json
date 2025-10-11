@@ -1,0 +1,9 @@
+{
+  "id": "16_unclosed_fence_followed_by_hashes",
+  "note": "If a fence remains open, following lines are code; no headings should leak.",
+  "expected_has_headings": false,
+  "expected_heading_count": 0,
+  "expected_heading_lines_0based": [],
+  "prefix_lines": 2,
+  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "hard_vs_soft_breaks",
+  "category": "linebreaks_spacing",
+  "expected": {
+    "soft_break_between": [
+      "First line",
+      "Second line"
+    ],
+    "hard_break_detected": true,
+    "trailing_spaces_preserved_on_hrd_line": true
+  }
+}

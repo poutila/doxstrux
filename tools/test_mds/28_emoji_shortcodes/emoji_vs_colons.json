@@ -1,0 +1,9 @@
+{
+  "id": "emoji_vs_colons",
+  "category": "emoji_shortcodes",
+  "plugin_required": true,
+  "expected": {
+    "emoji_count": 2,
+    "plain_colons_preserved": true
+  }
+}

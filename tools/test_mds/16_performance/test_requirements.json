@@ -1,0 +1,508 @@
+{
+  "metadata": {
+    "total_lines": 34,
+    "total_chars": 1010,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 6,
+      "inline": 19,
+      "text": 22,
+      "paragraph": 13,
+      "softbreak": 3,
+      "bullet_list": 2,
+      "list_item": 7,
+      "blockquote": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "tel",
+          "mailto",
+          "https",
+          "http"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    }
+  },
+  "content": {
+    "raw": "# Test Requirements Document\n\n## Section 1: Basic Requirements\n\nThe system MUST support user authentication.\nUsers SHOULD be able to reset their passwords.\nThe API MAY support webhooks for real-time updates.\nThe system MUST NOT store passwords in plain text.\n\n## Section 2: Requirements in Lists\n\n- The application MUST load within 3 seconds\n- The database SHOULD support horizontal scaling\n- The UI MAY include dark mode support\n- Logs MUST NOT contain sensitive user data\n\n## Section 3: Mixed Content\n\nThis paragraph contains a requirement: The system MUST validate all user inputs.\n\n### Nested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\n> Even in blockquotes: The API MUST return proper HTTP status codes.\n\n## Section 4: Complex Requirements\n\nThe authentication system MUST:\n- Support multi-factor authentication\n- Allow session management\n- Integrate with OAuth providers\n\nThe logging system SHOULD NOT expose internal system details in production.",
+    "lines": [
+      "# Test Requirements Document",
+      "",
+      "## Section 1: Basic Requirements",
+      "",
+      "The system MUST support user authentication.",
+      "Users SHOULD be able to reset their passwords.",
+      "The API MAY support webhooks for real-time updates.",
+      "The system MUST NOT store passwords in plain text.",
+      "",
+      "## Section 2: Requirements in Lists",
+      "",
+      "- The application MUST load within 3 seconds",
+      "- The database SHOULD support horizontal scaling",
+      "- The UI MAY include dark mode support",
+      "- Logs MUST NOT contain sensitive user data",
+      "",
+      "## Section 3: Mixed Content",
+      "",
+      "This paragraph contains a requirement: The system MUST validate all user inputs.",
+      "",
+      "### Nested requirements",
+      "",
+      "In nested sections, we still find requirements. The cache SHOULD expire after 1 hour.",
+      "",
+      "> Even in blockquotes: The API MUST return proper HTTP status codes.",
+      "",
+      "## Section 4: Complex Requirements",
+      "",
+      "The authentication system MUST:",
+      "- Support multi-factor authentication",
+      "- Allow session management",
+      "- Integrate with OAuth providers",
+      "",
+      "The logging system SHOULD NOT expose internal system details in production."
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-requirements-document",
+        "level": 1,
+        "title": "Test Requirements Document",
+        "slug": "test-requirements-document",
+        "start_line": 0,
+        "end_line": 33,
+        "start_char": 0,
+        "end_char": 1010,
+        "parent_id": null,
+        "child_ids": [
+          "section_section-1-basic-requirements",
+          "section_section-2-requirements-in-lists",
+          "section_section-3-mixed-content",
+          "section_section-4-complex-requirements"
+        ],
+        "raw_content": "# Test Requirements Document\n\n## Section 1: Basic Requirements\n\nThe system MUST support user authentication.\nUsers SHOULD be able to reset their passwords.\nThe API MAY support webhooks for real-time updates.\nThe system MUST NOT store passwords in plain text.\n\n## Section 2: Requirements in Lists\n\n- The application MUST load within 3 seconds\n- The database SHOULD support horizontal scaling\n- The UI MAY include dark mode support\n- Logs MUST NOT contain sensitive user data\n\n## Section 3: Mixed Content\n\nThis paragraph contains a requirement: The system MUST validate all user inputs.\n\n### Nested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\n> Even in blockquotes: The API MUST return proper HTTP status codes.\n\n## Section 4: Complex Requirements\n\nThe authentication system MUST:\n- Support multi-factor authentication\n- Allow session management\n- Integrate with OAuth providers\n\nThe logging system SHOULD NOT expose internal system details in production.",
+        "text_content": "Test Requirements Document\n\nSection 1: Basic Requirements\n\nThe system MUST support user authentication.\nUsers SHOULD be able to reset their passwords.\nThe API MAY support webhooks for real-time updates.\nThe system MUST NOT store passwords in plain text.\n\nSection 2: Requirements in Lists\n\nThe application MUST load within 3 seconds The database SHOULD support horizontal scaling The UI MAY include dark mode support Logs MUST NOT contain sensitive user data\n\nSection 3: Mixed Content\n\nThis paragraph contains a requirement: The system MUST validate all user inputs.\n\nNested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\nEven in blockquotes: The API MUST return proper HTTP status codes.\n\nSection 4: Complex Requirements\n\nThe authentication system MUST: Support multi-factor authentication Allow session management Integrate with OAuth providers\n\nThe logging system SHOULD NOT expose internal system details in production."
+      },
+      {
+        "id": "section_section-1-basic-requirements",
+        "level": 2,
+        "title": "Section 1: Basic Requirements",
+        "slug": "section-1-basic-requirements",
+        "start_line": 2,
+        "end_line": 8,
+        "start_char": 30,
+        "end_char": 260,
+        "parent_id": "section_test-requirements-document",
+        "child_ids": [],
+        "raw_content": "## Section 1: Basic Requirements\n\nThe system MUST support user authentication.\nUsers SHOULD be able to reset their passwords.\nThe API MAY support webhooks for real-time updates.\nThe system MUST NOT store passwords in plain text.\n",
+        "text_content": "Section 1: Basic Requirements\n\nThe system MUST support user authentication.\nUsers SHOULD be able to reset their passwords.\nThe API MAY support webhooks for real-time updates.\nThe system MUST NOT store passwords in plain text."
+      },
+      {
+        "id": "section_section-2-requirements-in-lists",
+        "level": 2,
+        "title": "Section 2: Requirements in Lists",
+        "slug": "section-2-requirements-in-lists",
+        "start_line": 9,
+        "end_line": 15,
+        "start_char": 260,
+        "end_char": 475,
+        "parent_id": "section_test-requirements-document",
+        "child_ids": [],
+        "raw_content": "## Section 2: Requirements in Lists\n\n- The application MUST load within 3 seconds\n- The database SHOULD support horizontal scaling\n- The UI MAY include dark mode support\n- Logs MUST NOT contain sensitive user data\n",
+        "text_content": "Section 2: Requirements in Lists\n\nThe application MUST load within 3 seconds The database SHOULD support horizontal scaling The UI MAY include dark mode support Logs MUST NOT contain sensitive user data"
+      },
+      {
+        "id": "section_section-3-mixed-content",
+        "level": 2,
+        "title": "Section 3: Mixed Content",
+        "slug": "section-3-mixed-content",
+        "start_line": 16,
+        "end_line": 25,
+        "start_char": 475,
+        "end_char": 768,
+        "parent_id": "section_test-requirements-document",
+        "child_ids": [
+          "section_nested-requirements"
+        ],
+        "raw_content": "## Section 3: Mixed Content\n\nThis paragraph contains a requirement: The system MUST validate all user inputs.\n\n### Nested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\n> Even in blockquotes: The API MUST return proper HTTP status codes.\n",
+        "text_content": "Section 3: Mixed Content\n\nThis paragraph contains a requirement: The system MUST validate all user inputs.\n\nNested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\nEven in blockquotes: The API MUST return proper HTTP status codes."
+      },
+      {
+        "id": "section_nested-requirements",
+        "level": 3,
+        "title": "Nested requirements",
+        "slug": "nested-requirements",
+        "start_line": 20,
+        "end_line": 25,
+        "start_char": 586,
+        "end_char": 768,
+        "parent_id": "section_section-3-mixed-content",
+        "child_ids": [],
+        "raw_content": "### Nested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\n> Even in blockquotes: The API MUST return proper HTTP status codes.\n",
+        "text_content": "Nested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\nEven in blockquotes: The API MUST return proper HTTP status codes."
+      },
+      {
+        "id": "section_section-4-complex-requirements",
+        "level": 2,
+        "title": "Section 4: Complex Requirements",
+        "slug": "section-4-complex-requirements",
+        "start_line": 26,
+        "end_line": 33,
+        "start_char": 768,
+        "end_char": 1010,
+        "parent_id": "section_test-requirements-document",
+        "child_ids": [],
+        "raw_content": "## Section 4: Complex Requirements\n\nThe authentication system MUST:\n- Support multi-factor authentication\n- Allow session management\n- Integrate with OAuth providers\n\nThe logging system SHOULD NOT expose internal system details in production.",
+        "text_content": "Section 4: Complex Requirements\n\nThe authentication system MUST: Support multi-factor authentication Allow session management Integrate with OAuth providers\n\nThe logging system SHOULD NOT expose internal system details in production."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "The system MUST support user authentication.\nUsers SHOULD be able to reset their passwords.\nThe API MAY support webhooks for real-time updates.\nThe system MUST NOT store passwords in plain text.",
+        "start_line": 4,
+        "end_line": 8,
+        "section_id": "section_test-requirements-document",
+        "word_count": 31,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "This paragraph contains a requirement: The system MUST validate all user inputs.",
+        "start_line": 18,
+        "end_line": 19,
+        "section_id": "section_test-requirements-document",
+        "word_count": 12,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "In nested sections, we still find requirements. The cache SHOULD expire after 1 hour.",
+        "start_line": 22,
+        "end_line": 23,
+        "section_id": "section_test-requirements-document",
+        "word_count": 14,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "The authentication system MUST:",
+        "start_line": 28,
+        "end_line": 29,
+        "section_id": "section_test-requirements-document",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "The logging system SHOULD NOT expose internal system details in production.",
+        "start_line": 33,
+        "end_line": 34,
+        "section_id": "section_test-requirements-document",
+        "word_count": 11,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 11,
+        "end_line": 16,
+        "section_id": "section_test-requirements-document",
+        "items": [
+          {
+            "text": "The application MUST load within 3 seconds",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "The database SHOULD support horizontal scaling",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "The UI MAY include dark mode support",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Logs MUST NOT contain sensitive user data",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 4,
+        "task_items_count": 0,
+        "has_mixed_task_items": false
+      },
+      {
+        "id": "list_1",
+        "type": "bullet",
+        "start_line": 29,
+        "end_line": 33,
+        "section_id": "section_test-requirements-document",
+        "items": [
+          {
+            "text": "Support multi-factor authentication",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Allow session management",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Integrate with OAuth providers",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 3,
+        "task_items_count": 0,
+        "has_mixed_task_items": false
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-requirements-document",
+        "level": 1,
+        "text": "Test Requirements Document",
+        "line": 0,
+        "slug": "test-requirements-document",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 29
+      },
+      {
+        "id": "heading_section-1-basic-requirements",
+        "level": 2,
+        "text": "Section 1: Basic Requirements",
+        "line": 2,
+        "slug": "section-1-basic-requirements",
+        "parent_heading_id": "heading_test-requirements-document",
+        "start_char": 30,
+        "end_char": 63
+      },
+      {
+        "id": "heading_section-2-requirements-in-lists",
+        "level": 2,
+        "text": "Section 2: Requirements in Lists",
+        "line": 9,
+        "slug": "section-2-requirements-in-lists",
+        "parent_heading_id": "heading_test-requirements-document",
+        "start_char": 260,
+        "end_char": 296
+      },
+      {
+        "id": "heading_section-3-mixed-content",
+        "level": 2,
+        "text": "Section 3: Mixed Content",
+        "line": 16,
+        "slug": "section-3-mixed-content",
+        "parent_heading_id": "heading_test-requirements-document",
+        "start_char": 475,
+        "end_char": 503
+      },
+      {
+        "id": "heading_nested-requirements",
+        "level": 3,
+        "text": "Nested requirements",
+        "line": 20,
+        "slug": "nested-requirements",
+        "parent_heading_id": "heading_section-3-mixed-content",
+        "start_char": 586,
+        "end_char": 610
+      },
+      {
+        "id": "heading_section-4-complex-requirements",
+        "level": 2,
+        "text": "Section 4: Complex Requirements",
+        "line": 26,
+        "slug": "section-4-complex-requirements",
+        "parent_heading_id": "heading_test-requirements-document",
+        "start_char": 768,
+        "end_char": 803
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "content": "Even in blockquotes: The API MUST return proper HTTP status codes.",
+        "start_line": 24,
+        "end_line": 25,
+        "section_id": "section_test-requirements-document",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": []
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "prose",
+      "29": "prose",
+      "30": "prose",
+      "31": "prose",
+      "32": "prose",
+      "33": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-requirements-document",
+      "1": "section_test-requirements-document",
+      "2": "section_section-1-basic-requirements",
+      "3": "section_section-1-basic-requirements",
+      "4": "section_section-1-basic-requirements",
+      "5": "section_section-1-basic-requirements",
+      "6": "section_section-1-basic-requirements",
+      "7": "section_section-1-basic-requirements",
+      "8": "section_section-1-basic-requirements",
+      "9": "section_section-2-requirements-in-lists",
+      "10": "section_section-2-requirements-in-lists",
+      "11": "section_section-2-requirements-in-lists",
+      "12": "section_section-2-requirements-in-lists",
+      "13": "section_section-2-requirements-in-lists",
+      "14": "section_section-2-requirements-in-lists",
+      "15": "section_section-2-requirements-in-lists",
+      "16": "section_section-3-mixed-content",
+      "17": "section_section-3-mixed-content",
+      "18": "section_section-3-mixed-content",
+      "19": "section_section-3-mixed-content",
+      "20": "section_nested-requirements",
+      "21": "section_nested-requirements",
+      "22": "section_nested-requirements",
+      "23": "section_nested-requirements",
+      "24": "section_nested-requirements",
+      "25": "section_nested-requirements",
+      "26": "section_section-4-complex-requirements",
+      "27": "section_section-4-complex-requirements",
+      "28": "section_section-4-complex-requirements",
+      "29": "section_section-4-complex-requirements",
+      "30": "section_section-4-complex-requirements",
+      "31": "section_section-4-complex-requirements",
+      "32": "section_section-4-complex-requirements",
+      "33": "section_section-4-complex-requirements"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "hr_in_containers",
+  "category": "strikethrough_hr",
+  "expected": {
+    "has_del_inline": false,
+    "del_count": 0,
+    "hr_count": 2,
+    "hr_styles": [
+      "---",
+      "---"
+    ]
+  }
+}

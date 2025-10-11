@@ -1,0 +1,14 @@
+{
+  "id": "backtick_and_tilde_mixture",
+  "category": "fenced_code_info",
+  "expected": {
+    "fence_types": [
+      "~",
+      "`"
+    ],
+    "langs": [
+      "python",
+      "txt"
+    ]
+  }
+}

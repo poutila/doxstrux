@@ -1,0 +1,11 @@
+{
+  "id": "deep_nested_tasks",
+  "category": "tasklists",
+  "expected": {
+    "checked": 5,
+    "unchecked": 5,
+    "nested_tasks_present": true,
+    "ordered_steps_under_task": false,
+    "allows_inline_formatting": false
+  }
+}

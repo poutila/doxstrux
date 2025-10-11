@@ -1,0 +1,9 @@
+{
+  "id": "blank_line_semantics",
+  "category": "linebreaks_spacing",
+  "expected": {
+    "paragraphs": 2,
+    "loose_list_detected": true,
+    "list_after_blank_line": true
+  }
+}

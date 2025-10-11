@@ -1,0 +1,8 @@
+{
+  "id": "image_ref_edge_cases",
+  "category": "images_references",
+  "expected": {
+    "unresolved_image_refs": 1,
+    "resolved_images": 0
+  }
+}

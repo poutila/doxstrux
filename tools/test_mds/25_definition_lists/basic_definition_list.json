@@ -1,0 +1,9 @@
+{
+  "id": "basic_definition_list",
+  "category": "definition_lists",
+  "plugin_required": true,
+  "expected": {
+    "terms": 2,
+    "definitions_for_term2": 2
+  }
+}

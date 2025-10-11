@@ -1,0 +1,7 @@
+{
+  "id": "details_without_closing_tag",
+  "category": "details_summary_html",
+  "expected": {
+    "unclosed_details": true
+  }
+}

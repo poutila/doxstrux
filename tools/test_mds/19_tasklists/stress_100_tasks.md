@@ -1,0 +1,102 @@
+# Stress test with 100 tasks
+
+- [ ] Task 1
+- [x] Task 2
+- [ ] Task 3
+- [ ] Task 4
+- [x] Task 5
+- [ ] Task 6
+- [ ] Task 7
+- [x] Task 8
+- [ ] Task 9
+- [ ] Task 10
+- [ ] Task 11
+- [x] Task 12
+- [ ] Task 13
+- [ ] Task 14
+- [x] Task 15
+- [ ] Task 16
+- [ ] Task 17
+- [x] Task 18
+- [ ] Task 19
+- [ ] Task 20
+- [ ] Task 21
+- [x] Task 22
+- [ ] Task 23
+- [ ] Task 24
+- [x] Task 25
+- [ ] Task 26
+- [ ] Task 27
+- [x] Task 28
+- [ ] Task 29
+- [ ] Task 30
+- [ ] Task 31
+- [x] Task 32
+- [ ] Task 33
+- [ ] Task 34
+- [x] Task 35
+- [ ] Task 36
+- [ ] Task 37
+- [x] Task 38
+- [ ] Task 39
+- [ ] Task 40
+- [ ] Task 41
+- [x] Task 42
+- [ ] Task 43
+- [ ] Task 44
+- [x] Task 45
+- [ ] Task 46
+- [ ] Task 47
+- [x] Task 48
+- [ ] Task 49
+- [ ] Task 50
+- [ ] Task 51
+- [x] Task 52
+- [ ] Task 53
+- [ ] Task 54
+- [x] Task 55
+- [ ] Task 56
+- [ ] Task 57
+- [x] Task 58
+- [ ] Task 59
+- [ ] Task 60
+- [ ] Task 61
+- [x] Task 62
+- [ ] Task 63
+- [ ] Task 64
+- [x] Task 65
+- [ ] Task 66
+- [ ] Task 67
+- [x] Task 68
+- [ ] Task 69
+- [ ] Task 70
+- [ ] Task 71
+- [x] Task 72
+- [ ] Task 73
+- [ ] Task 74
+- [x] Task 75
+- [ ] Task 76
+- [ ] Task 77
+- [x] Task 78
+- [ ] Task 79
+- [ ] Task 80
+- [ ] Task 81
+- [x] Task 82
+- [ ] Task 83
+- [ ] Task 84
+- [x] Task 85
+- [ ] Task 86
+- [ ] Task 87
+- [x] Task 88
+- [ ] Task 89
+- [ ] Task 90
+- [ ] Task 91
+- [x] Task 92
+- [ ] Task 93
+- [ ] Task 94
+- [x] Task 95
+- [ ] Task 96
+- [ ] Task 97
+- [x] Task 98
+- [ ] Task 99
+- [ ] Task 100

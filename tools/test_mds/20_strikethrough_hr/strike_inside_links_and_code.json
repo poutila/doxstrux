@@ -1,0 +1,8 @@
+{
+  "id": "strike_inside_links_and_code",
+  "category": "strikethrough_hr",
+  "expected": {
+    "del_inside_link_text": true,
+    "code_literally_shows_tildes": true
+  }
+}

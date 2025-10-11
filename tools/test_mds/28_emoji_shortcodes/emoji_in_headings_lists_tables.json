@@ -1,0 +1,13 @@
+{
+  "id": "emoji_in_headings_lists_tables",
+  "category": "emoji_shortcodes",
+  "plugin_required": true,
+  "expected": {
+    "emoji_count": 3,
+    "locations": [
+      "heading",
+      "list",
+      "table"
+    ]
+  }
+}

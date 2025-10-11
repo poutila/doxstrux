@@ -1,0 +1,16 @@
+{
+  "id": "types_note_warning_tip_danger",
+  "category": "admonitions_containers",
+  "plugin_required": true,
+  "expected": {
+    "types": [
+      "note",
+      "tip",
+      "warning",
+      "danger"
+    ],
+    "titles_present": [
+      "Note title"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "trailing_spaces_detection",
+  "category": "linebreaks_spacing",
+  "expected": {
+    "hard_breaks_detected": 2,
+    "varied_trailing_space_counts": [
+      2,
+      4
+    ]
+  }
+}

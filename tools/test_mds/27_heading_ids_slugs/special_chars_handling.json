@@ -1,0 +1,7 @@
+{
+  "id": "special_chars_handling",
+  "category": "heading_ids_slugs",
+  "expected": {
+    "special_chars_stripped_or_normalized": true
+  }
+}

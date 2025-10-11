@@ -1,0 +1,12 @@
+{
+  "id": "lazy_continuation",
+  "category": "blockquotes",
+  "expected": {
+    "min_quote_depth": 1,
+    "max_quote_depth": 1,
+    "contains_lazy_continuation": true,
+    "contains_list_in_quote": false,
+    "fenced_code_in_quote": false,
+    "hr_in_quote": false
+  }
+}

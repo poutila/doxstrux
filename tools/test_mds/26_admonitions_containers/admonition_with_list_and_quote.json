@@ -1,0 +1,9 @@
+{
+  "id": "admonition_with_list_and_quote",
+  "category": "admonitions_containers",
+  "plugin_required": true,
+  "expected": {
+    "contains_list": true,
+    "contains_blockquote": true
+  }
+}

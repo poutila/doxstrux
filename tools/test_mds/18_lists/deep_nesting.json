@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "total_lines": 12,
+    "total_chars": 234,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 11,
+      "text": 11,
+      "bullet_list": 5,
+      "list_item": 11
+    },
+    "has_frontmatter": false,
+    "security": {
+      "flags": [],
+      "statistics": {
+        "has_html": false,
+        "has_script": false,
+        "has_style": false,
+        "has_iframe": false,
+        "has_script_event_handlers": false,
+        "has_data_uri": false,
+        "link_count": 0,
+        "image_count": 0
+      }
+    }
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_0",
+        "level": 1,
+        "title": "Deep list nesting (5 levels)",
+        "start_line": 0,
+        "end_line": 11,
+        "content": ""
+      }
+    ],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 11,
+        "items": [
+          {
+            "text": "Level 1",
+            "checked": null,
+            "children": [
+              {
+                "text": "Level 2",
+                "checked": null,
+                "children": [
+                  {
+                    "text": "Level 3",
+                    "checked": null,
+                    "children": [
+                      {
+                        "text": "Level 4",
+                        "checked": null,
+                        "children": [
+                          {
+                            "text": "Level 5",
+                            "checked": null,
+                            "children": []
+                          },
+                          {
+                            "text": "Level 5 item 2",
+                            "checked": null,
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "text": "Back to level 4",
+                        "checked": null,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "text": "Back to level 3",
+                    "checked": null,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "text": "Level 2 again",
+                "checked": null,
+                "children": []
+              }
+            ]
+          },
+          {
+            "text": "Level 1 again",
+            "checked": null,
+            "children": []
+          }
+        ]
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_0",
+        "level": 1,
+        "text": "Deep list nesting (5 levels)",
+        "slug": "deep-list-nesting-5-levels",
+        "line": 0
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "footnotes": {
+      "references": [],
+      "definitions": []
+    },
+    "html": {
+      "blocks": [],
+      "inline": []
+    }
+  }
+}

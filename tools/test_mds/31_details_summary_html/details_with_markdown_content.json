@@ -1,0 +1,12 @@
+{
+  "id": "details_with_markdown_content",
+  "category": "details_summary_html",
+  "expected": {
+    "details_count": 2,
+    "summary_texts": [
+      "Click me",
+      "Nested"
+    ],
+    "markdown_inside_details": true
+  }
+}

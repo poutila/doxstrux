@@ -1,0 +1,8 @@
+{
+  "id": "malformed_missing_summary",
+  "category": "details_summary_html",
+  "expected": {
+    "malformed_details": true,
+    "summary_present": false
+  }
+}

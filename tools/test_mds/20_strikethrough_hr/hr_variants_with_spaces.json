@@ -1,0 +1,14 @@
+{
+  "id": "hr_variants_with_spaces",
+  "category": "strikethrough_hr",
+  "expected": {
+    "has_del_inline": false,
+    "del_count": 0,
+    "hr_count": 3,
+    "hr_styles": [
+      "---",
+      "***",
+      "___"
+    ]
+  }
+}

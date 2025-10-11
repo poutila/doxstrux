@@ -1,0 +1,8 @@
+{
+  "id": "windows_line_endings",
+  "category": "linebreaks_spacing",
+  "expected": {
+    "windows_crlf_detected": true,
+    "list_after_crlf_blank": true
+  }
+}

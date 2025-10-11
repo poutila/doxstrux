@@ -1,0 +1,14 @@
+{
+  "id": "triple_quadruple_markers",
+  "category": "inline_formatting",
+  "expected": {
+    "italic_variants": 1,
+    "bold_variants": 9,
+    "bolditalic_variants": 8,
+    "nested_ok": true,
+    "escapes_ok": false,
+    "code_spans_ok": false,
+    "no_intraword_underscore_emphasis": true,
+    "handles_adjacent_punctuation": false
+  }
+}

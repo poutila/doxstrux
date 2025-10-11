@@ -1,0 +1,13 @@
+{
+  "id": "lazy_continuation",
+  "category": "lists",
+  "expected": {
+    "uses_markers": [
+      "-"
+    ],
+    "nested_levels": 1,
+    "explicit_start_num": null,
+    "has_tight_list": true,
+    "has_loose_list": false
+  }
+}

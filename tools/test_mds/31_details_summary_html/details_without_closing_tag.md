@@ -1,0 +1,3 @@
+<details>
+  <summary>Open</summary>
+  Still open...

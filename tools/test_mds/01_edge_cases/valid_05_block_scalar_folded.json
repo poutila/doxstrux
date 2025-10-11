@@ -1,0 +1,9 @@
+{
+  "id": "valid_05_block_scalar_folded",
+  "expected_is_yaml_frontmatter": true,
+  "reason": "folded_block_scalar_gt",
+  "expect_keys": [
+    "title",
+    "summary"
+  ]
+}

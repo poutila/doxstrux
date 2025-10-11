@@ -1,0 +1,8 @@
+{
+  "id": "valid_11_multiline_list",
+  "expected_is_yaml_frontmatter": true,
+  "reason": "sequence_multiline",
+  "expect_keys": [
+    "tags"
+  ]
+}

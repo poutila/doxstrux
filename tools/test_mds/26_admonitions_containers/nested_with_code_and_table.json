@@ -1,0 +1,10 @@
+{
+  "id": "nested_with_code_and_table",
+  "category": "admonitions_containers",
+  "plugin_required": true,
+  "expected": {
+    "nesting_depth": 2,
+    "contains_fenced_code": true,
+    "contains_table": true
+  }
+}

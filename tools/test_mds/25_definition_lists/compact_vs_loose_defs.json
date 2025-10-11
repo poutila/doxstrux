@@ -1,0 +1,9 @@
+{
+  "id": "compact_vs_loose_defs",
+  "category": "definition_lists",
+  "plugin_required": true,
+  "expected": {
+    "has_tight_defs": true,
+    "has_loose_defs": true
+  }
+}

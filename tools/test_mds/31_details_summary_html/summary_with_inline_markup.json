@@ -1,0 +1,7 @@
+{
+  "id": "summary_with_inline_markup",
+  "category": "details_summary_html",
+  "expected": {
+    "summary_contains_html": true
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "rtl_text_heading",
+  "category": "heading_ids_slugs",
+  "expected": {
+    "rtl_script_supported": true
+  }
+}

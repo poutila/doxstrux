@@ -1,0 +1,9 @@
+{
+  "id": "valid_07_ellipsis_close",
+  "expected_is_yaml_frontmatter": true,
+  "reason": "ellipses_closing_marker",
+  "expect_keys": [
+    "title",
+    "flag"
+  ]
+}

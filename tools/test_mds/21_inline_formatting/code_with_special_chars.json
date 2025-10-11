@@ -1,0 +1,14 @@
+{
+  "id": "code_with_special_chars",
+  "category": "inline_formatting",
+  "expected": {
+    "italic_variants": 0,
+    "bold_variants": 0,
+    "bolditalic_variants": 0,
+    "nested_ok": false,
+    "escapes_ok": true,
+    "code_spans_ok": true,
+    "no_intraword_underscore_emphasis": true,
+    "handles_adjacent_punctuation": false
+  }
+}

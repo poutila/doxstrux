@@ -1,0 +1,10 @@
+{
+  "id": "invalid_and_escaped_colons",
+  "category": "emoji_shortcodes",
+  "plugin_required": true,
+  "expected": {
+    "valid_emoji_count": 1,
+    "invalid_kept_literal": 1,
+    "escaped_colon_not_emoji": 1
+  }
+}

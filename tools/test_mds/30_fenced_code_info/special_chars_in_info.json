@@ -1,0 +1,7 @@
+{
+  "id": "special_chars_in_info",
+  "category": "fenced_code_info",
+  "expected": {
+    "lang": "c++"
+  }
+}

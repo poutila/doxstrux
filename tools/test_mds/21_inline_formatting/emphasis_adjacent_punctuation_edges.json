@@ -1,0 +1,8 @@
+{
+  "id": "emphasis_adjacent_punctuation_edges",
+  "category": "inline_formatting",
+  "expected": {
+    "no_intraword_underscore_emphasis": true,
+    "handles_adjacent_punctuation": true
+  }
+}

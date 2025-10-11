@@ -1,0 +1,10 @@
+{
+  "id": "strikethrough_multiline",
+  "category": "strikethrough_hr",
+  "expected": {
+    "has_del_inline": true,
+    "del_count": 2,
+    "hr_count": 0,
+    "hr_styles": []
+  }
+}

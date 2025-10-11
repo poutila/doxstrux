@@ -1,0 +1,8 @@
+{
+  "id": "entity_boundaries_and_whitespace",
+  "category": "entities_escapes",
+  "expected": {
+    "nbsp_collapses_to_space": true,
+    "entity_at_end_of_word": true
+  }
+}

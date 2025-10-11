@@ -1,0 +1,12 @@
+{
+  "id": "bold_italic_code_combos",
+  "category": "inline_formatting",
+  "expected": {
+    "italic_variants": 2,
+    "bold_variants": 2,
+    "bolditalic_variants": 2,
+    "nested_ok": true,
+    "escapes_ok": true,
+    "code_spans_ok": true
+  }
+}

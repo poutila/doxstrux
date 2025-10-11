@@ -1,0 +1,10 @@
+{
+  "id": "strikethrough_with_bold_italic",
+  "category": "strikethrough_hr",
+  "expected": {
+    "has_del_inline": true,
+    "del_count": 7,
+    "hr_count": 0,
+    "hr_styles": []
+  }
+}

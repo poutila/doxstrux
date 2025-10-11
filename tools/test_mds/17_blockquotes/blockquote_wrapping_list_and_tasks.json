@@ -1,0 +1,11 @@
+{
+  "id": "blockquote_wrapping_list_and_tasks",
+  "category": "blockquotes",
+  "expected": {
+    "tasklist_in_quote": {
+      "checked": 1,
+      "unchecked": 1
+    },
+    "ordered_list_in_quote": true
+  }
+}

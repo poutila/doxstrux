@@ -1,0 +1,8 @@
+{
+  "id": "escaped_backslashes_and_edges",
+  "category": "entities_escapes",
+  "expected": {
+    "escaped_backslash_literal": true,
+    "escaped_hash_literal": true
+  }
+}

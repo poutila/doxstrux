@@ -1,0 +1,11 @@
+{
+  "id": "checkbox_not_at_start",
+  "category": "tasklists",
+  "expected": {
+    "checked": 0,
+    "unchecked": 1,
+    "nested_tasks_present": false,
+    "ordered_steps_under_task": false,
+    "allows_inline_formatting": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "malformed_missing_colon",
+  "category": "definition_lists",
+  "plugin_required": true,
+  "expected": {
+    "malformed_entries": 1,
+    "valid_terms": 0
+  }
+}

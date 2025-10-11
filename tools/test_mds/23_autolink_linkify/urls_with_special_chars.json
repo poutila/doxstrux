@@ -1,0 +1,9 @@
+{
+  "id": "urls_with_special_chars",
+  "category": "autolink_linkify",
+  "expected": {
+    "autolink_urls": 2,
+    "paren_trimmed": true,
+    "fragment_and_query_preserved": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "invalid_entities_and_double_amp",
+  "category": "entities_escapes",
+  "expected": {
+    "unknown_entity_literal": 1,
+    "double_amp_collapsed_once": true,
+    "amp_once": true
+  }
+}

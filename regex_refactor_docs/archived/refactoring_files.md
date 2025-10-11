@@ -1,0 +1,7 @@
+docs/
+├── REGEX_REFACTOR_EXECUTION_GUIDE.md
+├── REGEX_REFACTOR_POLICY_GATES.md
+├── REGEX_REFACTOR_DETAILED_MERGED_vNext.md
+├── archive/
+│   └── REGEX_REFACTOR_DETAILED_MERGED_legacy_2025-10-11.md
+└── token_adapter.py

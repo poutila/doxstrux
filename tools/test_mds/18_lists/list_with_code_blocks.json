@@ -1,0 +1,13 @@
+{
+  "id": "list_with_code_blocks",
+  "category": "lists",
+  "expected": {
+    "uses_markers": [
+      "-"
+    ],
+    "nested_levels": 1,
+    "explicit_start_num": null,
+    "has_tight_list": false,
+    "has_loose_list": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "invalid_info_string",
+  "category": "fenced_code_info",
+  "expected": {
+    "invalid_info_string": true,
+    "lang_detected": null
+  }
+}

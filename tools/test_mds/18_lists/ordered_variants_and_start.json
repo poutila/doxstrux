@@ -1,0 +1,12 @@
+{
+  "id": "ordered_variants_and_start",
+  "category": "lists",
+  "expected": {
+    "ordered_markers": [
+      ".",
+      ")"
+    ],
+    "has_nested_ordered": true,
+    "explicit_start_num": 7
+  }
+}

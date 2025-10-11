@@ -1,0 +1,13 @@
+{
+  "id": "empty_headings_and_bounds",
+  "category": "toc_invariants",
+  "expected": {
+    "empty_headings": 2,
+    "bounds_present": [
+      "start_line",
+      "end_line",
+      "start_char",
+      "end_char"
+    ]
+  }
+}

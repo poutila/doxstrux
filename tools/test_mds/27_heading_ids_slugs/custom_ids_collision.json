@@ -1,0 +1,8 @@
+{
+  "id": "custom_ids_collision",
+  "category": "heading_ids_slugs",
+  "expected": {
+    "respects_explicit_id": true,
+    "auto_id_collision_avoided": true
+  }
+}

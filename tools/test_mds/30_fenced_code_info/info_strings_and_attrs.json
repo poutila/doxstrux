@@ -1,0 +1,25 @@
+{
+  "id": "info_strings_and_attrs",
+  "category": "fenced_code_info",
+  "expected": {
+    "fences": [
+      {
+        "lang": "python"
+      },
+      {
+        "lang": "js",
+        "attrs": {
+          "class": [
+            "compact"
+          ],
+          "id": "code1",
+          "data-x": "1"
+        }
+      },
+      {
+        "lang": "txt",
+        "marker": "~"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "task_with_code_block",
+  "category": "tasklists",
+  "expected": {
+    "checked": 1,
+    "unchecked": 2,
+    "nested_tasks_present": true,
+    "ordered_steps_under_task": false,
+    "allows_inline_formatting": false
+  }
+}

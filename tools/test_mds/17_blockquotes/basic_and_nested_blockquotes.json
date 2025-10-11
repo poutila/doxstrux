@@ -1,0 +1,11 @@
+{
+  "id": "basic_and_nested_blockquotes",
+  "category": "blockquotes",
+  "expected": {
+    "min_quote_depth": 1,
+    "max_quote_depth": 3,
+    "contains_lazy_continuation": true,
+    "contains_list_in_quote": true,
+    "non_quoted_paragraphs_after": true
+  }
+}

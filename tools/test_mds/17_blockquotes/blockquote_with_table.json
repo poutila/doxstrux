@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "total_lines": 10,
+    "total_chars": 212,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 10,
+      "text": 10,
+      "paragraph": 2,
+      "blockquote": 1,
+      "table": 1,
+      "thead": 1,
+      "tbody": 1,
+      "tr": 3,
+      "th": 2,
+      "td": 4
+    },
+    "has_frontmatter": false,
+    "security": {
+      "flags": [],
+      "statistics": {
+        "has_html": false,
+        "has_script": false,
+        "has_style": false,
+        "has_iframe": false,
+        "has_script_event_handlers": false,
+        "has_data_uri": false,
+        "link_count": 0,
+        "image_count": 0
+      }
+    }
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_0",
+        "level": 1,
+        "title": "Blockquote containing table",
+        "start_line": 0,
+        "end_line": 9,
+        "content": "Normal text."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "paragraph_0",
+        "start_line": 7,
+        "end_line": 7,
+        "content": "Paragraph after table in quote."
+      },
+      {
+        "id": "paragraph_1",
+        "start_line": 9,
+        "end_line": 9,
+        "content": "Normal text."
+      }
+    ],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "start_line": 2,
+        "end_line": 5,
+        "rows": 3,
+        "columns": 2,
+        "headers": ["Column A", "Column B"],
+        "has_header": true
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_0",
+        "level": 1,
+        "text": "Blockquote containing table",
+        "slug": "blockquote-containing-table",
+        "line": 0
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "id": "blockquote_0",
+        "start_line": 2,
+        "end_line": 7,
+        "content": "| Column A | Column B |\n|----------|----------|\n| Cell 1   | Cell 2   |\n| Cell 3   | Cell 4   |\n\nParagraph after table in quote.",
+        "nesting_level": 1,
+        "contains_table": true
+      }
+    ],
+    "footnotes": {
+      "references": [],
+      "definitions": []
+    },
+    "html": {
+      "blocks": [],
+      "inline": []
+    }
+  }
+}

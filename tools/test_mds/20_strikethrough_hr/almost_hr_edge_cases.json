@@ -1,0 +1,10 @@
+{
+  "id": "almost_hr_edge_cases",
+  "category": "strikethrough_hr",
+  "expected": {
+    "has_del_inline": false,
+    "del_count": 0,
+    "hr_count": 0,
+    "hr_styles": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "toc_tree_bounds",
+  "category": "toc_invariants",
+  "expected": {
+    "sections": [
+      {
+        "title": "A",
+        "level": 1
+      },
+      {
+        "title": "A.1",
+        "level": 2
+      },
+      {
+        "title": "A.1.a",
+        "level": 3
+      },
+      {
+        "title": "B.1 (duplicate id check)",
+        "level": 2
+      },
+      {
+        "title": "B.1 (duplicate id check)",
+        "level": 2,
+        "deduped": true
+      }
+    ],
+    "bounds_present": [
+      "start_line",
+      "end_line",
+      "start_char",
+      "end_char"
+    ]
+  }
+}

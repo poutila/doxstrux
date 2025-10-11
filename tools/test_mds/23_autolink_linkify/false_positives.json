@@ -1,0 +1,7 @@
+{
+  "id": "false_positives",
+  "category": "autolink_linkify",
+  "expected": {
+    "false_positive_patterns_not_linked": true
+  }
+}

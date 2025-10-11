@@ -1,0 +1,10 @@
+{
+  "id": "numeric_entities_decimal_hex",
+  "category": "entities_escapes",
+  "expected": {
+    "decoded_entities": [
+      "©",
+      "❤"
+    ]
+  }
+}

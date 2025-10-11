@@ -1,0 +1,11 @@
+{
+  "id": "invalid_checkbox_syntax",
+  "category": "tasklists",
+  "expected": {
+    "checked": 2,
+    "unchecked": 1,
+    "nested_tasks_present": true,
+    "ordered_steps_under_task": false,
+    "allows_inline_formatting": false
+  }
+}

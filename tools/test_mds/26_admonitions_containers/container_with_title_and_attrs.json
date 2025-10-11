@@ -1,0 +1,15 @@
+{
+  "id": "container_with_title_and_attrs",
+  "category": "admonitions_containers",
+  "plugin_required": true,
+  "expected": {
+    "id": "n1",
+    "classes": [
+      "classy"
+    ],
+    "attrs": {
+      "data-x": "1"
+    },
+    "title_present": "Title"
+  }
+}

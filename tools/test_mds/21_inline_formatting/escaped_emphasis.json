@@ -1,0 +1,14 @@
+{
+  "id": "escaped_emphasis",
+  "category": "inline_formatting",
+  "expected": {
+    "italic_variants": 12,
+    "bold_variants": 1,
+    "bolditalic_variants": 0,
+    "nested_ok": false,
+    "escapes_ok": true,
+    "code_spans_ok": true,
+    "no_intraword_underscore_emphasis": true,
+    "handles_adjacent_punctuation": false
+  }
+}

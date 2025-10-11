@@ -1,0 +1,12 @@
+{
+  "id": "nested_details_markdown_inside",
+  "category": "details_summary_html",
+  "expected": {
+    "details_count": 2,
+    "markdown_inside_details": true,
+    "summary_texts": [
+      "Top",
+      "Inner"
+    ]
+  }
+}

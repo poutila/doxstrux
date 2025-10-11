@@ -1,0 +1,8 @@
+{
+  "id": "nested_and_circular_refs",
+  "category": "images_references",
+  "expected": {
+    "circular_reference_pairs": 1,
+    "resolved_links": 2
+  }
+}
