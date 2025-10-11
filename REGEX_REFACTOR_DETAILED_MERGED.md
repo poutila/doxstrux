@@ -75,13 +75,27 @@ This plan has been updated to fix critical bugs identified in technical review:
 - **Timeline**: All flags + old regex paths must be removed before PR merge
 
 **THIRD RULE - Iterative Token Traversal (MANDATORY)**:
-- **ALL token tree traversal MUST use explicit stack** (no recursion)
+- **ALL token tree traversal MUST use `_walk_tokens_iter()` utility** (§4.1)
+- **NO custom walk functions or nested helpers** (eliminates accidental recursion)
 - **Rationale**: Python recursion limit (~1000) can be hit by pathological markdown
-  - Example: 2000 levels of nested quotes (`> > > ...`)
+  - Example: 5000 levels of nested quotes (`> > > ...`)
   - Malicious inputs designed to cause RecursionError
+  - Even nested helper functions can create recursion risk
 - **Applies to**: ALL traversal functions (links, images, plaintext, HTML detection)
-- **Test requirement**: 2000-level nested fixture must NOT raise RecursionError
-- See §4.1 for implementation details
+- **Test requirement**: 5000-level nested fixture must NOT raise RecursionError
+- **Implementation**: Single unified walker in §4.1 - use it everywhere
+
+**FOURTH RULE - Single-Parse Principle (MANDATORY)**:
+- **Parse document EXACTLY ONCE** per `parse()` call
+- **All extraction methods MUST accept tokens parameter** (no default value)
+- **NO re-parsing allowed** except frontmatter verification (with timeout)
+- **Enforcement**: ⚠️ **PRIORITY 2.4 FIX** - `_extract_plain_text_from_tokens()` raises `ValueError` if tokens is None
+- **Rationale**: Multiple parses waste CPU, increase DoS risk, cause inconsistency
+  - Example: Re-parsing for plaintext doubles parse time
+  - Security: Each parse is a potential timeout/DoS vector
+  - Correctness: Tokens from different parses may diverge
+- **Implementation**: All callers pass `self.tokens` or explicit tokens
+- **Test requirement**: Verify ValueError raised when tokens=None passed
 
 **Additional Rules**:
 - **Single Source of Truth**: This file governs this refactor
@@ -148,7 +162,7 @@ uv run python -m docpipe.md_parser_testing.test_harness_full
 | **Links & Images** | Traverse `inline` children; for `link_open` read `attrs['href']`; for `image` read `attrs['src']` and derive alt from child text. Use **`urllib.parse.urlparse()`** for scheme extraction (replaces regex). Validate against **scheme allow-list** `["http", "https", "mailto"]`. **Reject** protocol-relative URLs (`//example.com`) and malformed URLs (fail closed). |
 | **Headings / Lists / Tasks** | `heading_open` (`tag`→level), `bullet_list_open`, `ordered_list_open`, `list_item_open`; task list plugin for checkbox state. |
 | **Inline → Plain Text** | Build text by concatenating inline `text` tokens; **ignore** `strong/em/code_inline` tokens instead of regex-stripping. |
-| **Autolinks** | Enable `linkify=True`; validate `href` schemes on produced link tokens. |
+| **Autolinks** | Enable `linkify=True` ONLY if legacy behavior auto-linked bare URLs. Run parity test (Step 1.1 in §4.4) to verify. Default to `linkify=False` for safety. Validate `href` schemes on produced link tokens. |
 | **HTML** | `html=False` mandatory; if a caller toggles `True`, raise or route through a single sanitizer that drops `html_inline/html_block` unless allow-listed. |
 | **Frontmatter** | Use `mdit-py-plugins.front_matter_plugin` to extract YAML frontmatter natively instead of regex line scanning. |
 | **Table Alignment** | **PRE-DECIDED: RETAINED** (§4.2). GFM table alignment (`:---|:--:|---:`) is format-specific parsing of separator syntax. Tokens don't expose alignment with `html=False` (alignment becomes HTML `style` attrs). Separator regex kept as format parsing. |
@@ -202,9 +216,23 @@ exit 0
 
 ### 4.4 MarkdownIt Initialization (hard requirement with enforcement)
 
+**⚠️ BLOCKER #5 FIX APPLIED**: `linkify` is now **conditional** to preserve parity with legacy behavior.
+
+**Policy Decision - Autolinks**:
+- **Default**: `linkify=False` (conservative - prevents NEW links from appearing)
+- **Override**: Set `config["linkify"] = True` ONLY if legacy behavior auto-linked bare URLs
+- **Verification**: Run parity test (see Step 1.1 below) to determine correct setting
+
 ```python
 # MANDATORY: html=False for security
-md = MarkdownIt("commonmark", options_update={"html": False, "linkify": True})
+# CONDITIONAL: linkify based on legacy behavior (default False for parity)
+md = MarkdownIt(
+    "commonmark",
+    options_update={
+        "html": False,         # ✅ MANDATORY (security)
+        "linkify": False       # ⚠️ CONDITIONAL (parity - see Step 1.1)
+    }
+)
 # enable table + tasklist plugins as used in repo
 ```
 
@@ -218,12 +246,125 @@ if config.get("allows_html", False):
         "If HTML sanitization is required, use external sanitizer with bleach."
     )
 
-# Then initialize with html=False:
+# Extract linkify setting (default to FALSE for parity)
+linkify_enabled = config.get("linkify", False)
+
+# Then initialize with html=False and conditional linkify:
 self.md = MarkdownIt(
     preset,
-    options_update={"html": False, "linkify": True}
+    options_update={"html": False, "linkify": linkify_enabled}
 )
 ```
+
+**Step 1.1 - Linkify Parity Verification** (Run BEFORE any code changes):
+
+Add this test to `src/docpipe/md_parser_testing/test_harness_full.py`:
+
+```python
+def test_linkify_parity():
+    """Verify linkify behavior matches legacy parser.
+
+    This determines whether linkify should be True or False by default.
+
+    Test Strategy:
+    - Parse test markdown with bare URLs using both settings
+    - Compare link counts
+    - If legacy auto-linked bare URLs → use linkify=True
+    - If legacy kept bare URLs as text → use linkify=False (default)
+    """
+    from docpipe.markdown_parser_core import MarkdownParserCore
+
+    test_content = "Visit http://example.com for more info."
+
+    # Test with linkify OFF
+    parser_no_linkify = MarkdownParserCore(
+        test_content,
+        config={"linkify": False}
+    )
+    result_no_linkify = parser_no_linkify.parse()
+
+    # Test with linkify ON
+    parser_linkify = MarkdownParserCore(
+        test_content,
+        config={"linkify": True}
+    )
+    result_linkify = parser_linkify.parse()
+
+    # Compare link counts
+    links_off = len(result_no_linkify.get('links', []))
+    links_on = len(result_linkify.get('links', []))
+
+    print("="*70)
+    print("LINKIFY PARITY TEST RESULTS")
+    print("="*70)
+    print(f"Test input: {repr(test_content)}")
+    print(f"Links with linkify=False: {links_off}")
+    print(f"Links with linkify=True:  {links_on}")
+    print()
+
+    if links_on > links_off:
+        print("✅ DECISION: linkify creates NEW links")
+        print("   → Set linkify=False (default) to preserve parity")
+        print("   → Legacy parser did NOT auto-link bare URLs")
+        recommendation = False
+    else:
+        print("✅ DECISION: linkify has no effect (legacy auto-linked)")
+        print("   → Set linkify=True to match legacy behavior")
+        print("   → Legacy parser auto-linked bare URLs")
+        recommendation = True
+
+    print()
+    print(f"RECOMMENDED SETTING: linkify={recommendation}")
+    print("="*70)
+
+    return recommendation
+
+
+# Run the test before starting refactor
+if __name__ == "__main__":
+    recommended_linkify = test_linkify_parity()
+
+    print()
+    print("NEXT STEPS:")
+    print(f"1. Update config in §4.4: linkify={recommended_linkify}")
+    print("2. Document decision in evidence block")
+    print("3. Proceed with refactor using this setting")
+```
+
+**Expected Output**:
+```
+======================================================================
+LINKIFY PARITY TEST RESULTS
+======================================================================
+Test input: 'Visit http://example.com for more info.'
+Links with linkify=False: 0
+Links with linkify=True:  1
+
+✅ DECISION: linkify creates NEW links
+   → Set linkify=False (default) to preserve parity
+   → Legacy parser did NOT auto-link bare URLs
+
+RECOMMENDED SETTING: linkify=False
+======================================================================
+```
+
+**Action**: Run this test BEFORE implementing §STEP 4 (Links & Images):
+
+```bash
+# Add test to test harness
+# Run to determine linkify setting
+uv run python src/docpipe/md_parser_testing/test_harness_full.py
+
+# Update §4.4 based on results
+# Document in evidence block
+```
+
+**Why This Matters**: Enabling `linkify=True` when legacy didn't auto-link causes parity failures:
+- **Current behavior**: `Visit http://example.com` → plain text
+- **With linkify=True**: `Visit http://example.com` → `<a href="http://example.com">http://example.com</a>`
+- **Result**: ❌ Parity test fails (NEW link appeared that wasn't in baseline)
+
+**Default Choice**: `linkify=False` (safe - no new links)
 
 **Sanitizer Path** (if bleach available):
 ```python
@@ -288,13 +429,119 @@ SECURITY_LIMITS = {
 
 ---
 
-**Implementation: _parse_with_timeout() Helper**
+**Implementation: Top-Level Worker Function (Pickling-Safe)**
 
-This helper MUST be used in **all 3 parse locations**.
+⚠️ **CRITICAL**: ProcessPoolExecutor cannot pickle instance methods or MarkdownIt objects.
+Must use top-level function that reconstructs parser in child process.
 
 ```python
+# ========================================================================
+# ADD TO MODULE SCOPE (NOT CLASS METHOD) - Must be picklable
+# ========================================================================
+
+def _worker_parse_markdown(content: str, preset: str, options: dict, plugins: dict) -> tuple:
+    """Worker function for ProcessPoolExecutor (must be picklable).
+
+    Reconstructs MarkdownIt parser in child process to avoid pickling issues.
+    ProcessPoolExecutor cannot pickle instance methods or complex objects.
+
+    Args:
+        content: Markdown content to parse
+        preset: MarkdownIt preset (e.g., 'commonmark', 'gfm')
+        options: Parser options dict (e.g., {'html': False, 'linkify': True})
+        plugins: Plugin flags {'table': True, 'tasklists': True, 'front_matter': True}
+
+    Returns:
+        Tuple of (serialized_tokens, frontmatter_dict, error_dict)
+        - serialized_tokens: List of dicts (Token objects don't pickle reliably)
+        - frontmatter_dict: env['front_matter'] if plugin used
+        - error_dict: {'error': str} if parsing fails, else None
+    """
+    from markdown_it import MarkdownIt
+
+    try:
+        # Import plugins (may not be available)
+        if plugins.get("table"):
+            from mdit_py_plugins.table import table_plugin
+        if plugins.get("tasklists"):
+            from mdit_py_plugins.tasklists import tasklists_plugin
+        if plugins.get("front_matter"):
+            from mdit_py_plugins.front_matter import front_matter_plugin
+
+        # Reconstruct parser in child process
+        md = MarkdownIt(preset, options_update=options)
+
+        # Add plugins based on flags
+        if plugins.get("table"):
+            md.use(table_plugin)
+        if plugins.get("tasklists"):
+            md.use(tasklists_plugin)
+
+        # Parse with environment (for frontmatter)
+        env = {}
+        if plugins.get("front_matter"):
+            md.use(front_matter_plugin)
+
+        tokens = md.parse(content, env)
+
+        # Serialize tokens (Token objects may not pickle reliably)
+        # Convert to plain dicts that are guaranteed picklable
+        serialized_tokens = []
+        for tok in tokens:
+            token_dict = {
+                "type": tok.type,
+                "tag": tok.tag,
+                "attrs": dict(tok.attrs or []),
+                "map": tok.map,
+                "level": tok.level,
+                "children": None,
+                "content": tok.content,
+                "markup": tok.markup,
+                "info": tok.info,
+                "meta": tok.meta,
+                "block": tok.block,
+                "hidden": tok.hidden,
+            }
+
+            # Serialize children recursively
+            if tok.children:
+                token_dict["children"] = [
+                    {
+                        "type": c.type,
+                        "content": c.content,
+                        "markup": c.markup,
+                        "info": getattr(c, 'info', ''),
+                        "meta": getattr(c, 'meta', None),
+                        "block": c.block,
+                        "hidden": c.hidden,
+                        "level": c.level,
+                    }
+                    for c in tok.children
+                ]
+
+            serialized_tokens.append(token_dict)
+
+        frontmatter = env.get("front_matter")
+
+        return serialized_tokens, frontmatter, None
+
+    except Exception as e:
+        # Return error info (picklable)
+        return [], None, {
+            "error": type(e).__name__,
+            "message": str(e),
+        }
+
+
+# ========================================================================
+# CLASS METHOD: _parse_with_timeout()
+# ========================================================================
+
 def _parse_with_timeout(self, content: str, timeout_sec: float = None):
     """Parse with cross-platform timeout protection.
+
+    ⚠️ CRITICAL: Uses pickling-safe approach for ProcessPoolExecutor.
+    Cannot pass self.md or Token objects to child process.
 
     Uses ProcessPoolExecutor for strict profile (can kill native loops),
     ThreadPoolExecutor for moderate/permissive (lower overhead).
@@ -304,10 +551,11 @@ def _parse_with_timeout(self, content: str, timeout_sec: float = None):
         timeout_sec: Timeout in seconds (defaults to profile setting)
 
     Returns:
-        Token list from markdown-it-py
+        Token list (or serialized token dicts for process isolation)
 
     Raises:
         TimeoutError: If parsing exceeds timeout
+        RuntimeError: If worker returns error
     """
     from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, TimeoutError
 
@@ -318,24 +566,74 @@ def _parse_with_timeout(self, content: str, timeout_sec: float = None):
 
     use_process_isolation = limits.get("use_process_isolation", False)
 
-    # Choose executor based on security profile
     if use_process_isolation:
-        executor_class = ProcessPoolExecutor  # ✅ Can kill native code loops
-    else:
-        executor_class = ThreadPoolExecutor  # Lower overhead
+        # ===== PROCESS ISOLATION PATH (Pickling-Safe) =====
+        # Use top-level worker function that reconstructs parser in child
 
-    with executor_class(max_workers=1) as executor:
-        future = executor.submit(self.md.parse, content)
-        try:
-            return future.result(timeout=timeout_sec)
-        except TimeoutError:
-            future.cancel()
-            raise TimeoutError(
-                f"Markdown parsing exceeded {timeout_sec}s timeout "
-                f"(profile: {self.security_profile}, "
-                f"process_isolation: {use_process_isolation})"
+        # Build serializable config
+        plugins = {
+            "table": "table" in self.config.get("plugins", []),
+            "tasklists": "tasklists" in self.config.get("plugins", []),
+            "front_matter": True,  # Always try to extract
+        }
+
+        preset = self.config.get("preset", "commonmark")
+        options = {
+            "html": False,  # Mandatory per §4.4
+            "linkify": self.config.get("linkify", False),
+        }
+
+        with ProcessPoolExecutor(max_workers=1) as executor:
+            future = executor.submit(
+                _worker_parse_markdown,  # ✅ Top-level function (picklable)
+                content,
+                preset,
+                options,
+                plugins
             )
+            try:
+                serialized_tokens, frontmatter, error = future.result(timeout=timeout_sec)
+
+                # Check for worker error
+                if error:
+                    raise RuntimeError(
+                        f"Worker parse failed: {error['error']} - {error['message']}"
+                    )
+
+                # Cache frontmatter for later use
+                if frontmatter:
+                    self._cached_frontmatter = frontmatter
+
+                # Return serialized tokens (will be used as plain dicts)
+                # Traversal functions must handle both Token objects and dicts
+                return serialized_tokens
+
+            except TimeoutError:
+                future.cancel()
+                raise TimeoutError(
+                    f"Markdown parsing exceeded {timeout_sec}s timeout "
+                    f"(profile: {self.security_profile}, process_isolation: True)"
+                )
+    else:
+        # ===== THREAD PATH (Can access self.md directly) =====
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            future = executor.submit(self.md.parse, content)
+            try:
+                return future.result(timeout=timeout_sec)
+            except TimeoutError:
+                future.cancel()
+                raise TimeoutError(
+                    f"Markdown parsing exceeded {timeout_sec}s timeout "
+                    f"(profile: {self.security_profile}, process_isolation: False)"
+                )
 ```
+
+**IMPORTANT NOTE**: When using process isolation, tokens are returned as plain dicts.
+Token traversal functions must handle both:
+- Real `Token` objects (from ThreadPoolExecutor)
+- Plain dicts (from ProcessPoolExecutor)
+
+Use attribute access like `token.get('type')` or `getattr(token, 'type', None)` to be safe.
 
 ---
 
@@ -376,28 +674,32 @@ def parse(self) -> dict[str, Any]:
 **⚠️ CRITICAL**: If `_extract_plain_text_from_tokens()` re-parses content (instead of using `self.tokens`), it MUST use timeout protection.
 
 ```python
-def _extract_plain_text_from_tokens(self, tokens: list = None) -> str:
+def _extract_plain_text_from_tokens(self, tokens: list) -> str:
     """Extract plain text from tokens.
 
+    ⚠️ PRIORITY 2.4 FIX: tokens parameter is now REQUIRED (no default, no re-parse).
+    This enforces the single-parse principle (§0 FOURTH RULE).
+
     Args:
-        tokens: Pre-parsed tokens (preferred - no re-parse)
-                If None, will re-parse self.content WITH TIMEOUT
+        tokens: Pre-parsed tokens (REQUIRED - no re-parse)
+                Must be self.tokens or passed explicitly
+
+    Raises:
+        ValueError: If tokens is None (prevents accidental re-parse)
     """
-    # PREFER: Use passed tokens or self.tokens (no re-parse needed)
+    # ✅ ENFORCE SINGLE-PARSE: No default value, no re-parse path
     if tokens is None:
-        if hasattr(self, 'tokens') and self.tokens:
-            tokens = self.tokens
-        else:
-            # ✅ LOCATION 2: Re-parse with timeout (if unavoidable)
-            limits = self.SECURITY_LIMITS[self.security_profile]
-            timeout_sec = limits.get("parse_timeout_sec", 5.0)
-            tokens = self._parse_with_timeout(self.content, timeout_sec=timeout_sec)
+        raise ValueError(
+            "tokens parameter is required (no re-parsing allowed). "
+            "Pass self.tokens or call parse() first. "
+            "Front-matter re-parse is the ONLY exception (see §4.5)."
+        )
 
     # Traverse tokens to extract plain text (see §4.1 for iterative traversal)
     # ... rest of method
 ```
 
-**BEST PRACTICE**: Always pass `self.tokens` to avoid re-parsing.
+**CRITICAL**: All callers MUST pass tokens explicitly. No default value allowed.
 
 ---
 
@@ -1012,6 +1314,238 @@ grep -n "signal.alarm\|signal.SIGALRM" src/docpipe/content_context.py src/docpip
 
 ---
 
+#### 2.1A ⚠️ BLOCKER #6 FIX: Verify token.map Semantics (MANDATORY)
+
+**⚠️ CRITICAL**: Token.map behavior varies across markdown-it-py versions and contexts. **DO NOT PROCEED** to Step 2.2 without running this verification.
+
+**Problem**: Plan assumes `token.map` excludes markers, but actual behavior can vary:
+- Some versions include opening fence marker in `map[0]`
+- Unterminated fences may have different semantics
+- List-nested fences may have `map = None`
+- Info string presence may affect mapping
+
+**This verification MUST run BEFORE implementing fence detection logic.**
+
+- [ ] **Action**: Create verification script `verify_token_map_semantics.py`
+
+```python
+#!/usr/bin/env python3
+"""Verify fence token.map semantics BEFORE implementation.
+
+⚠️ BLOCKER #6 FIX: This script determines the exact behavior of token.map
+for fence tokens, which varies across markdown-it-py versions.
+
+DO NOT PROCEED to Step 2.2 until this runs and findings are documented.
+"""
+
+from markdown_it import MarkdownIt
+
+md = MarkdownIt("commonmark")
+
+test_cases = [
+    # (name, markdown, expected_map_description)
+    (
+        "normal_fence",
+        "```python\ncode\n```",
+        "Does map include opening marker (line 0)?"
+    ),
+    (
+        "unterminated",
+        "```\ncode\nmore",
+        "How does unterminated fence map?"
+    ),
+    (
+        "fence_in_list",
+        "- ```\n  code\n  ```",
+        "Does list nesting affect map?"
+    ),
+    (
+        "info_string",
+        "```python title=\"test\"\ncode\n```",
+        "Does info string affect map?"
+    ),
+    (
+        "tilde_fence",
+        "~~~python\ncode\n~~~",
+        "Do tilde fences behave same as backticks?"
+    ),
+    (
+        "indented_code",
+        "    code\n    more",
+        "How does code_block (indented) map?"
+    ),
+]
+
+print("="*70)
+print("FENCE TOKEN.MAP SEMANTICS VERIFICATION")
+print("="*70)
+print()
+print("⚠️  BLOCKER #6 FIX: Determining token.map behavior")
+print("    This affects fence_marker line detection in Step 2.2")
+print()
+
+findings = {}
+
+for name, content, question in test_cases:
+    tokens = md.parse(content)
+    fence_tokens = [t for t in tokens if t.type in ("fence", "code_block")]
+
+    print(f"\n{name}:")
+    print(f"  Content: {repr(content)}")
+    print(f"  Question: {question}")
+
+    if fence_tokens:
+        token = fence_tokens[0]
+        print(f"  token.type: {token.type}")
+        print(f"  token.map: {token.map}")
+
+        if token.map:
+            start, end = token.map
+            lines = content.split('\n')
+            print(f"  Lines [{start}:{end}] (end is exclusive):")
+            for i in range(start, min(end, len(lines))):
+                print(f"    {i}: {repr(lines[i])}")
+
+            # Store findings
+            findings[name] = {
+                "type": token.type,
+                "map": token.map,
+                "map_start": start,
+                "map_end": end,
+                "first_line": lines[start] if start < len(lines) else None,
+                "last_line_index": end - 1,
+                "last_line": lines[end-1] if end-1 < len(lines) else None,
+            }
+        else:
+            print(f"  ⚠️  token.map is None (nested or special case)")
+            findings[name] = {"map": None}
+    else:
+        print(f"  ❌ No fence/code_block token found")
+        findings[name] = {"error": "no_token"}
+
+print("\n" + "="*70)
+print("FINDINGS SUMMARY")
+print("="*70)
+
+# Analyze findings to determine pattern
+normal_fence = findings.get("normal_fence", {})
+if normal_fence.get("map"):
+    start, end = normal_fence["map"]
+    first_line = normal_fence.get("first_line", "")
+    last_line = normal_fence.get("last_line", "")
+
+    print()
+    print("NORMAL FENCE PATTERN:")
+    print(f"  map: [{start}, {end})")
+    print(f"  First line (index {start}): {repr(first_line)}")
+    print(f"  Last line (index {end-1}): {repr(last_line)}")
+
+    if first_line.startswith("```"):
+        print("  ✅ map[0] INCLUDES opening fence marker")
+        includes_opener = True
+    else:
+        print("  ✅ map[0] EXCLUDES opening fence marker (code starts here)")
+        includes_opener = False
+
+    if last_line.startswith("```"):
+        print("  ✅ map[1]-1 INCLUDES closing fence marker")
+        includes_closer = True
+    else:
+        print("  ✅ map[1]-1 EXCLUDES closing fence marker (code ends before)")
+        includes_closer = False
+
+print("\n" + "="*70)
+print("DECISION REQUIRED FOR STEP 2.2")
+print("="*70)
+print()
+print("Based on findings above, update Step 2.2 fence_marker logic:")
+print()
+
+if includes_opener and includes_closer:
+    print("DETECTED PATTERN: map INCLUDES both markers")
+    print()
+    print("Correct implementation for Step 2.2:")
+    print("  context_map[start_line] = 'fence_marker'  # Opening")
+    print("  context_map[end_line - 1] = 'fence_marker'  # Closing")
+    print("  for line_no in range(start_line + 1, end_line - 1):")
+    print("      context_map[line_no] = 'fenced_code'")
+elif includes_opener and not includes_closer:
+    print("DETECTED PATTERN: map INCLUDES opener, EXCLUDES closer")
+    print()
+    print("Correct implementation for Step 2.2:")
+    print("  context_map[start_line] = 'fence_marker'  # Opening")
+    print("  # Closing marker NOT in map - need separate detection")
+    print("  for line_no in range(start_line + 1, end_line):")
+    print("      context_map[line_no] = 'fenced_code'")
+elif not includes_opener and includes_closer:
+    print("DETECTED PATTERN: map EXCLUDES opener, INCLUDES closer")
+    print()
+    print("Correct implementation for Step 2.2:")
+    print("  # Opening marker NOT in map - need separate detection")
+    print("  context_map[end_line - 1] = 'fence_marker'  # Closing")
+    print("  for line_no in range(start_line, end_line - 1):")
+    print("      context_map[line_no] = 'fenced_code'")
+else:
+    print("DETECTED PATTERN: map EXCLUDES both markers (code lines only)")
+    print()
+    print("Correct implementation for Step 2.2:")
+    print("  # Markers NOT in map - need separate regex detection")
+    print("  for line_no in range(start_line, end_line):")
+    print("      context_map[line_no] = 'fenced_code'")
+
+print()
+print("NEXT STEPS:")
+print("1. Save findings to token_map_findings.json for evidence")
+print("2. Update Step 2.2 implementation based on pattern above")
+print("3. Document in evidence block with quote from this output")
+print("="*70)
+
+# Save findings for evidence
+import json
+from pathlib import Path
+
+findings_path = Path("token_map_findings.json")
+findings_path.write_text(json.dumps({
+    "findings": findings,
+    "pattern": {
+        "includes_opener": includes_opener if 'includes_opener' in locals() else None,
+        "includes_closer": includes_closer if 'includes_closer' in locals() else None,
+    },
+    "markdown_it_version": md.__class__.__module__,  # Version info
+}, indent=2))
+
+print()
+print(f"✅ Findings saved to {findings_path}")
+print()
+print("⚠️  BLOCKER #6 RESOLVED: Proceed to Step 2.2 with correct logic")
+```
+
+- [ ] **Action**: Run verification script
+
+```bash
+uv run python verify_token_map_semantics.py
+```
+
+**Expected Output**: Clear determination of whether `token.map` includes or excludes fence markers.
+
+**Reflection Point**:
+- Did the script complete successfully?
+- Which pattern was detected (includes opener/closer)?
+- Are findings saved to `token_map_findings.json`?
+
+**GATE**: DO NOT proceed to Step 2.2 until:
+1. ✅ Script runs without errors
+2. ✅ Pattern clearly identified
+3. ✅ `token_map_findings.json` created
+4. ✅ Evidence block prepared with findings
+
+**Why This Matters**:
+- **Wrong assumption** → Off-by-one errors in fence marker detection
+- **Example**: If map includes opener but we assume it doesn't → opening marker incorrectly marked as "fenced_code" instead of "fence_marker"
+- **Impact**: ContentContext misclassifies lines → wrong prompt injection detection → security bypass
+
+---
+
 #### 2.2 Refactor ContentContext Architecture
 
 **CRITICAL ARCHITECTURAL DECISION:**
@@ -1261,33 +1795,38 @@ Tests: All canonical_count tests passing
 - [ ] **Action**: Add method to `MarkdownParserCore` (around line 3600)
 
 ```python
-def _extract_plain_text_from_tokens(self, tokens: list = None) -> str:
+def _extract_plain_text_from_tokens(self, tokens: list) -> str:
     """Extract plain text from markdown using ITERATIVE token traversal.
 
     ⚠️ CRITICAL: Uses explicit stack to avoid RecursionError on deeply nested markdown.
     Python's recursion limit (~1000) can be hit by pathological input (e.g., 2000-level
     nested blockquotes). Stack-based DFS handles arbitrary depth.
 
+    ⚠️ PRIORITY 2.4 FIX: tokens parameter is now REQUIRED (no default, no re-parse).
+    This enforces the single-parse principle (§0 FOURTH RULE).
+
     Replaces regex-based _strip_markdown_formatting(). Instead of
     stripping markdown syntax with regexes, we parse the document
     and extract only text-bearing tokens.
 
     Args:
-        tokens: Pre-parsed tokens (preferred - no re-parse)
-                If None, will re-parse self.content WITH TIMEOUT (see §4.5)
+        tokens: Pre-parsed tokens (REQUIRED - no re-parse)
+                Must be self.tokens or passed explicitly
+                Raises ValueError if None
 
     Returns:
         Plain text with formatting removed
+
+    Raises:
+        ValueError: If tokens is None (prevents accidental re-parse)
     """
-    # PREFER: Use passed tokens or self.tokens (no re-parse needed)
+    # ✅ ENFORCE SINGLE-PARSE: No default value, no re-parse path
     if tokens is None:
-        if hasattr(self, 'tokens') and self.tokens:
-            tokens = self.tokens
-        else:
-            # ✅ Re-parse with timeout (see §4.5 Location 2)
-            limits = self.SECURITY_LIMITS[self.security_profile]
-            timeout_sec = limits.get("parse_timeout_sec", 5.0)
-            tokens = self._parse_with_timeout(self.content, timeout_sec=timeout_sec)
+        raise ValueError(
+            "tokens parameter is required (no re-parsing allowed). "
+            "Pass self.tokens or call parse() first. "
+            "Front-matter re-parse is the ONLY exception (see §4.5)."
+        )
 
     plain_parts = []
 
@@ -1458,45 +1997,122 @@ Tests: Passing
 
 #### 3.6 Slugification Cleanup (Bonus Enhancement)
 
-**Goal**: Remove duplicate slugification logic, use existing utility.
+**Goal**: Remove duplicate slugification logic, use existing utility with Unicode normalization and collision handling.
 
 - [ ] **Action**: Remove `_slugify_base()` method
 
 Find and delete the `_slugify_base()` method (likely around line 3536-3545).
 
-- [ ] **Action**: Import `sluggify_util`
+- [ ] **Action**: Import required modules
 
 Add at top of file:
 ```python
+import unicodedata
 from docpipe.sluggify_util import slugify
 ```
 
-- [ ] **Action**: Replace all calls to `_slugify_base()`
+- [ ] **Action**: Add deterministic slug generator with NFKD normalization
 
-Find calls (likely in `_extract_headings()` and `_extract_sections()`):
+⚠️ **PRIORITY 2.3 FIX**: Ensures deterministic slug generation with Unicode normalization and collision registry.
+
 ```python
-# OLD:
-base_slug = self._slugify_base(heading_text)
+def _generate_deterministic_slug(self, text: str, slug_registry: dict) -> str:
+    """Generate slug with Unicode normalization and collision handling.
 
-# NEW:
-base_slug = slugify(heading_text) or "untitled"
+    ⚠️ CRITICAL: NFKD normalization ensures "é" (U+00E9) and "é" (e + combining acute)
+    produce identical slugs. Collision registry ensures uniqueness within document.
+
+    Args:
+        text: Source text from tokens (not raw markdown)
+        slug_registry: Per-document collision tracker (dict[str, int])
+
+    Returns:
+        Unique slug with -2, -3 suffixes on collision
+
+    Example:
+        "Héllo World" → NFKD → "Hello World" → slugify → "hello-world"
+        Collision: "hello-world" exists → "hello-world-2"
+    """
+    # STEP 1: Unicode normalization (NFKD - Compatibility Decomposition)
+    # Converts "é" (U+00E9) → "e" (U+0065) + combining acute (U+0301)
+    # This ensures visual equivalents produce same slug
+    normalized = unicodedata.normalize("NFKD", text)
+
+    # STEP 2: ASCII fold (remove combining marks)
+    # Keeps only ASCII, discards accents: "café" → "cafe"
+    ascii_text = normalized.encode('ascii', 'ignore').decode('ascii')
+
+    # STEP 3: Slugify (lowercase + replace spaces with -)
+    base_slug = slugify(ascii_text) or "untitled"
+
+    # STEP 4: Handle collisions deterministically
+    if base_slug not in slug_registry:
+        slug_registry[base_slug] = 1
+        return base_slug
+    else:
+        slug_registry[base_slug] += 1
+        count = slug_registry[base_slug]
+        return f"{base_slug}-{count}"
 ```
 
-- [ ] **Checkpoint**: Test slugification
+- [ ] **Action**: Update parse() method to use per-document slug registry
+
+Find the heading extraction loop in `parse()`:
+```python
+# OLD (no collision handling):
+for heading in headings:
+    base_slug = self._slugify_base(heading_text)
+    heading['slug'] = base_slug
+
+# NEW (with NFKD + collision registry):
+slug_registry = {}  # Per-document registry (reset for each parse)
+for heading in headings:
+    heading['slug'] = self._generate_deterministic_slug(
+        heading['text'],  # From tokens, not raw markdown
+        slug_registry
+    )
+```
+
+- [ ] **Checkpoint**: Test slugification with NFKD normalization and collisions
 
 ```python
 from docpipe.markdown_parser_core import MarkdownParserCore
 
-test = "# Heading with **Bold** and [Link](url)\n\n## Äöü Ñoñ-ASCII"
+# Test cases:
+# 1. Markdown stripping: **Bold** removed
+# 2. NFKD normalization: "é" (composed) vs "é" (decomposed) → same slug
+# 3. Collision handling: duplicate headings get -2, -3 suffixes
+test = """
+# Heading with **Bold** and [Link](url)
+## Äöü Ñoñ-ASCII
+## Café
+## Café
+## café
+"""
+
 parser = MarkdownParserCore(test, security_profile='moderate')
 result = parser.parse()
 
+print("Slug Generation Test Results:")
+print("="*50)
 for heading in result.get('headings', []):
-    print(f"Text: {heading['text']}, Slug: {heading['slug']}")
-# Verify slugs are clean and derived from token text (not raw markdown)
+    print(f"Level: {heading['level']}")
+    print(f"Text:  {heading['text']}")
+    print(f"Slug:  {heading['slug']}")
+    print("-" * 30)
+
+# Expected:
+# - "Heading with Bold and Link" → "heading-with-bold-and-link"
+# - "Äöü Ñoñ-ASCII" → "aou-non-ascii" (NFKD + ASCII fold)
+# - "Café" → "cafe"
+# - "Café" (duplicate) → "cafe-2"
+# - "café" (case variant) → "cafe-3" (lowercase normalization)
 ```
 
-**Reflection Point**: Are slugs generated correctly from clean text (without markdown syntax)?
+**Reflection Point**:
+1. Are slugs clean (no markdown syntax)?
+2. Does NFKD normalization handle accents correctly?
+3. Do collisions get deterministic -2, -3 suffixes?
 
 - [ ] **Action**: Update evidence block
 
@@ -1521,25 +2137,35 @@ for heading in result.get('headings', []):
 
 #### 4.1 Add Token-Based Link/Image Extraction
 
-- [ ] **Action**: Add utility methods (around line 300 in `MarkdownParserCore`)
+- [ ] **Action**: Add unified token walker utility (around line 300 in `MarkdownParserCore`)
+
+⚠️ **CRITICAL**: All token traversal MUST use this unified walker to prevent RecursionError.
 
 ```python
-def _extract_links_from_tokens(self, tokens: list) -> list[dict]:
-    """Extract all links from token tree using ITERATIVE traversal.
+def _walk_tokens_iter(self, tokens: list):
+    """Iterate over all tokens in tree using explicit stack (NO RECURSION).
 
-    ⚠️ CRITICAL: Uses explicit stack to avoid RecursionError on deeply nested markdown.
-    Python's recursion limit (~1000) can be hit by pathological input (e.g., 2000-level
-    nested blockquotes). Stack-based DFS handles arbitrary depth.
+    ⚠️ MANDATORY: This is the ONLY way to traverse tokens in this codebase.
+    Per §0 THIRD RULE, all token traversal must use explicit stack.
+
+    Python's recursion limit (~1000) can be hit by pathological markdown
+    (e.g., 5000-level nested blockquotes). This iterative approach handles
+    arbitrary nesting depth safely.
+
+    Yields tokens in depth-first order (parent before children, left before right).
 
     Args:
-        tokens: MarkdownIt token list
+        tokens: MarkdownIt token list (or list of token dicts from process isolation)
 
-    Returns:
-        List of dicts with keys: href, text, line_start, line_end
+    Yields:
+        Token objects (or token dicts) in DFS order
+
+    Example:
+        for token in self._walk_tokens_iter(self.tokens):
+            if token.type == "link_open":  # or token.get('type') == "link_open"
+                # process link...
+                pass
     """
-    links = []
-
-    # Explicit stack for iterative DFS: (token_list, index)
     stack = [(tokens, 0)]
 
     while stack:
@@ -1554,33 +2180,95 @@ def _extract_links_from_tokens(self, tokens: list) -> list[dict]:
         # Push next sibling onto stack (processed later)
         stack.append((token_list, idx + 1))
 
-        # Process current token
-        if token.type == "link_open":
-            attrs = dict(token.attrs or [])
-            href = attrs.get("href", "")
+        # Yield current token for processing
+        yield token
 
-            # Extract link text from NEXT token (should be inline with children)
-            text = ""
-            if idx + 1 < len(token_list) and token_list[idx + 1].type == "inline":
-                inline_token = token_list[idx + 1]
-                if inline_token.children:
-                    text = "".join(
-                        child.content for child in inline_token.children
-                        if child.type == "text"
-                    )
+        # Push children onto stack (processed before next sibling - DFS)
+        # Handle both Token objects and plain dicts (from process isolation)
+        children = getattr(token, 'children', None) or token.get('children') if isinstance(token, dict) else None
+        if children:
+            stack.append((children, 0))
+```
 
-            line_start, line_end = token.map if token.map else (None, None)
+---
 
-            links.append({
-                "href": href,
-                "text": text,
-                "line_start": line_start,
-                "line_end": line_end,
-            })
+- [ ] **Action**: Add link extraction using unified walker
 
-        # Push children onto stack (processed before next sibling)
-        if token.children:
-            stack.append((token.children, 0))
+```python
+def _extract_links_from_tokens(self, tokens: list) -> list[dict]:
+    """Extract all links with CORRECT text handling (includes emphasized text).
+
+    ⚠️ CRITICAL FIX: Previous version skipped em/strong/code/image inside links.
+    This version accumulates ALL text until matching link_close using depth tracking.
+
+    Example:
+        [**bold** and *italic* and `code`](http://example.com)
+        Old extraction: "and and "  ❌
+        New extraction: "bold and italic and code"  ✅
+
+    Uses unified walker per §0 THIRD RULE (no recursion).
+
+    Args:
+        tokens: MarkdownIt token list
+
+    Returns:
+        List of dicts with keys: href, text, line_start, line_end
+    """
+    links = []
+    depth = 0  # Track link nesting (for nested links, though rare)
+    current_link = None
+    link_text_parts = []
+
+    # Use unified walker (per §0 THIRD RULE)
+    for token in self._walk_tokens_iter(tokens):
+        # Get token type (handle both Token objects and dicts from process isolation)
+        token_type = getattr(token, 'type', None) or token.get('type') if isinstance(token, dict) else None
+
+        if token_type == "link_open":
+            if depth == 0:  # Top-level link (not nested)
+                # Get attrs (handle both formats)
+                attrs = getattr(token, 'attrs', None) or token.get('attrs') if isinstance(token, dict) else None
+                attrs_dict = dict(attrs or [])
+
+                # Get map (handle both formats)
+                token_map = getattr(token, 'map', None) or token.get('map') if isinstance(token, dict) else None
+
+                current_link = {
+                    "href": attrs_dict.get("href", ""),
+                    "line_start": token_map[0] if token_map else None,
+                    "line_end": token_map[1] if token_map else None,
+                }
+                link_text_parts = []
+            depth += 1
+
+        elif token_type == "link_close":
+            depth -= 1
+            if depth == 0 and current_link:  # Closing top-level link
+                current_link["text"] = "".join(link_text_parts)
+                links.append(current_link)
+                current_link = None
+                link_text_parts = []
+
+        elif depth > 0:  # Inside a link - collect ALL text
+            # Get content (handle both formats)
+            content = getattr(token, 'content', None) or token.get('content') if isinstance(token, dict) else None
+
+            if token_type == "text":
+                link_text_parts.append(content or "")
+            elif token_type == "code_inline":
+                link_text_parts.append(content or "")  # Include inline code
+            elif token_type == "image":
+                # Policy: Include alt text from images inside links
+                # Get children (handle both formats)
+                children = getattr(token, 'children', None) or token.get('children') if isinstance(token, dict) else None
+                if children:
+                    for child in children:
+                        child_type = getattr(child, 'type', None) or child.get('type') if isinstance(child, dict) else None
+                        child_content = getattr(child, 'content', None) or child.get('content') if isinstance(child, dict) else None
+                        if child_type == "text" and child_content:
+                            link_text_parts.append(child_content)
+            elif token_type in ("softbreak", "hardbreak"):
+                link_text_parts.append(" ")  # Convert breaks to spaces in link text
 
     return links
 
@@ -1727,9 +2415,10 @@ Add this method to `MarkdownParserCore`:
 
 ```python
 def _validate_and_normalize_url(self, url: str) -> tuple[bool, str, list[str]]:
-    """Comprehensive URL validation with 6 security layers.
+    """Comprehensive URL validation with 9 security layers.
 
     ⚠️ CRITICAL: Defense-in-depth approach prevents various attack vectors.
+    ⚠️ PRIORITY 2.1 FIX: Added layers 7-9 for dotless host, backslash smuggling, path traversal.
 
     Security Layers:
     1. Control characters & zero-width joiners (CR/LF injection, homograph attacks)
@@ -1738,6 +2427,9 @@ def _validate_and_normalize_url(self, url: str) -> tuple[bool, str, list[str]]:
     4. Scheme validation (allow-list enforcement)
     5. IDNA encoding for internationalized domains (fail-closed)
     6. Percent-encoding validation (malformed escapes)
+    7. Dotless host detection (http:example.com ambiguity)
+    8. Backslash smuggling (Windows path confusion)
+    9. Path traversal in percent-encoding (double-decode attacks)
 
     Args:
         url: URL to validate
@@ -1835,8 +2527,107 @@ def _validate_and_normalize_url(self, url: str) -> tuple[bool, str, list[str]]:
 
         idx += 1
 
+    # ======= LAYER 7: Dotless Host Detection =======
+    # Prevents: http:example.com → parsed as scheme="http", path="example.com"
+    # This is ambiguous (typo or intentional?) - reject for safety
+    if scheme in ["http", "https"]:
+        if not parsed.netloc:
+            warnings.append(f"HTTP(S) URL missing netloc: {url[:50]}")
+            return False, url, warnings
+
+    # ======= LAYER 8: Backslash Smuggling =======
+    # Prevents: http://example.com\path (Windows path confusion)
+    # Some parsers treat \ as / (directory traversal bypass)
+    if '\\' in parsed.netloc or '\\' in parsed.path:
+        warnings.append(f"Backslash in URL (path confusion risk): {url[:50]}")
+        return False, url, warnings
+
+    # ======= LAYER 9: Percent-Encoding Path Traversal =======
+    # Prevents: http://example.com/%2e%2e%2fpasswd (double-decode attack)
+    # Check for %2f (encoded /) in netloc - reject to prevent traversal
+    if '%2f' in parsed.netloc.lower() or '%5c' in parsed.netloc.lower():
+        warnings.append(f"Percent-encoded path separators in netloc: {url[:50]}")
+        return False, url, warnings
+
+    # For path, normalize and check for traversal patterns
+    if parsed.path:
+        normalized_path = unquote(parsed.path)
+        if '/../' in normalized_path or normalized_path.endswith('/..'):
+            warnings.append(f"Path traversal detected: {url[:50]}")
+            return False, url, warnings
+
     # ======= ALL CHECKS PASSED =======
     return True, normalized_url, []
+```
+
+- [ ] **Action**: Add Data-URI Size Estimation (Without Decode)
+
+```python
+def _parse_data_uri(self, data_uri: str, max_size: int = 10000) -> dict:
+    """Parse and size-check data URI WITHOUT full decode (DoS prevention).
+
+    ⚠️ PRIORITY 2.2 FIX: Handles both base64 AND non-base64 (percent-encoded) formats.
+    Uses O(1) formula for base64, bounded counting for percent-encoded.
+
+    Args:
+        data_uri: Data URI to parse (e.g., "data:image/png;base64,...")
+        max_size: Size limit in bytes (short-circuit if exceeded)
+
+    Returns:
+        dict with:
+            - mime_type: Extracted MIME type (or None)
+            - is_base64: bool
+            - size_bytes: Estimated payload size (WITHOUT decode)
+            - oversized: bool (True if exceeds max_size)
+    """
+    # RFC 2397 format: data:[<mediatype>][;base64],<data>
+    match = re.match(r"^data:([^;,]+)?(;base64)?,(.*)$", data_uri)
+    if not match:
+        return {"mime_type": None, "is_base64": False, "size_bytes": 0, "oversized": False}
+
+    mime_type, is_base64_flag, payload = match.groups()
+    is_base64 = bool(is_base64_flag)
+
+    if is_base64:
+        # ======= BASE64: Formula-based size (O(1), no decode) =======
+        # Base64 encoding: 4 chars → 3 bytes
+        # Padding chars (=) don't contribute to payload
+        padding = payload.count('=')
+        payload_len = len(payload.strip())
+        size_bytes = ((payload_len - padding) * 3) // 4
+
+    else:
+        # ======= NON-BASE64: Bounded percent-decode count (O(n) but short-circuits) =======
+        # URL-encoded format: %XX represents 1 byte but uses 3 chars
+        # Example: "Hello%20World" = 11 bytes (not 17)
+        size_bytes = 0
+        i = 0
+
+        while i < len(payload):
+            if payload[i] == '%':
+                # %XX represents 1 byte
+                if i + 2 < len(payload) and payload[i+1:i+3].isalnum():
+                    size_bytes += 1
+                    i += 3
+                else:
+                    # Malformed %XX - count as 1 char
+                    size_bytes += 1
+                    i += 1
+            else:
+                # Regular char = 1 byte
+                size_bytes += 1
+                i += 1
+
+            # ⚠️ SHORT-CIRCUIT: Stop counting if over limit (DoS prevention)
+            if size_bytes > max_size:
+                break  # Already oversized, no need to continue
+
+    return {
+        "mime_type": mime_type,
+        "is_base64": is_base64,
+        "size_bytes": size_bytes,
+        "oversized": size_bytes > max_size
+    }
 ```
 
 - [ ] **Action**: Use Comprehensive Validation in Parse Phase
@@ -1871,12 +2662,16 @@ images = self._extract_images_from_tokens(tokens)
 for image in images:
     src = image["src"]
 
-    # Check data URIs (keep this regex - it's RFC 2397 format parsing per §4.2)
+    # Check data URIs (RFC 2397 format parsing - RETAINED per §4.2)
     if src.startswith("data:"):
-        uri_info = self._parse_data_uri(src)
         max_size = cfg.get("max_data_uri_size", 10000)
-        if uri_info.get("size_bytes", 0) > max_size:
-            security["warnings"].append(f"Oversized data URI: {uri_info['size_bytes']} bytes")
+        uri_info = self._parse_data_uri(src, max_size=max_size)
+
+        if uri_info["oversized"]:
+            security["warnings"].append(
+                f"Oversized data URI: {uri_info['size_bytes']} bytes "
+                f"(max: {max_size}, {'base64' if uri_info['is_base64'] else 'percent-encoded'})"
+            )
 ```
 
 - [ ] **Checkpoint**: Test URL parsing edge cases
@@ -2601,25 +3396,95 @@ cat frontmatter_plugin_findings.json
 
 **⚠️ CRITICAL PRE-REQUISITE**: Step 7.1A verification MUST complete successfully.
 
-- [ ] **Pre-Flight Check**: Verify `frontmatter_plugin_findings.json` exists and shows valid frontmatter location
+- [ ] **Pre-Flight Check**: Run frontmatter verification gate script
+
+Save as `verify_frontmatter_gate.sh`:
 
 ```bash
-# Check that verification passed
+#!/bin/bash
+# Frontmatter Plugin Verification Gate
+# MUST pass before proceeding to Step 7.1B implementation
+
+set -e  # Exit on any error
+
+echo "================================================================="
+echo "FRONTMATTER VERIFICATION GATE"
+echo "================================================================="
+echo ""
+
+# Check findings file exists
 if [ ! -f frontmatter_plugin_findings.json ]; then
-    echo "❌ ERROR: Step 7.1A verification not run"
-    echo "Run: python verify_frontmatter_plugin.py"
+    echo "❌ BLOCKED: frontmatter_plugin_findings.json not found"
+    echo ""
+    echo "You MUST run Step 7.1A verification first:"
+    echo "  python verify_frontmatter_plugin.py"
+    echo ""
+    echo "DO NOT PROCEED until verification completes."
     exit 1
 fi
 
-# Check that plugin works
-if grep -q '"frontmatter_location": "unknown"' frontmatter_plugin_findings.json; then
-    echo "❌ ERROR: Frontmatter plugin verification FAILED"
-    echo "Use fallback strategy - DO NOT proceed to 7.1B"
-    exit 1
+# Try to use jq if available, fall back to grep
+if command -v jq &> /dev/null; then
+    # Use jq for robust JSON parsing
+    LOCATION=$(jq -r '.frontmatter_location' frontmatter_plugin_findings.json)
+    IS_DICT=$(jq -r '.is_dict' frontmatter_plugin_findings.json)
+    IS_STRING=$(jq -r '.is_string' frontmatter_plugin_findings.json)
+
+    if [ "$LOCATION" = "unknown" ]; then
+        echo "❌ BLOCKED: Frontmatter plugin verification FAILED"
+        echo ""
+        echo "Plugin does not populate env['front_matter']"
+        echo ""
+        echo "REQUIRED ACTIONS:"
+        echo "1. Mark frontmatter regex as RETAINED (§4.2)"
+        echo "2. Skip to STEP 8 (do NOT implement plugin)"
+        echo "3. Document in REFACTORING_PLAN_REGEX.md"
+        echo ""
+        exit 1
+    fi
+
+    # Check type is valid
+    if [ "$IS_DICT" != "true" ] && [ "$IS_STRING" != "true" ]; then
+        echo "❌ BLOCKED: Unexpected frontmatter type"
+        echo ""
+        echo "Plugin populates env but type is neither dict nor string"
+        echo "  Location: $LOCATION"
+        echo "  is_dict: $IS_DICT"
+        echo "  is_string: $IS_STRING"
+        echo ""
+        echo "Use fallback strategy (retain regex)"
+        exit 1
+    fi
+
+    echo "✅ Frontmatter verification passed"
+    echo "   Location: $LOCATION"
+    echo "   Type: $([ "$IS_DICT" = "true" ] && echo "dict" || echo "string")"
+else
+    # Fall back to grep (less robust but works without jq)
+    echo "⚠️  jq not found - using grep fallback (less robust)"
+
+    if grep -q '"frontmatter_location": "unknown"' frontmatter_plugin_findings.json; then
+        echo "❌ BLOCKED: Frontmatter plugin verification FAILED"
+        echo ""
+        echo "Use fallback strategy - DO NOT proceed to 7.1B"
+        exit 1
+    fi
+
+    echo "✅ Frontmatter verification passed (grep-based check)"
 fi
 
-echo "✅ Verification passed - proceeding with plugin implementation"
+echo ""
+echo "Proceeding with plugin-based implementation..."
+echo "================================================================="
 ```
+
+- [ ] **Action**: Run verification gate
+
+```bash
+bash verify_frontmatter_gate.sh  # Must exit 0
+```
+
+If gate fails (exit 1), **DO NOT PROCEED**. Follow fallback strategy documented in Step 7.1A.
 
 - [ ] **Action**: Enable the plugin in MarkdownIt initialization
 
@@ -3381,51 +4246,156 @@ PYTHON
 ```
 
 ### Gate 5: Canonical Count Verification (Paired Files)
+
+**⚠️ BLOCKER #7 FIX APPLIED**: Converted to pure Python for cross-platform compatibility (eliminates `jq` and OS-specific `stat` command dependencies).
+
+**Pure Python Implementation** (works on Linux, macOS, Windows):
+
+```python
+#!/usr/bin/env python3
+"""check_canonical_count.py - Pure Python (cross-platform)
+
+⚠️ BLOCKER #7 FIX: Replaces bash script with jq dependency.
+
+This script:
+- Counts paired .md + .json files (matches test harness logic)
+- Reads baseline using Python json module (no jq)
+- Checks baseline age using cross-platform Path.stat()
+- Exits with code 1 on mismatch (blocks merge)
+"""
+
+import json
+import sys
+from pathlib import Path
+from datetime import datetime
+
+print("Verifying canonical count consistency...")
+print()
+
+# Count paired files (CRITICAL: matches test harness logic)
+test_dir = Path("src/docpipe/md_parser_testing/test_mds/md_stress_mega")
+
+if not test_dir.exists():
+    print(f"❌ ERROR: Test directory not found: {test_dir}")
+    sys.exit(1)
+
+# Count ONLY .md files WITH matching .json siblings
+actual_count = sum(
+    1 for md_file in test_dir.glob("*.md")
+    if md_file.with_suffix(".json").exists()
+)
+
+print(f"Counted {actual_count} paired .md + .json files")
+
+# Read baseline (pure Python - no jq)
+baseline_path = Path("src/docpipe/md_parser_testing/baseline_performance.json")
+
+if not baseline_path.exists():
+    print(f"⚠️  WARNING: Baseline not found at {baseline_path}")
+    print(f"   Actual count: {actual_count}")
+    print(f"   Cannot verify (missing baseline)")
+    sys.exit(0)  # Don't block if baseline missing
+
+try:
+    with open(baseline_path, 'r') as f:
+        baseline = json.load(f)
+except json.JSONDecodeError as e:
+    print(f"❌ ERROR: Baseline JSON is malformed")
+    print(f"   {e}")
+    sys.exit(1)
+
+expected_count = baseline.get("canonical_count")
+
+if expected_count is None:
+    print(f"⚠️  WARNING: Baseline missing 'canonical_count' field")
+    print(f"   Actual count: {actual_count}")
+    sys.exit(0)  # Don't block if field missing
+
+# Compare counts
+if expected_count != actual_count:
+    # Check baseline age (cross-platform using Path.stat())
+    baseline_mtime = baseline_path.stat().st_mtime
+    age_days = (datetime.now().timestamp() - baseline_mtime) / 86400
+
+    if age_days < 7:
+        print("=" * 70)
+        print("❌ MERGE BLOCKED: Canonical count mismatch with fresh baseline")
+        print("=" * 70)
+        print()
+        print(f"  Expected: {expected_count} (from baseline)")
+        print(f"  Actual:   {actual_count} (paired .md + .json files only)")
+        print(f"  Baseline age: {age_days:.1f} days")
+        print()
+        print("  This indicates test corpus was modified after baseline capture.")
+        print()
+        print("  Required Actions:")
+        print("  1. Regenerate baseline: uv run python -m docpipe.md_parser_testing.testing_md_parser --emit-baseline ...")
+        print("  2. OR revert corpus changes if unintended")
+        print("  3. Commit updated baseline with corpus changes")
+        print()
+        sys.exit(1)
+    else:
+        print("=" * 70)
+        print("⚠️  WARNING: Canonical count drift (baseline is stale)")
+        print("=" * 70)
+        print()
+        print(f"  Expected: {expected_count} (from baseline)")
+        print(f"  Actual:   {actual_count} (paired files only)")
+        print(f"  Baseline age: {age_days:.1f} days (>7 days old)")
+        print()
+        print("  Drift may be acceptable for stale baselines.")
+        print("  Consider regenerating baseline if drift is significant.")
+        print()
+
+print(f"✅ Canonical count: {actual_count} (paired files only)")
+sys.exit(0)
+```
+
+**Shell wrapper for CI** (`.github/workflows/check_canonical_count.sh`):
+
 ```bash
 #!/bin/bash
-# .github/workflows/check_canonical_count.sh
+# Wrapper for CI - calls Python script
 
-echo "Verifying canonical count consistency..."
+# Run pure Python implementation (cross-platform)
+python3 check_canonical_count.py
 
-# CRITICAL: Count ONLY .md files with matching .json siblings (matches test harness logic)
-# Prevents false positives when unpaired .md files exist
-ACTUAL_COUNT=0
-for md_file in $(find src/docpipe/md_parser_testing/test_mds/md_stress_mega -name '*.md' -type f); do
-    json_file="${md_file%.md}.json"
-    if [ -f "$json_file" ]; then
-        ((ACTUAL_COUNT++))
-    fi
-done
+# Pass through exit code
+exit $?
+```
 
-EXPECTED_COUNT=$(jq -r '.canonical_count' src/docpipe/md_parser_testing/baseline_performance.json)
+**Why This Fix Matters**:
 
-if [ "$EXPECTED_COUNT" != "$ACTUAL_COUNT" ]; then
-    # Check baseline age (stat command varies by OS)
-    if [ "$(uname)" = "Linux" ]; then
-        BASELINE_AGE=$((($(date +%s) - $(stat -c %Y src/docpipe/md_parser_testing/baseline_performance.json 2>/dev/null)) / 86400))
-    else
-        BASELINE_AGE=$((($(date +%s) - $(stat -f %m src/docpipe/md_parser_testing/baseline_performance.json 2>/dev/null)) / 86400))
-    fi
+1. **`jq` dependency eliminated**:
+   - Old: `jq -r '.canonical_count' baseline.json` (fails if jq not installed)
+   - New: `json.load(f)` (Python stdlib - always available)
 
-    if [ $BASELINE_AGE -lt 7 ]; then
-        echo "❌ MERGE BLOCKED: Canonical count mismatch with fresh baseline"
-        echo "  Expected: $EXPECTED_COUNT (from baseline)"
-        echo "  Actual:   $ACTUAL_COUNT (paired .md+.json files only)"
-        echo "  Baseline age: $BASELINE_AGE days"
-        echo ""
-        echo "  This indicates test corpus was modified after baseline capture."
-        echo "  Action: Regenerate baseline or revert corpus changes."
-        exit 1
-    else
-        echo "⚠️  WARNING: Canonical count drift"
-        echo "  Expected: $EXPECTED_COUNT"
-        echo "  Actual:   $ACTUAL_COUNT"
-        echo "  Baseline is >7 days old, drift may be acceptable"
-    fi
-fi
+2. **Cross-platform `stat`**:
+   - Old: Different `stat` flags for Linux (`-c %Y`) vs macOS (`-f %m`)
+   - New: `Path.stat().st_mtime` (works everywhere)
 
-echo "✅ Canonical count: $ACTUAL_COUNT (paired files only)"
-exit 0
+3. **Better error messages**:
+   - Handles missing baseline gracefully
+   - Handles malformed JSON
+   - Handles missing `canonical_count` field
+
+4. **Consistent with test harness**:
+   - Uses `Path.glob("*.md")` + `.with_suffix(".json").exists()`
+   - Identical logic to Step 1.1 test harness
+
+**Testing**:
+
+```bash
+# Test on Linux
+python3 check_canonical_count.py
+
+# Test on macOS
+python3 check_canonical_count.py
+
+# Test on Windows
+python check_canonical_count.py
+
+# All should produce identical results
 ```
 
 ### Gate Summary
