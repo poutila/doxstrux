@@ -1,0 +1,240 @@
+file,line_no,line,context
+content_context.py,9,import re,"
+import re
+"
+content_context.py,44,"m = re.match(r""^\s*([`~])\1{2,}(\s*\S.*)?\s*$"", line)","            # Detect fenced code blocks (robust: track fence char and length)
+            m = re.match(r""^\s*([`~])\1{2,}(\s*\S.*)?\s*$"", line)
+            if m:"
+content_context.py,48,"run = re.match(r""^\s*([`~])\1{2,}"", line).group(0).lstrip()","                # count the opening fence run length after leading spaces
+                run = re.match(r""^\s*([`~])\1{2,}"", line).group(0).lstrip()
+                run_len = len(run)"
+content_context.py,158,"fence_match = re.match(r""^\s*([`~])\1{2,}(\s*\S.*)?\s*$"", line)","                # Compute regex match once and reuse (micro-optimization for hot path)
+                fence_match = re.match(r""^\s*([`~])\1{2,}(\s*\S.*)?\s*$"", line)
+                language = """""
+markdown_parser_core.py,5,No backward compatibility burden - fresh architecture.,"This is the foundation for all markdown processing tools.
+No backward compatibility burden - fresh architecture.
+"""""""
+markdown_parser_core.py,10,import re,"import posixpath
+import re
+import signal"
+markdown_parser_core.py,165,"if re.search(pattern, content[:10000], re.IGNORECASE):  # Check first 10KB","        for pattern, description in malicious_patterns:
+            if re.search(pattern, content[:10000], re.IGNORECASE):  # Check first 10KB
+                issues.append(f""Suspicious pattern detected: {description}"")"
+markdown_parser_core.py,249,_STYLE_JS_PAT = re.compile(,"    # Extra HTML/CSS/scriptless vector patterns
+    _STYLE_JS_PAT = re.compile(
+        r'style\s*=\s*[""\'][^""\']*(url\s*\(\s*javascript:|expression\s*\()', re.I"
+markdown_parser_core.py,250,"r'style\s*=\s*[""\'][^""\']*(url\s*\(\s*javascript:|expression\s*\()', re.I","    _STYLE_JS_PAT = re.compile(
+        r'style\s*=\s*[""\'][^""\']*(url\s*\(\s*javascript:|expression\s*\()', re.I
+    )"
+markdown_parser_core.py,252,"_META_REFRESH_PAT = re.compile(r'<meta[^>]+http-equiv\s*=\s*[""\']refresh[""\'][^>]*>', re.I)","    )
+    _META_REFRESH_PAT = re.compile(r'<meta[^>]+http-equiv\s*=\s*[""\']refresh[""\'][^>]*>', re.I)
+    _FRAMELIKE_PAT = re.compile(r""<(iframe|object|embed)[^>]*>"", re.I)  # Any frame-like element"
+markdown_parser_core.py,253,"_FRAMELIKE_PAT = re.compile(r""<(iframe|object|embed)[^>]*>"", re.I)  # Any frame-like element","    _META_REFRESH_PAT = re.compile(r'<meta[^>]+http-equiv\s*=\s*[""\']refresh[""\'][^>]*>', re.I)
+    _FRAMELIKE_PAT = re.compile(r""<(iframe|object|embed)[^>]*>"", re.I)  # Any frame-like element
+"
+markdown_parser_core.py,618,"if re.search(pattern, content[:10000], re.IGNORECASE):  # Check first 10KB","        for pattern in malicious_patterns:
+            if re.search(pattern, content[:10000], re.IGNORECASE):  # Check first 10KB
+                if self.security_profile == ""strict"":"
+markdown_parser_core.py,848,"if structure.get(""html_blocks""):","            # Strip HTML blocks
+            if structure.get(""html_blocks""):
+                original_count = len(structure[""html_blocks""])"
+markdown_parser_core.py,854,"if structure.get(""html_inline""):","            # Strip HTML inline
+            if structure.get(""html_inline""):
+                original_count = len(structure[""html_inline""])"
+markdown_parser_core.py,861,"if structure.get(""links""):","        # Filter links - remove those with disallowed schemes
+        if structure.get(""links""):
+            safe_links = []"
+markdown_parser_core.py,874,"if structure.get(""images""):","        # Filter images - remove those with disallowed schemes or data URIs
+        if structure.get(""images""):
+            safe_images = []"
+markdown_parser_core.py,901,"if structure.get(""footnotes""):","        # Check for long footnote definitions (potential payload hiding)
+        if structure.get(""footnotes""):
+            definitions = structure[""footnotes""].get(""definitions"", [])"
+markdown_parser_core.py,936,"return re.sub(r""<[^>]+>"", """", html)","            # Fallback to regex if bleach not available
+            return re.sub(r""<[^>]+>"", """", html)
+        # Allow safe subset"
+markdown_parser_core.py,948,html = re.sub(,"        # Remove script tags and event handlers
+        html = re.sub(
+            r""<script[^>]*>.*?</script>"", """", html, flags=re.IGNORECASE | re.DOTALL"
+markdown_parser_core.py,949,"r""<script[^>]*>.*?</script>"", """", html, flags=re.IGNORECASE | re.DOTALL","        html = re.sub(
+            r""<script[^>]*>.*?</script>"", """", html, flags=re.IGNORECASE | re.DOTALL
+        )"
+markdown_parser_core.py,951,"html = re.sub(r""\bon\w+\s*=\s*[\""'][^\""']*[\""']"", """", html, flags=re.IGNORECASE)","        )
+        html = re.sub(r""\bon\w+\s*=\s*[\""'][^\""']*[\""']"", """", html, flags=re.IGNORECASE)
+        html = re.sub(r""javascript:"", """", html, flags=re.IGNORECASE)"
+markdown_parser_core.py,952,"html = re.sub(r""javascript:"", """", html, flags=re.IGNORECASE)","        html = re.sub(r""\bon\w+\s*=\s*[\""'][^\""']*[\""']"", """", html, flags=re.IGNORECASE)
+        html = re.sub(r""javascript:"", """", html, flags=re.IGNORECASE)
+        return html"
+markdown_parser_core.py,1023,"if re.search(r""<\s*script\b"", text, re.I):","        if cfg[""strip_scripts""]:
+            if re.search(r""<\s*script\b"", text, re.I):
+                reasons.append(""script_tag_removed"")"
+markdown_parser_core.py,1025,"text = re.sub(r""<\s*script\b[^>]*>.*?<\s*/\s*script\s*>"", """", text, flags=re.I | re.S)","                reasons.append(""script_tag_removed"")
+            text = re.sub(r""<\s*script\b[^>]*>.*?<\s*/\s*script\s*>"", """", text, flags=re.I | re.S)
+"
+markdown_parser_core.py,1029,"if re.search(r""\bon[a-z]+\s*="", text, re.I):","        if cfg[""strip_event_handlers""]:
+            if re.search(r""\bon[a-z]+\s*="", text, re.I):
+                reasons.append(""event_handlers_removed"")"
+markdown_parser_core.py,1031,"text = re.sub(r""\bon[a-z]+\s*=\s*(\""[^\""]*\""|'[^']*'|[^\s>]+)"", """", text, flags=re.I)","                reasons.append(""event_handlers_removed"")
+            text = re.sub(r""\bon[a-z]+\s*=\s*(\""[^\""]*\""|'[^']*'|[^\s>]+)"", """", text, flags=re.I)
+"
+markdown_parser_core.py,1035,"if re.search(r""<\w+[^>]*>"", text):","        if not cfg[""allows_html""] and cfg[""strip_html_if_disallowed""]:
+            if re.search(r""<\w+[^>]*>"", text):
+                reasons.append(""html_stripped"")"
+markdown_parser_core.py,1050,"msch = re.match(r""^([a-zA-Z][a-zA-Z0-9+.\-]*):"", href)","                href = (m.group(2) or """").strip()
+                msch = re.match(r""^([a-zA-Z][a-zA-Z0-9+.\-]*):"", href)
+                if href.startswith(""#""):"
+markdown_parser_core.py,1062,"text = re.sub(r""(?<!\!)\[([^\]]+)\]\(([^)]+)\)"", _strip_bad_link, text)","            # Only match regular links, not image links (no leading !)
+            text = re.sub(r""(?<!\!)\[([^\]]+)\]\(([^)]+)\)"", _strip_bad_link, text)
+            if removed_schemes:"
+markdown_parser_core.py,1089,"text = re.sub(r""!\[([^\]]*)\]\(([^)]+)\)"", _filter_image, text)","
+        text = re.sub(r""!\[([^\]]*)\]\(([^)]+)\)"", _filter_image, text)
+        if data_uris_removed:"
+markdown_parser_core.py,1208,import re,"        """"""
+        import re
+"
+markdown_parser_core.py,1266,if re.search(,"        # HTML detection
+        if re.search(
+            r""<(div|span|script|style|iframe|object|embed|form)[\s>]"", raw_content, re.IGNORECASE"
+markdown_parser_core.py,1267,"r""<(div|span|script|style|iframe|object|embed|form)[\s>]"", raw_content, re.IGNORECASE","        if re.search(
+            r""<(div|span|script|style|iframe|object|embed|form)[\s>]"", raw_content, re.IGNORECASE
+        ):"
+markdown_parser_core.py,1270,"if re.search(r""<(a|img|em|strong|b|i|u|code|kbd|sup|sub)[\s>]"", raw_content, re.IGNORECASE):","            security[""statistics""][""has_html_block""] = True
+        if re.search(r""<(a|img|em|strong|b|i|u|code|kbd|sup|sub)[\s>]"", raw_content, re.IGNORECASE):
+            security[""statistics""][""has_html_inline""] = True"
+markdown_parser_core.py,1274,"if re.search(r""<script[\s>]"", raw_content, re.IGNORECASE):","        # Script detection
+        if re.search(r""<script[\s>]"", raw_content, re.IGNORECASE):
+            security[""statistics""][""has_script""] = True"
+markdown_parser_core.py,1281,if re.search(,"        # Event handler detection
+        if re.search(
+            r""\bon(load|error|click|mouse|key|focus|blur|change|submit)\s*="","
+markdown_parser_core.py,1284,"re.IGNORECASE,","            raw_content,
+            re.IGNORECASE,
+        ):"
+markdown_parser_core.py,1552,"footnotes = structure.get(""footnotes"", {})","        # RAG Safety: Check footnotes for injection
+        footnotes = structure.get(""footnotes"", {})
+        if self._check_footnote_injection(footnotes):"
+markdown_parser_core.py,1580,"html_blocks = structure.get(""html_blocks"", [])","        # RAG Safety: Check for HTML when not allowed
+        html_blocks = structure.get(""html_blocks"", [])
+        html_inline = structure.get(""html_inline"", [])"
+markdown_parser_core.py,1581,"html_inline = structure.get(""html_inline"", [])","        html_blocks = structure.get(""html_blocks"", [])
+        html_inline = structure.get(""html_inline"", [])
+        disallowed_html_blocks = [b for b in html_blocks if not b.get(""allowed"", True)]"
+markdown_parser_core.py,1590,"if re.search(csp_pattern, content, re.IGNORECASE):","            csp_pattern = r'<meta[^>]*http-equiv=[""\']Content-Security-Policy[""\'][^>]*>'
+            if re.search(csp_pattern, content, re.IGNORECASE):
+                security[""statistics""][""has_csp_header""] = True"
+markdown_parser_core.py,1602,"if re.search(xfo_pattern, content, re.IGNORECASE):","            xfo_pattern = r'<meta[^>]*http-equiv=[""\']X-Frame-Options[""\'][^>]*>'
+            if re.search(xfo_pattern, content, re.IGNORECASE):
+                security[""statistics""][""has_xframe_options""] = True"
+markdown_parser_core.py,2572,import re,"        """"""Parse data URI to extract media type, encoding, and size estimate.""""""
+        import re
+"
+markdown_parser_core.py,2575,"match = re.match(r""^data:([^;,]+)?(;base64)?,(.*)$"", uri)","        # data:[<mediatype>][;base64],<data>
+        match = re.match(r""^data:([^;,]+)?(;base64)?,(.*)$"", uri)
+        if not match:"
+markdown_parser_core.py,2591,"format_match = re.match(r""^[^/]+/([^;]+)"", media_type)","        # Extract format from media type
+        format_match = re.match(r""^[^/]+/([^;]+)"", media_type)
+        format_type = format_match.group(1) if format_match else ""unknown"""
+markdown_parser_core.py,2941,import re,"        """"""Extract HTML tag names for downstream sanitizer hints.""""""
+        import re
+"
+markdown_parser_core.py,2944,"tags = re.findall(r""<(\w+)"", html_content)","        # Simple regex to find opening tags
+        tags = re.findall(r""<(\w+)"", html_content)
+        return list(set(tags))  # Deduplicate"
+markdown_parser_core.py,3076,"if ""|"" in line and re.search(r""-{3,}"", line):","            line = lines[i].strip()
+            if ""|"" in line and re.search(r""-{3,}"", line):
+                # Heuristic: a separator row should mostly be pipes/dashes/colons/spaces"
+markdown_parser_core.py,3078,"if re.fullmatch(r""[|:\-\s]+"", line):","                # Heuristic: a separator row should mostly be pipes/dashes/colons/spaces
+                if re.fullmatch(r""[|:\-\s]+"", line):
+                    sep_idx = i"
+markdown_parser_core.py,3335,"if re.match(r""^[a-z]:[/\\]"", decoded_lower):","        # Check for Windows drive letters
+        if re.match(r""^[a-z]:[/\\]"", decoded_lower):
+            return True"
+markdown_parser_core.py,3419,"has_latin = bool(re.search(r""[a-zA-Z]"", text_sample))","                # Detect if text contains both Latin and non-Latin scripts
+                has_latin = bool(re.search(r""[a-zA-Z]"", text_sample))
+                has_cyrillic = bool(re.search(r""[\u0400-\u04FF]"", text_sample))"
+markdown_parser_core.py,3420,"has_cyrillic = bool(re.search(r""[\u0400-\u04FF]"", text_sample))","                has_latin = bool(re.search(r""[a-zA-Z]"", text_sample))
+                has_cyrillic = bool(re.search(r""[\u0400-\u04FF]"", text_sample))
+                has_greek = bool(re.search(r""[\u0370-\u03FF]"", text_sample))"
+markdown_parser_core.py,3421,"has_greek = bool(re.search(r""[\u0370-\u03FF]"", text_sample))","                has_cyrillic = bool(re.search(r""[\u0400-\u04FF]"", text_sample))
+                has_greek = bool(re.search(r""[\u0370-\u03FF]"", text_sample))
+                has_arabic = bool(re.search(r""[\u0600-\u06FF]"", text_sample))"
+markdown_parser_core.py,3422,"has_arabic = bool(re.search(r""[\u0600-\u06FF]"", text_sample))","                has_greek = bool(re.search(r""[\u0370-\u03FF]"", text_sample))
+                has_arabic = bool(re.search(r""[\u0600-\u06FF]"", text_sample))
+                has_hebrew = bool(re.search(r""[\u0590-\u05FF]"", text_sample))"
+markdown_parser_core.py,3423,"has_hebrew = bool(re.search(r""[\u0590-\u05FF]"", text_sample))","                has_arabic = bool(re.search(r""[\u0600-\u06FF]"", text_sample))
+                has_hebrew = bool(re.search(r""[\u0590-\u05FF]"", text_sample))
+                has_cjk = bool(re.search(r""[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]"", text_sample))"
+markdown_parser_core.py,3424,"has_cjk = bool(re.search(r""[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]"", text_sample))","                has_hebrew = bool(re.search(r""[\u0590-\u05FF]"", text_sample))
+                has_cjk = bool(re.search(r""[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]"", text_sample))
+"
+markdown_parser_core.py,3460,"if re.search(pattern, text, re.IGNORECASE | re.MULTILINE):","                for pattern in self._PROMPT_INJECTION_PATTERNS:
+                    if re.search(pattern, text, re.IGNORECASE | re.MULTILINE):
+                        return True"
+markdown_parser_core.py,3484,"match = re.match(r""^([a-zA-Z][a-zA-Z0-9+.-]*):(.*)$"", url)","        # Check for scheme
+        match = re.match(r""^([a-zA-Z][a-zA-Z0-9+.-]*):(.*)$"", url)
+        if match:"
+markdown_parser_core.py,3522,if re.search(,"                # Check more aggressively in long footnotes
+                if re.search(
+                    r""(system|prompt|instruction|ignore|override)"", content, re.IGNORECASE"
+markdown_parser_core.py,3523,"r""(system|prompt|instruction|ignore|override)"", content, re.IGNORECASE","                if re.search(
+                    r""(system|prompt|instruction|ignore|override)"", content, re.IGNORECASE
+                ):"
+markdown_parser_core.py,3531,import re,"        """"""Convert text to base slug format without de-duplication for stable IDs.""""""
+        import re
+        import unicodedata"
+markdown_parser_core.py,3536,"s = re.sub(r""[\s/]+"", ""-"", s)","        # First replace slashes and spaces with hyphens
+        s = re.sub(r""[\s/]+"", ""-"", s)
+        # Then remove other non-word characters (but keep hyphens)"
+markdown_parser_core.py,3538,"s = re.sub(r""[^\w-]"", """", s).strip()","        # Then remove other non-word characters (but keep hyphens)
+        s = re.sub(r""[^\w-]"", """", s).strip()
+        # Clean up multiple hyphens"
+markdown_parser_core.py,3540,"s = re.sub(r""-+"", ""-"", s)","        # Clean up multiple hyphens
+        s = re.sub(r""-+"", ""-"", s)
+        # Remove leading/trailing hyphens"
+markdown_parser_core.py,3547,import re,"        """"""Convert text to slug format with de-duplication.""""""
+        import re
+        import unicodedata"
+markdown_parser_core.py,3552,"s = re.sub(r""[\s/]+"", ""-"", s)","        # First replace slashes and spaces with hyphens
+        s = re.sub(r""[\s/]+"", ""-"", s)
+        # Then remove other non-word characters (but keep hyphens)"
+markdown_parser_core.py,3554,"s = re.sub(r""[^\w-]"", """", s).strip()","        # Then remove other non-word characters (but keep hyphens)
+        s = re.sub(r""[^\w-]"", """", s).strip()
+        # Clean up multiple hyphens"
+markdown_parser_core.py,3556,"s = re.sub(r""-+"", ""-"", s)","        # Clean up multiple hyphens
+        s = re.sub(r""-+"", ""-"", s)
+        # Remove leading/trailing hyphens"
+markdown_parser_core.py,3570,import re,"        """"""Remove markdown formatting from text (for backward compatibility).""""""
+        import re
+"
+markdown_parser_core.py,3573,"text = re.sub(r""^#+\s+"", """", text, flags=re.MULTILINE)","        # Remove headers
+        text = re.sub(r""^#+\s+"", """", text, flags=re.MULTILINE)
+        # Remove emphasis"
+markdown_parser_core.py,3575,"text = re.sub(r""\*\*([^*]+)\*\*"", r""\1"", text)","        # Remove emphasis
+        text = re.sub(r""\*\*([^*]+)\*\*"", r""\1"", text)
+        text = re.sub(r""\*([^*]+)\*"", r""\1"", text)"
+markdown_parser_core.py,3576,"text = re.sub(r""\*([^*]+)\*"", r""\1"", text)","        text = re.sub(r""\*\*([^*]+)\*\*"", r""\1"", text)
+        text = re.sub(r""\*([^*]+)\*"", r""\1"", text)
+        text = re.sub(r""__([^_]+)__"", r""\1"", text)"
+markdown_parser_core.py,3577,"text = re.sub(r""__([^_]+)__"", r""\1"", text)","        text = re.sub(r""\*([^*]+)\*"", r""\1"", text)
+        text = re.sub(r""__([^_]+)__"", r""\1"", text)
+        text = re.sub(r""_([^_]+)_"", r""\1"", text)"
+markdown_parser_core.py,3578,"text = re.sub(r""_([^_]+)_"", r""\1"", text)","        text = re.sub(r""__([^_]+)__"", r""\1"", text)
+        text = re.sub(r""_([^_]+)_"", r""\1"", text)
+        # Remove links"
+markdown_parser_core.py,3580,"text = re.sub(r""\[([^\]]+)\]\([^)]+\)"", r""\1"", text)","        # Remove links
+        text = re.sub(r""\[([^\]]+)\]\([^)]+\)"", r""\1"", text)
+        # Remove code blocks markers"
+markdown_parser_core.py,3582,"text = re.sub(r""```[^`]*```"", """", text, flags=re.DOTALL)","        # Remove code blocks markers
+        text = re.sub(r""```[^`]*```"", """", text, flags=re.DOTALL)
+        text = re.sub(r""`([^`]+)`"", r""\1"", text)"
+markdown_parser_core.py,3583,"text = re.sub(r""`([^`]+)`"", r""\1"", text)","        text = re.sub(r""```[^`]*```"", """", text, flags=re.DOTALL)
+        text = re.sub(r""`([^`]+)`"", r""\1"", text)
+        return text.strip()"
+sluggify_util.py,1,import re,"import re
+"
+sluggify_util.py,6,"text = re.sub(r""[\s\t\n]+"", ""-"", text)","    text = text.strip().lower()
+    text = re.sub(r""[\s\t\n]+"", ""-"", text)
+    return re.sub(r""[^\w\-]"", """", text)"
+sluggify_util.py,7,"return re.sub(r""[^\w\-]"", """", text)","    text = re.sub(r""[\s\t\n]+"", ""-"", text)
+    return re.sub(r""[^\w\-]"", """", text)"
+,,,

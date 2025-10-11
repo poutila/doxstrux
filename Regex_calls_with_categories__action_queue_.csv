@@ -1,0 +1,31 @@
+,file,line_no,fn,pattern_preview,category_guess
+27,content_context.py,44,match,"^\s*([`~])\1{2,}(\s*\S.*)?\s*$"", line)\n            if m:\n                ch = m.group(1)\n                # count the opening fence run length after leading s",inline formatting strip
+28,content_context.py,158,match,"^\s*([`~])\1{2,}(\s*\S.*)?\s*$"", line)\n                language = """"\n                if fence_match and fence_match.group(2):\n                    language = ",inline formatting strip
+0,markdown_parser_core.py,249,compile,"style\s*=\s*[""\'][^""\']*(url\s*\(\s*javascript:|expression\s*\()', re.I\n    )\n    _META_REFRESH_PAT = re.compile(",inline formatting strip
+1,markdown_parser_core.py,253,compile,"<(iframe|object|embed)[^>]*>"", re.I)  # Any frame-like element\n\n    # BiDi control characters for detecting text direction manipulation\n    _BIDI_CONTROLS = ",inline formatting strip
+2,markdown_parser_core.py,936,sub,"<[^>]+>"", """", html)\n        # Allow safe subset\n        if HAS_BLEACH:\n            return bleach.clean(\n                html,\n                tags=self._AL",inline formatting strip
+3,markdown_parser_core.py,951,sub,"\bon\w+\s*=\s*[\""'][^\""']*[\""']"", """", html, flags=re.IGNORECASE)\n        html = re.sub(",html sanitize
+4,markdown_parser_core.py,1023,search,"<\s*script\b"", text, re.I):\n                reasons.append(""script_tag_removed"")\n            text = re.sub(",inline formatting strip
+5,markdown_parser_core.py,1029,search,"\bon[a-z]+\s*="", text, re.I):\n                reasons.append(""event_handlers_removed"")\n            text = re.sub(",inline formatting strip
+6,markdown_parser_core.py,1035,search,"<\w+[^>]*>"", text):\n                reasons.append(""html_stripped"")\n            text = self._sanitize_html_content(text, allows_html=False)\n        elif cfg[",inline formatting strip
+7,markdown_parser_core.py,1062,sub,"(?<!\!)\[([^\]]+)\]\(([^)]+)\)"", _strip_bad_link, text)\n            if removed_schemes:\n                reasons.append(""disallowed_link_schemes_removed"")\n\n ",link/image
+8,markdown_parser_core.py,1266,search,"<(div|span|script|style|iframe|object|embed|form)[\s>]"", raw_content, re.IGNORECASE\n        ):\n            security[""statistics""][""has_html_block""] = True\n  ",inline formatting strip
+9,markdown_parser_core.py,1274,search,"<script[\s>]"", raw_content, re.IGNORECASE):\n            security[""statistics""][""has_script""] = True\n            security[""warnings""].append(\n                ",html sanitize
+10,markdown_parser_core.py,2575,match,"^data:([^;,]+)?(;base64)?,(.*)$"", uri)\n        if not match:\n            return {}\n\n        media_type = match.group(1) or ""text/plain""\n        is_base64 =",inline formatting strip
+11,markdown_parser_core.py,2944,findall,"<(\w+)"", html_content)\n        return list(set(tags))  # Deduplicate\n\n    def _build_mappings(self) -> dict[str, Any]:\n        """"""Build line-to-content mapp",inline formatting strip
+12,markdown_parser_core.py,3076,search,"-{3,}"", line):\n                # Heuristic: a separator row should mostly be pipes/dashes/colons/spaces\n                if re.fullmatch(",other
+13,markdown_parser_core.py,3335,match,"^[a-z]:[/\\]"", decoded_lower):\n            return True\n\n        for pattern in patterns:\n            if pattern in decoded_lower:\n                return Tr",inline formatting strip
+14,markdown_parser_core.py,3420,search,"[\u0400-\u04FF]"", text_sample))\n                has_greek = bool(re.search(",inline formatting strip
+15,markdown_parser_core.py,3422,search,"[\u0600-\u06FF]"", text_sample))\n                has_hebrew = bool(re.search(",inline formatting strip
+16,markdown_parser_core.py,3424,search,"[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]"", text_sample))\n\n                script_count = sum(\n                    [has_latin, has_cyrillic, has_greek, has_a",inline formatting strip
+17,markdown_parser_core.py,3522,search,"(system|prompt|instruction|ignore|override)"", content, re.IGNORECASE\n                ):\n                    return True\n\n        return False\n\n    def _sl",inline formatting strip
+18,markdown_parser_core.py,3538,sub,"[^\w-]"", """", s).strip()\n        # Clean up multiple hyphens\n        s = re.sub(",other
+19,markdown_parser_core.py,3552,sub,"[\s/]+"", ""-"", s)\n        # Then remove other non-word characters (but keep hyphens)\n        s = re.sub(",other
+20,markdown_parser_core.py,3556,sub,"-+"", ""-"", s)\n        # Remove leading/trailing hyphens\n        s = s.strip(""-"")\n        base, i = s, 2\n        seen = getattr(self, ""_slug_seen"", set())\n  ",inline formatting strip
+21,markdown_parser_core.py,3575,sub,"\*\*([^*]+)\*\*"", ",inline formatting strip
+22,markdown_parser_core.py,3576,sub,"\*([^*]+)\*"", ",inline formatting strip
+23,markdown_parser_core.py,3577,sub,"__([^_]+)__"", ",inline formatting strip
+24,markdown_parser_core.py,3578,sub,"_([^_]+)_"", ",inline formatting strip
+25,markdown_parser_core.py,3580,sub,"\[([^\]]+)\]\([^)]+\)"", ",link/image
+26,markdown_parser_core.py,3582,sub,"```[^`]*```"", """", text, flags=re.DOTALL)\n        text = re.sub(",code fence
+29,sluggify_util.py,6,sub,"[\s\t\n]+"", ""-"", text)\n    return re.sub(",other

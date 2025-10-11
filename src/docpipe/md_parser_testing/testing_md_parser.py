@@ -34,7 +34,7 @@ def test_basic_usage():
     content = (Path(__file__).parent / "CLAUDEorig.md").read_text(encoding="utf-8")
     config = {
     'allows_html': True,
-    'plugins': ['table', 'strikethrough'],
+    'plugins': ['table', 'strikethrough', 'tasklists'],
     'preset': 'gfm-like'}
     parser = MarkdownParserCore(content, config=config, security_profile='moderate')
     try:
