@@ -1,0 +1,249 @@
+{
+  "content": {
+    "lines": [
+      "# Triple and quadruple markers",
+      "",
+      "***triple stars***",
+      "",
+      "****quadruple stars****",
+      "",
+      "*****five stars*****",
+      "",
+      "___triple underscores___",
+      "",
+      "____quadruple underscores____",
+      "",
+      "***nested *italic* inside***",
+      "",
+      "****how ****does**** this**** parse?****",
+      ""
+    ],
+    "raw": "# Triple and quadruple markers\n\n***triple stars***\n\n****quadruple stars****\n\n*****five stars*****\n\n___triple underscores___\n\n____quadruple underscores____\n\n***nested *italic* inside***\n\n****how ****does**** this**** parse?****\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_triple-and-quadruple-markers",
+      "1": "section_triple-and-quadruple-markers",
+      "2": "section_triple-and-quadruple-markers",
+      "3": "section_triple-and-quadruple-markers",
+      "4": "section_triple-and-quadruple-markers",
+      "5": "section_triple-and-quadruple-markers",
+      "6": "section_triple-and-quadruple-markers",
+      "7": "section_triple-and-quadruple-markers",
+      "8": "section_triple-and-quadruple-markers",
+      "9": "section_triple-and-quadruple-markers",
+      "10": "section_triple-and-quadruple-markers",
+      "11": "section_triple-and-quadruple-markers",
+      "12": "section_triple-and-quadruple-markers",
+      "13": "section_triple-and-quadruple-markers",
+      "14": "section_triple-and-quadruple-markers",
+      "15": "section_triple-and-quadruple-markers"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "em": 5,
+      "heading": 1,
+      "inline": 8,
+      "paragraph": 7,
+      "root": 1,
+      "strong": 13,
+      "text": 36
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 227,
+    "total_lines": 16
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_triple-and-quadruple-markers",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "triple-and-quadruple-markers",
+        "start_char": 0,
+        "text": "Triple and quadruple markers"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_triple-and-quadruple-markers",
+        "start_line": 2,
+        "text": "triple stars",
+        "word_count": 2
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_triple-and-quadruple-markers",
+        "start_line": 4,
+        "text": "quadruple stars",
+        "word_count": 2
+      },
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_triple-and-quadruple-markers",
+        "start_line": 6,
+        "text": "five stars",
+        "word_count": 2
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_triple-and-quadruple-markers",
+        "start_line": 8,
+        "text": "triple underscores",
+        "word_count": 2
+      },
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_4",
+        "section_id": "section_triple-and-quadruple-markers",
+        "start_line": 10,
+        "text": "quadruple underscores",
+        "word_count": 2
+      },
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_5",
+        "section_id": "section_triple-and-quadruple-markers",
+        "start_line": 12,
+        "text": "nested italic inside",
+        "word_count": 3
+      },
+      {
+        "end_line": 15,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_6",
+        "section_id": "section_triple-and-quadruple-markers",
+        "start_line": 14,
+        "text": "how does this parse?****",
+        "word_count": 4
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 227,
+        "end_line": 15,
+        "id": "section_triple-and-quadruple-markers",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Triple and quadruple markers\n\n***triple stars***\n\n****quadruple stars****\n\n*****five stars*****\n\n___triple underscores___\n\n____quadruple underscores____\n\n***nested *italic* inside***\n\n****how ****does**** this**** parse?****\n",
+        "slug": "triple-and-quadruple-markers",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Triple and quadruple markers\n\ntriple stars\n\nquadruple stars\n\nfive stars\n\ntriple underscores\n\nquadruple underscores\n\nnested italic inside\n\nhow does this parse?****",
+        "title": "Triple and quadruple markers"
+      }
+    ],
+    "tables": []
+  }
+}

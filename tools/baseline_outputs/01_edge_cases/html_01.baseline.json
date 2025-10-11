@@ -1,0 +1,241 @@
+{
+  "content": {
+    "lines": [
+      "{\"title\":\"Refactored html 01\",\"id\":\"ref_html_01\",\"note\":\"html-case\"}",
+      "# Refactored html 01",
+      "Title",
+      "=====",
+      "",
+      "Sub",
+      "----",
+      "",
+      "",
+      "<div><em>ok</em></div><span style='color:red'>inline</span>",
+      "",
+      "<span>inline HTML</span> paragraph.",
+      ""
+    ],
+    "raw": "{\"title\":\"Refactored html 01\",\"id\":\"ref_html_01\",\"note\":\"html-case\"}\n# Refactored html 01\nTitle\n=====\n\nSub\n----\n\n\n<div><em>ok</em></div><span style='color:red'>inline</span>\n\n<span>inline HTML</span> paragraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "1": "section_refactored-html-01",
+      "2": "section_title",
+      "3": "section_title",
+      "4": "section_title",
+      "5": "section_sub",
+      "6": "section_sub",
+      "7": "section_sub",
+      "8": "section_sub",
+      "9": "section_sub",
+      "10": "section_sub",
+      "11": "section_sub",
+      "12": "section_sub"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 3,
+      "html_block": 1,
+      "html_inline": 2,
+      "inline": 5,
+      "paragraph": 2,
+      "root": 1,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": true,
+        "has_html_inline": true,
+        "has_script": false,
+        "html_disallowed": true,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "blocks": 1,
+          "inline": 2,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "stripped_1_html_blocks",
+      "stripped_2_html_inline"
+    ],
+    "total_chars": 211,
+    "total_lines": 13
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 90,
+        "id": "heading_refactored-html-01",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "refactored-html-01",
+        "start_char": 69,
+        "text": "Refactored html 01"
+      },
+      {
+        "end_char": 96,
+        "id": "heading_title",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "title",
+        "start_char": 90,
+        "text": "Title"
+      },
+      {
+        "end_char": 107,
+        "id": "heading_sub",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "sub",
+        "start_char": 103,
+        "text": "Sub"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 1,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "{\"title\":\"Refactored html 01\",\"id\":\"ref_html_01\",\"note\":\"html-case\"}",
+        "word_count": 3
+      },
+      {
+        "end_line": 12,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_sub",
+        "start_line": 11,
+        "text": "inline HTML paragraph.",
+        "word_count": 3
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 90,
+        "end_line": 1,
+        "id": "section_refactored-html-01",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored html 01",
+        "slug": "refactored-html-01",
+        "start_char": 69,
+        "start_line": 1,
+        "text_content": "Refactored html 01",
+        "title": "Refactored html 01"
+      },
+      {
+        "child_ids": [],
+        "end_char": 103,
+        "end_line": 4,
+        "id": "section_title",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Title\n=====\n",
+        "slug": "title",
+        "start_char": 90,
+        "start_line": 2,
+        "text_content": "Title",
+        "title": "Title"
+      },
+      {
+        "child_ids": [],
+        "end_char": 211,
+        "end_line": 12,
+        "id": "section_sub",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Sub\n----\n\n\n<div><em>ok</em></div><span style='color:red'>inline</span>\n\n<span>inline HTML</span> paragraph.\n",
+        "slug": "sub",
+        "start_char": 103,
+        "start_line": 5,
+        "text_content": "Sub\n\ninline HTML paragraph.",
+        "title": "Sub"
+      }
+    ],
+    "tables": []
+  }
+}

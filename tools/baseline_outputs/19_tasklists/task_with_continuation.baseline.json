@@ -1,0 +1,194 @@
+{
+  "content": {
+    "lines": [
+      "# Task with continuation paragraph",
+      "",
+      "- [ ] First task",
+      "",
+      "  Continuation paragraph for first task",
+      "",
+      "  Another paragraph",
+      "",
+      "- [x] Second task completed",
+      "",
+      "  Its continuation",
+      "",
+      "- [ ] Third task",
+      ""
+    ],
+    "raw": "# Task with continuation paragraph\n\n- [ ] First task\n\n  Continuation paragraph for first task\n\n  Another paragraph\n\n- [x] Second task completed\n\n  Its continuation\n\n- [ ] Third task\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_task-with-continuation-paragraph",
+      "1": "section_task-with-continuation-paragraph",
+      "2": "section_task-with-continuation-paragraph",
+      "3": "section_task-with-continuation-paragraph",
+      "4": "section_task-with-continuation-paragraph",
+      "5": "section_task-with-continuation-paragraph",
+      "6": "section_task-with-continuation-paragraph",
+      "7": "section_task-with-continuation-paragraph",
+      "8": "section_task-with-continuation-paragraph",
+      "9": "section_task-with-continuation-paragraph",
+      "10": "section_task-with-continuation-paragraph",
+      "11": "section_task-with-continuation-paragraph",
+      "12": "section_task-with-continuation-paragraph",
+      "13": "section_task-with-continuation-paragraph"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 1,
+      "inline": 7,
+      "list_item": 3,
+      "paragraph": 6,
+      "root": 1,
+      "text": 7
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 182,
+    "total_lines": 14
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 35,
+        "id": "heading_task-with-continuation-paragraph",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "task-with-continuation-paragraph",
+        "start_char": 0,
+        "text": "Task with continuation paragraph"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 13,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Another paragraph"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Its continuation"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Third task"
+          }
+        ],
+        "items_count": 3,
+        "section_id": "section_task-with-continuation-paragraph",
+        "start_line": 2,
+        "task_items_count": 3,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 182,
+        "end_line": 13,
+        "id": "section_task-with-continuation-paragraph",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Task with continuation paragraph\n\n- [ ] First task\n\n  Continuation paragraph for first task\n\n  Another paragraph\n\n- [x] Second task completed\n\n  Its continuation\n\n- [ ] Third task\n",
+        "slug": "task-with-continuation-paragraph",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Task with continuation paragraph\n\n[ ] First task\n\nContinuation paragraph for first task\n\nAnother paragraph\n\n[x] Second task completed\n\nIts continuation\n\n[ ] Third task",
+        "title": "Task with continuation paragraph"
+      }
+    ],
+    "tables": []
+  }
+}

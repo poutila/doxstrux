@@ -1,0 +1,306 @@
+{
+  "content": {
+    "lines": [
+      "{\"title\":\"Refactored code 01\",\"id\":\"ref_code_01\",\"note\":\"code-case\"}",
+      "# Refactored code 01",
+      "Title",
+      "=====",
+      "",
+      "Sub",
+      "----",
+      "",
+      "",
+      "```js",
+      "print('x')",
+      "```",
+      "",
+      "",
+      "~~~json",
+      "echo hello",
+      "~~~",
+      "",
+      "",
+      "Text with `inline` code and ``weird`` backticks.",
+      "",
+      "```yaml",
+      "k: v",
+      "  z: [  # unclosed fence below",
+      ""
+    ],
+    "raw": "{\"title\":\"Refactored code 01\",\"id\":\"ref_code_01\",\"note\":\"code-case\"}\n# Refactored code 01\nTitle\n=====\n\nSub\n----\n\n\n```js\nprint('x')\n```\n\n\n~~~json\necho hello\n~~~\n\n\nText with `inline` code and ``weird`` backticks.\n\n```yaml\nk: v\n  z: [  # unclosed fence below\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      17,
+      21,
+      22,
+      23,
+      24
+    ],
+    "line_to_section": {
+      "1": "section_refactored-code-01",
+      "2": "section_title",
+      "3": "section_title",
+      "4": "section_title",
+      "5": "section_sub",
+      "6": "section_sub",
+      "7": "section_sub",
+      "8": "section_sub",
+      "9": "section_sub",
+      "10": "section_sub",
+      "11": "section_sub",
+      "12": "section_sub",
+      "13": "section_sub",
+      "14": "section_sub",
+      "15": "section_sub",
+      "16": "section_sub",
+      "17": "section_sub",
+      "18": "section_sub",
+      "19": "section_sub",
+      "20": "section_sub",
+      "21": "section_sub",
+      "22": "section_sub",
+      "23": "section_sub",
+      "24": "section_sub"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "code",
+      "10": "code",
+      "11": "code",
+      "12": "code",
+      "13": "prose",
+      "14": "code",
+      "15": "code",
+      "16": "code",
+      "17": "code",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "code",
+      "22": "code",
+      "23": "code",
+      "24": "code"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      13,
+      18,
+      19,
+      20
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 2,
+      "fence": 3,
+      "heading": 3,
+      "inline": 5,
+      "paragraph": 2,
+      "root": 1,
+      "text": 7
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 256,
+    "total_lines": 25
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "print('x')\n",
+        "end_line": 12,
+        "id": "code_0",
+        "language": "js",
+        "section_id": "section_sub",
+        "start_line": 9,
+        "type": "fenced"
+      },
+      {
+        "content": "echo hello\n",
+        "end_line": 17,
+        "id": "code_1",
+        "language": "json",
+        "section_id": "section_sub",
+        "start_line": 14,
+        "type": "fenced"
+      },
+      {
+        "content": "k: v\n  z: [  # unclosed fence below\n",
+        "end_line": 24,
+        "id": "code_2",
+        "language": "yaml",
+        "section_id": "section_sub",
+        "start_line": 21,
+        "type": "fenced"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 90,
+        "id": "heading_refactored-code-01",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "refactored-code-01",
+        "start_char": 69,
+        "text": "Refactored code 01"
+      },
+      {
+        "end_char": 96,
+        "id": "heading_title",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "title",
+        "start_char": 90,
+        "text": "Title"
+      },
+      {
+        "end_char": 107,
+        "id": "heading_sub",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "sub",
+        "start_char": 103,
+        "text": "Sub"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 1,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "{\"title\":\"Refactored code 01\",\"id\":\"ref_code_01\",\"note\":\"code-case\"}",
+        "word_count": 3
+      },
+      {
+        "end_line": 20,
+        "has_code": true,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_sub",
+        "start_line": 19,
+        "text": "Text with inline code and weird backticks.",
+        "word_count": 7
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 90,
+        "end_line": 1,
+        "id": "section_refactored-code-01",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored code 01",
+        "slug": "refactored-code-01",
+        "start_char": 69,
+        "start_line": 1,
+        "text_content": "Refactored code 01",
+        "title": "Refactored code 01"
+      },
+      {
+        "child_ids": [],
+        "end_char": 103,
+        "end_line": 4,
+        "id": "section_title",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Title\n=====\n",
+        "slug": "title",
+        "start_char": 90,
+        "start_line": 2,
+        "text_content": "Title",
+        "title": "Title"
+      },
+      {
+        "child_ids": [],
+        "end_char": 256,
+        "end_line": 24,
+        "id": "section_sub",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Sub\n----\n\n\n```js\nprint('x')\n```\n\n\n~~~json\necho hello\n~~~\n\n\nText with `inline` code and ``weird`` backticks.\n\n```yaml\nk: v\n  z: [  # unclosed fence below\n",
+        "slug": "sub",
+        "start_char": 103,
+        "start_line": 5,
+        "text_content": "Sub\n\nText with inline code and weird backticks.",
+        "title": "Sub"
+      }
+    ],
+    "tables": []
+  }
+}

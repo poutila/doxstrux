@@ -1,0 +1,183 @@
+{
+  "content": {
+    "lines": [
+      "# List with lazy continuation",
+      "",
+      "- First item",
+      "Lazy continuation without indent",
+      "",
+      "- Second item",
+      "  Proper continuation",
+      "Lazy again",
+      "",
+      "- Third item",
+      ""
+    ],
+    "raw": "# List with lazy continuation\n\n- First item\nLazy continuation without indent\n\n- Second item\n  Proper continuation\nLazy again\n\n- Third item\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_list-with-lazy-continuation",
+      "1": "section_list-with-lazy-continuation",
+      "2": "section_list-with-lazy-continuation",
+      "3": "section_list-with-lazy-continuation",
+      "4": "section_list-with-lazy-continuation",
+      "5": "section_list-with-lazy-continuation",
+      "6": "section_list-with-lazy-continuation",
+      "7": "section_list-with-lazy-continuation",
+      "8": "section_list-with-lazy-continuation",
+      "9": "section_list-with-lazy-continuation",
+      "10": "section_list-with-lazy-continuation"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 1,
+      "inline": 4,
+      "list_item": 3,
+      "paragraph": 3,
+      "root": 1,
+      "softbreak": 3,
+      "text": 7
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 139,
+    "total_lines": 11
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 30,
+        "id": "heading_list-with-lazy-continuation",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "list-with-lazy-continuation",
+        "start_char": 0,
+        "text": "List with lazy continuation"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 10,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "First item\nLazy continuation without indent"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Second item\nProper continuation\nLazy again"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Third item"
+          }
+        ],
+        "items_count": 3,
+        "section_id": "section_list-with-lazy-continuation",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 139,
+        "end_line": 10,
+        "id": "section_list-with-lazy-continuation",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# List with lazy continuation\n\n- First item\nLazy continuation without indent\n\n- Second item\n  Proper continuation\nLazy again\n\n- Third item\n",
+        "slug": "list-with-lazy-continuation",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "List with lazy continuation\n\nFirst item\nLazy continuation without indent\n\nSecond item\nProper continuation\nLazy again\n\nThird item",
+        "title": "List with lazy continuation"
+      }
+    ],
+    "tables": []
+  }
+}

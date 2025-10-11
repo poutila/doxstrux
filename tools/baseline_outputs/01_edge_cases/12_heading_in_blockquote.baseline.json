@@ -1,0 +1,177 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 12_heading_in_blockquote",
+      "",
+      "> # Quote H1",
+      "> text",
+      ">",
+      "> ## Quote H2",
+      ""
+    ],
+    "raw": "# Test: 12_heading_in_blockquote\n\n> # Quote H1\n> text\n>\n> ## Quote H2\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-12_heading_in_blockquote",
+      "1": "section_test-12_heading_in_blockquote",
+      "2": "section_quote-h1",
+      "3": "section_quote-h1",
+      "4": "section_quote-h1",
+      "5": "section_quote-h2",
+      "6": "section_quote-h2"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "blockquote": 1,
+      "heading": 3,
+      "inline": 4,
+      "paragraph": 1,
+      "root": 1,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 70,
+    "total_lines": 7
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "Quote H1textQuote H2",
+        "end_line": 6,
+        "section_id": "section_quote-h1",
+        "start_line": 2
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 33,
+        "id": "heading_test-12_heading_in_blockquote",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-12_heading_in_blockquote",
+        "start_char": 0,
+        "text": "Test: 12_heading_in_blockquote"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 34,
+        "end_line": 1,
+        "id": "section_test-12_heading_in_blockquote",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 12_heading_in_blockquote\n",
+        "slug": "test-12_heading_in_blockquote",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 12_heading_in_blockquote",
+        "title": "Test: 12_heading_in_blockquote"
+      },
+      {
+        "child_ids": [
+          "section_quote-h2"
+        ],
+        "end_char": 70,
+        "end_line": 6,
+        "id": "section_quote-h1",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "> # Quote H1\n> text\n>\n> ## Quote H2\n",
+        "slug": "quote-h1",
+        "start_char": 34,
+        "start_line": 2,
+        "text_content": "Quote H1 text\n\nQuote H2",
+        "title": "Quote H1"
+      },
+      {
+        "child_ids": [],
+        "end_char": 70,
+        "end_line": 6,
+        "id": "section_quote-h2",
+        "level": 2,
+        "parent_id": "section_quote-h1",
+        "raw_content": "> ## Quote H2\n",
+        "slug": "quote-h2",
+        "start_char": 56,
+        "start_line": 5,
+        "text_content": "Quote H2",
+        "title": "Quote H2"
+      }
+    ],
+    "tables": []
+  }
+}

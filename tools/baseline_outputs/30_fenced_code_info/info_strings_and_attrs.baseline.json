@@ -1,0 +1,139 @@
+{
+  "content": {
+    "lines": [
+      "```python",
+      "print(\"hi\")",
+      "```",
+      "",
+      "```js { .compact #code1 data-x=1 }",
+      "console.log(\"x\")",
+      "```",
+      "",
+      "~~~txt",
+      "tilde fences ok",
+      "~~~",
+      ""
+    ],
+    "raw": "```python\nprint(\"hi\")\n```\n\n```js { .compact #code1 data-x=1 }\nconsole.log(\"x\")\n```\n\n~~~txt\ntilde fences ok\n~~~\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "code",
+      "1": "code",
+      "2": "code",
+      "3": "code",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "code",
+      "9": "code",
+      "10": "code",
+      "11": "code"
+    },
+    "prose_lines": []
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "fence": 3,
+      "root": 1
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 111,
+    "total_lines": 12
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "print(\"hi\")\n",
+        "end_line": 3,
+        "id": "code_0",
+        "language": "python",
+        "section_id": null,
+        "start_line": 0,
+        "type": "fenced"
+      },
+      {
+        "content": "console.log(\"x\")\n",
+        "end_line": 7,
+        "id": "code_1",
+        "language": "js { .compact #code1 data-x=1 }",
+        "section_id": null,
+        "start_line": 4,
+        "type": "fenced"
+      },
+      {
+        "content": "tilde fences ok\n",
+        "end_line": 11,
+        "id": "code_2",
+        "language": "txt",
+        "section_id": null,
+        "start_line": 8,
+        "type": "fenced"
+      }
+    ],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [],
+    "tables": []
+  }
+}

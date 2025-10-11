@@ -1,0 +1,399 @@
+{
+  "content": {
+    "lines": [
+      "+++",
+      "title = \"Refactored quotes 01\"",
+      "id = \"ref_quotes_01\"",
+      "note = \"quotes-case\"",
+      "+++",
+      "# Refactored quotes 01",
+      "",
+      "",
+      "> Quote level 1",
+      "> > Nested level 2 with a list:",
+      "> > - a",
+      "> > - b",
+      "> >",
+      "> > And a table:",
+      "> > ",
+      "> > | Q | V |",
+      "> > |---|---|",
+      "> > | 1 | 2 |",
+      ">",
+      "> Fenced code:",
+      ">",
+      "> ```json",
+      "> {\"a\":1}",
+      "> ```",
+      "",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./quotes_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
+      ""
+    ],
+    "raw": "+++\ntitle = \"Refactored quotes 01\"\nid = \"ref_quotes_01\"\nnote = \"quotes-case\"\n+++\n# Refactored quotes 01\n\n\n> Quote level 1\n> > Nested level 2 with a list:\n> > - a\n> > - b\n> >\n> > And a table:\n> > \n> > | Q | V |\n> > |---|---|\n> > | 1 | 2 |\n>\n> Fenced code:\n>\n> ```json\n> {\"a\":1}\n> ```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./quotes_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      21,
+      22,
+      23,
+      24
+    ],
+    "line_to_section": {
+      "5": "section_refactored-quotes-01",
+      "6": "section_refactored-quotes-01",
+      "7": "section_refactored-quotes-01",
+      "8": "section_refactored-quotes-01",
+      "9": "section_refactored-quotes-01",
+      "10": "section_refactored-quotes-01",
+      "11": "section_refactored-quotes-01",
+      "12": "section_refactored-quotes-01",
+      "13": "section_refactored-quotes-01",
+      "14": "section_refactored-quotes-01",
+      "15": "section_refactored-quotes-01",
+      "16": "section_refactored-quotes-01",
+      "17": "section_refactored-quotes-01",
+      "18": "section_refactored-quotes-01",
+      "19": "section_refactored-quotes-01",
+      "20": "section_refactored-quotes-01",
+      "21": "section_refactored-quotes-01",
+      "22": "section_refactored-quotes-01",
+      "23": "section_refactored-quotes-01",
+      "24": "section_refactored-quotes-01",
+      "25": "section_refactored-quotes-01",
+      "26": "section_refactored-quotes-01",
+      "27": "section_refactored-quotes-01"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "code",
+      "22": "code",
+      "23": "code",
+      "24": "code",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      25,
+      26,
+      27
+    ]
+  },
+  "metadata": {
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "embedding_blocked": true,
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": true,
+    "node_counts": {
+      "blockquote": 2,
+      "bullet_list": 1,
+      "fence": 1,
+      "heading": 1,
+      "inline": 13,
+      "link": 4,
+      "list_item": 2,
+      "paragraph": 8,
+      "root": 1,
+      "softbreak": 4,
+      "table": 1,
+      "tbody": 1,
+      "td": 2,
+      "text": 25,
+      "th": 2,
+      "thead": 1,
+      "tr": 2
+    },
+    "security": {
+      "link_disallowed_schemes_raw": true,
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1,
+          "mailto": 1,
+          "relative": 2
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "raw_dangerous_schemes": true,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 4,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 26,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "ht!tp://broken%5E2"
+        },
+        {
+          "line": 26,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com/4"
+        },
+        {
+          "message": "Raw content contains potentially dangerous scheme: file:",
+          "type": "disallowed_schemes_raw"
+        },
+        {
+          "message": "Dangerous scheme \"file:\" found in raw content",
+          "scheme": "file",
+          "type": "raw_dangerous_scheme"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw",
+      "dropped_1_unsafe_links"
+    ],
+    "total_chars": 466,
+    "total_lines": 28
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [
+          {
+            "end_line": 13,
+            "start_line": 10,
+            "type": "bullet_list"
+          },
+          {
+            "end_line": 18,
+            "start_line": 15,
+            "type": "table"
+          },
+          {
+            "end_line": 24,
+            "start_line": 21,
+            "type": "fence"
+          }
+        ],
+        "children_summary": {
+          "code": 1,
+          "lists": 1,
+          "tables": 1
+        },
+        "content": "Quote level 1Nested level 2 with a list:abAnd a table:QV12Fenced code:",
+        "end_line": 24,
+        "section_id": "section_refactored-quotes-01",
+        "start_line": 8
+      }
+    ],
+    "code_blocks": [
+      {
+        "content": "{\"a\":1}\n",
+        "end_line": 24,
+        "id": "code_0",
+        "language": "json",
+        "section_id": "section_refactored-quotes-01",
+        "start_line": 21,
+        "type": "fenced"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 104,
+        "id": "heading_refactored-quotes-01",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "refactored-quotes-01",
+        "start_char": 81,
+        "text": "Refactored quotes 01"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 26,
+        "scheme": null,
+        "text": "cross3",
+        "type": "internal",
+        "url": "./quotes_02.md#sec0"
+      },
+      {
+        "allowed": true,
+        "line": 26,
+        "scheme": "https",
+        "text": "ext4",
+        "type": "external",
+        "url": "https://example.com/4"
+      },
+      {
+        "allowed": true,
+        "line": 26,
+        "scheme": "mailto",
+        "text": "mail5",
+        "type": "email",
+        "url": "mailto:user5@example.com"
+      }
+    ],
+    "lists": [
+      {
+        "end_line": 13,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "a"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "b"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_refactored-quotes-01",
+        "start_line": 10,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "+++\ntitle = \"Refactored quotes 01\"\nid = \"ref_quotes_01\"\nnote = \"quotes-case\"\n+++",
+        "word_count": 13
+      },
+      {
+        "end_line": 27,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_1",
+        "section_id": "section_refactored-quotes-01",
+        "start_line": 26,
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "word_count": 6
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 466,
+        "end_line": 27,
+        "id": "section_refactored-quotes-01",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored quotes 01\n\n\n> Quote level 1\n> > Nested level 2 with a list:\n> > - a\n> > - b\n> >\n> > And a table:\n> > \n> > | Q | V |\n> > |---|---|\n> > | 1 | 2 |\n>\n> Fenced code:\n>\n> ```json\n> {\"a\":1}\n> ```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./quotes_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
+        "slug": "refactored-quotes-01",
+        "start_char": 81,
+        "start_line": 5,
+        "text_content": "Refactored quotes 01\n\nQuote level 1 Nested level 2 with a list: a b\n\nAnd a table:\n\nQV\n\n12\n\nFenced code:\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "title": "Refactored quotes 01"
+      }
+    ],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 18,
+        "headers": [
+          "Q",
+          "V"
+        ],
+        "id": "table_0",
+        "is_ragged": false,
+        "row_count": 1,
+        "rows": [
+          [
+            "1",
+            "2"
+          ]
+        ],
+        "section_id": "section_refactored-quotes-01",
+        "start_line": 15
+      }
+    ]
+  }
+}

@@ -1,0 +1,354 @@
+{
+  "content": {
+    "lines": [
+      "# Links with inline formatting",
+      "",
+      "[**Bold link text**](https://example.com)",
+      "",
+      "[*Italic link text*](https://example.com)",
+      "",
+      "[***Bold italic link***](https://example.com)",
+      "",
+      "[`Code in link`](https://example.com)",
+      "",
+      "[~~Struck link~~](https://example.com)",
+      "",
+      "**[Link inside bold](https://example.com)**",
+      "",
+      "*[Link inside italic](https://example.com)*",
+      ""
+    ],
+    "raw": "# Links with inline formatting\n\n[**Bold link text**](https://example.com)\n\n[*Italic link text*](https://example.com)\n\n[***Bold italic link***](https://example.com)\n\n[`Code in link`](https://example.com)\n\n[~~Struck link~~](https://example.com)\n\n**[Link inside bold](https://example.com)**\n\n*[Link inside italic](https://example.com)*\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_links-with-inline-formatting",
+      "1": "section_links-with-inline-formatting",
+      "2": "section_links-with-inline-formatting",
+      "3": "section_links-with-inline-formatting",
+      "4": "section_links-with-inline-formatting",
+      "5": "section_links-with-inline-formatting",
+      "6": "section_links-with-inline-formatting",
+      "7": "section_links-with-inline-formatting",
+      "8": "section_links-with-inline-formatting",
+      "9": "section_links-with-inline-formatting",
+      "10": "section_links-with-inline-formatting",
+      "11": "section_links-with-inline-formatting",
+      "12": "section_links-with-inline-formatting",
+      "13": "section_links-with-inline-formatting",
+      "14": "section_links-with-inline-formatting",
+      "15": "section_links-with-inline-formatting"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 1,
+      "em": 3,
+      "heading": 1,
+      "inline": 8,
+      "link": 7,
+      "paragraph": 7,
+      "root": 1,
+      "s": 1,
+      "strong": 3,
+      "text": 13
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 7
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 7,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 2,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        },
+        {
+          "line": 4,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        },
+        {
+          "line": 6,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        },
+        {
+          "line": 8,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        },
+        {
+          "line": 10,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        },
+        {
+          "line": 12,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        },
+        {
+          "line": 14,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        }
+      ]
+    },
+    "total_chars": 333,
+    "total_lines": 16
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_links-with-inline-formatting",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "links-with-inline-formatting",
+        "start_char": 0,
+        "text": "Links with inline formatting"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 2,
+        "scheme": "https",
+        "text": "Bold link text",
+        "type": "external",
+        "url": "https://example.com"
+      },
+      {
+        "allowed": true,
+        "line": 4,
+        "scheme": "https",
+        "text": "Italic link text",
+        "type": "external",
+        "url": "https://example.com"
+      },
+      {
+        "allowed": true,
+        "line": 6,
+        "scheme": "https",
+        "text": "Bold italic link",
+        "type": "external",
+        "url": "https://example.com"
+      },
+      {
+        "allowed": true,
+        "line": 8,
+        "scheme": "https",
+        "text": "Code in link",
+        "type": "external",
+        "url": "https://example.com"
+      },
+      {
+        "allowed": true,
+        "line": 10,
+        "scheme": "https",
+        "text": "Struck link",
+        "type": "external",
+        "url": "https://example.com"
+      },
+      {
+        "allowed": true,
+        "line": 12,
+        "scheme": "https",
+        "text": "Link inside bold",
+        "type": "external",
+        "url": "https://example.com"
+      },
+      {
+        "allowed": true,
+        "line": 14,
+        "scheme": "https",
+        "text": "Link inside italic",
+        "type": "external",
+        "url": "https://example.com"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": "section_links-with-inline-formatting",
+        "start_line": 2,
+        "text": "Bold link text",
+        "word_count": 3
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": true,
+        "id": "para_1",
+        "section_id": "section_links-with-inline-formatting",
+        "start_line": 4,
+        "text": "Italic link text",
+        "word_count": 3
+      },
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": true,
+        "id": "para_2",
+        "section_id": "section_links-with-inline-formatting",
+        "start_line": 6,
+        "text": "Bold italic link",
+        "word_count": 3
+      },
+      {
+        "end_line": 9,
+        "has_code": true,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_3",
+        "section_id": "section_links-with-inline-formatting",
+        "start_line": 8,
+        "text": "Code in link",
+        "word_count": 3
+      },
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_4",
+        "section_id": "section_links-with-inline-formatting",
+        "start_line": 10,
+        "text": "Struck link",
+        "word_count": 2
+      },
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": true,
+        "id": "para_5",
+        "section_id": "section_links-with-inline-formatting",
+        "start_line": 12,
+        "text": "Link inside bold",
+        "word_count": 3
+      },
+      {
+        "end_line": 15,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": true,
+        "id": "para_6",
+        "section_id": "section_links-with-inline-formatting",
+        "start_line": 14,
+        "text": "Link inside italic",
+        "word_count": 3
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 333,
+        "end_line": 15,
+        "id": "section_links-with-inline-formatting",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Links with inline formatting\n\n[**Bold link text**](https://example.com)\n\n[*Italic link text*](https://example.com)\n\n[***Bold italic link***](https://example.com)\n\n[`Code in link`](https://example.com)\n\n[~~Struck link~~](https://example.com)\n\n**[Link inside bold](https://example.com)**\n\n*[Link inside italic](https://example.com)*\n",
+        "slug": "links-with-inline-formatting",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Links with inline formatting\n\nBold link text\n\nItalic link text\n\nBold italic link\n\nCode in link\n\nStruck link\n\nLink inside bold\n\nLink inside italic",
+        "title": "Links with inline formatting"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "content": {
+    "lines": [
+      "# Test: sec_confusables",
+      "",
+      "\uff03 Not a real hash",
+      "Text with NBSP:\u00a0here and ZWSP:\u200bsplit.",
+      ""
+    ],
+    "raw": "# Test: sec_confusables\n\n\uff03 Not a real hash\nText with NBSP:\u00a0here and ZWSP:\u200bsplit.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-sec_confusables",
+      "1": "section_test-sec_confusables",
+      "2": "section_test-sec_confusables",
+      "3": "section_test-sec_confusables",
+      "4": "section_test-sec_confusables"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "inline": 2,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "invisible_chars": true,
+        "link_schemes": {},
+        "nbsp_present": true,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 1,
+        "zwsp_present": true
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 1
+      },
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document contains invisible/zero-width characters",
+          "type": "invisible_characters"
+        }
+      ]
+    },
+    "total_chars": 81,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 24,
+        "id": "heading_test-sec_confusables",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-sec_confusables",
+        "start_char": 0,
+        "text": "Test: sec_confusables"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-sec_confusables",
+        "start_line": 2,
+        "text": "\uff03 Not a real hash\nText with NBSP:\u00a0here and ZWSP:\u200bsplit.",
+        "word_count": 11
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 81,
+        "end_line": 4,
+        "id": "section_test-sec_confusables",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: sec_confusables\n\n\uff03 Not a real hash\nText with NBSP:\u00a0here and ZWSP:\u200bsplit.\n",
+        "slug": "test-sec_confusables",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: sec_confusables\n\n\uff03 Not a real hash\nText with NBSP:\u00a0here and ZWSP:\u200bsplit.",
+        "title": "Test: sec_confusables"
+      }
+    ],
+    "tables": []
+  }
+}

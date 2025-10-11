@@ -1,0 +1,174 @@
+{
+  "content": {
+    "lines": [
+      "# Test: fm_invalid_nbsp_fence",
+      "",
+      "---\u00a0",
+      "title: nbsp fence",
+      "---",
+      "",
+      "Body.",
+      ""
+    ],
+    "raw": "# Test: fm_invalid_nbsp_fence\n\n---\u00a0\ntitle: nbsp fence\n---\n\nBody.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-fm_invalid_nbsp_fence",
+      "1": "section_test-fm_invalid_nbsp_fence",
+      "2": "section_title-nbsp-fence",
+      "3": "section_title-nbsp-fence",
+      "4": "section_title-nbsp-fence",
+      "5": "section_title-nbsp-fence",
+      "6": "section_title-nbsp-fence",
+      "7": "section_title-nbsp-fence"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "inline": 3,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 1,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": true,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 65,
+    "total_lines": 8
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 30,
+        "id": "heading_test-fm_invalid_nbsp_fence",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-fm_invalid_nbsp_fence",
+        "start_char": 0,
+        "text": "Test: fm_invalid_nbsp_fence"
+      },
+      {
+        "end_char": 36,
+        "id": "heading_title-nbsp-fence",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "title-nbsp-fence",
+        "start_char": 31,
+        "text": "---\u00a0\ntitle: nbsp fence"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_title-nbsp-fence",
+        "start_line": 6,
+        "text": "Body.",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 31,
+        "end_line": 1,
+        "id": "section_test-fm_invalid_nbsp_fence",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: fm_invalid_nbsp_fence\n",
+        "slug": "test-fm_invalid_nbsp_fence",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: fm_invalid_nbsp_fence",
+        "title": "Test: fm_invalid_nbsp_fence"
+      },
+      {
+        "child_ids": [],
+        "end_char": 65,
+        "end_line": 7,
+        "id": "section_title-nbsp-fence",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "---\u00a0\ntitle: nbsp fence\n---\n\nBody.\n",
+        "slug": "title-nbsp-fence",
+        "start_char": 31,
+        "start_line": 2,
+        "text_content": "---\u00a0\ntitle: nbsp fence\n\nBody.",
+        "title": "---\u00a0\ntitle: nbsp fence"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "content": {
+    "lines": [
+      "+++",
+      "title = \"Refactored math 02\"",
+      "id = \"ref_math_02\"",
+      "note = \"math-case\"",
+      "+++",
+      "# Refactored math 02",
+      "",
+      "",
+      "Inline math $E=mc^2$ and block:",
+      "",
+      "$$",
+      "\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}",
+      "$$",
+      "",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
+      ""
+    ],
+    "raw": "+++\ntitle = \"Refactored math 02\"\nid = \"ref_math_02\"\nnote = \"math-case\"\n+++\n# Refactored math 02\n\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "5": "section_refactored-math-02",
+      "6": "section_refactored-math-02",
+      "7": "section_refactored-math-02",
+      "8": "section_refactored-math-02",
+      "9": "section_refactored-math-02",
+      "10": "section_refactored-math-02",
+      "11": "section_refactored-math-02",
+      "12": "section_refactored-math-02",
+      "13": "section_refactored-math-02",
+      "14": "section_refactored-math-02",
+      "15": "section_refactored-math-02",
+      "16": "section_refactored-math-02"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ]
+  },
+  "metadata": {
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "embedding_blocked": true,
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "inline": 5,
+      "link": 4,
+      "paragraph": 4,
+      "root": 1,
+      "softbreak": 6,
+      "text": 19
+    },
+    "security": {
+      "link_disallowed_schemes_raw": true,
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1,
+          "mailto": 1,
+          "relative": 2
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "raw_dangerous_schemes": true,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 4,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 15,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "ht!tp://broken%5E2"
+        },
+        {
+          "line": 15,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com/4"
+        },
+        {
+          "message": "Raw content contains potentially dangerous scheme: file:",
+          "type": "disallowed_schemes_raw"
+        },
+        {
+          "message": "Dangerous scheme \"file:\" found in raw content",
+          "scheme": "file",
+          "type": "raw_dangerous_scheme"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw",
+      "dropped_1_unsafe_links"
+    ],
+    "total_chars": 367,
+    "total_lines": 17
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 96,
+        "id": "heading_refactored-math-02",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "refactored-math-02",
+        "start_char": 75,
+        "text": "Refactored math 02"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 15,
+        "scheme": null,
+        "text": "cross3",
+        "type": "internal",
+        "url": "./math_03.md#sec0"
+      },
+      {
+        "allowed": true,
+        "line": 15,
+        "scheme": "https",
+        "text": "ext4",
+        "type": "external",
+        "url": "https://example.com/4"
+      },
+      {
+        "allowed": true,
+        "line": 15,
+        "scheme": "mailto",
+        "text": "mail5",
+        "type": "email",
+        "url": "mailto:user5@example.com"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "+++\ntitle = \"Refactored math 02\"\nid = \"ref_math_02\"\nnote = \"math-case\"\n+++",
+        "word_count": 13
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_refactored-math-02",
+        "start_line": 8,
+        "text": "Inline math $E=mc^2$ and block:",
+        "word_count": 5
+      },
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_refactored-math-02",
+        "start_line": 10,
+        "text": "$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$",
+        "word_count": 7
+      },
+      {
+        "end_line": 16,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_3",
+        "section_id": "section_refactored-math-02",
+        "start_line": 15,
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "word_count": 6
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 367,
+        "end_line": 16,
+        "id": "section_refactored-math-02",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored math 02\n\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
+        "slug": "refactored-math-02",
+        "start_char": 75,
+        "start_line": 5,
+        "text_content": "Refactored math 02\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "title": "Refactored math 02"
+      }
+    ],
+    "tables": []
+  }
+}

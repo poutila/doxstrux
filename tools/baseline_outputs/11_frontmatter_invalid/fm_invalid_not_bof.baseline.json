@@ -1,0 +1,193 @@
+{
+  "content": {
+    "lines": [
+      "# Test: fm_invalid_not_bof",
+      "",
+      "Intro",
+      "",
+      "---",
+      "title: late",
+      "---",
+      "",
+      "Body.",
+      ""
+    ],
+    "raw": "# Test: fm_invalid_not_bof\n\nIntro\n\n---\ntitle: late\n---\n\nBody.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-fm_invalid_not_bof",
+      "1": "section_test-fm_invalid_not_bof",
+      "2": "section_test-fm_invalid_not_bof",
+      "3": "section_test-fm_invalid_not_bof",
+      "4": "section_test-fm_invalid_not_bof",
+      "5": "section_title-late",
+      "6": "section_title-late",
+      "7": "section_title-late",
+      "8": "section_title-late",
+      "9": "section_title-late"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "hr": 1,
+      "inline": 4,
+      "paragraph": 2,
+      "root": 1,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 62,
+    "total_lines": 10
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 27,
+        "id": "heading_test-fm_invalid_not_bof",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-fm_invalid_not_bof",
+        "start_char": 0,
+        "text": "Test: fm_invalid_not_bof"
+      },
+      {
+        "end_char": 51,
+        "id": "heading_title-late",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "title-late",
+        "start_char": 39,
+        "text": "title: late"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-fm_invalid_not_bof",
+        "start_line": 2,
+        "text": "Intro",
+        "word_count": 1
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_title-late",
+        "start_line": 8,
+        "text": "Body.",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 39,
+        "end_line": 4,
+        "id": "section_test-fm_invalid_not_bof",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: fm_invalid_not_bof\n\nIntro\n\n---",
+        "slug": "test-fm_invalid_not_bof",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: fm_invalid_not_bof\n\nIntro",
+        "title": "Test: fm_invalid_not_bof"
+      },
+      {
+        "child_ids": [],
+        "end_char": 62,
+        "end_line": 9,
+        "id": "section_title-late",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "title: late\n---\n\nBody.\n",
+        "slug": "title-late",
+        "start_char": 39,
+        "start_line": 5,
+        "text_content": "title: late\n\nBody.",
+        "title": "title: late"
+      }
+    ],
+    "tables": []
+  }
+}

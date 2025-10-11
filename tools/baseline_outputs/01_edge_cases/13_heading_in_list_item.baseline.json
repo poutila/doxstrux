@@ -1,0 +1,212 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 13_heading_in_list_item",
+      "",
+      "- # H1 in item",
+      "  text",
+      "- item 2",
+      "  - ## H2 nested",
+      "    body",
+      ""
+    ],
+    "raw": "# Test: 13_heading_in_list_item\n\n- # H1 in item\n  text\n- item 2\n  - ## H2 nested\n    body\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      6,
+      7
+    ],
+    "line_to_section": {
+      "0": "section_test-13_heading_in_list_item",
+      "1": "section_test-13_heading_in_list_item",
+      "2": "section_h1-in-item",
+      "3": "section_h1-in-item",
+      "4": "section_h1-in-item",
+      "5": "section_h2-nested",
+      "6": "section_h2-nested",
+      "7": "section_h2-nested"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "code",
+      "7": "code"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 2,
+      "heading": 3,
+      "inline": 6,
+      "list_item": 3,
+      "paragraph": 3,
+      "root": 1,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 90,
+    "total_lines": 8
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "body\n",
+        "end_line": 7,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_h1-in-item",
+        "start_line": 6,
+        "type": "indented"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 32,
+        "id": "heading_test-13_heading_in_list_item",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-13_heading_in_list_item",
+        "start_char": 0,
+        "text": "Test: 13_heading_in_list_item"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 7,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "text"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [],
+                "text": "body"
+              }
+            ],
+            "text": "item 2"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_h1-in-item",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 33,
+        "end_line": 1,
+        "id": "section_test-13_heading_in_list_item",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 13_heading_in_list_item\n",
+        "slug": "test-13_heading_in_list_item",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 13_heading_in_list_item",
+        "title": "Test: 13_heading_in_list_item"
+      },
+      {
+        "child_ids": [
+          "section_h2-nested"
+        ],
+        "end_char": 90,
+        "end_line": 7,
+        "id": "section_h1-in-item",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "- # H1 in item\n  text\n- item 2\n  - ## H2 nested\n    body\n",
+        "slug": "h1-in-item",
+        "start_char": 33,
+        "start_line": 2,
+        "text_content": "H1 in item text item 2 H2 nested body",
+        "title": "H1 in item"
+      },
+      {
+        "child_ids": [],
+        "end_char": 90,
+        "end_line": 7,
+        "id": "section_h2-nested",
+        "level": 2,
+        "parent_id": "section_h1-in-item",
+        "raw_content": "  - ## H2 nested\n    body\n",
+        "slug": "h2-nested",
+        "start_char": 64,
+        "start_line": 5,
+        "text_content": "H2 nested body",
+        "title": "H2 nested"
+      }
+    ],
+    "tables": []
+  }
+}

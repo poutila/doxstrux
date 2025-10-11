@@ -1,0 +1,268 @@
+{
+  "content": {
+    "lines": [
+      "# Escaped emphasis characters",
+      "",
+      "\\*not italic\\*",
+      "",
+      "\\_not italic\\_",
+      "",
+      "\\*\\*not bold\\*\\*",
+      "",
+      "\\_\\_not bold\\_\\_",
+      "",
+      "\\*\\*\\*not bold italic\\*\\*\\*",
+      "",
+      "Partial escape: *italic\\* but broken",
+      "",
+      "Mixed: **bold** and \\*\\*not bold\\*\\*",
+      "",
+      "Escaped in code: `\\*still shows\\*`",
+      ""
+    ],
+    "raw": "# Escaped emphasis characters\n\n\\*not italic\\*\n\n\\_not italic\\_\n\n\\*\\*not bold\\*\\*\n\n\\_\\_not bold\\_\\_\n\n\\*\\*\\*not bold italic\\*\\*\\*\n\nPartial escape: *italic\\* but broken\n\nMixed: **bold** and \\*\\*not bold\\*\\*\n\nEscaped in code: `\\*still shows\\*`\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_escaped-emphasis-characters",
+      "1": "section_escaped-emphasis-characters",
+      "2": "section_escaped-emphasis-characters",
+      "3": "section_escaped-emphasis-characters",
+      "4": "section_escaped-emphasis-characters",
+      "5": "section_escaped-emphasis-characters",
+      "6": "section_escaped-emphasis-characters",
+      "7": "section_escaped-emphasis-characters",
+      "8": "section_escaped-emphasis-characters",
+      "9": "section_escaped-emphasis-characters",
+      "10": "section_escaped-emphasis-characters",
+      "11": "section_escaped-emphasis-characters",
+      "12": "section_escaped-emphasis-characters",
+      "13": "section_escaped-emphasis-characters",
+      "14": "section_escaped-emphasis-characters",
+      "15": "section_escaped-emphasis-characters",
+      "16": "section_escaped-emphasis-characters",
+      "17": "section_escaped-emphasis-characters"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 1,
+      "heading": 1,
+      "inline": 9,
+      "paragraph": 8,
+      "root": 1,
+      "strong": 1,
+      "text": 11
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 239,
+    "total_lines": 18
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 30,
+        "id": "heading_escaped-emphasis-characters",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "escaped-emphasis-characters",
+        "start_char": 0,
+        "text": "Escaped emphasis characters"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 2,
+        "text": "*not italic*",
+        "word_count": 2
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 4,
+        "text": "_not italic_",
+        "word_count": 2
+      },
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 6,
+        "text": "**not bold**",
+        "word_count": 2
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 8,
+        "text": "__not bold__",
+        "word_count": 2
+      },
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_4",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 10,
+        "text": "***not bold italic***",
+        "word_count": 3
+      },
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_5",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 12,
+        "text": "Partial escape: *italic* but broken",
+        "word_count": 5
+      },
+      {
+        "end_line": 15,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_6",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 14,
+        "text": "Mixed: bold and **not bold**",
+        "word_count": 5
+      },
+      {
+        "end_line": 17,
+        "has_code": true,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_7",
+        "section_id": "section_escaped-emphasis-characters",
+        "start_line": 16,
+        "text": "Escaped in code: \\*still shows\\*",
+        "word_count": 5
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 239,
+        "end_line": 17,
+        "id": "section_escaped-emphasis-characters",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Escaped emphasis characters\n\n\\*not italic\\*\n\n\\_not italic\\_\n\n\\*\\*not bold\\*\\*\n\n\\_\\_not bold\\_\\_\n\n\\*\\*\\*not bold italic\\*\\*\\*\n\nPartial escape: *italic\\* but broken\n\nMixed: **bold** and \\*\\*not bold\\*\\*\n\nEscaped in code: `\\*still shows\\*`\n",
+        "slug": "escaped-emphasis-characters",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Escaped emphasis characters\n\n*not italic*\n\n_not italic_\n\n**not bold**\n\n__not bold__\n\n***not bold italic***\n\nPartial escape: *italic* but broken\n\nMixed: bold and **not bold**\n\nEscaped in code: \\*still shows\\*",
+        "title": "Escaped emphasis characters"
+      }
+    ],
+    "tables": []
+  }
+}

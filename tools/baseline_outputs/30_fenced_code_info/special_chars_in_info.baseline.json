@@ -1,0 +1,97 @@
+{
+  "content": {
+    "lines": [
+      "```c++",
+      "int main(){}",
+      "```",
+      ""
+    ],
+    "raw": "```c++\nint main(){}\n```\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "code",
+      "1": "code",
+      "2": "code",
+      "3": "code"
+    },
+    "prose_lines": []
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "fence": 1,
+      "root": 1
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 24,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "int main(){}\n",
+        "end_line": 3,
+        "id": "code_0",
+        "language": "c++",
+        "section_id": null,
+        "start_line": 0,
+        "type": "fenced"
+      }
+    ],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [],
+    "tables": []
+  }
+}

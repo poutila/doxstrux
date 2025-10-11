@@ -1,0 +1,194 @@
+{
+  "content": {
+    "lines": [
+      "Broken [ref][missing] and ![][noalt]",
+      "",
+      "![Alt only]()",
+      "",
+      "![Alt with title](https://example.com/a.png \"T\")",
+      "",
+      ""
+    ],
+    "raw": "Broken [ref][missing] and ![][noalt]\n\n![Alt only]()\n\n![Alt with title](https://example.com/a.png \"T\")\n\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "image": 2,
+      "inline": 3,
+      "paragraph": 3,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "relative": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 4,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com/a.png"
+        }
+      ]
+    },
+    "total_chars": 103,
+    "total_lines": 7
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [
+      {
+        "allowed": true,
+        "alt": "Alt only",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": false,
+        "image_id": "7cfc9bcc6bbbe6c6",
+        "image_kind": "local",
+        "line": 2,
+        "scheme": null,
+        "src": "",
+        "title": ""
+      },
+      {
+        "allowed": true,
+        "alt": "Alt with title",
+        "format": "png",
+        "has_alt": true,
+        "has_title": true,
+        "image_id": "0d171e79f65c9bf7",
+        "image_kind": "external",
+        "line": 4,
+        "scheme": "https",
+        "src": "https://example.com/a.png",
+        "title": "T"
+      }
+    ],
+    "links": [
+      {
+        "alt": "Alt only",
+        "format": "unknown",
+        "image_id": "7cfc9bcc6bbbe6c6",
+        "image_kind": "local",
+        "line": 2,
+        "src": "",
+        "text": "Alt only",
+        "title": "",
+        "type": "image",
+        "url": ""
+      },
+      {
+        "alt": "Alt with title",
+        "format": "png",
+        "image_id": "0d171e79f65c9bf7",
+        "image_kind": "external",
+        "line": 4,
+        "src": "https://example.com/a.png",
+        "text": "Alt with title",
+        "title": "T",
+        "type": "image",
+        "url": "https://example.com/a.png"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 1,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "Broken [ref][missing] and ![][noalt]",
+        "word_count": 4
+      },
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": null,
+        "start_line": 2,
+        "text": "Alt onlyAlt only",
+        "word_count": 3
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": null,
+        "start_line": 4,
+        "text": "Alt with titleAlt with title",
+        "word_count": 5
+      }
+    ],
+    "sections": [],
+    "tables": []
+  }
+}

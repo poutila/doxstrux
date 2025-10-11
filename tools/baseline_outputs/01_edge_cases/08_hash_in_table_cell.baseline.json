@@ -1,0 +1,162 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 08_hash_in_table_cell",
+      "",
+      "| A | B |",
+      "|---|---|",
+      "| # not heading | text |",
+      ""
+    ],
+    "raw": "# Test: 08_hash_in_table_cell\n\n| A | B |\n|---|---|\n| # not heading | text |\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-08_hash_in_table_cell",
+      "1": "section_test-08_hash_in_table_cell",
+      "2": "section_test-08_hash_in_table_cell",
+      "3": "section_test-08_hash_in_table_cell",
+      "4": "section_test-08_hash_in_table_cell",
+      "5": "section_test-08_hash_in_table_cell"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": true,
+    "node_counts": {
+      "heading": 1,
+      "inline": 5,
+      "root": 1,
+      "table": 1,
+      "tbody": 1,
+      "td": 2,
+      "text": 5,
+      "th": 2,
+      "thead": 1,
+      "tr": 2
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 76,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 30,
+        "id": "heading_test-08_hash_in_table_cell",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-08_hash_in_table_cell",
+        "start_char": 0,
+        "text": "Test: 08_hash_in_table_cell"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 76,
+        "end_line": 5,
+        "id": "section_test-08_hash_in_table_cell",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 08_hash_in_table_cell\n\n| A | B |\n|---|---|\n| # not heading | text |\n",
+        "slug": "test-08_hash_in_table_cell",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 08_hash_in_table_cell\n\nAB\n\n# not headingtext",
+        "title": "Test: 08_hash_in_table_cell"
+      }
+    ],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 5,
+        "headers": [
+          "A",
+          "B"
+        ],
+        "id": "table_0",
+        "is_ragged": false,
+        "row_count": 1,
+        "rows": [
+          [
+            "# not heading",
+            "text"
+          ]
+        ],
+        "section_id": "section_test-08_hash_in_table_cell",
+        "start_line": 2
+      }
+    ]
+  }
+}

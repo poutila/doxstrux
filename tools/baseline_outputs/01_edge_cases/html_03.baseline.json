@@ -1,0 +1,182 @@
+{
+  "content": {
+    "lines": [
+      "+++",
+      "title = \"Refactored html 03\"",
+      "id = \"ref_html_03\"",
+      "note = \"html-case\"",
+      "+++",
+      "# Refactored html 03",
+      "",
+      "<div><span>broken",
+      "",
+      "<span>inline HTML</span> paragraph.",
+      ""
+    ],
+    "raw": "+++\ntitle = \"Refactored html 03\"\nid = \"ref_html_03\"\nnote = \"html-case\"\n+++\n# Refactored html 03\n\n<div><span>broken\n\n<span>inline HTML</span> paragraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "5": "section_refactored-html-03",
+      "6": "section_refactored-html-03",
+      "7": "section_refactored-html-03",
+      "8": "section_refactored-html-03",
+      "9": "section_refactored-html-03",
+      "10": "section_refactored-html-03"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "html_block": 1,
+      "html_inline": 2,
+      "inline": 3,
+      "paragraph": 2,
+      "root": 1,
+      "softbreak": 4,
+      "text": 8
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": true,
+        "has_html_inline": false,
+        "has_script": false,
+        "html_disallowed": true,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "blocks": 1,
+          "inline": 2,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "stripped_1_html_blocks",
+      "stripped_2_html_inline"
+    ],
+    "total_chars": 152,
+    "total_lines": 11
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 96,
+        "id": "heading_refactored-html-03",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "refactored-html-03",
+        "start_char": 75,
+        "text": "Refactored html 03"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "+++\ntitle = \"Refactored html 03\"\nid = \"ref_html_03\"\nnote = \"html-case\"\n+++",
+        "word_count": 13
+      },
+      {
+        "end_line": 10,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_refactored-html-03",
+        "start_line": 9,
+        "text": "inline HTML paragraph.",
+        "word_count": 3
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 152,
+        "end_line": 10,
+        "id": "section_refactored-html-03",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored html 03\n\n<div><span>broken\n\n<span>inline HTML</span> paragraph.\n",
+        "slug": "refactored-html-03",
+        "start_char": 75,
+        "start_line": 5,
+        "text_content": "Refactored html 03\n\ninline HTML paragraph.",
+        "title": "Refactored html 03"
+      }
+    ],
+    "tables": []
+  }
+}

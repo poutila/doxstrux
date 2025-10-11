@@ -1,0 +1,146 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 03_indented_tab",
+      "",
+      "### tab indented",
+      ""
+    ],
+    "raw": "# Test: 03_indented_tab\n\n### tab indented\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-03_indented_tab",
+      "1": "section_test-03_indented_tab",
+      "2": "section_tab-indented",
+      "3": "section_tab-indented"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "inline": 2,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 42,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 24,
+        "id": "heading_test-03_indented_tab",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-03_indented_tab",
+        "start_char": 0,
+        "text": "Test: 03_indented_tab"
+      },
+      {
+        "end_char": 42,
+        "id": "heading_tab-indented",
+        "level": 3,
+        "line": 2,
+        "parent_heading_id": "heading_test-03_indented_tab",
+        "slug": "tab-indented",
+        "start_char": 25,
+        "text": "tab indented"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [
+          "section_tab-indented"
+        ],
+        "end_char": 42,
+        "end_line": 3,
+        "id": "section_test-03_indented_tab",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 03_indented_tab\n\n### tab indented\n",
+        "slug": "test-03_indented_tab",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 03_indented_tab\n\ntab indented",
+        "title": "Test: 03_indented_tab"
+      },
+      {
+        "child_ids": [],
+        "end_char": 42,
+        "end_line": 3,
+        "id": "section_tab-indented",
+        "level": 3,
+        "parent_id": "section_test-03_indented_tab",
+        "raw_content": "### tab indented\n",
+        "slug": "tab-indented",
+        "start_char": 25,
+        "start_line": 2,
+        "text_content": "tab indented",
+        "title": "tab indented"
+      }
+    ],
+    "tables": []
+  }
+}

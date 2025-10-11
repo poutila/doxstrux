@@ -1,0 +1,350 @@
+{
+  "content": {
+    "lines": [
+      "+++",
+      "title = \"Refactored admonitions 02\"",
+      "id = \"ref_admonitions_02\"",
+      "note = \"admonitions-case\"",
+      "+++",
+      "# Refactored admonitions 02",
+      "",
+      "",
+      ":::note",
+      "This is a callout that some parsers ignore.",
+      ":::",
+      "",
+      "",
+      "",
+      "Term 1",
+      ": Definition 1",
+      "",
+      "Term 2",
+      ": Definition 2 with *emphasis*",
+      "",
+      "",
+      "",
+      "```{mermaid}",
+      "graph TD",
+      "  A --> B",
+      "```",
+      "",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
+      ""
+    ],
+    "raw": "+++\ntitle = \"Refactored admonitions 02\"\nid = \"ref_admonitions_02\"\nnote = \"admonitions-case\"\n+++\n# Refactored admonitions 02\n\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\n\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with *emphasis*\n\n\n\n```{mermaid}\ngraph TD\n  A --> B\n```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "line_to_section": {
+      "5": "section_refactored-admonitions-02",
+      "6": "section_refactored-admonitions-02",
+      "7": "section_refactored-admonitions-02",
+      "8": "section_refactored-admonitions-02",
+      "9": "section_refactored-admonitions-02",
+      "10": "section_refactored-admonitions-02",
+      "11": "section_refactored-admonitions-02",
+      "12": "section_refactored-admonitions-02",
+      "13": "section_refactored-admonitions-02",
+      "14": "section_refactored-admonitions-02",
+      "15": "section_refactored-admonitions-02",
+      "16": "section_refactored-admonitions-02",
+      "17": "section_refactored-admonitions-02",
+      "18": "section_refactored-admonitions-02",
+      "19": "section_refactored-admonitions-02",
+      "20": "section_refactored-admonitions-02",
+      "21": "section_refactored-admonitions-02",
+      "22": "section_refactored-admonitions-02",
+      "23": "section_refactored-admonitions-02",
+      "24": "section_refactored-admonitions-02",
+      "25": "section_refactored-admonitions-02",
+      "26": "section_refactored-admonitions-02",
+      "27": "section_refactored-admonitions-02",
+      "28": "section_refactored-admonitions-02",
+      "29": "section_refactored-admonitions-02"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "code",
+      "23": "code",
+      "24": "code",
+      "25": "code",
+      "26": "code",
+      "27": "prose",
+      "28": "prose",
+      "29": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      27,
+      28,
+      29
+    ]
+  },
+  "metadata": {
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "embedding_blocked": true,
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "em": 1,
+      "fence": 1,
+      "heading": 1,
+      "inline": 6,
+      "link": 4,
+      "paragraph": 5,
+      "root": 1,
+      "softbreak": 8,
+      "text": 23
+    },
+    "security": {
+      "link_disallowed_schemes_raw": true,
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1,
+          "mailto": 1,
+          "relative": 2
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "raw_dangerous_schemes": true,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 4,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 28,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "ht!tp://broken%5E2"
+        },
+        {
+          "line": 28,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com/4"
+        },
+        {
+          "message": "Raw content contains potentially dangerous scheme: file:",
+          "type": "disallowed_schemes_raw"
+        },
+        {
+          "message": "Dangerous scheme \"file:\" found in raw content",
+          "scheme": "file",
+          "type": "raw_dangerous_scheme"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw",
+      "dropped_1_unsafe_links"
+    ],
+    "total_chars": 473,
+    "total_lines": 30
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "graph TD\n  A --> B\n",
+        "end_line": 26,
+        "id": "code_0",
+        "language": "{mermaid}",
+        "section_id": "section_refactored-admonitions-02",
+        "start_line": 22,
+        "type": "fenced"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 124,
+        "id": "heading_refactored-admonitions-02",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "refactored-admonitions-02",
+        "start_char": 96,
+        "text": "Refactored admonitions 02"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 28,
+        "scheme": null,
+        "text": "cross3",
+        "type": "internal",
+        "url": "./admonitions_03.md#sec0"
+      },
+      {
+        "allowed": true,
+        "line": 28,
+        "scheme": "https",
+        "text": "ext4",
+        "type": "external",
+        "url": "https://example.com/4"
+      },
+      {
+        "allowed": true,
+        "line": 28,
+        "scheme": "mailto",
+        "text": "mail5",
+        "type": "email",
+        "url": "mailto:user5@example.com"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "+++\ntitle = \"Refactored admonitions 02\"\nid = \"ref_admonitions_02\"\nnote = \"admonitions-case\"\n+++",
+        "word_count": 13
+      },
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_refactored-admonitions-02",
+        "start_line": 8,
+        "text": ":::note\nThis is a callout that some parsers ignore.\n:::",
+        "word_count": 10
+      },
+      {
+        "end_line": 16,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_refactored-admonitions-02",
+        "start_line": 14,
+        "text": "Term 1\n: Definition 1",
+        "word_count": 5
+      },
+      {
+        "end_line": 19,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_refactored-admonitions-02",
+        "start_line": 17,
+        "text": "Term 2\n: Definition 2 with emphasis",
+        "word_count": 7
+      },
+      {
+        "end_line": 29,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_4",
+        "section_id": "section_refactored-admonitions-02",
+        "start_line": 28,
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "word_count": 6
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 473,
+        "end_line": 29,
+        "id": "section_refactored-admonitions-02",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored admonitions 02\n\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\n\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with *emphasis*\n\n\n\n```{mermaid}\ngraph TD\n  A --> B\n```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
+        "slug": "refactored-admonitions-02",
+        "start_char": 96,
+        "start_line": 5,
+        "text_content": "Refactored admonitions 02\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with emphasis\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "title": "Refactored admonitions 02"
+      }
+    ],
+    "tables": []
+  }
+}

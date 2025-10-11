@@ -1,0 +1,275 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 11_mixed_legit_and_traps",
+      "",
+      "# Real H1",
+      "Text.",
+      "",
+      "```",
+      "## code fence not heading",
+      "```",
+      "",
+      "## Real H2",
+      "Some paragraph.",
+      "",
+      "    ### indented code, not heading",
+      "",
+      "Normal text.",
+      ""
+    ],
+    "raw": "# Test: 11_mixed_legit_and_traps\n\n# Real H1\nText.\n\n```\n## code fence not heading\n```\n\n## Real H2\nSome paragraph.\n\n    ### indented code, not heading\n\nNormal text.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      5,
+      6,
+      7,
+      8,
+      12,
+      13
+    ],
+    "line_to_section": {
+      "0": "section_test-11_mixed_legit_and_traps",
+      "1": "section_test-11_mixed_legit_and_traps",
+      "2": "section_real-h1",
+      "3": "section_real-h1",
+      "4": "section_real-h1",
+      "5": "section_real-h1",
+      "6": "section_real-h1",
+      "7": "section_real-h1",
+      "8": "section_real-h1",
+      "9": "section_real-h2",
+      "10": "section_real-h2",
+      "11": "section_real-h2",
+      "12": "section_real-h2",
+      "13": "section_real-h2",
+      "14": "section_real-h2",
+      "15": "section_real-h2"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "code",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "code",
+      "13": "code",
+      "14": "prose",
+      "15": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      9,
+      10,
+      11,
+      14,
+      15
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_block": 1,
+      "fence": 1,
+      "heading": 3,
+      "inline": 6,
+      "paragraph": 3,
+      "root": 1,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 163,
+    "total_lines": 16
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "## code fence not heading\n",
+        "end_line": 8,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_real-h1",
+        "start_line": 5,
+        "type": "fenced"
+      },
+      {
+        "content": "### indented code, not heading\n",
+        "end_line": 13,
+        "id": "code_1",
+        "language": "",
+        "section_id": "section_real-h1",
+        "start_line": 12,
+        "type": "indented"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 33,
+        "id": "heading_test-11_mixed_legit_and_traps",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-11_mixed_legit_and_traps",
+        "start_char": 0,
+        "text": "Test: 11_mixed_legit_and_traps"
+      },
+      {
+        "end_char": 44,
+        "id": "heading_real-h1",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "real-h1",
+        "start_char": 34,
+        "text": "Real H1"
+      },
+      {
+        "end_char": 97,
+        "id": "heading_real-h2",
+        "level": 2,
+        "line": 9,
+        "parent_heading_id": "heading_real-h1",
+        "slug": "real-h2",
+        "start_char": 86,
+        "text": "Real H2"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_real-h1",
+        "start_line": 3,
+        "text": "Text.",
+        "word_count": 1
+      },
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_real-h1",
+        "start_line": 10,
+        "text": "Some paragraph.",
+        "word_count": 2
+      },
+      {
+        "end_line": 15,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_real-h1",
+        "start_line": 14,
+        "text": "Normal text.",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 34,
+        "end_line": 1,
+        "id": "section_test-11_mixed_legit_and_traps",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 11_mixed_legit_and_traps\n",
+        "slug": "test-11_mixed_legit_and_traps",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 11_mixed_legit_and_traps",
+        "title": "Test: 11_mixed_legit_and_traps"
+      },
+      {
+        "child_ids": [
+          "section_real-h2"
+        ],
+        "end_char": 163,
+        "end_line": 15,
+        "id": "section_real-h1",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Real H1\nText.\n\n```\n## code fence not heading\n```\n\n## Real H2\nSome paragraph.\n\n    ### indented code, not heading\n\nNormal text.\n",
+        "slug": "real-h1",
+        "start_char": 34,
+        "start_line": 2,
+        "text_content": "Real H1 Text.\n\nReal H2 Some paragraph.\n\nNormal text.",
+        "title": "Real H1"
+      },
+      {
+        "child_ids": [],
+        "end_char": 163,
+        "end_line": 15,
+        "id": "section_real-h2",
+        "level": 2,
+        "parent_id": "section_real-h1",
+        "raw_content": "## Real H2\nSome paragraph.\n\n    ### indented code, not heading\n\nNormal text.\n",
+        "slug": "real-h2",
+        "start_char": 86,
+        "start_line": 9,
+        "text_content": "Real H2 Some paragraph.\n\nNormal text.",
+        "title": "Real H2"
+      }
+    ],
+    "tables": []
+  }
+}

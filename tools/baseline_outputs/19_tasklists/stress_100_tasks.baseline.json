@@ -1,0 +1,1132 @@
+{
+  "content": {
+    "lines": [
+      "# Stress test with 100 tasks",
+      "",
+      "- [ ] Task 1",
+      "- [x] Task 2",
+      "- [ ] Task 3",
+      "- [ ] Task 4",
+      "- [x] Task 5",
+      "- [ ] Task 6",
+      "- [ ] Task 7",
+      "- [x] Task 8",
+      "- [ ] Task 9",
+      "- [ ] Task 10",
+      "- [ ] Task 11",
+      "- [x] Task 12",
+      "- [ ] Task 13",
+      "- [ ] Task 14",
+      "- [x] Task 15",
+      "- [ ] Task 16",
+      "- [ ] Task 17",
+      "- [x] Task 18",
+      "- [ ] Task 19",
+      "- [ ] Task 20",
+      "- [ ] Task 21",
+      "- [x] Task 22",
+      "- [ ] Task 23",
+      "- [ ] Task 24",
+      "- [x] Task 25",
+      "- [ ] Task 26",
+      "- [ ] Task 27",
+      "- [x] Task 28",
+      "- [ ] Task 29",
+      "- [ ] Task 30",
+      "- [ ] Task 31",
+      "- [x] Task 32",
+      "- [ ] Task 33",
+      "- [ ] Task 34",
+      "- [x] Task 35",
+      "- [ ] Task 36",
+      "- [ ] Task 37",
+      "- [x] Task 38",
+      "- [ ] Task 39",
+      "- [ ] Task 40",
+      "- [ ] Task 41",
+      "- [x] Task 42",
+      "- [ ] Task 43",
+      "- [ ] Task 44",
+      "- [x] Task 45",
+      "- [ ] Task 46",
+      "- [ ] Task 47",
+      "- [x] Task 48",
+      "- [ ] Task 49",
+      "- [ ] Task 50",
+      "- [ ] Task 51",
+      "- [x] Task 52",
+      "- [ ] Task 53",
+      "- [ ] Task 54",
+      "- [x] Task 55",
+      "- [ ] Task 56",
+      "- [ ] Task 57",
+      "- [x] Task 58",
+      "- [ ] Task 59",
+      "- [ ] Task 60",
+      "- [ ] Task 61",
+      "- [x] Task 62",
+      "- [ ] Task 63",
+      "- [ ] Task 64",
+      "- [x] Task 65",
+      "- [ ] Task 66",
+      "- [ ] Task 67",
+      "- [x] Task 68",
+      "- [ ] Task 69",
+      "- [ ] Task 70",
+      "- [ ] Task 71",
+      "- [x] Task 72",
+      "- [ ] Task 73",
+      "- [ ] Task 74",
+      "- [x] Task 75",
+      "- [ ] Task 76",
+      "- [ ] Task 77",
+      "- [x] Task 78",
+      "- [ ] Task 79",
+      "- [ ] Task 80",
+      "- [ ] Task 81",
+      "- [x] Task 82",
+      "- [ ] Task 83",
+      "- [ ] Task 84",
+      "- [x] Task 85",
+      "- [ ] Task 86",
+      "- [ ] Task 87",
+      "- [x] Task 88",
+      "- [ ] Task 89",
+      "- [ ] Task 90",
+      "- [ ] Task 91",
+      "- [x] Task 92",
+      "- [ ] Task 93",
+      "- [ ] Task 94",
+      "- [x] Task 95",
+      "- [ ] Task 96",
+      "- [ ] Task 97",
+      "- [x] Task 98",
+      "- [ ] Task 99",
+      "- [ ] Task 100",
+      ""
+    ],
+    "raw": "# Stress test with 100 tasks\n\n- [ ] Task 1\n- [x] Task 2\n- [ ] Task 3\n- [ ] Task 4\n- [x] Task 5\n- [ ] Task 6\n- [ ] Task 7\n- [x] Task 8\n- [ ] Task 9\n- [ ] Task 10\n- [ ] Task 11\n- [x] Task 12\n- [ ] Task 13\n- [ ] Task 14\n- [x] Task 15\n- [ ] Task 16\n- [ ] Task 17\n- [x] Task 18\n- [ ] Task 19\n- [ ] Task 20\n- [ ] Task 21\n- [x] Task 22\n- [ ] Task 23\n- [ ] Task 24\n- [x] Task 25\n- [ ] Task 26\n- [ ] Task 27\n- [x] Task 28\n- [ ] Task 29\n- [ ] Task 30\n- [ ] Task 31\n- [x] Task 32\n- [ ] Task 33\n- [ ] Task 34\n- [x] Task 35\n- [ ] Task 36\n- [ ] Task 37\n- [x] Task 38\n- [ ] Task 39\n- [ ] Task 40\n- [ ] Task 41\n- [x] Task 42\n- [ ] Task 43\n- [ ] Task 44\n- [x] Task 45\n- [ ] Task 46\n- [ ] Task 47\n- [x] Task 48\n- [ ] Task 49\n- [ ] Task 50\n- [ ] Task 51\n- [x] Task 52\n- [ ] Task 53\n- [ ] Task 54\n- [x] Task 55\n- [ ] Task 56\n- [ ] Task 57\n- [x] Task 58\n- [ ] Task 59\n- [ ] Task 60\n- [ ] Task 61\n- [x] Task 62\n- [ ] Task 63\n- [ ] Task 64\n- [x] Task 65\n- [ ] Task 66\n- [ ] Task 67\n- [x] Task 68\n- [ ] Task 69\n- [ ] Task 70\n- [ ] Task 71\n- [x] Task 72\n- [ ] Task 73\n- [ ] Task 74\n- [x] Task 75\n- [ ] Task 76\n- [ ] Task 77\n- [x] Task 78\n- [ ] Task 79\n- [ ] Task 80\n- [ ] Task 81\n- [x] Task 82\n- [ ] Task 83\n- [ ] Task 84\n- [x] Task 85\n- [ ] Task 86\n- [ ] Task 87\n- [x] Task 88\n- [ ] Task 89\n- [ ] Task 90\n- [ ] Task 91\n- [x] Task 92\n- [ ] Task 93\n- [ ] Task 94\n- [x] Task 95\n- [ ] Task 96\n- [ ] Task 97\n- [x] Task 98\n- [ ] Task 99\n- [ ] Task 100\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_stress-test-with-100-tasks",
+      "1": "section_stress-test-with-100-tasks",
+      "2": "section_stress-test-with-100-tasks",
+      "3": "section_stress-test-with-100-tasks",
+      "4": "section_stress-test-with-100-tasks",
+      "5": "section_stress-test-with-100-tasks",
+      "6": "section_stress-test-with-100-tasks",
+      "7": "section_stress-test-with-100-tasks",
+      "8": "section_stress-test-with-100-tasks",
+      "9": "section_stress-test-with-100-tasks",
+      "10": "section_stress-test-with-100-tasks",
+      "11": "section_stress-test-with-100-tasks",
+      "12": "section_stress-test-with-100-tasks",
+      "13": "section_stress-test-with-100-tasks",
+      "14": "section_stress-test-with-100-tasks",
+      "15": "section_stress-test-with-100-tasks",
+      "16": "section_stress-test-with-100-tasks",
+      "17": "section_stress-test-with-100-tasks",
+      "18": "section_stress-test-with-100-tasks",
+      "19": "section_stress-test-with-100-tasks",
+      "20": "section_stress-test-with-100-tasks",
+      "21": "section_stress-test-with-100-tasks",
+      "22": "section_stress-test-with-100-tasks",
+      "23": "section_stress-test-with-100-tasks",
+      "24": "section_stress-test-with-100-tasks",
+      "25": "section_stress-test-with-100-tasks",
+      "26": "section_stress-test-with-100-tasks",
+      "27": "section_stress-test-with-100-tasks",
+      "28": "section_stress-test-with-100-tasks",
+      "29": "section_stress-test-with-100-tasks",
+      "30": "section_stress-test-with-100-tasks",
+      "31": "section_stress-test-with-100-tasks",
+      "32": "section_stress-test-with-100-tasks",
+      "33": "section_stress-test-with-100-tasks",
+      "34": "section_stress-test-with-100-tasks",
+      "35": "section_stress-test-with-100-tasks",
+      "36": "section_stress-test-with-100-tasks",
+      "37": "section_stress-test-with-100-tasks",
+      "38": "section_stress-test-with-100-tasks",
+      "39": "section_stress-test-with-100-tasks",
+      "40": "section_stress-test-with-100-tasks",
+      "41": "section_stress-test-with-100-tasks",
+      "42": "section_stress-test-with-100-tasks",
+      "43": "section_stress-test-with-100-tasks",
+      "44": "section_stress-test-with-100-tasks",
+      "45": "section_stress-test-with-100-tasks",
+      "46": "section_stress-test-with-100-tasks",
+      "47": "section_stress-test-with-100-tasks",
+      "48": "section_stress-test-with-100-tasks",
+      "49": "section_stress-test-with-100-tasks",
+      "50": "section_stress-test-with-100-tasks",
+      "51": "section_stress-test-with-100-tasks",
+      "52": "section_stress-test-with-100-tasks",
+      "53": "section_stress-test-with-100-tasks",
+      "54": "section_stress-test-with-100-tasks",
+      "55": "section_stress-test-with-100-tasks",
+      "56": "section_stress-test-with-100-tasks",
+      "57": "section_stress-test-with-100-tasks",
+      "58": "section_stress-test-with-100-tasks",
+      "59": "section_stress-test-with-100-tasks",
+      "60": "section_stress-test-with-100-tasks",
+      "61": "section_stress-test-with-100-tasks",
+      "62": "section_stress-test-with-100-tasks",
+      "63": "section_stress-test-with-100-tasks",
+      "64": "section_stress-test-with-100-tasks",
+      "65": "section_stress-test-with-100-tasks",
+      "66": "section_stress-test-with-100-tasks",
+      "67": "section_stress-test-with-100-tasks",
+      "68": "section_stress-test-with-100-tasks",
+      "69": "section_stress-test-with-100-tasks",
+      "70": "section_stress-test-with-100-tasks",
+      "71": "section_stress-test-with-100-tasks",
+      "72": "section_stress-test-with-100-tasks",
+      "73": "section_stress-test-with-100-tasks",
+      "74": "section_stress-test-with-100-tasks",
+      "75": "section_stress-test-with-100-tasks",
+      "76": "section_stress-test-with-100-tasks",
+      "77": "section_stress-test-with-100-tasks",
+      "78": "section_stress-test-with-100-tasks",
+      "79": "section_stress-test-with-100-tasks",
+      "80": "section_stress-test-with-100-tasks",
+      "81": "section_stress-test-with-100-tasks",
+      "82": "section_stress-test-with-100-tasks",
+      "83": "section_stress-test-with-100-tasks",
+      "84": "section_stress-test-with-100-tasks",
+      "85": "section_stress-test-with-100-tasks",
+      "86": "section_stress-test-with-100-tasks",
+      "87": "section_stress-test-with-100-tasks",
+      "88": "section_stress-test-with-100-tasks",
+      "89": "section_stress-test-with-100-tasks",
+      "90": "section_stress-test-with-100-tasks",
+      "91": "section_stress-test-with-100-tasks",
+      "92": "section_stress-test-with-100-tasks",
+      "93": "section_stress-test-with-100-tasks",
+      "94": "section_stress-test-with-100-tasks",
+      "95": "section_stress-test-with-100-tasks",
+      "96": "section_stress-test-with-100-tasks",
+      "97": "section_stress-test-with-100-tasks",
+      "98": "section_stress-test-with-100-tasks",
+      "99": "section_stress-test-with-100-tasks",
+      "100": "section_stress-test-with-100-tasks",
+      "101": "section_stress-test-with-100-tasks",
+      "102": "section_stress-test-with-100-tasks"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "prose",
+      "29": "prose",
+      "30": "prose",
+      "31": "prose",
+      "32": "prose",
+      "33": "prose",
+      "34": "prose",
+      "35": "prose",
+      "36": "prose",
+      "37": "prose",
+      "38": "prose",
+      "39": "prose",
+      "40": "prose",
+      "41": "prose",
+      "42": "prose",
+      "43": "prose",
+      "44": "prose",
+      "45": "prose",
+      "46": "prose",
+      "47": "prose",
+      "48": "prose",
+      "49": "prose",
+      "50": "prose",
+      "51": "prose",
+      "52": "prose",
+      "53": "prose",
+      "54": "prose",
+      "55": "prose",
+      "56": "prose",
+      "57": "prose",
+      "58": "prose",
+      "59": "prose",
+      "60": "prose",
+      "61": "prose",
+      "62": "prose",
+      "63": "prose",
+      "64": "prose",
+      "65": "prose",
+      "66": "prose",
+      "67": "prose",
+      "68": "prose",
+      "69": "prose",
+      "70": "prose",
+      "71": "prose",
+      "72": "prose",
+      "73": "prose",
+      "74": "prose",
+      "75": "prose",
+      "76": "prose",
+      "77": "prose",
+      "78": "prose",
+      "79": "prose",
+      "80": "prose",
+      "81": "prose",
+      "82": "prose",
+      "83": "prose",
+      "84": "prose",
+      "85": "prose",
+      "86": "prose",
+      "87": "prose",
+      "88": "prose",
+      "89": "prose",
+      "90": "prose",
+      "91": "prose",
+      "92": "prose",
+      "93": "prose",
+      "94": "prose",
+      "95": "prose",
+      "96": "prose",
+      "97": "prose",
+      "98": "prose",
+      "99": "prose",
+      "100": "prose",
+      "101": "prose",
+      "102": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 1,
+      "inline": 101,
+      "list_item": 100,
+      "paragraph": 100,
+      "root": 1,
+      "text": 101
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 1422,
+    "total_lines": 103
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 29,
+        "id": "heading_stress-test-with-100-tasks",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "stress-test-with-100-tasks",
+        "start_char": 0,
+        "text": "Stress test with 100 tasks"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 102,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 1"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 2"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 3"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 4"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 5"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 6"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 7"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 8"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 9"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 10"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 11"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 12"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 13"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 14"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 15"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 16"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 17"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 18"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 19"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 20"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 21"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 22"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 23"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 24"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 25"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 26"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 27"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 28"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 29"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 30"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 31"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 32"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 33"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 34"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 35"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 36"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 37"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 38"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 39"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 40"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 41"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 42"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 43"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 44"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 45"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 46"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 47"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 48"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 49"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 50"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 51"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 52"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 53"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 54"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 55"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 56"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 57"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 58"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 59"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 60"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 61"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 62"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 63"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 64"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 65"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 66"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 67"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 68"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 69"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 70"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 71"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 72"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 73"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 74"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 75"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 76"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 77"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 78"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 79"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 80"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 81"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 82"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 83"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 84"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 85"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 86"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 87"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 88"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 89"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 90"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 91"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 92"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 93"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 94"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 95"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 96"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 97"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [],
+            "text": "Task 98"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 99"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task 100"
+          }
+        ],
+        "items_count": 100,
+        "section_id": "section_stress-test-with-100-tasks",
+        "start_line": 2,
+        "task_items_count": 100,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 1422,
+        "end_line": 102,
+        "id": "section_stress-test-with-100-tasks",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Stress test with 100 tasks\n\n- [ ] Task 1\n- [x] Task 2\n- [ ] Task 3\n- [ ] Task 4\n- [x] Task 5\n- [ ] Task 6\n- [ ] Task 7\n- [x] Task 8\n- [ ] Task 9\n- [ ] Task 10\n- [ ] Task 11\n- [x] Task 12\n- [ ] Task 13\n- [ ] Task 14\n- [x] Task 15\n- [ ] Task 16\n- [ ] Task 17\n- [x] Task 18\n- [ ] Task 19\n- [ ] Task 20\n- [ ] Task 21\n- [x] Task 22\n- [ ] Task 23\n- [ ] Task 24\n- [x] Task 25\n- [ ] Task 26\n- [ ] Task 27\n- [x] Task 28\n- [ ] Task 29\n- [ ] Task 30\n- [ ] Task 31\n- [x] Task 32\n- [ ] Task 33\n- [ ] Task 34\n- [x] Task 35\n- [ ] Task 36\n- [ ] Task 37\n- [x] Task 38\n- [ ] Task 39\n- [ ] Task 40\n- [ ] Task 41\n- [x] Task 42\n- [ ] Task 43\n- [ ] Task 44\n- [x] Task 45\n- [ ] Task 46\n- [ ] Task 47\n- [x] Task 48\n- [ ] Task 49\n- [ ] Task 50\n- [ ] Task 51\n- [x] Task 52\n- [ ] Task 53\n- [ ] Task 54\n- [x] Task 55\n- [ ] Task 56\n- [ ] Task 57\n- [x] Task 58\n- [ ] Task 59\n- [ ] Task 60\n- [ ] Task 61\n- [x] Task 62\n- [ ] Task 63\n- [ ] Task 64\n- [x] Task 65\n- [ ] Task 66\n- [ ] Task 67\n- [x] Task 68\n- [ ] Task 69\n- [ ] Task 70\n- [ ] Task 71\n- [x] Task 72\n- [ ] Task 73\n- [ ] Task 74\n- [x] Task 75\n- [ ] Task 76\n- [ ] Task 77\n- [x] Task 78\n- [ ] Task 79\n- [ ] Task 80\n- [ ] Task 81\n- [x] Task 82\n- [ ] Task 83\n- [ ] Task 84\n- [x] Task 85\n- [ ] Task 86\n- [ ] Task 87\n- [x] Task 88\n- [ ] Task 89\n- [ ] Task 90\n- [ ] Task 91\n- [x] Task 92\n- [ ] Task 93\n- [ ] Task 94\n- [x] Task 95\n- [ ] Task 96\n- [ ] Task 97\n- [x] Task 98\n- [ ] Task 99\n- [ ] Task 100\n",
+        "slug": "stress-test-with-100-tasks",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Stress test with 100 tasks\n\n[ ] Task 1 [x] Task 2 [ ] Task 3 [ ] Task 4 [x] Task 5 [ ] Task 6 [ ] Task 7 [x] Task 8 [ ] Task 9 [ ] Task 10 [ ] Task 11 [x] Task 12 [ ] Task 13 [ ] Task 14 [x] Task 15 [ ] Task 16 [ ] Task 17 [x] Task 18 [ ] Task 19 [ ] Task 20 [ ] Task 21 [x] Task 22 [ ] Task 23 [ ] Task 24 [x] Task 25 [ ] Task 26 [ ] Task 27 [x] Task 28 [ ] Task 29 [ ] Task 30 [ ] Task 31 [x] Task 32 [ ] Task 33 [ ] Task 34 [x] Task 35 [ ] Task 36 [ ] Task 37 [x] Task 38 [ ] Task 39 [ ] Task 40 [ ] Task 41 [x] Task 42 [ ] Task 43 [ ] Task 44 [x] Task 45 [ ] Task 46 [ ] Task 47 [x] Task 48 [ ] Task 49 [ ] Task 50 [ ] Task 51 [x] Task 52 [ ] Task 53 [ ] Task 54 [x] Task 55 [ ] Task 56 [ ] Task 57 [x] Task 58 [ ] Task 59 [ ] Task 60 [ ] Task 61 [x] Task 62 [ ] Task 63 [ ] Task 64 [x] Task 65 [ ] Task 66 [ ] Task 67 [x] Task 68 [ ] Task 69 [ ] Task 70 [ ] Task 71 [x] Task 72 [ ] Task 73 [ ] Task 74 [x] Task 75 [ ] Task 76 [ ] Task 77 [x] Task 78 [ ] Task 79 [ ] Task 80 [ ] Task 81 [x] Task 82 [ ] Task 83 [ ] Task 84 [x] Task 85 [ ] Task 86 [ ] Task 87 [x] Task 88 [ ] Task 89 [ ] Task 90 [ ] Task 91 [x] Task 92 [ ] Task 93 [ ] Task 94 [x] Task 95 [ ] Task 96 [ ] Task 97 [x] Task 98 [ ] Task 99 [ ] Task 100",
+        "title": "Stress test with 100 tasks"
+      }
+    ],
+    "tables": []
+  }
+}

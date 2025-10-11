@@ -1,0 +1,205 @@
+{
+  "content": {
+    "lines": [
+      "::: note Outer",
+      "Code:",
+      "```python",
+      "x=1",
+      "```",
+      "| A | B |",
+      "| - | - |",
+      "| 1 | 2 |",
+      "::: warning Inner",
+      "**Be careful**",
+      ":::",
+      ":::",
+      ""
+    ],
+    "raw": "::: note Outer\nCode:\n```python\nx=1\n```\n| A | B |\n| - | - |\n| 1 | 2 |\n::: warning Inner\n**Be careful**\n:::\n:::\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "code",
+      "3": "code",
+      "4": "code",
+      "5": "code",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": true,
+    "node_counts": {
+      "fence": 1,
+      "inline": 13,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 1,
+      "strong": 1,
+      "table": 1,
+      "tbody": 1,
+      "td": 10,
+      "text": 12,
+      "th": 2,
+      "thead": 1,
+      "tr": 6
+    },
+    "quarantine_reasons": [
+      "ragged_tables:1"
+    ],
+    "quarantined": true,
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 1,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 1,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 5,
+          "message": "Table has inconsistent column counts",
+          "type": "ragged_table"
+        }
+      ]
+    },
+    "total_chars": 110,
+    "total_lines": 13
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "x=1\n",
+        "end_line": 5,
+        "id": "code_0",
+        "language": "python",
+        "section_id": null,
+        "start_line": 2,
+        "type": "fenced"
+      }
+    ],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 2,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "::: note Outer\nCode:",
+        "word_count": 4
+      }
+    ],
+    "sections": [],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 12,
+        "headers": [
+          "A",
+          "B"
+        ],
+        "id": "table_0",
+        "is_ragged": true,
+        "is_ragged_meta": {
+          "heuristic": true
+        },
+        "row_count": 5,
+        "rows": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "::: warning Inner",
+            ""
+          ],
+          [
+            "Be careful",
+            ""
+          ],
+          [
+            ":::",
+            ""
+          ],
+          [
+            ":::",
+            ""
+          ]
+        ],
+        "section_id": null,
+        "start_line": 5
+      }
+    ]
+  }
+}

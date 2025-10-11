@@ -1,0 +1,140 @@
+{
+  "content": {
+    "lines": [
+      "# Title \ud83d\ude04 with emoji",
+      "# Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very long heading",
+      ""
+    ],
+    "raw": "# Title \ud83d\ude04 with emoji\n# Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very long heading\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_title-with-emoji",
+      "1": "section_very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-heading",
+      "2": "section_very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-heading"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "inline": 2,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 186,
+    "total_lines": 3
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 21,
+        "id": "heading_title-with-emoji",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "title-with-emoji",
+        "start_char": 0,
+        "text": "Title \ud83d\ude04 with emoji"
+      },
+      {
+        "end_char": 186,
+        "id": "heading_very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-heading",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-heading",
+        "start_char": 21,
+        "text": "Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very long heading"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 21,
+        "end_line": 0,
+        "id": "section_title-with-emoji",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Title \ud83d\ude04 with emoji",
+        "slug": "title-with-emoji",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Title \ud83d\ude04 with emoji",
+        "title": "Title \ud83d\ude04 with emoji"
+      },
+      {
+        "child_ids": [],
+        "end_char": 186,
+        "end_line": 2,
+        "id": "section_very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-heading",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very long heading\n",
+        "slug": "very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-very-long-heading",
+        "start_char": 21,
+        "start_line": 1,
+        "text_content": "Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very long heading",
+        "title": "Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very Very long heading"
+      }
+    ],
+    "tables": []
+  }
+}

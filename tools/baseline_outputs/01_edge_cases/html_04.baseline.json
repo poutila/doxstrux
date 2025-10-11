@@ -1,0 +1,169 @@
+{
+  "content": {
+    "lines": [
+      "{\"title\":\"Refactored html 04\",\"id\":\"ref_html_04\",\"note\":\"html-case\"}",
+      "# Refactored html 04",
+      "",
+      "<div><span>broken",
+      "",
+      "<span>inline HTML</span> paragraph.",
+      ""
+    ],
+    "raw": "{\"title\":\"Refactored html 04\",\"id\":\"ref_html_04\",\"note\":\"html-case\"}\n# Refactored html 04\n\n<div><span>broken\n\n<span>inline HTML</span> paragraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "1": "section_refactored-html-04",
+      "2": "section_refactored-html-04",
+      "3": "section_refactored-html-04",
+      "4": "section_refactored-html-04",
+      "5": "section_refactored-html-04",
+      "6": "section_refactored-html-04"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "html_block": 1,
+      "html_inline": 2,
+      "inline": 3,
+      "paragraph": 2,
+      "root": 1,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": true,
+        "has_html_inline": false,
+        "has_script": false,
+        "html_disallowed": true,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "blocks": 1,
+          "inline": 2,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "stripped_1_html_blocks",
+      "stripped_2_html_inline"
+    ],
+    "total_chars": 146,
+    "total_lines": 7
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 90,
+        "id": "heading_refactored-html-04",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "refactored-html-04",
+        "start_char": 69,
+        "text": "Refactored html 04"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 1,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "{\"title\":\"Refactored html 04\",\"id\":\"ref_html_04\",\"note\":\"html-case\"}",
+        "word_count": 3
+      },
+      {
+        "end_line": 6,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_refactored-html-04",
+        "start_line": 5,
+        "text": "inline HTML paragraph.",
+        "word_count": 3
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 146,
+        "end_line": 6,
+        "id": "section_refactored-html-04",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored html 04\n\n<div><span>broken\n\n<span>inline HTML</span> paragraph.\n",
+        "slug": "refactored-html-04",
+        "start_char": 69,
+        "start_line": 1,
+        "text_content": "Refactored html 04\n\ninline HTML paragraph.",
+        "title": "Refactored html 04"
+      }
+    ],
+    "tables": []
+  }
+}

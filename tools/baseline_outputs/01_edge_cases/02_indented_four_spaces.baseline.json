@@ -1,0 +1,160 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 02_indented_four_spaces",
+      "",
+      "# indented by four",
+      "    ## also code",
+      ""
+    ],
+    "raw": "# Test: 02_indented_four_spaces\n\n# indented by four\n    ## also code\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      3,
+      4
+    ],
+    "line_to_section": {
+      "0": "section_test-02_indented_four_spaces",
+      "1": "section_test-02_indented_four_spaces",
+      "2": "section_indented-by-four",
+      "3": "section_indented-by-four",
+      "4": "section_indented-by-four"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "code",
+      "4": "code"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_block": 1,
+      "heading": 2,
+      "inline": 2,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 69,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "## also code\n",
+        "end_line": 4,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_indented-by-four",
+        "start_line": 3,
+        "type": "indented"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 32,
+        "id": "heading_test-02_indented_four_spaces",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-02_indented_four_spaces",
+        "start_char": 0,
+        "text": "Test: 02_indented_four_spaces"
+      },
+      {
+        "end_char": 52,
+        "id": "heading_indented-by-four",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "indented-by-four",
+        "start_char": 33,
+        "text": "indented by four"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 33,
+        "end_line": 1,
+        "id": "section_test-02_indented_four_spaces",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 02_indented_four_spaces\n",
+        "slug": "test-02_indented_four_spaces",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 02_indented_four_spaces",
+        "title": "Test: 02_indented_four_spaces"
+      },
+      {
+        "child_ids": [],
+        "end_char": 69,
+        "end_line": 4,
+        "id": "section_indented-by-four",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# indented by four\n    ## also code\n",
+        "slug": "indented-by-four",
+        "start_char": 33,
+        "start_line": 2,
+        "text_content": "indented by four",
+        "title": "indented by four"
+      }
+    ],
+    "tables": []
+  }
+}

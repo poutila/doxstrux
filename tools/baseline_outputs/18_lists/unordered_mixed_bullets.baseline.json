@@ -1,0 +1,276 @@
+{
+  "content": {
+    "lines": [
+      "# Unordered lists \u2014 mixed bullets",
+      "",
+      "- A",
+      "  - A.1",
+      "    * A.1.a",
+      "* B",
+      "+ C",
+      "  + C.1",
+      "",
+      "Paragraph between.",
+      "",
+      "- D (new list)",
+      ""
+    ],
+    "raw": "# Unordered lists \u2014 mixed bullets\n\n- A\n  - A.1\n    * A.1.a\n* B\n+ C\n  + C.1\n\nParagraph between.\n\n- D (new list)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      4
+    ],
+    "line_to_section": {
+      "0": "section_unordered-lists-mixed-bullets",
+      "1": "section_unordered-lists-mixed-bullets",
+      "2": "section_unordered-lists-mixed-bullets",
+      "3": "section_unordered-lists-mixed-bullets",
+      "4": "section_unordered-lists-mixed-bullets",
+      "5": "section_unordered-lists-mixed-bullets",
+      "6": "section_unordered-lists-mixed-bullets",
+      "7": "section_unordered-lists-mixed-bullets",
+      "8": "section_unordered-lists-mixed-bullets",
+      "9": "section_unordered-lists-mixed-bullets",
+      "10": "section_unordered-lists-mixed-bullets",
+      "11": "section_unordered-lists-mixed-bullets",
+      "12": "section_unordered-lists-mixed-bullets"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 7,
+      "heading": 1,
+      "inline": 9,
+      "list_item": 7,
+      "paragraph": 8,
+      "root": 1,
+      "text": 9
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 111,
+    "total_lines": 13
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "* A.1.a",
+        "end_line": 4,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_unordered-lists-mixed-bullets",
+        "start_line": 4,
+        "type": "indented"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 34,
+        "id": "heading_unordered-lists-mixed-bullets",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "unordered-lists-mixed-bullets",
+        "start_char": 0,
+        "text": "Unordered lists \u2014 mixed bullets"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 5,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [
+                  {
+                    "blocks": [],
+                    "checked": null,
+                    "children": [],
+                    "text": "A.1.a"
+                  }
+                ],
+                "text": "A.1"
+              }
+            ],
+            "text": "A"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_unordered-lists-mixed-bullets",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      },
+      {
+        "end_line": 6,
+        "has_mixed_task_items": false,
+        "id": "list_1",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "B"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_unordered-lists-mixed-bullets",
+        "start_line": 5,
+        "task_items_count": 0,
+        "type": "bullet"
+      },
+      {
+        "end_line": 9,
+        "has_mixed_task_items": false,
+        "id": "list_2",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [],
+                "text": "C.1"
+              }
+            ],
+            "text": "C"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_unordered-lists-mixed-bullets",
+        "start_line": 6,
+        "task_items_count": 0,
+        "type": "bullet"
+      },
+      {
+        "end_line": 12,
+        "has_mixed_task_items": false,
+        "id": "list_3",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "D (new list)"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_unordered-lists-mixed-bullets",
+        "start_line": 11,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 10,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_unordered-lists-mixed-bullets",
+        "start_line": 9,
+        "text": "Paragraph between.",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 111,
+        "end_line": 12,
+        "id": "section_unordered-lists-mixed-bullets",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Unordered lists \u2014 mixed bullets\n\n- A\n  - A.1\n    * A.1.a\n* B\n+ C\n  + C.1\n\nParagraph between.\n\n- D (new list)\n",
+        "slug": "unordered-lists-mixed-bullets",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Unordered lists \u2014 mixed bullets\n\nA A.1 A.1.a B C C.1\n\nParagraph between.\n\nD (new list)",
+        "title": "Unordered lists \u2014 mixed bullets"
+      }
+    ],
+    "tables": []
+  }
+}

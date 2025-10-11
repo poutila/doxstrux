@@ -1,0 +1,145 @@
+{
+  "content": {
+    "lines": [
+      "# Test: sec_html_inline",
+      "",
+      "Text <span data-x=1>inline</span> and <em>ok</em>.",
+      ""
+    ],
+    "raw": "# Test: sec_html_inline\n\nText <span data-x=1>inline</span> and <em>ok</em>.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-sec_html_inline",
+      "1": "section_test-sec_html_inline",
+      "2": "section_test-sec_html_inline",
+      "3": "section_test-sec_html_inline"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "html_inline": 4,
+      "inline": 2,
+      "paragraph": 1,
+      "root": 1,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": true,
+        "has_html_inline": true,
+        "has_script": false,
+        "html_disallowed": true,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 4,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "stripped_4_html_inline"
+    ],
+    "total_chars": 76,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 24,
+        "id": "heading_test-sec_html_inline",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-sec_html_inline",
+        "start_char": 0,
+        "text": "Test: sec_html_inline"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-sec_html_inline",
+        "start_line": 2,
+        "text": "Text inline and ok.",
+        "word_count": 4
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 76,
+        "end_line": 3,
+        "id": "section_test-sec_html_inline",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: sec_html_inline\n\nText <span data-x=1>inline</span> and <em>ok</em>.\n",
+        "slug": "test-sec_html_inline",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: sec_html_inline\n\nText inline and ok.",
+        "title": "Test: sec_html_inline"
+      }
+    ],
+    "tables": []
+  }
+}

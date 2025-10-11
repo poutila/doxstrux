@@ -1,0 +1,133 @@
+{
+  "content": {
+    "lines": [
+      "Link with ~~strikethrough~~: [~~old~~ link](https://example.com)",
+      "",
+      "Code should not strike: `~~code~~`",
+      ""
+    ],
+    "raw": "Link with ~~strikethrough~~: [~~old~~ link](https://example.com)\n\nCode should not strike: `~~code~~`\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 1,
+      "inline": 2,
+      "link": 1,
+      "paragraph": 2,
+      "root": 1,
+      "s": 2,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 0,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        }
+      ]
+    },
+    "total_chars": 101,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 0,
+        "scheme": "https",
+        "text": "old link",
+        "type": "external",
+        "url": "https://example.com"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 1,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "Link with strikethrough: old link",
+        "word_count": 5
+      },
+      {
+        "end_line": 3,
+        "has_code": true,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": null,
+        "start_line": 2,
+        "text": "Code should not strike: ~~code~~",
+        "word_count": 5
+      }
+    ],
+    "sections": [],
+    "tables": []
+  }
+}

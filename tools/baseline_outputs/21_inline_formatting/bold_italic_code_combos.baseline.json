@@ -1,0 +1,193 @@
+{
+  "content": {
+    "lines": [
+      "# Inline formatting combos",
+      "",
+      "*Italic* _Italic_ **Bold** __Bold__ ***BoldItalic*** ___BoldItalic___",
+      "",
+      "Mixed nesting: **bold *italic* inside** and *italic **bold** inside*",
+      "",
+      "Escapes: \\*not italic\\* and \\_not italic\\_",
+      "",
+      "Code: `**not bold** and *not italic*` and ``code with `backticks``` ",
+      ""
+    ],
+    "raw": "# Inline formatting combos\n\n*Italic* _Italic_ **Bold** __Bold__ ***BoldItalic*** ___BoldItalic___\n\nMixed nesting: **bold *italic* inside** and *italic **bold** inside*\n\nEscapes: \\*not italic\\* and \\_not italic\\_\n\nCode: `**not bold** and *not italic*` and ``code with `backticks``` \n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_inline-formatting-combos",
+      "1": "section_inline-formatting-combos",
+      "2": "section_inline-formatting-combos",
+      "3": "section_inline-formatting-combos",
+      "4": "section_inline-formatting-combos",
+      "5": "section_inline-formatting-combos",
+      "6": "section_inline-formatting-combos",
+      "7": "section_inline-formatting-combos",
+      "8": "section_inline-formatting-combos",
+      "9": "section_inline-formatting-combos"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 1,
+      "em": 6,
+      "heading": 1,
+      "inline": 5,
+      "paragraph": 4,
+      "root": 1,
+      "strong": 6,
+      "text": 27
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 282,
+    "total_lines": 10
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 27,
+        "id": "heading_inline-formatting-combos",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "inline-formatting-combos",
+        "start_char": 0,
+        "text": "Inline formatting combos"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_inline-formatting-combos",
+        "start_line": 2,
+        "text": "Italic Italic Bold Bold BoldItalic BoldItalic",
+        "word_count": 6
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_inline-formatting-combos",
+        "start_line": 4,
+        "text": "Mixed nesting: bold italic inside and italic bold inside",
+        "word_count": 9
+      },
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_inline-formatting-combos",
+        "start_line": 6,
+        "text": "Escapes: *not italic* and _not italic_",
+        "word_count": 6
+      },
+      {
+        "end_line": 9,
+        "has_code": true,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_inline-formatting-combos",
+        "start_line": 8,
+        "text": "Code: **not bold** and *not italic* and ``code with `backticks```",
+        "word_count": 10
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 282,
+        "end_line": 9,
+        "id": "section_inline-formatting-combos",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Inline formatting combos\n\n*Italic* _Italic_ **Bold** __Bold__ ***BoldItalic*** ___BoldItalic___\n\nMixed nesting: **bold *italic* inside** and *italic **bold** inside*\n\nEscapes: \\*not italic\\* and \\_not italic\\_\n\nCode: `**not bold** and *not italic*` and ``code with `backticks``` \n",
+        "slug": "inline-formatting-combos",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Inline formatting combos\n\nItalic Italic Bold Bold BoldItalic BoldItalic\n\nMixed nesting: bold italic inside and italic bold inside\n\nEscapes: *not italic* and _not italic_\n\nCode: **not bold** and *not italic* and ``code with `backticks```",
+        "title": "Inline formatting combos"
+      }
+    ],
+    "tables": []
+  }
+}

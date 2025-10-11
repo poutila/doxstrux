@@ -1,0 +1,111 @@
+{
+  "content": {
+    "lines": [
+      "Term",
+      ": Def level 1",
+      ": More detail",
+      ": Subterm",
+      "  : Subdef 1",
+      "  : Subdef 2",
+      ""
+    ],
+    "raw": "Term\n: Def level 1\n: More detail\n: Subterm\n  : Subdef 1\n  : Subdef 2\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "inline": 1,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 5,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 69,
+    "total_lines": 7
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 6,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "Term\n: Def level 1\n: More detail\n: Subterm\n: Subdef 1\n: Subdef 2",
+        "word_count": 16
+      }
+    ],
+    "sections": [],
+    "tables": []
+  }
+}

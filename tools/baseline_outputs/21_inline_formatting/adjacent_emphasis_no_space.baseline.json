@@ -1,0 +1,270 @@
+{
+  "content": {
+    "lines": [
+      "# Adjacent emphasis without spaces",
+      "",
+      "**bold***italic*",
+      "",
+      "***bolditalic***next",
+      "",
+      "*italic***bold**",
+      "",
+      "~~strike~~**bold**",
+      "",
+      "**bold**`code`",
+      "",
+      "`code`*italic*",
+      "",
+      "***combo***~~strike~~`code`",
+      "",
+      "Text**bold**text",
+      ""
+    ],
+    "raw": "# Adjacent emphasis without spaces\n\n**bold***italic*\n\n***bolditalic***next\n\n*italic***bold**\n\n~~strike~~**bold**\n\n**bold**`code`\n\n`code`*italic*\n\n***combo***~~strike~~`code`\n\nText**bold**text\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_adjacent-emphasis-without-spaces",
+      "1": "section_adjacent-emphasis-without-spaces",
+      "2": "section_adjacent-emphasis-without-spaces",
+      "3": "section_adjacent-emphasis-without-spaces",
+      "4": "section_adjacent-emphasis-without-spaces",
+      "5": "section_adjacent-emphasis-without-spaces",
+      "6": "section_adjacent-emphasis-without-spaces",
+      "7": "section_adjacent-emphasis-without-spaces",
+      "8": "section_adjacent-emphasis-without-spaces",
+      "9": "section_adjacent-emphasis-without-spaces",
+      "10": "section_adjacent-emphasis-without-spaces",
+      "11": "section_adjacent-emphasis-without-spaces",
+      "12": "section_adjacent-emphasis-without-spaces",
+      "13": "section_adjacent-emphasis-without-spaces",
+      "14": "section_adjacent-emphasis-without-spaces",
+      "15": "section_adjacent-emphasis-without-spaces",
+      "16": "section_adjacent-emphasis-without-spaces",
+      "17": "section_adjacent-emphasis-without-spaces"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 3,
+      "em": 5,
+      "heading": 1,
+      "inline": 9,
+      "paragraph": 8,
+      "root": 1,
+      "s": 2,
+      "strong": 7,
+      "text": 28
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 192,
+    "total_lines": 18
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 35,
+        "id": "heading_adjacent-emphasis-without-spaces",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "adjacent-emphasis-without-spaces",
+        "start_char": 0,
+        "text": "Adjacent emphasis without spaces"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 2,
+        "text": "bolditalic",
+        "word_count": 1
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 4,
+        "text": "bolditalicnext",
+        "word_count": 1
+      },
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 6,
+        "text": "italicbold",
+        "word_count": 1
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 8,
+        "text": "strikebold",
+        "word_count": 1
+      },
+      {
+        "end_line": 11,
+        "has_code": true,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_4",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 10,
+        "text": "boldcode",
+        "word_count": 1
+      },
+      {
+        "end_line": 13,
+        "has_code": true,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_5",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 12,
+        "text": "codeitalic",
+        "word_count": 1
+      },
+      {
+        "end_line": 15,
+        "has_code": true,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_6",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 14,
+        "text": "combostrikecode",
+        "word_count": 1
+      },
+      {
+        "end_line": 17,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_7",
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "start_line": 16,
+        "text": "Textboldtext",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 192,
+        "end_line": 17,
+        "id": "section_adjacent-emphasis-without-spaces",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Adjacent emphasis without spaces\n\n**bold***italic*\n\n***bolditalic***next\n\n*italic***bold**\n\n~~strike~~**bold**\n\n**bold**`code`\n\n`code`*italic*\n\n***combo***~~strike~~`code`\n\nText**bold**text\n",
+        "slug": "adjacent-emphasis-without-spaces",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Adjacent emphasis without spaces\n\nbolditalic\n\nbolditalicnext\n\nitalicbold\n\nstrikebold\n\nboldcode\n\ncodeitalic\n\ncombostrikecode\n\nTextboldtext",
+        "title": "Adjacent emphasis without spaces"
+      }
+    ],
+    "tables": []
+  }
+}

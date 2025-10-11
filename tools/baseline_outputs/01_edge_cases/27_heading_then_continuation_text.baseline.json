@@ -1,0 +1,161 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 27_heading_then_continuation_text",
+      "",
+      "# Heading",
+      "continuation text not heading",
+      ""
+    ],
+    "raw": "# Test: 27_heading_then_continuation_text\n\n# Heading\ncontinuation text not heading\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-27_heading_then_continuation_text",
+      "1": "section_test-27_heading_then_continuation_text",
+      "2": "section_heading",
+      "3": "section_heading",
+      "4": "section_heading"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "inline": 3,
+      "paragraph": 1,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 83,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 42,
+        "id": "heading_test-27_heading_then_continuation_text",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-27_heading_then_continuation_text",
+        "start_char": 0,
+        "text": "Test: 27_heading_then_continuation_text"
+      },
+      {
+        "end_char": 53,
+        "id": "heading_heading",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "heading",
+        "start_char": 43,
+        "text": "Heading"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_heading",
+        "start_line": 3,
+        "text": "continuation text not heading",
+        "word_count": 4
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 43,
+        "end_line": 1,
+        "id": "section_test-27_heading_then_continuation_text",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 27_heading_then_continuation_text\n",
+        "slug": "test-27_heading_then_continuation_text",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 27_heading_then_continuation_text",
+        "title": "Test: 27_heading_then_continuation_text"
+      },
+      {
+        "child_ids": [],
+        "end_char": 83,
+        "end_line": 4,
+        "id": "section_heading",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Heading\ncontinuation text not heading\n",
+        "slug": "heading",
+        "start_char": 43,
+        "start_line": 2,
+        "text_content": "Heading continuation text not heading",
+        "title": "Heading"
+      }
+    ],
+    "tables": []
+  }
+}

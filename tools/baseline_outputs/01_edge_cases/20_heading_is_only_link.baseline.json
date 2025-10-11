@@ -1,0 +1,180 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 20_heading_is_only_link",
+      "",
+      "# [Only Link](https://example.com)",
+      "Paragraph.",
+      ""
+    ],
+    "raw": "# Test: 20_heading_is_only_link\n\n# [Only Link](https://example.com)\nParagraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-20_heading_is_only_link",
+      "1": "section_test-20_heading_is_only_link",
+      "2": "section_only-link",
+      "3": "section_only-link",
+      "4": "section_only-link"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "inline": 3,
+      "link": 1,
+      "paragraph": 1,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 2,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com"
+        }
+      ]
+    },
+    "total_chars": 79,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 32,
+        "id": "heading_test-20_heading_is_only_link",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-20_heading_is_only_link",
+        "start_char": 0,
+        "text": "Test: 20_heading_is_only_link"
+      },
+      {
+        "end_char": 68,
+        "id": "heading_only-link",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "only-link",
+        "start_char": 33,
+        "text": "Only Link"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 2,
+        "scheme": "https",
+        "text": "Only Link",
+        "type": "external",
+        "url": "https://example.com"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_only-link",
+        "start_line": 3,
+        "text": "Paragraph.",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 33,
+        "end_line": 1,
+        "id": "section_test-20_heading_is_only_link",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 20_heading_is_only_link\n",
+        "slug": "test-20_heading_is_only_link",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 20_heading_is_only_link",
+        "title": "Test: 20_heading_is_only_link"
+      },
+      {
+        "child_ids": [],
+        "end_char": 79,
+        "end_line": 4,
+        "id": "section_only-link",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# [Only Link](https://example.com)\nParagraph.\n",
+        "slug": "only-link",
+        "start_char": 33,
+        "start_line": 2,
+        "text_content": "Only Link Paragraph.",
+        "title": "Only Link"
+      }
+    ],
+    "tables": []
+  }
+}

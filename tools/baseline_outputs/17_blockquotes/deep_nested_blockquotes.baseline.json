@@ -1,0 +1,195 @@
+{
+  "content": {
+    "lines": [
+      "# Deep nested blockquotes (5 levels)",
+      "",
+      "> Level 1",
+      ">> Level 2",
+      ">>> Level 3",
+      ">>>> Level 4",
+      ">>>>> Level 5",
+      ">>>>>",
+      ">>>>> Text at deepest level",
+      ">>>>",
+      ">>>> Back to level 4",
+      ">>>",
+      ">>> Level 3 again",
+      "",
+      "Normal paragraph.",
+      ""
+    ],
+    "raw": "# Deep nested blockquotes (5 levels)\n\n> Level 1\n>> Level 2\n>>> Level 3\n>>>> Level 4\n>>>>> Level 5\n>>>>>\n>>>>> Text at deepest level\n>>>>\n>>>> Back to level 4\n>>>\n>>> Level 3 again\n\nNormal paragraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_deep-nested-blockquotes-5-levels",
+      "1": "section_deep-nested-blockquotes-5-levels",
+      "2": "section_deep-nested-blockquotes-5-levels",
+      "3": "section_deep-nested-blockquotes-5-levels",
+      "4": "section_deep-nested-blockquotes-5-levels",
+      "5": "section_deep-nested-blockquotes-5-levels",
+      "6": "section_deep-nested-blockquotes-5-levels",
+      "7": "section_deep-nested-blockquotes-5-levels",
+      "8": "section_deep-nested-blockquotes-5-levels",
+      "9": "section_deep-nested-blockquotes-5-levels",
+      "10": "section_deep-nested-blockquotes-5-levels",
+      "11": "section_deep-nested-blockquotes-5-levels",
+      "12": "section_deep-nested-blockquotes-5-levels",
+      "13": "section_deep-nested-blockquotes-5-levels",
+      "14": "section_deep-nested-blockquotes-5-levels",
+      "15": "section_deep-nested-blockquotes-5-levels"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "blockquote": 5,
+      "heading": 1,
+      "inline": 10,
+      "paragraph": 9,
+      "root": 1,
+      "text": 10
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 199,
+    "total_lines": 16
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "Level 1Level 2Level 3Level 4Level 5Text at deepest levelBack to level 4Level 3 again",
+        "end_line": 13,
+        "section_id": "section_deep-nested-blockquotes-5-levels",
+        "start_line": 2
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 37,
+        "id": "heading_deep-nested-blockquotes-5-levels",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "deep-nested-blockquotes-5-levels",
+        "start_char": 0,
+        "text": "Deep nested blockquotes (5 levels)"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 15,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_deep-nested-blockquotes-5-levels",
+        "start_line": 14,
+        "text": "Normal paragraph.",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 199,
+        "end_line": 15,
+        "id": "section_deep-nested-blockquotes-5-levels",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Deep nested blockquotes (5 levels)\n\n> Level 1\n>> Level 2\n>>> Level 3\n>>>> Level 4\n>>>>> Level 5\n>>>>>\n>>>>> Text at deepest level\n>>>>\n>>>> Back to level 4\n>>>\n>>> Level 3 again\n\nNormal paragraph.\n",
+        "slug": "deep-nested-blockquotes-5-levels",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Deep nested blockquotes (5 levels)\n\nLevel 1 Level 2 Level 3 Level 4 Level 5\n\nText at deepest level\n\nBack to level 4\n\nLevel 3 again\n\nNormal paragraph.",
+        "title": "Deep nested blockquotes (5 levels)"
+      }
+    ],
+    "tables": []
+  }
+}

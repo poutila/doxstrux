@@ -1,0 +1,401 @@
+{
+  "content": {
+    "lines": [
+      "# Refactored images 05",
+      "Title",
+      "=====",
+      "",
+      "Sub",
+      "----",
+      "",
+      "",
+      "![ok0](https://via.placeholder.com/64 \"t0\")",
+      "![rel0](./assets/img_0.png)",
+      "[![imglink](https://via.placeholder.com/24)](https://example.com/landing)",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./images_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)",
+      ""
+    ],
+    "raw": "# Refactored images 05\nTitle\n=====\n\nSub\n----\n\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n![rel0](./assets/img_0.png)\n[![imglink](https://via.placeholder.com/24)](https://example.com/landing)\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./images_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_refactored-images-05",
+      "1": "section_title",
+      "2": "section_title",
+      "3": "section_title",
+      "4": "section_sub",
+      "5": "section_sub",
+      "6": "section_sub",
+      "7": "section_sub",
+      "8": "section_sub",
+      "9": "section_sub",
+      "10": "section_sub",
+      "11": "section_sub",
+      "12": "section_sub",
+      "13": "section_sub"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  "metadata": {
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "embedding_blocked": true,
+    "frontmatter": {
+      "id": "ref_images_05",
+      "note": "images-case",
+      "title": "Refactored images 05"
+    },
+    "has_code": false,
+    "has_frontmatter": true,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 3,
+      "image": 3,
+      "inline": 5,
+      "link": 5,
+      "paragraph": 2,
+      "root": 1,
+      "softbreak": 2,
+      "text": 14
+    },
+    "security": {
+      "link_disallowed_schemes_raw": true,
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": true,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 2,
+          "mailto": 1,
+          "relative": 5
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "raw_dangerous_schemes": true,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 7,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 8,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://via.placeholder.com/64"
+        },
+        {
+          "line": 10,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com/landing"
+        },
+        {
+          "line": 10,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://via.placeholder.com/24"
+        },
+        {
+          "line": 12,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "ht!tp://broken%5E2"
+        },
+        {
+          "line": 12,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com/4"
+        },
+        {
+          "message": "Raw content contains potentially dangerous scheme: file:",
+          "type": "disallowed_schemes_raw"
+        },
+        {
+          "message": "Dangerous scheme \"file:\" found in raw content",
+          "scheme": "file",
+          "type": "raw_dangerous_scheme"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw",
+      "dropped_1_unsafe_links"
+    ],
+    "total_chars": 344,
+    "total_lines": 14
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 23,
+        "id": "heading_refactored-images-05",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "refactored-images-05",
+        "start_char": 0,
+        "text": "Refactored images 05"
+      },
+      {
+        "end_char": 29,
+        "id": "heading_title",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "title",
+        "start_char": 23,
+        "text": "Title"
+      },
+      {
+        "end_char": 40,
+        "id": "heading_sub",
+        "level": 1,
+        "line": 4,
+        "parent_heading_id": null,
+        "slug": "sub",
+        "start_char": 36,
+        "text": "Sub"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [
+      {
+        "allowed": true,
+        "alt": "ok0",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": true,
+        "image_id": "15cde9e8ad4d561a",
+        "image_kind": "external",
+        "line": 8,
+        "scheme": "https",
+        "src": "https://via.placeholder.com/64",
+        "title": "t0"
+      },
+      {
+        "allowed": true,
+        "alt": "rel0",
+        "format": "png",
+        "has_alt": true,
+        "has_title": false,
+        "image_id": "4d84e13c31365b57",
+        "image_kind": "local",
+        "line": 9,
+        "scheme": null,
+        "src": "./assets/img_0.png",
+        "title": ""
+      },
+      {
+        "allowed": true,
+        "alt": "imglink",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": false,
+        "image_id": "ae5d50ee6fcdefdb",
+        "image_kind": "external",
+        "line": 10,
+        "scheme": "https",
+        "src": "https://via.placeholder.com/24",
+        "title": ""
+      }
+    ],
+    "links": [
+      {
+        "alt": "ok0",
+        "format": "unknown",
+        "image_id": "15cde9e8ad4d561a",
+        "image_kind": "external",
+        "line": 8,
+        "src": "https://via.placeholder.com/64",
+        "text": "ok0",
+        "title": "t0",
+        "type": "image",
+        "url": "https://via.placeholder.com/64"
+      },
+      {
+        "alt": "rel0",
+        "format": "png",
+        "image_id": "4d84e13c31365b57",
+        "image_kind": "local",
+        "line": 9,
+        "src": "./assets/img_0.png",
+        "text": "rel0",
+        "title": "",
+        "type": "image",
+        "url": "./assets/img_0.png"
+      },
+      {
+        "allowed": true,
+        "line": 10,
+        "scheme": "https",
+        "text": "imglink",
+        "type": "external",
+        "url": "https://example.com/landing"
+      },
+      {
+        "alt": "imglink",
+        "format": "unknown",
+        "image_id": "ae5d50ee6fcdefdb",
+        "image_kind": "external",
+        "line": 10,
+        "src": "https://via.placeholder.com/24",
+        "text": "imglink",
+        "title": "",
+        "type": "image",
+        "url": "https://via.placeholder.com/24"
+      },
+      {
+        "allowed": true,
+        "line": 12,
+        "scheme": null,
+        "text": "cross3",
+        "type": "internal",
+        "url": "./images_01.md#sec0"
+      },
+      {
+        "allowed": true,
+        "line": 12,
+        "scheme": "https",
+        "text": "ext4",
+        "type": "external",
+        "url": "https://example.com/4"
+      },
+      {
+        "allowed": true,
+        "line": 12,
+        "scheme": "mailto",
+        "text": "mail5",
+        "type": "email",
+        "url": "mailto:user5@example.com"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": "section_sub",
+        "start_line": 8,
+        "text": "ok0ok0\nrel0rel0\nimglinkimglink",
+        "word_count": 3
+      },
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_1",
+        "section_id": "section_sub",
+        "start_line": 12,
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
+        "word_count": 5
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 23,
+        "end_line": 0,
+        "id": "section_refactored-images-05",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored images 05",
+        "slug": "refactored-images-05",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Refactored images 05",
+        "title": "Refactored images 05"
+      },
+      {
+        "child_ids": [],
+        "end_char": 36,
+        "end_line": 3,
+        "id": "section_title",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Title\n=====\n",
+        "slug": "title",
+        "start_char": 23,
+        "start_line": 1,
+        "text_content": "Title",
+        "title": "Title"
+      },
+      {
+        "child_ids": [],
+        "end_char": 344,
+        "end_line": 13,
+        "id": "section_sub",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Sub\n----\n\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n![rel0](./assets/img_0.png)\n[![imglink](https://via.placeholder.com/24)](https://example.com/landing)\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./images_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n",
+        "slug": "sub",
+        "start_char": 36,
+        "start_line": 4,
+        "text_content": "Sub\n\n\n\n\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
+        "title": "Sub"
+      }
+    ],
+    "tables": []
+  }
+}

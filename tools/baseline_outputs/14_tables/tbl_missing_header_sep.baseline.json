@@ -1,0 +1,142 @@
+{
+  "content": {
+    "lines": [
+      "# Test: tbl_missing_header_sep",
+      "",
+      "| A | B |",
+      "| 1 | 2 |",
+      "Paragraph.",
+      ""
+    ],
+    "raw": "# Test: tbl_missing_header_sep\n\n| A | B |\n| 1 | 2 |\nParagraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-tbl_missing_header_sep",
+      "1": "section_test-tbl_missing_header_sep",
+      "2": "section_test-tbl_missing_header_sep",
+      "3": "section_test-tbl_missing_header_sep",
+      "4": "section_test-tbl_missing_header_sep",
+      "5": "section_test-tbl_missing_header_sep"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "inline": 2,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 2,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 63,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_test-tbl_missing_header_sep",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-tbl_missing_header_sep",
+        "start_char": 0,
+        "text": "Test: tbl_missing_header_sep"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-tbl_missing_header_sep",
+        "start_line": 2,
+        "text": "| A | B |\n| 1 | 2 |\nParagraph.",
+        "word_count": 11
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 63,
+        "end_line": 5,
+        "id": "section_test-tbl_missing_header_sep",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: tbl_missing_header_sep\n\n| A | B |\n| 1 | 2 |\nParagraph.\n",
+        "slug": "test-tbl_missing_header_sep",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: tbl_missing_header_sep\n\n| A | B |\n| 1 | 2 |\nParagraph.",
+        "title": "Test: tbl_missing_header_sep"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "content": {
+    "lines": [
+      "# Test: fm_invalid_in_code",
+      "",
+      "```md",
+      "---",
+      "title: in code",
+      "---",
+      "```",
+      "",
+      "Body.",
+      ""
+    ],
+    "raw": "# Test: fm_invalid_in_code\n\n```md\n---\ntitle: in code\n---\n```\n\nBody.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "line_to_section": {
+      "0": "section_test-fm_invalid_in_code",
+      "1": "section_test-fm_invalid_in_code",
+      "2": "section_test-fm_invalid_in_code",
+      "3": "section_test-fm_invalid_in_code",
+      "4": "section_test-fm_invalid_in_code",
+      "5": "section_test-fm_invalid_in_code",
+      "6": "section_test-fm_invalid_in_code",
+      "7": "section_test-fm_invalid_in_code",
+      "8": "section_test-fm_invalid_in_code",
+      "9": "section_test-fm_invalid_in_code"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "code",
+      "3": "code",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "prose",
+      "9": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      8,
+      9
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "fence": 1,
+      "heading": 1,
+      "inline": 2,
+      "paragraph": 1,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 68,
+    "total_lines": 10
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "---\ntitle: in code\n---\n",
+        "end_line": 7,
+        "id": "code_0",
+        "language": "md",
+        "section_id": "section_test-fm_invalid_in_code",
+        "start_line": 2,
+        "type": "fenced"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 27,
+        "id": "heading_test-fm_invalid_in_code",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-fm_invalid_in_code",
+        "start_char": 0,
+        "text": "Test: fm_invalid_in_code"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-fm_invalid_in_code",
+        "start_line": 8,
+        "text": "Body.",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 68,
+        "end_line": 9,
+        "id": "section_test-fm_invalid_in_code",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: fm_invalid_in_code\n\n```md\n---\ntitle: in code\n---\n```\n\nBody.\n",
+        "slug": "test-fm_invalid_in_code",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: fm_invalid_in_code\n\nBody.",
+        "title": "Test: fm_invalid_in_code"
+      }
+    ],
+    "tables": []
+  }
+}

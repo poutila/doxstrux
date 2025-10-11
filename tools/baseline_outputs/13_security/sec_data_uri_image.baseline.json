@@ -1,0 +1,158 @@
+{
+  "content": {
+    "lines": [
+      "# Test: sec_data_uri_image",
+      "",
+      "![d](data:image/png;base64,iVBORw0KGgo=)",
+      ""
+    ],
+    "raw": "# Test: sec_data_uri_image\n\n![d](data:image/png;base64,iVBORw0KGgo=)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-sec_data_uri_image",
+      "1": "section_test-sec_data_uri_image",
+      "2": "section_test-sec_data_uri_image",
+      "3": "section_test-sec_data_uri_image"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "image": 1,
+      "inline": 2,
+      "paragraph": 1,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": true,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "relative": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 2,
+          "message": "Image uses data: URI scheme",
+          "type": "data_uri_image"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "dropped_1_unsafe_images"
+    ],
+    "total_chars": 69,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 27,
+        "id": "heading_test-sec_data_uri_image",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-sec_data_uri_image",
+        "start_char": 0,
+        "text": "Test: sec_data_uri_image"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "alt": "d",
+        "format": "png",
+        "image_id": "2ca75ef2c3b7e5f8",
+        "image_kind": "data",
+        "line": 2,
+        "src": "data:image/png;base64,iVBORw0KGgo=",
+        "text": "d",
+        "title": "",
+        "type": "image",
+        "url": "data:image/png;base64,iVBORw0KGgo="
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-sec_data_uri_image",
+        "start_line": 2,
+        "text": "dd",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 69,
+        "end_line": 3,
+        "id": "section_test-sec_data_uri_image",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: sec_data_uri_image\n\n![d](data:image/png;base64,iVBORw0KGgo=)\n",
+        "slug": "test-sec_data_uri_image",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: sec_data_uri_image",
+        "title": "Test: sec_data_uri_image"
+      }
+    ],
+    "tables": []
+  }
+}

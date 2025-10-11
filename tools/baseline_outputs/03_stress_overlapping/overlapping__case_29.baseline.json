@@ -1,0 +1,84 @@
+{
+  "content": {
+    "lines": [
+      ""
+    ],
+    "raw": ""
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose"
+    },
+    "prose_lines": [
+      0
+    ]
+  },
+  "metadata": {
+    "frontmatter": {
+      "allows_html": true,
+      "id": "overlapping_kitchen_sink_29",
+      "md_flavor": "mixed",
+      "note": "overlap-all",
+      "title": "Overlapping Kitchen Sink 29"
+    },
+    "has_code": false,
+    "has_frontmatter": true,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "root": 1
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": true,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 0,
+    "total_lines": 1
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [],
+    "tables": []
+  }
+}

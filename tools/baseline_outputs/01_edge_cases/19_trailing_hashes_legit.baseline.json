@@ -1,0 +1,204 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 19_trailing_hashes_legit",
+      "",
+      "# Title #",
+      "## Sub ##",
+      "### Third ###   ##",
+      ""
+    ],
+    "raw": "# Test: 19_trailing_hashes_legit\n\n# Title #\n## Sub ##\n### Third ###   ##\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-19_trailing_hashes_legit",
+      "1": "section_test-19_trailing_hashes_legit",
+      "2": "section_title",
+      "3": "section_sub",
+      "4": "section_third",
+      "5": "section_third"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 4,
+      "inline": 4,
+      "root": 1,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 73,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 33,
+        "id": "heading_test-19_trailing_hashes_legit",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-19_trailing_hashes_legit",
+        "start_char": 0,
+        "text": "Test: 19_trailing_hashes_legit"
+      },
+      {
+        "end_char": 44,
+        "id": "heading_title",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "title",
+        "start_char": 34,
+        "text": "Title"
+      },
+      {
+        "end_char": 54,
+        "id": "heading_sub",
+        "level": 2,
+        "line": 3,
+        "parent_heading_id": "heading_title",
+        "slug": "sub",
+        "start_char": 44,
+        "text": "Sub"
+      },
+      {
+        "end_char": 73,
+        "id": "heading_third",
+        "level": 3,
+        "line": 4,
+        "parent_heading_id": "heading_sub",
+        "slug": "third",
+        "start_char": 54,
+        "text": "Third ###"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 34,
+        "end_line": 1,
+        "id": "section_test-19_trailing_hashes_legit",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 19_trailing_hashes_legit\n",
+        "slug": "test-19_trailing_hashes_legit",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 19_trailing_hashes_legit",
+        "title": "Test: 19_trailing_hashes_legit"
+      },
+      {
+        "child_ids": [
+          "section_sub"
+        ],
+        "end_char": 73,
+        "end_line": 5,
+        "id": "section_title",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Title #\n## Sub ##\n### Third ###   ##\n",
+        "slug": "title",
+        "start_char": 34,
+        "start_line": 2,
+        "text_content": "Title Sub Third ###",
+        "title": "Title"
+      },
+      {
+        "child_ids": [
+          "section_third"
+        ],
+        "end_char": 73,
+        "end_line": 5,
+        "id": "section_sub",
+        "level": 2,
+        "parent_id": "section_title",
+        "raw_content": "## Sub ##\n### Third ###   ##\n",
+        "slug": "sub",
+        "start_char": 44,
+        "start_line": 3,
+        "text_content": "Sub Third ###",
+        "title": "Sub"
+      },
+      {
+        "child_ids": [],
+        "end_char": 73,
+        "end_line": 5,
+        "id": "section_third",
+        "level": 3,
+        "parent_id": "section_sub",
+        "raw_content": "### Third ###   ##\n",
+        "slug": "third",
+        "start_char": 54,
+        "start_line": 4,
+        "text_content": "Third ###",
+        "title": "Third ###"
+      }
+    ],
+    "tables": []
+  }
+}

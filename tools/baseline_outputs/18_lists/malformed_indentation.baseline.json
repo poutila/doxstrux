@@ -1,0 +1,205 @@
+{
+  "content": {
+    "lines": [
+      "# Malformed list indentation",
+      "",
+      "- Item 1",
+      " - Wrong indent (1 space)",
+      "   - Correct indent (2 spaces)",
+      "- Item 2",
+      "     - Too much indent (5 spaces)",
+      "- Item 3",
+      ""
+    ],
+    "raw": "# Malformed list indentation\n\n- Item 1\n - Wrong indent (1 space)\n   - Correct indent (2 spaces)\n- Item 2\n     - Too much indent (5 spaces)\n- Item 3\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      6
+    ],
+    "line_to_section": {
+      "0": "section_malformed-list-indentation",
+      "1": "section_malformed-list-indentation",
+      "2": "section_malformed-list-indentation",
+      "3": "section_malformed-list-indentation",
+      "4": "section_malformed-list-indentation",
+      "5": "section_malformed-list-indentation",
+      "6": "section_malformed-list-indentation",
+      "7": "section_malformed-list-indentation",
+      "8": "section_malformed-list-indentation"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "code",
+      "7": "prose",
+      "8": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 3,
+      "heading": 1,
+      "inline": 7,
+      "list_item": 6,
+      "paragraph": 6,
+      "root": 1,
+      "text": 7
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 148,
+    "total_lines": 9
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": " - Too much indent (5 spaces)",
+        "end_line": 6,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_malformed-list-indentation",
+        "start_line": 6,
+        "type": "indented"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 29,
+        "id": "heading_malformed-list-indentation",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "malformed-list-indentation",
+        "start_char": 0,
+        "text": "Malformed list indentation"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 8,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Item 1"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [],
+                "text": "Correct indent (2 spaces)"
+              }
+            ],
+            "text": "Wrong indent (1 space)"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [],
+                "text": "Too much indent (5 spaces)"
+              }
+            ],
+            "text": "Item 2"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Item 3"
+          }
+        ],
+        "items_count": 4,
+        "section_id": "section_malformed-list-indentation",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 148,
+        "end_line": 8,
+        "id": "section_malformed-list-indentation",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Malformed list indentation\n\n- Item 1\n - Wrong indent (1 space)\n   - Correct indent (2 spaces)\n- Item 2\n     - Too much indent (5 spaces)\n- Item 3\n",
+        "slug": "malformed-list-indentation",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Malformed list indentation\n\nItem 1 Wrong indent (1 space) Correct indent (2 spaces) Item 2 Too much indent (5 spaces) Item 3",
+        "title": "Malformed list indentation"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "content": {
+    "lines": [
+      "",
+      "---",
+      "title: dup fm",
+      "",
+      "---",
+      "Content",
+      "",
+      "---",
+      "other: block",
+      "",
+      "---",
+      ""
+    ],
+    "raw": "\n---\ntitle: dup fm\n\n---\nContent\n\n---\nother: block\n\n---\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "metadata": {
+    "frontmatter": {
+      "allows_html": false,
+      "id": "fm_stress_02",
+      "md_flavor": "commonmark",
+      "note": "front-matter-conflict",
+      "title": "FM Stress 02"
+    },
+    "has_code": false,
+    "has_frontmatter": true,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "hr": 4,
+      "inline": 3,
+      "paragraph": 3,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": true,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 55,
+    "total_lines": 12
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 2,
+        "text": "title: dup fm",
+        "word_count": 3
+      },
+      {
+        "end_line": 6,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": null,
+        "start_line": 5,
+        "text": "Content",
+        "word_count": 1
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": null,
+        "start_line": 8,
+        "text": "other: block",
+        "word_count": 2
+      }
+    ],
+    "sections": [],
+    "tables": []
+  }
+}

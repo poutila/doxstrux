@@ -1,0 +1,152 @@
+{
+  "content": {
+    "lines": [
+      "---",
+      "title: Wrong Close",
+      "----",
+      "",
+      "# Content",
+      ""
+    ],
+    "raw": "---\ntitle: Wrong Close\n----\n\n# Content\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "1": "section_title-wrong-close",
+      "2": "section_title-wrong-close",
+      "3": "section_title-wrong-close",
+      "4": "section_content",
+      "5": "section_content"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "hr": 1,
+      "inline": 2,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 39,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 23,
+        "id": "heading_title-wrong-close",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "title-wrong-close",
+        "start_char": 4,
+        "text": "title: Wrong Close"
+      },
+      {
+        "end_char": 39,
+        "id": "heading_content",
+        "level": 1,
+        "line": 4,
+        "parent_heading_id": null,
+        "slug": "content",
+        "start_char": 29,
+        "text": "Content"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 29,
+        "end_line": 3,
+        "id": "section_title-wrong-close",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "title: Wrong Close\n----\n",
+        "slug": "title-wrong-close",
+        "start_char": 4,
+        "start_line": 1,
+        "text_content": "title: Wrong Close",
+        "title": "title: Wrong Close"
+      },
+      {
+        "child_ids": [],
+        "end_char": 39,
+        "end_line": 5,
+        "id": "section_content",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Content\n",
+        "slug": "content",
+        "start_char": 29,
+        "start_line": 4,
+        "text_content": "Content",
+        "title": "Content"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "content": {
+    "lines": [
+      "# Blockquotes \u2014 basic & nested",
+      "",
+      "> Level 1",
+      ">",
+      "> Still level 1",
+      ">> Level 2",
+      ">>> Level 3",
+      ">",
+      "> Paragraph after nesting",
+      "",
+      "> * List inside quote",
+      ">   - Nested list item",
+      "",
+      "Normal paragraph.",
+      ""
+    ],
+    "raw": "# Blockquotes \u2014 basic & nested\n\n> Level 1\n>\n> Still level 1\n>> Level 2\n>>> Level 3\n>\n> Paragraph after nesting\n\n> * List inside quote\n>   - Nested list item\n\nNormal paragraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_blockquotes-basic-nested",
+      "1": "section_blockquotes-basic-nested",
+      "2": "section_blockquotes-basic-nested",
+      "3": "section_blockquotes-basic-nested",
+      "4": "section_blockquotes-basic-nested",
+      "5": "section_blockquotes-basic-nested",
+      "6": "section_blockquotes-basic-nested",
+      "7": "section_blockquotes-basic-nested",
+      "8": "section_blockquotes-basic-nested",
+      "9": "section_blockquotes-basic-nested",
+      "10": "section_blockquotes-basic-nested",
+      "11": "section_blockquotes-basic-nested",
+      "12": "section_blockquotes-basic-nested",
+      "13": "section_blockquotes-basic-nested",
+      "14": "section_blockquotes-basic-nested"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "blockquote": 4,
+      "bullet_list": 2,
+      "heading": 1,
+      "inline": 9,
+      "list_item": 2,
+      "paragraph": 8,
+      "root": 1,
+      "text": 9
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 176,
+    "total_lines": 15
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "Level 1Still level 1Level 2Level 3Paragraph after nesting",
+        "end_line": 9,
+        "section_id": "section_blockquotes-basic-nested",
+        "start_line": 2
+      },
+      {
+        "children_blocks": [
+          {
+            "end_line": 12,
+            "start_line": 10,
+            "type": "bullet_list"
+          },
+          {
+            "end_line": 12,
+            "start_line": 11,
+            "type": "bullet_list"
+          }
+        ],
+        "children_summary": {
+          "code": 0,
+          "lists": 2,
+          "tables": 0
+        },
+        "content": "List inside quoteNested list item",
+        "end_line": 12,
+        "section_id": "section_blockquotes-basic-nested",
+        "start_line": 10
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_blockquotes-basic-nested",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "blockquotes-basic-nested",
+        "start_char": 0,
+        "text": "Blockquotes \u2014 basic & nested"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 12,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [],
+                "text": "Nested list item"
+              }
+            ],
+            "text": "List inside quote"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_blockquotes-basic-nested",
+        "start_line": 10,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 14,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_blockquotes-basic-nested",
+        "start_line": 13,
+        "text": "Normal paragraph.",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 176,
+        "end_line": 14,
+        "id": "section_blockquotes-basic-nested",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Blockquotes \u2014 basic & nested\n\n> Level 1\n>\n> Still level 1\n>> Level 2\n>>> Level 3\n>\n> Paragraph after nesting\n\n> * List inside quote\n>   - Nested list item\n\nNormal paragraph.\n",
+        "slug": "blockquotes-basic-nested",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Blockquotes \u2014 basic & nested\n\nLevel 1\n\nStill level 1 Level 2 Level 3\n\nParagraph after nesting\n\nList inside quote Nested list item\n\nNormal paragraph.",
+        "title": "Blockquotes \u2014 basic & nested"
+      }
+    ],
+    "tables": []
+  }
+}

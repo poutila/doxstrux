@@ -1,0 +1,112 @@
+{
+  "content": {
+    "lines": [
+      "# \u0639\u0646\u0648\u0627\u0646 \u0639\u0631\u0628\u064a",
+      ""
+    ],
+    "raw": "# \u0639\u0646\u0648\u0627\u0646 \u0639\u0631\u0628\u064a\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_\u0639\u0646\u0648\u0627\u0646-\u0639\u0631\u0628\u064a",
+      "1": "section_\u0639\u0646\u0648\u0627\u0646-\u0639\u0631\u0628\u064a"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose"
+    },
+    "prose_lines": [
+      0,
+      1
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "inline": 1,
+      "root": 1,
+      "text": 1
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 13,
+    "total_lines": 2
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 13,
+        "id": "heading_\u0639\u0646\u0648\u0627\u0646-\u0639\u0631\u0628\u064a",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "\u0639\u0646\u0648\u0627\u0646-\u0639\u0631\u0628\u064a",
+        "start_char": 0,
+        "text": "\u0639\u0646\u0648\u0627\u0646 \u0639\u0631\u0628\u064a"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 13,
+        "end_line": 1,
+        "id": "section_\u0639\u0646\u0648\u0627\u0646-\u0639\u0631\u0628\u064a",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# \u0639\u0646\u0648\u0627\u0646 \u0639\u0631\u0628\u064a\n",
+        "slug": "\u0639\u0646\u0648\u0627\u0646-\u0639\u0631\u0628\u064a",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "\u0639\u0646\u0648\u0627\u0646 \u0639\u0631\u0628\u064a",
+        "title": "\u0639\u0646\u0648\u0627\u0646 \u0639\u0631\u0628\u064a"
+      }
+    ],
+    "tables": []
+  }
+}

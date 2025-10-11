@@ -1,0 +1,200 @@
+{
+  "content": {
+    "lines": [
+      "# List with continuation paragraphs",
+      "",
+      "- First item",
+      "",
+      "  Continuation paragraph for first item.",
+      "",
+      "  Another paragraph still in first item.",
+      "",
+      "- Second item",
+      "",
+      "  Its continuation.",
+      "",
+      "Normal text outside list.",
+      ""
+    ],
+    "raw": "# List with continuation paragraphs\n\n- First item\n\n  Continuation paragraph for first item.\n\n  Another paragraph still in first item.\n\n- Second item\n\n  Its continuation.\n\nNormal text outside list.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_list-with-continuation-paragraphs",
+      "1": "section_list-with-continuation-paragraphs",
+      "2": "section_list-with-continuation-paragraphs",
+      "3": "section_list-with-continuation-paragraphs",
+      "4": "section_list-with-continuation-paragraphs",
+      "5": "section_list-with-continuation-paragraphs",
+      "6": "section_list-with-continuation-paragraphs",
+      "7": "section_list-with-continuation-paragraphs",
+      "8": "section_list-with-continuation-paragraphs",
+      "9": "section_list-with-continuation-paragraphs",
+      "10": "section_list-with-continuation-paragraphs",
+      "11": "section_list-with-continuation-paragraphs",
+      "12": "section_list-with-continuation-paragraphs",
+      "13": "section_list-with-continuation-paragraphs"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 1,
+      "inline": 7,
+      "list_item": 2,
+      "paragraph": 6,
+      "root": 1,
+      "text": 7
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 197,
+    "total_lines": 14
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 36,
+        "id": "heading_list-with-continuation-paragraphs",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "list-with-continuation-paragraphs",
+        "start_char": 0,
+        "text": "List with continuation paragraphs"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 12,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Another paragraph still in first item."
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Its continuation."
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_list-with-continuation-paragraphs",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_list-with-continuation-paragraphs",
+        "start_line": 12,
+        "text": "Normal text outside list.",
+        "word_count": 4
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 197,
+        "end_line": 13,
+        "id": "section_list-with-continuation-paragraphs",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# List with continuation paragraphs\n\n- First item\n\n  Continuation paragraph for first item.\n\n  Another paragraph still in first item.\n\n- Second item\n\n  Its continuation.\n\nNormal text outside list.\n",
+        "slug": "list-with-continuation-paragraphs",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "List with continuation paragraphs\n\nFirst item\n\nContinuation paragraph for first item.\n\nAnother paragraph still in first item.\n\nSecond item\n\nIts continuation.\n\nNormal text outside list.",
+        "title": "List with continuation paragraphs"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 00_no_headings",
+      "",
+      "plain paragraph only",
+      "another line",
+      "- list item",
+      "  continues",
+      "```",
+      "# not a heading",
+      "```",
+      ""
+    ],
+    "raw": "# Test: 00_no_headings\n\nplain paragraph only\nanother line\n- list item\n  continues\n```\n# not a heading\n```\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "line_to_section": {
+      "0": "section_test-00_no_headings",
+      "1": "section_test-00_no_headings",
+      "2": "section_test-00_no_headings",
+      "3": "section_test-00_no_headings",
+      "4": "section_test-00_no_headings",
+      "5": "section_test-00_no_headings",
+      "6": "section_test-00_no_headings",
+      "7": "section_test-00_no_headings",
+      "8": "section_test-00_no_headings",
+      "9": "section_test-00_no_headings"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "code",
+      "7": "code",
+      "8": "code",
+      "9": "code"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "fence": 1,
+      "heading": 1,
+      "inline": 3,
+      "list_item": 1,
+      "paragraph": 2,
+      "root": 1,
+      "softbreak": 2,
+      "text": 5
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 106,
+    "total_lines": 10
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "# not a heading\n",
+        "end_line": 9,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_test-00_no_headings",
+        "start_line": 6,
+        "type": "fenced"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 23,
+        "id": "heading_test-00_no_headings",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-00_no_headings",
+        "start_char": 0,
+        "text": "Test: 00_no_headings"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 6,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "list item\ncontinues"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_test-00_no_headings",
+        "start_line": 4,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-00_no_headings",
+        "start_line": 2,
+        "text": "plain paragraph only\nanother line",
+        "word_count": 5
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 106,
+        "end_line": 9,
+        "id": "section_test-00_no_headings",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 00_no_headings\n\nplain paragraph only\nanother line\n- list item\n  continues\n```\n# not a heading\n```\n",
+        "slug": "test-00_no_headings",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 00_no_headings\n\nplain paragraph only\nanother line list item\ncontinues",
+        "title": "Test: 00_no_headings"
+      }
+    ],
+    "tables": []
+  }
+}

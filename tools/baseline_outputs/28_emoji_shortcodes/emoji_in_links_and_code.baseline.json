@@ -1,0 +1,156 @@
+{
+  "content": {
+    "lines": [
+      "Link text with :tada: [click :tada:](https://e.x)",
+      "",
+      "Code: `:tada:` and",
+      "",
+      "```",
+      ":not_emoji:",
+      "```",
+      ""
+    ],
+    "raw": "Link text with :tada: [click :tada:](https://e.x)\n\nCode: `:tada:` and\n\n```\n:not_emoji:\n```\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 1,
+      "fence": 1,
+      "inline": 2,
+      "link": 1,
+      "paragraph": 2,
+      "root": 1,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 0,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://e.x"
+        }
+      ]
+    },
+    "total_chars": 91,
+    "total_lines": 8
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": ":not_emoji:\n",
+        "end_line": 7,
+        "id": "code_0",
+        "language": "",
+        "section_id": null,
+        "start_line": 4,
+        "type": "fenced"
+      }
+    ],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 0,
+        "scheme": "https",
+        "text": "click :tada:",
+        "type": "external",
+        "url": "https://e.x"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 1,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "Link text with :tada: click :tada:",
+        "word_count": 6
+      },
+      {
+        "end_line": 3,
+        "has_code": true,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": null,
+        "start_line": 2,
+        "text": "Code: :tada: and",
+        "word_count": 3
+      }
+    ],
+    "sections": [],
+    "tables": []
+  }
+}

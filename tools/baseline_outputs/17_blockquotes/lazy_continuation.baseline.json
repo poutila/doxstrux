@@ -1,0 +1,184 @@
+{
+  "content": {
+    "lines": [
+      "# Lazy blockquote continuation",
+      "",
+      "> First line with marker",
+      "Second line without marker (lazy)",
+      "Third line also lazy",
+      "",
+      "> New quote after break",
+      "",
+      "Normal text.",
+      ""
+    ],
+    "raw": "# Lazy blockquote continuation\n\n> First line with marker\nSecond line without marker (lazy)\nThird line also lazy\n\n> New quote after break\n\nNormal text.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_lazy-blockquote-continuation",
+      "1": "section_lazy-blockquote-continuation",
+      "2": "section_lazy-blockquote-continuation",
+      "3": "section_lazy-blockquote-continuation",
+      "4": "section_lazy-blockquote-continuation",
+      "5": "section_lazy-blockquote-continuation",
+      "6": "section_lazy-blockquote-continuation",
+      "7": "section_lazy-blockquote-continuation",
+      "8": "section_lazy-blockquote-continuation",
+      "9": "section_lazy-blockquote-continuation"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "blockquote": 2,
+      "heading": 1,
+      "inline": 4,
+      "paragraph": 3,
+      "root": 1,
+      "softbreak": 2,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 151,
+    "total_lines": 10
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "First line with marker\nSecond line without marker (lazy)\nThird line also lazy",
+        "end_line": 5,
+        "section_id": "section_lazy-blockquote-continuation",
+        "start_line": 2
+      },
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "New quote after break",
+        "end_line": 7,
+        "section_id": "section_lazy-blockquote-continuation",
+        "start_line": 6
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_lazy-blockquote-continuation",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "lazy-blockquote-continuation",
+        "start_char": 0,
+        "text": "Lazy blockquote continuation"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_lazy-blockquote-continuation",
+        "start_line": 8,
+        "text": "Normal text.",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 151,
+        "end_line": 9,
+        "id": "section_lazy-blockquote-continuation",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Lazy blockquote continuation\n\n> First line with marker\nSecond line without marker (lazy)\nThird line also lazy\n\n> New quote after break\n\nNormal text.\n",
+        "slug": "lazy-blockquote-continuation",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Lazy blockquote continuation\n\nFirst line with marker\nSecond line without marker (lazy)\nThird line also lazy\n\nNew quote after break\n\nNormal text.",
+        "title": "Lazy blockquote continuation"
+      }
+    ],
+    "tables": []
+  }
+}

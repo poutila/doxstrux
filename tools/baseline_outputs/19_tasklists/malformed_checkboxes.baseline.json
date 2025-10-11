@@ -1,0 +1,204 @@
+{
+  "content": {
+    "lines": [
+      "# Malformed checkbox syntax",
+      "",
+      "-[ ] No space after dash",
+      "- []Task text immediately after",
+      "- [ ]No space after checkbox",
+      "-  [ ] Two spaces after dash",
+      "- [ ] Normal task",
+      "[x] No dash marker",
+      "  - [ ] Indented task without parent",
+      ""
+    ],
+    "raw": "# Malformed checkbox syntax\n\n-[ ] No space after dash\n- []Task text immediately after\n- [ ]No space after checkbox\n-  [ ] Two spaces after dash\n- [ ] Normal task\n[x] No dash marker\n  - [ ] Indented task without parent\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_malformed-checkbox-syntax",
+      "1": "section_malformed-checkbox-syntax",
+      "2": "section_malformed-checkbox-syntax",
+      "3": "section_malformed-checkbox-syntax",
+      "4": "section_malformed-checkbox-syntax",
+      "5": "section_malformed-checkbox-syntax",
+      "6": "section_malformed-checkbox-syntax",
+      "7": "section_malformed-checkbox-syntax",
+      "8": "section_malformed-checkbox-syntax",
+      "9": "section_malformed-checkbox-syntax"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 2,
+      "heading": 1,
+      "inline": 7,
+      "list_item": 5,
+      "paragraph": 6,
+      "root": 1,
+      "softbreak": 1,
+      "text": 8
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 218,
+    "total_lines": 10
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 28,
+        "id": "heading_malformed-checkbox-syntax",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "malformed-checkbox-syntax",
+        "start_char": 0,
+        "text": "Malformed checkbox syntax"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 9,
+        "has_mixed_task_items": true,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "[]Task text immediately after"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "[ ]No space after checkbox"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Two spaces after dash"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [
+              {
+                "blocks": [],
+                "checked": false,
+                "children": [],
+                "text": "Indented task without parent"
+              }
+            ],
+            "text": "Normal task\n[x] No dash marker"
+          }
+        ],
+        "items_count": 4,
+        "section_id": "section_malformed-checkbox-syntax",
+        "start_line": 3,
+        "task_items_count": 2,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_malformed-checkbox-syntax",
+        "start_line": 2,
+        "text": "-[ ] No space after dash",
+        "word_count": 6
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 218,
+        "end_line": 9,
+        "id": "section_malformed-checkbox-syntax",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Malformed checkbox syntax\n\n-[ ] No space after dash\n- []Task text immediately after\n- [ ]No space after checkbox\n-  [ ] Two spaces after dash\n- [ ] Normal task\n[x] No dash marker\n  - [ ] Indented task without parent\n",
+        "slug": "malformed-checkbox-syntax",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Malformed checkbox syntax\n\n-[ ] No space after dash []Task text immediately after [ ]No space after checkbox [ ] Two spaces after dash [ ] Normal task\n[x] No dash marker [ ] Indented task without parent",
+        "title": "Malformed checkbox syntax"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "content": {
+    "lines": [
+      "# Test: tbl_large_rect",
+      "",
+      "| H1 | H2 | H3 | H4 | H5 | H6 |",
+      "|:--|:--|:--|:--|:--|:--|",
+      "| 1 | 2 | 3 | 4 | 5 | 6 |",
+      "| 2 | 4 | 6 | 8 | 10 | 12 |",
+      "| 3 | 6 | 9 | 12 | 15 | 18 |",
+      "| 4 | 8 | 12 | 16 | 20 | 24 |",
+      "| 5 | 10 | 15 | 20 | 25 | 30 |",
+      "| 6 | 12 | 18 | 24 | 30 | 36 |",
+      "| 7 | 14 | 21 | 28 | 35 | 42 |",
+      "| 8 | 16 | 24 | 32 | 40 | 48 |",
+      "| 9 | 18 | 27 | 36 | 45 | 54 |",
+      "| 10 | 20 | 30 | 40 | 50 | 60 |",
+      "Paragraph.",
+      ""
+    ],
+    "raw": "# Test: tbl_large_rect\n\n| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 2 | 3 | 4 | 5 | 6 |\n| 2 | 4 | 6 | 8 | 10 | 12 |\n| 3 | 6 | 9 | 12 | 15 | 18 |\n| 4 | 8 | 12 | 16 | 20 | 24 |\n| 5 | 10 | 15 | 20 | 25 | 30 |\n| 6 | 12 | 18 | 24 | 30 | 36 |\n| 7 | 14 | 21 | 28 | 35 | 42 |\n| 8 | 16 | 24 | 32 | 40 | 48 |\n| 9 | 18 | 27 | 36 | 45 | 54 |\n| 10 | 20 | 30 | 40 | 50 | 60 |\nParagraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-tbl_large_rect",
+      "1": "section_test-tbl_large_rect",
+      "2": "section_test-tbl_large_rect",
+      "3": "section_test-tbl_large_rect",
+      "4": "section_test-tbl_large_rect",
+      "5": "section_test-tbl_large_rect",
+      "6": "section_test-tbl_large_rect",
+      "7": "section_test-tbl_large_rect",
+      "8": "section_test-tbl_large_rect",
+      "9": "section_test-tbl_large_rect",
+      "10": "section_test-tbl_large_rect",
+      "11": "section_test-tbl_large_rect",
+      "12": "section_test-tbl_large_rect",
+      "13": "section_test-tbl_large_rect",
+      "14": "section_test-tbl_large_rect",
+      "15": "section_test-tbl_large_rect"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": true,
+    "node_counts": {
+      "heading": 1,
+      "inline": 73,
+      "root": 1,
+      "table": 1,
+      "tbody": 1,
+      "td": 66,
+      "text": 68,
+      "th": 6,
+      "thead": 1,
+      "tr": 12
+    },
+    "quarantine_reasons": [
+      "ragged_tables:1"
+    ],
+    "quarantined": true,
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 1,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 1,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 2,
+          "message": "Table has inconsistent column counts",
+          "type": "ragged_table"
+        }
+      ]
+    },
+    "total_chars": 393,
+    "total_lines": 16
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 23,
+        "id": "heading_test-tbl_large_rect",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-tbl_large_rect",
+        "start_char": 0,
+        "text": "Test: tbl_large_rect"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 393,
+        "end_line": 15,
+        "id": "section_test-tbl_large_rect",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: tbl_large_rect\n\n| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 2 | 3 | 4 | 5 | 6 |\n| 2 | 4 | 6 | 8 | 10 | 12 |\n| 3 | 6 | 9 | 12 | 15 | 18 |\n| 4 | 8 | 12 | 16 | 20 | 24 |\n| 5 | 10 | 15 | 20 | 25 | 30 |\n| 6 | 12 | 18 | 24 | 30 | 36 |\n| 7 | 14 | 21 | 28 | 35 | 42 |\n| 8 | 16 | 24 | 32 | 40 | 48 |\n| 9 | 18 | 27 | 36 | 45 | 54 |\n| 10 | 20 | 30 | 40 | 50 | 60 |\nParagraph.\n",
+        "slug": "test-tbl_large_rect",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: tbl_large_rect\n\nH1H2H3H4H5H6\n\n123456 24681012 369121518 4812162024 51015202530 61218243036 71421283542 81624324048 91827364554 102030405060 Paragraph.",
+        "title": "Test: tbl_large_rect"
+      }
+    ],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "left",
+          "left",
+          "left",
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 6,
+        "end_line": 15,
+        "headers": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6"
+        ],
+        "id": "table_0",
+        "is_ragged": true,
+        "is_ragged_meta": {
+          "heuristic": true
+        },
+        "row_count": 11,
+        "rows": [
+          [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          [
+            "2",
+            "4",
+            "6",
+            "8",
+            "10",
+            "12"
+          ],
+          [
+            "3",
+            "6",
+            "9",
+            "12",
+            "15",
+            "18"
+          ],
+          [
+            "4",
+            "8",
+            "12",
+            "16",
+            "20",
+            "24"
+          ],
+          [
+            "5",
+            "10",
+            "15",
+            "20",
+            "25",
+            "30"
+          ],
+          [
+            "6",
+            "12",
+            "18",
+            "24",
+            "30",
+            "36"
+          ],
+          [
+            "7",
+            "14",
+            "21",
+            "28",
+            "35",
+            "42"
+          ],
+          [
+            "8",
+            "16",
+            "24",
+            "32",
+            "40",
+            "48"
+          ],
+          [
+            "9",
+            "18",
+            "27",
+            "36",
+            "45",
+            "54"
+          ],
+          [
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60"
+          ],
+          [
+            "Paragraph.",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        "section_id": "section_test-tbl_large_rect",
+        "start_line": 2
+      }
+    ]
+  }
+}

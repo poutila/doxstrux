@@ -1,0 +1,297 @@
+{
+  "content": {
+    "lines": [
+      "# Refactored code 02",
+      "Title",
+      "=====",
+      "",
+      "Sub",
+      "----",
+      "",
+      "",
+      "```py",
+      "print('x')",
+      "```",
+      "",
+      "",
+      "~~~json",
+      "echo hello",
+      "~~~",
+      "",
+      "",
+      "Text with `inline` code and ``weird`` backticks.",
+      "",
+      "```yaml",
+      "k: v",
+      "  z: [  # unclosed fence below",
+      ""
+    ],
+    "raw": "# Refactored code 02\nTitle\n=====\n\nSub\n----\n\n\n```py\nprint('x')\n```\n\n\n~~~json\necho hello\n~~~\n\n\nText with `inline` code and ``weird`` backticks.\n\n```yaml\nk: v\n  z: [  # unclosed fence below\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      20,
+      21,
+      22,
+      23
+    ],
+    "line_to_section": {
+      "0": "section_refactored-code-02",
+      "1": "section_title",
+      "2": "section_title",
+      "3": "section_title",
+      "4": "section_sub",
+      "5": "section_sub",
+      "6": "section_sub",
+      "7": "section_sub",
+      "8": "section_sub",
+      "9": "section_sub",
+      "10": "section_sub",
+      "11": "section_sub",
+      "12": "section_sub",
+      "13": "section_sub",
+      "14": "section_sub",
+      "15": "section_sub",
+      "16": "section_sub",
+      "17": "section_sub",
+      "18": "section_sub",
+      "19": "section_sub",
+      "20": "section_sub",
+      "21": "section_sub",
+      "22": "section_sub",
+      "23": "section_sub"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "code",
+      "9": "code",
+      "10": "code",
+      "11": "code",
+      "12": "prose",
+      "13": "code",
+      "14": "code",
+      "15": "code",
+      "16": "code",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "code",
+      "21": "code",
+      "22": "code",
+      "23": "code"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      12,
+      17,
+      18,
+      19
+    ]
+  },
+  "metadata": {
+    "frontmatter": {
+      "id": "ref_code_02",
+      "note": "code-case",
+      "title": "Refactored code 02"
+    },
+    "has_code": true,
+    "has_frontmatter": true,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "code_inline": 2,
+      "fence": 3,
+      "heading": 3,
+      "inline": 4,
+      "paragraph": 1,
+      "root": 1,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": true,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 187,
+    "total_lines": 24
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "print('x')\n",
+        "end_line": 11,
+        "id": "code_0",
+        "language": "py",
+        "section_id": "section_sub",
+        "start_line": 8,
+        "type": "fenced"
+      },
+      {
+        "content": "echo hello\n",
+        "end_line": 16,
+        "id": "code_1",
+        "language": "json",
+        "section_id": "section_sub",
+        "start_line": 13,
+        "type": "fenced"
+      },
+      {
+        "content": "k: v\n  z: [  # unclosed fence below\n",
+        "end_line": 23,
+        "id": "code_2",
+        "language": "yaml",
+        "section_id": "section_sub",
+        "start_line": 20,
+        "type": "fenced"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 21,
+        "id": "heading_refactored-code-02",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "refactored-code-02",
+        "start_char": 0,
+        "text": "Refactored code 02"
+      },
+      {
+        "end_char": 27,
+        "id": "heading_title",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "title",
+        "start_char": 21,
+        "text": "Title"
+      },
+      {
+        "end_char": 38,
+        "id": "heading_sub",
+        "level": 1,
+        "line": 4,
+        "parent_heading_id": null,
+        "slug": "sub",
+        "start_char": 34,
+        "text": "Sub"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 19,
+        "has_code": true,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_sub",
+        "start_line": 18,
+        "text": "Text with inline code and weird backticks.",
+        "word_count": 7
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 21,
+        "end_line": 0,
+        "id": "section_refactored-code-02",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored code 02",
+        "slug": "refactored-code-02",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Refactored code 02",
+        "title": "Refactored code 02"
+      },
+      {
+        "child_ids": [],
+        "end_char": 34,
+        "end_line": 3,
+        "id": "section_title",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Title\n=====\n",
+        "slug": "title",
+        "start_char": 21,
+        "start_line": 1,
+        "text_content": "Title",
+        "title": "Title"
+      },
+      {
+        "child_ids": [],
+        "end_char": 187,
+        "end_line": 23,
+        "id": "section_sub",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Sub\n----\n\n\n```py\nprint('x')\n```\n\n\n~~~json\necho hello\n~~~\n\n\nText with `inline` code and ``weird`` backticks.\n\n```yaml\nk: v\n  z: [  # unclosed fence below\n",
+        "slug": "sub",
+        "start_char": 34,
+        "start_line": 4,
+        "text_content": "Sub\n\nText with inline code and weird backticks.",
+        "title": "Sub"
+      }
+    ],
+    "tables": []
+  }
+}

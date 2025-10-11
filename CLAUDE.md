@@ -2,6 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ! IMPORTANT
+**Do not edit** files in /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/test_mds
+
 ## Project Overview
 
 **Docpipe** is a comprehensive markdown enrichment and parsing library designed for both human users and AI systems. It provides robust markdown parsing with security-first design, extracting structured data from markdown documents while maintaining content integrity.

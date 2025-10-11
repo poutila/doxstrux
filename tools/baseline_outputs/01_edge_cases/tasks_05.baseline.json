@@ -1,0 +1,386 @@
+{
+  "content": {
+    "lines": [
+      "+++",
+      "title = \"Refactored tasks 05\"",
+      "id = \"ref_tasks_05\"",
+      "note = \"tasks-case\"",
+      "+++",
+      "# Refactored tasks 05",
+      "",
+      "- list level 1",
+      "  - [x] task level 2",
+      "    - [ ] task level 3",
+      "      - [x] task level 4",
+      "        - list level 5",
+      "          - [x] task level 6",
+      "            - list level 7",
+      "                  code in list",
+      "              \tindented with tab",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tasks_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
+      "",
+      "![ok0](https://via.placeholder.com/64 \"t0\")",
+      ""
+    ],
+    "raw": "+++\ntitle = \"Refactored tasks 05\"\nid = \"ref_tasks_05\"\nnote = \"tasks-case\"\n+++\n# Refactored tasks 05\n\n- list level 1\n  - [x] task level 2\n    - [ ] task level 3\n      - [x] task level 4\n        - list level 5\n          - [x] task level 6\n            - list level 7\n                  code in list\n              \tindented with tab\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tasks_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "line_to_section": {
+      "5": "section_refactored-tasks-05",
+      "6": "section_refactored-tasks-05",
+      "7": "section_refactored-tasks-05",
+      "8": "section_refactored-tasks-05",
+      "9": "section_refactored-tasks-05",
+      "10": "section_refactored-tasks-05",
+      "11": "section_refactored-tasks-05",
+      "12": "section_refactored-tasks-05",
+      "13": "section_refactored-tasks-05",
+      "14": "section_refactored-tasks-05",
+      "15": "section_refactored-tasks-05",
+      "16": "section_refactored-tasks-05",
+      "17": "section_refactored-tasks-05",
+      "18": "section_refactored-tasks-05",
+      "19": "section_refactored-tasks-05",
+      "20": "section_refactored-tasks-05"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "code",
+      "10": "code",
+      "11": "code",
+      "12": "code",
+      "13": "code",
+      "14": "code",
+      "15": "code",
+      "16": "code",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "metadata": {
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "embedding_blocked": true,
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 7,
+      "heading": 1,
+      "image": 1,
+      "inline": 11,
+      "link": 4,
+      "list_item": 7,
+      "paragraph": 10,
+      "root": 1,
+      "softbreak": 6,
+      "text": 25
+    },
+    "security": {
+      "link_disallowed_schemes_raw": true,
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1,
+          "mailto": 1,
+          "relative": 3
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 0,
+        "raw_dangerous_schemes": true,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 5,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 17,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "ht!tp://broken%5E2"
+        },
+        {
+          "line": 17,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://example.com/4"
+        },
+        {
+          "line": 19,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://via.placeholder.com/64"
+        },
+        {
+          "message": "Raw content contains potentially dangerous scheme: file:",
+          "type": "disallowed_schemes_raw"
+        },
+        {
+          "message": "Dangerous scheme \"file:\" found in raw content",
+          "scheme": "file",
+          "type": "raw_dangerous_scheme"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw",
+      "dropped_1_unsafe_links"
+    ],
+    "total_chars": 554,
+    "total_lines": 21
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "- [ ] task level 3\n  - [x] task level 4\n    - list level 5\n      - [x] task level 6\n        - list level 7\n              code in list\n          \tindented with tab\n",
+        "end_line": 16,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_refactored-tasks-05",
+        "start_line": 9,
+        "type": "indented"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 100,
+        "id": "heading_refactored-tasks-05",
+        "level": 1,
+        "line": 5,
+        "parent_heading_id": null,
+        "slug": "refactored-tasks-05",
+        "start_char": 78,
+        "text": "Refactored tasks 05"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [
+      {
+        "allowed": true,
+        "alt": "ok0",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": true,
+        "image_id": "44b1efe440757f3a",
+        "image_kind": "external",
+        "line": 19,
+        "scheme": "https",
+        "src": "https://via.placeholder.com/64",
+        "title": "t0"
+      }
+    ],
+    "links": [
+      {
+        "allowed": true,
+        "line": 17,
+        "scheme": null,
+        "text": "cross3",
+        "type": "internal",
+        "url": "./tasks_01.md#sec0"
+      },
+      {
+        "allowed": true,
+        "line": 17,
+        "scheme": "https",
+        "text": "ext4",
+        "type": "external",
+        "url": "https://example.com/4"
+      },
+      {
+        "allowed": true,
+        "line": 17,
+        "scheme": "mailto",
+        "text": "mail5",
+        "type": "email",
+        "url": "mailto:user5@example.com"
+      },
+      {
+        "alt": "ok0",
+        "format": "unknown",
+        "image_id": "44b1efe440757f3a",
+        "image_kind": "external",
+        "line": 19,
+        "src": "https://via.placeholder.com/64",
+        "text": "ok0",
+        "title": "t0",
+        "type": "image",
+        "url": "https://via.placeholder.com/64"
+      }
+    ],
+    "lists": [
+      {
+        "end_line": 17,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": true,
+                "children": [
+                  {
+                    "blocks": [],
+                    "checked": false,
+                    "children": [
+                      {
+                        "blocks": [],
+                        "checked": true,
+                        "children": [
+                          {
+                            "blocks": [],
+                            "checked": null,
+                            "children": [
+                              {
+                                "blocks": [],
+                                "checked": true,
+                                "children": [
+                                  {
+                                    "blocks": [],
+                                    "checked": null,
+                                    "children": [],
+                                    "text": "list level 7\ncode in list\nindented with tab"
+                                  }
+                                ],
+                                "text": "task level 6"
+                              }
+                            ],
+                            "text": "list level 5"
+                          }
+                        ],
+                        "text": "task level 4"
+                      }
+                    ],
+                    "text": "task level 3"
+                  }
+                ],
+                "text": "task level 2"
+              }
+            ],
+            "text": "list level 1"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_refactored-tasks-05",
+        "start_line": 7,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "+++\ntitle = \"Refactored tasks 05\"\nid = \"ref_tasks_05\"\nnote = \"tasks-case\"\n+++",
+        "word_count": 13
+      },
+      {
+        "end_line": 18,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_1",
+        "section_id": "section_refactored-tasks-05",
+        "start_line": 17,
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "word_count": 6
+      },
+      {
+        "end_line": 20,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_refactored-tasks-05",
+        "start_line": 19,
+        "text": "ok0ok0",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 554,
+        "end_line": 20,
+        "id": "section_refactored-tasks-05",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Refactored tasks 05\n\n- list level 1\n  - [x] task level 2\n    - [ ] task level 3\n      - [x] task level 4\n        - list level 5\n          - [x] task level 6\n            - list level 7\n                  code in list\n              \tindented with tab\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tasks_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n",
+        "slug": "refactored-tasks-05",
+        "start_char": 78,
+        "start_line": 5,
+        "text_content": "Refactored tasks 05\n\nlist level 1 [x] task level 2 [ ] task level 3 [x] task level 4 list level 5 [x] task level 6 list level 7\ncode in list\nindented with tab\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "title": "Refactored tasks 05"
+      }
+    ],
+    "tables": []
+  }
+}

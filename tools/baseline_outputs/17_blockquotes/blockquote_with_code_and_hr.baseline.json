@@ -1,0 +1,186 @@
+{
+  "content": {
+    "lines": [
+      "# Blockquote with code and hr",
+      "",
+      "> Intro line",
+      ">",
+      "> ```python",
+      "> print(\"hello\")",
+      "> ```",
+      ">",
+      "> ---",
+      ">",
+      "> After hr",
+      ""
+    ],
+    "raw": "# Blockquote with code and hr\n\n> Intro line\n>\n> ```python\n> print(\"hello\")\n> ```\n>\n> ---\n>\n> After hr\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "line_to_section": {
+      "0": "section_blockquote-with-code-and-hr",
+      "1": "section_blockquote-with-code-and-hr",
+      "2": "section_blockquote-with-code-and-hr",
+      "3": "section_blockquote-with-code-and-hr",
+      "4": "section_blockquote-with-code-and-hr",
+      "5": "section_blockquote-with-code-and-hr",
+      "6": "section_blockquote-with-code-and-hr",
+      "7": "section_blockquote-with-code-and-hr",
+      "8": "section_blockquote-with-code-and-hr",
+      "9": "section_blockquote-with-code-and-hr",
+      "10": "section_blockquote-with-code-and-hr",
+      "11": "section_blockquote-with-code-and-hr"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "metadata": {
+    "has_code": true,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "blockquote": 1,
+      "fence": 1,
+      "heading": 1,
+      "hr": 1,
+      "inline": 3,
+      "paragraph": 2,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 102,
+    "total_lines": 12
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [
+          {
+            "end_line": 7,
+            "start_line": 4,
+            "type": "fence"
+          }
+        ],
+        "children_summary": {
+          "code": 1,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "Intro lineAfter hr",
+        "end_line": 11,
+        "section_id": "section_blockquote-with-code-and-hr",
+        "start_line": 2
+      }
+    ],
+    "code_blocks": [
+      {
+        "content": "print(\"hello\")\n",
+        "end_line": 7,
+        "id": "code_0",
+        "language": "python",
+        "section_id": "section_blockquote-with-code-and-hr",
+        "start_line": 4,
+        "type": "fenced"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 30,
+        "id": "heading_blockquote-with-code-and-hr",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "blockquote-with-code-and-hr",
+        "start_char": 0,
+        "text": "Blockquote with code and hr"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 102,
+        "end_line": 11,
+        "id": "section_blockquote-with-code-and-hr",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Blockquote with code and hr\n\n> Intro line\n>\n> ```python\n> print(\"hello\")\n> ```\n>\n> ---\n>\n> After hr\n",
+        "slug": "blockquote-with-code-and-hr",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Blockquote with code and hr\n\nIntro line\n\nAfter hr",
+        "title": "Blockquote with code and hr"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "content": {
+    "lines": [
+      "# Test: 26_setext_one_dash_valid",
+      "",
+      "Short",
+      "-",
+      "para",
+      ""
+    ],
+    "raw": "# Test: 26_setext_one_dash_valid\n\nShort\n-\npara\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-26_setext_one_dash_valid",
+      "1": "section_test-26_setext_one_dash_valid",
+      "2": "section_short",
+      "3": "section_short",
+      "4": "section_short",
+      "5": "section_short"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "inline": 3,
+      "paragraph": 1,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 47,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 33,
+        "id": "heading_test-26_setext_one_dash_valid",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-26_setext_one_dash_valid",
+        "start_char": 0,
+        "text": "Test: 26_setext_one_dash_valid"
+      },
+      {
+        "end_char": 40,
+        "id": "heading_short",
+        "level": 1,
+        "line": 2,
+        "parent_heading_id": null,
+        "slug": "short",
+        "start_char": 34,
+        "text": "Short"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_short",
+        "start_line": 4,
+        "text": "para",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 34,
+        "end_line": 1,
+        "id": "section_test-26_setext_one_dash_valid",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: 26_setext_one_dash_valid\n",
+        "slug": "test-26_setext_one_dash_valid",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: 26_setext_one_dash_valid",
+        "title": "Test: 26_setext_one_dash_valid"
+      },
+      {
+        "child_ids": [],
+        "end_char": 47,
+        "end_line": 5,
+        "id": "section_short",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "Short\n-\npara\n",
+        "slug": "short",
+        "start_char": 34,
+        "start_line": 2,
+        "text_content": "Short\n\npara",
+        "title": "Short"
+      }
+    ],
+    "tables": []
+  }
+}

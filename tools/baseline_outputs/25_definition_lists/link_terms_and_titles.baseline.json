@@ -1,0 +1,144 @@
+{
+  "content": {
+    "lines": [
+      "[Linked Term](#ref)",
+      ": Definition with \"title\" and **bold**.",
+      "",
+      "<abbr title=\"World Health Organization\">WHO</abbr>",
+      ": UN agency",
+      ""
+    ],
+    "raw": "[Linked Term](#ref)\n: Definition with \"title\" and **bold**.\n\n<abbr title=\"World Health Organization\">WHO</abbr>\n: UN agency\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {},
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": false,
+    "has_tables": false,
+    "node_counts": {
+      "html_inline": 2,
+      "inline": 2,
+      "link": 1,
+      "paragraph": 2,
+      "root": 1,
+      "softbreak": 2,
+      "strong": 1,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "html_disallowed": true,
+        "link_schemes": {
+          "anchor": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 2,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "stripped_2_html_inline"
+    ],
+    "total_chars": 124,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 0,
+        "scheme": null,
+        "text": "Linked Term",
+        "type": "anchor",
+        "url": "#ref"
+      }
+    ],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 2,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "Linked Term\n: Definition with \"title\" and bold.",
+        "word_count": 8
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": null,
+        "start_line": 3,
+        "text": "WHO\n: UN agency",
+        "word_count": 4
+      }
+    ],
+    "sections": [],
+    "tables": []
+  }
+}

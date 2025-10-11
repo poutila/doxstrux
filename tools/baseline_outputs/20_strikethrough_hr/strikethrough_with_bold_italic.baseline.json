@@ -1,0 +1,250 @@
+{
+  "content": {
+    "lines": [
+      "# Strikethrough combined with bold/italic",
+      "",
+      "~~Simple strikethrough~~",
+      "",
+      "~~**Bold and struck**~~",
+      "",
+      "~~*Italic and struck*~~",
+      "",
+      "~~***Bold italic and struck***~~",
+      "",
+      "**~~Struck inside bold~~**",
+      "",
+      "*~~Struck inside italic~~*",
+      "",
+      "***~~All three combined~~***",
+      ""
+    ],
+    "raw": "# Strikethrough combined with bold/italic\n\n~~Simple strikethrough~~\n\n~~**Bold and struck**~~\n\n~~*Italic and struck*~~\n\n~~***Bold italic and struck***~~\n\n**~~Struck inside bold~~**\n\n*~~Struck inside italic~~*\n\n***~~All three combined~~***\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_strikethrough-combined-with-bold-italic",
+      "1": "section_strikethrough-combined-with-bold-italic",
+      "2": "section_strikethrough-combined-with-bold-italic",
+      "3": "section_strikethrough-combined-with-bold-italic",
+      "4": "section_strikethrough-combined-with-bold-italic",
+      "5": "section_strikethrough-combined-with-bold-italic",
+      "6": "section_strikethrough-combined-with-bold-italic",
+      "7": "section_strikethrough-combined-with-bold-italic",
+      "8": "section_strikethrough-combined-with-bold-italic",
+      "9": "section_strikethrough-combined-with-bold-italic",
+      "10": "section_strikethrough-combined-with-bold-italic",
+      "11": "section_strikethrough-combined-with-bold-italic",
+      "12": "section_strikethrough-combined-with-bold-italic",
+      "13": "section_strikethrough-combined-with-bold-italic",
+      "14": "section_strikethrough-combined-with-bold-italic",
+      "15": "section_strikethrough-combined-with-bold-italic"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "em": 4,
+      "heading": 1,
+      "inline": 8,
+      "paragraph": 7,
+      "root": 1,
+      "s": 7,
+      "strong": 4,
+      "text": 16
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 238,
+    "total_lines": 16
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 42,
+        "id": "heading_strikethrough-combined-with-bold-italic",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "strikethrough-combined-with-bold-italic",
+        "start_char": 0,
+        "text": "Strikethrough combined with bold/italic"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_strikethrough-combined-with-bold-italic",
+        "start_line": 2,
+        "text": "Simple strikethrough",
+        "word_count": 2
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_strikethrough-combined-with-bold-italic",
+        "start_line": 4,
+        "text": "Bold and struck",
+        "word_count": 3
+      },
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_strikethrough-combined-with-bold-italic",
+        "start_line": 6,
+        "text": "Italic and struck",
+        "word_count": 3
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_strikethrough-combined-with-bold-italic",
+        "start_line": 8,
+        "text": "Bold italic and struck",
+        "word_count": 4
+      },
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_4",
+        "section_id": "section_strikethrough-combined-with-bold-italic",
+        "start_line": 10,
+        "text": "Struck inside bold",
+        "word_count": 3
+      },
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_5",
+        "section_id": "section_strikethrough-combined-with-bold-italic",
+        "start_line": 12,
+        "text": "Struck inside italic",
+        "word_count": 3
+      },
+      {
+        "end_line": 15,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_6",
+        "section_id": "section_strikethrough-combined-with-bold-italic",
+        "start_line": 14,
+        "text": "All three combined",
+        "word_count": 3
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 238,
+        "end_line": 15,
+        "id": "section_strikethrough-combined-with-bold-italic",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Strikethrough combined with bold/italic\n\n~~Simple strikethrough~~\n\n~~**Bold and struck**~~\n\n~~*Italic and struck*~~\n\n~~***Bold italic and struck***~~\n\n**~~Struck inside bold~~**\n\n*~~Struck inside italic~~*\n\n***~~All three combined~~***\n",
+        "slug": "strikethrough-combined-with-bold-italic",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Strikethrough combined with bold/italic\n\nSimple strikethrough\n\nBold and struck\n\nItalic and struck\n\nBold italic and struck\n\nStruck inside bold\n\nStruck inside italic\n\nAll three combined",
+        "title": "Strikethrough combined with bold/italic"
+      }
+    ],
+    "tables": []
+  }
+}

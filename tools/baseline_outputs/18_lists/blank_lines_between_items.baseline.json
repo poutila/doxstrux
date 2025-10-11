@@ -1,0 +1,234 @@
+{
+  "content": {
+    "lines": [
+      "# Lists with blank lines",
+      "",
+      "- Item 1",
+      "",
+      "- Item 2 (blank line above)",
+      "",
+      "- Item 3",
+      "",
+      "",
+      "- Item 4 (multiple blank lines above)",
+      "",
+      "Normal paragraph",
+      "",
+      "- New list after paragraph",
+      ""
+    ],
+    "raw": "# Lists with blank lines\n\n- Item 1\n\n- Item 2 (blank line above)\n\n- Item 3\n\n\n- Item 4 (multiple blank lines above)\n\nNormal paragraph\n\n- New list after paragraph\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_lists-with-blank-lines",
+      "1": "section_lists-with-blank-lines",
+      "2": "section_lists-with-blank-lines",
+      "3": "section_lists-with-blank-lines",
+      "4": "section_lists-with-blank-lines",
+      "5": "section_lists-with-blank-lines",
+      "6": "section_lists-with-blank-lines",
+      "7": "section_lists-with-blank-lines",
+      "8": "section_lists-with-blank-lines",
+      "9": "section_lists-with-blank-lines",
+      "10": "section_lists-with-blank-lines",
+      "11": "section_lists-with-blank-lines",
+      "12": "section_lists-with-blank-lines",
+      "13": "section_lists-with-blank-lines",
+      "14": "section_lists-with-blank-lines"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 2,
+      "heading": 1,
+      "inline": 7,
+      "list_item": 5,
+      "paragraph": 6,
+      "root": 1,
+      "text": 7
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 160,
+    "total_lines": 15
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 25,
+        "id": "heading_lists-with-blank-lines",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "lists-with-blank-lines",
+        "start_char": 0,
+        "text": "Lists with blank lines"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 11,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Item 1"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Item 2 (blank line above)"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Item 3"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Item 4 (multiple blank lines above)"
+          }
+        ],
+        "items_count": 4,
+        "section_id": "section_lists-with-blank-lines",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      },
+      {
+        "end_line": 14,
+        "has_mixed_task_items": false,
+        "id": "list_1",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "New list after paragraph"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_lists-with-blank-lines",
+        "start_line": 13,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 12,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_lists-with-blank-lines",
+        "start_line": 11,
+        "text": "Normal paragraph",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 160,
+        "end_line": 14,
+        "id": "section_lists-with-blank-lines",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Lists with blank lines\n\n- Item 1\n\n- Item 2 (blank line above)\n\n- Item 3\n\n\n- Item 4 (multiple blank lines above)\n\nNormal paragraph\n\n- New list after paragraph\n",
+        "slug": "lists-with-blank-lines",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Lists with blank lines\n\nItem 1\n\nItem 2 (blank line above)\n\nItem 3\n\nItem 4 (multiple blank lines above)\n\nNormal paragraph\n\nNew list after paragraph",
+        "title": "Lists with blank lines"
+      }
+    ],
+    "tables": []
+  }
+}

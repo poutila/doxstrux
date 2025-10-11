@@ -1,0 +1,243 @@
+{
+  "content": {
+    "lines": [
+      "# Unicode in bold/italic",
+      "",
+      "**\u3053\u3093\u306b\u3061\u306f** (Japanese in bold)",
+      "",
+      "*\u4f60\u597d* (Chinese in italic)",
+      "",
+      "***\ud83d\udd25 emoji in bold italic \ud83d\ude80***",
+      "",
+      "**\u00d1o\u00f1o** (accented characters)",
+      "",
+      "*\u041c\u043e\u0441\u043a\u0432\u0430* (Cyrillic)",
+      "",
+      "***\u03b1\u03b2\u03b3\u03b4*** (Greek)",
+      ""
+    ],
+    "raw": "# Unicode in bold/italic\n\n**\u3053\u3093\u306b\u3061\u306f** (Japanese in bold)\n\n*\u4f60\u597d* (Chinese in italic)\n\n***\ud83d\udd25 emoji in bold italic \ud83d\ude80***\n\n**\u00d1o\u00f1o** (accented characters)\n\n*\u041c\u043e\u0441\u043a\u0432\u0430* (Cyrillic)\n\n***\u03b1\u03b2\u03b3\u03b4*** (Greek)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_unicode-in-bold-italic",
+      "1": "section_unicode-in-bold-italic",
+      "2": "section_unicode-in-bold-italic",
+      "3": "section_unicode-in-bold-italic",
+      "4": "section_unicode-in-bold-italic",
+      "5": "section_unicode-in-bold-italic",
+      "6": "section_unicode-in-bold-italic",
+      "7": "section_unicode-in-bold-italic",
+      "8": "section_unicode-in-bold-italic",
+      "9": "section_unicode-in-bold-italic",
+      "10": "section_unicode-in-bold-italic",
+      "11": "section_unicode-in-bold-italic",
+      "12": "section_unicode-in-bold-italic",
+      "13": "section_unicode-in-bold-italic"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "em": 4,
+      "heading": 1,
+      "inline": 7,
+      "paragraph": 6,
+      "root": 1,
+      "strong": 4,
+      "text": 18
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": true,
+        "frontmatter_at_bof": false,
+        "has_confusables": true,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "mixed_scripts": true,
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 2,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "unicode_risk_score": 2
+      },
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document contains confusable Unicode characters (potential homograph attack)",
+          "type": "confusable_characters"
+        },
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        }
+      ]
+    },
+    "total_chars": 186,
+    "total_lines": 14
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 25,
+        "id": "heading_unicode-in-bold-italic",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "unicode-in-bold-italic",
+        "start_char": 0,
+        "text": "Unicode in bold/italic"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_unicode-in-bold-italic",
+        "start_line": 2,
+        "text": "\u3053\u3093\u306b\u3061\u306f (Japanese in bold)",
+        "word_count": 4
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_unicode-in-bold-italic",
+        "start_line": 4,
+        "text": "\u4f60\u597d (Chinese in italic)",
+        "word_count": 4
+      },
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_unicode-in-bold-italic",
+        "start_line": 6,
+        "text": "\ud83d\udd25 emoji in bold italic \ud83d\ude80",
+        "word_count": 6
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_unicode-in-bold-italic",
+        "start_line": 8,
+        "text": "\u00d1o\u00f1o (accented characters)",
+        "word_count": 3
+      },
+      {
+        "end_line": 11,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_4",
+        "section_id": "section_unicode-in-bold-italic",
+        "start_line": 10,
+        "text": "\u041c\u043e\u0441\u043a\u0432\u0430 (Cyrillic)",
+        "word_count": 2
+      },
+      {
+        "end_line": 13,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_5",
+        "section_id": "section_unicode-in-bold-italic",
+        "start_line": 12,
+        "text": "\u03b1\u03b2\u03b3\u03b4 (Greek)",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 186,
+        "end_line": 13,
+        "id": "section_unicode-in-bold-italic",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Unicode in bold/italic\n\n**\u3053\u3093\u306b\u3061\u306f** (Japanese in bold)\n\n*\u4f60\u597d* (Chinese in italic)\n\n***\ud83d\udd25 emoji in bold italic \ud83d\ude80***\n\n**\u00d1o\u00f1o** (accented characters)\n\n*\u041c\u043e\u0441\u043a\u0432\u0430* (Cyrillic)\n\n***\u03b1\u03b2\u03b3\u03b4*** (Greek)\n",
+        "slug": "unicode-in-bold-italic",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Unicode in bold/italic\n\n\u3053\u3093\u306b\u3061\u306f (Japanese in bold)\n\n\u4f60\u597d (Chinese in italic)\n\n\ud83d\udd25 emoji in bold italic \ud83d\ude80\n\n\u00d1o\u00f1o (accented characters)\n\n\u041c\u043e\u0441\u043a\u0432\u0430 (Cyrillic)\n\n\u03b1\u03b2\u03b3\u03b4 (Greek)",
+        "title": "Unicode in bold/italic"
+      }
+    ],
+    "tables": []
+  }
+}

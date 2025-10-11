@@ -1,0 +1,247 @@
+{
+  "content": {
+    "lines": [
+      "# Deep list nesting (5 levels)",
+      "",
+      "- Level 1",
+      "  - Level 2",
+      "    - Level 3",
+      "      - Level 4",
+      "        - Level 5",
+      "        - Level 5 item 2",
+      "      - Back to level 4",
+      "    - Back to level 3",
+      "  - Level 2 again",
+      "- Level 1 again",
+      ""
+    ],
+    "raw": "# Deep list nesting (5 levels)\n\n- Level 1\n  - Level 2\n    - Level 3\n      - Level 4\n        - Level 5\n        - Level 5 item 2\n      - Back to level 4\n    - Back to level 3\n  - Level 2 again\n- Level 1 again\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "line_to_section": {
+      "0": "section_deep-list-nesting-5-levels",
+      "1": "section_deep-list-nesting-5-levels",
+      "2": "section_deep-list-nesting-5-levels",
+      "3": "section_deep-list-nesting-5-levels",
+      "4": "section_deep-list-nesting-5-levels",
+      "5": "section_deep-list-nesting-5-levels",
+      "6": "section_deep-list-nesting-5-levels",
+      "7": "section_deep-list-nesting-5-levels",
+      "8": "section_deep-list-nesting-5-levels",
+      "9": "section_deep-list-nesting-5-levels",
+      "10": "section_deep-list-nesting-5-levels",
+      "11": "section_deep-list-nesting-5-levels",
+      "12": "section_deep-list-nesting-5-levels"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "code",
+      "9": "code",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      10,
+      11,
+      12
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 5,
+      "heading": 1,
+      "inline": 11,
+      "list_item": 10,
+      "paragraph": 10,
+      "root": 1,
+      "text": 11
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 207,
+    "total_lines": 13
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "- Level 3\n  - Level 4\n    - Level 5\n    - Level 5 item 2\n  - Back to level 4\n- Back to level 3",
+        "end_line": 9,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_deep-list-nesting-5-levels",
+        "start_line": 4,
+        "type": "indented"
+      }
+    ],
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_deep-list-nesting-5-levels",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "deep-list-nesting-5-levels",
+        "start_char": 0,
+        "text": "Deep list nesting (5 levels)"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 12,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [
+                  {
+                    "blocks": [],
+                    "checked": null,
+                    "children": [
+                      {
+                        "blocks": [],
+                        "checked": null,
+                        "children": [
+                          {
+                            "blocks": [],
+                            "checked": null,
+                            "children": [],
+                            "text": "Level 5"
+                          },
+                          {
+                            "blocks": [],
+                            "checked": null,
+                            "children": [],
+                            "text": "Level 5 item 2"
+                          }
+                        ],
+                        "text": "Level 4"
+                      },
+                      {
+                        "blocks": [],
+                        "checked": null,
+                        "children": [],
+                        "text": "Back to level 4"
+                      }
+                    ],
+                    "text": "Level 3"
+                  },
+                  {
+                    "blocks": [],
+                    "checked": null,
+                    "children": [],
+                    "text": "Back to level 3"
+                  }
+                ],
+                "text": "Level 2"
+              },
+              {
+                "blocks": [],
+                "checked": null,
+                "children": [],
+                "text": "Level 2 again"
+              }
+            ],
+            "text": "Level 1"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Level 1 again"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_deep-list-nesting-5-levels",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 207,
+        "end_line": 12,
+        "id": "section_deep-list-nesting-5-levels",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Deep list nesting (5 levels)\n\n- Level 1\n  - Level 2\n    - Level 3\n      - Level 4\n        - Level 5\n        - Level 5 item 2\n      - Back to level 4\n    - Back to level 3\n  - Level 2 again\n- Level 1 again\n",
+        "slug": "deep-list-nesting-5-levels",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Deep list nesting (5 levels)\n\nLevel 1 Level 2 Level 3 Level 4 Level 5 Level 5 item 2 Back to level 4 Back to level 3 Level 2 again Level 1 again",
+        "title": "Deep list nesting (5 levels)"
+      }
+    ],
+    "tables": []
+  }
+}

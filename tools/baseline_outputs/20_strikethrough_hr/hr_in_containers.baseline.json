@@ -1,0 +1,239 @@
+{
+  "content": {
+    "lines": [
+      "# HR in blockquotes and lists",
+      "",
+      "> Blockquote text",
+      ">",
+      "> ---",
+      ">",
+      "> Text after HR in quote",
+      "",
+      "- List item 1",
+      "",
+      "  ---",
+      "",
+      "  Text after HR in list",
+      "",
+      "- List item 2",
+      "",
+      "Normal text with HR below:",
+      "",
+      "---",
+      ""
+    ],
+    "raw": "# HR in blockquotes and lists\n\n> Blockquote text\n>\n> ---\n>\n> Text after HR in quote\n\n- List item 1\n\n  ---\n\n  Text after HR in list\n\n- List item 2\n\nNormal text with HR below:\n\n---\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_hr-in-blockquotes-and-lists",
+      "1": "section_hr-in-blockquotes-and-lists",
+      "2": "section_hr-in-blockquotes-and-lists",
+      "3": "section_hr-in-blockquotes-and-lists",
+      "4": "section_hr-in-blockquotes-and-lists",
+      "5": "section_hr-in-blockquotes-and-lists",
+      "6": "section_hr-in-blockquotes-and-lists",
+      "7": "section_hr-in-blockquotes-and-lists",
+      "8": "section_hr-in-blockquotes-and-lists",
+      "9": "section_hr-in-blockquotes-and-lists",
+      "10": "section_hr-in-blockquotes-and-lists",
+      "11": "section_hr-in-blockquotes-and-lists",
+      "12": "section_hr-in-blockquotes-and-lists",
+      "13": "section_hr-in-blockquotes-and-lists",
+      "14": "section_hr-in-blockquotes-and-lists",
+      "15": "section_hr-in-blockquotes-and-lists",
+      "16": "section_hr-in-blockquotes-and-lists",
+      "17": "section_hr-in-blockquotes-and-lists",
+      "18": "section_hr-in-blockquotes-and-lists",
+      "19": "section_hr-in-blockquotes-and-lists"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "blockquote": 1,
+      "bullet_list": 1,
+      "heading": 1,
+      "hr": 3,
+      "inline": 7,
+      "list_item": 2,
+      "paragraph": 6,
+      "root": 1,
+      "text": 7
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 179,
+    "total_lines": 20
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "Blockquote textText after HR in quote",
+        "end_line": 7,
+        "section_id": "section_hr-in-blockquotes-and-lists",
+        "start_line": 2
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 30,
+        "id": "heading_hr-in-blockquotes-and-lists",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "hr-in-blockquotes-and-lists",
+        "start_char": 0,
+        "text": "HR in blockquotes and lists"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 16,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Text after HR in list"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "List item 2"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_hr-in-blockquotes-and-lists",
+        "start_line": 8,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 17,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_hr-in-blockquotes-and-lists",
+        "start_line": 16,
+        "text": "Normal text with HR below:",
+        "word_count": 5
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 179,
+        "end_line": 19,
+        "id": "section_hr-in-blockquotes-and-lists",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# HR in blockquotes and lists\n\n> Blockquote text\n>\n> ---\n>\n> Text after HR in quote\n\n- List item 1\n\n  ---\n\n  Text after HR in list\n\n- List item 2\n\nNormal text with HR below:\n\n---\n",
+        "slug": "hr-in-blockquotes-and-lists",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "HR in blockquotes and lists\n\nBlockquote text\n\nText after HR in quote\n\nList item 1\n\nText after HR in list\n\nList item 2\n\nNormal text with HR below:",
+        "title": "HR in blockquotes and lists"
+      }
+    ],
+    "tables": []
+  }
+}

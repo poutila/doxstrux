@@ -1,0 +1,155 @@
+{
+  "content": {
+    "lines": [
+      "# Heading :sparkles:",
+      "",
+      "- List :sparkles:",
+      "| A | B |",
+      "| - | - |",
+      "| :sparkles: | x |",
+      ""
+    ],
+    "raw": "# Heading :sparkles:\n\n- List :sparkles:\n| A | B |\n| - | - |\n| :sparkles: | x |\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_heading-sparkles",
+      "1": "section_heading-sparkles",
+      "2": "section_heading-sparkles",
+      "3": "section_heading-sparkles",
+      "4": "section_heading-sparkles",
+      "5": "section_heading-sparkles",
+      "6": "section_heading-sparkles"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 1,
+      "inline": 2,
+      "list_item": 1,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 3,
+      "text": 5
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 79,
+    "total_lines": 7
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 21,
+        "id": "heading_heading-sparkles",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "heading-sparkles",
+        "start_char": 0,
+        "text": "Heading :sparkles:"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 6,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "List :sparkles:\n| A | B |\n| - | - |\n| :sparkles: | x |"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_heading-sparkles",
+        "start_line": 2,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 79,
+        "end_line": 6,
+        "id": "section_heading-sparkles",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Heading :sparkles:\n\n- List :sparkles:\n| A | B |\n| - | - |\n| :sparkles: | x |\n",
+        "slug": "heading-sparkles",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Heading :sparkles:\n\nList :sparkles:\n| A | B |\n| - | - |\n| :sparkles: | x |",
+        "title": "Heading :sparkles:"
+      }
+    ],
+    "tables": []
+  }
+}

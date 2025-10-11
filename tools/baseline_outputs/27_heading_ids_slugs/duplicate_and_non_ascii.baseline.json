@@ -1,0 +1,172 @@
+{
+  "content": {
+    "lines": [
+      "# Hello World",
+      "# Hello World",
+      "",
+      "# Caf\u00e9 cr\u00e8me \u2014 Gr\u00f6\u00dfz\u00fcgig",
+      ""
+    ],
+    "raw": "# Hello World\n# Hello World\n\n# Caf\u00e9 cr\u00e8me \u2014 Gr\u00f6\u00dfz\u00fcgig\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_hello-world",
+      "1": "section_hello-world-2",
+      "2": "section_hello-world-2",
+      "3": "section_cafe-creme-gro\u00dfzugig",
+      "4": "section_cafe-creme-gro\u00dfzugig"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 3,
+      "inline": 3,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 54,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 14,
+        "id": "heading_hello-world",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "hello-world",
+        "start_char": 0,
+        "text": "Hello World"
+      },
+      {
+        "end_char": 28,
+        "id": "heading_hello-world-2",
+        "level": 1,
+        "line": 1,
+        "parent_heading_id": null,
+        "slug": "hello-world-2",
+        "start_char": 14,
+        "text": "Hello World"
+      },
+      {
+        "end_char": 54,
+        "id": "heading_cafe-creme-gro\u00dfzugig",
+        "level": 1,
+        "line": 3,
+        "parent_heading_id": null,
+        "slug": "cafe-creme-gro\u00dfzugig",
+        "start_char": 29,
+        "text": "Caf\u00e9 cr\u00e8me \u2014 Gr\u00f6\u00dfz\u00fcgig"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 14,
+        "end_line": 0,
+        "id": "section_hello-world",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Hello World",
+        "slug": "hello-world",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Hello World",
+        "title": "Hello World"
+      },
+      {
+        "child_ids": [],
+        "end_char": 29,
+        "end_line": 2,
+        "id": "section_hello-world-2",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Hello World\n",
+        "slug": "hello-world-2",
+        "start_char": 14,
+        "start_line": 1,
+        "text_content": "Hello World",
+        "title": "Hello World"
+      },
+      {
+        "child_ids": [],
+        "end_char": 54,
+        "end_line": 4,
+        "id": "section_cafe-creme-gro\u00dfzugig",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Caf\u00e9 cr\u00e8me \u2014 Gr\u00f6\u00dfz\u00fcgig\n",
+        "slug": "cafe-creme-gro\u00dfzugig",
+        "start_char": 29,
+        "start_line": 3,
+        "text_content": "Caf\u00e9 cr\u00e8me \u2014 Gr\u00f6\u00dfz\u00fcgig",
+        "title": "Caf\u00e9 cr\u00e8me \u2014 Gr\u00f6\u00dfz\u00fcgig"
+      }
+    ],
+    "tables": []
+  }
+}

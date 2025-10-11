@@ -1,0 +1,182 @@
+{
+  "content": {
+    "lines": [
+      "# Checkbox not at line start",
+      "",
+      "- This is a task [ ] with checkbox in middle",
+      "- Another line [x] with checked box",
+      "- [ ] Normal task at start",
+      "- End of line has checkbox [ ]",
+      "- Normal text [x] inline checkbox [  ] multiple",
+      ""
+    ],
+    "raw": "# Checkbox not at line start\n\n- This is a task [ ] with checkbox in middle\n- Another line [x] with checked box\n- [ ] Normal task at start\n- End of line has checkbox [ ]\n- Normal text [x] inline checkbox [  ] multiple\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_checkbox-not-at-line-start",
+      "1": "section_checkbox-not-at-line-start",
+      "2": "section_checkbox-not-at-line-start",
+      "3": "section_checkbox-not-at-line-start",
+      "4": "section_checkbox-not-at-line-start",
+      "5": "section_checkbox-not-at-line-start",
+      "6": "section_checkbox-not-at-line-start",
+      "7": "section_checkbox-not-at-line-start"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 1,
+      "inline": 6,
+      "list_item": 5,
+      "paragraph": 5,
+      "root": 1,
+      "text": 6
+    },
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "total_chars": 217,
+    "total_lines": 8
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 29,
+        "id": "heading_checkbox-not-at-line-start",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "checkbox-not-at-line-start",
+        "start_char": 0,
+        "text": "Checkbox not at line start"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 7,
+        "has_mixed_task_items": true,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "This is a task [ ] with checkbox in middle"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Another line [x] with checked box"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Normal task at start"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "End of line has checkbox [ ]"
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Normal text [x] inline checkbox [  ] multiple"
+          }
+        ],
+        "items_count": 5,
+        "section_id": "section_checkbox-not-at-line-start",
+        "start_line": 2,
+        "task_items_count": 1,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 217,
+        "end_line": 7,
+        "id": "section_checkbox-not-at-line-start",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Checkbox not at line start\n\n- This is a task [ ] with checkbox in middle\n- Another line [x] with checked box\n- [ ] Normal task at start\n- End of line has checkbox [ ]\n- Normal text [x] inline checkbox [  ] multiple\n",
+        "slug": "checkbox-not-at-line-start",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Checkbox not at line start\n\nThis is a task [ ] with checkbox in middle Another line [x] with checked box [ ] Normal task at start End of line has checkbox [ ] Normal text [x] inline checkbox [  ] multiple",
+        "title": "Checkbox not at line start"
+      }
+    ],
+    "tables": []
+  }
+}

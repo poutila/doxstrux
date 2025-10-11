@@ -1,0 +1,1997 @@
+{
+  "content": {
+    "lines": [
+      "# \ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition",
+      "",
+      "This file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks \u2014 up to **depth 4**. ",
+      "If your renderer sanitizes HTML, many nested tables will be flattened or removed.",
+      "",
+      "---",
+      "",
+      "## 0) Reference Links & Assets",
+      "We\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]",
+      "",
+      "[cm]: https://spec.commonmark.org/",
+      "[gfm]: https://github.github.com/gfm/",
+      "[logo]: https://via.placeholder.com/60x20?text=MD",
+      "",
+      "---",
+      "",
+      "## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**",
+      "",
+      "> **L1** Quote",
+      "> - **L2** List item leading to inner quote",
+      "> > **L3** Quote wrapping an outer Markdown table:",
+      "> >",
+      "> > | Outer A | Outer B |",
+      "> > |:-------:|:-------:|",
+      "> > | plain | ",
+      "> > ",
+      "> > Nested A1Nested A2",
+      "> > ",
+      "> > ",
+      "> > L4 Cell 1L4 Cell 2",
+      "> > ",
+      "> > ",
+      "> > Nested\u20112 ANested\u20112 B",
+      "> > ",
+      "> > ",
+      "> > Nested\u20113 XNested\u20113 Y",
+      "> > ",
+      "> > ",
+      "> > Inline code at nested\u20112 depth",
+      "> > ",
+      "> > ",
+      "> > ",
+      "> > ",
+      "> > |",
+      "> >",
+      "> > Row below nested table:",
+      "> > | `code` | **bold** |",
+      "",
+      "",
+      "---",
+      "",
+      "## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**",
+      "",
+      "| Col A | Col B |",
+      "|------:|:------|",
+      "| 12345 | - **L1** bullet in table cell ",
+      "| | > **L2** quote in table cell ",
+      "| | > - **L3** list within quote ",
+      "| | > ```js",
+      "| | > // L4 fenced code inside the quoted list",
+      "| | > export const deep = 4;",
+      "| | > ``` |",
+      "",
+      "",
+      "---",
+      "",
+      "## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**",
+      "",
+      "| Level | Content |",
+      "|:-----:|:--------|",
+      "| L1 | ",
+      "| | ",
+      "| | HTML\u2011L2",
+      "| | ",
+      "| | MD\u2011L3 AMD\u2011L3 B",
+      "| | ",
+      "| | ",
+      "| | | L4 key | L4 val |",
+      "| | |:------:|:------:|",
+      "| | | a | 1 |",
+      "| | ",
+      "| | ",
+      "| | Nested paragraph with **bold**, *italic*, and `code`.",
+      "| | ",
+      "| | ",
+      "| | ",
+      "| | ",
+      "| | |",
+      "",
+      "",
+      "---",
+      "",
+      "## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation",
+      "",
+      "> Outer context",
+      ">",
+      "> | Task | Status |",
+      "> |--------------|--------|",
+      "> | Subtasks | - [ ] L1 todo ",
+      "> | | - [x] L2 done ",
+      "> | | - [ ] L2 todo ",
+      "> | | - [ ] L3 deeper ",
+      "> | | - [x] **L4 deepest** (done) |",
+      ">",
+      "> End of quote.",
+      "",
+      "",
+      "---",
+      "",
+      "## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**",
+      "",
+      "- **Phase 1 (L1)** intro paragraph.",
+      " - **Phase 2 (L2)** we drop a table:",
+      " | K | V |",
+      " |---|---|",
+      " | A | ",
+      " | | HTML L3: value A",
+      " | | ",
+      " | | # L4 fenced block (inside HTML table)",
+      " | | echo nested",
+      " | | ",
+      " | | ",
+      " | | |",
+      " | B | 2 |",
+      "",
+      "",
+      "---",
+      "",
+      "## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells",
+      "",
+      "| Feature | Demo |",
+      "|:-------:|:-----|",
+      "| Footnote | Here is a note[^t1] inside a table cell (L1). |",
+      "| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |",
+      "| Image | ![logo][logo] |",
+      "| Deep | - L1 bullet ",
+      "| | > L2 quote inside table ",
+      "| | > 1. L3 number ",
+      "| | > - L4 bullet |",
+      "",
+      "[^t1]: Footnote defined outside the table but referenced inside.",
+      "",
+      "---",
+      "",
+      "## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases",
+      "",
+      "| Pipe | Value |",
+      "|------|-------|",
+      "| show | ```bash",
+      "| | echo \"a|b|c\"",
+      "| | printf \"1|2|3\\n\"",
+      "| | ``` |",
+      "",
+      "",
+      "---",
+      "",
+      "## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes",
+      "",
+      "| Left | Center | Right |",
+      "|:------------|:------------:|------:|",
+      "| `|` | `\\|` | 1000 |",
+      "| text \\| more | **bold** | -10 |",
+      "| > L1 quote | > L1 quote | > L1 quote |",
+      "| > - L2 li | > - L2 li | > - L2 li |",
+      "| > > L3 | > > L3 | > > L3 |",
+      "| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |",
+      "",
+      "",
+      "---",
+      "",
+      "## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)",
+      "",
+      "> Root quote (L1)",
+      "> - List level (L2)",
+      "> > Inner quote (L3)",
+      "> >",
+      "> > | Head A | Head B |",
+      "> > |:------:|:------:|",
+      "> > | **L4** bold | `L4` code |",
+      "> > | sub | sup |",
+      "",
+      "",
+      "---",
+      "",
+      "## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)",
+      "",
+      "| Field | Value |",
+      "|------:|:------|",
+      "| script | console.log(\"XSS?\") |",
+      "| style | table{border:2px solid red} |",
+      "| iframe | |",
+      "",
+      "> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.",
+      "",
+      "---",
+      "",
+      "## Final HRs",
+      "",
+      "---",
+      "***",
+      "___",
+      "",
+      "_EOF_"
+    ],
+    "raw": "# \ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition\n\nThis file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks \u2014 up to **depth 4**. \nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n---\n\n## 0) Reference Links & Assets\nWe\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n\n## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested\u20112 ANested\u20112 B\n> > \n> > \n> > Nested\u20113 XNested\u20113 Y\n> > \n> > \n> > Inline code at nested\u20112 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n\n## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n\n## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n\n## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n\n## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n\n## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n\n## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n\n## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n\n## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n\n## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\n---\n\n## Final HRs\n\n---\n***\n___\n\n_EOF_"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_brutal-markdown-test-nested-tables-edition",
+      "1": "section_brutal-markdown-test-nested-tables-edition",
+      "2": "section_brutal-markdown-test-nested-tables-edition",
+      "3": "section_brutal-markdown-test-nested-tables-edition",
+      "4": "section_brutal-markdown-test-nested-tables-edition",
+      "5": "section_brutal-markdown-test-nested-tables-edition",
+      "6": "section_brutal-markdown-test-nested-tables-edition",
+      "7": "section_0-reference-links-assets",
+      "8": "section_0-reference-links-assets",
+      "9": "section_0-reference-links-assets",
+      "10": "section_0-reference-links-assets",
+      "11": "section_0-reference-links-assets",
+      "12": "section_0-reference-links-assets",
+      "13": "section_0-reference-links-assets",
+      "14": "section_0-reference-links-assets",
+      "15": "section_0-reference-links-assets",
+      "16": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "17": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "18": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "19": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "20": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "21": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "22": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "23": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "24": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "25": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "26": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "27": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "28": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "29": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "30": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "31": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "32": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "33": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "34": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "35": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "36": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "37": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "38": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "39": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "40": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "41": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "42": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "43": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "44": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "45": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "46": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "47": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "48": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "49": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "50": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+      "51": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "52": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "53": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "54": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "55": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "56": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "57": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "58": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "59": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "60": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "61": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "62": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "63": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "64": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "65": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+      "66": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "67": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "68": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "69": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "70": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "71": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "72": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "73": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "74": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "75": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "76": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "77": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "78": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "79": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "80": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "81": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "82": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "83": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "84": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "85": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "86": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "87": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "88": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "89": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "90": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "91": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+      "92": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "93": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "94": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "95": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "96": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "97": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "98": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "99": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "100": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "101": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "102": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "103": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "104": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "105": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "106": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "107": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "108": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+      "109": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "110": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "111": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "112": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "113": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "114": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "115": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "116": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "117": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "118": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "119": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "120": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "121": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "122": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "123": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "124": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "125": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "126": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "127": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+      "128": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "129": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "130": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "131": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "132": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "133": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "134": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "135": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "136": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "137": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "138": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "139": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "140": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "141": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "142": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "143": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+      "144": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "145": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "146": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "147": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "148": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "149": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "150": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "151": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "152": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "153": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "154": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "155": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+      "156": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "157": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "158": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "159": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "160": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "161": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "162": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "163": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "164": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "165": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "166": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "167": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "168": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "169": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+      "170": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "171": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "172": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "173": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "174": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "175": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "176": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "177": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "178": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "179": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "180": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "181": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "182": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "183": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+      "184": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "185": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "186": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "187": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "188": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "189": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "190": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "191": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "192": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "193": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "194": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "195": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+      "196": "section_final-hrs",
+      "197": "section_final-hrs",
+      "198": "section_final-hrs",
+      "199": "section_final-hrs",
+      "200": "section_final-hrs",
+      "201": "section_final-hrs",
+      "202": "section_final-hrs"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "prose",
+      "29": "prose",
+      "30": "prose",
+      "31": "prose",
+      "32": "prose",
+      "33": "prose",
+      "34": "prose",
+      "35": "prose",
+      "36": "prose",
+      "37": "prose",
+      "38": "prose",
+      "39": "prose",
+      "40": "prose",
+      "41": "prose",
+      "42": "prose",
+      "43": "prose",
+      "44": "prose",
+      "45": "prose",
+      "46": "prose",
+      "47": "prose",
+      "48": "prose",
+      "49": "prose",
+      "50": "prose",
+      "51": "prose",
+      "52": "prose",
+      "53": "prose",
+      "54": "prose",
+      "55": "prose",
+      "56": "prose",
+      "57": "prose",
+      "58": "prose",
+      "59": "prose",
+      "60": "prose",
+      "61": "prose",
+      "62": "prose",
+      "63": "prose",
+      "64": "prose",
+      "65": "prose",
+      "66": "prose",
+      "67": "prose",
+      "68": "prose",
+      "69": "prose",
+      "70": "prose",
+      "71": "prose",
+      "72": "prose",
+      "73": "prose",
+      "74": "prose",
+      "75": "prose",
+      "76": "prose",
+      "77": "prose",
+      "78": "prose",
+      "79": "prose",
+      "80": "prose",
+      "81": "prose",
+      "82": "prose",
+      "83": "prose",
+      "84": "prose",
+      "85": "prose",
+      "86": "prose",
+      "87": "prose",
+      "88": "prose",
+      "89": "prose",
+      "90": "prose",
+      "91": "prose",
+      "92": "prose",
+      "93": "prose",
+      "94": "prose",
+      "95": "prose",
+      "96": "prose",
+      "97": "prose",
+      "98": "prose",
+      "99": "prose",
+      "100": "prose",
+      "101": "prose",
+      "102": "prose",
+      "103": "prose",
+      "104": "prose",
+      "105": "prose",
+      "106": "prose",
+      "107": "prose",
+      "108": "prose",
+      "109": "prose",
+      "110": "prose",
+      "111": "prose",
+      "112": "prose",
+      "113": "prose",
+      "114": "prose",
+      "115": "prose",
+      "116": "prose",
+      "117": "prose",
+      "118": "prose",
+      "119": "prose",
+      "120": "prose",
+      "121": "prose",
+      "122": "prose",
+      "123": "prose",
+      "124": "prose",
+      "125": "prose",
+      "126": "prose",
+      "127": "prose",
+      "128": "prose",
+      "129": "prose",
+      "130": "prose",
+      "131": "prose",
+      "132": "prose",
+      "133": "prose",
+      "134": "prose",
+      "135": "prose",
+      "136": "prose",
+      "137": "prose",
+      "138": "prose",
+      "139": "prose",
+      "140": "prose",
+      "141": "prose",
+      "142": "prose",
+      "143": "prose",
+      "144": "prose",
+      "145": "prose",
+      "146": "prose",
+      "147": "prose",
+      "148": "prose",
+      "149": "prose",
+      "150": "prose",
+      "151": "prose",
+      "152": "prose",
+      "153": "prose",
+      "154": "prose",
+      "155": "prose",
+      "156": "prose",
+      "157": "prose",
+      "158": "prose",
+      "159": "prose",
+      "160": "prose",
+      "161": "prose",
+      "162": "prose",
+      "163": "prose",
+      "164": "prose",
+      "165": "prose",
+      "166": "prose",
+      "167": "prose",
+      "168": "prose",
+      "169": "prose",
+      "170": "prose",
+      "171": "prose",
+      "172": "prose",
+      "173": "prose",
+      "174": "prose",
+      "175": "prose",
+      "176": "prose",
+      "177": "prose",
+      "178": "prose",
+      "179": "prose",
+      "180": "prose",
+      "181": "prose",
+      "182": "prose",
+      "183": "prose",
+      "184": "prose",
+      "185": "prose",
+      "186": "prose",
+      "187": "prose",
+      "188": "prose",
+      "189": "prose",
+      "190": "prose",
+      "191": "prose",
+      "192": "prose",
+      "193": "prose",
+      "194": "prose",
+      "195": "prose",
+      "196": "prose",
+      "197": "prose",
+      "198": "prose",
+      "199": "prose",
+      "200": "prose",
+      "201": "prose",
+      "202": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202
+    ]
+  },
+  "metadata": {
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": true,
+    "node_counts": {
+      "blockquote": 6,
+      "bullet_list": 3,
+      "code_inline": 5,
+      "em": 2,
+      "heading": 13,
+      "hr": 15,
+      "image": 2,
+      "inline": 166,
+      "link": 4,
+      "list_item": 4,
+      "paragraph": 22,
+      "root": 1,
+      "softbreak": 13,
+      "strong": 34,
+      "table": 9,
+      "tbody": 9,
+      "td": 112,
+      "text": 208,
+      "th": 19,
+      "thead": 9,
+      "tr": 62
+    },
+    "quarantine_reasons": [
+      "ragged_tables:3"
+    ],
+    "quarantined": true,
+    "security": {
+      "profile_used": "moderate",
+      "statistics": {
+        "allowed_schemes": [
+          "mailto",
+          "tel",
+          "https",
+          "http"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 4,
+          "relative": 2
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": true,
+        "ragged_tables_count": 3,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 3,
+        "total_warnings": 9,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 22,
+          "message": "Table has inconsistent column counts",
+          "type": "ragged_table"
+        },
+        {
+          "line": 68,
+          "message": "Table has inconsistent column counts",
+          "type": "ragged_table"
+        },
+        {
+          "line": 186,
+          "message": "Table has inconsistent column counts",
+          "type": "ragged_table"
+        },
+        {
+          "line": 8,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://spec.commonmark.org/"
+        },
+        {
+          "line": 8,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://github.github.com/gfm/"
+        },
+        {
+          "line": 8,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://via.placeholder.com/60x20?text=MD"
+        },
+        {
+          "line": 133,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://spec.commonmark.org/"
+        },
+        {
+          "line": 133,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://github.github.com/gfm/"
+        },
+        {
+          "line": 134,
+          "message": "Link contains path traversal pattern",
+          "type": "path_traversal",
+          "url": "https://via.placeholder.com/60x20?text=MD"
+        }
+      ]
+    },
+    "total_chars": 4007,
+    "total_lines": 203
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [
+          {
+            "end_line": 20,
+            "start_line": 19,
+            "type": "bullet_list"
+          },
+          {
+            "end_line": 25,
+            "start_line": 22,
+            "type": "table"
+          }
+        ],
+        "children_summary": {
+          "code": 0,
+          "lists": 1,
+          "tables": 1
+        },
+        "content": "L1 QuoteL2 List item leading to inner quoteL3 Quote wrapping an outer Markdown table:Outer AOuter BplainNested A1Nested A2L4 Cell 1L4 Cell 2Nested\u20112 ANested\u20112 BNested\u20113 XNested\u20113 YInline code at nested\u20112 depth|Row below nested table:\n| code | bold |",
+        "end_line": 47,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 18
+      },
+      {
+        "children_blocks": [
+          {
+            "end_line": 103,
+            "start_line": 96,
+            "type": "table"
+          }
+        ],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 1
+        },
+        "content": "Outer contextTaskStatusSubtasks- [ ] L1 todo- [x] L2 done- [ ] L2 todo- [ ] L3 deeper- [x] L4 deepest (done)End of quote.",
+        "end_line": 105,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 94
+      },
+      {
+        "children_blocks": [
+          {
+            "end_line": 174,
+            "start_line": 173,
+            "type": "bullet_list"
+          },
+          {
+            "end_line": 180,
+            "start_line": 176,
+            "type": "table"
+          }
+        ],
+        "children_summary": {
+          "code": 0,
+          "lists": 1,
+          "tables": 1
+        },
+        "content": "Root quote (L1)List level (L2)Inner quote (L3)Head AHead BL4 boldL4 codesubsup",
+        "end_line": 180,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 172
+      },
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.",
+        "end_line": 193,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 192
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "end_char": 49,
+        "id": "heading_brutal-markdown-test-nested-tables-edition",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "brutal-markdown-test-nested-tables-edition",
+        "start_char": 0,
+        "text": "\ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition"
+      },
+      {
+        "end_char": 345,
+        "id": "heading_0-reference-links-assets",
+        "level": 2,
+        "line": 7,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "0-reference-links-assets",
+        "start_char": 314,
+        "text": "0) Reference Links & Assets"
+      },
+      {
+        "end_char": 625,
+        "id": "heading_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+        "level": 2,
+        "line": 16,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+        "start_char": 543,
+        "text": "1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table"
+      },
+      {
+        "end_char": 1147,
+        "id": "heading_2-depth4-markdown-table-cell-contains-list-quote-code",
+        "level": 2,
+        "line": 51,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "2-depth4-markdown-table-cell-contains-list-quote-code",
+        "start_char": 1073,
+        "text": "2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code"
+      },
+      {
+        "end_char": 1500,
+        "id": "heading_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+        "level": 2,
+        "line": 66,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+        "start_char": 1400,
+        "text": "3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table"
+      },
+      {
+        "end_char": 1851,
+        "id": "heading_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+        "level": 2,
+        "line": 92,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+        "start_char": 1763,
+        "text": "4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation"
+      },
+      {
+        "end_char": 2142,
+        "id": "heading_5-depth4-list-markdown-table-html-table-fenced-code",
+        "level": 2,
+        "line": 109,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "5-depth4-list-markdown-table-html-table-fenced-code",
+        "start_char": 2074,
+        "text": "5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code"
+      },
+      {
+        "end_char": 2452,
+        "id": "heading_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+        "level": 2,
+        "line": 128,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+        "start_char": 2371,
+        "text": "6) Depth\u20114: Markdown Table with footnotes, links, images inside cells"
+      },
+      {
+        "end_char": 2903,
+        "id": "heading_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+        "level": 2,
+        "line": 144,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+        "start_char": 2820,
+        "text": "7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases"
+      },
+      {
+        "end_char": 3087,
+        "id": "heading_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+        "level": 2,
+        "line": 156,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+        "start_char": 3010,
+        "text": "8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes"
+      },
+      {
+        "end_char": 3482,
+        "id": "heading_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+        "level": 2,
+        "line": 170,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+        "start_char": 3380,
+        "text": "9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)"
+      },
+      {
+        "end_char": 3742,
+        "id": "heading_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+        "level": 2,
+        "line": 184,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+        "start_char": 3651,
+        "text": "10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)"
+      },
+      {
+        "end_char": 3988,
+        "id": "heading_final-hrs",
+        "level": 2,
+        "line": 196,
+        "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
+        "slug": "final-hrs",
+        "start_char": 3975,
+        "text": "Final HRs"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [
+      {
+        "allowed": true,
+        "alt": "logo",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": false,
+        "image_id": "5d9ea350f2965186",
+        "image_kind": "external",
+        "line": 8,
+        "scheme": "https",
+        "src": "https://via.placeholder.com/60x20?text=MD",
+        "title": ""
+      },
+      {
+        "allowed": true,
+        "alt": "logo",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": false,
+        "image_id": "56ab7d4ffc3d95b7",
+        "image_kind": "external",
+        "line": 134,
+        "scheme": "https",
+        "src": "https://via.placeholder.com/60x20?text=MD",
+        "title": ""
+      }
+    ],
+    "links": [
+      {
+        "allowed": true,
+        "line": 8,
+        "scheme": "https",
+        "text": "CommonMark",
+        "type": "external",
+        "url": "https://spec.commonmark.org/"
+      },
+      {
+        "allowed": true,
+        "line": 8,
+        "scheme": "https",
+        "text": "GFM",
+        "type": "external",
+        "url": "https://github.github.com/gfm/"
+      },
+      {
+        "alt": "logo",
+        "format": "unknown",
+        "image_id": "5d9ea350f2965186",
+        "image_kind": "external",
+        "line": 8,
+        "src": "https://via.placeholder.com/60x20?text=MD",
+        "text": "logo",
+        "title": "",
+        "type": "image",
+        "url": "https://via.placeholder.com/60x20?text=MD"
+      },
+      {
+        "allowed": true,
+        "line": 133,
+        "scheme": "https",
+        "text": "CommonMark spec",
+        "type": "external",
+        "url": "https://spec.commonmark.org/"
+      },
+      {
+        "allowed": true,
+        "line": 133,
+        "scheme": "https",
+        "text": "GFM",
+        "type": "external",
+        "url": "https://github.github.com/gfm/"
+      },
+      {
+        "alt": "logo",
+        "format": "unknown",
+        "image_id": "56ab7d4ffc3d95b7",
+        "image_kind": "external",
+        "line": 134,
+        "src": "https://via.placeholder.com/60x20?text=MD",
+        "text": "logo",
+        "title": "",
+        "type": "image",
+        "url": "https://via.placeholder.com/60x20?text=MD"
+      }
+    ],
+    "lists": [
+      {
+        "end_line": 20,
+        "has_mixed_task_items": false,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "L2 List item leading to inner quote"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 19,
+        "task_items_count": 0,
+        "type": "bullet"
+      },
+      {
+        "end_line": 126,
+        "has_mixed_task_items": false,
+        "id": "list_1",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Phase 1 (L1) intro paragraph."
+          },
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 111,
+        "task_items_count": 0,
+        "type": "bullet"
+      },
+      {
+        "end_line": 174,
+        "has_mixed_task_items": false,
+        "id": "list_2",
+        "items": [
+          {
+            "blocks": [],
+            "checked": null,
+            "children": [],
+            "text": "List level (L2)"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 173,
+        "task_items_count": 0,
+        "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 2,
+        "text": "This file is designed to break Markdown table renderers by abusing HTML tables inside Markdown tables, nested blockquotes, lists, and code blocks \u2014 up to depth 4.\nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.",
+        "word_count": 40
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_1",
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 8,
+        "text": "We\u2019ll reuse refs: CommonMark, GFM, logo: logologo",
+        "word_count": 7
+      },
+      {
+        "end_line": 141,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 140,
+        "text": "[^t1]: Footnote defined outside the table but referenced inside.",
+        "word_count": 9
+      },
+      {
+        "end_line": 203,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 202,
+        "text": "EOF",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [
+          "section_0-reference-links-assets",
+          "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+          "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+          "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+          "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+          "section_5-depth4-list-markdown-table-html-table-fenced-code",
+          "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+          "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+          "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+          "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+          "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+          "section_final-hrs"
+        ],
+        "end_char": 4007,
+        "end_line": 202,
+        "id": "section_brutal-markdown-test-nested-tables-edition",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# \ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition\n\nThis file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks \u2014 up to **depth 4**. \nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n---\n\n## 0) Reference Links & Assets\nWe\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n\n## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested\u20112 ANested\u20112 B\n> > \n> > \n> > Nested\u20113 XNested\u20113 Y\n> > \n> > \n> > Inline code at nested\u20112 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n\n## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n\n## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n\n## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n\n## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n\n## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n\n## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n\n## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n\n## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n\n## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\n---\n\n## Final HRs\n\n---\n***\n___\n\n_EOF_",
+        "slug": "brutal-markdown-test-nested-tables-edition",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "\ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition\n\nThis file is designed to break Markdown table renderers by abusing HTML tables inside Markdown tables, nested blockquotes, lists, and code blocks \u2014 up to depth 4.\nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n0) Reference Links & Assets We\u2019ll reuse refs: CommonMark, GFM, logo: \n\n1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table\n\nL1 Quote L2 List item leading to inner quote L3 Quote wrapping an outer Markdown table:\n\nOuter AOuter B\n\nplain\n\nNested A1Nested A2\n\nL4 Cell 1L4 Cell 2\n\nNested\u20112 ANested\u20112 B\n\nNested\u20113 XNested\u20113 Y\n\nInline code at nested\u20112 depth\n\n|\n\nRow below nested table:\n| code | bold |\n\n2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code\n\nCol ACol B\n\n12345- L1 bullet in table cell > L2 quote in table cell > - L3 list within quote > ```js > // L4 fenced code inside the quoted list > export const deep = 4; > ```\n\n3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table\n\nLevelContent\n\nL1\n\nHTML\u2011L2\n\nMD\u2011L3 AMD\u2011L3 B\n\nNested paragraph with bold, italic, and code.\n\n4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation\n\nOuter context\n\nTaskStatus\n\nSubtasks- [ ] L1 todo - [x] L2 done - [ ] L2 todo - [ ] L3 deeper - [x] L4 deepest (done)\n\nEnd of quote.\n\n5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code\n\nPhase 1 (L1) intro paragraph. Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |\n\n6) Depth\u20114: Markdown Table with footnotes, links, images inside cells\n\nFeatureDemo\n\nFootnoteHere is a note[^t1] inside a table cell (L1). LinksCommonMark spec and GFM referenced within table (L1). Image Deep- L1 bullet > L2 quote inside table > 1. L3 number > - L4 bullet\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases\n\nPipeValue\n\nshow```bash echo \"a printf \"1 ```\n\n8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes\n\nLeftCenterRight\n\n``| text | morebold-10 > L1 quote> L1 quote> L1 quote > - L2 li> - L2 li> - L2 li > > L3> > L3> > L3 > > 1. L4 ordered> > - L4 bullet> > L4 code\n\n9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)\n\nRoot quote (L1) List level (L2) Inner quote (L3)\n\nHead AHead B\n\nL4 boldL4 code subsup\n\n10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\nFieldValue\n\nscriptconsole.log(\"XSS?\") styletable{border:2px solid red} iframe\n\nIf your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\nFinal HRs\n\nEOF",
+        "title": "\ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition"
+      },
+      {
+        "child_ids": [],
+        "end_char": 543,
+        "end_line": 15,
+        "id": "section_0-reference-links-assets",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 0) Reference Links & Assets\nWe\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n",
+        "slug": "0-reference-links-assets",
+        "start_char": 314,
+        "start_line": 7,
+        "text_content": "0) Reference Links & Assets We\u2019ll reuse refs: CommonMark, GFM, logo:",
+        "title": "0) Reference Links & Assets"
+      },
+      {
+        "child_ids": [],
+        "end_char": 1073,
+        "end_line": 50,
+        "id": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested\u20112 ANested\u20112 B\n> > \n> > \n> > Nested\u20113 XNested\u20113 Y\n> > \n> > \n> > Inline code at nested\u20112 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n",
+        "slug": "1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
+        "start_char": 543,
+        "start_line": 16,
+        "text_content": "1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table\n\nL1 Quote L2 List item leading to inner quote L3 Quote wrapping an outer Markdown table:\n\nOuter AOuter B\n\nplain\n\nNested A1Nested A2\n\nL4 Cell 1L4 Cell 2\n\nNested\u20112 ANested\u20112 B\n\nNested\u20113 XNested\u20113 Y\n\nInline code at nested\u20112 depth\n\n|\n\nRow below nested table:\n| code | bold |",
+        "title": "1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table"
+      },
+      {
+        "child_ids": [],
+        "end_char": 1400,
+        "end_line": 65,
+        "id": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n",
+        "slug": "2-depth4-markdown-table-cell-contains-list-quote-code",
+        "start_char": 1073,
+        "start_line": 51,
+        "text_content": "2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code\n\nCol ACol B\n\n12345- L1 bullet in table cell > L2 quote in table cell > - L3 list within quote > ```js > // L4 fenced code inside the quoted list > export const deep = 4; > ```",
+        "title": "2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code"
+      },
+      {
+        "child_ids": [],
+        "end_char": 1763,
+        "end_line": 91,
+        "id": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n",
+        "slug": "3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
+        "start_char": 1400,
+        "start_line": 66,
+        "text_content": "3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table\n\nLevelContent\n\nL1\n\nHTML\u2011L2\n\nMD\u2011L3 AMD\u2011L3 B\n\nNested paragraph with bold, italic, and code.",
+        "title": "3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table"
+      },
+      {
+        "child_ids": [],
+        "end_char": 2074,
+        "end_line": 108,
+        "id": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n",
+        "slug": "4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
+        "start_char": 1763,
+        "start_line": 92,
+        "text_content": "4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation\n\nOuter context\n\nTaskStatus\n\nSubtasks- [ ] L1 todo - [x] L2 done - [ ] L2 todo - [ ] L3 deeper - [x] L4 deepest (done)\n\nEnd of quote.",
+        "title": "4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation"
+      },
+      {
+        "child_ids": [],
+        "end_char": 2371,
+        "end_line": 127,
+        "id": "section_5-depth4-list-markdown-table-html-table-fenced-code",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n",
+        "slug": "5-depth4-list-markdown-table-html-table-fenced-code",
+        "start_char": 2074,
+        "start_line": 109,
+        "text_content": "5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code\n\nPhase 1 (L1) intro paragraph. Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |",
+        "title": "5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code"
+      },
+      {
+        "child_ids": [],
+        "end_char": 2820,
+        "end_line": 143,
+        "id": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n",
+        "slug": "6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
+        "start_char": 2371,
+        "start_line": 128,
+        "text_content": "6) Depth\u20114: Markdown Table with footnotes, links, images inside cells\n\nFeatureDemo\n\nFootnoteHere is a note[^t1] inside a table cell (L1). LinksCommonMark spec and GFM referenced within table (L1). Image Deep- L1 bullet > L2 quote inside table > 1. L3 number > - L4 bullet\n\n[^t1]: Footnote defined outside the table but referenced inside.",
+        "title": "6) Depth\u20114: Markdown Table with footnotes, links, images inside cells"
+      },
+      {
+        "child_ids": [],
+        "end_char": 3010,
+        "end_line": 155,
+        "id": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n",
+        "slug": "7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
+        "start_char": 2820,
+        "start_line": 144,
+        "text_content": "7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases\n\nPipeValue\n\nshow```bash echo \"a printf \"1 ```",
+        "title": "7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases"
+      },
+      {
+        "child_ids": [],
+        "end_char": 3380,
+        "end_line": 169,
+        "id": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n",
+        "slug": "8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
+        "start_char": 3010,
+        "start_line": 156,
+        "text_content": "8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes\n\nLeftCenterRight\n\n``| text | morebold-10 > L1 quote> L1 quote> L1 quote > - L2 li> - L2 li> - L2 li > > L3> > L3> > L3 > > 1. L4 ordered> > - L4 bullet> > L4 code",
+        "title": "8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes"
+      },
+      {
+        "child_ids": [],
+        "end_char": 3651,
+        "end_line": 183,
+        "id": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n",
+        "slug": "9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
+        "start_char": 3380,
+        "start_line": 170,
+        "text_content": "9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)\n\nRoot quote (L1) List level (L2) Inner quote (L3)\n\nHead AHead B\n\nL4 boldL4 code subsup",
+        "title": "9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)"
+      },
+      {
+        "child_ids": [],
+        "end_char": 3975,
+        "end_line": 195,
+        "id": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\n---\n",
+        "slug": "10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
+        "start_char": 3651,
+        "start_line": 184,
+        "text_content": "10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\nFieldValue\n\nscriptconsole.log(\"XSS?\") styletable{border:2px solid red} iframe\n\nIf your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.",
+        "title": "10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)"
+      },
+      {
+        "child_ids": [],
+        "end_char": 4007,
+        "end_line": 202,
+        "id": "section_final-hrs",
+        "level": 2,
+        "parent_id": "section_brutal-markdown-test-nested-tables-edition",
+        "raw_content": "## Final HRs\n\n---\n***\n___\n\n_EOF_",
+        "slug": "final-hrs",
+        "start_char": 3975,
+        "start_line": 196,
+        "text_content": "Final HRs\n\nEOF",
+        "title": "Final HRs"
+      }
+    ],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "center"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 25,
+        "headers": [
+          "Outer A",
+          "Outer B"
+        ],
+        "id": "table_0",
+        "is_ragged": true,
+        "is_ragged_meta": {
+          "heuristic": true
+        },
+        "row_count": 1,
+        "rows": [
+          [
+            "plain",
+            ""
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 22
+      },
+      {
+        "align": [
+          "right",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 62,
+        "headers": [
+          "Col A",
+          "Col B"
+        ],
+        "id": "table_1",
+        "is_ragged": false,
+        "row_count": 7,
+        "rows": [
+          [
+            "12345",
+            "- L1 bullet in table cell"
+          ],
+          [
+            "",
+            "> L2 quote in table cell"
+          ],
+          [
+            "",
+            "> - L3 list within quote"
+          ],
+          [
+            "",
+            "> ```js"
+          ],
+          [
+            "",
+            "> // L4 fenced code inside the quoted list"
+          ],
+          [
+            "",
+            "> export const deep = 4;"
+          ],
+          [
+            "",
+            "> ```"
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 53
+      },
+      {
+        "align": [
+          "center",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 88,
+        "headers": [
+          "Level",
+          "Content"
+        ],
+        "id": "table_2",
+        "is_ragged": true,
+        "is_ragged_meta": {
+          "heuristic": true
+        },
+        "row_count": 18,
+        "rows": [
+          [
+            "L1",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            "HTML\u2011L2"
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            "MD\u2011L3 AMD\u2011L3 B"
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            "Nested paragraph with bold, italic, and code."
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 68
+      },
+      {
+        "align": [
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 103,
+        "headers": [
+          "Task",
+          "Status"
+        ],
+        "id": "table_3",
+        "is_ragged": false,
+        "row_count": 5,
+        "rows": [
+          [
+            "Subtasks",
+            "- [ ] L1 todo"
+          ],
+          [
+            "",
+            "- [x] L2 done"
+          ],
+          [
+            "",
+            "- [ ] L2 todo"
+          ],
+          [
+            "",
+            "- [ ] L3 deeper"
+          ],
+          [
+            "",
+            "- [x] L4 deepest (done)"
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 96
+      },
+      {
+        "align": [
+          "center",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 139,
+        "headers": [
+          "Feature",
+          "Demo"
+        ],
+        "id": "table_4",
+        "is_ragged": false,
+        "row_count": 7,
+        "rows": [
+          [
+            "Footnote",
+            "Here is a note[^t1] inside a table cell (L1)."
+          ],
+          [
+            "Links",
+            "CommonMark spec and GFM referenced within table (L1)."
+          ],
+          [
+            "Image",
+            "logologo"
+          ],
+          [
+            "Deep",
+            "- L1 bullet"
+          ],
+          [
+            "",
+            "> L2 quote inside table"
+          ],
+          [
+            "",
+            "> 1. L3 number"
+          ],
+          [
+            "",
+            "> - L4 bullet"
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 130
+      },
+      {
+        "align": [
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 152,
+        "headers": [
+          "Pipe",
+          "Value"
+        ],
+        "id": "table_5",
+        "is_ragged": false,
+        "row_count": 4,
+        "rows": [
+          [
+            "show",
+            "```bash"
+          ],
+          [
+            "",
+            "echo \"a"
+          ],
+          [
+            "",
+            "printf \"1"
+          ],
+          [
+            "",
+            "```"
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 146
+      },
+      {
+        "align": [
+          "left",
+          "center",
+          "right"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 3,
+        "end_line": 166,
+        "headers": [
+          "Left",
+          "Center",
+          "Right"
+        ],
+        "id": "table_6",
+        "is_ragged": false,
+        "row_count": 6,
+        "rows": [
+          [
+            "`",
+            "`",
+            "|"
+          ],
+          [
+            "text | more",
+            "bold",
+            "-10"
+          ],
+          [
+            "> L1 quote",
+            "> L1 quote",
+            "> L1 quote"
+          ],
+          [
+            "> - L2 li",
+            "> - L2 li",
+            "> - L2 li"
+          ],
+          [
+            "> > L3",
+            "> > L3",
+            "> > L3"
+          ],
+          [
+            "> > 1. L4 ordered",
+            "> > - L4 bullet",
+            "> > L4 code"
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 158
+      },
+      {
+        "align": [
+          "left",
+          "center"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 180,
+        "headers": [
+          "Head A",
+          "Head B"
+        ],
+        "id": "table_7",
+        "is_ragged": false,
+        "row_count": 2,
+        "rows": [
+          [
+            "L4 bold",
+            "L4 code"
+          ],
+          [
+            "sub",
+            "sup"
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 176
+      },
+      {
+        "align": [
+          "right",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 191,
+        "headers": [
+          "Field",
+          "Value"
+        ],
+        "id": "table_8",
+        "is_ragged": true,
+        "is_ragged_meta": {
+          "heuristic": true
+        },
+        "row_count": 3,
+        "rows": [
+          [
+            "script",
+            "console.log(\"XSS?\")"
+          ],
+          [
+            "style",
+            "table{border:2px solid red}"
+          ],
+          [
+            "iframe",
+            ""
+          ]
+        ],
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "start_line": 186
+      }
+    ]
+  }
+}
