@@ -16,6 +16,14 @@ from contextlib import contextmanager
 from typing import Any
 
 
+# ---- Precompiled security patterns (Phase 3 hardening) ----
+# Raw content scan for schemes that markdown-it might not parse as links
+_DISALLOWED_SCHEMES_RAW_RE = re.compile(
+    r"(?:javascript:|file:|vbscript:|data:text/html)",
+    re.IGNORECASE
+)
+
+
 # Custom Security Exceptions
 class MarkdownSecurityError(Exception):
     """Raised when content fails security validation."""
@@ -1325,17 +1333,15 @@ class MarkdownParserCore:
         security["statistics"]["unicode_risk_score"] = unicode_risk_score
 
         # Scan raw content for disallowed link schemes that markdown-it might not parse
-        disallowed_raw_schemes = ["javascript:", "file:", "vbscript:", "data:text/html"]
-        for scheme in disallowed_raw_schemes:
-            if scheme in raw_content.lower():
-                security["link_disallowed_schemes_raw"] = True
-                security["warnings"].append(
-                    {
-                        "type": "disallowed_schemes_raw",
-                        "message": f"Raw content contains potentially dangerous scheme: {scheme}",
-                    }
-                )
-                break
+        m = _DISALLOWED_SCHEMES_RAW_RE.search(raw_content)
+        if m:
+            security["link_disallowed_schemes_raw"] = True
+            security["warnings"].append(
+                {
+                    "type": "disallowed_schemes_raw",
+                    "message": f"Raw content contains potentially dangerous scheme: {m.group(0)}",
+                }
+            )
 
         # RAG Safety: Comprehensive prompt injection detection
 

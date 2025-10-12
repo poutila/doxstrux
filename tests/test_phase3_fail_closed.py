@@ -8,7 +8,7 @@ Tests for the fail-closed approach to link/image validation:
 """
 
 import pytest
-from docpipe.markdown_parser_core import MarkdownParserCore
+from docpipe.markdown_parser_core import MarkdownParserCore, _DISALLOWED_SCHEMES_RAW_RE
 
 
 def test_parse_does_not_mutate_source():
@@ -167,3 +167,19 @@ code = "block"
     assert result["content"]["raw"] == text
     # Should have security flags set
     assert "embedding_blocked" in result["metadata"] or "quarantined" in result["metadata"]
+
+
+def test_raw_scheme_detection_compiled_regex():
+    """Verify precompiled regex catches dangerous schemes in raw content."""
+    # Positive cases - should match
+    assert _DISALLOWED_SCHEMES_RAW_RE.search("prefix javascript:alert(1) suffix")
+    assert _DISALLOWED_SCHEMES_RAW_RE.search("FILE://host/path")  # case insensitive
+    assert _DISALLOWED_SCHEMES_RAW_RE.search("data:text/html,<script>")
+    assert _DISALLOWED_SCHEMES_RAW_RE.search("[link](javascript:alert)")
+    assert _DISALLOWED_SCHEMES_RAW_RE.search("vbscript:msgbox")
+
+    # Negative cases - should NOT match
+    assert not _DISALLOWED_SCHEMES_RAW_RE.search("https://example.com")
+    assert not _DISALLOWED_SCHEMES_RAW_RE.search("mailto:user@example.com")
+    assert not _DISALLOWED_SCHEMES_RAW_RE.search("data:image/png;base64,ABC")  # data:image is OK
+    assert not _DISALLOWED_SCHEMES_RAW_RE.search("normal text with javascript word")
