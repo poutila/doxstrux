@@ -1,0 +1,120 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: |
+        uv venv
+        uv pip install -e ".[dev]"
+
+    - name: Run pytest
+      run: |
+        uv run pytest --cov=src/doxstrux --cov-report=xml --cov-report=term
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: false
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: |
+        uv venv
+        uv pip install -e ".[dev]"
+
+    - name: Run ruff
+      run: |
+        uv run ruff check src/ tests/
+
+    - name: Run mypy
+      run: |
+        uv run mypy src/doxstrux
+
+  ci-gates:
+    name: CI Gates (Baseline Tests)
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: |
+        uv venv
+        uv pip install -e ".[dev]"
+
+    - name: Run CI Gate G1 (Parity)
+      run: |
+        cd tools/ci
+        uv run python ci_gate_parity.py
+
+    - name: Run CI Gate G2 (Canonical Pairs)
+      run: |
+        cd tools/ci
+        uv run python ci_gate_canonical_pairs.py
+
+    - name: Run CI Gate G3 (No Hybrids)
+      run: |
+        cd tools/ci
+        uv run python ci_gate_no_hybrids.py
+
+    - name: Run CI Gate G4 (Evidence Hash)
+      run: |
+        cd tools/ci
+        uv run python ci_gate_evidence_hash.py
+
+    - name: Run CI Gate G5 (Performance)
+      run: |
+        cd tools/ci
+        uv run python ci_gate_performance.py
