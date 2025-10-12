@@ -1,0 +1,23 @@
+{
+  "phase": 2,
+  "completed_at": "2025-10-12T07:29:53.264426Z",
+  "baseline_pass_count": 542,
+  "performance_delta_median_pct": -3.81,
+  "performance_delta_p95_pct": -3.36,
+  "ci_gates_passed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5"
+  ],
+  "regex_count_before": 41,
+  "regex_count_after": 34,
+  "patterns_removed": 7,
+  "evidence_blocks_created": 1,
+  "git_tag": "phase-2-complete",
+  "git_commit": "e34fc1d9133b35de34a315f5ee6d179d4e95c6cc",
+  "schema_version": "1.0",
+  "min_schema_version": "1.0",
+  "notes": "Replaced 7 regex patterns in _strip_markdown() with pure token-based extraction. Removed 18 lines of regex fallback code. Function is unused (zero callers) so changes have zero runtime impact. Note: REGEX_INVENTORY lists 12 patterns for Phase 2, but 5 are in slug functions (_slugify, _slugify_base) which were not modified."
+}

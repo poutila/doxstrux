@@ -3575,46 +3575,39 @@ class MarkdownParserCore:
         return s
 
     def _strip_markdown(self, text: str) -> str:
-        """Remove markdown formatting from text (for backward compatibility)."""
-        import re
+        """Is this useful?
+        Remove markdown formatting from text using token-based extraction.
 
-        # Remove headers
-        text = re.sub(r"^#+\s+", "", text, flags=re.MULTILINE)
-        # Remove emphasis
-        text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)
-        text = re.sub(r"\*([^*]+)\*", r"\1", text)
-        text = re.sub(r"__([^_]+)__", r"\1", text)
-        text = re.sub(r"_([^_]+)_", r"\1", text)
-        # Remove links
-        text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
-        # Remove code blocks markers (Phase 1: token-based fence removal)
-        if HAS_TOKEN_UTILS and walk_tokens_iter is not None:
-            # Token-based approach: parse and remove fence blocks
-            try:
-                temp_tokens = self.md.parse(text)
-                lines = text.split('\n')
-                lines_to_remove = set()
+        Phase 2: Pure token-based plaintext extraction (zero regex).
+        Extracts only text content, excluding all markdown formatting:
+        - Headers, emphasis, bold, links, code blocks, inline code
 
-                for token in walk_tokens_iter(temp_tokens):
-                    if token.type == "fence" and token.map:
-                        start_line, end_line = token.map
-                        # Mark lines for removal (fence markers + content)
-                        for line_idx in range(start_line, end_line):
-                            lines_to_remove.add(line_idx)
+        Policy: Excludes code_inline content (technical content, not prose).
+        """
+        # Token-based plaintext extraction (Phase 2 - zero regex)
+        tokens = self.md.parse(text)
+        plaintext_parts = []
 
-                # Remove marked lines
-                if lines_to_remove:
-                    lines = [line for idx, line in enumerate(lines) if idx not in lines_to_remove]
-                    text = '\n'.join(lines)
-            except Exception:
-                # Fallback to regex if token parsing fails
-                text = re.sub(r"```[^`]*```", "", text, flags=re.DOTALL)
-        else:
-            # Fallback to regex if token utilities not available
-            text = re.sub(r"```[^`]*```", "", text, flags=re.DOTALL)
+        for token in walk_tokens_iter(tokens):
+            if token.type == "text":
+                # Pure text content - include it
+                plaintext_parts.append(token.content)
+            elif token.type in ("softbreak", "hardbreak"):
+                # Convert breaks to spaces
+                plaintext_parts.append(" ")
+            # Skip all other token types:
+            # - "heading_open" (header markers)
+            # - "strong_open"/"em_open" (emphasis markers)
+            # - "code_inline" (technical content - excluded per policy)
+            # - "link_open"/"link_close" (link markup)
+            # - "fence"/"code_block" (code blocks)
+            # We only want the text content, not the formatting
 
-        text = re.sub(r"`([^`]+)`", r"\1", text)
-        return text.strip()
+        # Join and normalize whitespace
+        plaintext = "".join(plaintext_parts)
+        # Collapse multiple spaces and strip
+        plaintext = " ".join(plaintext.split())
+        return plaintext
 
     def _find_section_id(self, line_number: int) -> str | None:
         """Find which section a line belongs to.
