@@ -287,11 +287,16 @@ def main():
     # Print summary
     print_summary(summary, args.verbose)
 
-    # Save JSON output
+    # Always save results to baseline_results.json for CI gates
+    results_file = Path(__file__).parent / "baseline_results.json"
+    with results_file.open("w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2, cls=DateTimeEncoder)
+
+    # Save JSON output to custom location if specified
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         with args.output.open("w", encoding="utf-8") as f:
-            json.dump(summary, f, indent=2)
+            json.dump(summary, f, indent=2, cls=DateTimeEncoder)
         print(f"\nDetailed results saved to: {args.output}")
 
     # Exit with appropriate code

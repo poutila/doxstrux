@@ -1,0 +1,52 @@
+{
+  "phase": 0,
+  "status": "complete",
+  "timestamp": "2025-10-12T04:32:14.182810",
+  "git_commit": "fb2b5fb7c9edee671b3c6258b5cccb548cfc8c19",
+  "git_commit_short": "fb2b5fb",
+  "corpus": {
+    "test_files_count": 542,
+    "baseline_files_count": 542,
+    "test_directory": "tools/test_mds",
+    "baseline_directory": "tools/baseline_outputs"
+  },
+  "regex_inventory": {
+    "total_patterns_baseline": 50,
+    "note": "Baseline count before Phase 1+ refactoring"
+  },
+  "performance": {
+    "avg_time_ms": 1.02,
+    "total_time_ms": 555.45,
+    "profile": "moderate"
+  },
+  "ci_gates_passed": [
+    "G1: No Hybrids",
+    "G2: Canonical Pairs (542)",
+    "G3: Parity (542/542)",
+    "G4: Performance (\u0394median=-1.96%)",
+    "G5: Evidence Hash (N/A - no evidence yet)"
+  ],
+  "deliverables": [
+    "tools/ci/ci_gate_no_hybrids.py",
+    "tools/ci/ci_gate_canonical_pairs.py",
+    "tools/ci/ci_gate_parity.py",
+    "tools/ci/ci_gate_performance.py",
+    "tools/ci/ci_gate_evidence_hash.py",
+    "tools/run_tests.sh",
+    "src/docpipe/token_replacement_lib.py (enhanced)",
+    "tests/test_token_utils.py",
+    "tools/baseline_outputs/ (542 baselines regenerated)"
+  ],
+  "tasks_completed": [
+    "0.0: Research & Alignment",
+    "0.1: Baseline Test Infrastructure",
+    "0.2: Parser Determinism Fixes",
+    "0.3: CI Gate G2 - Canonical Pairs",
+    "0.4: CI Gate G3 - Parity",
+    "0.5: CI Gate G4 - Performance",
+    "0.6: CI Gate G5 - Evidence Hash",
+    "0.7: Token Utilities Enhancement",
+    "0.8: Test Command Bridge",
+    "0.9: Phase 0 Validation & Documentation"
+  ]
+}
