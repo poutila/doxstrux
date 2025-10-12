@@ -736,7 +736,7 @@ python3 tools/baseline_test_runner.py \
 **Time**: 1-2 hours
 **Files**: `tools/create_regex_inventory.py`, `regex_refactor_docs/steps_taken/REGEX_INVENTORY.md`
 **Test**: N/A (analysis only, no code changes)
-**References**: EXECUTION_GUIDE.md §1, archived/Regex_calls_with_categories__action_queue_.csv
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §1, archived/Regex_calls_with_categories__action_queue_.csv
 
 **Steps**:
 - [x] Create `tools/create_regex_inventory.py`:
@@ -1134,13 +1134,13 @@ python3 tools/baseline_test_runner.py \
 
 #### Step 0.7.1: Add Iterative Token Walker
 - [x] Git checkpoint: `git commit -m "before adding token utilities"`
-- [x] Add `walk_tokens_iter()` function (from EXECUTION_GUIDE.md lines 170-182)
+- [x] Add `walk_tokens_iter()` function (from REGEX_REFACTOR_EXECUTION_GUIDE.md lines 170-182)
 - [x] **TEST**: Baseline tests (should pass, function not used yet)
 - [x] Write unit test: `tests/test_token_utils.py::test_walk_tokens_iter`
 - [x] Run: `pytest tests/test_token_utils.py -v`
 
 #### Step 0.7.2: Add Text Collection Helper
-- [x] Add `collect_text_between_tokens()` function (from EXECUTION_GUIDE.md lines 185-202)
+- [x] Add `collect_text_between_tokens()` function (from REGEX_REFACTOR_EXECUTION_GUIDE.md lines 185-202)
 - [x] **TEST**: Baseline tests
 - [x] Write unit test: `test_collect_text_between_tokens`
 - [x] Run: `pytest tests/test_token_utils.py -v`
@@ -1205,7 +1205,7 @@ def extract_code_blocks(tokens):
 **Time**: 1 hour
 **Files**: `tools/run_tests.sh`, `tools/README.md`
 **Test**: Script execution
-**References**: EXECUTION_GUIDE.md §2
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §2
 
 **Steps**:
 - [x] Create `tools/run_tests.sh`:
@@ -1422,7 +1422,7 @@ print(f"✓ Created .phase-0.complete.json ({corpus_count} test files, {regex_co
 **Time**: 12-16 hours
 **Status**: ⏸️ Blocked until Phase 0 complete
 **Unlock Requirement**: `.phase-0.complete.json` must exist and be valid
-**References**: EXECUTION_GUIDE.md §3 Phase 1
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §3 Phase 1
 
 ---
 
@@ -1669,7 +1669,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Goal**: Replace regex-based markdown stripping with token-based text extraction
 **Time**: 8-12 hours
 **Status**: ⏸️ Blocked until Phase 1 complete
-**References**: EXECUTION_GUIDE.md §3 Phase 2
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §3 Phase 2
 
 ---
 
@@ -1741,7 +1741,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Time**: 12-16 hours
 **Status**: ⏸️ Blocked until Phase 2 complete
 **Unlock Requirement**: `.phase-2.complete.json` must exist and be valid
-**References**: EXECUTION_GUIDE.md §3 Phase 3
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §3 Phase 3
 
 ---
 
@@ -1835,7 +1835,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Time**: 8-12 hours
 **Status**: ⏸️ Blocked until Phase 3 complete
 **Unlock Requirement**: `.phase-3.complete.json` must exist and be valid
-**References**: EXECUTION_GUIDE.md §3 Phase 4, POLICY_GATES.md §1.3
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §3 Phase 4, POLICY_GATES.md §1.3
 
 ---
 
@@ -1900,7 +1900,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Time**: 8-10 hours
 **Status**: ⏸️ Blocked until Phase 4 complete
 **Unlock Requirement**: `.phase-4.complete.json` must exist and be valid
-**References**: EXECUTION_GUIDE.md §3 Phase 5, POLICY_GATES.md §1.8
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §3 Phase 5, POLICY_GATES.md §1.8
 
 ---
 
@@ -1948,7 +1948,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Time**: 6-8 hours
 **Status**: ⏸️ Blocked until Phase 5 complete
 **Unlock Requirement**: `.phase-5.complete.json` must exist and be valid
-**References**: EXECUTION_GUIDE.md §3 Phase 6, POLICY_GATES.md §7
+**References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §3 Phase 6, POLICY_GATES.md §7
 
 ---
 
@@ -2433,7 +2433,7 @@ print(f"✓ Created .phase-{X}.complete.json")
 
 ## Deviations from Specification
 
-[List any intentional deviations from REGEX_REFACTOR_DETAILED_MERGED_vNext.md or EXECUTION_GUIDE.md]
+[List any intentional deviations from REGEX_REFACTOR_DETAILED_MERGED_vNext.md or REGEX_REFACTOR_EXECUTION_GUIDE.md]
 
 - **Deviation 1**: [Description and justification]
 
