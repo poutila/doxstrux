@@ -1,11 +1,14 @@
 {
   "content": {
     "lines": [
+      "---",
+      "k: v",
+      "...",
       "",
       "Paragraph.",
       ""
     ],
-    "raw": "\nParagraph.\n"
+    "raw": "---\nk: v\n...\n\nParagraph.\n"
   },
   "mappings": {
     "code_blocks": [],
@@ -14,12 +17,18 @@
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose"
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
     },
     "prose_lines": [
       0,
       1,
-      2
+      2,
+      3,
+      4,
+      5
     ]
   },
   "metadata": {
@@ -32,6 +41,7 @@
     "has_sections": false,
     "has_tables": false,
     "node_counts": {
+      "front_matter": 1,
       "inline": 1,
       "paragraph": 1,
       "root": 1,
@@ -70,8 +80,8 @@
       },
       "warnings": []
     },
-    "total_chars": 12,
-    "total_lines": 3
+    "total_chars": 25,
+    "total_lines": 6
   },
   "structure": {
     "blockquotes": [],
@@ -79,6 +89,9 @@
     "footnotes": {
       "definitions": [],
       "references": []
+    },
+    "frontmatter": {
+      "k": "v"
     },
     "headings": [],
     "html_blocks": [],
@@ -88,18 +101,19 @@
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 2,
+        "end_line": 5,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": null,
-        "start_line": 1,
+        "start_line": 4,
         "text": "Paragraph.",
         "word_count": 1
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

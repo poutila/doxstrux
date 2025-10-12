@@ -148,6 +148,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 37,
@@ -194,6 +195,7 @@
         "title": "Deep nested blockquotes (5 levels)"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

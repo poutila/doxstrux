@@ -39,12 +39,17 @@
     "raw": "+++\ntitle = \"Refactored quotes 03\"\nid = \"ref_quotes_03\"\nnote = \"quotes-case\"\n+++\n# Refactored quotes 03\nTitle\n=====\n\nSub\n----\n\n\n\n> Quote level 1\n> > Nested level 2 with a list:\n> > - a\n> > - b\n> >\n> > And a table:\n> > \n> > | Q | V |\n> > |---|---|\n> > | 1 | 2 |\n>\n> Fenced code:\n>\n> ```json\n> {\"a\":1}\n> ```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./quotes_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 29,
+        "language": "json",
+        "start_line": 27
+      }
+    ],
     "code_lines": [
       27,
       28,
-      29,
-      30
+      29
     ],
     "line_to_section": {
       "10": "section_sub",
@@ -102,7 +107,7 @@
       "28": "code",
       "29": "code",
       "3": "prose",
-      "30": "code",
+      "30": "prose",
       "31": "prose",
       "32": "prose",
       "33": "prose",
@@ -141,6 +146,7 @@
       24,
       25,
       26,
+      30,
       31,
       32,
       33
@@ -235,8 +241,7 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
     "total_chars": 489,
     "total_lines": 34
@@ -287,6 +292,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 104,
@@ -327,8 +333,16 @@
         "allowed": true,
         "line": 32,
         "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 32,
+        "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./quotes_04.md#sec0"
       },
       {
@@ -336,7 +350,7 @@
         "line": 32,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
@@ -344,25 +358,22 @@
         "line": 32,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       }
     ],
     "lists": [
       {
         "end_line": 19,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "a"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "b"
           }
@@ -370,7 +381,6 @@
         "items_count": 2,
         "section_id": "section_sub",
         "start_line": 16,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -460,6 +470,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "> > | Q | V |\n> > |---|---|\n> > | 1 | 2 |",
         "row_count": 1,
         "rows": [
           [
@@ -468,8 +479,10 @@
           ]
         ],
         "section_id": "section_sub",
-        "start_line": 21
+        "start_line": 21,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

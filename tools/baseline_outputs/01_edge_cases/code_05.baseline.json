@@ -30,20 +30,33 @@
     "raw": "{\"title\":\"Refactored code 05\",\"id\":\"ref_code_05\",\"note\":\"code-case\"}\n# Refactored code 05\nTitle\n=====\n\nSub\n----\n\n\n```html\nprint('x')\n```\n\n\n~~~json\necho hello\n~~~\n\n\nText with `inline` code and ``weird`` backticks.\n\n```yaml\nk: v\n  z: [  # unclosed fence below\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 11,
+        "language": "html",
+        "start_line": 9
+      },
+      {
+        "end_line": 16,
+        "language": "json",
+        "start_line": 14
+      },
+      {
+        "end_line": 23,
+        "language": "yaml",
+        "start_line": 21
+      }
+    ],
     "code_lines": [
       9,
       10,
       11,
-      12,
       14,
       15,
       16,
-      17,
       21,
       22,
-      23,
-      24
+      23
     ],
     "line_to_section": {
       "1": "section_refactored-code-05",
@@ -76,12 +89,12 @@
       "1": "prose",
       "10": "code",
       "11": "code",
-      "12": "code",
+      "12": "prose",
       "13": "prose",
       "14": "code",
       "15": "code",
       "16": "code",
-      "17": "code",
+      "17": "prose",
       "18": "prose",
       "19": "prose",
       "2": "prose",
@@ -89,7 +102,7 @@
       "21": "code",
       "22": "code",
       "23": "code",
-      "24": "code",
+      "24": "prose",
       "3": "prose",
       "4": "prose",
       "5": "prose",
@@ -108,10 +121,13 @@
       6,
       7,
       8,
+      12,
       13,
+      17,
       18,
       19,
-      20
+      20,
+      24
     ]
   },
   "metadata": {
@@ -200,6 +216,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 90,
@@ -305,6 +322,7 @@
         "title": "Sub"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

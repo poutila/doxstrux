@@ -108,6 +108,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 24,
@@ -172,6 +173,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "A | B\n---|---\n1 | 2",
         "row_count": 1,
         "rows": [
           [
@@ -180,8 +182,10 @@
           ]
         ],
         "section_id": "section_test-tbl_loose_pipes",
-        "start_line": 2
+        "start_line": 2,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

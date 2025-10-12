@@ -14,9 +14,6 @@
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "1": "section_title-wrong-close",
-      "2": "section_title-wrong-close",
-      "3": "section_title-wrong-close",
       "4": "section_content",
       "5": "section_content"
     },
@@ -38,17 +35,20 @@
     ]
   },
   "metadata": {
+    "frontmatter": {
+      "title": "Wrong Close"
+    },
     "has_code": false,
-    "has_frontmatter": false,
+    "has_frontmatter": true,
     "has_lists": false,
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
-      "heading": 2,
-      "hr": 1,
-      "inline": 2,
+      "front_matter": 1,
+      "heading": 1,
+      "inline": 1,
       "root": 1,
-      "text": 2
+      "text": 1
     },
     "security": {
       "profile_used": "moderate",
@@ -60,7 +60,7 @@
           "tel"
         ],
         "confusables_present": false,
-        "frontmatter_at_bof": false,
+        "frontmatter_at_bof": true,
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
@@ -93,17 +93,10 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "title": "Wrong Close"
+    },
     "headings": [
-      {
-        "end_char": 23,
-        "id": "heading_title-wrong-close",
-        "level": 1,
-        "line": 1,
-        "parent_heading_id": null,
-        "slug": "title-wrong-close",
-        "start_char": 4,
-        "text": "title: Wrong Close"
-      },
       {
         "end_char": 39,
         "id": "heading_content",
@@ -124,20 +117,6 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 29,
-        "end_line": 3,
-        "id": "section_title-wrong-close",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "title: Wrong Close\n----\n",
-        "slug": "title-wrong-close",
-        "start_char": 4,
-        "start_line": 1,
-        "text_content": "title: Wrong Close",
-        "title": "title: Wrong Close"
-      },
-      {
-        "child_ids": [],
         "end_char": 39,
         "end_line": 5,
         "id": "section_content",
@@ -151,6 +130,7 @@
         "title": "Content"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

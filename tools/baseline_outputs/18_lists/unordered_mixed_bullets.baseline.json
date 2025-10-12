@@ -18,10 +18,14 @@
     "raw": "# Unordered lists \u2014 mixed bullets\n\n- A\n  - A.1\n    * A.1.a\n* B\n+ C\n  + C.1\n\nParagraph between.\n\n- D (new list)\n"
   },
   "mappings": {
-    "code_blocks": [],
-    "code_lines": [
-      4
+    "code_blocks": [
+      {
+        "end_line": 3,
+        "language": "",
+        "start_line": 4
+      }
     ],
+    "code_lines": [],
     "line_to_section": {
       "0": "section_unordered-lists-mixed-bullets",
       "1": "section_unordered-lists-mixed-bullets",
@@ -45,7 +49,7 @@
       "12": "prose",
       "2": "prose",
       "3": "prose",
-      "4": "code",
+      "4": "prose",
       "5": "prose",
       "6": "prose",
       "7": "prose",
@@ -57,6 +61,7 @@
       1,
       2,
       3,
+      4,
       5,
       6,
       7,
@@ -99,21 +104,28 @@
         "has_html_inline": false,
         "has_script": false,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 1,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        }
+      ]
     },
     "total_chars": 111,
     "total_lines": 13
@@ -135,6 +147,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 34,
@@ -154,20 +167,16 @@
     "lists": [
       {
         "end_line": 5,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "A.1.a"
                   }
@@ -181,17 +190,14 @@
         "items_count": 1,
         "section_id": "section_unordered-lists-mixed-bullets",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 6,
-        "has_mixed_task_items": false,
         "id": "list_1",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "B"
           }
@@ -199,21 +205,17 @@
         "items_count": 1,
         "section_id": "section_unordered-lists-mixed-bullets",
         "start_line": 5,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 9,
-        "has_mixed_task_items": false,
         "id": "list_2",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "C.1"
               }
@@ -224,17 +226,14 @@
         "items_count": 1,
         "section_id": "section_unordered-lists-mixed-bullets",
         "start_line": 6,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 12,
-        "has_mixed_task_items": false,
         "id": "list_3",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "D (new list)"
           }
@@ -242,7 +241,6 @@
         "items_count": 1,
         "section_id": "section_unordered-lists-mixed-bullets",
         "start_line": 11,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -275,6 +273,7 @@
         "title": "Unordered lists \u2014 mixed bullets"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

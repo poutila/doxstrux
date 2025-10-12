@@ -94,6 +94,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 26,
@@ -151,6 +152,7 @@
         "title": "Test: fm_invalid_inline"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored footnotes 04\"",
+      "id: ref_footnotes_04",
+      "note: footnotes-case",
+      "---",
       "# Refactored footnotes 04",
       "",
       "Footnote ref here[^a].",
@@ -10,30 +15,35 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_05.md#sec0) [ext4](https://example.com/4)",
       ""
     ],
-    "raw": "# Refactored footnotes 04\n\nFootnote ref here[^a].\n\n[^a]: A proper footnote.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_05.md#sec0) [ext4](https://example.com/4)\n"
+    "raw": "---\ntitle: \"Refactored footnotes 04\"\nid: ref_footnotes_04\nnote: footnotes-case\n---\n# Refactored footnotes 04\n\nFootnote ref here[^a].\n\n[^a]: A proper footnote.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_05.md#sec0) [ext4](https://example.com/4)\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "0": "section_refactored-footnotes-04",
-      "1": "section_refactored-footnotes-04",
-      "2": "section_refactored-footnotes-04",
-      "3": "section_refactored-footnotes-04",
-      "4": "section_refactored-footnotes-04",
+      "10": "section_refactored-footnotes-04",
+      "11": "section_refactored-footnotes-04",
+      "12": "section_refactored-footnotes-04",
       "5": "section_refactored-footnotes-04",
       "6": "section_refactored-footnotes-04",
-      "7": "section_refactored-footnotes-04"
+      "7": "section_refactored-footnotes-04",
+      "8": "section_refactored-footnotes-04",
+      "9": "section_refactored-footnotes-04"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
       "5": "prose",
       "6": "prose",
-      "7": "prose"
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -43,7 +53,12 @@
       4,
       5,
       6,
-      7
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
     ]
   },
   "metadata": {
@@ -64,6 +79,7 @@
       "footnote_anchor": 1,
       "footnote_block": 1,
       "footnote_ref": 1,
+      "front_matter": 1,
       "heading": 1,
       "inline": 4,
       "link": 3,
@@ -109,13 +125,13 @@
       },
       "warnings": [
         {
-          "line": 6,
+          "line": 11,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 6,
+          "line": 11,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
@@ -132,11 +148,10 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 196,
-    "total_lines": 8
+    "total_chars": 279,
+    "total_lines": 13
   },
   "structure": {
     "blockquotes": [],
@@ -163,15 +178,20 @@
         }
       ]
     },
+    "frontmatter": {
+      "id": "ref_footnotes_04",
+      "note": "footnotes-case",
+      "title": "Refactored footnotes 04"
+    },
     "headings": [
       {
-        "end_char": 26,
+        "end_char": 109,
         "id": "heading_refactored-footnotes-04",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-footnotes-04",
-        "start_char": 0,
+        "start_char": 83,
         "text": "Refactored footnotes 04"
       }
     ],
@@ -181,53 +201,61 @@
     "links": [
       {
         "allowed": true,
-        "line": 6,
+        "line": 11,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 11,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./footnotes_05.md#sec0"
       },
       {
         "allowed": true,
-        "line": 6,
+        "line": 11,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       }
     ],
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 3,
+        "end_line": 8,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_refactored-footnotes-04",
-        "start_line": 2,
+        "start_line": 7,
         "text": "Footnote ref here.",
         "word_count": 3
       },
       {
-        "end_line": 7,
+        "end_line": 12,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_1",
         "section_id": "section_refactored-footnotes-04",
-        "start_line": 6,
+        "start_line": 11,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
         "word_count": 4
       },
       {
-        "end_line": 5,
+        "end_line": 10,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_2",
         "section_id": "section_refactored-footnotes-04",
-        "start_line": 4,
+        "start_line": 9,
         "text": "A proper footnote.",
         "word_count": 3
       }
@@ -235,19 +263,20 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 196,
-        "end_line": 7,
+        "end_char": 279,
+        "end_line": 12,
         "id": "section_refactored-footnotes-04",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored footnotes 04\n\nFootnote ref here[^a].\n\n[^a]: A proper footnote.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_05.md#sec0) [ext4](https://example.com/4)\n",
         "slug": "refactored-footnotes-04",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 83,
+        "start_line": 5,
         "text_content": "Refactored footnotes 04\n\nFootnote ref here.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4A proper footnote.",
         "title": "Refactored footnotes 04"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

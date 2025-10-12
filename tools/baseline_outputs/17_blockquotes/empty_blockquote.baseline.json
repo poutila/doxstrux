@@ -128,6 +128,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 24,
@@ -174,6 +175,7 @@
         "title": "Empty blockquote test"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

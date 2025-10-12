@@ -95,6 +95,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 36,
@@ -141,6 +142,7 @@
         "title": "Test: 05_missing_space_after_hash"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

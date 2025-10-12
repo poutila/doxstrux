@@ -14,10 +14,14 @@
     "raw": "# Malformed list indentation\n\n- Item 1\n - Wrong indent (1 space)\n   - Correct indent (2 spaces)\n- Item 2\n     - Too much indent (5 spaces)\n- Item 3\n"
   },
   "mappings": {
-    "code_blocks": [],
-    "code_lines": [
-      6
+    "code_blocks": [
+      {
+        "end_line": 5,
+        "language": "",
+        "start_line": 6
+      }
     ],
+    "code_lines": [],
     "line_to_section": {
       "0": "section_malformed-list-indentation",
       "1": "section_malformed-list-indentation",
@@ -36,7 +40,7 @@
       "3": "prose",
       "4": "prose",
       "5": "prose",
-      "6": "code",
+      "6": "prose",
       "7": "prose",
       "8": "prose"
     },
@@ -47,6 +51,7 @@
       3,
       4,
       5,
+      6,
       7,
       8
     ]
@@ -119,6 +124,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 29,
@@ -138,22 +144,18 @@
     "lists": [
       {
         "end_line": 8,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Item 1"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Correct indent (2 spaces)"
               }
@@ -162,11 +164,9 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Too much indent (5 spaces)"
               }
@@ -175,7 +175,6 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Item 3"
           }
@@ -183,7 +182,6 @@
         "items_count": 4,
         "section_id": "section_malformed-list-indentation",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -204,6 +202,7 @@
         "title": "Malformed list indentation"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

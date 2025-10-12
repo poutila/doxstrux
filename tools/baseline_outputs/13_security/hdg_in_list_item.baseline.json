@@ -92,6 +92,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -111,12 +112,10 @@
     "lists": [
       {
         "end_line": 4,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "body"
           }
@@ -124,7 +123,6 @@
         "items_count": 1,
         "section_id": "section_h1-in-list",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -159,6 +157,7 @@
         "title": "H1 in list"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

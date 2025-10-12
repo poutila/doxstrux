@@ -13,13 +13,18 @@
     "raw": "# Test: hdg_code_fence\n\n```\n# not heading\n## still not\n```\nText\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 5,
+        "language": "",
+        "start_line": 2
+      }
+    ],
     "code_lines": [
       2,
       3,
       4,
-      5,
-      6
+      5
     ],
     "line_to_section": {
       "0": "section_test-hdg_code_fence",
@@ -38,12 +43,13 @@
       "3": "code",
       "4": "code",
       "5": "code",
-      "6": "code",
+      "6": "prose",
       "7": "prose"
     },
     "prose_lines": [
       0,
       1,
+      6,
       7
     ]
   },
@@ -114,6 +120,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 23,
@@ -160,6 +167,7 @@
         "title": "Test: hdg_code_fence"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

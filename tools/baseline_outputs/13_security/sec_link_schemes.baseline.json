@@ -114,8 +114,7 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
     "total_chars": 155,
     "total_lines": 5
@@ -127,6 +126,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -148,7 +148,7 @@
         "line": 2,
         "scheme": "https",
         "text": "ext",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -156,8 +156,16 @@
         "line": 2,
         "scheme": "mailto",
         "text": "mail",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:a@b.com"
+      },
+      {
+        "allowed": true,
+        "line": 3,
+        "scheme": null,
+        "text": "bad",
+        "type": "relative",
+        "url": "ht!tp://broken"
       },
       {
         "allowed": true,
@@ -172,7 +180,7 @@
         "line": 3,
         "scheme": null,
         "text": "rel",
-        "type": "internal",
+        "type": "relative",
         "url": "./doc.md"
       }
     ],
@@ -206,6 +214,7 @@
         "title": "Test: sec_link_schemes"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

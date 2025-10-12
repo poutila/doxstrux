@@ -81,6 +81,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 17,
@@ -139,6 +140,7 @@
         "title": "Title"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

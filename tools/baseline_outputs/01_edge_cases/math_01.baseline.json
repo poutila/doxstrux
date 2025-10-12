@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored math 01\"",
+      "id: ref_math_01",
+      "note: math-case",
+      "---",
       "# Refactored math 01",
       "",
       "",
@@ -14,19 +19,19 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
       ""
     ],
-    "raw": "# Refactored math 01\n\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
+    "raw": "---\ntitle: \"Refactored math 01\"\nid: ref_math_01\nnote: math-case\n---\n# Refactored math 01\n\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "0": "section_refactored-math-01",
-      "1": "section_refactored-math-01",
       "10": "section_refactored-math-01",
       "11": "section_refactored-math-01",
-      "2": "section_refactored-math-01",
-      "3": "section_refactored-math-01",
-      "4": "section_refactored-math-01",
+      "12": "section_refactored-math-01",
+      "13": "section_refactored-math-01",
+      "14": "section_refactored-math-01",
+      "15": "section_refactored-math-01",
+      "16": "section_refactored-math-01",
       "5": "section_refactored-math-01",
       "6": "section_refactored-math-01",
       "7": "section_refactored-math-01",
@@ -38,6 +43,11 @@
       "1": "prose",
       "10": "prose",
       "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -59,7 +69,12 @@
       8,
       9,
       10,
-      11
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
     ]
   },
   "metadata": {
@@ -76,6 +91,7 @@
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "front_matter": 1,
       "heading": 1,
       "inline": 4,
       "link": 4,
@@ -123,13 +139,13 @@
       },
       "warnings": [
         {
-          "line": 10,
+          "line": 15,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 10,
+          "line": 15,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
@@ -146,11 +162,10 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 292,
-    "total_lines": 12
+    "total_chars": 360,
+    "total_lines": 17
   },
   "structure": {
     "blockquotes": [],
@@ -159,15 +174,20 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "id": "ref_math_01",
+      "note": "math-case",
+      "title": "Refactored math 01"
+    },
     "headings": [
       {
-        "end_char": 21,
+        "end_char": 89,
         "id": "heading_refactored-math-01",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-math-01",
-        "start_char": 0,
+        "start_char": 68,
         "text": "Refactored math 01"
       }
     ],
@@ -177,61 +197,69 @@
     "links": [
       {
         "allowed": true,
-        "line": 10,
+        "line": 15,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 15,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./math_02.md#sec0"
       },
       {
         "allowed": true,
-        "line": 10,
+        "line": 15,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
         "allowed": true,
-        "line": 10,
+        "line": 15,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       }
     ],
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 4,
+        "end_line": 9,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_refactored-math-01",
-        "start_line": 3,
+        "start_line": 8,
         "text": "Inline math $E=mc^2$ and block:",
         "word_count": 5
       },
       {
-        "end_line": 8,
+        "end_line": 13,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_1",
         "section_id": "section_refactored-math-01",
-        "start_line": 5,
+        "start_line": 10,
         "text": "$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$",
         "word_count": 7
       },
       {
-        "end_line": 11,
+        "end_line": 16,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_2",
         "section_id": "section_refactored-math-01",
-        "start_line": 10,
+        "start_line": 15,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
         "word_count": 6
       }
@@ -239,19 +267,20 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 292,
-        "end_line": 11,
+        "end_char": 360,
+        "end_line": 16,
         "id": "section_refactored-math-01",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored math 01\n\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
         "slug": "refactored-math-01",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 68,
+        "start_line": 5,
         "text_content": "Refactored math 01\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
         "title": "Refactored math 01"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -13,10 +13,15 @@
     "raw": "Term E\n: First para\n: Second para\n\n  Code:\n\n      indented code\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "",
+        "start_line": 6
+      }
+    ],
     "code_lines": [
-      6,
-      7
+      6
     ],
     "line_to_section": {},
     "line_to_type": {
@@ -27,7 +32,7 @@
       "4": "prose",
       "5": "prose",
       "6": "code",
-      "7": "code"
+      "7": "prose"
     },
     "prose_lines": [
       0,
@@ -35,7 +40,8 @@
       2,
       3,
       4,
-      5
+      5,
+      7
     ]
   },
   "metadata": {
@@ -105,6 +111,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -136,6 +143,7 @@
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

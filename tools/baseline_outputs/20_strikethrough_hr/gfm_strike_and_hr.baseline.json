@@ -125,6 +125,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 39,
@@ -182,6 +183,7 @@
         "title": "GFM strikethrough + horizontal rules"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -84,7 +84,7 @@
       },
       "warnings": [
         {
-          "line": null,
+          "line": 2,
           "message": "Document contains <script> tags",
           "type": "script_tag"
         },
@@ -110,6 +110,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 24,
@@ -156,6 +157,7 @@
         "title": "Test: sec_html_script"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -17,12 +17,17 @@
     "raw": "# Blockquote with code and hr\n\n> Intro line\n>\n> ```python\n> print(\"hello\")\n> ```\n>\n> ---\n>\n> After hr\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "python",
+        "start_line": 4
+      }
+    ],
     "code_lines": [
       4,
       5,
-      6,
-      7
+      6
     ],
     "line_to_section": {
       "0": "section_blockquote-with-code-and-hr",
@@ -48,7 +53,7 @@
       "4": "code",
       "5": "code",
       "6": "code",
-      "7": "code",
+      "7": "prose",
       "8": "prose",
       "9": "prose"
     },
@@ -57,6 +62,7 @@
       1,
       2,
       3,
+      7,
       8,
       9,
       10,
@@ -151,6 +157,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -185,6 +192,7 @@
         "title": "Blockquote with code and hr"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

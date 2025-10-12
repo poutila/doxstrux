@@ -129,6 +129,7 @@
         }
       ]
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -186,6 +187,7 @@
         "title": "Test: sec_footnote_injection"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

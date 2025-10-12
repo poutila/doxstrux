@@ -17,37 +17,54 @@
     "raw": "```python\nprint(\"hi\")\n```\n\n```js { .compact #code1 data-x=1 }\nconsole.log(\"x\")\n```\n\n~~~txt\ntilde fences ok\n~~~\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 2,
+        "language": "python",
+        "start_line": 0
+      },
+      {
+        "end_line": 6,
+        "language": "js { .compact #code1 data-x=1 }",
+        "start_line": 4
+      },
+      {
+        "end_line": 10,
+        "language": "txt",
+        "start_line": 8
+      }
+    ],
     "code_lines": [
       0,
       1,
       2,
-      3,
       4,
       5,
       6,
-      7,
       8,
       9,
-      10,
-      11
+      10
     ],
     "line_to_section": {},
     "line_to_type": {
       "0": "code",
       "1": "code",
       "10": "code",
-      "11": "code",
+      "11": "prose",
       "2": "code",
-      "3": "code",
+      "3": "prose",
       "4": "code",
       "5": "code",
       "6": "code",
-      "7": "code",
+      "7": "prose",
       "8": "code",
       "9": "code"
     },
-    "prose_lines": []
+    "prose_lines": [
+      3,
+      7,
+      11
+    ]
   },
   "metadata": {
     "has_code": true,
@@ -130,6 +147,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -138,6 +156,7 @@
     "lists": [],
     "paragraphs": [],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

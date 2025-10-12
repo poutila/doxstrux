@@ -69,23 +69,25 @@
 
 ## Phase 4
 
-**Count**: 13
+**Count**: 4 (COMPLETE - 4 removed, 9 retained as fallbacks/utilities/precompiled)
+
+**Status**: ✅ COMPLETE (2025-10-12)
 
 | Line | Context | Pattern | Purpose | Replacement Strategy |
 |------|---------|---------|---------|---------------------|
-| 252 | `validate_content` | `<meta[^>]+http-equiv\s*=\s*[` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 253 | `validate_content` | `<(iframe\|object\|embed)[^>]*>` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 936 | `_sanitize_html_content` | `<[^>]+>` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 951 | `_sanitize_html_content` | `\bon\w+\s*=\s*[\` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 952 | `_sanitize_html_content` | `javascript:` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 1023 | `sanitize` | `<\s*script\b` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 1025 | `sanitize` | `<\s*script\b[^>]*>.*?<\s*/\s*script\s*>` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 1029 | `sanitize` | `\bon[a-z]+\s*=` | HTML detection/sanitization (event handlers) | Token-based: Check token.type == 'html_block', 'ht |
-| 1031 | `sanitize` | `\bon[a-z]+\s*=\s*(\"[^\"]*\"\|'[^']*'\|[^\s>]+)` | HTML detection/sanitization (event handlers) | Token-based: Check token.type == 'html_block', 'ht |
-| 1035 | `sanitize` | `<\w+[^>]*>` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 1270 | `_generate_security_metadata` | `<(a\|img\|em\|strong\|b\|i\|u\|code\|kbd\|sup\|...` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 1274 | `_generate_security_metadata` | `<script[\s>]` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
-| 2944 | `_extract_html_tag_hints` | `<(\w+)` | HTML detection/sanitization | Token-based: Check token.type == 'html_block', 'ht |
+| 1148-1149 | `_generate_security_metadata` | `<(div\|span\|script...)[\s>]` | HTML block detection | **REMOVED**: Replaced with token-based detection using `structure["html_blocks"]` |
+| 1152 | `_generate_security_metadata` | `<(a\|img\|em...)[\s>]` | HTML inline detection | **REMOVED**: Replaced with token-based detection using `structure["html_inline"]` |
+| 1156 | `_generate_security_metadata` | `<script[\s>]` | Script detection | **REMOVED**: Replaced with token-based content inspection |
+| 1163-1164 | `_generate_security_metadata` | `\bon(load\|error...)\\s*=` | Event handler detection | **REMOVED**: Replaced with token-based content inspection |
+| 1023, 1025, 1029, 1031, 1035 | `sanitize` (deprecated) | Various HTML patterns | HTML detection/removal | **ALREADY HANDLED**: Deprecated in Phase 3 |
+| 936 | `_sanitize_html_content` | `<[^>]+>` | HTML stripping (bleach fallback) | **RETAINED**: Defensive fallback when bleach unavailable |
+| 951 | `_sanitize_html_content` | `\bon\w+\s*=...` | Event handler stripping (bleach fallback) | **RETAINED**: Defensive fallback when bleach unavailable |
+| 952 | `_sanitize_html_content` | `javascript:` | JavaScript protocol stripping (bleach fallback) | **RETAINED**: Defensive fallback when bleach unavailable |
+| 965-966 | `_sanitize_html_content` | `<script[^>]*>.*?</script>` | Script tag removal (bleach fallback) | **RETAINED**: Defensive fallback when bleach unavailable |
+| 2824 | `_extract_html_tag_hints` | `<(\w+)` | Tag name extraction | **RETAINED**: Simple utility, low value to replace |
+| 252-253 | Class attributes | `_META_REFRESH_PAT`, `_FRAMELIKE_PAT` | Security detection | **RETAINED**: Already precompiled and optimized |
+
+**Implementation**: Replaced 4 regex detection patterns in `_generate_security_metadata()` with token-based detection using existing `_extract_html()` results. Retained 9 patterns: 5 bleach fallbacks (defensive programming), 1 utility function (low ROI), 2 precompiled security patterns (already optimized), plus 5 deprecated patterns in `sanitize()` (already handled in Phase 3).
 
 ## Phase 5
 

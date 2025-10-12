@@ -28,12 +28,17 @@
     "raw": "+++\ntitle = \"Refactored clean 05\"\nid = \"ref_clean_05\"\nnote = \"clean-case\"\n+++\n# Refactored clean 05\n\nA simple paragraph with alpha whiskey november lima zulu uniform delta zulu foxtrot charlie whiskey alpha.\n\n- list level 1\n  * list level 2\n    - list level 3\n      * list level 4\n            code in list\n\n| H1 | H2 | H3 | H4 |\n|:--:|:---|:---|:--:|\n| 1:1 uniform mike sierra | 1:2 hotel bravo november | 1:3 victor | 1:4 kilo romeo |\n| 2:1 papa xray | 2:2 charlie | 2:3 charlie | 2:4 victor echo lima |\n| 3:1 sierra mike | 3:2 alpha | 3:3 hotel bravo romeo | 3:4 delta uniform mike |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_01.md#sec2)\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 13,
+        "language": "",
+        "start_line": 11
+      }
+    ],
     "code_lines": [
       11,
       12,
-      13,
-      14
+      13
     ],
     "line_to_section": {
       "10": "section_refactored-clean-05",
@@ -62,7 +67,7 @@
       "11": "code",
       "12": "code",
       "13": "code",
-      "14": "code",
+      "14": "prose",
       "15": "prose",
       "16": "prose",
       "17": "prose",
@@ -92,6 +97,7 @@
       8,
       9,
       10,
+      14,
       15,
       16,
       17,
@@ -195,8 +201,7 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_2_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
     "total_chars": 821,
     "total_lines": 23
@@ -218,6 +223,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 100,
@@ -238,8 +244,16 @@
         "allowed": true,
         "line": 21,
         "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 21,
+        "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./clean_01.md#sec0"
       },
       {
@@ -247,7 +261,7 @@
         "line": 21,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
@@ -255,39 +269,42 @@
         "line": 21,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       },
       {
         "allowed": true,
         "line": 21,
         "scheme": null,
+        "text": "bad7",
+        "type": "relative",
+        "url": "ht!tp://broken%5E7"
+      },
+      {
+        "allowed": true,
+        "line": 21,
+        "scheme": null,
         "text": "cross8",
-        "type": "internal",
+        "type": "relative",
         "url": "./clean_01.md#sec2"
       }
     ],
     "lists": [
       {
         "end_line": 15,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [
                       {
                         "blocks": [],
-                        "checked": null,
                         "children": [],
                         "text": "list level 4\ncode in list"
                       }
@@ -304,7 +321,6 @@
         "items_count": 1,
         "section_id": "section_refactored-clean-05",
         "start_line": 9,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -381,6 +397,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "| H1 | H2 | H3 | H4 |\n|:--:|:---|:---|:--:|\n| 1:1 uniform mike sierra | 1:2 hotel bravo november | 1:3 victor | 1:4 kilo romeo |\n| 2:1 papa xray | 2:2 charlie | 2:3 charlie | 2:4 victor echo lima |\n| 3:1 sierra mike | 3:2 alpha | 3:3 hotel bravo romeo | 3:4 delta uniform mike |",
         "row_count": 3,
         "rows": [
           [
@@ -403,8 +420,10 @@
           ]
         ],
         "section_id": "section_refactored-clean-05",
-        "start_line": 15
+        "start_line": 15,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

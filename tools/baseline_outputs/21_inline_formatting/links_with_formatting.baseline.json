@@ -184,6 +184,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -205,7 +206,7 @@
         "line": 2,
         "scheme": "https",
         "text": "Bold link text",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -213,7 +214,7 @@
         "line": 4,
         "scheme": "https",
         "text": "Italic link text",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -221,7 +222,7 @@
         "line": 6,
         "scheme": "https",
         "text": "Bold italic link",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -229,7 +230,7 @@
         "line": 8,
         "scheme": "https",
         "text": "Code in link",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -237,7 +238,7 @@
         "line": 10,
         "scheme": "https",
         "text": "Struck link",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -245,7 +246,7 @@
         "line": 12,
         "scheme": "https",
         "text": "Link inside bold",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -253,7 +254,7 @@
         "line": 14,
         "scheme": "https",
         "text": "Link inside italic",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       }
     ],
@@ -353,6 +354,7 @@
         "title": "Links with inline formatting"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

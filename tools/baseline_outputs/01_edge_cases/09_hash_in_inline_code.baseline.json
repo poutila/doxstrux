@@ -96,6 +96,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -142,6 +143,7 @@
         "title": "Test: 09_hash_in_inline_code"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

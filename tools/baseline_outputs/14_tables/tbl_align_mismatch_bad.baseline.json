@@ -103,6 +103,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -149,6 +150,7 @@
         "title": "Test: tbl_align_mismatch_bad"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

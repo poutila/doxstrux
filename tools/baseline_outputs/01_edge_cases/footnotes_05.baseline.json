@@ -143,8 +143,7 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
     "total_chars": 285,
     "total_lines": 13
@@ -174,6 +173,7 @@
         }
       ]
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 116,
@@ -194,8 +194,16 @@
         "allowed": true,
         "line": 11,
         "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 11,
+        "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./footnotes_01.md#sec0"
       },
       {
@@ -203,7 +211,7 @@
         "line": 11,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       }
     ],
@@ -270,6 +278,7 @@
         "title": "Refactored footnotes 05"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

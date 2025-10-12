@@ -90,6 +90,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 36,
@@ -162,6 +163,7 @@
         "title": "Valid H3 (3 spaces before)"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

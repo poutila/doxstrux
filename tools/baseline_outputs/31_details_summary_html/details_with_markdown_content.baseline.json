@@ -17,10 +17,15 @@
     "raw": "<details>\n  <summary>Click me</summary>\n\n  - List item inside details\n  - **Bold** works here\n\n  <details>\n    <summary>Nested</summary>\n    Content\n  </details>\n</details>\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 7,
+        "language": "",
+        "start_line": 7
+      }
+    ],
     "code_lines": [
-      7,
-      8
+      7
     ],
     "line_to_section": {},
     "line_to_type": {
@@ -34,7 +39,7 @@
       "5": "prose",
       "6": "prose",
       "7": "code",
-      "8": "code",
+      "8": "prose",
       "9": "prose"
     },
     "prose_lines": [
@@ -45,6 +50,7 @@
       4,
       5,
       6,
+      8,
       9,
       10,
       11
@@ -79,7 +85,7 @@
         "frontmatter_at_bof": false,
         "has_data_uri_images": false,
         "has_event_handlers": false,
-        "has_html_block": false,
+        "has_html_block": true,
         "has_html_inline": false,
         "has_script": false,
         "html_disallowed": true,
@@ -130,6 +136,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -138,18 +145,15 @@
     "lists": [
       {
         "end_line": 6,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "List item inside details"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Bold works here"
           }
@@ -157,12 +161,12 @@
         "items_count": 2,
         "section_id": null,
         "start_line": 3,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
     "paragraphs": [],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

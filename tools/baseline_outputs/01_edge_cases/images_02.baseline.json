@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored images 02\"",
+      "id: ref_images_02",
+      "note: images-case",
+      "---",
       "# Refactored images 02",
       "Title",
       "=====",
@@ -14,23 +19,23 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./images_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)",
       ""
     ],
-    "raw": "# Refactored images 02\nTitle\n=====\n\nSub\n----\n\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./images_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n"
+    "raw": "---\ntitle: \"Refactored images 02\"\nid: ref_images_02\nnote: images-case\n---\n# Refactored images 02\nTitle\n=====\n\nSub\n----\n\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./images_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "0": "section_refactored-images-02",
-      "1": "section_title",
       "10": "section_sub",
       "11": "section_sub",
-      "2": "section_title",
-      "3": "section_title",
-      "4": "section_sub",
-      "5": "section_sub",
-      "6": "section_sub",
-      "7": "section_sub",
-      "8": "section_sub",
+      "12": "section_sub",
+      "13": "section_sub",
+      "14": "section_sub",
+      "15": "section_sub",
+      "16": "section_sub",
+      "5": "section_refactored-images-02",
+      "6": "section_title",
+      "7": "section_title",
+      "8": "section_title",
       "9": "section_sub"
     },
     "line_to_type": {
@@ -38,6 +43,11 @@
       "1": "prose",
       "10": "prose",
       "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -59,7 +69,12 @@
       8,
       9,
       10,
-      11
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
     ]
   },
   "metadata": {
@@ -76,6 +91,7 @@
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "front_matter": 1,
       "heading": 3,
       "image": 1,
       "inline": 5,
@@ -123,19 +139,19 @@
       },
       "warnings": [
         {
-          "line": 8,
+          "line": 13,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://via.placeholder.com/64"
         },
         {
-          "line": 10,
+          "line": 15,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 10,
+          "line": 15,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
@@ -152,11 +168,10 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 242,
-    "total_lines": 12
+    "total_chars": 316,
+    "total_lines": 17
   },
   "structure": {
     "blockquotes": [],
@@ -165,35 +180,40 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "id": "ref_images_02",
+      "note": "images-case",
+      "title": "Refactored images 02"
+    },
     "headings": [
       {
-        "end_char": 23,
+        "end_char": 97,
         "id": "heading_refactored-images-02",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-images-02",
-        "start_char": 0,
+        "start_char": 74,
         "text": "Refactored images 02"
       },
       {
-        "end_char": 29,
+        "end_char": 103,
         "id": "heading_title",
         "level": 1,
-        "line": 1,
+        "line": 6,
         "parent_heading_id": null,
         "slug": "title",
-        "start_char": 23,
+        "start_char": 97,
         "text": "Title"
       },
       {
-        "end_char": 40,
+        "end_char": 114,
         "id": "heading_sub",
         "level": 1,
-        "line": 4,
+        "line": 9,
         "parent_heading_id": null,
         "slug": "sub",
-        "start_char": 36,
+        "start_char": 110,
         "text": "Sub"
       }
     ],
@@ -206,9 +226,9 @@
         "format": "unknown",
         "has_alt": true,
         "has_title": true,
-        "image_id": "15cde9e8ad4d561a",
+        "image_id": "e4c59911894d1d72",
         "image_kind": "external",
-        "line": 8,
+        "line": 13,
         "scheme": "https",
         "src": "https://via.placeholder.com/64",
         "title": "t0"
@@ -218,9 +238,9 @@
       {
         "alt": "ok0",
         "format": "unknown",
-        "image_id": "15cde9e8ad4d561a",
+        "image_id": "e4c59911894d1d72",
         "image_kind": "external",
-        "line": 8,
+        "line": 13,
         "src": "https://via.placeholder.com/64",
         "text": "ok0",
         "title": "t0",
@@ -229,50 +249,58 @@
       },
       {
         "allowed": true,
-        "line": 10,
+        "line": 15,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 15,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./images_03.md#sec0"
       },
       {
         "allowed": true,
-        "line": 10,
+        "line": 15,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
         "allowed": true,
-        "line": 10,
+        "line": 15,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       }
     ],
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 9,
+        "end_line": 14,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_sub",
-        "start_line": 8,
+        "start_line": 13,
         "text": "ok0ok0",
         "word_count": 1
       },
       {
-        "end_line": 11,
+        "end_line": 16,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_1",
         "section_id": "section_sub",
-        "start_line": 10,
+        "start_line": 15,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
         "word_count": 5
       }
@@ -280,47 +308,48 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 23,
-        "end_line": 0,
+        "end_char": 97,
+        "end_line": 5,
         "id": "section_refactored-images-02",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored images 02",
         "slug": "refactored-images-02",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 74,
+        "start_line": 5,
         "text_content": "Refactored images 02",
         "title": "Refactored images 02"
       },
       {
         "child_ids": [],
-        "end_char": 36,
-        "end_line": 3,
+        "end_char": 110,
+        "end_line": 8,
         "id": "section_title",
         "level": 1,
         "parent_id": null,
         "raw_content": "Title\n=====\n",
         "slug": "title",
-        "start_char": 23,
-        "start_line": 1,
+        "start_char": 97,
+        "start_line": 6,
         "text_content": "Title",
         "title": "Title"
       },
       {
         "child_ids": [],
-        "end_char": 242,
-        "end_line": 11,
+        "end_char": 316,
+        "end_line": 16,
         "id": "section_sub",
         "level": 1,
         "parent_id": null,
         "raw_content": "Sub\n----\n\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./images_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n",
         "slug": "sub",
-        "start_char": 36,
-        "start_line": 4,
+        "start_char": 110,
+        "start_line": 9,
         "text_content": "Sub\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
         "title": "Sub"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -156,8 +156,7 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
     "total_chars": 367,
     "total_lines": 17
@@ -169,6 +168,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 96,
@@ -189,8 +189,16 @@
         "allowed": true,
         "line": 15,
         "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 15,
+        "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./math_03.md#sec0"
       },
       {
@@ -198,7 +206,7 @@
         "line": 15,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
@@ -206,7 +214,7 @@
         "line": 15,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       }
     ],
@@ -273,6 +281,7 @@
         "title": "Refactored math 02"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

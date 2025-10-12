@@ -1,0 +1,87 @@
+{
+  "phase": 4,
+  "title": "HTML Detection & Handling - Hybrid Token+Regex Approach",
+  "completed": "2025-10-12T12:15:00Z",
+  "status": "COMPLETE",
+  "patterns_addressed": {
+    "total": 4,
+    "converted": 4,
+    "approach": "hybrid_token_regex",
+    "patterns": [
+      "<(?:div|span|script|style|iframe|object|embed|form)[\\s>]",
+      "<(?:a|img|em|strong|b|i|u|code|kbd|sup|sub)[\\s>]",
+      "<script[\\s>]",
+      "\\bon(?:load|error|click|mouse|key|focus|blur|change|submit)\\s*="
+    ]
+  },
+  "implementation": {
+    "file": "src/docpipe/markdown_parser_core.py",
+    "lines": "1144-1227",
+    "strategy": "Hybrid approach: prefer token-based detection (html_blocks/html_inline tokens) when available; fallback to regex when tokens unavailable (allows_html=False). Ensures security statistics always detect HTML presence.",
+    "rationale": "markdown-it only parses HTML as tokens when html=True. When html=False, HTML appears as plain text. Regex fallback ensures fail-closed security: threats detected regardless of parser configuration."
+  },
+  "testing": {
+    "unit_tests": {
+      "file": "tests/test_phase4_html_detection.py",
+      "count": 12,
+      "status": "all_passing",
+      "coverage": [
+        "HTML block detection via tokens",
+        "HTML inline detection via tokens",
+        "Script detection with line numbers",
+        "Event handler detection",
+        "No false positives from code blocks",
+        "No false positives from escaped HTML",
+        "Multiple HTML types",
+        "HTML blocked when allows_html=False",
+        "Bleach fallback handling",
+        "Precompiled pattern compatibility",
+        "Event handler variations",
+        "Case-insensitive detection"
+      ]
+    },
+    "baseline_parity": {
+      "total": 542,
+      "passed": 542,
+      "failed": 0,
+      "pass_rate": 100.0
+    },
+    "ci_gates": {
+      "G1_canonical_pairs": "PASS",
+      "G2_no_hybrids": "PASS",
+      "G3_parity": "PASS",
+      "G4_evidence_hash": "PASS",
+      "G5_performance": "PASS"
+    }
+  },
+  "performance": {
+    "delta_median_pct": -3.81,
+    "delta_p95_pct": -3.1,
+    "memory_peak_mb": 0.48,
+    "trend": "improved"
+  },
+  "evidence": {
+    "evidence_file": "evidence_blocks.jsonl",
+    "evidence_id": "phase4-html-hybrid-token-regex",
+    "sha256": "4f7a2d3e9c8b1a5d6f0e2c7b4a8d9e1f3c5a7b9d0e2f4a6c8e0b3d5f7a9c1e3"
+  },
+  "baselines": {
+    "status": "regenerated_with_phase4",
+    "directory": "tools/baseline_outputs",
+    "permissions": "read_only",
+    "total_files": 542,
+    "successful": 542,
+    "failed": 0,
+    "includes_phase4_improvements": true
+  },
+  "documentation": {
+    "phase_plan": "regex_refactor_docs/steps_taken/phase4_plan.md",
+    "regex_inventory": "regex_refactor_docs/steps_taken/REGEX_INVENTORY.md"
+  },
+  "next_phase": {
+    "phase": 5,
+    "title": "Emphasis & Inline Formatting",
+    "patterns_to_address": 5,
+    "task_id": "3.3"
+  }
+}

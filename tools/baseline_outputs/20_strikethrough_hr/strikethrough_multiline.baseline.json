@@ -116,6 +116,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 29,
@@ -184,6 +185,7 @@
         "title": "Strikethrough across lines"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

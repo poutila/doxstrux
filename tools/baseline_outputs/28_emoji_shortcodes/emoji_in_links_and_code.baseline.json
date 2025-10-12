@@ -13,12 +13,17 @@
     "raw": "Link text with :tada: [click :tada:](https://e.x)\n\nCode: `:tada:` and\n\n```\n:not_emoji:\n```\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "",
+        "start_line": 4
+      }
+    ],
     "code_lines": [
       4,
       5,
-      6,
-      7
+      6
     ],
     "line_to_section": {},
     "line_to_type": {
@@ -29,13 +34,14 @@
       "4": "code",
       "5": "code",
       "6": "code",
-      "7": "code"
+      "7": "prose"
     },
     "prose_lines": [
       0,
       1,
       2,
-      3
+      3,
+      7
     ]
   },
   "metadata": {
@@ -115,6 +121,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -125,7 +132,7 @@
         "line": 0,
         "scheme": "https",
         "text": "click :tada:",
-        "type": "external",
+        "type": "absolute",
         "url": "https://e.x"
       }
     ],
@@ -155,6 +162,7 @@
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored tables 03\"",
+      "id: ref_tables_03",
+      "note: tables-case",
+      "---",
       "# Refactored tables 03",
       "",
       "| H1 | H2 | H3 | H4 | H5 | H6 |",
@@ -23,14 +28,12 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tables_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)",
       ""
     ],
-    "raw": "# Refactored tables 03\n\n| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--:|---:|:--:|---:|---:|:---|\n| 1\\\\:1 hotel yankee | 1:2 quebec kilo uniform | 1\\\\:3 sierra november | 1:4 echo | 1\\\\:5 hotel lima india | 1:6 echo |\n| 2\\\\:1 romeo papa victor | 2:2 victor yankee | 2\\\\:3 india | 2:4 juliet victor kilo | 2\\\\:5 foxtrot | 2:6 kilo yankee delta |\n| 3\\\\:1 bravo uniform echo | 3:2 uniform | 3\\\\:3 golf zulu papa | 3:4 whiskey | 3\\\\:5 lima november foxtrot | 3:6 golf |\n| 4\\\\:1 sierra | 4:2 lima foxtrot sierra | 4\\\\:3 zulu kilo | 4:4 whiskey | 4\\\\:5 delta sierra |\n| 5\\\\:1 bravo oscar | 5:2 papa november | 5\\\\:3 zulu juliet | 5:4 hotel xray echo | 5\\\\:5 juliet tango | 5:6 quebec alpha |\n| 6\\\\:1 november zulu | 6:2 xray mike lima | 6\\\\:3 uniform charlie | 6:4 xray india | 6\\\\:5 papa | 6:6 quebec lima | 6\\\\:7 hotel |\n| 7\\\\:1 delta quebec | 7:2 delta charlie delta | 7\\\\:3 golf papa yankee | 7:4 yankee whiskey | 7\\\\:5 kilo hotel | 7:6 zulu juliet | 7\\\\:7 charlie kilo papa |\n| 8\\\\:1 zulu alpha alpha | 8:2 delta | 8\\\\:3 golf sierra | 8:4 india quebec lima | 8\\\\:5 india quebec mike |\n| 9\\\\:1 foxtrot india alpha | 9:2 yankee | 9\\\\:3 romeo juliet | 9:4 xray | 9\\\\:5 papa |\n\n| H1 | H2 | H3 | H4 |\n|---:|----|---:|:--:|\n| 1:1 kilo golf charlie | 1:2 foxtrot hotel kilo | 1:3 delta romeo delta | 1:4 victor charlie |\n| 2:1 foxtrot | 2:2 bravo golf | 2:3 november | 2:4 golf zulu yankee |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tables_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n"
+    "raw": "---\ntitle: \"Refactored tables 03\"\nid: ref_tables_03\nnote: tables-case\n---\n# Refactored tables 03\n\n| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--:|---:|:--:|---:|---:|:---|\n| 1\\\\:1 hotel yankee | 1:2 quebec kilo uniform | 1\\\\:3 sierra november | 1:4 echo | 1\\\\:5 hotel lima india | 1:6 echo |\n| 2\\\\:1 romeo papa victor | 2:2 victor yankee | 2\\\\:3 india | 2:4 juliet victor kilo | 2\\\\:5 foxtrot | 2:6 kilo yankee delta |\n| 3\\\\:1 bravo uniform echo | 3:2 uniform | 3\\\\:3 golf zulu papa | 3:4 whiskey | 3\\\\:5 lima november foxtrot | 3:6 golf |\n| 4\\\\:1 sierra | 4:2 lima foxtrot sierra | 4\\\\:3 zulu kilo | 4:4 whiskey | 4\\\\:5 delta sierra |\n| 5\\\\:1 bravo oscar | 5:2 papa november | 5\\\\:3 zulu juliet | 5:4 hotel xray echo | 5\\\\:5 juliet tango | 5:6 quebec alpha |\n| 6\\\\:1 november zulu | 6:2 xray mike lima | 6\\\\:3 uniform charlie | 6:4 xray india | 6\\\\:5 papa | 6:6 quebec lima | 6\\\\:7 hotel |\n| 7\\\\:1 delta quebec | 7:2 delta charlie delta | 7\\\\:3 golf papa yankee | 7:4 yankee whiskey | 7\\\\:5 kilo hotel | 7:6 zulu juliet | 7\\\\:7 charlie kilo papa |\n| 8\\\\:1 zulu alpha alpha | 8:2 delta | 8\\\\:3 golf sierra | 8:4 india quebec lima | 8\\\\:5 india quebec mike |\n| 9\\\\:1 foxtrot india alpha | 9:2 yankee | 9\\\\:3 romeo juliet | 9:4 xray | 9\\\\:5 papa |\n\n| H1 | H2 | H3 | H4 |\n|---:|----|---:|:--:|\n| 1:1 kilo golf charlie | 1:2 foxtrot hotel kilo | 1:3 delta romeo delta | 1:4 victor charlie |\n| 2:1 foxtrot | 2:2 bravo golf | 2:3 november | 2:4 golf zulu yankee |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tables_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "0": "section_refactored-tables-03",
-      "1": "section_refactored-tables-03",
       "10": "section_refactored-tables-03",
       "11": "section_refactored-tables-03",
       "12": "section_refactored-tables-03",
@@ -41,10 +44,12 @@
       "17": "section_refactored-tables-03",
       "18": "section_refactored-tables-03",
       "19": "section_refactored-tables-03",
-      "2": "section_refactored-tables-03",
       "20": "section_refactored-tables-03",
-      "3": "section_refactored-tables-03",
-      "4": "section_refactored-tables-03",
+      "21": "section_refactored-tables-03",
+      "22": "section_refactored-tables-03",
+      "23": "section_refactored-tables-03",
+      "24": "section_refactored-tables-03",
+      "25": "section_refactored-tables-03",
       "5": "section_refactored-tables-03",
       "6": "section_refactored-tables-03",
       "7": "section_refactored-tables-03",
@@ -66,6 +71,11 @@
       "19": "prose",
       "2": "prose",
       "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
       "3": "prose",
       "4": "prose",
       "5": "prose",
@@ -95,7 +105,12 @@
       17,
       18,
       19,
-      20
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
     ]
   },
   "metadata": {
@@ -112,6 +127,7 @@
     "has_sections": true,
     "has_tables": true,
     "node_counts": {
+      "front_matter": 1,
       "heading": 1,
       "inline": 74,
       "link": 4,
@@ -168,18 +184,18 @@
       },
       "warnings": [
         {
-          "line": 2,
+          "line": 7,
           "message": "Table has inconsistent column counts",
           "type": "ragged_table"
         },
         {
-          "line": 19,
+          "line": 24,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 19,
+          "line": 24,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
@@ -196,11 +212,10 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 1525,
-    "total_lines": 21
+    "total_chars": 1599,
+    "total_lines": 26
   },
   "structure": {
     "blockquotes": [],
@@ -209,15 +224,20 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "id": "ref_tables_03",
+      "note": "tables-case",
+      "title": "Refactored tables 03"
+    },
     "headings": [
       {
-        "end_char": 23,
+        "end_char": 97,
         "id": "heading_refactored-tables-03",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-tables-03",
-        "start_char": 0,
+        "start_char": 74,
         "text": "Refactored tables 03"
       }
     ],
@@ -227,39 +247,47 @@
     "links": [
       {
         "allowed": true,
-        "line": 19,
+        "line": 24,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 24,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./tables_04.md#sec0"
       },
       {
         "allowed": true,
-        "line": 19,
+        "line": 24,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
         "allowed": true,
-        "line": 19,
+        "line": 24,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       }
     ],
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 20,
+        "end_line": 25,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_0",
         "section_id": "section_refactored-tables-03",
-        "start_line": 19,
+        "start_line": 24,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
         "word_count": 5
       }
@@ -267,15 +295,15 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 1525,
-        "end_line": 20,
+        "end_char": 1599,
+        "end_line": 25,
         "id": "section_refactored-tables-03",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored tables 03\n\n| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--:|---:|:--:|---:|---:|:---|\n| 1\\\\:1 hotel yankee | 1:2 quebec kilo uniform | 1\\\\:3 sierra november | 1:4 echo | 1\\\\:5 hotel lima india | 1:6 echo |\n| 2\\\\:1 romeo papa victor | 2:2 victor yankee | 2\\\\:3 india | 2:4 juliet victor kilo | 2\\\\:5 foxtrot | 2:6 kilo yankee delta |\n| 3\\\\:1 bravo uniform echo | 3:2 uniform | 3\\\\:3 golf zulu papa | 3:4 whiskey | 3\\\\:5 lima november foxtrot | 3:6 golf |\n| 4\\\\:1 sierra | 4:2 lima foxtrot sierra | 4\\\\:3 zulu kilo | 4:4 whiskey | 4\\\\:5 delta sierra |\n| 5\\\\:1 bravo oscar | 5:2 papa november | 5\\\\:3 zulu juliet | 5:4 hotel xray echo | 5\\\\:5 juliet tango | 5:6 quebec alpha |\n| 6\\\\:1 november zulu | 6:2 xray mike lima | 6\\\\:3 uniform charlie | 6:4 xray india | 6\\\\:5 papa | 6:6 quebec lima | 6\\\\:7 hotel |\n| 7\\\\:1 delta quebec | 7:2 delta charlie delta | 7\\\\:3 golf papa yankee | 7:4 yankee whiskey | 7\\\\:5 kilo hotel | 7:6 zulu juliet | 7\\\\:7 charlie kilo papa |\n| 8\\\\:1 zulu alpha alpha | 8:2 delta | 8\\\\:3 golf sierra | 8:4 india quebec lima | 8\\\\:5 india quebec mike |\n| 9\\\\:1 foxtrot india alpha | 9:2 yankee | 9\\\\:3 romeo juliet | 9:4 xray | 9\\\\:5 papa |\n\n| H1 | H2 | H3 | H4 |\n|---:|----|---:|:--:|\n| 1:1 kilo golf charlie | 1:2 foxtrot hotel kilo | 1:3 delta romeo delta | 1:4 victor charlie |\n| 2:1 foxtrot | 2:2 bravo golf | 2:3 november | 2:4 golf zulu yankee |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tables_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n",
         "slug": "refactored-tables-03",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 74,
+        "start_line": 5,
         "text_content": "Refactored tables 03\n\nH1H2H3H4H5H6\n\n1\\:1 hotel yankee1:2 quebec kilo uniform1\\:3 sierra november1:4 echo1\\:5 hotel lima india1:6 echo 2\\:1 romeo papa victor2:2 victor yankee2\\:3 india2:4 juliet victor kilo2\\:5 foxtrot2:6 kilo yankee delta 3\\:1 bravo uniform echo3:2 uniform3\\:3 golf zulu papa3:4 whiskey3\\:5 lima november foxtrot3:6 golf 4\\:1 sierra4:2 lima foxtrot sierra4\\:3 zulu kilo4:4 whiskey4\\:5 delta sierra 5\\:1 bravo oscar5:2 papa november5\\:3 zulu juliet5:4 hotel xray echo5\\:5 juliet tango5:6 quebec alpha 6\\:1 november zulu6:2 xray mike lima6\\:3 uniform charlie6:4 xray india6\\:5 papa6:6 quebec lima 7\\:1 delta quebec7:2 delta charlie delta7\\:3 golf papa yankee7:4 yankee whiskey7\\:5 kilo hotel7:6 zulu juliet 8\\:1 zulu alpha alpha8:2 delta8\\:3 golf sierra8:4 india quebec lima8\\:5 india quebec mike 9\\:1 foxtrot india alpha9:2 yankee9\\:3 romeo juliet9:4 xray9\\:5 papa\n\nH1H2H3H4\n\n1:1 kilo golf charlie1:2 foxtrot hotel kilo1:3 delta romeo delta1:4 victor charlie 2:1 foxtrot2:2 bravo golf2:3 november2:4 golf zulu yankee\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
         "title": "Refactored tables 03"
       }
@@ -295,7 +323,7 @@
         },
         "align_mismatch": false,
         "column_count": 6,
-        "end_line": 13,
+        "end_line": 18,
         "headers": [
           "H1",
           "H2",
@@ -309,83 +337,85 @@
         "is_ragged_meta": {
           "heuristic": true
         },
+        "raw_content": "| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--:|---:|:--:|---:|---:|:---|\n| 1\\\\:1 hotel yankee | 1:2 quebec kilo uniform | 1\\\\:3 sierra november | 1:4 echo | 1\\\\:5 hotel lima india | 1:6 echo |\n| 2\\\\:1 romeo papa victor | 2:2 victor yankee | 2\\\\:3 india | 2:4 juliet victor kilo | 2\\\\:5 foxtrot | 2:6 kilo yankee delta |\n| 3\\\\:1 bravo uniform echo | 3:2 uniform | 3\\\\:3 golf zulu papa | 3:4 whiskey | 3\\\\:5 lima november foxtrot | 3:6 golf |\n| 4\\\\:1 sierra | 4:2 lima foxtrot sierra | 4\\\\:3 zulu kilo | 4:4 whiskey | 4\\\\:5 delta sierra |\n| 5\\\\:1 bravo oscar | 5:2 papa november | 5\\\\:3 zulu juliet | 5:4 hotel xray echo | 5\\\\:5 juliet tango | 5:6 quebec alpha |\n| 6\\\\:1 november zulu | 6:2 xray mike lima | 6\\\\:3 uniform charlie | 6:4 xray india | 6\\\\:5 papa | 6:6 quebec lima | 6\\\\:7 hotel |\n| 7\\\\:1 delta quebec | 7:2 delta charlie delta | 7\\\\:3 golf papa yankee | 7:4 yankee whiskey | 7\\\\:5 kilo hotel | 7:6 zulu juliet | 7\\\\:7 charlie kilo papa |\n| 8\\\\:1 zulu alpha alpha | 8:2 delta | 8\\\\:3 golf sierra | 8:4 india quebec lima | 8\\\\:5 india quebec mike |\n| 9\\\\:1 foxtrot india alpha | 9:2 yankee | 9\\\\:3 romeo juliet | 9:4 xray | 9\\\\:5 papa |",
         "row_count": 9,
         "rows": [
           [
-            "1\\:1 hotel yankee",
+            "1\\\\:1 hotel yankee",
             "1:2 quebec kilo uniform",
-            "1\\:3 sierra november",
+            "1\\\\:3 sierra november",
             "1:4 echo",
-            "1\\:5 hotel lima india",
+            "1\\\\:5 hotel lima india",
             "1:6 echo"
           ],
           [
-            "2\\:1 romeo papa victor",
+            "2\\\\:1 romeo papa victor",
             "2:2 victor yankee",
-            "2\\:3 india",
+            "2\\\\:3 india",
             "2:4 juliet victor kilo",
-            "2\\:5 foxtrot",
+            "2\\\\:5 foxtrot",
             "2:6 kilo yankee delta"
           ],
           [
-            "3\\:1 bravo uniform echo",
+            "3\\\\:1 bravo uniform echo",
             "3:2 uniform",
-            "3\\:3 golf zulu papa",
+            "3\\\\:3 golf zulu papa",
             "3:4 whiskey",
-            "3\\:5 lima november foxtrot",
+            "3\\\\:5 lima november foxtrot",
             "3:6 golf"
           ],
           [
-            "4\\:1 sierra",
+            "4\\\\:1 sierra",
             "4:2 lima foxtrot sierra",
-            "4\\:3 zulu kilo",
+            "4\\\\:3 zulu kilo",
             "4:4 whiskey",
-            "4\\:5 delta sierra",
+            "4\\\\:5 delta sierra",
             ""
           ],
           [
-            "5\\:1 bravo oscar",
+            "5\\\\:1 bravo oscar",
             "5:2 papa november",
-            "5\\:3 zulu juliet",
+            "5\\\\:3 zulu juliet",
             "5:4 hotel xray echo",
-            "5\\:5 juliet tango",
+            "5\\\\:5 juliet tango",
             "5:6 quebec alpha"
           ],
           [
-            "6\\:1 november zulu",
+            "6\\\\:1 november zulu",
             "6:2 xray mike lima",
-            "6\\:3 uniform charlie",
+            "6\\\\:3 uniform charlie",
             "6:4 xray india",
-            "6\\:5 papa",
+            "6\\\\:5 papa",
             "6:6 quebec lima"
           ],
           [
-            "7\\:1 delta quebec",
+            "7\\\\:1 delta quebec",
             "7:2 delta charlie delta",
-            "7\\:3 golf papa yankee",
+            "7\\\\:3 golf papa yankee",
             "7:4 yankee whiskey",
-            "7\\:5 kilo hotel",
+            "7\\\\:5 kilo hotel",
             "7:6 zulu juliet"
           ],
           [
-            "8\\:1 zulu alpha alpha",
+            "8\\\\:1 zulu alpha alpha",
             "8:2 delta",
-            "8\\:3 golf sierra",
+            "8\\\\:3 golf sierra",
             "8:4 india quebec lima",
-            "8\\:5 india quebec mike",
+            "8\\\\:5 india quebec mike",
             ""
           ],
           [
-            "9\\:1 foxtrot india alpha",
+            "9\\\\:1 foxtrot india alpha",
             "9:2 yankee",
-            "9\\:3 romeo juliet",
+            "9\\\\:3 romeo juliet",
             "9:4 xray",
-            "9\\:5 papa",
+            "9\\\\:5 papa",
             ""
           ]
         ],
         "section_id": "section_refactored-tables-03",
-        "start_line": 2
+        "start_line": 7,
+        "table_valid_md": false
       },
       {
         "align": [
@@ -399,7 +429,7 @@
         },
         "align_mismatch": false,
         "column_count": 4,
-        "end_line": 18,
+        "end_line": 23,
         "headers": [
           "H1",
           "H2",
@@ -408,6 +438,7 @@
         ],
         "id": "table_1",
         "is_ragged": false,
+        "raw_content": "| H1 | H2 | H3 | H4 |\n|---:|----|---:|:--:|\n| 1:1 kilo golf charlie | 1:2 foxtrot hotel kilo | 1:3 delta romeo delta | 1:4 victor charlie |\n| 2:1 foxtrot | 2:2 bravo golf | 2:3 november | 2:4 golf zulu yankee |",
         "row_count": 2,
         "rows": [
           [
@@ -424,8 +455,10 @@
           ]
         ],
         "section_id": "section_refactored-tables-03",
-        "start_line": 14
+        "start_line": 19,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

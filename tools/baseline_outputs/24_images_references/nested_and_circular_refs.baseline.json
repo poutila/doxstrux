@@ -99,6 +99,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -109,7 +110,7 @@
         "line": 0,
         "scheme": "https",
         "text": "one",
-        "type": "external",
+        "type": "absolute",
         "url": "https://b.example"
       },
       {
@@ -117,7 +118,7 @@
         "line": 0,
         "scheme": "https",
         "text": "two",
-        "type": "external",
+        "type": "absolute",
         "url": "https://a.example"
       }
     ],
@@ -136,6 +137,7 @@
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

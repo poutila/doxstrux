@@ -10,10 +10,15 @@
     "raw": "# Test: 02_indented_four_spaces\n\n# indented by four\n    ## also code\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 3,
+        "language": "",
+        "start_line": 3
+      }
+    ],
     "code_lines": [
-      3,
-      4
+      3
     ],
     "line_to_section": {
       "0": "section_test-02_indented_four_spaces",
@@ -27,12 +32,13 @@
       "1": "prose",
       "2": "prose",
       "3": "code",
-      "4": "code"
+      "4": "prose"
     },
     "prose_lines": [
       0,
       1,
-      2
+      2,
+      4
     ]
   },
   "metadata": {
@@ -101,6 +107,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 32,
@@ -159,6 +166,7 @@
         "title": "indented by four"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

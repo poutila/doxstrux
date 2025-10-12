@@ -95,6 +95,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -141,6 +142,7 @@
         "title": "Test: tbl_missing_header_sep"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

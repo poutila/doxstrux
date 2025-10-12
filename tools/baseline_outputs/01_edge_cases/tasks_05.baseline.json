@@ -26,7 +26,13 @@
     "raw": "+++\ntitle = \"Refactored tasks 05\"\nid = \"ref_tasks_05\"\nnote = \"tasks-case\"\n+++\n# Refactored tasks 05\n\n- list level 1\n  - [x] task level 2\n    - [ ] task level 3\n      - [x] task level 4\n        - list level 5\n          - [x] task level 6\n            - list level 7\n                  code in list\n              \tindented with tab\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tasks_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 15,
+        "language": "",
+        "start_line": 9
+      }
+    ],
     "code_lines": [
       9,
       10,
@@ -34,8 +40,7 @@
       12,
       13,
       14,
-      15,
-      16
+      15
     ],
     "line_to_section": {
       "10": "section_refactored-tasks-05",
@@ -64,7 +69,7 @@
       "13": "code",
       "14": "code",
       "15": "code",
-      "16": "code",
+      "16": "prose",
       "17": "prose",
       "18": "prose",
       "19": "prose",
@@ -88,6 +93,7 @@
       6,
       7,
       8,
+      16,
       17,
       18,
       19,
@@ -105,6 +111,7 @@
     "node_counts": {
       "bullet_list": 7,
       "heading": 1,
+      "html_inline": 4,
       "image": 1,
       "inline": 11,
       "link": 4,
@@ -129,8 +136,9 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {
           "https": 1,
           "mailto": 1,
@@ -148,7 +156,7 @@
       "summary": {
         "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 5,
+        "total_warnings": 6,
         "unicode_risk_score": 0
       },
       "warnings": [
@@ -175,6 +183,12 @@
           "type": "disallowed_schemes_raw"
         },
         {
+          "blocks": 0,
+          "inline": 4,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        },
+        {
           "message": "Dangerous scheme \"file:\" found in raw content",
           "scheme": "file",
           "type": "raw_dangerous_scheme"
@@ -183,7 +197,7 @@
     },
     "security_policies_applied": [
       "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "stripped_4_html_inline"
     ],
     "total_chars": 554,
     "total_lines": 21
@@ -205,6 +219,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 100,
@@ -239,8 +254,16 @@
         "allowed": true,
         "line": 17,
         "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 17,
+        "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./tasks_01.md#sec0"
       },
       {
@@ -248,7 +271,7 @@
         "line": 17,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
@@ -256,7 +279,7 @@
         "line": 17,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       },
       {
@@ -275,53 +298,45 @@
     "lists": [
       {
         "end_line": 17,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": true,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": false,
                     "children": [
                       {
                         "blocks": [],
-                        "checked": true,
                         "children": [
                           {
                             "blocks": [],
-                            "checked": null,
                             "children": [
                               {
                                 "blocks": [],
-                                "checked": true,
                                 "children": [
                                   {
                                     "blocks": [],
-                                    "checked": null,
                                     "children": [],
                                     "text": "list level 7\ncode in list\nindented with tab"
                                   }
                                 ],
-                                "text": "task level 6"
+                                "text": " task level 6"
                               }
                             ],
                             "text": "list level 5"
                           }
                         ],
-                        "text": "task level 4"
+                        "text": " task level 4"
                       }
                     ],
-                    "text": "task level 3"
+                    "text": " task level 3"
                   }
                 ],
-                "text": "task level 2"
+                "text": " task level 2"
               }
             ],
             "text": "list level 1"
@@ -330,7 +345,6 @@
         "items_count": 1,
         "section_id": "section_refactored-tasks-05",
         "start_line": 7,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -381,10 +395,63 @@
         "slug": "refactored-tasks-05",
         "start_char": 78,
         "start_line": 5,
-        "text_content": "Refactored tasks 05\n\nlist level 1 [x] task level 2 [ ] task level 3 [x] task level 4 list level 5 [x] task level 6 list level 7\ncode in list\nindented with tab\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "text_content": "Refactored tasks 05\n\nlist level 1  task level 2  task level 3  task level 4 list level 5  task level 6 list level 7\ncode in list\nindented with tab\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
         "title": "Refactored tasks 05"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 1,
+        "end_line": 17,
+        "has_mixed_task_items": false,
+        "id": "tasklist_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [
+              {
+                "blocks": [],
+                "checked": false,
+                "children": [
+                  {
+                    "blocks": [],
+                    "checked": true,
+                    "children": [
+                      {
+                        "blocks": [],
+                        "children": [
+                          {
+                            "blocks": [],
+                            "children": [
+                              {
+                                "blocks": [],
+                                "children": [],
+                                "text": "list level 7\ncode in list\nindented with tab"
+                              }
+                            ],
+                            "text": " task level 6"
+                          }
+                        ],
+                        "text": "list level 5"
+                      }
+                    ],
+                    "text": "task level 4"
+                  }
+                ],
+                "text": "task level 3"
+              }
+            ],
+            "text": "task level 2"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_refactored-tasks-05",
+        "start_line": 8,
+        "type": "bullet",
+        "unchecked_count": 0
+      }
+    ]
   }
 }

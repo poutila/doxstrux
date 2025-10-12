@@ -1,0 +1,99 @@
+{
+  "phase": 5,
+  "title": "Tables & Lists - Pure Token-Based + Frontmatter Plugin",
+  "completed": "2025-10-12T23:30:00Z",
+  "status": "COMPLETE",
+  "patterns_addressed": {
+    "total": 4,
+    "converted": 4,
+    "approach": "pure_token_based",
+    "patterns": [
+      "r\"-{3,}\" (table alignment separator detection)",
+      "r\"[|:\\-\\s]+\" (table alignment inference)",
+      "^---\\s*$ (frontmatter detection)",
+      "^\\.\\.\\$ (frontmatter end marker)"
+    ]
+  },
+  "implementation": {
+    "frontmatter": {
+      "file": "src/docpipe/markdown_parser_core.py",
+      "lines": "1554-1579",
+      "strategy": "Plugin-based: use mdit-py-plugins.front_matter. Plugin creates 'front_matter' token with YAML content. No pre-processing, no content mutation, no blank line insertion.",
+      "architectural_fix": "Removed pre-processing from __init__. Frontmatter extracted from tokens in parse() like all other features."
+    },
+    "tables": {
+      "file": "src/docpipe/markdown_parser_core.py",
+      "lines": "1958-2086",
+      "strategy": "Pure token-based: extract alignment from th.attrs['style'] provided by markdown-it's GFM tables plugin. No regex - alignment already parsed and stored in token attributes.",
+      "methods_removed": [
+        "_infer_table_alignment() (lines 2798-2845)",
+        "_infer_table_alignment_line() (lines 2876-2903)"
+      ],
+      "features_added": [
+        "raw_content: preserves original markdown table text",
+        "table_valid_md: validation flag (!is_ragged && !align_mismatch)"
+      ]
+    },
+    "tasklists": {
+      "file": "src/docpipe/markdown_parser_core.py",
+      "lines": "1768-1817, 1836-1903",
+      "strategy": "Separated task lists from regular lists. Detection via 'contains-task-list' class from tasklists plugin. Added recursion depth limits (max_depth=10)."
+    }
+  },
+  "testing": {
+    "baseline_parity": {
+      "total": 542,
+      "passed": 542,
+      "failed": 0,
+      "pass_rate": 100.0,
+      "regenerated": true
+    },
+    "ci_gates": {
+      "G1_canonical_pairs": "PASS",
+      "G2_no_hybrids": "PASS",
+      "G3_parity": "PASS",
+      "G4_evidence_hash": "PASS",
+      "G5_performance": "PASS"
+    }
+  },
+  "performance": {
+    "delta_median_pct": -0.95,
+    "delta_p95_pct": -0.61,
+    "memory_peak_mb": 0.48,
+    "trend": "improved"
+  },
+  "evidence": {
+    "evidence_file": "evidence_blocks.jsonl",
+    "evidence_ids": [
+      "phase5-frontmatter-plugin",
+      "phase5-tables-pure-token"
+    ],
+    "sha256_frontmatter": "548be4e33892cda9a2cbc87cc6d37dad6ca46f73c77966fe5e67d5a39ccc0604",
+    "sha256_tables": "9d5517cc9dc25604ef818940b38a223e35606ddea7387376c44b32b8372ca20d"
+  },
+  "baselines": {
+    "status": "regenerated_with_phase5",
+    "directory": "tools/baseline_outputs",
+    "permissions": "read_only",
+    "total_files": 542,
+    "successful": 542,
+    "failed": 0,
+    "includes_phase5_improvements": true,
+    "reason": "table.raw_content added, validation flags added"
+  },
+  "bug_fixes": [
+    "Eliminated content mutation bug (blank line insertion in frontmatter pre-processing)",
+    "Removed redundant regex parsing of table alignment (markdown-it already provides this)"
+  ],
+  "documentation": {
+    "phase_plan": "regex_refactor_docs/steps_taken/phase5_plan.md",
+    "regex_inventory": "regex_refactor_docs/steps_taken/REGEX_INVENTORY.md"
+  },
+  "git_commit": "a703685089569fff98f0b2819f4b45b09218631f",
+  "next_phase": {
+    "phase": 6,
+    "title": "ContentContext Removal",
+    "patterns_to_address": "ContentContext regex heuristics",
+    "task_id": "6.0"
+  }
+}

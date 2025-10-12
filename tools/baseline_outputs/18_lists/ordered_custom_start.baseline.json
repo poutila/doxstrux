@@ -124,6 +124,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 33,
@@ -143,54 +144,45 @@
     "lists": [
       {
         "end_line": 12,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "First item (starts at 5)"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Second item"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Third item"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "New list starting at 1"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Second"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Third"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Start at 99"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Continue"
           }
@@ -198,7 +190,6 @@
         "items_count": 8,
         "section_id": "section_ordered-list-with-custom-start",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "ordered"
       }
     ],
@@ -219,6 +210,7 @@
         "title": "Ordered list with custom start"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

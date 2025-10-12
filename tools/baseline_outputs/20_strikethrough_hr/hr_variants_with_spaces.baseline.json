@@ -167,6 +167,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -213,6 +214,7 @@
         "title": "Horizontal rule variants"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

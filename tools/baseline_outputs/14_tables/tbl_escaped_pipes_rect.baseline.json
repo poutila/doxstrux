@@ -122,6 +122,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -189,6 +190,7 @@
         "is_ragged_meta": {
           "heuristic": true
         },
+        "raw_content": "| A\\|a | B |\n|---|---|\n| 1\\|x | 2 |\n| 3\\|y | 4 |\nParagraph.",
         "row_count": 3,
         "rows": [
           [
@@ -205,8 +207,10 @@
           ]
         ],
         "section_id": "section_test-tbl_escaped_pipes_rect",
-        "start_line": 3
+        "start_line": 3,
+        "table_valid_md": false
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

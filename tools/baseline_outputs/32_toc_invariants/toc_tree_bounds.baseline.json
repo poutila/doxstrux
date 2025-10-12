@@ -130,6 +130,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 4,
@@ -322,6 +323,7 @@
         "title": "B.1 (duplicate id check)"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

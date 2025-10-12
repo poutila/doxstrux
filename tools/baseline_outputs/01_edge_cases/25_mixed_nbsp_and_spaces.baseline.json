@@ -86,6 +86,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 33,
@@ -132,6 +133,7 @@
         "title": "Test: 25_mixed_nbsp_and_spaces"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

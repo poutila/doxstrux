@@ -99,6 +99,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -151,6 +152,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "| A | B |\n|---|---|\n| # not heading | text |",
         "row_count": 1,
         "rows": [
           [
@@ -159,8 +161,10 @@
           ]
         ],
         "section_id": "section_test-08_hash_in_table_cell",
-        "start_line": 2
+        "start_line": 2,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

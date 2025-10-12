@@ -94,12 +94,12 @@
       },
       "warnings": [
         {
-          "line": null,
+          "line": 2,
           "message": "Document contains <script> tags",
           "type": "script_tag"
         },
         {
-          "line": null,
+          "line": 3,
           "message": "Document contains HTML event handler attributes",
           "type": "event_handlers"
         },
@@ -125,8 +125,7 @@
     "security_policies_applied": [
       "embedding_blocked_script",
       "stripped_1_html_blocks",
-      "stripped_3_html_inline",
-      "dropped_1_unsafe_links"
+      "stripped_3_html_inline"
     ],
     "total_chars": 229,
     "total_lines": 6
@@ -138,6 +137,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -153,7 +153,16 @@
     "html_blocks": [],
     "html_inline": [],
     "images": [],
-    "links": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 4,
+        "scheme": null,
+        "text": "bad",
+        "type": "relative",
+        "url": "ht!tp://x"
+      }
+    ],
     "lists": [],
     "paragraphs": [
       {
@@ -184,6 +193,7 @@
         "title": "Test: sec_kitchen_sink"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -51,6 +51,7 @@
     "node_counts": {
       "bullet_list": 1,
       "heading": 1,
+      "html_inline": 4,
       "inline": 5,
       "list_item": 4,
       "paragraph": 4,
@@ -72,25 +73,42 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 2,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        },
+        {
+          "blocks": 0,
+          "inline": 4,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_4_html_inline"
+    ],
     "total_chars": 100,
     "total_lines": 7
   },
@@ -101,6 +119,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 20,
@@ -117,11 +136,31 @@
     "html_inline": [],
     "images": [],
     "links": [],
-    "lists": [
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
       {
+        "child_ids": [],
+        "end_char": 100,
+        "end_line": 6,
+        "id": "section_task-list-basic",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Task list \u2014 basic\n\n- [ ] Unchecked\n- [x] Checked\n- [X] Checked uppercase\n- [ ] With **bold** text\n",
+        "slug": "task-list-basic",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Task list \u2014 basic\n\n Unchecked  Checked  Checked uppercase  With bold text",
+        "title": "Task list \u2014 basic"
+      }
+    ],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 2,
         "end_line": 6,
         "has_mixed_task_items": false,
-        "id": "list_0",
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [],
@@ -151,27 +190,9 @@
         "items_count": 4,
         "section_id": "section_task-list-basic",
         "start_line": 2,
-        "task_items_count": 4,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 2
       }
-    ],
-    "paragraphs": [],
-    "sections": [
-      {
-        "child_ids": [],
-        "end_char": 100,
-        "end_line": 6,
-        "id": "section_task-list-basic",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "# Task list \u2014 basic\n\n- [ ] Unchecked\n- [x] Checked\n- [X] Checked uppercase\n- [ ] With **bold** text\n",
-        "slug": "task-list-basic",
-        "start_char": 0,
-        "start_line": 0,
-        "text_content": "Task list \u2014 basic\n\n[ ] Unchecked [x] Checked [X] Checked uppercase [ ] With bold text",
-        "title": "Task list \u2014 basic"
-      }
-    ],
-    "tables": []
+    ]
   }
 }

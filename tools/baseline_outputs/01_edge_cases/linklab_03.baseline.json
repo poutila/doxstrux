@@ -189,8 +189,7 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_3_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
     "total_chars": 857,
     "total_lines": 17
@@ -202,6 +201,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 102,
@@ -242,8 +242,16 @@
         "allowed": true,
         "line": 9,
         "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 9,
+        "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./linklab_04.md#sec0"
       },
       {
@@ -251,7 +259,7 @@
         "line": 9,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
@@ -259,15 +267,23 @@
         "line": 9,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       },
       {
         "allowed": true,
         "line": 9,
         "scheme": null,
+        "text": "bad7",
+        "type": "relative",
+        "url": "ht!tp://broken%5E7"
+      },
+      {
+        "allowed": true,
+        "line": 9,
+        "scheme": null,
         "text": "cross8",
-        "type": "internal",
+        "type": "relative",
         "url": "./linklab_04.md#sec2"
       },
       {
@@ -275,7 +291,7 @@
         "line": 9,
         "scheme": "https",
         "text": "ext9",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/9"
       },
       {
@@ -283,15 +299,23 @@
         "line": 9,
         "scheme": "mailto",
         "text": "mail10",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user10@example.com"
       },
       {
         "allowed": true,
         "line": 9,
         "scheme": null,
+        "text": "bad12",
+        "type": "relative",
+        "url": "ht!tp://broken%5E12"
+      },
+      {
+        "allowed": true,
+        "line": 9,
+        "scheme": null,
         "text": "cross13",
-        "type": "internal",
+        "type": "relative",
         "url": "./linklab_04.md#sec1"
       },
       {
@@ -299,7 +323,7 @@
         "line": 9,
         "scheme": "https",
         "text": "ext14",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/14"
       },
       {
@@ -307,7 +331,7 @@
         "line": 9,
         "scheme": "mailto",
         "text": "mail15",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user15@example.com"
       }
     ],
@@ -400,6 +424,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "| H1 | H2 | H3 |\n|:---|:---|:---|\n| 1:1 lima romeo alpha | 1:2 xray papa | 1:3 yankee victor lima |\n| 2:1 oscar romeo india | 2:2 hotel bravo tango | 2:3 whiskey romeo xray |\n| 3:1 papa yankee | 3:2 uniform juliet bravo | 3:3 kilo |",
         "row_count": 3,
         "rows": [
           [
@@ -419,8 +444,10 @@
           ]
         ],
         "section_id": "section_sub",
-        "start_line": 11
+        "start_line": 11,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

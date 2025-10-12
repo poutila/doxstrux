@@ -12,12 +12,17 @@
     "raw": "`https://example.com` should not be linkified\nand inside code block:\n\n```\nvisit http://not.linkified.local\n```\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 5,
+        "language": "",
+        "start_line": 3
+      }
+    ],
     "code_lines": [
       3,
       4,
-      5,
-      6
+      5
     ],
     "line_to_section": {},
     "line_to_type": {
@@ -27,12 +32,13 @@
       "3": "code",
       "4": "code",
       "5": "code",
-      "6": "code"
+      "6": "prose"
     },
     "prose_lines": [
       0,
       1,
-      2
+      2,
+      6
     ]
   },
   "metadata": {
@@ -103,6 +109,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -123,6 +130,7 @@
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

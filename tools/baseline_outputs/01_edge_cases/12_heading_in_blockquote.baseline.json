@@ -112,6 +112,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 33,
@@ -176,6 +177,7 @@
         "title": "Quote H2"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

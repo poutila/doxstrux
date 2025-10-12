@@ -111,6 +111,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -192,6 +193,7 @@
         "title": "title: late"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

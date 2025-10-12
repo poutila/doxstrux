@@ -51,21 +51,28 @@
         "has_html_inline": false,
         "has_script": false,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 1,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        }
+      ]
     },
     "total_chars": 13,
     "total_lines": 2
@@ -77,6 +84,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 13,
@@ -111,6 +119,7 @@
         "title": "\u0639\u0646\u0648\u0627\u0646 \u0639\u0631\u0628\u064a"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

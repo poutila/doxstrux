@@ -13,11 +13,16 @@
     "raw": "# Task list \u2014 nested\n\n- [ ] Parent\n  - [x] Child done\n  - [ ] Child todo\n    1. Step 1\n    2. Step 2\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "",
+        "start_line": 5
+      }
+    ],
     "code_lines": [
       5,
-      6,
-      7
+      6
     ],
     "line_to_section": {
       "0": "section_task-list-nested",
@@ -37,14 +42,15 @@
       "4": "prose",
       "5": "code",
       "6": "code",
-      "7": "code"
+      "7": "prose"
     },
     "prose_lines": [
       0,
       1,
       2,
       3,
-      4
+      4,
+      7
     ]
   },
   "metadata": {
@@ -56,6 +62,7 @@
     "node_counts": {
       "bullet_list": 2,
       "heading": 1,
+      "html_inline": 3,
       "inline": 6,
       "list_item": 5,
       "ordered_list": 1,
@@ -77,25 +84,42 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 2,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        },
+        {
+          "blocks": 0,
+          "inline": 3,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_3_html_inline"
+    ],
     "total_chars": 101,
     "total_lines": 8
   },
@@ -116,6 +140,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 21,
@@ -135,8 +160,49 @@
     "lists": [
       {
         "end_line": 7,
-        "has_mixed_task_items": false,
         "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "children": [],
+            "text": "Step 1"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "Step 2"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_task-list-nested",
+        "start_line": 5,
+        "type": "ordered"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 101,
+        "end_line": 7,
+        "id": "section_task-list-nested",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Task list \u2014 nested\n\n- [ ] Parent\n  - [x] Child done\n  - [ ] Child todo\n    1. Step 1\n    2. Step 2\n",
+        "slug": "task-list-nested",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Task list \u2014 nested\n\n Parent  Child done  Child todo Step 1 Step 2",
+        "title": "Task list \u2014 nested"
+      }
+    ],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 0,
+        "end_line": 7,
+        "has_mixed_task_items": false,
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [],
@@ -154,13 +220,11 @@
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Step 1"
                   },
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Step 2"
                   }
@@ -174,27 +238,9 @@
         "items_count": 1,
         "section_id": "section_task-list-nested",
         "start_line": 2,
-        "task_items_count": 1,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 1
       }
-    ],
-    "paragraphs": [],
-    "sections": [
-      {
-        "child_ids": [],
-        "end_char": 101,
-        "end_line": 7,
-        "id": "section_task-list-nested",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "# Task list \u2014 nested\n\n- [ ] Parent\n  - [x] Child done\n  - [ ] Child todo\n    1. Step 1\n    2. Step 2\n",
-        "slug": "task-list-nested",
-        "start_char": 0,
-        "start_line": 0,
-        "text_content": "Task list \u2014 nested\n\n[ ] Parent [x] Child done [ ] Child todo Step 1 Step 2",
-        "title": "Task list \u2014 nested"
-      }
-    ],
-    "tables": []
+    ]
   }
 }

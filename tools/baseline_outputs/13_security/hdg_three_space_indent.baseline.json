@@ -85,6 +85,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -145,6 +146,7 @@
         "title": "Valid doc H2"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -43,7 +43,6 @@ dependencies = [
     "types-pyyaml>=6.0.12.20250516",
     "pyyaml>=6.0.2",
     "markdown-it-py>=3.0.0",
-    "bleach>=6.2.0",
     "rich>=14.1.0",
     "typer>=0.16.0",
     "linkify-it-py>=2.0.3",

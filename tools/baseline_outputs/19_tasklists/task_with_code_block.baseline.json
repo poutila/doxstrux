@@ -22,17 +22,26 @@
     "raw": "# Task containing code block\n\n- [ ] Implement function\n\n  ```python\n  def task_function():\n      return \"done\"\n  ```\n\n- [x] Test the function\n\n  ```python\n  assert task_function() == \"done\"\n  ```\n\n- [ ] Deploy\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 7,
+        "language": "python",
+        "start_line": 4
+      },
+      {
+        "end_line": 13,
+        "language": "python",
+        "start_line": 11
+      }
+    ],
     "code_lines": [
       4,
       5,
       6,
       7,
-      8,
       11,
       12,
-      13,
-      14
+      13
     ],
     "line_to_section": {
       "0": "section_task-containing-code-block",
@@ -60,7 +69,7 @@
       "11": "code",
       "12": "code",
       "13": "code",
-      "14": "code",
+      "14": "prose",
       "15": "prose",
       "16": "prose",
       "2": "prose",
@@ -69,7 +78,7 @@
       "5": "code",
       "6": "code",
       "7": "code",
-      "8": "code",
+      "8": "prose",
       "9": "prose"
     },
     "prose_lines": [
@@ -77,8 +86,10 @@
       1,
       2,
       3,
+      8,
       9,
       10,
+      14,
       15,
       16
     ]
@@ -93,6 +104,7 @@
       "bullet_list": 1,
       "fence": 2,
       "heading": 1,
+      "html_inline": 3,
       "inline": 4,
       "list_item": 3,
       "paragraph": 3,
@@ -113,8 +125,9 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -125,13 +138,23 @@
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
+        "total_warnings": 1,
         "unicode_risk_score": 0
       },
-      "warnings": []
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 3,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_3_html_inline"
+    ],
     "total_chars": 210,
     "total_lines": 17
   },
@@ -161,6 +184,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 29,
@@ -177,11 +201,31 @@
     "html_inline": [],
     "images": [],
     "links": [],
-    "lists": [
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
       {
+        "child_ids": [],
+        "end_char": 210,
+        "end_line": 16,
+        "id": "section_task-containing-code-block",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Task containing code block\n\n- [ ] Implement function\n\n  ```python\n  def task_function():\n      return \"done\"\n  ```\n\n- [x] Test the function\n\n  ```python\n  assert task_function() == \"done\"\n  ```\n\n- [ ] Deploy\n",
+        "slug": "task-containing-code-block",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Task containing code block\n\n Implement function\n\n Test the function\n\n Deploy",
+        "title": "Task containing code block"
+      }
+    ],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 1,
         "end_line": 16,
         "has_mixed_task_items": false,
-        "id": "list_0",
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [
@@ -217,27 +261,9 @@
         "items_count": 3,
         "section_id": "section_task-containing-code-block",
         "start_line": 2,
-        "task_items_count": 3,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 2
       }
-    ],
-    "paragraphs": [],
-    "sections": [
-      {
-        "child_ids": [],
-        "end_char": 210,
-        "end_line": 16,
-        "id": "section_task-containing-code-block",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "# Task containing code block\n\n- [ ] Implement function\n\n  ```python\n  def task_function():\n      return \"done\"\n  ```\n\n- [x] Test the function\n\n  ```python\n  assert task_function() == \"done\"\n  ```\n\n- [ ] Deploy\n",
-        "slug": "task-containing-code-block",
-        "start_char": 0,
-        "start_line": 0,
-        "text_content": "Task containing code block\n\n[ ] Implement function\n\n[x] Test the function\n\n[ ] Deploy",
-        "title": "Task containing code block"
-      }
-    ],
-    "tables": []
+    ]
   }
 }

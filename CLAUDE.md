@@ -2,8 +2,53 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## ! IMPORTANT
-**Do not edit** files in /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/test_mds
+## ⚠️ CRITICAL - PYTHON ENVIRONMENT
+
+**NEVER use system python (`python`, `python3`) - ALWAYS use `.venv/bin/python`:**
+
+System python is **OFF LIMITS** because it lacks required dependencies (mdit-py-plugins, etc.). Using system python produces **silently incorrect results** - the code runs but produces wrong output because optional dependencies fail silently.
+
+**Example of silent failure:**
+- System python runs `generate_baseline_outputs.py` without errors
+- But mdit-py-plugins are missing, so tables/footnotes/tasklists are parsed incorrectly
+- Baselines are generated with wrong structure - CORRUPTED DATA
+- No error thrown - failure is silent and undetectable until parity tests fail
+
+**CORRECT usage (ALWAYS):**
+```bash
+.venv/bin/python tools/generate_baseline_outputs.py
+.venv/bin/python tools/baseline_test_runner.py
+.venv/bin/python tools/ci/ci_gate_parity.py
+```
+
+**WRONG usage (NEVER):**
+```bash
+python3 tools/generate_baseline_outputs.py  # ❌ Creates corrupted baselines
+python tools/baseline_test_runner.py        # ❌ Wrong test results
+```
+
+## ⚠️ CRITICAL - IMMUTABLE DIRECTORIES
+
+**NEVER EDIT without explicit human approval:**
+
+1. **`/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/baseline_outputs/`**
+   - Contains frozen baseline JSON files (542 files)
+   - Ground truth for regression testing
+   - ANY modification breaks parity testing
+   - **MUST be generated with `.venv/bin/python` ONLY**
+   - To regenerate: Requires completed phase + human approval
+
+2. **`/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/test_mds/`**
+   - Contains test markdown files (542 files)
+   - Test corpus for parser validation
+   - Modifications invalidate all baselines
+   - Changes require human approval only
+
+3. **`/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/mds.zip`**
+   - Compressed backup of test corpus
+   - Do not modify or regenerate
+
+**These directories are read-only. Ask for human approval before ANY changes.**
 
 ## Project Overview
 
@@ -16,7 +61,7 @@ The heart of this project is `src/docpipe/markdown_parser_core.py` (3660 lines),
 - **MarkdownParserCore**: Main parser class using markdown-it-py as the parsing engine
 - **Security-first design**: Three security profiles (strict, moderate, permissive) with content size limits, plugin validation, and prompt injection detection
 - **Universal recursion engine**: Single-pass document parsing with configurable recursion depth limits
-- **Content context awareness**: Via `ContentContext` class for distinguishing prose from code blocks
+- **Pure token-based extraction**: Phase 6 - zero regex, all classification from markdown-it AST tokens
 
 ### Key Design Principles
 1. **Extract everything, analyze nothing**: Parser focuses on structural extraction, not semantic analysis
@@ -27,13 +72,15 @@ The heart of this project is `src/docpipe/markdown_parser_core.py` (3660 lines),
 ### Module Structure
 ```
 src/docpipe/
-├── markdown_parser_core.py    # Core parser (3660 lines)
-├── content_context.py          # Context mapping (prose vs code blocks)
+├── markdown_parser_core.py    # Core parser (3660 lines) - pure token-based
 ├── json_utils.py              # JSON serialization helpers
 ├── sluggify_util.py           # Slug generation utilities
 ├── help.py                    # Interactive help system for users and AI
+├── token_replacement_lib.py   # Token walking utilities (zero-regex support)
 └── __init__.py                # Package exports
 ```
+
+**Note**: `content_context.py` was removed in Phase 6 - prose/code classification now derived entirely from markdown-it AST tokens.
 
 ### Security Features
 The parser implements multi-layered security:
@@ -190,26 +237,13 @@ if not result["valid"]:
     print(f"Issues: {result['issues']}")
 ```
 
-### Content Context
-```python
-from src.docpipe.content_context import ContentContext
-
-# Distinguish prose from code blocks
-context = ContentContext(content)
-for i, line in enumerate(context.lines):
-    if context.is_prose_line(i):
-        # Process as markdown
-        pass
-    elif context.is_code_line(i):
-        # Skip or handle as code
-        pass
-```
-
 ### Available Features Check
 ```python
 features = MarkdownParserCore.get_available_features()
-# Returns: {"bleach": bool, "yaml": bool, "footnotes": bool, "tasklists": bool, "content_context": bool}
+# Returns: {"bleach": bool, "yaml": bool, "footnotes": bool, "tasklists": bool}
 ```
+
+**Note**: `ContentContext` was removed in Phase 6. Prose/code classification is now derived directly from AST code blocks in `mappings` dict returned by `parse()`.
 
 ## Dependencies
 
@@ -273,10 +307,3 @@ This project has a workspace dependency on `ptool` located at `../PTOOL_SERENA`.
 ### Script Organization
 - `scripts/`: Development and testing utilities (see `scripts/README.md`)
 - `test_scripts/`: Ad-hoc testing scripts (not part of main test suite)
-
-### Content Context Implementation
-The `ContentContext` class implements sophisticated code block detection:
-- Fenced code blocks (``` or ~~~)
-- Indented code blocks (4 spaces or tab)
-- Handles blank lines within code blocks
-- Conservative detection to avoid false positives from list continuations

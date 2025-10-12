@@ -85,6 +85,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 24,
@@ -145,6 +146,7 @@
         "title": "tab indented"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

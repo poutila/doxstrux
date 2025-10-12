@@ -86,6 +86,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 28,
@@ -132,6 +133,7 @@
         "title": "Test: hdg_nbsp_after_hash"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

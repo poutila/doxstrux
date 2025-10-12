@@ -67,6 +67,7 @@
     "node_counts": {
       "bullet_list": 1,
       "heading": 1,
+      "html_inline": 3,
       "inline": 9,
       "list_item": 8,
       "paragraph": 8,
@@ -87,8 +88,9 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -99,13 +101,23 @@
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
+        "total_warnings": 1,
         "unicode_risk_score": 0
       },
-      "warnings": []
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 3,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_3_html_inline"
+    ],
     "total_chars": 217,
     "total_lines": 11
   },
@@ -116,6 +128,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -132,11 +145,31 @@
     "html_inline": [],
     "images": [],
     "links": [],
-    "lists": [
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
       {
+        "child_ids": [],
+        "end_char": 217,
+        "end_line": 10,
+        "id": "section_invalid-checkbox-variations",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Invalid checkbox variations\n\n- [X] Capital X (may or may not work)\n- [x] Lowercase x (standard)\n- [ ] Empty (standard)\n- [ x] Space before x\n- [x ] Space after x\n- [] No space\n- [?] Question mark\n- [-] Dash instead\n",
+        "slug": "invalid-checkbox-variations",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Invalid checkbox variations\n\n Capital X (may or may not work)  Lowercase x (standard)  Empty (standard) [ x] Space before x [x ] Space after x [] No space [?] Question mark [-] Dash instead",
+        "title": "Invalid checkbox variations"
+      }
+    ],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 2,
         "end_line": 10,
         "has_mixed_task_items": true,
-        "id": "list_0",
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [],
@@ -190,27 +223,9 @@
         "items_count": 8,
         "section_id": "section_invalid-checkbox-variations",
         "start_line": 2,
-        "task_items_count": 3,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 1
       }
-    ],
-    "paragraphs": [],
-    "sections": [
-      {
-        "child_ids": [],
-        "end_char": 217,
-        "end_line": 10,
-        "id": "section_invalid-checkbox-variations",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "# Invalid checkbox variations\n\n- [X] Capital X (may or may not work)\n- [x] Lowercase x (standard)\n- [ ] Empty (standard)\n- [ x] Space before x\n- [x ] Space after x\n- [] No space\n- [?] Question mark\n- [-] Dash instead\n",
-        "slug": "invalid-checkbox-variations",
-        "start_char": 0,
-        "start_line": 0,
-        "text_content": "Invalid checkbox variations\n\n[X] Capital X (may or may not work) [x] Lowercase x (standard) [ ] Empty (standard) [ x] Space before x [x ] Space after x [] No space [?] Question mark [-] Dash instead",
-        "title": "Invalid checkbox variations"
-      }
-    ],
-    "tables": []
+    ]
   }
 }

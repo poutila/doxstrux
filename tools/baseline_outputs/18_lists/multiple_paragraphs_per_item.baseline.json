@@ -136,6 +136,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 38,
@@ -155,24 +156,20 @@
     "lists": [
       {
         "end_line": 15,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Third continuation paragraph"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Only one continuation"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Third item with no continuation"
           }
@@ -180,7 +177,6 @@
         "items_count": 3,
         "section_id": "section_list-items-with-multiple-paragraphs",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "ordered"
       }
     ],
@@ -201,6 +197,7 @@
         "title": "List items with multiple paragraphs"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -11,10 +11,14 @@
     "raw": "# Test: hdg_list_cont_4sp\n\n- item\n    # not doc heading (list cont)\n  text\n"
   },
   "mappings": {
-    "code_blocks": [],
-    "code_lines": [
-      3
+    "code_blocks": [
+      {
+        "end_line": 2,
+        "language": "",
+        "start_line": 3
+      }
     ],
+    "code_lines": [],
     "line_to_section": {
       "0": "section_test-hdg_list_cont_4sp",
       "1": "section_test-hdg_list_cont_4sp",
@@ -27,7 +31,7 @@
       "0": "prose",
       "1": "prose",
       "2": "prose",
-      "3": "code",
+      "3": "prose",
       "4": "prose",
       "5": "prose"
     },
@@ -35,6 +39,7 @@
       0,
       1,
       2,
+      3,
       4,
       5
     ]
@@ -107,6 +112,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 26,
@@ -126,12 +132,10 @@
     "lists": [
       {
         "end_line": 5,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "text"
           }
@@ -139,7 +143,6 @@
         "items_count": 1,
         "section_id": "section_test-hdg_list_cont_4sp",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -174,6 +177,7 @@
         "title": "not doc heading (list cont)"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

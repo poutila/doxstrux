@@ -143,6 +143,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 38,
@@ -266,6 +267,7 @@
         "title": "Inline code with special characters"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

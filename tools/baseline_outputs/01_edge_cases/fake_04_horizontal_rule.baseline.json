@@ -84,6 +84,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 37,
@@ -118,6 +119,7 @@
         "title": "Heading after horizontal rule"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

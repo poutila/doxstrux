@@ -128,6 +128,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 36,
@@ -147,18 +148,15 @@
     "lists": [
       {
         "end_line": 12,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Another paragraph still in first item."
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Its continuation."
           }
@@ -166,7 +164,6 @@
         "items_count": 2,
         "section_id": "section_list-with-continuation-paragraphs",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -199,6 +196,7 @@
         "title": "List with continuation paragraphs"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

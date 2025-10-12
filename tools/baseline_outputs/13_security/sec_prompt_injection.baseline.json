@@ -93,6 +93,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 29,
@@ -139,6 +140,7 @@
         "title": "Test: sec_prompt_injection"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

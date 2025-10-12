@@ -103,6 +103,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -173,6 +174,7 @@
         "title": "---\u00a0\ntitle: nbsp fence"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

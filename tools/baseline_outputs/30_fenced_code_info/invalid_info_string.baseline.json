@@ -9,21 +9,28 @@
     "raw": "```py th on\nprint(\"split language\")\n```\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 2,
+        "language": "py th on",
+        "start_line": 0
+      }
+    ],
     "code_lines": [
       0,
       1,
-      2,
-      3
+      2
     ],
     "line_to_section": {},
     "line_to_type": {
       "0": "code",
       "1": "code",
       "2": "code",
-      "3": "code"
+      "3": "prose"
     },
-    "prose_lines": []
+    "prose_lines": [
+      3
+    ]
   },
   "metadata": {
     "has_code": true,
@@ -88,6 +95,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -96,6 +104,7 @@
     "lists": [],
     "paragraphs": [],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

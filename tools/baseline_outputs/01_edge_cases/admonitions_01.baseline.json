@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored admonitions 01\"",
+      "id: ref_admonitions_01",
+      "note: admonitions-case",
+      "---",
       "# Refactored admonitions 01",
       "Title",
       "=====",
@@ -33,20 +38,23 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
       ""
     ],
-    "raw": "# Refactored admonitions 01\nTitle\n=====\n\nSub\n----\n\n\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\n\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with *emphasis*\n\n\n\n```{mermaid}\ngraph TD\n  A --> B\n```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
+    "raw": "---\ntitle: \"Refactored admonitions 01\"\nid: ref_admonitions_01\nnote: admonitions-case\n---\n# Refactored admonitions 01\nTitle\n=====\n\nSub\n----\n\n\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\n\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with *emphasis*\n\n\n\n```{mermaid}\ngraph TD\n  A --> B\n```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 31,
+        "language": "{mermaid}",
+        "start_line": 28
+      }
+    ],
     "code_lines": [
-      23,
-      24,
-      25,
-      26,
-      27
+      28,
+      29,
+      30,
+      31
     ],
     "line_to_section": {
-      "0": "section_refactored-admonitions-01",
-      "1": "section_title",
       "10": "section_sub",
       "11": "section_sub",
       "12": "section_sub",
@@ -57,7 +65,6 @@
       "17": "section_sub",
       "18": "section_sub",
       "19": "section_sub",
-      "2": "section_title",
       "20": "section_sub",
       "21": "section_sub",
       "22": "section_sub",
@@ -68,13 +75,16 @@
       "27": "section_sub",
       "28": "section_sub",
       "29": "section_sub",
-      "3": "section_title",
       "30": "section_sub",
-      "4": "section_sub",
-      "5": "section_sub",
-      "6": "section_sub",
-      "7": "section_sub",
-      "8": "section_sub",
+      "31": "section_sub",
+      "32": "section_sub",
+      "33": "section_sub",
+      "34": "section_sub",
+      "35": "section_sub",
+      "5": "section_refactored-admonitions-01",
+      "6": "section_title",
+      "7": "section_title",
+      "8": "section_title",
       "9": "section_sub"
     },
     "line_to_type": {
@@ -94,15 +104,20 @@
       "20": "prose",
       "21": "prose",
       "22": "prose",
-      "23": "code",
-      "24": "code",
-      "25": "code",
-      "26": "code",
-      "27": "code",
-      "28": "prose",
-      "29": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "code",
+      "29": "code",
       "3": "prose",
-      "30": "prose",
+      "30": "code",
+      "31": "code",
+      "32": "prose",
+      "33": "prose",
+      "34": "prose",
+      "35": "prose",
       "4": "prose",
       "5": "prose",
       "6": "prose",
@@ -134,9 +149,15 @@
       20,
       21,
       22,
-      28,
-      29,
-      30
+      23,
+      24,
+      25,
+      26,
+      27,
+      32,
+      33,
+      34,
+      35
     ]
   },
   "metadata": {
@@ -155,6 +176,7 @@
     "node_counts": {
       "em": 1,
       "fence": 1,
+      "front_matter": 1,
       "heading": 3,
       "inline": 7,
       "link": 4,
@@ -202,13 +224,13 @@
       },
       "warnings": [
         {
-          "line": 29,
+          "line": 34,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 29,
+          "line": 34,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
@@ -225,22 +247,21 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 400,
-    "total_lines": 31
+    "total_chars": 489,
+    "total_lines": 36
   },
   "structure": {
     "blockquotes": [],
     "code_blocks": [
       {
         "content": "graph TD\n  A --> B\n",
-        "end_line": 27,
+        "end_line": 32,
         "id": "code_0",
         "language": "{mermaid}",
         "section_id": "section_sub",
-        "start_line": 23,
+        "start_line": 28,
         "type": "fenced"
       }
     ],
@@ -248,35 +269,40 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "id": "ref_admonitions_01",
+      "note": "admonitions-case",
+      "title": "Refactored admonitions 01"
+    },
     "headings": [
       {
-        "end_char": 28,
+        "end_char": 117,
         "id": "heading_refactored-admonitions-01",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-admonitions-01",
-        "start_char": 0,
+        "start_char": 89,
         "text": "Refactored admonitions 01"
       },
       {
-        "end_char": 34,
+        "end_char": 123,
         "id": "heading_title",
         "level": 1,
-        "line": 1,
+        "line": 6,
         "parent_heading_id": null,
         "slug": "title",
-        "start_char": 28,
+        "start_char": 117,
         "text": "Title"
       },
       {
-        "end_char": 45,
+        "end_char": 134,
         "id": "heading_sub",
         "level": 1,
-        "line": 4,
+        "line": 9,
         "parent_heading_id": null,
         "slug": "sub",
-        "start_char": 41,
+        "start_char": 130,
         "text": "Sub"
       }
     ],
@@ -286,72 +312,80 @@
     "links": [
       {
         "allowed": true,
-        "line": 29,
+        "line": 34,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 34,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./admonitions_02.md#sec0"
       },
       {
         "allowed": true,
-        "line": 29,
+        "line": 34,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
         "allowed": true,
-        "line": 29,
+        "line": 34,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       }
     ],
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 12,
+        "end_line": 17,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_sub",
-        "start_line": 9,
+        "start_line": 14,
         "text": ":::note\nThis is a callout that some parsers ignore.\n:::",
         "word_count": 10
       },
       {
-        "end_line": 17,
+        "end_line": 22,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_1",
         "section_id": "section_sub",
-        "start_line": 15,
+        "start_line": 20,
         "text": "Term 1\n: Definition 1",
         "word_count": 5
       },
       {
-        "end_line": 20,
+        "end_line": 25,
         "has_code": false,
         "has_emphasis": true,
         "has_links": false,
         "id": "para_2",
         "section_id": "section_sub",
-        "start_line": 18,
+        "start_line": 23,
         "text": "Term 2\n: Definition 2 with emphasis",
         "word_count": 7
       },
       {
-        "end_line": 30,
+        "end_line": 35,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_3",
         "section_id": "section_sub",
-        "start_line": 29,
+        "start_line": 34,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
         "word_count": 6
       }
@@ -359,47 +393,48 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 28,
-        "end_line": 0,
+        "end_char": 117,
+        "end_line": 5,
         "id": "section_refactored-admonitions-01",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored admonitions 01",
         "slug": "refactored-admonitions-01",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 89,
+        "start_line": 5,
         "text_content": "Refactored admonitions 01",
         "title": "Refactored admonitions 01"
       },
       {
         "child_ids": [],
-        "end_char": 41,
-        "end_line": 3,
+        "end_char": 130,
+        "end_line": 8,
         "id": "section_title",
         "level": 1,
         "parent_id": null,
         "raw_content": "Title\n=====\n",
         "slug": "title",
-        "start_char": 28,
-        "start_line": 1,
+        "start_char": 117,
+        "start_line": 6,
         "text_content": "Title",
         "title": "Title"
       },
       {
         "child_ids": [],
-        "end_char": 400,
-        "end_line": 30,
+        "end_char": 489,
+        "end_line": 35,
         "id": "section_sub",
         "level": 1,
         "parent_id": null,
         "raw_content": "Sub\n----\n\n\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\n\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with *emphasis*\n\n\n\n```{mermaid}\ngraph TD\n  A --> B\n```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_02.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
         "slug": "sub",
-        "start_char": 41,
-        "start_line": 4,
+        "start_char": 130,
+        "start_line": 9,
         "text_content": "Sub\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with emphasis\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
         "title": "Sub"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

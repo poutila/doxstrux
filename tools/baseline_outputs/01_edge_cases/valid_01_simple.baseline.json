@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: Simple Doc",
+      "author: Ada Lovelace",
+      "",
+      "---",
       "",
       "",
       "# Content",
@@ -8,24 +13,29 @@
       "This is regular markdown content.",
       ""
     ],
-    "raw": "\n\n# Content\n\nThis is regular markdown content.\n"
+    "raw": "---\ntitle: Simple Doc\nauthor: Ada Lovelace\n\n---\n\n\n# Content\n\nThis is regular markdown content.\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "2": "section_content",
-      "3": "section_content",
-      "4": "section_content",
-      "5": "section_content"
+      "10": "section_content",
+      "7": "section_content",
+      "8": "section_content",
+      "9": "section_content"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
-      "5": "prose"
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -33,7 +43,12 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ]
   },
   "metadata": {
@@ -47,6 +62,7 @@
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "front_matter": 1,
       "heading": 1,
       "inline": 2,
       "paragraph": 1,
@@ -86,8 +102,8 @@
       },
       "warnings": []
     },
-    "total_chars": 47,
-    "total_lines": 6
+    "total_chars": 95,
+    "total_lines": 11
   },
   "structure": {
     "blockquotes": [],
@@ -96,15 +112,19 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "author": "Ada Lovelace",
+      "title": "Simple Doc"
+    },
     "headings": [
       {
-        "end_char": 12,
+        "end_char": 60,
         "id": "heading_content",
         "level": 1,
-        "line": 2,
+        "line": 7,
         "parent_heading_id": null,
         "slug": "content",
-        "start_char": 2,
+        "start_char": 50,
         "text": "Content"
       }
     ],
@@ -115,13 +135,13 @@
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 5,
+        "end_line": 10,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_content",
-        "start_line": 4,
+        "start_line": 9,
         "text": "This is regular markdown content.",
         "word_count": 5
       }
@@ -129,19 +149,20 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 47,
-        "end_line": 5,
+        "end_char": 95,
+        "end_line": 10,
         "id": "section_content",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Content\n\nThis is regular markdown content.\n",
         "slug": "content",
-        "start_char": 2,
-        "start_line": 2,
+        "start_char": 50,
+        "start_line": 7,
         "text_content": "Content\n\nThis is regular markdown content.",
         "title": "Content"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

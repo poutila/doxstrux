@@ -112,6 +112,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 32,
@@ -176,6 +177,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "| A | B | \n|---|---|\n| 1 | 2 |\n| 3 | 4 | ",
         "row_count": 2,
         "rows": [
           [
@@ -188,8 +190,10 @@
           ]
         ],
         "section_id": "section_test-tbl_trailing_pipes_rect",
-        "start_line": 2
+        "start_line": 2,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

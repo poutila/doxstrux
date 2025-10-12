@@ -70,7 +70,7 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": true,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
         "html_disallowed": true,
         "link_schemes": {},
@@ -111,6 +111,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 90,
@@ -168,6 +169,7 @@
         "title": "Refactored html 04"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

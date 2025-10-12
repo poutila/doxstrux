@@ -140,6 +140,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -204,6 +205,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "> | Column A | Column B |\n> |----------|----------|\n> | Cell 1   | Cell 2   |\n> | Cell 3   | Cell 4   |",
         "row_count": 2,
         "rows": [
           [
@@ -216,8 +218,10 @@
           ]
         ],
         "section_id": "section_blockquote-containing-table",
-        "start_line": 2
+        "start_line": 2,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

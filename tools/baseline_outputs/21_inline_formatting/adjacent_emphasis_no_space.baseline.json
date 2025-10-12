@@ -146,6 +146,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 35,
@@ -269,6 +270,7 @@
         "title": "Adjacent emphasis without spaces"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

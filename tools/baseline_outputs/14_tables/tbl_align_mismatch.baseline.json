@@ -117,6 +117,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -174,6 +175,7 @@
         "is_ragged_meta": {
           "heuristic": true
         },
+        "raw_content": "| A | B | C |\n|:--|--:|:--:|\n| 1 | 2 | 3 |\n| 4 | 5 | 6 |\nParagraph.",
         "row_count": 3,
         "rows": [
           [
@@ -193,8 +195,10 @@
           ]
         ],
         "section_id": "section_test-tbl_align_mismatch",
-        "start_line": 2
+        "start_line": 2,
+        "table_valid_md": false
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

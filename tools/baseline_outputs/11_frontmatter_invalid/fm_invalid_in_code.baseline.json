@@ -15,14 +15,19 @@
     "raw": "# Test: fm_invalid_in_code\n\n```md\n---\ntitle: in code\n---\n```\n\nBody.\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "md",
+        "start_line": 2
+      }
+    ],
     "code_lines": [
       2,
       3,
       4,
       5,
-      6,
-      7
+      6
     ],
     "line_to_section": {
       "0": "section_test-fm_invalid_in_code",
@@ -44,13 +49,14 @@
       "4": "code",
       "5": "code",
       "6": "code",
-      "7": "code",
+      "7": "prose",
       "8": "prose",
       "9": "prose"
     },
     "prose_lines": [
       0,
       1,
+      7,
       8,
       9
     ]
@@ -122,6 +128,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -168,6 +175,7 @@
         "title": "Test: fm_invalid_in_code"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

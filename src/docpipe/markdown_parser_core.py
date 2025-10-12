@@ -8,122 +8,20 @@ No backward compatibility burden - fresh architecture.
 import hashlib
 import posixpath
 import re
-import signal
 import urllib.parse
 import warnings
 from collections.abc import Callable
-from contextlib import contextmanager
 from typing import Any
-
-
-# ---- Precompiled security patterns (Phase 3 hardening) ----
-# Raw content scan for schemes that markdown-it might not parse as links
-_DISALLOWED_SCHEMES_RAW_RE = re.compile(
-    r"(?:javascript:|file:|vbscript:|data:text/html)",
-    re.IGNORECASE
-)
-
-
-# Custom Security Exceptions
-class MarkdownSecurityError(Exception):
-    """Raised when content fails security validation."""
-
-    def __init__(self, message: str, security_profile: str, content_info: dict = None):
-        super().__init__(message)
-        self.security_profile = security_profile
-        self.content_info = content_info or {}
-
-
-class MarkdownSizeError(MarkdownSecurityError):
-    """Raised when content exceeds size limits."""
-
-
-
-class MarkdownPluginError(MarkdownSecurityError):
-    """Raised when plugins are not allowed."""
-
-
-
-class RegexTimeoutError(Exception):
-    """Raised when regex operation times out."""
-
-
-
-@contextmanager
-def regex_timeout(seconds: int):
-    """Context manager to timeout regex operations."""
-
-    def timeout_handler(signum, frame):
-        raise RegexTimeoutError(f"Regex operation timed out after {seconds} seconds")
-
-    # Only use on Unix-like systems where SIGALRM is available
-    if hasattr(signal, "SIGALRM"):
-        old_handler = signal.signal(signal.SIGALRM, timeout_handler)
-        signal.alarm(seconds)
-        try:
-            yield
-        finally:
-            signal.alarm(0)
-            signal.signal(signal.SIGALRM, old_handler)
-    else:
-        # On Windows or other systems, just proceed without timeout
-        yield
-
-
+import yaml
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
-
-# Token utilities for zero-regex refactoring
-try:
-    from docpipe.token_replacement_lib import walk_tokens_iter
-    HAS_TOKEN_UTILS = True
-except ImportError:
-    walk_tokens_iter = None  # type: ignore
-    HAS_TOKEN_UTILS = False
-
-# Optional content context (if you ship content_context.py alongside)
-try:
-    from docpipe.loaders.content_context import ContentContext  # local helper
-
-    _HAS_CC = True
-except Exception:
-    ContentContext = None  # type: ignore
-    _HAS_CC = False
-
-# Optional HTML sanitization - graceful fallback if not available
-try:
-    import bleach
-
-    HAS_BLEACH = True
-except ImportError:
-    HAS_BLEACH = False
-
-# Optional YAML support for frontmatter
-try:
-    import yaml
-
-    HAS_YAML = True
-except ImportError:
-    yaml = None  # type: ignore
-    HAS_YAML = False
-
-# Optional markdown-it plugins
-try:
-    from mdit_py_plugins.footnote import footnote_plugin
-
-    HAS_FOOTNOTE_PLUGIN = True
-except ImportError:
-    footnote_plugin = None  # type: ignore
-    HAS_FOOTNOTE_PLUGIN = False
-
-try:
-    from mdit_py_plugins.tasklists import tasklists_plugin
-
-    HAS_TASKLIST_PLUGIN = True
-except ImportError:
-    tasklists_plugin = None  # type: ignore
-    HAS_TASKLIST_PLUGIN = False
-
+from mdit_py_plugins.footnote import footnote_plugin
+from mdit_py_plugins.tasklists import tasklists_plugin
+from mdit_py_plugins.front_matter import front_matter_plugin
+from docpipe import security_validators
+from docpipe.document_ir import DocumentIR, DocNode
+from docpipe.token_replacement_lib import walk_tokens_iter
+from docpipe.exceptions import MarkdownSecurityError, MarkdownSizeError
 
 class MarkdownParserCore:
     """
@@ -140,13 +38,15 @@ class MarkdownParserCore:
 
     @classmethod
     def get_available_features(cls) -> dict[str, bool]:
-        """Return dict of available optional features."""
+        """Return dict of available features (all required now).
+
+        Phase 6: content_context removed - pure token-based classification.
+        """
+        # Phase 6: All features are required dependencies, no optional packages
         return {
-            "bleach": HAS_BLEACH,
-            "yaml": HAS_YAML,
-            "footnotes": HAS_FOOTNOTE_PLUGIN,
-            "tasklists": HAS_TASKLIST_PLUGIN,
-            "content_context": _HAS_CC,
+            "yaml": True,
+            "footnotes": True,
+            "tasklists": True,
         }
 
     @classmethod
@@ -196,12 +96,8 @@ class MarkdownParserCore:
     MAX_RECURSION_DEPTH = 100
 
     # Security: Allowed link schemes for RAG safety
-    _ALLOWED_LINK_SCHEMES = {
-        "http",
-        "https",
-        "mailto",
-        "tel",
-    }  # anchors & relative paths allowed implicitly
+    # Phase 6 Task 6.1: _ALLOWED_LINK_SCHEMES moved to security_validators.py
+    # Use security_validators.ALLOWED_LINK_SCHEMES_* constants
 
     # Security: Content size limits to prevent DoS
     SECURITY_LIMITS = {
@@ -229,38 +125,20 @@ class MarkdownParserCore:
     ALLOWED_PLUGINS = {
         "strict": {
             "builtin": ["table"],  # Only basic table support
-            "external": [],  # No external plugins in strict mode
+            "external": ["front_matter", "tasklists"],  # Frontmatter plugin allowed (read-only extraction)
         },
         "moderate": {
             "builtin": ["table", "strikethrough", "linkify"],
-            "external": ["footnote"],  # Limited external plugins
+            "external": ["footnote", "front_matter", "tasklists"],  # Limited external plugins
         },
         "permissive": {
             "builtin": ["table", "strikethrough", "linkify"],
-            "external": ["footnote", "tasklists"],  # All supported plugins
+            "external": ["footnote", "tasklists", "front_matter"],  # All supported plugins
         },
     }
 
-    # Security: Prompt injection detection patterns
-    _PROMPT_INJECTION_PATTERNS = [
-        r"\bignore (all )?previous (system )?instructions\b",
-        r"\boverride the system\b",
-        r"\breveal (the )?system prompt\b",
-        r"\bsystem prompt reveal\b",  # Added explicit pattern
-        r"\bdisregard earlier (instructions|context)\b",
-        r"\bBEGIN SYSTEM PROMPT\b",
-        r"\brespond (only|strictly) with\b",
-        r"\b(jailbreak|developer mode)\b",
-        r"\bpretend to be\b",
-        r"\bdo not follow the above\b",
-        r"\binternal tool instructions\b",
-        r"\bbypass.*restrictions\b",  # Added from original patterns
-        # Additional patterns for hidden injections
-        r"\bsystem:\s*you are\b",
-        r"\bassistant:\s*i understand\b",
-        r"\b<\|im_start\|>\b",
-        r"\b<\|im_end\|>\b",
-    ]
+    # Phase 6 Task 6.1: _PROMPT_INJECTION_PATTERNS moved to security_validators.py
+    # Use security_validators.PROMPT_INJECTION_PATTERNS
 
     # Extra HTML/CSS/scriptless vector patterns
     _STYLE_JS_PAT = re.compile(
@@ -284,145 +162,12 @@ class MarkdownParserCore:
         "\u200f",  # Right-to-Left Mark
     ]
 
-    # Expanded confusable characters (Latin lookalikes from other scripts)
-    _CONFUSABLES_EXTENDED = {
-        # Cyrillic lookalikes
-        "а",
-        "е",
-        "о",
-        "р",
-        "с",
-        "у",
-        "х",
-        "В",
-        "К",
-        "М",
-        "Н",
-        "Т",
-        # Greek lookalikes
-        "α",
-        "ο",
-        "ρ",
-        "τ",
-        "υ",
-        "χ",
-        "Α",
-        "Β",
-        "Ε",
-        "Ζ",
-        "Η",
-        "Ι",
-        "Κ",
-        "Μ",
-        "Ν",
-        "Ο",
-        "Ρ",
-        "Τ",
-        "Υ",
-        "Χ",
-        # Mathematical/special variants
-        "ℓ",
-        "ℴ",
-        "𝐚",
-        "𝐛",
-        "𝐜",
-        "𝐝",
-        "𝐞",
-        "𝐟",
-        "𝐠",
-        "𝐡",
-        "𝐢",
-        "𝐣",
-        "𝐤",
-        "𝐥",
-        "𝐦",
-        "𝐧",
-        "𝐨",
-        "𝐩",
-        # Fullwidth forms
-        "ａ",
-        "ｂ",
-        "ｃ",
-        "ｄ",
-        "ｅ",
-        "ｆ",
-        "ｇ",
-        "ｈ",
-        "ｉ",
-        "ｊ",
-        "ｋ",
-        "ｌ",
-        "ｍ",
-        "ｎ",
-        "ｏ",
-        "ｐ",
-        # Enclosed alphanumerics
-        "ⓐ",
-        "ⓑ",
-        "ⓒ",
-        "ⓓ",
-        "ⓔ",
-        "ⓕ",
-        "ⓖ",
-        "ⓗ",
-        "ⓘ",
-        "ⓙ",
-        "ⓚ",
-        "ⓛ",
-        "ⓜ",
-        "ⓝ",
-        "ⓞ",
-        "ⓟ",
-    }
+    # Phase 6 Task 6.1: _CONFUSABLES_EXTENDED moved to security_validators.py
+    # Use security_validators.CONFUSABLES_EXTENDED
 
-    # HTML sanitization configuration
-    _ALLOWED_HTML_TAGS = [
-        "p",
-        "br",
-        "strong",
-        "em",
-        "u",
-        "s",
-        "code",
-        "pre",
-        "blockquote",
-        "ul",
-        "ol",
-        "li",
-        "a",
-        "img",
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "h5",
-        "h6",
-        "table",
-        "thead",
-        "tbody",
-        "tr",
-        "th",
-        "td",
-        "hr",
-        "abbr",
-        "cite",
-        "del",
-        "ins",
-        "mark",
-        "sub",
-        "sup",
-    ]
-
-    _ALLOWED_HTML_ATTRIBUTES = {
-        "a": ["href", "title", "rel"],
-        "img": ["src", "alt", "title", "width", "height"],
-        "blockquote": ["cite"],
-        "abbr": ["title"],
-        "code": ["class"],  # For language highlighting
-        "*": ["class"],  # Allow class on any element for styling
-    }
-
-    _ALLOWED_PROTOCOLS = ["http", "https", "mailto", "tel"]
+    # Phase 6: Removed _ALLOWED_HTML_TAGS, _ALLOWED_HTML_ATTRIBUTES, _ALLOWED_PROTOCOLS
+    # HTML sanitization via bleach removed - security now enforced via token-based
+    # detection and centralized validators (security_validators.py)
 
     # Security profiles for different environments
     SECURITY_PROFILES = {
@@ -431,7 +176,7 @@ class MarkdownParserCore:
             "allows_scripts": False,
             "allows_data_uri": False,
             "max_data_uri_size": 0,
-            "allowed_schemes": {"https"},
+            "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_STRICT,  # Phase 6 Task 6.1
             "max_link_count": 50,
             "max_image_count": 20,
             "max_footnote_size": 256,
@@ -444,7 +189,7 @@ class MarkdownParserCore:
             "allows_scripts": False,
             "allows_data_uri": True,
             "max_data_uri_size": 10240,  # 10KB
-            "allowed_schemes": {"http", "https", "mailto"},
+            "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_MODERATE,  # Phase 6 Task 6.1
             "max_link_count": 200,
             "max_image_count": 100,
             "max_footnote_size": 512,
@@ -457,7 +202,7 @@ class MarkdownParserCore:
             "allows_scripts": False,  # Never allow scripts in RAG
             "allows_data_uri": True,
             "max_data_uri_size": 102400,  # 100KB
-            "allowed_schemes": {"http", "https", "mailto", "tel", "ftp"},
+            "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_PERMISSIVE,  # Phase 6 Task 6.1
             "max_link_count": 1000,
             "max_image_count": 500,
             "max_footnote_size": 2048,
@@ -502,25 +247,25 @@ class MarkdownParserCore:
         profile = self.SECURITY_PROFILES.get(
             self.security_profile, self.SECURITY_PROFILES["moderate"]
         )
-        self._effective_allowed_schemes = profile.get("allowed_schemes", self._ALLOWED_LINK_SCHEMES)
+        # Phase 6 Task 6.1: Use centralized security_validators constants
+        self._effective_allowed_schemes = profile.get("allowed_schemes", security_validators.ALLOWED_LINK_SCHEMES_MODERATE)
 
         # Store limits for later validation
         limits = self.SECURITY_LIMITS[self.security_profile]
         self._max_token_count = limits["max_token_count"]
         self.MAX_RECURSION_DEPTH = limits["max_recursion_depth"]
 
-        # Extract YAML frontmatter before processing
-        self.content, self.frontmatter, self.yaml_hrule_count = self._extract_yaml_frontmatter(
-            content
-        )
+        # Use original content (frontmatter will be extracted by plugin after parsing)
+        self.content = content
         self.lines = self.content.split("\n")
 
         # Build character offset map for RAG chunking
         self._build_line_offsets()
 
         # Initialize markdown parser with configurable features
+        # Always enable HTML parsing to get tokens (policy enforces allows_html)
         preset = self.config.get("preset", "commonmark")
-        self.md = MarkdownIt(preset)
+        self.md = MarkdownIt(preset, options_update={"html": True})
 
         # Enable built-in plugins and external plugins
         # Use profile-appropriate defaults when not specified
@@ -540,7 +285,6 @@ class MarkdownParserCore:
 
         # Track what we actually enabled
         self.enabled_plugins = set()
-        self.unavailable_plugins = []
 
         # Enable allowed built-in plugins
         if allowed_builtin:
@@ -550,29 +294,27 @@ class MarkdownParserCore:
         # Apply allowed external plugins with availability check
         for plugin_config in allowed_external:
             if plugin_config == "footnote":
-                if HAS_FOOTNOTE_PLUGIN:
-                    self.md.use(footnote_plugin)
-                    self.enabled_plugins.add("footnote")
-                else:
-                    self.unavailable_plugins.append("footnote")
+                self.md.use(footnote_plugin)
+                self.enabled_plugins.add("footnote")
             elif plugin_config == "tasklists":
-                if HAS_TASKLIST_PLUGIN:
-                    self.md.use(tasklists_plugin)
-                    self.enabled_plugins.add("tasklists")
-                else:
-                    self.unavailable_plugins.append("tasklists")
+                self.md.use(tasklists_plugin)
+                self.enabled_plugins.add("tasklists")
+            elif plugin_config == "front_matter":
+                self.md.use(front_matter_plugin)
+                self.enabled_plugins.add("front_matter")
 
         # Track enabled features for extraction logic
         self.allows_html = self.config.get("allows_html", False)
 
-        # Parse once and create tree (using cleaned content without frontmatter)
-        self.tokens = self.md.parse(self.content)
+        # Initialize env dict for plugins (front_matter plugin stores data here)
+        self.md.env = {}
+
+        # Parse once and create tree (frontmatter extracted by plugin to env)
+        self.tokens = self.md.parse(self.content, self.md.env)
         self.tree = SyntaxTreeNode(self.tokens)
 
-        # Initialize optional content context for prose/code distinction
-        self._context = ContentContext(self.content) if _HAS_CC else None
-        # Keep self.context for backward compatibility if needed
-        self.context = self._context
+        # Phase 6: ContentContext removed - use pure token-based classification
+        # Prose/code distinction now derived entirely from AST code blocks
 
         # Pre-collect text segments for faster plain text extraction
         self._text_segments = []
@@ -580,7 +322,6 @@ class MarkdownParserCore:
 
         # Track sections for cross-referencing
         self._sections = []
-        self._current_section = None
 
         # Initialize extraction caches to avoid redundant work
         self._cache = {
@@ -671,7 +412,7 @@ class MarkdownParserCore:
 
         # Check external plugins
         for plugin in external_plugins:
-            if plugin in ["footnote", "tasklists"]:
+            if plugin in ["footnote", "tasklists", "front_matter"]:
                 if plugin in profile_config["external"]:
                     allowed_external.append(plugin)
                 else:
@@ -753,7 +494,11 @@ class MarkdownParserCore:
                 "links": self._extract_links(),
                 "images": self._extract_images(),
                 "blockquotes": self._extract_blockquotes(),
+                "frontmatter": self._extract_frontmatter(),
+                "tasklists": self._extract_tasklists(),
             }
+
+
 
             # Add conditional extractions based on enabled features
             if "footnote" in self.enabled_plugins:
@@ -943,32 +688,6 @@ class MarkdownParserCore:
 
         return result
 
-    def _sanitize_html_content(self, html: str, allows_html: bool = False) -> str:
-        """Properly sanitize HTML content using bleach if available."""
-        if not allows_html:
-            # Strip all HTML
-            if HAS_BLEACH:
-                return bleach.clean(html, tags=[], strip=True)
-            # Fallback to regex if bleach not available
-            return re.sub(r"<[^>]+>", "", html)
-        # Allow safe subset
-        if HAS_BLEACH:
-            return bleach.clean(
-                html,
-                tags=self._ALLOWED_HTML_TAGS,
-                attributes=self._ALLOWED_HTML_ATTRIBUTES,
-                protocols=self._ALLOWED_PROTOCOLS,
-                strip=True,
-            )
-        # Basic sanitization without bleach
-        # Remove script tags and event handlers
-        html = re.sub(
-            r"<script[^>]*>.*?</script>", "", html, flags=re.IGNORECASE | re.DOTALL
-        )
-        html = re.sub(r"\bon\w+\s*=\s*[\"'][^\"']*[\"']", "", html, flags=re.IGNORECASE)
-        html = re.sub(r"javascript:", "", html, flags=re.IGNORECASE)
-        return html
-
     def sanitize(
         self, policy: dict[str, Any] | None = None, security_profile: str | None = None
     ) -> dict[str, Any]:
@@ -1061,13 +780,10 @@ class MarkdownParserCore:
             "node_counts": type_counts,  # Bonus: expose raw counts for debugging/analytics
         }
 
-        # Add frontmatter if present
-        if self.frontmatter:
-            # Extract data from the new structure
-            if isinstance(self.frontmatter, dict) and "data" in self.frontmatter:
-                metadata["frontmatter"] = self.frontmatter["data"]
-            else:
-                metadata["frontmatter"] = self.frontmatter
+        # Add frontmatter if present (from structure, not self.frontmatter)
+        frontmatter = structure.get("frontmatter")
+        if frontmatter:
+            metadata["frontmatter"] = frontmatter
             metadata["has_frontmatter"] = True
         else:
             metadata["has_frontmatter"] = False
@@ -1094,7 +810,7 @@ class MarkdownParserCore:
             "statistics": {
                 "frontmatter_at_bof": False,
                 "ragged_tables_count": 0,
-                "allowed_schemes": sorted(list(self._ALLOWED_LINK_SCHEMES)),
+                "allowed_schemes": sorted(list(self._effective_allowed_schemes)),  # Phase 6 Task 6.1: Use effective schemes from profile
                 "table_align_mismatches": 0,
                 "nested_headings_blocked": 0,
                 "has_html_block": False,
@@ -1110,10 +826,11 @@ class MarkdownParserCore:
             },
         }
 
-        # Check frontmatter location
-        if self.frontmatter:
+        # Check frontmatter location (from structure)
+        frontmatter = structure.get("frontmatter")
+        if frontmatter:
             security["statistics"]["frontmatter_at_bof"] = True
-            # We know it's at BOF because we only accept it there now
+            # We know it's at BOF because plugin only extracts it from there
 
         # Count ragged tables and alignment mismatches
         tables = self._get_cached("tables", self._extract_tables)
@@ -1141,38 +858,49 @@ class MarkdownParserCore:
         security["statistics"]["ragged_tables_count"] = ragged_count
         security["statistics"]["table_align_mismatches"] = align_mismatch_count
 
-        # Scan raw content for HTML/security signals (always, regardless of allows_html)
+        # HTML detection (Phase 4: pure token-based, zero regex)
+        # Extract HTML from structure (already parsed via tokens in _extract_html)
+        html_blocks = structure.get("html_blocks", [])
+        html_inline = structure.get("html_inline", [])
+
+        # Keep raw_content for non-HTML patterns (style JS, etc.)
         raw_content = self.original_content
 
-        # HTML detection
-        if re.search(
-            r"<(div|span|script|style|iframe|object|embed|form)[\s>]", raw_content, re.IGNORECASE
-        ):
+        # Token-based detection (always works now since html=True in parser init)
+        if html_blocks:
             security["statistics"]["has_html_block"] = True
-        if re.search(r"<(a|img|em|strong|b|i|u|code|kbd|sup|sub)[\s>]", raw_content, re.IGNORECASE):
+        if html_inline:
             security["statistics"]["has_html_inline"] = True
 
-        # Script detection
-        if re.search(r"<script[\s>]", raw_content, re.IGNORECASE):
-            security["statistics"]["has_script"] = True
-            security["warnings"].append(
-                {"type": "script_tag", "line": None, "message": "Document contains <script> tags"}
-            )
+        # Script detection (pure token-based)
+        html_items = html_blocks + html_inline
+        for html_item in html_items:
+            content = html_item.get("content", "").lower()
+            if "<script" in content:
+                security["statistics"]["has_script"] = True
+                security["warnings"].append(
+                    {
+                        "type": "script_tag",
+                        "line": html_item.get("line") or html_item.get("start_line"),
+                        "message": "Document contains <script> tags"
+                    }
+                )
+                break
 
-        # Event handler detection
-        if re.search(
-            r"\bon(load|error|click|mouse|key|focus|blur|change|submit)\s*=",
-            raw_content,
-            re.IGNORECASE,
-        ):
-            security["statistics"]["has_event_handlers"] = True
-            security["warnings"].append(
-                {
-                    "type": "event_handlers",
-                    "line": None,
-                    "message": "Document contains HTML event handler attributes",
-                }
-            )
+        # Event handler detection (pure token-based)
+        event_handlers = ["onload", "onerror", "onclick", "onmouse", "onkey", "onfocus", "onblur", "onchange", "onsubmit"]
+        for html_item in html_items:
+            content = html_item.get("content", "").lower()
+            if any(handler in content for handler in event_handlers):
+                security["statistics"]["has_event_handlers"] = True
+                security["warnings"].append(
+                    {
+                        "type": "event_handlers",
+                        "line": html_item.get("line") or html_item.get("start_line"),
+                        "message": "Document contains HTML event handler attributes",
+                    }
+                )
+                break
 
         # Style-based JavaScript injection detection
         if self._STYLE_JS_PAT.search(raw_content):
@@ -1332,21 +1060,21 @@ class MarkdownParserCore:
         )
         security["statistics"]["unicode_risk_score"] = unicode_risk_score
 
-        # Scan raw content for disallowed link schemes that markdown-it might not parse
-        m = _DISALLOWED_SCHEMES_RAW_RE.search(raw_content)
-        if m:
+        # Scan raw content for disallowed link schemes that markdown-it might not parse (Phase 6 Task 6.1)
+        scheme_scan = security_validators.scan_raw_for_disallowed_schemes(raw_content)
+        if scheme_scan["found"]:
             security["link_disallowed_schemes_raw"] = True
             security["warnings"].append(
                 {
                     "type": "disallowed_schemes_raw",
-                    "message": f"Raw content contains potentially dangerous scheme: {m.group(0)}",
+                    "message": f"Raw content contains potentially dangerous scheme: {scheme_scan['match']}",
                 }
             )
 
         # RAG Safety: Comprehensive prompt injection detection
 
-        # Check main content
-        if self._check_prompt_injection(raw_content):
+        # Check main content (Phase 6 Task 6.1)
+        if security_validators.check_prompt_injection(raw_content):
             security["statistics"]["suspected_prompt_injection"] = True
             security["warnings"].append(
                 {
@@ -1360,7 +1088,7 @@ class MarkdownParserCore:
         for img in images:
             alt_text = img.get("alt", "")
             title = img.get("title", "")
-            if self._check_prompt_injection(alt_text) or self._check_prompt_injection(title):
+            if security_validators.check_prompt_injection(alt_text) or security_validators.check_prompt_injection(title):
                 security["statistics"]["prompt_injection_in_images"] = True
                 security["warnings"].append(
                     {
@@ -1375,7 +1103,7 @@ class MarkdownParserCore:
         for link in links:
             title = link.get("title", "")
             text = link.get("text", "")
-            if self._check_prompt_injection(title) or self._check_prompt_injection(text):
+            if security_validators.check_prompt_injection(title) or security_validators.check_prompt_injection(text):
                 security["statistics"]["prompt_injection_in_links"] = True
                 security["warnings"].append(
                     {
@@ -1390,7 +1118,7 @@ class MarkdownParserCore:
         code_blocks = self._get_cached("code_blocks", self._extract_code_blocks)
         for block in code_blocks:
             code = block.get("code", "")
-            if self._check_prompt_injection(code):
+            if security_validators.check_prompt_injection(code):
                 security["statistics"]["prompt_injection_in_code"] = True
                 security["warnings"].append(
                     {
@@ -1405,7 +1133,7 @@ class MarkdownParserCore:
         for table in tables:
             # Check headers
             for header in table.get("headers", []):
-                if self._check_prompt_injection(header):
+                if security_validators.check_prompt_injection(header):
                     security["statistics"]["prompt_injection_in_tables"] = True
                     security["warnings"].append(
                         {
@@ -1417,7 +1145,7 @@ class MarkdownParserCore:
                     break
             # Check rows
             for row in table.get("rows", []):
-                if any(self._check_prompt_injection(cell) for cell in row):
+                if any(security_validators.check_prompt_injection(cell) for cell in row):
                     security["statistics"]["prompt_injection_in_tables"] = True
                     security["warnings"].append(
                         {
@@ -1529,27 +1257,6 @@ class MarkdownParserCore:
             self._cache[key] = extractor()
         return self._cache[key]
 
-    def _get_covered_ranges(self, structure_type: str) -> set:
-        """Get line ranges covered by a structure type.
-
-        Useful for avoiding redundant extraction in overlapping structures.
-        For example, paragraphs can skip lines already covered by code blocks.
-        """
-        cache_key = f"{structure_type}_ranges"
-        if self._cache.get(cache_key) is None:
-            ranges = set()
-            # Get the extracted items (uses cache)
-            items = self._get_cached(
-                structure_type, lambda: getattr(self, f"_extract_{structure_type}")()
-            )
-            for item in items:
-                start = item.get("start_line")
-                end = item.get("end_line", start)
-                if start is not None and end is not None:
-                    ranges.update(range(start, end + 1))
-            self._cache[cache_key] = ranges
-        return self._cache[cache_key]
-
     def _slice_lines_inclusive(self, start_line: int | None, end_line: int | None) -> list[str]:
         """
         Centralized line slicing with end-inclusive convention.
@@ -1595,141 +1302,35 @@ class MarkdownParserCore:
         lines = self._slice_lines_inclusive(start_line, end_line)
         return "\n".join(lines)
 
-    def _extract_yaml_frontmatter(self, content: str) -> tuple[str, dict | None, int]:
+    def _extract_frontmatter(self) -> dict | None:
         """
-        Extract YAML frontmatter from content if present.
-        SECURITY: Only accepts frontmatter at beginning of file (BOF).
+        Extract YAML frontmatter from tokens (Phase 5: plugin-based).
 
-        Args:
-            content: Raw markdown content
+        The front_matter plugin creates a 'front_matter' token with YAML content.
+        We parse the YAML content from the token.
 
         Returns:
-            Tuple of (cleaned_content, frontmatter_dict, hrule_count)
-            - cleaned_content: Content with frontmatter removed
-            - frontmatter_dict: Parsed YAML data with metadata or None
-            - hrule_count: Number of YAML delimiter hrules found
+            Frontmatter dict or None if not present
         """
-        # Strip BOM if present
-        if content.startswith("\ufeff"):
-            content = content[1:]
-
-        lines = content.split("\n")
-
-        # SECURITY: Only check at BOF - prevent content deletion attacks
-        # Allow single blank line before frontmatter for flexibility
-        start_idx = 0
-        if lines and lines[0].strip() == "":
-            # Single blank line tolerance
-            start_idx = 1
-            if len(lines) <= 1:
-                return content, None, 0
-
-        # Require exact '---' (no trailing spaces, handle CRLF)
-        if start_idx >= len(lines) or lines[start_idx].rstrip("\r") != "---":
-            return content, None, 0
-
-        # Look for closing delimiter
-        hrule_count = 1  # Opening ---
-        yaml_lines = []
-
-        # Security: Cap frontmatter size (200 lines or 64KB)
-        max_lines = 200
-        max_bytes = 64 * 1024
-        current_bytes = 0
-
-        for i in range(start_idx + 1, min(len(lines), start_idx + max_lines + 1)):
-            line = lines[i]
-            current_bytes += len(line.encode("utf-8"))
-
-            # Security check: stop if too large
-            if current_bytes > max_bytes:
-                return content, None, 0
-
-            # SECURITY: Require exact '---' or '...' (exactly 3 dots, handle CRLF)
-            if line.rstrip("\r") in ("---", "..."):
-                hrule_count += 1
-
-                # Get YAML content
-                yaml_content = "\n".join(yaml_lines)
-
-                # Direct yaml.safe_load without heuristic pre-check
-                try:
-                    if not HAS_YAML:
-                        self.frontmatter_error = "yaml_library_not_available"
-                        return content, None, 0
-
-                    parsed_yaml = yaml.safe_load(yaml_content)
-
-                    # Accept dict or list
-                    if isinstance(parsed_yaml, (dict, list)):
-                        # Add metadata for forensics
-                        frontmatter_data = {
-                            "data": parsed_yaml,
-                            "raw": yaml_content,
-                            "start_line": 0,
-                            "end_line": i,
-                        }
-
-                        # Remove frontmatter from content
-                        # Remove from content (including any leading blank line)
-                        remaining_lines = lines[i + 1 :] if i + 1 < len(lines) else []
-
-                        # Prevent remaining YAML-like blocks from becoming Setext headings
-                        # Insert blank lines before --- that follow text to break Setext pattern
-                        processed_lines = []
-                        for j in range(len(remaining_lines)):
-                            processed_lines.append(remaining_lines[j])
-
-                            # If this line has text and next line is exactly '---'
-                            if (
-                                j + 1 < len(remaining_lines)
-                                and remaining_lines[j].strip()
-                                and remaining_lines[j + 1] == "---"
-                            ):
-                                # Insert blank line to prevent Setext interpretation
-                                processed_lines.append("")
-
-                        cleaned_content = "\n".join(processed_lines)
-
-                        return cleaned_content, frontmatter_data, hrule_count
-                    # Not dict/list - don't remove
-                    return content, None, 0
-                except yaml.YAMLError as e:
-                    # Log specific YAML error but don't fail parsing
-                    self.frontmatter_error = f"yaml_parse_error: {str(e)[:100]}"
-                    return content, None, 0
-                except Exception as e:
-                    # Catch any other frontmatter processing errors
-                    self.frontmatter_error = f"processing_error: {type(e).__name__}"
-                    return content, None, 0
-            else:
-                # Strip \r for YAML processing but preserve line content
-                yaml_lines.append(line.rstrip("\r"))
-
-        # No closing delimiter found - not valid frontmatter
-        # Check if it looks like unterminated frontmatter (has single dot line)
-        if yaml_lines and any(line.strip() == "." for line in yaml_lines):
-            self.frontmatter_error = "unterminated"
-        return content, None, 0
-
-    # REMOVED: _is_valid_yaml method - no longer needed
-    # We now use direct yaml.safe_load() without heuristic pre-check
-
-    def get_total_hrule_count(self) -> int:
-        """
-        Get total count of horizontal rules including YAML frontmatter delimiters.
-
-        Returns:
-            Total number of hrules (markdown hrules + YAML delimiters)
-        """
-        # Count markdown hrules from tokens
-        markdown_hrules = 0
+        # Find front_matter token (plugin creates this)
         for token in self.tokens:
-            if hasattr(token, "type") and token.type == "hr":
-                markdown_hrules += 1
+            if hasattr(token, 'type') and token.type == 'front_matter':
+                # Token content is the raw YAML string
+                yaml_content = token.content
+                if yaml_content:
+                    try:
+                        parsed_yaml = yaml.safe_load(yaml_content)
+                        # Return parsed YAML if it's a dict or list
+                        if isinstance(parsed_yaml, (dict, list)):
+                            return parsed_yaml
+                    except yaml.YAMLError:
+                        # Invalid YAML - return None
+                        pass
+                break
+        return None
 
-        # Add YAML delimiter hrules
-        return markdown_hrules + self.yaml_hrule_count
+    # Phase 6 Task 6.1: Removed get_total_hrule_count() - broken after frontmatter plugin migration
+    # Frontmatter line numbers not needed for RAG use cases (metadata extracted, sections start after frontmatter)
 
     def _extract_sections(self) -> list[dict]:
         """
@@ -1864,18 +1465,22 @@ class MarkdownParserCore:
         return paragraphs
 
     def _extract_lists(self) -> list[dict]:
-        """Extract all lists with proper nesting and detailed task item metrics."""
+        """Extract regular lists (excludes task lists - those are in _extract_tasklists)."""
         lists = []
 
         def list_processor(node, ctx, level):
             if node.type in ["bullet_list", "ordered_list"]:
-                # Extract complete list structure
-                items = self._extract_list_items(node)
+                # Check if this is a task list (skip if it is)
+                class_attr = ""
+                if hasattr(node, 'attrs') and node.attrs:
+                    class_attr = node.attrs.get('class', '')
 
-                # Count task items for detailed metrics
-                task_items = [item for item in items if self._is_task_item(item)]
-                task_items_count = len(task_items)
-                items_count = len(items)
+                if 'contains-task-list' in class_attr:
+                    # Skip task lists (handled by _extract_tasklists)
+                    return True
+
+                # Extract regular list structure
+                items = self._extract_list_items(node)
 
                 list_data = {
                     "id": f"list_{len(ctx)}",
@@ -1884,9 +1489,7 @@ class MarkdownParserCore:
                     "end_line": node.map[1] if node.map else None,
                     "section_id": self._find_section_id(node.map[0] if node.map else 0),
                     "items": items,
-                    "items_count": items_count,
-                    "task_items_count": task_items_count,
-                    "has_mixed_task_items": task_items_count > 0 and task_items_count < items_count,
+                    "items_count": len(items),
                 }
 
                 ctx.append(list_data)
@@ -1897,8 +1500,142 @@ class MarkdownParserCore:
         self.process_tree(self.tree, list_processor, lists)
         return lists
 
-    def _extract_list_items(self, list_node) -> list[dict]:
-        """Recursively extract list items with nesting."""
+    def _extract_tasklists(self) -> list[dict]:
+        """Extract task lists (GFM extension with checkbox items)."""
+        tasklists = []
+
+        def tasklist_processor(node, ctx, level):
+            if node.type in ["bullet_list", "ordered_list"]:
+                # Check if this is a task list (plugin marks it with class)
+                class_attr = ""
+                if hasattr(node, 'attrs') and node.attrs:
+                    class_attr = node.attrs.get('class', '')
+
+                if 'contains-task-list' not in class_attr:
+                    # Skip regular lists (handled by _extract_lists)
+                    return True
+
+                # Extract task list structure
+                start_line = node.map[0] if node.map else None
+                end_line = node.map[1] if node.map else None
+
+                tasklist = {
+                    "id": f"tasklist_{len(ctx)}",
+                    "type": "bullet" if node.type == "bullet_list" else "ordered",
+                    "start_line": start_line,
+                    "end_line": end_line,
+                    "section_id": self._find_section_id(start_line if start_line is not None else 0),
+                    "items": [],
+                }
+
+                # Extract task list items
+                tasklist["items"] = self._extract_tasklist_items(node)
+
+                # Calculate metrics
+                items_count = len(tasklist["items"])
+                checked_count = sum(1 for item in tasklist["items"] if item.get("checked") is True)
+                unchecked_count = sum(1 for item in tasklist["items"] if item.get("checked") is False)
+
+                tasklist["items_count"] = items_count
+                tasklist["checked_count"] = checked_count
+                tasklist["unchecked_count"] = unchecked_count
+                tasklist["has_mixed_task_items"] = any(
+                    item.get("checked") is None for item in tasklist["items"]
+                )
+
+                ctx.append(tasklist)
+                return False  # Don't recurse, we handled the entire task list
+
+            return True
+
+        self.process_tree(self.tree, tasklist_processor, tasklists)
+        return tasklists
+
+    def _detect_task_checkbox(self, paragraph_node) -> tuple[bool, bool]:
+        """Detect task list checkbox from tasklists plugin.
+
+        The plugin injects html_inline tokens with class="task-list-item-checkbox"
+        and checked="checked" for checked items.
+
+        Returns:
+            (has_checkbox, is_checked) tuple
+        """
+        if not hasattr(paragraph_node, "children"):
+            return False, False
+
+        # Walk inline tokens looking for checkbox HTML
+        for token in walk_tokens_iter([paragraph_node]):
+            if token.type == "html_inline":
+                content = getattr(token, "content", "")
+                if "task-list-item-checkbox" in content:
+                    is_checked = 'checked="checked"' in content
+                    return True, is_checked
+
+        return False, False
+
+    def _extract_list_items(self, list_node, depth: int = 0, max_depth: int = 10) -> list[dict]:
+        """Extract regular list items (no checkbox detection) with depth limit.
+
+        Args:
+            list_node: The list node to extract items from
+            depth: Current recursion depth (default 0)
+            max_depth: Maximum allowed depth to prevent stack overflow (default 10)
+
+        Returns:
+            List of item dicts, or empty list if depth exceeded
+        """
+        # Safety: Prevent stack overflow from deeply nested lists
+        if depth >= max_depth:
+            return []
+
+        items = []
+
+        for child in list_node.children or []:
+            if child.type == "list_item":
+                item = {"text": "", "children": [], "blocks": []}
+
+                # Process list item children
+                for item_child in child.children or []:
+                    if item_child.type == "paragraph":
+                        # Regular list item - just extract text (no checkbox detection)
+                        text = self._get_text(item_child)
+                        item["text"] = text
+
+                    elif item_child.type in ["bullet_list", "ordered_list"]:
+                        # Nested list (recursive with depth tracking)
+                        item["children"] = self._extract_list_items(
+                            item_child,
+                            depth=depth + 1,
+                            max_depth=max_depth
+                        )
+
+                    elif item_child.type in ["fence", "code_block", "blockquote", "table"]:
+                        # Block elements within list item
+                        item["blocks"].append({
+                            "type": item_child.type,
+                            "start_line": item_child.map[0] if item_child.map else None,
+                            "end_line": item_child.map[1] if item_child.map else None,
+                        })
+
+                items.append(item)
+
+        return items
+
+    def _extract_tasklist_items(self, list_node, depth: int = 0, max_depth: int = 10) -> list[dict]:
+        """Extract task list items WITH checkbox detection and depth limit.
+
+        Args:
+            list_node: The task list node to extract items from
+            depth: Current recursion depth (default 0)
+            max_depth: Maximum allowed depth to prevent stack overflow (default 10)
+
+        Returns:
+            List of task item dicts with checked status, or empty list if depth exceeded
+        """
+        # Safety: Prevent stack overflow from deeply nested lists
+        if depth >= max_depth:
+            return []
+
         items = []
 
         for child in list_node.children or []:
@@ -1908,56 +1645,46 @@ class MarkdownParserCore:
                 # Process list item children
                 for item_child in child.children or []:
                     if item_child.type == "paragraph":
-                        # Check for task list markers in HTML (from tasklist plugin)
-                        has_checkbox = False
-                        is_checked = False
-
-                        # Look for HTML checkbox in paragraph's inline children
-                        if hasattr(item_child, "children"):
-                            for para_child in item_child.children:
-                                # Check inline node's children for html_inline
-                                if para_child.type == "inline" and hasattr(para_child, "children"):
-                                    for inline_child in para_child.children:
-                                        if inline_child.type == "html_inline":
-                                            html_content = getattr(inline_child, "content", "")
-                                            if "task-list-item-checkbox" in html_content:
-                                                has_checkbox = True
-                                                is_checked = 'checked="checked"' in html_content
-                                                break
-                                # Also check direct html_inline (fallback)
-                                elif para_child.type == "html_inline":
-                                    html_content = getattr(para_child, "content", "")
-                                    if "task-list-item-checkbox" in html_content:
-                                        has_checkbox = True
-                                        is_checked = 'checked="checked"' in html_content
-                                        break
-
+                        # Detect task checkbox (plugin already removed [ ] from text)
+                        has_checkbox, is_checked = self._detect_task_checkbox(item_child)
                         text = self._get_text(item_child)
 
-                        # If we found a checkbox, set the checked status
                         if has_checkbox:
                             item["checked"] = is_checked
                             item["text"] = text.strip()
-                        # Otherwise check for plain text task markers (fallback)
-                        elif text.startswith("[ ] "):
-                            item["checked"] = False
-                            item["text"] = text[4:]
-                        elif text.startswith("[x] ") or text.startswith("[X] "):
-                            item["checked"] = True
-                            item["text"] = text[4:]
                         else:
+                            # Regular list item mixed in task list
                             item["text"] = text
+
                     elif item_child.type in ["bullet_list", "ordered_list"]:
-                        # Nested list
-                        item["children"] = self._extract_list_items(item_child)
+                        # Check if nested list is also a task list
+                        nested_class = ""
+                        if hasattr(item_child, 'attrs') and item_child.attrs:
+                            nested_class = item_child.attrs.get('class', '')
+
+                        if 'contains-task-list' in nested_class:
+                            # Nested task list (recursive with depth tracking)
+                            item["children"] = self._extract_tasklist_items(
+                                item_child,
+                                depth=depth + 1,
+                                max_depth=max_depth
+                            )
+                        else:
+                            # Regular nested list inside task list item
+                            # Extract as regular list
+                            item["children"] = self._extract_list_items(
+                                item_child,
+                                depth=depth + 1,
+                                max_depth=max_depth
+                            )
+
                     elif item_child.type in ["fence", "code_block", "blockquote", "table"]:
-                        item["blocks"].append(
-                            {
-                                "type": item_child.type,
-                                "start_line": item_child.map[0] if item_child.map else None,
-                                "end_line": item_child.map[1] if item_child.map else None,
-                            }
-                        )
+                        # Block elements within list item
+                        item["blocks"].append({
+                            "type": item_child.type,
+                            "start_line": item_child.map[0] if item_child.map else None,
+                            "end_line": item_child.map[1] if item_child.map else None,
+                        })
 
                 items.append(item)
 
@@ -1969,50 +1696,61 @@ class MarkdownParserCore:
 
         def table_processor(node, ctx, level):
             if node.type == "table":
+                start_line = node.map[0] if node.map else None
+                end_line = node.map[1] if node.map else None
+
+                # Extract raw table content (preserve original markdown)
+                raw_content = ""
+                if start_line is not None and end_line is not None:
+                    raw_content = "\n".join(self.lines[start_line:end_line])
+
                 table = {
                     "id": f"table_{len(ctx)}",
-                    "headers": [],
-                    "rows": [],
-                    "align": None,
-                    "start_line": node.map[0] if node.map else None,
-                    "end_line": node.map[1] if node.map else None,
-                    "section_id": self._find_section_id(node.map[0] if node.map else 0),
+                    "raw_content": raw_content,  # Original markdown table (unchanged)
+                    "headers": [],  # Parsed headers (polished)
+                    "rows": [],     # Parsed rows (polished)
+                    "align": None,  # Parsed alignment (polished)
+                    "start_line": start_line,
+                    "end_line": end_line,
+                    "section_id": self._find_section_id(start_line if start_line is not None else 0),
                 }
 
-                # Extract headers and rows
+                # Extract headers, rows, and alignment (Phase 5: token-based, zero regex)
                 for child in node.children or []:
                     if child.type == "thead":
                         for tr in child.children or []:
-                            if tr.type == "tr":
-                                headers = []
-                                for th in tr.children or []:
-                                    if th.type == "th":
-                                        headers.append(self._get_text(th))
-                                table["headers"] = headers
+                            # Extract header text and alignment from th nodes
+                            headers = []
+                            aligns = []
+                            for th in tr.children or []:
+                                # Header text from inline children
+                                header_text = "".join(
+                                    grandchild.content for grandchild in (th.children or [])
+                                )
+                                headers.append(header_text)
+
+                                # Alignment from th.attrs (markdown-it provides this)
+                                align = "left"  # default
+                                if hasattr(th, 'attrs') and th.attrs:
+                                    style = th.attrs.get('style', '')
+                                    if 'text-align:center' in style:
+                                        align = "center"
+                                    elif 'text-align:right' in style:
+                                        align = "right"
+                                    elif 'text-align:left' in style:
+                                        align = "left"
+                                aligns.append(align)
+
+                            table["headers"] = headers
+                            table["align"] = aligns
                     elif child.type == "tbody":
                         for tr in child.children or []:
-                            if tr.type == "tr":
-                                row = []
-                                for td in tr.children or []:
-                                    if td.type == "td":
-                                        row.append(self._get_text(td))
-                                if row:
-                                    table["rows"].append(row)
-
-                # Determine separator line from thead, fallback to range
-                sep_line = None
-                for ch in node.children or []:
-                    if ch.type == "thead":
-                        for tr in ch.children or []:
-                            if tr.type == "tr" and tr.map:
-                                sep_line = tr.map[1]
-                                break
-                if sep_line is not None:
-                    table["align"] = self._infer_table_alignment_line(sep_line) or []
-                else:
-                    table["align"] = (
-                        self._infer_table_alignment(table["start_line"], table["end_line"]) or []
-                    )
+                            row = [
+                                "".join(grandchild.content for grandchild in (td.children or []))
+                                for td in tr.children or []
+                            ]
+                            if row:
+                                table["rows"].append(row)
                 # Normalize align to column count (defensive against escaped pipe miscounts)
                 # Safety guard: if header count is zero but there are body rows, use max row width
                 header_cols = len(table["headers"])
@@ -2064,6 +1802,7 @@ class MarkdownParserCore:
 
                 table["is_ragged"] = is_ragged
                 table["align_mismatch"] = align_mismatch
+                table["table_valid_md"] = not is_ragged and not align_mismatch
                 table["column_count"] = cols
                 table["row_count"] = len(table["rows"])
                 # Add heuristic metadata for alignment and ragged detection
@@ -2280,8 +2019,8 @@ class MarkdownParserCore:
                 # Extract href from attributes
                 href = token.attrGet("href") or ""
 
-                # Validate link scheme for security
-                scheme, is_allowed = self._validate_link_scheme(href)
+                # Validate link scheme for security (Phase 6 Task 6.1)
+                scheme, is_allowed = security_validators.validate_link_scheme(href, self._effective_allowed_schemes)
 
                 # Collect text until link_close and watch for embedded images
                 text_parts = []
@@ -2315,8 +2054,8 @@ class MarkdownParserCore:
                 # Use snapshotted offset for link's line number
                 line_num = (line_map[0] + link_line_offset) if line_map else None
 
-                # Determine link type with enhanced scheme detection
-                link_type = self._classify_link_scheme(href)
+                # Determine link type with enhanced scheme detection (Phase 6 Task 6.1)
+                link_type = security_validators.classify_link_type(href)
 
                 # Add the main link record with security metadata
                 links.append(
@@ -2400,11 +2139,13 @@ class MarkdownParserCore:
         Returns:
             Dictionary with 'image_kind' and 'format' keys.
         """
-        # Determine image kind and parse data URIs
+        # Determine image kind and parse data URIs (Phase 6 Task 6.1)
         if src.startswith("data:"):
             image_kind = "data"
-            data_info = self._parse_data_uri(src)
-            format_type = data_info.get("format", "unknown")
+            data_info = security_validators.parse_data_uri(src)
+            # Extract format from mediatype (e.g., "image/png" → "png")
+            mediatype = data_info.get("mediatype", "")
+            format_type = mediatype.split("/")[1] if "/" in mediatype else "unknown"
         elif src.startswith(("http://", "https://")):
             image_kind = "external"
             # Extract format from extension for external URIs
@@ -2422,61 +2163,9 @@ class MarkdownParserCore:
 
         return {"image_kind": image_kind, "format": format_type}
 
-    def _classify_link_scheme(self, url: str) -> str:
-        """Classify URL scheme for enhanced link categorization.
+    # Phase 6 Task 6.1: _classify_link_scheme() moved to security_validators.classify_link_type()
 
-        Returns:
-            Link type: 'anchor', 'external', 'email', 'phone', 'file', 'custom', 'malformed', 'internal'
-        """
-        if url.startswith("#"):
-            return "anchor"
-        if url.startswith(("http://", "https://")):
-            return "external"
-        if url.startswith("mailto:"):
-            return "email"
-        if url.startswith("tel:"):
-            return "phone"
-        if url.startswith("file:"):
-            return "file"
-        if "://" in url:
-            # Check for malformed schemes (non-alphabetic characters before ://)
-            scheme_part = url.split("://", 1)[0]
-            if not scheme_part.isalpha():
-                return "malformed"  # e.g., ht!tp://, 123://
-            return "custom"  # e.g., app://, slack://, custom://
-        # Relative paths, no scheme
-        return "internal"
-
-    def _parse_data_uri(self, uri: str) -> dict[str, Any]:
-        """Parse data URI to extract media type, encoding, and size estimate."""
-        import re
-
-        # data:[<mediatype>][;base64],<data>
-        match = re.match(r"^data:([^;,]+)?(;base64)?,(.*)$", uri)
-        if not match:
-            return {}
-
-        media_type = match.group(1) or "text/plain"
-        is_base64 = bool(match.group(2))
-        data = match.group(3)
-
-        # Estimate byte size
-        if is_base64:
-            # Base64 encoding increases size by ~33%
-            bytes_approx = len(data) * 3 // 4
-        else:
-            bytes_approx = len(data)
-
-        # Extract format from media type
-        format_match = re.match(r"^[^/]+/([^;]+)", media_type)
-        format_type = format_match.group(1) if format_match else "unknown"
-
-        return {
-            "media_type": media_type,
-            "format": format_type,
-            "encoding": "base64" if is_base64 else "url",
-            "bytes_approx": bytes_approx,
-        }
+    # Phase 6 Task 6.1: _parse_data_uri() moved to security_validators.parse_data_uri()
 
     def _extract_images(self) -> list[dict]:
         """Extract all images as first-class elements with enhanced metadata.
@@ -2525,17 +2214,17 @@ class MarkdownParserCore:
                     continue
                 seen_ids.add(image_id)
 
-                # Validate image URL scheme for security
-                scheme, is_allowed = self._validate_link_scheme(src)
+                # Validate image URL scheme for security (Phase 6 Task 6.1)
+                scheme, is_allowed = security_validators.validate_link_scheme(src, self._effective_allowed_schemes)
 
                 # Use centralized metadata determination for consistency
                 img_metadata = self._determine_image_metadata(src)
                 image_kind = img_metadata["image_kind"]
                 format_type = img_metadata["format"]
 
-                # Parse data URIs for additional metadata
+                # Parse data URIs for additional metadata (Phase 6 Task 6.1)
                 if image_kind == "data":
-                    data_info = self._parse_data_uri(src)
+                    data_info = security_validators.parse_data_uri(src)
                 else:
                     data_info = {}
 
@@ -2556,11 +2245,12 @@ class MarkdownParserCore:
 
                 # Add data URI info if present
                 if data_info:
+                    # Phase 6 Task 6.1: Map new security_validators field names to old baseline names
                     image_record.update(
                         {
-                            "media_type": data_info.get("media_type"),
+                            "media_type": data_info.get("mediatype"),  # New API uses "mediatype" not "media_type"
                             "encoding": data_info.get("encoding"),
-                            "bytes_approx": data_info.get("bytes_approx"),
+                            "bytes_approx": data_info.get("size_bytes"),  # New API uses "size_bytes" not "bytes_approx"
                         }
                     )
 
@@ -2827,47 +2517,23 @@ class MarkdownParserCore:
     def _build_mappings(self) -> dict[str, Any]:
         """Build line-to-content mappings.
 
-        Build line-type map and expose code/prose spans if ContentContext is present.
-        Falls back to 'all prose' if not available.
-
-        Note: Code/prose classification is ultimately corrected using AST code blocks,
-        so callers should trust these mappings over raw ContentContext results.
+        Phase 6: Pure token-based classification using AST code blocks.
+        No ContentContext - classification derived entirely from markdown-it tokens.
         """
         mappings = {
             "line_to_type": {},
             "line_to_section": {},
             "prose_lines": [],
             "code_lines": [],
-            "code_blocks": [],  # Added: expose code blocks with language
+            "code_blocks": [],  # Expose code blocks with language
         }
 
-        # Use ContentContext for prose/code distinction if available
-        if self._context:
-            for i in range(len(self.lines)):
-                if self._context.is_prose_line(i):
-                    mappings["prose_lines"].append(i)
-                    mappings["line_to_type"][str(i)] = "prose"
-                else:
-                    mappings["code_lines"].append(i)
-                    mappings["line_to_type"][str(i)] = "code"
-
-            # Expose contiguous code blocks with spans & language if available
-            for blk in self._context.get_code_blocks():
-                mappings["code_blocks"].append(
-                    {
-                        "start_line": blk.get("start_line"),
-                        "end_line": blk.get("end_line"),
-                        "language": blk.get("language"),
-                    }
-                )
-        else:
-            # Fallback: treat all lines as prose if ContentContext not available
-            for i in range(len(self.lines)):
-                mappings["prose_lines"].append(i)
-                mappings["line_to_type"][str(i)] = "prose"
+        # Initialize all lines as prose (default assumption)
+        for i in range(len(self.lines)):
+            mappings["prose_lines"].append(i)
+            mappings["line_to_type"][str(i)] = "prose"
 
         # Build section mappings directly to avoid circular dependency
-        # Ensure sections are extracted (uses cache if available)
         sections = self._sections or self._get_cached("sections", self._extract_sections)
         for section in sections:
             if section["start_line"] is not None and section["end_line"] is not None:
@@ -2878,104 +2544,36 @@ class MarkdownParserCore:
         # Cache mappings for O(1) lookups in _find_section_id
         self._mappings_cache = mappings
 
-        # Overlay code blocks into mappings so classification matches extraction
-        # This corrects ContentContext heuristics for list-nested indented code
-        # which ContentContext classifies as prose (following CommonMark blank-line rules)
-        # but extraction correctly identifies as code blocks
+        # Pure token-based code block classification (Phase 6)
+        # Extract code blocks from AST and mark those lines as code
         try:
-            # Use cached code blocks if available, otherwise extract
             code_blocks = self._get_cached("code_blocks", self._extract_code_blocks)
             for b in code_blocks:
                 s, e = b.get("start_line"), b.get("end_line")
                 if s is None or e is None:
                     continue
-                for ln in range(s, e + 1):
+
+                # Add to code_blocks list for mappings
+                # Note: structure uses exclusive end_line, but mappings uses inclusive for backward compat
+                mappings["code_blocks"].append({
+                    "start_line": s,
+                    "end_line": e - 1,  # Convert exclusive to inclusive
+                    "language": b.get("language"),
+                })
+
+                # Mark these lines as code (end_line from structure is exclusive)
+                for ln in range(s, e):
                     mappings["line_to_type"][str(ln)] = "code"
-                    if ln in mappings.get("prose_lines", []):
-                        try:
-                            mappings["prose_lines"].remove(ln)
-                        except ValueError:
-                            pass
-                    if ln not in mappings.get("code_lines", []):
+                    # Remove from prose_lines if present
+                    if ln in mappings["prose_lines"]:
+                        mappings["prose_lines"].remove(ln)
+                    # Add to code_lines if not present
+                    if ln not in mappings["code_lines"]:
                         mappings["code_lines"].append(ln)
         except Exception:
             pass
 
-        # Demote unmatched fenced tails from ContentContext (AST is authoritative)
-        try:
-            # Fetch code blocks independently to avoid scope leak
-            code_blocks = self._get_cached("code_blocks", self._extract_code_blocks)
-            covered = set()
-            for b in code_blocks or []:
-                s, e = b.get("start_line"), b.get("end_line")
-                if s is None or e is None:
-                    continue
-                covered.update(range(s, e + 1))
-            ctx_map = getattr(self._context, "context_map", {}) if self._context else {}
-            for ln_str, t in list(mappings["line_to_type"].items()):
-                if t == "code":
-                    ln = int(ln_str)  # Convert string key back to int for context_map lookup
-                    kind = ctx_map.get(ln)
-                    if kind in ("fenced_code", "fence_marker") and ln not in covered:
-                        mappings["line_to_type"][ln_str] = "prose"
-                        if ln in mappings.get("code_lines", []):
-                            try:
-                                mappings["code_lines"].remove(ln)
-                            except ValueError:
-                                pass
-                        if ln not in mappings.get("prose_lines", []):
-                            mappings["prose_lines"].append(ln)
-        except Exception:
-            pass
-
         return mappings
-
-    def _infer_table_alignment(self, start_line: int, end_line: int) -> list[str] | None:
-        """Infer table column alignment from the header separator line within [start_line, end_line].
-        Returns a list like ["left","center","right",...] or None if not inferable.
-
-        ⚠️ CRITICAL WARNING: This is approximate heuristic parsing!
-        - Escaped pipes (\\|) in cells WILL cause miscount of columns
-        - Complex cells with markdown syntax may break alignment detection
-        - The alignment result should NEVER be trusted for critical formatting
-        - This is a known limitation and NOT a bug - proper parsing would require
-          full re-implementation of table parsing logic
-
-        Use this alignment data only as a hint, never as authoritative.
-        """
-        # Search a plausible separator row (e.g., |:---|:--:|---:| or --- | :---: | ---:)
-        # We scan up to the first 10 lines after start_line for a row with dashes and pipes.
-        lines = self.lines
-        if start_line is None or end_line is None:
-            return None
-        lo = max(start_line, 0)
-        hi = min(end_line, len(lines) - 1)
-        # Find a candidate separator: a line that has pipes and at least one sequence of ---
-        sep_idx = None
-        for i in range(lo, min(lo + 10, hi + 1)):
-            line = lines[i].strip()
-            if "|" in line and re.search(r"-{3,}", line):
-                # Heuristic: a separator row should mostly be pipes/dashes/colons/spaces
-                if re.fullmatch(r"[|:\-\s]+", line):
-                    sep_idx = i
-                    break
-        if sep_idx is None:
-            return None
-        raw = lines[sep_idx].strip().strip("|")
-        parts = [p.strip() for p in raw.split("|")]
-
-        def align(p: str) -> str:
-            left = p.startswith(":")
-            right = p.endswith(":")
-            if left and right:
-                return "center"
-            if left and not right:
-                return "left"
-            if right and not left:
-                return "right"
-            return "left"
-
-        return [align(p) for p in parts if p]
 
     def _plain_text_in_range(self, start_line: int, end_line: int) -> str:
         """Extract plain text from a line range with proper paragraph boundaries.
@@ -3005,82 +2603,6 @@ class MarkdownParserCore:
             last_end = e
 
         return "".join(parts).strip()
-
-    def _infer_table_alignment_line(self, line_index: int) -> list[str] | None:
-        """Infer column alignment from a specific separator line (|:---|:--:|---:|).
-
-        ⚠️ CRITICAL WARNING: This is approximate heuristic parsing!
-        - Escaped pipes (\\|) in cells WILL cause miscount of columns
-        - The alignment result should NEVER be trusted for critical formatting
-        - Use this alignment data only as a hint, never as authoritative
-        """
-        if line_index is None or line_index < 0 or line_index >= len(self.lines):
-            return None
-        line = self.lines[line_index].strip()
-        if "|" not in line or "-" not in line:
-            return None
-        raw = line.strip().strip("|")
-        parts = [p.strip() for p in raw.split("|")]
-
-        def align(p: str) -> str:
-            left = p.startswith(":")
-            right = p.endswith(":")
-            if left and right:
-                return "center"
-            if left and not right:
-                return "left"
-            if right and not left:
-                return "right"
-            return "left"
-
-        return [align(p) for p in parts if p]
-
-    def _detect_table_ragged(self, start_line: int, end_line: int) -> bool:
-        """
-        Detect if a table has ragged (mismatched) column counts.
-        SECURITY: Important for data integrity - ragged tables can hide malicious content.
-
-        Args:
-            start_line: Start line of table
-            end_line: End line of table
-
-        Returns:
-            True if table is ragged (inconsistent column counts), False otherwise
-        """
-        if start_line is None or end_line is None:
-            return False
-
-        # Extract table lines
-        table_lines = []
-        for i in range(start_line, min(end_line + 1, len(self.lines))):
-            line = self.lines[i].strip()
-            if line and "|" in line:
-                table_lines.append(line)
-
-        if len(table_lines) < 2:
-            return False  # Not enough lines for a table
-
-        # Count columns in each row (accounting for leading/trailing pipes)
-        column_counts = []
-        for line in table_lines:
-            # Remove leading and trailing pipes if present
-            cleaned = line.strip("|").strip()
-            if cleaned:
-                # Split by pipe and count non-empty segments
-                # Note: This is approximate - escaped pipes will cause issues
-                segments = cleaned.split("|")
-                column_counts.append(len(segments))
-
-        if not column_counts:
-            return False
-
-        # Check if all rows have the same column count
-        first_count = column_counts[0]
-        for count in column_counts:
-            if count != first_count:
-                return True  # Ragged - different column counts
-
-        return False  # All rows have same column count
 
     def _collect_text_segments(self) -> None:
         """Collect text-ish segments with proper line ranges for better paragraph boundary detection."""
@@ -3244,139 +2766,47 @@ class MarkdownParserCore:
         """
         Detect Unicode spoofing attempts including BiDi and confusables with size limits.
 
+        Phase 6 Task 6.1: Wrapper around security_validators.detect_unicode_issues()
+        with additional BiDi controls check and legacy field names for backward compatibility.
+
         Args:
             text: Text to check
 
         Returns:
-            Dictionary with spoofing indicators
+            Dictionary with spoofing indicators (legacy field names for backward compatibility)
         """
-        issues = {
-            "has_bidi": False,
-            "has_confusables": False,
-            "has_mixed_scripts": False,
-            "has_invisible_chars": False,
-            "has_zero_width": False,
+        # Skip very large texts
+        if not text or len(text) > 100000:
+            return {
+                "has_bidi": False,
+                "has_confusables": False,
+                "has_mixed_scripts": False,
+                "has_invisible_chars": False,
+                "has_zero_width": False,
+            }
+
+        # Use centralized security validator
+        unicode_issues = security_validators.detect_unicode_issues(text, max_scan_bytes=10240)
+
+        # Check for BiDi control characters (legacy check, not in centralized validator)
+        has_bidi_controls = False
+        for char in self._BIDI_CONTROLS:
+            if char in text[:10000]:  # Check first 10KB only
+                has_bidi_controls = True
+                break
+
+        # Map to legacy field names for backward compatibility
+        return {
+            "has_bidi": unicode_issues["has_bidi_override"] or has_bidi_controls,
+            "has_confusables": unicode_issues["has_confusables"],
+            "has_mixed_scripts": unicode_issues["has_mixed_scripts"],
+            "has_invisible_chars": unicode_issues["has_zero_width"],
+            "has_zero_width": unicode_issues["has_zero_width"],
         }
 
-        if not text or len(text) > 100000:  # Skip very large texts
-            return issues
+    # Phase 6 Task 6.1: _check_prompt_injection() moved to security_validators.check_prompt_injection()
 
-        try:
-            with regex_timeout(1):  # 1 second timeout for Unicode checks
-                # Check for BiDi control characters
-                for char in self._BIDI_CONTROLS:
-                    if char in text:
-                        issues["has_bidi"] = True
-                        break
-
-                # Check for confusable characters (limit to first 10KB for performance)
-                text_sample = text[:10000] if len(text) > 10000 else text
-                for char in text_sample:
-                    if char in self._CONFUSABLES_EXTENDED:
-                        issues["has_confusables"] = True
-                        break
-
-                # Check for invisible/zero-width characters
-                invisible_chars = [
-                    "\u200b",  # Zero Width Space
-                    "\u200c",  # Zero Width Non-Joiner
-                    "\u200d",  # Zero Width Joiner
-                    "\ufeff",  # Zero Width No-Break Space
-                    "\u2060",  # Word Joiner
-                    "\u2061",  # Function Application
-                    "\u2062",  # Invisible Times
-                    "\u2063",  # Invisible Separator
-                    "\u2064",  # Invisible Plus
-                ]
-
-                for char in invisible_chars:
-                    if char in text:
-                        issues["has_invisible_chars"] = True
-                        issues["has_zero_width"] = True
-                        break
-
-                # Check for mixed scripts (simplified check)
-                # Detect if text contains both Latin and non-Latin scripts
-                has_latin = bool(re.search(r"[a-zA-Z]", text_sample))
-                has_cyrillic = bool(re.search(r"[\u0400-\u04FF]", text_sample))
-                has_greek = bool(re.search(r"[\u0370-\u03FF]", text_sample))
-                has_arabic = bool(re.search(r"[\u0600-\u06FF]", text_sample))
-                has_hebrew = bool(re.search(r"[\u0590-\u05FF]", text_sample))
-                has_cjk = bool(re.search(r"[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]", text_sample))
-
-                script_count = sum(
-                    [has_latin, has_cyrillic, has_greek, has_arabic, has_hebrew, has_cjk]
-                )
-                if script_count > 1 and has_latin:
-                    # Mixed scripts with Latin (potential spoofing)
-                    issues["has_mixed_scripts"] = True
-
-        except RegexTimeoutError:
-            # If timeout, mark as suspicious
-            issues["has_confusables"] = True
-
-        return issues
-
-    def _check_prompt_injection(self, text: str) -> bool:
-        """
-        Check for prompt injection patterns in text with timeout protection.
-
-        Args:
-            text: Text to check for injection patterns
-
-        Returns:
-            True if injection pattern detected, False otherwise
-        """
-        if not text:
-            return False
-
-        # Limit text size for regex processing
-        if len(text) > 50000:  # 50KB limit for regex processing
-            # Only check first and last parts for large texts
-            text = text[:25000] + text[-25000:]
-
-        try:
-            with regex_timeout(2):  # 2 second timeout
-                for pattern in self._PROMPT_INJECTION_PATTERNS:
-                    if re.search(pattern, text, re.IGNORECASE | re.MULTILINE):
-                        return True
-        except RegexTimeoutError:
-            # If regex times out, assume it's suspicious
-            return True
-
-        return False
-
-    def _validate_link_scheme(self, url: str) -> tuple[str | None, bool]:
-        """
-        Extract link scheme and check if it's allowed.
-
-        Args:
-            url: URL to validate
-
-        Returns:
-            Tuple of (scheme, is_allowed)
-            - scheme: The URL scheme or None for relative/anchor links
-            - is_allowed: True if scheme is allowed, False otherwise
-        """
-        if not url:
-            return None, True
-
-        # Check for scheme
-        match = re.match(r"^([a-zA-Z][a-zA-Z0-9+.-]*):(.*)$", url)
-        if match:
-            scheme = match.group(1).lower()
-            # Check against effective allowed schemes (set at init)
-            is_allowed = scheme in self._effective_allowed_schemes
-            return scheme, is_allowed
-
-        # No scheme - check if it's relative/anchor
-        if url.startswith("#"):
-            return None, True  # Anchor links allowed
-        if url.startswith(("./", "../", "/")) or ("/" not in url and ":" not in url):
-            return None, True  # Relative paths allowed
-
-        # Unknown format
-        return None, False
+    # Phase 6 Task 6.1: _validate_link_scheme() moved to security_validators.validate_link_scheme()
 
     def _check_footnote_injection(self, footnotes: dict) -> bool:
         """
@@ -3394,7 +2824,7 @@ class MarkdownParserCore:
         definitions = footnotes.get("definitions", [])
         for footnote in definitions:
             content = footnote.get("content", "")
-            if self._check_prompt_injection(content):
+            if security_validators.check_prompt_injection(content):
                 return True
 
             # Also check for oversized footnotes (potential payload hiding)
@@ -3422,64 +2852,6 @@ class MarkdownParserCore:
         # Remove leading/trailing hyphens
         s = s.strip("-")
         return s or "untitled"  # Fallback for empty slugs
-
-    def _slugify(self, text: str) -> str:
-        """Convert text to slug format with de-duplication."""
-        import re
-        import unicodedata
-
-        s = unicodedata.normalize("NFKD", text).lower()
-        # First replace slashes and spaces with hyphens
-        s = re.sub(r"[\s/]+", "-", s)
-        # Then remove other non-word characters (but keep hyphens)
-        s = re.sub(r"[^\w-]", "", s).strip()
-        # Clean up multiple hyphens
-        s = re.sub(r"-+", "-", s)
-        # Remove leading/trailing hyphens
-        s = s.strip("-")
-        base, i = s, 2
-        seen = getattr(self, "_slug_seen", set())
-        while s in seen:
-            s = f"{base}-{i}"
-            i += 1
-        seen.add(s)
-        self._slug_seen = seen
-        return s
-
-    def _strip_markdown(self, text: str) -> str:
-        """Is this useful?
-        Remove markdown formatting from text using token-based extraction.
-
-        Phase 2: Pure token-based plaintext extraction (zero regex).
-        Extracts only text content, excluding all markdown formatting:
-        - Headers, emphasis, bold, links, code blocks, inline code
-
-        Policy: Excludes code_inline content (technical content, not prose).
-        """
-        # Token-based plaintext extraction (Phase 2 - zero regex)
-        tokens = self.md.parse(text)
-        plaintext_parts = []
-
-        for token in walk_tokens_iter(tokens):
-            if token.type == "text":
-                # Pure text content - include it
-                plaintext_parts.append(token.content)
-            elif token.type in ("softbreak", "hardbreak"):
-                # Convert breaks to spaces
-                plaintext_parts.append(" ")
-            # Skip all other token types:
-            # - "heading_open" (header markers)
-            # - "strong_open"/"em_open" (emphasis markers)
-            # - "code_inline" (technical content - excluded per policy)
-            # - "link_open"/"link_close" (link markup)
-            # - "fence"/"code_block" (code blocks)
-            # We only want the text content, not the formatting
-
-        # Join and normalize whitespace
-        plaintext = "".join(plaintext_parts)
-        # Collapse multiple spaces and strip
-        plaintext = " ".join(plaintext.split())
-        return plaintext
 
     def _find_section_id(self, line_number: int) -> str | None:
         """Find which section a line belongs to.
@@ -3512,10 +2884,6 @@ class MarkdownParserCore:
             if child.type in types:
                 return True
         return False
-
-    def _is_task_item(self, item: dict) -> bool:
-        """Check if a list item is a task item."""
-        return item.get("checked") is not None
 
     def _build_line_offsets(self) -> None:
         """Build array of character offsets for each line start."""
@@ -3556,3 +2924,133 @@ class MarkdownParserCore:
             end_char = self._total_chars_with_lf
 
         return start_char, end_char
+
+    def to_ir(self, source_id: str = "") -> DocumentIR:
+        """
+        Convert parsed document to Document IR for RAG chunking.
+
+        The Document IR is a source-agnostic representation that serves as
+        the contract between parsers (Markdown, HTML, PDF) and chunkers.
+
+        Schema Version: md-ir@1.0.0
+
+        Args:
+            source_id: Source identifier (file path, URL, or hash)
+
+        Returns:
+            DocumentIR object ready for chunking
+
+        Example:
+            ```python
+            parser = MarkdownParserCore(content)
+            result = parser.parse()
+            ir = parser.to_ir(source_id="docs/intro.md")
+
+            # Later: pass to chunker
+            chunks = chunker.chunk(ir, policy)
+            ```
+        """
+        import hashlib
+
+        # Parse if not already done
+        if not hasattr(self, '_parsed') or not self._parsed:
+            self.parse()
+
+        # Compute content hash
+        normalized_content = self.content.encode('utf-8', errors='replace')
+        content_hash = hashlib.sha256(normalized_content).hexdigest()
+
+        # Extract security metadata
+        result = self.parse()
+        security_meta = result['metadata']['security']
+
+        # Build document tree from sections
+        root = DocNode(
+            id="root",
+            type="section",
+            text=None,
+            meta={"title": "Document Root"},
+            children=self._build_ir_nodes()
+        )
+
+        # Build link graph (section_id -> [target_section_ids])
+        link_graph = self._build_link_graph()
+
+        return DocumentIR(
+            schema_version="md-ir@1.0.0",
+            source_id=source_id or content_hash[:16],
+            source_type="markdown",
+            content_hash=content_hash,
+            allows_html=self.allows_html,
+            security=security_meta,
+            frontmatter=result['metadata'].get('frontmatter', {}),
+            root=root,
+            link_graph=link_graph,
+        )
+
+    def _build_ir_nodes(self) -> list[DocNode]:
+        """Build DocNode tree from parsed structures."""
+        nodes = []
+
+        # Get parsed structures
+        sections = self._get_cached("sections", self._extract_sections)
+
+        for section in sections:
+            # Build section node
+            section_node = DocNode(
+                id=section['id'],
+                type="section",
+                text=section.get('text_content'),
+                meta={
+                    "title": section['title'],
+                    "level": section['level'],
+                    "slug": section['slug'],
+                },
+                span=None,  # Character spans can be added later if needed
+                line_span=(section.get('start_line'), section.get('end_line')),
+                children=[],
+            )
+            nodes.append(section_node)
+
+        return nodes
+
+    def _build_link_graph(self) -> dict[str, list[str]]:
+        """Build internal link adjacency list for retrieval expansion."""
+        link_graph = {}
+
+        links = self._get_cached("links", self._extract_links)
+        sections = self._get_cached("sections", self._extract_sections)
+
+        # Map line numbers to section IDs
+        line_to_section = {}
+        for section in sections:
+            if section.get('start_line') is not None and section.get('end_line') is not None:
+                for line in range(section['start_line'], section['end_line'] + 1):
+                    line_to_section[line] = section['id']
+
+        # Build adjacency list for internal links
+        for link in links:
+            line = link.get('line')
+            if line is None:
+                continue
+
+            source_section = line_to_section.get(line)
+            if not source_section:
+                continue
+
+            # Check if it's an anchor link (internal reference)
+            url = link.get('url', '')
+            if url.startswith('#'):
+                # Extract target slug from anchor
+                target_slug = url.lstrip('#')
+                # Find target section by slug
+                for section in sections:
+                    if section.get('slug') == target_slug:
+                        target_id = section['id']
+                        if source_section not in link_graph:
+                            link_graph[source_section] = []
+                        if target_id not in link_graph[source_section]:
+                            link_graph[source_section].append(target_id)
+                        break
+
+        return link_graph

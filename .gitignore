@@ -122,6 +122,8 @@ venv_local/
 # mkdocs documentation
 /site
 
+mdit-py-plugins-master/
+
 # mypy
 .mypy_cache/
 .dmypy.json

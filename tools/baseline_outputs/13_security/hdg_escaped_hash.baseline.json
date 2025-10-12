@@ -82,6 +82,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -128,6 +129,7 @@
         "title": "Test: hdg_escaped_hash"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

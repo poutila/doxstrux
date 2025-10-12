@@ -91,6 +91,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -137,6 +138,7 @@
         "title": "Test: 06_nbsp_after_hash"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

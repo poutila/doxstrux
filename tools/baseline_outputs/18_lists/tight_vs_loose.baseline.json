@@ -124,6 +124,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 23,
@@ -143,30 +144,25 @@
     "lists": [
       {
         "end_line": 12,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Tight A"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Tight B"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Paragraph under A"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Another paragraph"
           }
@@ -174,7 +170,6 @@
         "items_count": 4,
         "section_id": "section_tight-vs-loose-lists",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -195,6 +190,7 @@
         "title": "Tight vs loose lists"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

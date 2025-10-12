@@ -91,6 +91,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 24,
@@ -137,6 +138,7 @@
         "title": "Test: 04_escaped_hash"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

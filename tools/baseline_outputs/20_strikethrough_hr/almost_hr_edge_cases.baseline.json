@@ -146,6 +146,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 26,
@@ -165,16 +166,13 @@
     "lists": [
       {
         "end_line": 10,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "(spaces between stars)"
               }
@@ -185,25 +183,20 @@
         "items_count": 1,
         "section_id": "section_almost-hr-but-not-quite",
         "start_line": 8,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 12,
-        "has_mixed_task_items": false,
         "id": "list_1",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "(spaces between dashes)"
                   }
@@ -217,7 +210,6 @@
         "items_count": 1,
         "section_id": "section_almost-hr-but-not-quite",
         "start_line": 10,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -305,6 +297,7 @@
         "title": "Almost-HR but not quite"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -1,41 +1,56 @@
 {
   "content": {
     "lines": [
+      "\ufeff---",
+      "title: BOM",
+      "---",
       "",
       "Text.",
       ""
     ],
-    "raw": "\nText.\n"
+    "raw": "\ufeff---\ntitle: BOM\n---\n\nText.\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
-    "line_to_section": {},
+    "line_to_section": {
+      "0": "section_title-bom",
+      "1": "section_title-bom",
+      "2": "section_title-bom",
+      "3": "section_title-bom",
+      "4": "section_title-bom",
+      "5": "section_title-bom"
+    },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose"
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
     },
     "prose_lines": [
       0,
       1,
-      2
+      2,
+      3,
+      4,
+      5
     ]
   },
   "metadata": {
-    "frontmatter": {
-      "title": "BOM"
-    },
     "has_code": false,
-    "has_frontmatter": true,
+    "has_frontmatter": false,
     "has_lists": false,
-    "has_sections": false,
+    "has_sections": true,
     "has_tables": false,
     "node_counts": {
-      "inline": 1,
+      "heading": 1,
+      "inline": 2,
       "paragraph": 1,
       "root": 1,
-      "text": 1
+      "softbreak": 1,
+      "text": 3
     },
     "security": {
       "profile_used": "moderate",
@@ -47,14 +62,14 @@
           "tel"
         ],
         "confusables_present": false,
-        "frontmatter_at_bof": true,
+        "frontmatter_at_bof": false,
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
         "has_html_inline": false,
         "has_script": false,
-        "invisible_chars": true,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
@@ -72,13 +87,13 @@
       "warnings": [
         {
           "line": null,
-          "message": "Document contains invisible/zero-width characters",
-          "type": "invisible_characters"
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
         }
       ]
     },
-    "total_chars": 7,
-    "total_lines": 3
+    "total_chars": 27,
+    "total_lines": 6
   },
   "structure": {
     "blockquotes": [],
@@ -87,7 +102,19 @@
       "definitions": [],
       "references": []
     },
-    "headings": [],
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 5,
+        "id": "heading_title-bom",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "title-bom",
+        "start_char": 0,
+        "text": "\ufeff---\ntitle: BOM"
+      }
+    ],
     "html_blocks": [],
     "html_inline": [],
     "images": [],
@@ -95,18 +122,34 @@
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 2,
+        "end_line": 5,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
-        "section_id": null,
-        "start_line": 1,
+        "section_id": "section_title-bom",
+        "start_line": 4,
         "text": "Text.",
         "word_count": 1
       }
     ],
-    "sections": [],
-    "tables": []
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 27,
+        "end_line": 5,
+        "id": "section_title-bom",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "\ufeff---\ntitle: BOM\n---\n\nText.\n",
+        "slug": "title-bom",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "\ufeff---\ntitle: BOM\n\nText.",
+        "title": "\ufeff---\ntitle: BOM"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -99,6 +99,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -109,7 +110,7 @@
         "line": 3,
         "scheme": "https",
         "text": "REF",
-        "type": "external",
+        "type": "absolute",
         "url": "https://UP.example/%C3%A4?x=1"
       },
       {
@@ -117,7 +118,7 @@
         "line": 3,
         "scheme": "https",
         "text": "ref",
-        "type": "external",
+        "type": "absolute",
         "url": "https://UP.example/%C3%A4?x=1"
       }
     ],
@@ -136,6 +137,7 @@
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

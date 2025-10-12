@@ -10,11 +10,16 @@
     "raw": "# Test: hdg_unclosed_fence_then_hash\n\n```\n# code\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 3,
+        "language": "",
+        "start_line": 2
+      }
+    ],
     "code_lines": [
       2,
-      3,
-      4
+      3
     ],
     "line_to_section": {
       "0": "section_test-hdg_unclosed_fence_then_hash",
@@ -28,11 +33,12 @@
       "1": "prose",
       "2": "code",
       "3": "code",
-      "4": "code"
+      "4": "prose"
     },
     "prose_lines": [
       0,
-      1
+      1,
+      4
     ]
   },
   "metadata": {
@@ -101,6 +107,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 37,
@@ -135,6 +142,7 @@
         "title": "Test: hdg_unclosed_fence_then_hash"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

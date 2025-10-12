@@ -113,6 +113,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -192,6 +193,7 @@
         "title": "Inline formatting combos"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

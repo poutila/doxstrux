@@ -67,7 +67,33 @@
     "raw": "# Test Code Blocks Document\n\n## Python Examples\n\nHere's a simple Python function:\n\n```python\ndef fibonacci(n: int) -> int:\n    \"\"\"Calculate the nth Fibonacci number.\"\"\"\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\n```\n\n## JavaScript Code\n\nSome JavaScript code:\n\n```javascript\nconst fetchData = async (url) => {\n    try {\n        const response = await fetch(url);\n        return await response.json();\n    } catch (error) {\n        console.error('Error:', error);\n    }\n};\n```\n\n## Shell Scripts\n\nA useful bash script:\n\n```bash\n#!/bin/bash\nfor file in *.md; do\n    echo \"Processing $file\"\n    wc -l \"$file\"\ndone\n```\n\n## YAML Configuration\n\n```yaml\nversion: '3.8'\nservices:\n  web:\n    image: nginx:latest\n    ports:\n      - \"80:80\"\n```\n\n## No Language Specified\n\n```\nThis is a code block without language specification.\nIt should still be captured.\n```\n\n## Inline Code\n\nDon't forget about `inline code` examples like `print(\"hello\")` or `const x = 42`."
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 12,
+        "language": "python",
+        "start_line": 6
+      },
+      {
+        "end_line": 27,
+        "language": "javascript",
+        "start_line": 18
+      },
+      {
+        "end_line": 39,
+        "language": "bash",
+        "start_line": 33
+      },
+      {
+        "end_line": 50,
+        "language": "yaml",
+        "start_line": 43
+      },
+      {
+        "end_line": 57,
+        "language": "",
+        "start_line": 54
+      }
+    ],
     "code_lines": [
       6,
       7,
@@ -76,7 +102,6 @@
       10,
       11,
       12,
-      13,
       18,
       19,
       20,
@@ -87,7 +112,6 @@
       25,
       26,
       27,
-      28,
       33,
       34,
       35,
@@ -95,7 +119,6 @@
       37,
       38,
       39,
-      40,
       43,
       44,
       45,
@@ -104,12 +127,10 @@
       48,
       49,
       50,
-      51,
       54,
       55,
       56,
-      57,
-      58
+      57
     ],
     "line_to_section": {
       "0": "section_test-code-blocks-document",
@@ -181,7 +202,7 @@
       "10": "code",
       "11": "code",
       "12": "code",
-      "13": "code",
+      "13": "prose",
       "14": "prose",
       "15": "prose",
       "16": "prose",
@@ -197,7 +218,7 @@
       "25": "code",
       "26": "code",
       "27": "code",
-      "28": "code",
+      "28": "prose",
       "29": "prose",
       "3": "prose",
       "30": "prose",
@@ -211,7 +232,7 @@
       "38": "code",
       "39": "code",
       "4": "prose",
-      "40": "code",
+      "40": "prose",
       "41": "prose",
       "42": "prose",
       "43": "code",
@@ -223,14 +244,14 @@
       "49": "code",
       "5": "prose",
       "50": "code",
-      "51": "code",
+      "51": "prose",
       "52": "prose",
       "53": "prose",
       "54": "code",
       "55": "code",
       "56": "code",
       "57": "code",
-      "58": "code",
+      "58": "prose",
       "59": "prose",
       "6": "code",
       "60": "prose",
@@ -246,18 +267,23 @@
       3,
       4,
       5,
+      13,
       14,
       15,
       16,
       17,
+      28,
       29,
       30,
       31,
       32,
+      40,
       41,
       42,
+      51,
       52,
       53,
+      58,
       59,
       60,
       61
@@ -367,6 +393,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 28,
@@ -597,6 +624,7 @@
         "title": "Inline Code"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

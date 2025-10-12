@@ -96,6 +96,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 43,
@@ -115,18 +116,15 @@
     "lists": [
       {
         "end_line": 5,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "text"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "item"
           }
@@ -134,7 +132,6 @@
         "items_count": 2,
         "section_id": "section_legit-in-list",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -169,6 +166,7 @@
         "title": "Legit in list"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

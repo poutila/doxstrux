@@ -18,14 +18,19 @@
     "raw": "# Deep nested task lists\n\n- [ ] Level 1 task\n  - [ ] Level 2 task\n    - [x] Level 3 done\n      - [ ] Level 4 task\n        - [x] Level 5 done\n        - [ ] Level 5 pending\n      - [x] Level 4 done\n    - [ ] Level 3 task\n  - [x] Level 2 done\n- [x] Level 1 done\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 8,
+        "language": "",
+        "start_line": 4
+      }
+    ],
     "code_lines": [
       4,
       5,
       6,
       7,
-      8,
-      9
+      8
     ],
     "line_to_section": {
       "0": "section_deep-nested-task-lists",
@@ -55,13 +60,14 @@
       "6": "code",
       "7": "code",
       "8": "code",
-      "9": "code"
+      "9": "prose"
     },
     "prose_lines": [
       0,
       1,
       2,
       3,
+      9,
       10,
       11,
       12
@@ -76,6 +82,7 @@
     "node_counts": {
       "bullet_list": 5,
       "heading": 1,
+      "html_inline": 10,
       "inline": 11,
       "list_item": 10,
       "paragraph": 10,
@@ -96,8 +103,9 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -108,13 +116,23 @@
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
+        "total_warnings": 1,
         "unicode_risk_score": 0
       },
-      "warnings": []
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 10,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_10_html_inline"
+    ],
     "total_chars": 259,
     "total_lines": 13
   },
@@ -135,6 +153,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -151,11 +170,31 @@
     "html_inline": [],
     "images": [],
     "links": [],
-    "lists": [
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
       {
+        "child_ids": [],
+        "end_char": 259,
+        "end_line": 12,
+        "id": "section_deep-nested-task-lists",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Deep nested task lists\n\n- [ ] Level 1 task\n  - [ ] Level 2 task\n    - [x] Level 3 done\n      - [ ] Level 4 task\n        - [x] Level 5 done\n        - [ ] Level 5 pending\n      - [x] Level 4 done\n    - [ ] Level 3 task\n  - [x] Level 2 done\n- [x] Level 1 done\n",
+        "slug": "deep-nested-task-lists",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Deep nested task lists\n\n Level 1 task  Level 2 task  Level 3 done  Level 4 task  Level 5 done  Level 5 pending  Level 4 done  Level 3 task  Level 2 done  Level 1 done",
+        "title": "Deep nested task lists"
+      }
+    ],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 1,
         "end_line": 12,
         "has_mixed_task_items": false,
-        "id": "list_0",
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [],
@@ -225,27 +264,9 @@
         "items_count": 2,
         "section_id": "section_deep-nested-task-lists",
         "start_line": 2,
-        "task_items_count": 2,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 1
       }
-    ],
-    "paragraphs": [],
-    "sections": [
-      {
-        "child_ids": [],
-        "end_char": 259,
-        "end_line": 12,
-        "id": "section_deep-nested-task-lists",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "# Deep nested task lists\n\n- [ ] Level 1 task\n  - [ ] Level 2 task\n    - [x] Level 3 done\n      - [ ] Level 4 task\n        - [x] Level 5 done\n        - [ ] Level 5 pending\n      - [x] Level 4 done\n    - [ ] Level 3 task\n  - [x] Level 2 done\n- [x] Level 1 done\n",
-        "slug": "deep-nested-task-lists",
-        "start_char": 0,
-        "start_line": 0,
-        "text_content": "Deep nested task lists\n\n[ ] Level 1 task [ ] Level 2 task [x] Level 3 done [ ] Level 4 task [x] Level 5 done [ ] Level 5 pending [x] Level 4 done [ ] Level 3 task [x] Level 2 done [x] Level 1 done",
-        "title": "Deep nested task lists"
-      }
-    ],
-    "tables": []
+    ]
   }
 }

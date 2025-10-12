@@ -1,19 +1,40 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Mixed Encoding 09\"",
+      "id: mixed_encoding_09",
+      "md_flavor: commonmark",
+      "allows_html: false",
+      "note: i18n-longline",
+      "---",
       ""
     ],
-    "raw": ""
+    "raw": "---\ntitle: \"Mixed Encoding 09\"\nid: mixed_encoding_09\nmd_flavor: commonmark\nallows_html: false\nnote: i18n-longline\n---\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {},
     "line_to_type": {
-      "0": "prose"
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
     },
     "prose_lines": [
-      0
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
     ]
   },
   "metadata": {
@@ -30,6 +51,7 @@
     "has_sections": false,
     "has_tables": false,
     "node_counts": {
+      "front_matter": 1,
       "root": 1
     },
     "security": {
@@ -65,8 +87,8 @@
       },
       "warnings": []
     },
-    "total_chars": 0,
-    "total_lines": 1
+    "total_chars": 118,
+    "total_lines": 8
   },
   "structure": {
     "blockquotes": [],
@@ -74,6 +96,13 @@
     "footnotes": {
       "definitions": [],
       "references": []
+    },
+    "frontmatter": {
+      "allows_html": false,
+      "id": "mixed_encoding_09",
+      "md_flavor": "commonmark",
+      "note": "i18n-longline",
+      "title": "Mixed Encoding 09"
     },
     "headings": [],
     "html_blocks": [],
@@ -83,6 +112,7 @@
     "lists": [],
     "paragraphs": [],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

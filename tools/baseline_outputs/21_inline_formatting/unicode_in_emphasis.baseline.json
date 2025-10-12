@@ -141,6 +141,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -242,6 +243,7 @@
         "title": "Unicode in bold/italic"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

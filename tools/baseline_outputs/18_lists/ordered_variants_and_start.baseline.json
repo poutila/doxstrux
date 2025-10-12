@@ -86,21 +86,28 @@
         "has_html_inline": false,
         "has_script": false,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 1,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        }
+      ]
     },
     "total_chars": 124,
     "total_lines": 10
@@ -112,6 +119,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 45,
@@ -131,28 +139,23 @@
     "lists": [
       {
         "end_line": 9,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "One"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Two.one"
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Two.two"
               }
@@ -161,13 +164,11 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Seven (explicit start)"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Eight"
           }
@@ -175,7 +176,6 @@
         "items_count": 4,
         "section_id": "section_ordered-lists-variants-start-attribute",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "ordered"
       }
     ],
@@ -196,6 +196,7 @@
         "title": "Ordered lists \u2014 variants & start attribute"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

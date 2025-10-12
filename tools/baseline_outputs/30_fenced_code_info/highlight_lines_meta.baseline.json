@@ -13,7 +13,13 @@
     "raw": "```js {highlight=2,4-5}\nconsole.log(1)\nconsole.log(2)\nconsole.log(3)\nconsole.log(4)\nconsole.log(5)\n```\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "js {highlight=2,4-5}",
+        "start_line": 0
+      }
+    ],
     "code_lines": [
       0,
       1,
@@ -21,8 +27,7 @@
       3,
       4,
       5,
-      6,
-      7
+      6
     ],
     "line_to_section": {},
     "line_to_type": {
@@ -33,9 +38,11 @@
       "4": "code",
       "5": "code",
       "6": "code",
-      "7": "code"
+      "7": "prose"
     },
-    "prose_lines": []
+    "prose_lines": [
+      7
+    ]
   },
   "metadata": {
     "has_code": true,
@@ -100,6 +107,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -108,6 +116,7 @@
     "lists": [],
     "paragraphs": [],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

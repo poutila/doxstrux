@@ -11,11 +11,16 @@
     "raw": "Paragraph 1\n\n\n\t- Tab-indented list\n\t\t- deeper\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 4,
+        "language": "",
+        "start_line": 3
+      }
+    ],
     "code_lines": [
       3,
-      4,
-      5
+      4
     ],
     "line_to_section": {},
     "line_to_type": {
@@ -24,12 +29,13 @@
       "2": "prose",
       "3": "code",
       "4": "code",
-      "5": "code"
+      "5": "prose"
     },
     "prose_lines": [
       0,
       1,
-      2
+      2,
+      5
     ]
   },
   "metadata": {
@@ -98,6 +104,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -118,6 +125,7 @@
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

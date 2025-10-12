@@ -8,7 +8,8 @@ Tests for the fail-closed approach to link/image validation:
 """
 
 import pytest
-from docpipe.markdown_parser_core import MarkdownParserCore, _DISALLOWED_SCHEMES_RAW_RE
+from docpipe.markdown_parser_core import MarkdownParserCore
+from docpipe import security_validators
 
 
 def test_parse_does_not_mutate_source():
@@ -170,16 +171,19 @@ code = "block"
 
 
 def test_raw_scheme_detection_compiled_regex():
-    """Verify precompiled regex catches dangerous schemes in raw content."""
+    """Verify centralized security validator catches dangerous schemes in raw content.
+
+    Phase 6 Task 6.1: Updated to use security_validators.scan_raw_for_disallowed_schemes()
+    """
     # Positive cases - should match
-    assert _DISALLOWED_SCHEMES_RAW_RE.search("prefix javascript:alert(1) suffix")
-    assert _DISALLOWED_SCHEMES_RAW_RE.search("FILE://host/path")  # case insensitive
-    assert _DISALLOWED_SCHEMES_RAW_RE.search("data:text/html,<script>")
-    assert _DISALLOWED_SCHEMES_RAW_RE.search("[link](javascript:alert)")
-    assert _DISALLOWED_SCHEMES_RAW_RE.search("vbscript:msgbox")
+    assert security_validators.scan_raw_for_disallowed_schemes("prefix javascript:alert(1) suffix")["found"]
+    assert security_validators.scan_raw_for_disallowed_schemes("FILE://host/path")["found"]  # case insensitive
+    assert security_validators.scan_raw_for_disallowed_schemes("data:text/html,<script>")["found"]
+    assert security_validators.scan_raw_for_disallowed_schemes("[link](javascript:alert)")["found"]
+    assert security_validators.scan_raw_for_disallowed_schemes("vbscript:msgbox")["found"]
 
     # Negative cases - should NOT match
-    assert not _DISALLOWED_SCHEMES_RAW_RE.search("https://example.com")
-    assert not _DISALLOWED_SCHEMES_RAW_RE.search("mailto:user@example.com")
-    assert not _DISALLOWED_SCHEMES_RAW_RE.search("data:image/png;base64,ABC")  # data:image is OK
-    assert not _DISALLOWED_SCHEMES_RAW_RE.search("normal text with javascript word")
+    assert not security_validators.scan_raw_for_disallowed_schemes("https://example.com")["found"]
+    assert not security_validators.scan_raw_for_disallowed_schemes("mailto:user@example.com")["found"]
+    assert not security_validators.scan_raw_for_disallowed_schemes("data:image/png;base64,ABC")["found"]  # data:image is OK
+    assert not security_validators.scan_raw_for_disallowed_schemes("normal text with javascript word")["found"]

@@ -137,6 +137,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 42,
@@ -249,6 +250,7 @@
         "title": "Strikethrough combined with bold/italic"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

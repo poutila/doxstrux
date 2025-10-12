@@ -117,6 +117,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -136,24 +137,20 @@
     "lists": [
       {
         "end_line": 10,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "First item\nLazy continuation without indent"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Second item\nProper continuation\nLazy again"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Third item"
           }
@@ -161,7 +158,6 @@
         "items_count": 3,
         "section_id": "section_list-with-lazy-continuation",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -182,6 +178,7 @@
         "title": "List with lazy continuation"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

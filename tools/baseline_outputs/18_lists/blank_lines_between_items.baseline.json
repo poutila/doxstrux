@@ -132,6 +132,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -151,30 +152,25 @@
     "lists": [
       {
         "end_line": 11,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Item 1"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Item 2 (blank line above)"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Item 3"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Item 4 (multiple blank lines above)"
           }
@@ -182,17 +178,14 @@
         "items_count": 4,
         "section_id": "section_lists-with-blank-lines",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 14,
-        "has_mixed_task_items": false,
         "id": "list_1",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "New list after paragraph"
           }
@@ -200,7 +193,6 @@
         "items_count": 1,
         "section_id": "section_lists-with-blank-lines",
         "start_line": 13,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -233,6 +225,7 @@
         "title": "Lists with blank lines"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

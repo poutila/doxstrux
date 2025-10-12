@@ -107,21 +107,28 @@
         "has_html_inline": false,
         "has_script": false,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 1,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        }
+      ]
     },
     "total_chars": 176,
     "total_lines": 15
@@ -169,6 +176,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -188,16 +196,13 @@
     "lists": [
       {
         "end_line": 12,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Nested list item"
               }
@@ -208,7 +213,6 @@
         "items_count": 1,
         "section_id": "section_blockquotes-basic-nested",
         "start_line": 10,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -241,6 +245,7 @@
         "title": "Blockquotes \u2014 basic & nested"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

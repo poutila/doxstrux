@@ -159,6 +159,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -178,7 +179,6 @@
     "lists": [
       {
         "end_line": 14,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
@@ -189,7 +189,6 @@
                 "type": "blockquote"
               }
             ],
-            "checked": null,
             "children": [],
             "text": "First item"
           },
@@ -201,13 +200,11 @@
                 "type": "blockquote"
               }
             ],
-            "checked": null,
             "children": [],
             "text": "Second item"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Third item"
           }
@@ -215,7 +212,6 @@
         "items_count": 3,
         "section_id": "section_list-containing-blockquotes",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -236,6 +232,7 @@
         "title": "List containing blockquotes"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

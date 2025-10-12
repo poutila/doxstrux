@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored clean 02\"",
+      "id: ref_clean_02",
+      "note: clean-case",
+      "---",
       "# Refactored clean 02",
       "Title",
       "=====",
@@ -25,18 +30,21 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_03.md#sec2)",
       ""
     ],
-    "raw": "# Refactored clean 02\nTitle\n=====\n\nSub\n----\n\n\nA simple paragraph with oscar xray zulu sierra kilo alpha zulu tango kilo november sierra zulu.\n\n- list level 1\n  * list level 2\n    - list level 3\n          code in list\n\n| H1 | H2 | H3 | H4 | H5 |\n|:--:|:--:|:---|----|----|\n| 1:1 zulu | 1:2 papa romeo yankee | 1:3 xray lima xray | 1:4 zulu sierra uniform | 1:5 india charlie |\n| 2:1 echo bravo foxtrot | 2:2 charlie golf | 2:3 romeo india | 2:4 romeo | 2:5 november |\n| 3:1 tango whiskey | 3:2 november | 3:3 xray echo | 3:4 uniform | 3:5 lima mike |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_03.md#sec2)\n"
+    "raw": "---\ntitle: \"Refactored clean 02\"\nid: ref_clean_02\nnote: clean-case\n---\n# Refactored clean 02\nTitle\n=====\n\nSub\n----\n\n\nA simple paragraph with oscar xray zulu sierra kilo alpha zulu tango kilo november sierra zulu.\n\n- list level 1\n  * list level 2\n    - list level 3\n          code in list\n\n| H1 | H2 | H3 | H4 | H5 |\n|:--:|:--:|:---|----|----|\n| 1:1 zulu | 1:2 papa romeo yankee | 1:3 xray lima xray | 1:4 zulu sierra uniform | 1:5 india charlie |\n| 2:1 echo bravo foxtrot | 2:2 charlie golf | 2:3 romeo india | 2:4 romeo | 2:5 november |\n| 3:1 tango whiskey | 3:2 november | 3:3 xray echo | 3:4 uniform | 3:5 lima mike |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_03.md#sec2)\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 18,
+        "language": "",
+        "start_line": 17
+      }
+    ],
     "code_lines": [
-      12,
-      13,
-      14
+      17,
+      18
     ],
     "line_to_section": {
-      "0": "section_refactored-clean-02",
-      "1": "section_title",
       "10": "section_sub",
       "11": "section_sub",
       "12": "section_sub",
@@ -47,16 +55,18 @@
       "17": "section_sub",
       "18": "section_sub",
       "19": "section_sub",
-      "2": "section_title",
       "20": "section_sub",
       "21": "section_sub",
       "22": "section_sub",
-      "3": "section_title",
-      "4": "section_sub",
-      "5": "section_sub",
-      "6": "section_sub",
-      "7": "section_sub",
-      "8": "section_sub",
+      "23": "section_sub",
+      "24": "section_sub",
+      "25": "section_sub",
+      "26": "section_sub",
+      "27": "section_sub",
+      "5": "section_refactored-clean-02",
+      "6": "section_title",
+      "7": "section_title",
+      "8": "section_title",
       "9": "section_sub"
     },
     "line_to_type": {
@@ -64,18 +74,23 @@
       "1": "prose",
       "10": "prose",
       "11": "prose",
-      "12": "code",
-      "13": "code",
-      "14": "code",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
       "15": "prose",
       "16": "prose",
-      "17": "prose",
-      "18": "prose",
+      "17": "code",
+      "18": "code",
       "19": "prose",
       "2": "prose",
       "20": "prose",
       "21": "prose",
       "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
       "3": "prose",
       "4": "prose",
       "5": "prose",
@@ -97,14 +112,20 @@
       9,
       10,
       11,
+      12,
+      13,
+      14,
       15,
       16,
-      17,
-      18,
       19,
       20,
       21,
-      22
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
     ]
   },
   "metadata": {
@@ -122,6 +143,7 @@
     "has_tables": true,
     "node_counts": {
       "bullet_list": 3,
+      "front_matter": 1,
       "heading": 3,
       "inline": 28,
       "link": 6,
@@ -176,19 +198,19 @@
       },
       "warnings": [
         {
-          "line": 21,
+          "line": 26,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 21,
+          "line": 26,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
         },
         {
-          "line": 21,
+          "line": 26,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E7"
@@ -205,22 +227,21 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_2_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 785,
-    "total_lines": 23
+    "total_chars": 856,
+    "total_lines": 28
   },
   "structure": {
     "blockquotes": [],
     "code_blocks": [
       {
         "content": "- list level 3\n      code in list\n",
-        "end_line": 14,
+        "end_line": 19,
         "id": "code_0",
         "language": "",
         "section_id": "section_sub",
-        "start_line": 12,
+        "start_line": 17,
         "type": "indented"
       }
     ],
@@ -228,35 +249,40 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "id": "ref_clean_02",
+      "note": "clean-case",
+      "title": "Refactored clean 02"
+    },
     "headings": [
       {
-        "end_char": 22,
+        "end_char": 93,
         "id": "heading_refactored-clean-02",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-clean-02",
-        "start_char": 0,
+        "start_char": 71,
         "text": "Refactored clean 02"
       },
       {
-        "end_char": 28,
+        "end_char": 99,
         "id": "heading_title",
         "level": 1,
-        "line": 1,
+        "line": 6,
         "parent_heading_id": null,
         "slug": "title",
-        "start_char": 22,
+        "start_char": 93,
         "text": "Title"
       },
       {
-        "end_char": 39,
+        "end_char": 110,
         "id": "heading_sub",
         "level": 1,
-        "line": 4,
+        "line": 9,
         "parent_heading_id": null,
         "slug": "sub",
-        "start_char": 35,
+        "start_char": 106,
         "text": "Sub"
       }
     ],
@@ -266,54 +292,66 @@
     "links": [
       {
         "allowed": true,
-        "line": 21,
+        "line": 26,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 26,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./clean_03.md#sec0"
       },
       {
         "allowed": true,
-        "line": 21,
+        "line": 26,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
         "allowed": true,
-        "line": 21,
+        "line": 26,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       },
       {
         "allowed": true,
-        "line": 21,
+        "line": 26,
+        "scheme": null,
+        "text": "bad7",
+        "type": "relative",
+        "url": "ht!tp://broken%5E7"
+      },
+      {
+        "allowed": true,
+        "line": 26,
         "scheme": null,
         "text": "cross8",
-        "type": "internal",
+        "type": "relative",
         "url": "./clean_03.md#sec2"
       }
     ],
     "lists": [
       {
-        "end_line": 15,
-        "has_mixed_task_items": false,
+        "end_line": 20,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "list level 3\ncode in list"
                   }
@@ -326,31 +364,30 @@
         ],
         "items_count": 1,
         "section_id": "section_sub",
-        "start_line": 10,
-        "task_items_count": 0,
+        "start_line": 15,
         "type": "bullet"
       }
     ],
     "paragraphs": [
       {
-        "end_line": 9,
+        "end_line": 14,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_sub",
-        "start_line": 8,
+        "start_line": 13,
         "text": "A simple paragraph with oscar xray zulu sierra kilo alpha zulu tango kilo november sierra zulu.",
         "word_count": 16
       },
       {
-        "end_line": 22,
+        "end_line": 27,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_1",
         "section_id": "section_sub",
-        "start_line": 21,
+        "start_line": 26,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt) bad7 cross8",
         "word_count": 8
       }
@@ -358,43 +395,43 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 22,
-        "end_line": 0,
+        "end_char": 93,
+        "end_line": 5,
         "id": "section_refactored-clean-02",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored clean 02",
         "slug": "refactored-clean-02",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 71,
+        "start_line": 5,
         "text_content": "Refactored clean 02",
         "title": "Refactored clean 02"
       },
       {
         "child_ids": [],
-        "end_char": 35,
-        "end_line": 3,
+        "end_char": 106,
+        "end_line": 8,
         "id": "section_title",
         "level": 1,
         "parent_id": null,
         "raw_content": "Title\n=====\n",
         "slug": "title",
-        "start_char": 22,
-        "start_line": 1,
+        "start_char": 93,
+        "start_line": 6,
         "text_content": "Title",
         "title": "Title"
       },
       {
         "child_ids": [],
-        "end_char": 785,
-        "end_line": 22,
+        "end_char": 856,
+        "end_line": 27,
         "id": "section_sub",
         "level": 1,
         "parent_id": null,
         "raw_content": "Sub\n----\n\n\nA simple paragraph with oscar xray zulu sierra kilo alpha zulu tango kilo november sierra zulu.\n\n- list level 1\n  * list level 2\n    - list level 3\n          code in list\n\n| H1 | H2 | H3 | H4 | H5 |\n|:--:|:--:|:---|----|----|\n| 1:1 zulu | 1:2 papa romeo yankee | 1:3 xray lima xray | 1:4 zulu sierra uniform | 1:5 india charlie |\n| 2:1 echo bravo foxtrot | 2:2 charlie golf | 2:3 romeo india | 2:4 romeo | 2:5 november |\n| 3:1 tango whiskey | 3:2 november | 3:3 xray echo | 3:4 uniform | 3:5 lima mike |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_03.md#sec2)\n",
         "slug": "sub",
-        "start_char": 35,
-        "start_line": 4,
+        "start_char": 106,
+        "start_line": 9,
         "text_content": "Sub\n\nA simple paragraph with oscar xray zulu sierra kilo alpha zulu tango kilo november sierra zulu.\n\nlist level 1 list level 2 list level 3\ncode in list\n\nH1H2H3H4H5\n\n1:1 zulu1:2 papa romeo yankee1:3 xray lima xray1:4 zulu sierra uniform1:5 india charlie 2:1 echo bravo foxtrot2:2 charlie golf2:3 romeo india2:4 romeo2:5 november 3:1 tango whiskey3:2 november3:3 xray echo3:4 uniform3:5 lima mike\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt) bad7 cross8",
         "title": "Sub"
       }
@@ -413,7 +450,7 @@
         },
         "align_mismatch": false,
         "column_count": 5,
-        "end_line": 20,
+        "end_line": 25,
         "headers": [
           "H1",
           "H2",
@@ -423,6 +460,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "| H1 | H2 | H3 | H4 | H5 |\n|:--:|:--:|:---|----|----|\n| 1:1 zulu | 1:2 papa romeo yankee | 1:3 xray lima xray | 1:4 zulu sierra uniform | 1:5 india charlie |\n| 2:1 echo bravo foxtrot | 2:2 charlie golf | 2:3 romeo india | 2:4 romeo | 2:5 november |\n| 3:1 tango whiskey | 3:2 november | 3:3 xray echo | 3:4 uniform | 3:5 lima mike |",
         "row_count": 3,
         "rows": [
           [
@@ -448,8 +486,10 @@
           ]
         ],
         "section_id": "section_sub",
-        "start_line": 15
+        "start_line": 20,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

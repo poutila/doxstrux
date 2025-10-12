@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored footnotes 03\"",
+      "id: ref_footnotes_03",
+      "note: footnotes-case",
+      "---",
       "# Refactored footnotes 03",
       "Title",
       "=====",
@@ -17,26 +22,26 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_04.md#sec0) [ext4](https://example.com/4)",
       ""
     ],
-    "raw": "# Refactored footnotes 03\nTitle\n=====\n\nSub\n----\n\n\nRefs[^d] and again[^d].\n\n[^d]: First.\n[^d]: Second duplicate.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_04.md#sec0) [ext4](https://example.com/4)\n"
+    "raw": "---\ntitle: \"Refactored footnotes 03\"\nid: ref_footnotes_03\nnote: footnotes-case\n---\n# Refactored footnotes 03\nTitle\n=====\n\nSub\n----\n\n\nRefs[^d] and again[^d].\n\n[^d]: First.\n[^d]: Second duplicate.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_04.md#sec0) [ext4](https://example.com/4)\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "0": "section_refactored-footnotes-03",
-      "1": "section_title",
       "10": "section_sub",
       "11": "section_sub",
       "12": "section_sub",
       "13": "section_sub",
       "14": "section_sub",
-      "2": "section_title",
-      "3": "section_title",
-      "4": "section_sub",
-      "5": "section_sub",
-      "6": "section_sub",
-      "7": "section_sub",
-      "8": "section_sub",
+      "15": "section_sub",
+      "16": "section_sub",
+      "17": "section_sub",
+      "18": "section_sub",
+      "19": "section_sub",
+      "5": "section_refactored-footnotes-03",
+      "6": "section_title",
+      "7": "section_title",
+      "8": "section_title",
       "9": "section_sub"
     },
     "line_to_type": {
@@ -47,6 +52,11 @@
       "12": "prose",
       "13": "prose",
       "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -71,7 +81,12 @@
       11,
       12,
       13,
-      14
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
     ]
   },
   "metadata": {
@@ -92,6 +107,7 @@
       "footnote_anchor": 2,
       "footnote_block": 1,
       "footnote_ref": 2,
+      "front_matter": 1,
       "heading": 3,
       "inline": 6,
       "link": 3,
@@ -137,13 +153,13 @@
       },
       "warnings": [
         {
-          "line": 13,
+          "line": 18,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 13,
+          "line": 18,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
@@ -160,11 +176,10 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 232,
-    "total_lines": 15
+    "total_chars": 315,
+    "total_lines": 20
   },
   "structure": {
     "blockquotes": [],
@@ -197,35 +212,40 @@
         }
       ]
     },
+    "frontmatter": {
+      "id": "ref_footnotes_03",
+      "note": "footnotes-case",
+      "title": "Refactored footnotes 03"
+    },
     "headings": [
       {
-        "end_char": 26,
+        "end_char": 109,
         "id": "heading_refactored-footnotes-03",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-footnotes-03",
-        "start_char": 0,
+        "start_char": 83,
         "text": "Refactored footnotes 03"
       },
       {
-        "end_char": 32,
+        "end_char": 115,
         "id": "heading_title",
         "level": 1,
-        "line": 1,
+        "line": 6,
         "parent_heading_id": null,
         "slug": "title",
-        "start_char": 26,
+        "start_char": 109,
         "text": "Title"
       },
       {
-        "end_char": 43,
+        "end_char": 126,
         "id": "heading_sub",
         "level": 1,
-        "line": 4,
+        "line": 9,
         "parent_heading_id": null,
         "slug": "sub",
-        "start_char": 39,
+        "start_char": 122,
         "text": "Sub"
       }
     ],
@@ -235,53 +255,61 @@
     "links": [
       {
         "allowed": true,
-        "line": 13,
+        "line": 18,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 18,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./footnotes_04.md#sec0"
       },
       {
         "allowed": true,
-        "line": 13,
+        "line": 18,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       }
     ],
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 9,
+        "end_line": 14,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_sub",
-        "start_line": 8,
+        "start_line": 13,
         "text": "Refs and again.",
         "word_count": 3
       },
       {
-        "end_line": 14,
+        "end_line": 19,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_1",
         "section_id": "section_sub",
-        "start_line": 13,
+        "start_line": 18,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
         "word_count": 4
       },
       {
-        "end_line": 12,
+        "end_line": 17,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_2",
         "section_id": "section_sub",
-        "start_line": 11,
+        "start_line": 16,
         "text": "Second duplicate.",
         "word_count": 2
       }
@@ -289,47 +317,48 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 26,
-        "end_line": 0,
+        "end_char": 109,
+        "end_line": 5,
         "id": "section_refactored-footnotes-03",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored footnotes 03",
         "slug": "refactored-footnotes-03",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 83,
+        "start_line": 5,
         "text_content": "Refactored footnotes 03",
         "title": "Refactored footnotes 03"
       },
       {
         "child_ids": [],
-        "end_char": 39,
-        "end_line": 3,
+        "end_char": 122,
+        "end_line": 8,
         "id": "section_title",
         "level": 1,
         "parent_id": null,
         "raw_content": "Title\n=====\n",
         "slug": "title",
-        "start_char": 26,
-        "start_line": 1,
+        "start_char": 109,
+        "start_line": 6,
         "text_content": "Title",
         "title": "Title"
       },
       {
         "child_ids": [],
-        "end_char": 232,
-        "end_line": 14,
+        "end_char": 315,
+        "end_line": 19,
         "id": "section_sub",
         "level": 1,
         "parent_id": null,
         "raw_content": "Sub\n----\n\n\nRefs[^d] and again[^d].\n\n[^d]: First.\n[^d]: Second duplicate.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_04.md#sec0) [ext4](https://example.com/4)\n",
         "slug": "sub",
-        "start_char": 39,
-        "start_line": 4,
+        "start_char": 122,
+        "start_line": 9,
         "text_content": "Sub\n\nRefs and again.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4Second duplicate.",
         "title": "Sub"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

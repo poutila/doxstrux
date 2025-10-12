@@ -21,14 +21,23 @@
     "raw": "# Test: 11_mixed_legit_and_traps\n\n# Real H1\nText.\n\n```\n## code fence not heading\n```\n\n## Real H2\nSome paragraph.\n\n    ### indented code, not heading\n\nNormal text.\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 7,
+        "language": "",
+        "start_line": 5
+      },
+      {
+        "end_line": 12,
+        "language": "",
+        "start_line": 12
+      }
+    ],
     "code_lines": [
       5,
       6,
       7,
-      8,
-      12,
-      13
+      12
     ],
     "line_to_section": {
       "0": "section_test-11_mixed_legit_and_traps",
@@ -54,7 +63,7 @@
       "10": "prose",
       "11": "prose",
       "12": "code",
-      "13": "code",
+      "13": "prose",
       "14": "prose",
       "15": "prose",
       "2": "prose",
@@ -63,7 +72,7 @@
       "5": "code",
       "6": "code",
       "7": "code",
-      "8": "code",
+      "8": "prose",
       "9": "prose"
     },
     "prose_lines": [
@@ -72,9 +81,11 @@
       2,
       3,
       4,
+      8,
       9,
       10,
       11,
+      13,
       14,
       15
     ]
@@ -156,6 +167,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 33,
@@ -274,6 +286,7 @@
         "title": "Real H2"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

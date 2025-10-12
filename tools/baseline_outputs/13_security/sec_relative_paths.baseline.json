@@ -96,6 +96,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -117,7 +118,7 @@
         "line": 2,
         "scheme": null,
         "text": "../../secret",
-        "type": "internal",
+        "type": "relative",
         "url": "../../secret"
       }
     ],
@@ -151,6 +152,7 @@
         "title": "Test: sec_relative_paths"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

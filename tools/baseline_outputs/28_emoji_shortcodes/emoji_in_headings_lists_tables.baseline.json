@@ -101,6 +101,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 21,
@@ -120,12 +121,10 @@
     "lists": [
       {
         "end_line": 6,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "List :sparkles:\n| A | B |\n| - | - |\n| :sparkles: | x |"
           }
@@ -133,7 +132,6 @@
         "items_count": 1,
         "section_id": "section_heading-sparkles",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -154,6 +152,7 @@
         "title": "Heading :sparkles:"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

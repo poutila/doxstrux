@@ -13,10 +13,15 @@
     "raw": "# Test: 13_heading_in_list_item\n\n- # H1 in item\n  text\n- item 2\n  - ## H2 nested\n    body\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "",
+        "start_line": 6
+      }
+    ],
     "code_lines": [
-      6,
-      7
+      6
     ],
     "line_to_section": {
       "0": "section_test-13_heading_in_list_item",
@@ -36,7 +41,7 @@
       "4": "prose",
       "5": "prose",
       "6": "code",
-      "7": "code"
+      "7": "prose"
     },
     "prose_lines": [
       0,
@@ -44,7 +49,8 @@
       2,
       3,
       4,
-      5
+      5,
+      7
     ]
   },
   "metadata": {
@@ -115,6 +121,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 32,
@@ -134,22 +141,18 @@
     "lists": [
       {
         "end_line": 7,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "text"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "body"
               }
@@ -160,7 +163,6 @@
         "items_count": 2,
         "section_id": "section_h1-in-item",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -211,6 +213,7 @@
         "title": "H2 nested"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -61,7 +61,7 @@
         "frontmatter_at_bof": false,
         "has_data_uri_images": false,
         "has_event_handlers": false,
-        "has_html_block": false,
+        "has_html_block": true,
         "has_html_inline": false,
         "has_script": false,
         "html_disallowed": true,
@@ -102,6 +102,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 25,
@@ -148,6 +149,7 @@
         "title": "Test: sec_html_comment"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

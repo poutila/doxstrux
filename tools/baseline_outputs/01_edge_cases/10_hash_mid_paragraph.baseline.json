@@ -91,6 +91,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -137,6 +138,7 @@
         "title": "Test: 10_hash_mid_paragraph"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

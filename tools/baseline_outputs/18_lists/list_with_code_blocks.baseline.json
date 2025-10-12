@@ -24,17 +24,26 @@
     "raw": "# List containing code blocks\n\n- Item with code:\n\n  ```python\n  def example():\n      return True\n  ```\n\n- Another item\n\n  ```javascript\n  const x = 42;\n  ```\n\n  Text after code\n\n- Final item\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 7,
+        "language": "python",
+        "start_line": 4
+      },
+      {
+        "end_line": 13,
+        "language": "javascript",
+        "start_line": 11
+      }
+    ],
     "code_lines": [
       4,
       5,
       6,
       7,
-      8,
       11,
       12,
-      13,
-      14
+      13
     ],
     "line_to_section": {
       "0": "section_list-containing-code-blocks",
@@ -64,7 +73,7 @@
       "11": "code",
       "12": "code",
       "13": "code",
-      "14": "code",
+      "14": "prose",
       "15": "prose",
       "16": "prose",
       "17": "prose",
@@ -75,7 +84,7 @@
       "5": "code",
       "6": "code",
       "7": "code",
-      "8": "code",
+      "8": "prose",
       "9": "prose"
     },
     "prose_lines": [
@@ -83,8 +92,10 @@
       1,
       2,
       3,
+      8,
       9,
       10,
+      14,
       15,
       16,
       17,
@@ -169,6 +180,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -188,7 +200,6 @@
     "lists": [
       {
         "end_line": 18,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
@@ -199,7 +210,6 @@
                 "type": "fence"
               }
             ],
-            "checked": null,
             "children": [],
             "text": "Item with code:"
           },
@@ -211,13 +221,11 @@
                 "type": "fence"
               }
             ],
-            "checked": null,
             "children": [],
             "text": "Text after code"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Final item"
           }
@@ -225,7 +233,6 @@
         "items_count": 3,
         "section_id": "section_list-containing-code-blocks",
         "start_line": 2,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -246,6 +253,7 @@
         "title": "List containing code blocks"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

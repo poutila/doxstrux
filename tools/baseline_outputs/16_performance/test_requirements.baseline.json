@@ -223,6 +223,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 29,
@@ -292,30 +293,25 @@
     "lists": [
       {
         "end_line": 16,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "The application MUST load within 3 seconds"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "The database SHOULD support horizontal scaling"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "The UI MAY include dark mode support"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Logs MUST NOT contain sensitive user data"
           }
@@ -323,29 +319,24 @@
         "items_count": 4,
         "section_id": "section_test-requirements-document",
         "start_line": 11,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 33,
-        "has_mixed_task_items": false,
         "id": "list_1",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Support multi-factor authentication"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Allow session management"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Integrate with OAuth providers"
           }
@@ -353,7 +344,6 @@
         "items_count": 3,
         "section_id": "section_test-requirements-document",
         "start_line": 29,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -507,6 +497,7 @@
         "title": "Section 4: Complex Requirements"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

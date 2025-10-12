@@ -63,21 +63,28 @@
         "has_html_inline": false,
         "has_script": false,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 1,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        }
+      ]
     },
     "total_chars": 54,
     "total_lines": 5
@@ -89,6 +96,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 14,
@@ -171,6 +179,7 @@
         "title": "Caf\u00e9 cr\u00e8me \u2014 Gr\u00f6\u00dfz\u00fcgig"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

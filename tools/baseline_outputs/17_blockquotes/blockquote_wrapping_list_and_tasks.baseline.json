@@ -37,6 +37,7 @@
     "node_counts": {
       "blockquote": 1,
       "bullet_list": 1,
+      "html_inline": 2,
       "inline": 4,
       "list_item": 4,
       "ordered_list": 1,
@@ -58,8 +59,9 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -70,13 +72,23 @@
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
+        "total_warnings": 1,
         "unicode_risk_score": 0
       },
-      "warnings": []
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 2,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_2_html_inline"
+    ],
     "total_chars": 54,
     "total_lines": 5
   },
@@ -100,7 +112,7 @@
           "lists": 2,
           "tables": 0
         },
-        "content": "[x] Done[ ] TodoStep AStep B",
+        "content": " Done TodoStep AStep B",
         "end_line": 4,
         "section_id": null,
         "start_line": 0
@@ -111,6 +123,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -119,8 +132,34 @@
     "lists": [
       {
         "end_line": 4,
-        "has_mixed_task_items": false,
         "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "children": [],
+            "text": "Step A"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "Step B"
+          }
+        ],
+        "items_count": 2,
+        "section_id": null,
+        "start_line": 2,
+        "type": "ordered"
+      }
+    ],
+    "paragraphs": [],
+    "sections": [],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 1,
+        "end_line": 4,
+        "has_mixed_task_items": false,
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [],
@@ -134,13 +173,11 @@
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Step A"
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Step B"
               }
@@ -151,12 +188,9 @@
         "items_count": 2,
         "section_id": null,
         "start_line": 0,
-        "task_items_count": 2,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 1
       }
-    ],
-    "paragraphs": [],
-    "sections": [],
-    "tables": []
+    ]
   }
 }

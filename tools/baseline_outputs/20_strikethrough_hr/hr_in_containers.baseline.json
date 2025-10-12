@@ -167,6 +167,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 30,
@@ -186,18 +187,15 @@
     "lists": [
       {
         "end_line": 16,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Text after HR in list"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "List item 2"
           }
@@ -205,7 +203,6 @@
         "items_count": 2,
         "section_id": "section_hr-in-blockquotes-and-lists",
         "start_line": 8,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -238,6 +235,7 @@
         "title": "HR in blockquotes and lists"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

@@ -101,6 +101,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -125,7 +126,7 @@
         "line": 0,
         "scheme": "https",
         "text": "ref link",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com"
       },
       {
@@ -156,6 +157,7 @@
       }
     ],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

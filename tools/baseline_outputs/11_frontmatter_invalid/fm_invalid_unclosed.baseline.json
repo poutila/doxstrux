@@ -99,6 +99,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 28,
@@ -156,6 +157,7 @@
         "title": "Test: fm_invalid_unclosed"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

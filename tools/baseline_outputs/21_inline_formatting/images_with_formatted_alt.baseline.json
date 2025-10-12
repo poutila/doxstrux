@@ -124,6 +124,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 33,
@@ -341,6 +342,7 @@
         "title": "Images with formatted alt text"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

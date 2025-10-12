@@ -18,12 +18,17 @@
     "raw": "::: note Outer\nCode:\n```python\nx=1\n```\n| A | B |\n| - | - |\n| 1 | 2 |\n::: warning Inner\n**Be careful**\n:::\n:::\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 4,
+        "language": "python",
+        "start_line": 2
+      }
+    ],
     "code_lines": [
       2,
       3,
-      4,
-      5
+      4
     ],
     "line_to_section": {},
     "line_to_type": {
@@ -35,7 +40,7 @@
       "2": "code",
       "3": "code",
       "4": "code",
-      "5": "code",
+      "5": "prose",
       "6": "prose",
       "7": "prose",
       "8": "prose",
@@ -44,6 +49,7 @@
     "prose_lines": [
       0,
       1,
+      5,
       6,
       7,
       8,
@@ -137,6 +143,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -178,6 +185,7 @@
         "is_ragged_meta": {
           "heuristic": true
         },
+        "raw_content": "| A | B |\n| - | - |\n| 1 | 2 |\n::: warning Inner\n**Be careful**\n:::\n:::",
         "row_count": 5,
         "rows": [
           [
@@ -189,7 +197,7 @@
             ""
           ],
           [
-            "Be careful",
+            "**Be careful**",
             ""
           ],
           [
@@ -202,8 +210,10 @@
           ]
         ],
         "section_id": null,
-        "start_line": 5
+        "start_line": 5,
+        "table_valid_md": false
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

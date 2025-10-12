@@ -1,6 +1,11 @@
 {
   "content": {
     "lines": [
+      "---",
+      "title: \"Refactored frontmatter 03\"",
+      "id: ref_frontmatter_03",
+      "note: frontmatter-case",
+      "---",
       "# Refactored frontmatter 03",
       "",
       "Front matter variant above; plus wiki links: [[Page One]] and [[Page Two|Alias]].",
@@ -8,26 +13,31 @@
       "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./frontmatter_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)",
       ""
     ],
-    "raw": "# Refactored frontmatter 03\n\nFront matter variant above; plus wiki links: [[Page One]] and [[Page Two|Alias]].\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./frontmatter_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n"
+    "raw": "---\ntitle: \"Refactored frontmatter 03\"\nid: ref_frontmatter_03\nnote: frontmatter-case\n---\n# Refactored frontmatter 03\n\nFront matter variant above; plus wiki links: [[Page One]] and [[Page Two|Alias]].\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./frontmatter_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "0": "section_refactored-frontmatter-03",
-      "1": "section_refactored-frontmatter-03",
-      "2": "section_refactored-frontmatter-03",
-      "3": "section_refactored-frontmatter-03",
-      "4": "section_refactored-frontmatter-03",
-      "5": "section_refactored-frontmatter-03"
+      "10": "section_refactored-frontmatter-03",
+      "5": "section_refactored-frontmatter-03",
+      "6": "section_refactored-frontmatter-03",
+      "7": "section_refactored-frontmatter-03",
+      "8": "section_refactored-frontmatter-03",
+      "9": "section_refactored-frontmatter-03"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
-      "5": "prose"
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -35,7 +45,12 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ]
   },
   "metadata": {
@@ -52,6 +67,7 @@
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "front_matter": 1,
       "heading": 1,
       "inline": 3,
       "link": 4,
@@ -98,13 +114,13 @@
       },
       "warnings": [
         {
-          "line": 4,
+          "line": 9,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "ht!tp://broken%5E2"
         },
         {
-          "line": 4,
+          "line": 9,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
           "url": "https://example.com/4"
@@ -121,11 +137,10 @@
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_schemes_raw",
-      "dropped_1_unsafe_links"
+      "embedding_blocked_schemes_raw"
     ],
-    "total_chars": 267,
-    "total_lines": 6
+    "total_chars": 356,
+    "total_lines": 11
   },
   "structure": {
     "blockquotes": [],
@@ -134,15 +149,20 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": {
+      "id": "ref_frontmatter_03",
+      "note": "frontmatter-case",
+      "title": "Refactored frontmatter 03"
+    },
     "headings": [
       {
-        "end_char": 28,
+        "end_char": 117,
         "id": "heading_refactored-frontmatter-03",
         "level": 1,
-        "line": 0,
+        "line": 5,
         "parent_heading_id": null,
         "slug": "refactored-frontmatter-03",
-        "start_char": 0,
+        "start_char": 89,
         "text": "Refactored frontmatter 03"
       }
     ],
@@ -152,50 +172,58 @@
     "links": [
       {
         "allowed": true,
-        "line": 4,
+        "line": 9,
+        "scheme": null,
+        "text": "bad2",
+        "type": "relative",
+        "url": "ht!tp://broken%5E2"
+      },
+      {
+        "allowed": true,
+        "line": 9,
         "scheme": null,
         "text": "cross3",
-        "type": "internal",
+        "type": "relative",
         "url": "./frontmatter_04.md#sec0"
       },
       {
         "allowed": true,
-        "line": 4,
+        "line": 9,
         "scheme": "https",
         "text": "ext4",
-        "type": "external",
+        "type": "absolute",
         "url": "https://example.com/4"
       },
       {
         "allowed": true,
-        "line": 4,
+        "line": 9,
         "scheme": "mailto",
         "text": "mail5",
-        "type": "email",
+        "type": "absolute",
         "url": "mailto:user5@example.com"
       }
     ],
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 3,
+        "end_line": 8,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
         "section_id": "section_refactored-frontmatter-03",
-        "start_line": 2,
+        "start_line": 7,
         "text": "Front matter variant above; plus wiki links: [[Page One]] and [[Page Two|Alias]].",
         "word_count": 12
       },
       {
-        "end_line": 5,
+        "end_line": 10,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
         "id": "para_1",
         "section_id": "section_refactored-frontmatter-03",
-        "start_line": 4,
+        "start_line": 9,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
         "word_count": 5
       }
@@ -203,19 +231,20 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 267,
-        "end_line": 5,
+        "end_char": 356,
+        "end_line": 10,
         "id": "section_refactored-frontmatter-03",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Refactored frontmatter 03\n\nFront matter variant above; plus wiki links: [[Page One]] and [[Page Two|Alias]].\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./frontmatter_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n",
         "slug": "refactored-frontmatter-03",
-        "start_char": 0,
-        "start_line": 0,
+        "start_char": 89,
+        "start_line": 5,
         "text_content": "Refactored frontmatter 03\n\nFront matter variant above; plus wiki links: [[Page One]] and [[Page Two|Alias]].\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
         "title": "Refactored frontmatter 03"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

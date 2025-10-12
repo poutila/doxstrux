@@ -165,19 +165,88 @@
     "raw": "# Mixed Nested Structures Test\n\n## Complex List with Code and Requirements\n\n1. First item with a requirement: The system MUST handle nested structures\n   - Sub-item with code:\n     ```python\n     def process_nested():\n         # This code is inside a nested list\n         return \"nested\"\n     ```\n   - Another sub-item that SHOULD be processed correctly\n     - Third level with inline `code` and a MAY requirement\n     - Third level with a table:\n       | Header | Value |\n       |--------|-------|\n       | Data   | 123   |\n   \n2. Second numbered item\n   - [ ] Unchecked task in numbered list\n   - [x] Checked task that MUST be tracked\n     - Nested under task with requirement: SHOULD NOT miss this\n     \n## Lists with Blockquotes\n\n- Bullet item with blockquote:\n  > This is a quote inside a list\n  > The quote MUST be preserved with formatting\n  \n  - Nested item after blockquote\n    > Another nested quote\n    > With multiple lines that SHOULD stay together\n    \n- Another bullet with code after quote:\n  > Quote first\n  \n  ```javascript\n  // Code after quote in list\n  const test = \"complex\";\n  ```\n\n## Tables with Complex Content\n\n| Feature | Status | Requirement |\n|---------|--------|-------------|\n| Parsing | \u2705 Done | MUST parse all markdown |\n| Nesting | \ud83d\udd04 WIP | SHOULD support 3 levels |\n| Tables | \u2705 Done | MAY include nested content |\n| Code in table | `inline()` | MUST NOT break |\n\n## Mixed Task Lists\n\n### Project Tasks\n- [x] Implement parser\n  - [x] Basic parsing MUST work\n  - [ ] Advanced features SHOULD be added\n    - [ ] Feature A MAY be optional\n    - [x] Feature B MUST be included\n- [ ] Write documentation\n  - [ ] User guide MUST be comprehensive\n  - [x] API docs SHOULD be auto-generated\n\n## Code Blocks with Different Languages\n\n### Python with Requirements\n```python\n# This function MUST validate input\ndef validate(data):\n    \"\"\"The validator SHOULD check all fields.\"\"\"\n    if not data:\n        raise ValueError(\"Data MUST NOT be empty\")\n    return True\n```\n\n### YAML Configuration\n```yaml\n# This config MUST be valid\nversion: \"3.8\"\nrequirements:\n  - MUST: Support Docker\n  - SHOULD: Use caching\n  - MAY: Include monitoring\n```\n\n### SQL with Comments\n```sql\n-- This query MUST be optimized\nSELECT * FROM users\nWHERE status = 'active'  -- SHOULD filter properly\n  AND created > '2024-01-01';  -- MAY need index\n```\n\n## Edge Case: Empty Sections\n\n## \n\n## Section with Only Whitespace\n\n   \n\n## Requirements in Various Contexts\n\nThis paragraph has multiple requirements. First, the system MUST handle inline requirements. Second, it SHOULD detect multiple patterns in one block. Third, it MAY optimize for performance. Finally, it MUST NOT lose any data.\n\n### Requirements in Headers MUST Be Detected\n\nEven headers can contain requirements that SHOULD be found.\n\n#### Deep Nesting MAY Contain Requirements\n\nAt any level, requirements MUST be extracted.\n\n> Blockquotes also contain requirements:\n> - The parser MUST handle quoted lists\n> - It SHOULD preserve formatting\n> - It MAY add metadata\n\n**Bold text with requirement: MUST work**\n*Italic text saying SHOULD process correctly*\n***Bold italic claiming MAY be styled***\n\n## Complex Numbered Lists\n\n1. First level item\n   1. Second level item 1.1\n      1. Third level item 1.1.1 MUST be captured\n      2. Third level item 1.1.2 SHOULD work\n   2. Second level item 1.2\n      1. Third level item 1.2.1\n         - Mixing bullet in numbered list\n         - Another bullet that MAY confuse parser\n2. Back to first level\n   a. Letter sub-item (if supported)\n   b. Another letter item\n      i. Roman numeral (edge case)\n      ii. Another roman\n\n## Final Test: Everything Combined\n\nHere's a paragraph with a requirement: The enricher MUST handle this complex document.\n\n- A list starts here\n  ```python\n  # Code in list\n  def test():\n      pass\n  ```\n  > Quote in list after code\n  > MUST handle this\n  \n  | Table | In | List |\n  |-------|----|----|\n  | Yes   | It | SHOULD |\n  \n  - [ ] Task in same list\n  - [x] Checked task MUST track\n    - Nested continuation\n      - Third level still going\n        \nAnd back to normal text with inline `code` and a final requirement: The parser MUST NOT fail on this document!"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 10,
+        "language": "python",
+        "start_line": 6
+      },
+      {
+        "end_line": 39,
+        "language": "javascript",
+        "start_line": 36
+      },
+      {
+        "end_line": 72,
+        "language": "python",
+        "start_line": 65
+      },
+      {
+        "end_line": 82,
+        "language": "yaml",
+        "start_line": 75
+      },
+      {
+        "end_line": 90,
+        "language": "sql",
+        "start_line": 85
+      },
+      {
+        "end_line": 146,
+        "language": "python",
+        "start_line": 142
+      },
+      {
+        "end_line": 16,
+        "language": "",
+        "start_line": 12
+      },
+      {
+        "end_line": 21,
+        "language": "",
+        "start_line": 21
+      },
+      {
+        "end_line": 31,
+        "language": "",
+        "start_line": 30
+      },
+      {
+        "end_line": 56,
+        "language": "",
+        "start_line": 56
+      },
+      {
+        "end_line": 125,
+        "language": "",
+        "start_line": 125
+      },
+      {
+        "end_line": 129,
+        "language": "",
+        "start_line": 128
+      },
+      {
+        "end_line": 135,
+        "language": "",
+        "start_line": 134
+      },
+      {
+        "end_line": 157,
+        "language": "",
+        "start_line": 156
+      }
+    ],
     "code_lines": [
       6,
       7,
       8,
       9,
       10,
-      11,
       36,
       37,
       38,
       39,
-      40,
       65,
       66,
       67,
@@ -186,7 +255,6 @@
       70,
       71,
       72,
-      73,
       75,
       76,
       77,
@@ -195,44 +263,33 @@
       80,
       81,
       82,
-      83,
       85,
       86,
       87,
       88,
       89,
       90,
-      91,
       142,
       143,
       144,
       145,
       146,
-      147,
       12,
       13,
       14,
       15,
       16,
-      17,
       21,
-      22,
       30,
       31,
-      32,
       56,
-      57,
       125,
-      126,
       128,
       129,
-      130,
       134,
       135,
-      136,
       156,
-      157,
-      158
+      157
     ],
     "line_to_section": {
       "0": "section_mixed-nested-structures-test",
@@ -410,7 +467,7 @@
       "107": "prose",
       "108": "prose",
       "109": "prose",
-      "11": "code",
+      "11": "prose",
       "110": "prose",
       "111": "prose",
       "112": "prose",
@@ -428,18 +485,18 @@
       "123": "prose",
       "124": "prose",
       "125": "code",
-      "126": "code",
+      "126": "prose",
       "127": "prose",
       "128": "code",
       "129": "code",
       "13": "code",
-      "130": "code",
+      "130": "prose",
       "131": "prose",
       "132": "prose",
       "133": "prose",
       "134": "code",
       "135": "code",
-      "136": "code",
+      "136": "prose",
       "137": "prose",
       "138": "prose",
       "139": "prose",
@@ -451,7 +508,7 @@
       "144": "code",
       "145": "code",
       "146": "code",
-      "147": "code",
+      "147": "prose",
       "148": "prose",
       "149": "prose",
       "15": "code",
@@ -463,16 +520,16 @@
       "155": "prose",
       "156": "code",
       "157": "code",
-      "158": "code",
+      "158": "prose",
       "159": "prose",
       "16": "code",
-      "17": "code",
+      "17": "prose",
       "18": "prose",
       "19": "prose",
       "2": "prose",
       "20": "prose",
       "21": "code",
-      "22": "code",
+      "22": "prose",
       "23": "prose",
       "24": "prose",
       "25": "prose",
@@ -483,7 +540,7 @@
       "3": "prose",
       "30": "code",
       "31": "code",
-      "32": "code",
+      "32": "prose",
       "33": "prose",
       "34": "prose",
       "35": "prose",
@@ -492,7 +549,7 @@
       "38": "code",
       "39": "code",
       "4": "prose",
-      "40": "code",
+      "40": "prose",
       "41": "prose",
       "42": "prose",
       "43": "prose",
@@ -510,7 +567,7 @@
       "54": "prose",
       "55": "prose",
       "56": "code",
-      "57": "code",
+      "57": "prose",
       "58": "prose",
       "59": "prose",
       "6": "code",
@@ -528,7 +585,7 @@
       "70": "code",
       "71": "code",
       "72": "code",
-      "73": "code",
+      "73": "prose",
       "74": "prose",
       "75": "code",
       "76": "code",
@@ -539,7 +596,7 @@
       "80": "code",
       "81": "code",
       "82": "code",
-      "83": "code",
+      "83": "prose",
       "84": "prose",
       "85": "code",
       "86": "code",
@@ -548,7 +605,7 @@
       "89": "code",
       "9": "code",
       "90": "code",
-      "91": "code",
+      "91": "prose",
       "92": "prose",
       "93": "prose",
       "94": "prose",
@@ -565,9 +622,12 @@
       3,
       4,
       5,
+      11,
+      17,
       18,
       19,
       20,
+      22,
       23,
       24,
       25,
@@ -575,9 +635,11 @@
       27,
       28,
       29,
+      32,
       33,
       34,
       35,
+      40,
       41,
       42,
       43,
@@ -593,6 +655,7 @@
       53,
       54,
       55,
+      57,
       58,
       59,
       60,
@@ -600,8 +663,11 @@
       62,
       63,
       64,
+      73,
       74,
+      83,
       84,
+      91,
       92,
       93,
       94,
@@ -635,15 +701,19 @@
       122,
       123,
       124,
+      126,
       127,
+      130,
       131,
       132,
       133,
+      136,
       137,
       138,
       139,
       140,
       141,
+      147,
       148,
       149,
       150,
@@ -652,6 +722,7 @@
       153,
       154,
       155,
+      158,
       159
     ]
   },
@@ -668,6 +739,7 @@
       "em": 2,
       "fence": 6,
       "heading": 18,
+      "html_inline": 12,
       "inline": 91,
       "list_item": 37,
       "ordered_list": 5,
@@ -697,25 +769,42 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 0,
+        "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
-        "unicode_risk_score": 0
+        "total_warnings": 2,
+        "unicode_risk_score": 1
       },
-      "warnings": []
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        },
+        {
+          "blocks": 0,
+          "inline": 12,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_12_html_inline"
+    ],
     "total_chars": 4186,
     "total_lines": 160
   },
@@ -920,6 +1009,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 31,
@@ -1109,12 +1199,10 @@
     "lists": [
       {
         "end_line": 23,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [
@@ -1124,17 +1212,14 @@
                     "type": "fence"
                   }
                 ],
-                "checked": null,
                 "children": [],
                 "text": "Sub-item with code:"
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Third level with inline code and a MAY requirement"
                   },
@@ -1146,7 +1231,6 @@
                         "type": "table"
                       }
                     ],
-                    "checked": null,
                     "children": [],
                     "text": "Third level with a table:"
                   }
@@ -1158,26 +1242,22 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": false,
                 "children": [],
-                "text": "Unchecked task in numbered list"
+                "text": " Unchecked task in numbered list"
               },
               {
                 "blocks": [],
-                "checked": true,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Nested under task with requirement: SHOULD NOT miss this"
                   }
                 ],
-                "text": "Checked task that MUST be tracked"
+                "text": " Checked task that MUST be tracked"
               }
             ],
             "text": "Second numbered item"
@@ -1186,12 +1266,10 @@
         "items_count": 2,
         "section_id": "section_mixed-nested-structures-test",
         "start_line": 4,
-        "task_items_count": 0,
         "type": "ordered"
       },
       {
         "end_line": 41,
-        "has_mixed_task_items": false,
         "id": "list_1",
         "items": [
           {
@@ -1202,7 +1280,6 @@
                 "type": "blockquote"
               }
             ],
-            "checked": null,
             "children": [
               {
                 "blocks": [
@@ -1212,7 +1289,6 @@
                     "type": "blockquote"
                   }
                 ],
-                "checked": null,
                 "children": [],
                 "text": "Nested item after blockquote"
               }
@@ -1232,7 +1308,6 @@
                 "type": "fence"
               }
             ],
-            "checked": null,
             "children": [],
             "text": "Another bullet with code after quote:"
           }
@@ -1240,92 +1315,24 @@
         "items_count": 2,
         "section_id": "section_mixed-nested-structures-test",
         "start_line": 25,
-        "task_items_count": 0,
-        "type": "bullet"
-      },
-      {
-        "end_line": 62,
-        "has_mixed_task_items": false,
-        "id": "list_2",
-        "items": [
-          {
-            "blocks": [],
-            "checked": true,
-            "children": [
-              {
-                "blocks": [],
-                "checked": true,
-                "children": [],
-                "text": "Basic parsing MUST work"
-              },
-              {
-                "blocks": [],
-                "checked": false,
-                "children": [
-                  {
-                    "blocks": [],
-                    "checked": false,
-                    "children": [],
-                    "text": "Feature A MAY be optional"
-                  },
-                  {
-                    "blocks": [],
-                    "checked": true,
-                    "children": [],
-                    "text": "Feature B MUST be included"
-                  }
-                ],
-                "text": "Advanced features SHOULD be added"
-              }
-            ],
-            "text": "Implement parser"
-          },
-          {
-            "blocks": [],
-            "checked": false,
-            "children": [
-              {
-                "blocks": [],
-                "checked": false,
-                "children": [],
-                "text": "User guide MUST be comprehensive"
-              },
-              {
-                "blocks": [],
-                "checked": true,
-                "children": [],
-                "text": "API docs SHOULD be auto-generated"
-              }
-            ],
-            "text": "Write documentation"
-          }
-        ],
-        "items_count": 2,
-        "section_id": "section_mixed-nested-structures-test",
-        "start_line": 53,
-        "task_items_count": 2,
         "type": "bullet"
       },
       {
         "end_line": 116,
-        "has_mixed_task_items": false,
-        "id": "list_3",
+        "id": "list_2",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "The parser MUST handle quoted lists"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "It SHOULD preserve formatting"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "It MAY add metadata"
           }
@@ -1333,31 +1340,25 @@
         "items_count": 3,
         "section_id": "section_mixed-nested-structures-test",
         "start_line": 113,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 137,
-        "has_mixed_task_items": false,
-        "id": "list_4",
+        "id": "list_3",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Third level item 1.1.1 MUST be captured"
                   },
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Third level item 1.1.2 SHOULD work"
                   }
@@ -1366,21 +1367,17 @@
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [
                       {
                         "blocks": [],
-                        "checked": null,
                         "children": [],
                         "text": "Mixing bullet in numbered list"
                       },
                       {
                         "blocks": [],
-                        "checked": null,
                         "children": [],
                         "text": "Another bullet that MAY confuse parser"
                       }
@@ -1395,7 +1392,6 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Back to first level\na. Letter sub-item (if supported)\nb. Another letter item\ni. Roman numeral (edge case)\nii. Another roman"
           }
@@ -1403,13 +1399,11 @@
         "items_count": 2,
         "section_id": "section_mixed-nested-structures-test",
         "start_line": 123,
-        "task_items_count": 0,
         "type": "ordered"
       },
       {
         "end_line": 159,
-        "has_mixed_task_items": false,
-        "id": "list_5",
+        "id": "list_4",
         "items": [
           {
             "blocks": [
@@ -1429,25 +1423,20 @@
                 "type": "table"
               }
             ],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": false,
                 "children": [],
-                "text": "Task in same list"
+                "text": " Task in same list"
               },
               {
                 "blocks": [],
-                "checked": true,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [
                       {
                         "blocks": [],
-                        "checked": null,
                         "children": [],
                         "text": "Third level still going"
                       }
@@ -1455,7 +1444,7 @@
                     "text": "Nested continuation"
                   }
                 ],
-                "text": "Checked task MUST track"
+                "text": " Checked task MUST track"
               }
             ],
             "text": "A list starts here"
@@ -1464,7 +1453,6 @@
         "items_count": 1,
         "section_id": "section_mixed-nested-structures-test",
         "start_line": 141,
-        "task_items_count": 0,
         "type": "bullet"
       }
     ],
@@ -1560,7 +1548,7 @@
         "slug": "mixed-nested-structures-test",
         "start_char": 0,
         "start_line": 0,
-        "text_content": "Mixed Nested Structures Test\n\nComplex List with Code and Requirements\n\nFirst item with a requirement: The system MUST handle nested structures Sub-item with code:\n\nAnother sub-item that SHOULD be processed correctly Third level with inline code and a MAY requirement Third level with a table: HeaderValue\n\nData123\n\nSecond numbered item [ ] Unchecked task in numbered list [x] Checked task that MUST be tracked Nested under task with requirement: SHOULD NOT miss this\n\nLists with Blockquotes\n\nBullet item with blockquote: This is a quote inside a list\nThe quote MUST be preserved with formatting\n\nNested item after blockquote Another nested quote\nWith multiple lines that SHOULD stay together\n\nAnother bullet with code after quote: Quote first\n\nTables with Complex Content\n\nFeatureStatusRequirement\n\nParsing\u2705 DoneMUST parse all markdown Nesting\ud83d\udd04 WIPSHOULD support 3 levels Tables\u2705 DoneMAY include nested content Code in tableinline()MUST NOT break\n\nMixed Task Lists\n\nProject Tasks [x] Implement parser [x] Basic parsing MUST work [ ] Advanced features SHOULD be added [ ] Feature A MAY be optional [x] Feature B MUST be included [ ] Write documentation [ ] User guide MUST be comprehensive [x] API docs SHOULD be auto-generated\n\nCode Blocks with Different Languages\n\nPython with Requirements\n\nYAML Configuration\n\nSQL with Comments\n\nEdge Case: Empty Sections\n\nSection with Only Whitespace\n\nRequirements in Various Contexts\n\nThis paragraph has multiple requirements. First, the system MUST handle inline requirements. Second, it SHOULD detect multiple patterns in one block. Third, it MAY optimize for performance. Finally, it MUST NOT lose any data.\n\nRequirements in Headers MUST Be Detected\n\nEven headers can contain requirements that SHOULD be found.\n\nDeep Nesting MAY Contain Requirements\n\nAt any level, requirements MUST be extracted.\n\nBlockquotes also contain requirements: The parser MUST handle quoted lists It SHOULD preserve formatting It MAY add metadata\n\nBold text with requirement: MUST work\nItalic text saying SHOULD process correctly\nBold italic claiming MAY be styled\n\nComplex Numbered Lists\n\nFirst level item Second level item 1.1 Third level item 1.1.1 MUST be captured Third level item 1.1.2 SHOULD work Second level item 1.2 Third level item 1.2.1 Mixing bullet in numbered list Another bullet that MAY confuse parser Back to first level\na. Letter sub-item (if supported)\nb. Another letter item\ni. Roman numeral (edge case)\nii. Another roman\n\nFinal Test: Everything Combined\n\nHere's a paragraph with a requirement: The enricher MUST handle this complex document.\n\nA list starts here\n\nQuote in list after code\nMUST handle this\n\nTableInList\n\nYesItSHOULD\n\n[ ] Task in same list [x] Checked task MUST track Nested continuation Third level still going\n\nAnd back to normal text with inline code and a final requirement: The parser MUST NOT fail on this document!",
+        "text_content": "Mixed Nested Structures Test\n\nComplex List with Code and Requirements\n\nFirst item with a requirement: The system MUST handle nested structures Sub-item with code:\n\nAnother sub-item that SHOULD be processed correctly Third level with inline code and a MAY requirement Third level with a table: HeaderValue\n\nData123\n\nSecond numbered item  Unchecked task in numbered list  Checked task that MUST be tracked Nested under task with requirement: SHOULD NOT miss this\n\nLists with Blockquotes\n\nBullet item with blockquote: This is a quote inside a list\nThe quote MUST be preserved with formatting\n\nNested item after blockquote Another nested quote\nWith multiple lines that SHOULD stay together\n\nAnother bullet with code after quote: Quote first\n\nTables with Complex Content\n\nFeatureStatusRequirement\n\nParsing\u2705 DoneMUST parse all markdown Nesting\ud83d\udd04 WIPSHOULD support 3 levels Tables\u2705 DoneMAY include nested content Code in tableinline()MUST NOT break\n\nMixed Task Lists\n\nProject Tasks  Implement parser  Basic parsing MUST work  Advanced features SHOULD be added  Feature A MAY be optional  Feature B MUST be included  Write documentation  User guide MUST be comprehensive  API docs SHOULD be auto-generated\n\nCode Blocks with Different Languages\n\nPython with Requirements\n\nYAML Configuration\n\nSQL with Comments\n\nEdge Case: Empty Sections\n\nSection with Only Whitespace\n\nRequirements in Various Contexts\n\nThis paragraph has multiple requirements. First, the system MUST handle inline requirements. Second, it SHOULD detect multiple patterns in one block. Third, it MAY optimize for performance. Finally, it MUST NOT lose any data.\n\nRequirements in Headers MUST Be Detected\n\nEven headers can contain requirements that SHOULD be found.\n\nDeep Nesting MAY Contain Requirements\n\nAt any level, requirements MUST be extracted.\n\nBlockquotes also contain requirements: The parser MUST handle quoted lists It SHOULD preserve formatting It MAY add metadata\n\nBold text with requirement: MUST work\nItalic text saying SHOULD process correctly\nBold italic claiming MAY be styled\n\nComplex Numbered Lists\n\nFirst level item Second level item 1.1 Third level item 1.1.1 MUST be captured Third level item 1.1.2 SHOULD work Second level item 1.2 Third level item 1.2.1 Mixing bullet in numbered list Another bullet that MAY confuse parser Back to first level\na. Letter sub-item (if supported)\nb. Another letter item\ni. Roman numeral (edge case)\nii. Another roman\n\nFinal Test: Everything Combined\n\nHere's a paragraph with a requirement: The enricher MUST handle this complex document.\n\nA list starts here\n\nQuote in list after code\nMUST handle this\n\nTableInList\n\nYesItSHOULD\n\n Task in same list  Checked task MUST track Nested continuation Third level still going\n\nAnd back to normal text with inline code and a final requirement: The parser MUST NOT fail on this document!",
         "title": "Mixed Nested Structures Test"
       },
       {
@@ -1574,7 +1562,7 @@
         "slug": "complex-list-with-code-and-requirements",
         "start_char": 32,
         "start_line": 2,
-        "text_content": "Complex List with Code and Requirements\n\nFirst item with a requirement: The system MUST handle nested structures Sub-item with code:\n\nAnother sub-item that SHOULD be processed correctly Third level with inline code and a MAY requirement Third level with a table: HeaderValue\n\nData123\n\nSecond numbered item [ ] Unchecked task in numbered list [x] Checked task that MUST be tracked Nested under task with requirement: SHOULD NOT miss this",
+        "text_content": "Complex List with Code and Requirements\n\nFirst item with a requirement: The system MUST handle nested structures Sub-item with code:\n\nAnother sub-item that SHOULD be processed correctly Third level with inline code and a MAY requirement Third level with a table: HeaderValue\n\nData123\n\nSecond numbered item  Unchecked task in numbered list  Checked task that MUST be tracked Nested under task with requirement: SHOULD NOT miss this",
         "title": "Complex List with Code and Requirements"
       },
       {
@@ -1618,7 +1606,7 @@
         "slug": "mixed-task-lists",
         "start_char": 1398,
         "start_line": 50,
-        "text_content": "Mixed Task Lists\n\nProject Tasks [x] Implement parser [x] Basic parsing MUST work [ ] Advanced features SHOULD be added [ ] Feature A MAY be optional [x] Feature B MUST be included [ ] Write documentation [ ] User guide MUST be comprehensive [x] API docs SHOULD be auto-generated",
+        "text_content": "Mixed Task Lists\n\nProject Tasks  Implement parser  Basic parsing MUST work  Advanced features SHOULD be added  Feature A MAY be optional  Feature B MUST be included  Write documentation  User guide MUST be comprehensive  API docs SHOULD be auto-generated",
         "title": "Mixed Task Lists"
       },
       {
@@ -1632,7 +1620,7 @@
         "slug": "project-tasks",
         "start_char": 1419,
         "start_line": 52,
-        "text_content": "Project Tasks [x] Implement parser [x] Basic parsing MUST work [ ] Advanced features SHOULD be added [ ] Feature A MAY be optional [x] Feature B MUST be included [ ] Write documentation [ ] User guide MUST be comprehensive [x] API docs SHOULD be auto-generated",
+        "text_content": "Project Tasks  Implement parser  Basic parsing MUST work  Advanced features SHOULD be added  Feature A MAY be optional  Feature B MUST be included  Write documentation  User guide MUST be comprehensive  API docs SHOULD be auto-generated",
         "title": "Project Tasks"
       },
       {
@@ -1808,7 +1796,7 @@
         "slug": "final-test-everything-combined",
         "start_char": 3618,
         "start_line": 137,
-        "text_content": "Final Test: Everything Combined\n\nHere's a paragraph with a requirement: The enricher MUST handle this complex document.\n\nA list starts here\n\nQuote in list after code\nMUST handle this\n\nTableInList\n\nYesItSHOULD\n\n[ ] Task in same list [x] Checked task MUST track Nested continuation Third level still going\n\nAnd back to normal text with inline code and a final requirement: The parser MUST NOT fail on this document!",
+        "text_content": "Final Test: Everything Combined\n\nHere's a paragraph with a requirement: The enricher MUST handle this complex document.\n\nA list starts here\n\nQuote in list after code\nMUST handle this\n\nTableInList\n\nYesItSHOULD\n\n Task in same list  Checked task MUST track Nested continuation Third level still going\n\nAnd back to normal text with inline code and a final requirement: The parser MUST NOT fail on this document!",
         "title": "Final Test: Everything Combined"
       }
     ],
@@ -1830,6 +1818,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "       | Header | Value |\n       |--------|-------|\n       | Data   | 123   |",
         "row_count": 1,
         "rows": [
           [
@@ -1838,7 +1827,8 @@
           ]
         ],
         "section_id": "section_mixed-nested-structures-test",
-        "start_line": 14
+        "start_line": 14,
+        "table_valid_md": true
       },
       {
         "align": [
@@ -1859,6 +1849,7 @@
         ],
         "id": "table_1",
         "is_ragged": false,
+        "raw_content": "| Feature | Status | Requirement |\n|---------|--------|-------------|\n| Parsing | \u2705 Done | MUST parse all markdown |\n| Nesting | \ud83d\udd04 WIP | SHOULD support 3 levels |\n| Tables | \u2705 Done | MAY include nested content |\n| Code in table | `inline()` | MUST NOT break |",
         "row_count": 4,
         "rows": [
           [
@@ -1878,12 +1869,13 @@
           ],
           [
             "Code in table",
-            "inline()",
+            "`inline()`",
             "MUST NOT break"
           ]
         ],
         "section_id": "section_mixed-nested-structures-test",
-        "start_line": 43
+        "start_line": 43,
+        "table_valid_md": true
       },
       {
         "align": [
@@ -1904,6 +1896,7 @@
         ],
         "id": "table_2",
         "is_ragged": false,
+        "raw_content": "  | Table | In | List |\n  |-------|----|----|\n  | Yes   | It | SHOULD |",
         "row_count": 1,
         "rows": [
           [
@@ -1913,7 +1906,142 @@
           ]
         ],
         "section_id": "section_mixed-nested-structures-test",
-        "start_line": 150
+        "start_line": 150,
+        "table_valid_md": true
+      }
+    ],
+    "tasklists": [
+      {
+        "checked_count": 1,
+        "end_line": 23,
+        "has_mixed_task_items": false,
+        "id": "tasklist_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Unchecked task in numbered list"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [
+              {
+                "blocks": [],
+                "children": [],
+                "text": "Nested under task with requirement: SHOULD NOT miss this"
+              }
+            ],
+            "text": "Checked task that MUST be tracked"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_mixed-nested-structures-test",
+        "start_line": 19,
+        "type": "bullet",
+        "unchecked_count": 1
+      },
+      {
+        "checked_count": 1,
+        "end_line": 62,
+        "has_mixed_task_items": false,
+        "id": "tasklist_1",
+        "items": [
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [
+              {
+                "blocks": [],
+                "checked": true,
+                "children": [],
+                "text": "Basic parsing MUST work"
+              },
+              {
+                "blocks": [],
+                "checked": false,
+                "children": [
+                  {
+                    "blocks": [],
+                    "checked": false,
+                    "children": [],
+                    "text": "Feature A MAY be optional"
+                  },
+                  {
+                    "blocks": [],
+                    "checked": true,
+                    "children": [],
+                    "text": "Feature B MUST be included"
+                  }
+                ],
+                "text": "Advanced features SHOULD be added"
+              }
+            ],
+            "text": "Implement parser"
+          },
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [
+              {
+                "blocks": [],
+                "checked": false,
+                "children": [],
+                "text": "User guide MUST be comprehensive"
+              },
+              {
+                "blocks": [],
+                "checked": true,
+                "children": [],
+                "text": "API docs SHOULD be auto-generated"
+              }
+            ],
+            "text": "Write documentation"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_mixed-nested-structures-test",
+        "start_line": 53,
+        "type": "bullet",
+        "unchecked_count": 1
+      },
+      {
+        "checked_count": 1,
+        "end_line": 159,
+        "has_mixed_task_items": false,
+        "id": "tasklist_2",
+        "items": [
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task in same list"
+          },
+          {
+            "blocks": [],
+            "checked": true,
+            "children": [
+              {
+                "blocks": [],
+                "children": [
+                  {
+                    "blocks": [],
+                    "children": [],
+                    "text": "Third level still going"
+                  }
+                ],
+                "text": "Nested continuation"
+              }
+            ],
+            "text": "Checked task MUST track"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_mixed-nested-structures-test",
+        "start_line": 154,
+        "type": "bullet",
+        "unchecked_count": 1
       }
     ]
   }

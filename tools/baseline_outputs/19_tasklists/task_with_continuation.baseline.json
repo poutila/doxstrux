@@ -79,6 +79,7 @@
     "node_counts": {
       "bullet_list": 1,
       "heading": 1,
+      "html_inline": 3,
       "inline": 7,
       "list_item": 3,
       "paragraph": 6,
@@ -99,8 +100,9 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -111,13 +113,23 @@
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
+        "total_warnings": 1,
         "unicode_risk_score": 0
       },
-      "warnings": []
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 3,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_3_html_inline"
+    ],
     "total_chars": 182,
     "total_lines": 14
   },
@@ -128,6 +140,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 35,
@@ -144,11 +157,31 @@
     "html_inline": [],
     "images": [],
     "links": [],
-    "lists": [
+    "lists": [],
+    "paragraphs": [],
+    "sections": [
       {
+        "child_ids": [],
+        "end_char": 182,
+        "end_line": 13,
+        "id": "section_task-with-continuation-paragraph",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Task with continuation paragraph\n\n- [ ] First task\n\n  Continuation paragraph for first task\n\n  Another paragraph\n\n- [x] Second task completed\n\n  Its continuation\n\n- [ ] Third task\n",
+        "slug": "task-with-continuation-paragraph",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Task with continuation paragraph\n\n First task\n\nContinuation paragraph for first task\n\nAnother paragraph\n\n Second task completed\n\nIts continuation\n\n Third task",
+        "title": "Task with continuation paragraph"
+      }
+    ],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 1,
         "end_line": 13,
         "has_mixed_task_items": false,
-        "id": "list_0",
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [],
@@ -172,27 +205,9 @@
         "items_count": 3,
         "section_id": "section_task-with-continuation-paragraph",
         "start_line": 2,
-        "task_items_count": 3,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 2
       }
-    ],
-    "paragraphs": [],
-    "sections": [
-      {
-        "child_ids": [],
-        "end_char": 182,
-        "end_line": 13,
-        "id": "section_task-with-continuation-paragraph",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "# Task with continuation paragraph\n\n- [ ] First task\n\n  Continuation paragraph for first task\n\n  Another paragraph\n\n- [x] Second task completed\n\n  Its continuation\n\n- [ ] Third task\n",
-        "slug": "task-with-continuation-paragraph",
-        "start_char": 0,
-        "start_line": 0,
-        "text_content": "Task with continuation paragraph\n\n[ ] First task\n\nContinuation paragraph for first task\n\nAnother paragraph\n\n[x] Second task completed\n\nIts continuation\n\n[ ] Third task",
-        "title": "Task with continuation paragraph"
-      }
-    ],
-    "tables": []
+    ]
   }
 }

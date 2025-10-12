@@ -238,7 +238,48 @@
     "raw": "# Edge Cases Test Document\n\n## Unicode and Special Characters\n\n### Emoji in Requirements \nThe system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\n### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: \u2211 \u220f \u222b \u2202 \u2207\n- Currency: $100, \u20ac50, \u00a375, \u00a51000\n- Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0\n  - Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5\n  - Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\n### Code with Unicode\n```python\ndef caf\u00e9():\n    return \"Z\u00fcrich \u2192 M\u00fcnchen\"\n    \n# Japanese comment: \u3053\u308c\u306f\u30c6\u30b9\u30c8\u3067\u3059\n\u540d\u524d = \"\u7530\u4e2d\"\n```\n\n## Malformed Markdown (Parser Resilience)\n\n### Unclosed Code Block\n```python\ndef broken():\n    # This code block is never closed\n    return None\n\n### Mixed List Markers\n- Bullet item\n* Different bullet marker\n+ Yet another marker\n- Back to dash\n  * Nested with star\n  - Nested with dash\n\n### Broken Table\n| Col1 | Col2 | Col3\n|------|------\n| Data | Missing | Separator |\n| Row2 \n| Row3 | Has | Too | Many | Columns |\n\n## Extreme Nesting Test\n\n- Level 1\n  - Level 2\n    - Level 3 (our limit)\n      - Level 4 (should be treated as text)\n        - Level 5 (definitely text)\n          - Level 6 (way too deep)\n            - Level 7 (parser should not crash)\n\n## Empty Elements Test\n\n### Empty List Items\n- \n- Item with content\n- \n  - \n  - Nested with content\n  - \n\n### Empty Code Block\n```\n```\n\n### Empty Table\n| | |\n|-|-|\n| | |\n\n## Inline Code Stress Test\n\nHere's `inline code` followed by more `inline code` and even more `inline code` all in one line with `special <> chars` and `quotes \"inside\"` plus `backslashes \\\\ too`.\n\n### List with Inline Code\n- Item with `code`\n- Another `with` multiple `code` spans\n  - Nested `code` with special chars: `<>&\"`\n  - More `inline` code `everywhere`\n\n## Links and References Test\n\n### Various Link Formats\n- [Basic link](http://example.com)\n- [Link with title](http://example.com \"Title here\")\n- [Relative link](../docs/README.md)\n- [Anchor link](#section-name)\n- [Reference link][ref1]\n- <http://direct-link.com>\n- Plain URL: http://should-not-be-parsed.com\n\n[ref1]: http://reference.com \"Reference Title\"\n\n### Links in Lists\n1. [Link in numbered](http://test.com)\n   - [Nested link](../file.md)\n     - [Deep nested](#anchor)\n2. Multiple [link 1](url1) and [link 2](url2) same item\n\n## Escaping Test\n\n### Escaped Special Characters\n- Escaped \\* asterisk\n- Escaped \\# hash\n- Escaped \\[not a link\\](not a url)\n- Escaped \\`not code\\`\n\n### Backslashes\n- Single backslash: \\\n- Double backslash: \\\\\n- Triple: \\\\\\\n- In code: `\\n\\t\\r`\n\n## HTML Entities and Raw HTML\n\n### HTML Entities\n- Less than: &lt;\n- Greater than: &gt;\n- Ampersand: &amp;\n- Quote: &quot;\n- Apos: &apos;\n- Non-breaking space: &nbsp;\n- Copyright: &copy;\n\n### Raw HTML (if supported)\n<div>\nThis is raw HTML that SHOULD be handled gracefully.\n</div>\n\n<script>\n// This MUST NOT execute\nalert(\"This should not run\");\n</script>\n\n## Long Lines Test\n\nThis is an extremely long line that contains a requirement: The system MUST handle very long lines without breaking or causing performance issues even when the line goes on and on and on with multiple requirements like SHOULD support streaming and MAY optimize memory usage and MUST NOT crash on extremely long content that keeps going and going with more text and more requirements and potentially causing buffer or memory issues in poorly implemented parsers but our parser MUST handle this gracefully without any problems whatsoever even if the line is thousands of characters long.\n\n## Repeated Pattern Test\n\nMUST MUST MUST MUST MUST - multiple MUSTs in a row\nSHOULD NOT SHOULD NOT SHOULD NOT - repeated SHOULD NOTs\nMAY MAY MAY MAY - multiple MAYs\n\n## Case Sensitivity Test\n\n### Mixed Case Requirements\n- The system must handle lowercase\n- The system MUST handle uppercase\n- The system Must handle mixed case\n- The system MuSt handle weird case\n- The system should HANDLE various cases\n- The system SHOULD handle normal case\n- The system SHOulD handle odd case\n\n## Numbers and Requirements\n\n### Requirements with Numbers\n1. MUST support 100% uptime\n2. SHOULD handle 1,000,000 requests\n3. MAY cache for 3.14159 seconds\n4. MUST NOT exceed 2^32 bytes\n5. SHOULD process in <100ms\n\n## Comments in Code Blocks\n\n```python\n# This comment has a requirement: MUST parse comments\ndef function():\n    \"\"\"\n    Docstring with requirement: SHOULD document well\n    \"\"\"\n    # TODO: MUST fix this later\n    pass  # MUST NOT remove this\n```\n\n```javascript\n// JavaScript comment: MUST support JS\n/* \n   Multi-line comment\n   SHOULD handle this too\n*/\nconst x = 42; // Inline comment: MAY be useful\n```\n\n## Nested Blockquotes\n\n> Level 1 quote\n> > Level 2 quote with requirement: MUST nest\n> > > Level 3 quote that SHOULD work\n> > > > Level 4 quote MAY be too deep\n> > > > > Level 5 definitely too deep but MUST NOT crash\n\n## Mixed Indentation (Tabs vs Spaces)\n\n\t- Tab indented item\n  - Space indented item\n\t  - Tab nested\n    - Space nested\n\t\t- More tabs\n      - More spaces\n\n## Finally: Kitchen Sink\n\nThis final section has everything: **bold**, *italic*, ***both***, `code`, [links](http://test.com), requirements that MUST work, lists below:\n\n- [ ] Task one\n- [x] Task two with `code` and [link](url)\n  > Quote in list\n  ```python\n  # Code in list after quote\n  print(\"Complex MUST work\")\n  ```\n  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |\n  \n  1. Numbered in bullet\n     - Bullet in numbered\n       - Deep nesting MAY confuse\n  2. But MUST NOT fail\n\n---\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 24,
+        "language": "python",
+        "start_line": 18
+      },
+      {
+        "end_line": 70,
+        "language": "python",
+        "start_line": 29
+      },
+      {
+        "end_line": 182,
+        "language": "",
+        "start_line": 71
+      },
+      {
+        "end_line": 191,
+        "language": "javascript",
+        "start_line": 184
+      },
+      {
+        "end_line": 203,
+        "language": "",
+        "start_line": 203
+      },
+      {
+        "end_line": 220,
+        "language": "python",
+        "start_line": 217
+      },
+      {
+        "end_line": 208,
+        "language": "",
+        "start_line": 205
+      },
+      {
+        "end_line": 226,
+        "language": "",
+        "start_line": 226
+      }
+    ],
     "code_lines": [
       18,
       19,
@@ -247,7 +288,6 @@
       22,
       23,
       24,
-      25,
       29,
       30,
       31,
@@ -402,7 +442,6 @@
       180,
       181,
       182,
-      183,
       184,
       185,
       186,
@@ -411,21 +450,16 @@
       189,
       190,
       191,
-      192,
       203,
-      204,
       217,
       218,
       219,
       220,
-      221,
       205,
       206,
       207,
       208,
-      209,
-      226,
-      227
+      226
     ],
     "line_to_section": {
       "0": "section_edge-cases-test-document",
@@ -757,7 +791,7 @@
       "180": "code",
       "181": "code",
       "182": "code",
-      "183": "code",
+      "183": "prose",
       "184": "code",
       "185": "code",
       "186": "code",
@@ -767,7 +801,7 @@
       "19": "code",
       "190": "code",
       "191": "code",
-      "192": "code",
+      "192": "prose",
       "193": "prose",
       "194": "prose",
       "195": "prose",
@@ -781,12 +815,12 @@
       "201": "prose",
       "202": "prose",
       "203": "code",
-      "204": "code",
+      "204": "prose",
       "205": "code",
       "206": "code",
       "207": "code",
       "208": "code",
-      "209": "code",
+      "209": "prose",
       "21": "code",
       "210": "prose",
       "211": "prose",
@@ -800,13 +834,13 @@
       "219": "code",
       "22": "code",
       "220": "code",
-      "221": "code",
+      "221": "prose",
       "222": "prose",
       "223": "prose",
       "224": "prose",
       "225": "prose",
       "226": "code",
-      "227": "code",
+      "227": "prose",
       "228": "prose",
       "229": "prose",
       "23": "code",
@@ -814,7 +848,7 @@
       "231": "prose",
       "232": "prose",
       "24": "code",
-      "25": "code",
+      "25": "prose",
       "26": "prose",
       "27": "prose",
       "28": "prose",
@@ -916,9 +950,12 @@
       15,
       16,
       17,
+      25,
       26,
       27,
       28,
+      183,
+      192,
       193,
       194,
       195,
@@ -929,6 +966,8 @@
       200,
       201,
       202,
+      204,
+      209,
       210,
       211,
       212,
@@ -936,10 +975,12 @@
       214,
       215,
       216,
+      221,
       222,
       223,
       224,
       225,
+      227,
       228,
       229,
       230,
@@ -948,8 +989,6 @@
     ]
   },
   "metadata": {
-    "embedding_block_reason": "Document contains script tags",
-    "embedding_blocked": true,
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": true,
@@ -964,6 +1003,7 @@
       "fence": 5,
       "heading": 10,
       "hr": 1,
+      "html_inline": 2,
       "inline": 42,
       "link": 2,
       "list_item": 17,
@@ -994,9 +1034,10 @@
         "has_confusables": true,
         "has_data_uri_images": false,
         "has_event_handlers": false,
-        "has_html_block": true,
-        "has_html_inline": false,
-        "has_script": true,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {
           "http": 1,
           "relative": 1
@@ -1018,11 +1059,6 @@
       },
       "warnings": [
         {
-          "line": null,
-          "message": "Document contains <script> tags",
-          "type": "script_tag"
-        },
-        {
           "line": 212,
           "message": "Link contains path traversal pattern",
           "type": "path_traversal",
@@ -1037,11 +1073,17 @@
           "line": null,
           "message": "Document mixes multiple scripts with Latin (potential spoofing)",
           "type": "mixed_scripts"
+        },
+        {
+          "blocks": 0,
+          "inline": 2,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
         }
       ]
     },
     "security_policies_applied": [
-      "embedding_blocked_script"
+      "stripped_2_html_inline"
     ],
     "total_chars": 5622,
     "total_lines": 233
@@ -1151,6 +1193,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 27,
@@ -1262,7 +1305,7 @@
         "line": 212,
         "scheme": "http",
         "text": "links",
-        "type": "external",
+        "type": "absolute",
         "url": "http://test.com"
       },
       {
@@ -1270,47 +1313,40 @@
         "line": 215,
         "scheme": null,
         "text": "link",
-        "type": "internal",
+        "type": "relative",
         "url": "url"
       }
     ],
     "lists": [
       {
         "end_line": 17,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Item with special chars: <>&\"'"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Math symbols: \u2211 \u220f \u222b \u2202 \u2207"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [],
             "text": "Currency: $100, \u20ac50, \u00a375, \u00a51000"
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5"
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a"
               }
@@ -1321,37 +1357,30 @@
         "items_count": 4,
         "section_id": "section_edge-cases-test-document",
         "start_line": 10,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 210,
-        "has_mixed_task_items": false,
         "id": "list_1",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Tab nested"
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "More tabs"
                   },
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "More spaces"
                   }
@@ -1365,75 +1394,39 @@
         "items_count": 1,
         "section_id": "section_edge-cases-test-document",
         "start_line": 204,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 230,
-        "has_mixed_task_items": false,
         "id": "list_2",
         "items": [
           {
             "blocks": [],
-            "checked": false,
-            "children": [],
-            "text": "Task one"
-          },
-          {
-            "blocks": [
-              {
-                "end_line": 217,
-                "start_line": 216,
-                "type": "blockquote"
-              },
-              {
-                "end_line": 221,
-                "start_line": 217,
-                "type": "fence"
-              },
-              {
-                "end_line": 224,
-                "start_line": 221,
-                "type": "table"
-              }
-            ],
-            "checked": true,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
-                    "children": [
-                      {
-                        "blocks": [],
-                        "checked": null,
-                        "children": [],
-                        "text": "Deep nesting MAY confuse"
-                      }
-                    ],
-                    "text": "Bullet in numbered"
+                    "children": [],
+                    "text": "Deep nesting MAY confuse"
                   }
                 ],
-                "text": "Numbered in bullet"
-              },
-              {
-                "blocks": [],
-                "checked": null,
-                "children": [],
-                "text": "But MUST NOT fail"
+                "text": "Bullet in numbered"
               }
             ],
-            "text": "Task two with code and link"
+            "text": "Numbered in bullet"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "But MUST NOT fail"
           }
         ],
         "items_count": 2,
         "section_id": "section_edge-cases-test-document",
-        "start_line": 214,
-        "task_items_count": 2,
-        "type": "bullet"
+        "start_line": 225,
+        "type": "ordered"
       }
     ],
     "paragraphs": [
@@ -1489,7 +1482,7 @@
         "slug": "edge-cases-test-document",
         "start_char": 0,
         "start_line": 0,
-        "text_content": "Edge Cases Test Document\n\nUnicode and Special Characters\n\nEmoji in Requirements The system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\nSpecial Characters in Lists Item with special chars: <>&\"' Math symbols: \u2211 \u220f \u222b \u2202 \u2207 Currency: $100, \u20ac50, \u00a375, \u00a51000 Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0 Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5 Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\nCode with Unicode\n\nMalformed Markdown (Parser Resilience)\n\nUnclosed Code Block\n\nNested Blockquotes\n\nLevel 1 quote Level 2 quote with requirement: MUST nest Level 3 quote that SHOULD work Level 4 quote MAY be too deep Level 5 definitely too deep but MUST NOT crash\n\nMixed Indentation (Tabs vs Spaces)\n\nSpace indented item Tab nested Space nested More tabs More spaces\n\nFinally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n[ ] Task one [x] Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
+        "text_content": "Edge Cases Test Document\n\nUnicode and Special Characters\n\nEmoji in Requirements The system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\nSpecial Characters in Lists Item with special chars: <>&\"' Math symbols: \u2211 \u220f \u222b \u2202 \u2207 Currency: $100, \u20ac50, \u00a375, \u00a51000 Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0 Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5 Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\nCode with Unicode\n\nMalformed Markdown (Parser Resilience)\n\nUnclosed Code Block\n\nNested Blockquotes\n\nLevel 1 quote Level 2 quote with requirement: MUST nest Level 3 quote that SHOULD work Level 4 quote MAY be too deep Level 5 definitely too deep but MUST NOT crash\n\nMixed Indentation (Tabs vs Spaces)\n\nSpace indented item Tab nested Space nested More tabs More spaces\n\nFinally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n Task one  Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
         "title": "Edge Cases Test Document"
       },
       {
@@ -1621,7 +1614,7 @@
         "slug": "finally-kitchen-sink",
         "start_char": 4954,
         "start_line": 210,
-        "text_content": "Finally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n[ ] Task one [x] Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
+        "text_content": "Finally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n Task one  Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
         "title": "Finally: Kitchen Sink"
       }
     ],
@@ -1645,6 +1638,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |",
         "row_count": 1,
         "rows": [
           [
@@ -1654,7 +1648,74 @@
           ]
         ],
         "section_id": "section_edge-cases-test-document",
-        "start_line": 221
+        "start_line": 221,
+        "table_valid_md": true
+      }
+    ],
+    "tasklists": [
+      {
+        "checked_count": 1,
+        "end_line": 230,
+        "has_mixed_task_items": false,
+        "id": "tasklist_0",
+        "items": [
+          {
+            "blocks": [],
+            "checked": false,
+            "children": [],
+            "text": "Task one"
+          },
+          {
+            "blocks": [
+              {
+                "end_line": 217,
+                "start_line": 216,
+                "type": "blockquote"
+              },
+              {
+                "end_line": 221,
+                "start_line": 217,
+                "type": "fence"
+              },
+              {
+                "end_line": 224,
+                "start_line": 221,
+                "type": "table"
+              }
+            ],
+            "checked": true,
+            "children": [
+              {
+                "blocks": [],
+                "children": [
+                  {
+                    "blocks": [],
+                    "children": [
+                      {
+                        "blocks": [],
+                        "children": [],
+                        "text": "Deep nesting MAY confuse"
+                      }
+                    ],
+                    "text": "Bullet in numbered"
+                  }
+                ],
+                "text": "Numbered in bullet"
+              },
+              {
+                "blocks": [],
+                "children": [],
+                "text": "But MUST NOT fail"
+              }
+            ],
+            "text": "Task two with code and link"
+          }
+        ],
+        "items_count": 2,
+        "section_id": "section_edge-cases-test-document",
+        "start_line": 214,
+        "type": "bullet",
+        "unchecked_count": 1
       }
     ]
   }

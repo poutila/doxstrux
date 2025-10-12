@@ -13,14 +13,19 @@
     "raw": "```md\n---\ntitle: Inside Code\n---\n```\n\n# Content\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 4,
+        "language": "md",
+        "start_line": 0
+      }
+    ],
     "code_lines": [
       0,
       1,
       2,
       3,
-      4,
-      5
+      4
     ],
     "line_to_section": {
       "6": "section_content",
@@ -32,11 +37,12 @@
       "2": "code",
       "3": "code",
       "4": "code",
-      "5": "code",
+      "5": "prose",
       "6": "prose",
       "7": "prose"
     },
     "prose_lines": [
+      5,
       6,
       7
     ]
@@ -107,6 +113,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 48,
@@ -141,6 +148,7 @@
         "title": "Content"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

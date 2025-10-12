@@ -13,14 +13,19 @@
     "raw": "# Test: 16_unclosed_fence_followed_by_hashes\n\n```\n# should be code not heading\n## also code\n\n# after-but-still-in-code-due-to-missing-fence\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 6,
+        "language": "",
+        "start_line": 2
+      }
+    ],
     "code_lines": [
       2,
       3,
       4,
       5,
-      6,
-      7
+      6
     ],
     "line_to_section": {
       "0": "section_test-16_unclosed_fence_followed_by_hashes",
@@ -40,11 +45,12 @@
       "4": "code",
       "5": "code",
       "6": "code",
-      "7": "code"
+      "7": "prose"
     },
     "prose_lines": [
       0,
-      1
+      1,
+      7
     ]
   },
   "metadata": {
@@ -113,6 +119,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 45,
@@ -147,6 +154,7 @@
         "title": "Test: 16_unclosed_fence_followed_by_hashes"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

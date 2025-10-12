@@ -74,18 +74,39 @@
     "raw": "# Markdown Nested Lists and Checklists Test\n\nThis file is for testing **nested unordered lists, ordered lists, and checklists** in various combinations.\n\n---\n\n## 1. Nested Unordered Lists\n\n- Level 1 - Item 1\n  - Level 2 - Item 1.1\n    - Level 3 - Item 1.1.1\n    - Level 3 - Item 1.1.2\n  - Level 2 - Item 1.2\n- Level 1 - Item 2\n  - Level 2 - Item 2.1\n\n---\n\n## 2. Nested Ordered Lists\n\n1. Step 1\n   1. Step 1.1\n      1. Step 1.1.1\n      2. Step 1.1.2\n   2. Step 1.2\n2. Step 2\n   1. Step 2.1\n\n---\n\n## 3. Mixed Unordered and Ordered Lists\n\n- Phase 1\n  1. Task 1.1\n  2. Task 1.2\n    - Subtask 1.2.1\n    - Subtask 1.2.2\n- Phase 2\n  1. Task 2.1\n  2. Task 2.2\n\n---\n\n## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n\n## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 10,
+        "language": "",
+        "start_line": 10
+      },
+      {
+        "end_line": 22,
+        "language": "",
+        "start_line": 22
+      },
+      {
+        "end_line": 35,
+        "language": "",
+        "start_line": 35
+      },
+      {
+        "end_line": 48,
+        "language": "",
+        "start_line": 48
+      },
+      {
+        "end_line": 61,
+        "language": "",
+        "start_line": 61
+      }
+    ],
     "code_lines": [
       10,
-      11,
       22,
-      23,
       35,
-      36,
       48,
-      49,
-      61,
-      62
+      61
     ],
     "line_to_section": {
       "0": "section_markdown-nested-lists-and-checklists-test",
@@ -162,7 +183,7 @@
       "0": "prose",
       "1": "prose",
       "10": "code",
-      "11": "code",
+      "11": "prose",
       "12": "prose",
       "13": "prose",
       "14": "prose",
@@ -175,7 +196,7 @@
       "20": "prose",
       "21": "prose",
       "22": "code",
-      "23": "code",
+      "23": "prose",
       "24": "prose",
       "25": "prose",
       "26": "prose",
@@ -189,7 +210,7 @@
       "33": "prose",
       "34": "prose",
       "35": "code",
-      "36": "code",
+      "36": "prose",
       "37": "prose",
       "38": "prose",
       "39": "prose",
@@ -203,7 +224,7 @@
       "46": "prose",
       "47": "prose",
       "48": "code",
-      "49": "code",
+      "49": "prose",
       "5": "prose",
       "50": "prose",
       "51": "prose",
@@ -218,7 +239,7 @@
       "6": "prose",
       "60": "prose",
       "61": "code",
-      "62": "code",
+      "62": "prose",
       "63": "prose",
       "64": "prose",
       "65": "prose",
@@ -240,6 +261,7 @@
       7,
       8,
       9,
+      11,
       12,
       13,
       14,
@@ -250,6 +272,7 @@
       19,
       20,
       21,
+      23,
       24,
       25,
       26,
@@ -261,6 +284,7 @@
       32,
       33,
       34,
+      36,
       37,
       38,
       39,
@@ -272,6 +296,7 @@
       45,
       46,
       47,
+      49,
       50,
       51,
       52,
@@ -283,6 +308,7 @@
       58,
       59,
       60,
+      62,
       63,
       64,
       65,
@@ -301,6 +327,7 @@
       "bullet_list": 12,
       "heading": 6,
       "hr": 6,
+      "html_inline": 16,
       "inline": 45,
       "list_item": 38,
       "ordered_list": 8,
@@ -323,8 +350,9 @@
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
+        "html_disallowed": true,
         "link_schemes": {},
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -335,13 +363,23 @@
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": false,
+        "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 0,
+        "total_warnings": 1,
         "unicode_risk_score": 0
       },
-      "warnings": []
+      "warnings": [
+        {
+          "blocks": 0,
+          "inline": 16,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
     },
+    "security_policies_applied": [
+      "stripped_16_html_inline"
+    ],
     "total_chars": 1184,
     "total_lines": 69
   },
@@ -398,6 +436,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 44,
@@ -467,26 +506,21 @@
     "lists": [
       {
         "end_line": 16,
-        "has_mixed_task_items": false,
         "id": "list_0",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Level 3 - Item 1.1.1"
                   },
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Level 3 - Item 1.1.2"
                   }
@@ -495,7 +529,6 @@
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Level 2 - Item 1.2"
               }
@@ -504,11 +537,9 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Level 2 - Item 2.1"
               }
@@ -519,31 +550,25 @@
         "items_count": 2,
         "section_id": "section_markdown-nested-lists-and-checklists-test",
         "start_line": 8,
-        "task_items_count": 0,
         "type": "bullet"
       },
       {
         "end_line": 28,
-        "has_mixed_task_items": false,
         "id": "list_1",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Step 1.1.1"
                   },
                   {
                     "blocks": [],
-                    "checked": null,
                     "children": [],
                     "text": "Step 1.1.2"
                   }
@@ -552,7 +577,6 @@
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Step 1.2"
               }
@@ -561,11 +585,9 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Step 2.1"
               }
@@ -576,27 +598,22 @@
         "items_count": 2,
         "section_id": "section_markdown-nested-lists-and-checklists-test",
         "start_line": 20,
-        "task_items_count": 0,
         "type": "ordered"
       },
       {
         "end_line": 41,
-        "has_mixed_task_items": false,
         "id": "list_2",
         "items": [
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Subtask 1.2.1"
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Subtask 1.2.2"
               }
@@ -605,17 +622,14 @@
           },
           {
             "blocks": [],
-            "checked": null,
             "children": [
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Task 2.1"
               },
               {
                 "blocks": [],
-                "checked": null,
                 "children": [],
                 "text": "Task 2.2"
               }
@@ -626,13 +640,121 @@
         "items_count": 2,
         "section_id": "section_markdown-nested-lists-and-checklists-test",
         "start_line": 32,
-        "task_items_count": 0,
         "type": "bullet"
+      }
+    ],
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": true,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "start_line": 2,
+        "text": "This file is for testing nested unordered lists, ordered lists, and checklists in various combinations.",
+        "word_count": 15
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [
+          "section_1-nested-unordered-lists",
+          "section_2-nested-ordered-lists",
+          "section_3-mixed-unordered-and-ordered-lists",
+          "section_4-checklists-with-nesting",
+          "section_5-complex-mixed-lists-with-checklists"
+        ],
+        "end_char": 1184,
+        "end_line": 68,
+        "id": "section_markdown-nested-lists-and-checklists-test",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Markdown Nested Lists and Checklists Test\n\nThis file is for testing **nested unordered lists, ordered lists, and checklists** in various combinations.\n\n---\n\n## 1. Nested Unordered Lists\n\n- Level 1 - Item 1\n  - Level 2 - Item 1.1\n    - Level 3 - Item 1.1.1\n    - Level 3 - Item 1.1.2\n  - Level 2 - Item 1.2\n- Level 1 - Item 2\n  - Level 2 - Item 2.1\n\n---\n\n## 2. Nested Ordered Lists\n\n1. Step 1\n   1. Step 1.1\n      1. Step 1.1.1\n      2. Step 1.1.2\n   2. Step 1.2\n2. Step 2\n   1. Step 2.1\n\n---\n\n## 3. Mixed Unordered and Ordered Lists\n\n- Phase 1\n  1. Task 1.1\n  2. Task 1.2\n    - Subtask 1.2.1\n    - Subtask 1.2.2\n- Phase 2\n  1. Task 2.1\n  2. Task 2.2\n\n---\n\n## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n\n## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n",
+        "slug": "markdown-nested-lists-and-checklists-test",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Markdown Nested Lists and Checklists Test\n\nThis file is for testing nested unordered lists, ordered lists, and checklists in various combinations.\n\n1. Nested Unordered Lists\n\nLevel 1 - Item 1 Level 2 - Item 1.1 Level 3 - Item 1.1.1 Level 3 - Item 1.1.2 Level 2 - Item 1.2 Level 1 - Item 2 Level 2 - Item 2.1\n\n2. Nested Ordered Lists\n\nStep 1 Step 1.1 Step 1.1.1 Step 1.1.2 Step 1.2 Step 2 Step 2.1\n\n3. Mixed Unordered and Ordered Lists\n\nPhase 1 Task 1.1 Task 1.2 Subtask 1.2.1 Subtask 1.2.2 Phase 2 Task 2.1 Task 2.2\n\n4. Checklists with Nesting\n\n Main Task 1  Subtask 1.1 (completed)  Subtask 1.2 (incomplete)  Sub-subtask 1.2.1  Sub-subtask 1.2.2  Main Task 2  Subtask 2.1  Subtask 2.2\n\n5. Complex Mixed Lists with Checklists\n\n Completed Step  Still pending subtask  Done subtask  Inner numbered checklist item  Completed inner numbered checklist item  Incomplete Step  Needs review  Needs implementation",
+        "title": "Markdown Nested Lists and Checklists Test"
       },
       {
+        "child_ids": [],
+        "end_char": 356,
+        "end_line": 17,
+        "id": "section_1-nested-unordered-lists",
+        "level": 2,
+        "parent_id": "section_markdown-nested-lists-and-checklists-test",
+        "raw_content": "## 1. Nested Unordered Lists\n\n- Level 1 - Item 1\n  - Level 2 - Item 1.1\n    - Level 3 - Item 1.1.1\n    - Level 3 - Item 1.1.2\n  - Level 2 - Item 1.2\n- Level 1 - Item 2\n  - Level 2 - Item 2.1\n\n---\n",
+        "slug": "1-nested-unordered-lists",
+        "start_char": 159,
+        "start_line": 6,
+        "text_content": "1. Nested Unordered Lists\n\nLevel 1 - Item 1 Level 2 - Item 1.1 Level 3 - Item 1.1.1 Level 3 - Item 1.1.2 Level 2 - Item 1.2 Level 1 - Item 2 Level 2 - Item 2.1",
+        "title": "1. Nested Unordered Lists"
+      },
+      {
+        "child_ids": [],
+        "end_char": 495,
+        "end_line": 29,
+        "id": "section_2-nested-ordered-lists",
+        "level": 2,
+        "parent_id": "section_markdown-nested-lists-and-checklists-test",
+        "raw_content": "## 2. Nested Ordered Lists\n\n1. Step 1\n   1. Step 1.1\n      1. Step 1.1.1\n      2. Step 1.1.2\n   2. Step 1.2\n2. Step 2\n   1. Step 2.1\n\n---\n",
+        "slug": "2-nested-ordered-lists",
+        "start_char": 356,
+        "start_line": 18,
+        "text_content": "2. Nested Ordered Lists\n\nStep 1 Step 1.1 Step 1.1.1 Step 1.1.2 Step 1.2 Step 2 Step 2.1",
+        "title": "2. Nested Ordered Lists"
+      },
+      {
+        "child_ids": [],
+        "end_char": 658,
+        "end_line": 42,
+        "id": "section_3-mixed-unordered-and-ordered-lists",
+        "level": 2,
+        "parent_id": "section_markdown-nested-lists-and-checklists-test",
+        "raw_content": "## 3. Mixed Unordered and Ordered Lists\n\n- Phase 1\n  1. Task 1.1\n  2. Task 1.2\n    - Subtask 1.2.1\n    - Subtask 1.2.2\n- Phase 2\n  1. Task 2.1\n  2. Task 2.2\n\n---\n",
+        "slug": "3-mixed-unordered-and-ordered-lists",
+        "start_char": 495,
+        "start_line": 30,
+        "text_content": "3. Mixed Unordered and Ordered Lists\n\nPhase 1 Task 1.1 Task 1.2 Subtask 1.2.1 Subtask 1.2.2 Phase 2 Task 2.1 Task 2.2",
+        "title": "3. Mixed Unordered and Ordered Lists"
+      },
+      {
+        "child_ids": [],
+        "end_char": 892,
+        "end_line": 55,
+        "id": "section_4-checklists-with-nesting",
+        "level": 2,
+        "parent_id": "section_markdown-nested-lists-and-checklists-test",
+        "raw_content": "## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n",
+        "slug": "4-checklists-with-nesting",
+        "start_char": 658,
+        "start_line": 43,
+        "text_content": "4. Checklists with Nesting\n\n Main Task 1  Subtask 1.1 (completed)  Subtask 1.2 (incomplete)  Sub-subtask 1.2.1  Sub-subtask 1.2.2  Main Task 2  Subtask 2.1  Subtask 2.2",
+        "title": "4. Checklists with Nesting"
+      },
+      {
+        "child_ids": [],
+        "end_char": 1184,
+        "end_line": 68,
+        "id": "section_5-complex-mixed-lists-with-checklists",
+        "level": 2,
+        "parent_id": "section_markdown-nested-lists-and-checklists-test",
+        "raw_content": "## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n",
+        "slug": "5-complex-mixed-lists-with-checklists",
+        "start_char": 892,
+        "start_line": 56,
+        "text_content": "5. Complex Mixed Lists with Checklists\n\n Completed Step  Still pending subtask  Done subtask  Inner numbered checklist item  Completed inner numbered checklist item  Incomplete Step  Needs review  Needs implementation",
+        "title": "5. Complex Mixed Lists with Checklists"
+      }
+    ],
+    "tables": [],
+    "tasklists": [
+      {
+        "checked_count": 1,
         "end_line": 54,
         "has_mixed_task_items": false,
-        "id": "list_3",
+        "id": "tasklist_0",
         "items": [
           {
             "blocks": [],
@@ -689,13 +811,14 @@
         "items_count": 2,
         "section_id": "section_markdown-nested-lists-and-checklists-test",
         "start_line": 45,
-        "task_items_count": 2,
-        "type": "bullet"
+        "type": "bullet",
+        "unchecked_count": 1
       },
       {
+        "checked_count": 1,
         "end_line": 67,
         "has_mixed_task_items": false,
-        "id": "list_4",
+        "id": "tasklist_1",
         "items": [
           {
             "blocks": [],
@@ -752,115 +875,9 @@
         "items_count": 2,
         "section_id": "section_markdown-nested-lists-and-checklists-test",
         "start_line": 58,
-        "task_items_count": 2,
-        "type": "ordered"
+        "type": "ordered",
+        "unchecked_count": 1
       }
-    ],
-    "paragraphs": [
-      {
-        "end_line": 3,
-        "has_code": false,
-        "has_emphasis": true,
-        "has_links": false,
-        "id": "para_0",
-        "section_id": "section_markdown-nested-lists-and-checklists-test",
-        "start_line": 2,
-        "text": "This file is for testing nested unordered lists, ordered lists, and checklists in various combinations.",
-        "word_count": 15
-      }
-    ],
-    "sections": [
-      {
-        "child_ids": [
-          "section_1-nested-unordered-lists",
-          "section_2-nested-ordered-lists",
-          "section_3-mixed-unordered-and-ordered-lists",
-          "section_4-checklists-with-nesting",
-          "section_5-complex-mixed-lists-with-checklists"
-        ],
-        "end_char": 1184,
-        "end_line": 68,
-        "id": "section_markdown-nested-lists-and-checklists-test",
-        "level": 1,
-        "parent_id": null,
-        "raw_content": "# Markdown Nested Lists and Checklists Test\n\nThis file is for testing **nested unordered lists, ordered lists, and checklists** in various combinations.\n\n---\n\n## 1. Nested Unordered Lists\n\n- Level 1 - Item 1\n  - Level 2 - Item 1.1\n    - Level 3 - Item 1.1.1\n    - Level 3 - Item 1.1.2\n  - Level 2 - Item 1.2\n- Level 1 - Item 2\n  - Level 2 - Item 2.1\n\n---\n\n## 2. Nested Ordered Lists\n\n1. Step 1\n   1. Step 1.1\n      1. Step 1.1.1\n      2. Step 1.1.2\n   2. Step 1.2\n2. Step 2\n   1. Step 2.1\n\n---\n\n## 3. Mixed Unordered and Ordered Lists\n\n- Phase 1\n  1. Task 1.1\n  2. Task 1.2\n    - Subtask 1.2.1\n    - Subtask 1.2.2\n- Phase 2\n  1. Task 2.1\n  2. Task 2.2\n\n---\n\n## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n\n## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n",
-        "slug": "markdown-nested-lists-and-checklists-test",
-        "start_char": 0,
-        "start_line": 0,
-        "text_content": "Markdown Nested Lists and Checklists Test\n\nThis file is for testing nested unordered lists, ordered lists, and checklists in various combinations.\n\n1. Nested Unordered Lists\n\nLevel 1 - Item 1 Level 2 - Item 1.1 Level 3 - Item 1.1.1 Level 3 - Item 1.1.2 Level 2 - Item 1.2 Level 1 - Item 2 Level 2 - Item 2.1\n\n2. Nested Ordered Lists\n\nStep 1 Step 1.1 Step 1.1.1 Step 1.1.2 Step 1.2 Step 2 Step 2.1\n\n3. Mixed Unordered and Ordered Lists\n\nPhase 1 Task 1.1 Task 1.2 Subtask 1.2.1 Subtask 1.2.2 Phase 2 Task 2.1 Task 2.2\n\n4. Checklists with Nesting\n\n[ ] Main Task 1 [x] Subtask 1.1 (completed) [ ] Subtask 1.2 (incomplete) [ ] Sub-subtask 1.2.1 [x] Sub-subtask 1.2.2 [x] Main Task 2 [x] Subtask 2.1 [ ] Subtask 2.2\n\n5. Complex Mixed Lists with Checklists\n\n[x] Completed Step [ ] Still pending subtask [x] Done subtask [ ] Inner numbered checklist item [x] Completed inner numbered checklist item [ ] Incomplete Step [ ] Needs review [ ] Needs implementation",
-        "title": "Markdown Nested Lists and Checklists Test"
-      },
-      {
-        "child_ids": [],
-        "end_char": 356,
-        "end_line": 17,
-        "id": "section_1-nested-unordered-lists",
-        "level": 2,
-        "parent_id": "section_markdown-nested-lists-and-checklists-test",
-        "raw_content": "## 1. Nested Unordered Lists\n\n- Level 1 - Item 1\n  - Level 2 - Item 1.1\n    - Level 3 - Item 1.1.1\n    - Level 3 - Item 1.1.2\n  - Level 2 - Item 1.2\n- Level 1 - Item 2\n  - Level 2 - Item 2.1\n\n---\n",
-        "slug": "1-nested-unordered-lists",
-        "start_char": 159,
-        "start_line": 6,
-        "text_content": "1. Nested Unordered Lists\n\nLevel 1 - Item 1 Level 2 - Item 1.1 Level 3 - Item 1.1.1 Level 3 - Item 1.1.2 Level 2 - Item 1.2 Level 1 - Item 2 Level 2 - Item 2.1",
-        "title": "1. Nested Unordered Lists"
-      },
-      {
-        "child_ids": [],
-        "end_char": 495,
-        "end_line": 29,
-        "id": "section_2-nested-ordered-lists",
-        "level": 2,
-        "parent_id": "section_markdown-nested-lists-and-checklists-test",
-        "raw_content": "## 2. Nested Ordered Lists\n\n1. Step 1\n   1. Step 1.1\n      1. Step 1.1.1\n      2. Step 1.1.2\n   2. Step 1.2\n2. Step 2\n   1. Step 2.1\n\n---\n",
-        "slug": "2-nested-ordered-lists",
-        "start_char": 356,
-        "start_line": 18,
-        "text_content": "2. Nested Ordered Lists\n\nStep 1 Step 1.1 Step 1.1.1 Step 1.1.2 Step 1.2 Step 2 Step 2.1",
-        "title": "2. Nested Ordered Lists"
-      },
-      {
-        "child_ids": [],
-        "end_char": 658,
-        "end_line": 42,
-        "id": "section_3-mixed-unordered-and-ordered-lists",
-        "level": 2,
-        "parent_id": "section_markdown-nested-lists-and-checklists-test",
-        "raw_content": "## 3. Mixed Unordered and Ordered Lists\n\n- Phase 1\n  1. Task 1.1\n  2. Task 1.2\n    - Subtask 1.2.1\n    - Subtask 1.2.2\n- Phase 2\n  1. Task 2.1\n  2. Task 2.2\n\n---\n",
-        "slug": "3-mixed-unordered-and-ordered-lists",
-        "start_char": 495,
-        "start_line": 30,
-        "text_content": "3. Mixed Unordered and Ordered Lists\n\nPhase 1 Task 1.1 Task 1.2 Subtask 1.2.1 Subtask 1.2.2 Phase 2 Task 2.1 Task 2.2",
-        "title": "3. Mixed Unordered and Ordered Lists"
-      },
-      {
-        "child_ids": [],
-        "end_char": 892,
-        "end_line": 55,
-        "id": "section_4-checklists-with-nesting",
-        "level": 2,
-        "parent_id": "section_markdown-nested-lists-and-checklists-test",
-        "raw_content": "## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n",
-        "slug": "4-checklists-with-nesting",
-        "start_char": 658,
-        "start_line": 43,
-        "text_content": "4. Checklists with Nesting\n\n[ ] Main Task 1 [x] Subtask 1.1 (completed) [ ] Subtask 1.2 (incomplete) [ ] Sub-subtask 1.2.1 [x] Sub-subtask 1.2.2 [x] Main Task 2 [x] Subtask 2.1 [ ] Subtask 2.2",
-        "title": "4. Checklists with Nesting"
-      },
-      {
-        "child_ids": [],
-        "end_char": 1184,
-        "end_line": 68,
-        "id": "section_5-complex-mixed-lists-with-checklists",
-        "level": 2,
-        "parent_id": "section_markdown-nested-lists-and-checklists-test",
-        "raw_content": "## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n",
-        "slug": "5-complex-mixed-lists-with-checklists",
-        "start_char": 892,
-        "start_line": 56,
-        "text_content": "5. Complex Mixed Lists with Checklists\n\n[x] Completed Step [ ] Still pending subtask [x] Done subtask [ ] Inner numbered checklist item [x] Completed inner numbered checklist item [ ] Incomplete Step [ ] Needs review [ ] Needs implementation",
-        "title": "5. Complex Mixed Lists with Checklists"
-      }
-    ],
-    "tables": []
+    ]
   }
 }

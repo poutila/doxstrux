@@ -116,6 +116,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 28,
@@ -184,6 +185,7 @@
         "title": "Line breaks: hard vs soft"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

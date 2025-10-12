@@ -124,6 +124,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 26,
@@ -188,6 +189,7 @@
         ],
         "id": "table_0",
         "is_ragged": false,
+        "raw_content": "> | H | V |\n> |---|---|\n> | 1 | 2 |",
         "row_count": 1,
         "rows": [
           [
@@ -196,8 +198,10 @@
           ]
         ],
         "section_id": "section_test-tbl_in_blockquote",
-        "start_line": 2
+        "start_line": 2,
+        "table_valid_md": true
       }
-    ]
+    ],
+    "tasklists": []
   }
 }

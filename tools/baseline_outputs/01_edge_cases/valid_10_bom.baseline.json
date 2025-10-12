@@ -1,6 +1,10 @@
 {
   "content": {
     "lines": [
+      "\ufeff---",
+      "title: With BOM",
+      "",
+      "---",
       "",
       "",
       "# Content",
@@ -8,16 +12,16 @@
       "This is regular markdown content.",
       ""
     ],
-    "raw": "\n\n# Content\n\nThis is regular markdown content.\n"
+    "raw": "\ufeff---\ntitle: With BOM\n\n---\n\n\n# Content\n\nThis is regular markdown content.\n"
   },
   "mappings": {
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "2": "section_content",
-      "3": "section_content",
-      "4": "section_content",
-      "5": "section_content"
+      "6": "section_content",
+      "7": "section_content",
+      "8": "section_content",
+      "9": "section_content"
     },
     "line_to_type": {
       "0": "prose",
@@ -25,7 +29,11 @@
       "2": "prose",
       "3": "prose",
       "4": "prose",
-      "5": "prose"
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -33,24 +41,27 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8,
+      9
     ]
   },
   "metadata": {
-    "frontmatter": {
-      "title": "With BOM"
-    },
     "has_code": false,
-    "has_frontmatter": true,
+    "has_frontmatter": false,
     "has_lists": false,
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
       "heading": 1,
-      "inline": 2,
-      "paragraph": 1,
+      "hr": 1,
+      "inline": 3,
+      "paragraph": 2,
       "root": 1,
-      "text": 2
+      "softbreak": 1,
+      "text": 4
     },
     "security": {
       "profile_used": "moderate",
@@ -62,14 +73,14 @@
           "tel"
         ],
         "confusables_present": false,
-        "frontmatter_at_bof": true,
+        "frontmatter_at_bof": false,
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
         "has_html_inline": false,
         "has_script": false,
-        "invisible_chars": true,
         "link_schemes": {},
+        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
@@ -87,13 +98,13 @@
       "warnings": [
         {
           "line": null,
-          "message": "Document contains invisible/zero-width characters",
-          "type": "invisible_characters"
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
         }
       ]
     },
-    "total_chars": 47,
-    "total_lines": 6
+    "total_chars": 73,
+    "total_lines": 10
   },
   "structure": {
     "blockquotes": [],
@@ -102,15 +113,16 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
-        "end_char": 12,
+        "end_char": 38,
         "id": "heading_content",
         "level": 1,
-        "line": 2,
+        "line": 6,
         "parent_heading_id": null,
         "slug": "content",
-        "start_char": 2,
+        "start_char": 28,
         "text": "Content"
       }
     ],
@@ -121,13 +133,24 @@
     "lists": [],
     "paragraphs": [
       {
-        "end_line": 5,
+        "end_line": 2,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
         "id": "para_0",
+        "section_id": null,
+        "start_line": 0,
+        "text": "\ufeff---\ntitle: With BOM",
+        "word_count": 4
+      },
+      {
+        "end_line": 9,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
         "section_id": "section_content",
-        "start_line": 4,
+        "start_line": 8,
         "text": "This is regular markdown content.",
         "word_count": 5
       }
@@ -135,19 +158,20 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 47,
-        "end_line": 5,
+        "end_char": 73,
+        "end_line": 9,
         "id": "section_content",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Content\n\nThis is regular markdown content.\n",
         "slug": "content",
-        "start_char": 2,
-        "start_line": 2,
+        "start_char": 28,
+        "start_line": 6,
         "text_content": "Content\n\nThis is regular markdown content.",
         "title": "Content"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

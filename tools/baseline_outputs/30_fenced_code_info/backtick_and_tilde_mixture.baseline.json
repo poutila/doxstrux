@@ -13,29 +13,41 @@
     "raw": "~~~python\ntilde fence\n~~~\n\n```txt\nbacktick fence\n```\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 2,
+        "language": "python",
+        "start_line": 0
+      },
+      {
+        "end_line": 6,
+        "language": "txt",
+        "start_line": 4
+      }
+    ],
     "code_lines": [
       0,
       1,
       2,
-      3,
       4,
       5,
-      6,
-      7
+      6
     ],
     "line_to_section": {},
     "line_to_type": {
       "0": "code",
       "1": "code",
       "2": "code",
-      "3": "code",
+      "3": "prose",
       "4": "code",
       "5": "code",
       "6": "code",
-      "7": "code"
+      "7": "prose"
     },
-    "prose_lines": []
+    "prose_lines": [
+      3,
+      7
+    ]
   },
   "metadata": {
     "has_code": true,
@@ -109,6 +121,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [],
     "html_blocks": [],
     "html_inline": [],
@@ -117,6 +130,7 @@
     "lists": [],
     "paragraphs": [],
     "sections": [],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }

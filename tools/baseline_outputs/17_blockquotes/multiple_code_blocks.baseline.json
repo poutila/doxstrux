@@ -24,17 +24,26 @@
     "raw": "# Blockquote with multiple code blocks\n\n> First paragraph\n>\n> ```python\n> def first():\n>     pass\n> ```\n>\n> Middle paragraph\n>\n> ```javascript\n> function second() {}\n> ```\n>\n> Final paragraph\n\nNormal text.\n"
   },
   "mappings": {
-    "code_blocks": [],
+    "code_blocks": [
+      {
+        "end_line": 7,
+        "language": "python",
+        "start_line": 4
+      },
+      {
+        "end_line": 13,
+        "language": "javascript",
+        "start_line": 11
+      }
+    ],
     "code_lines": [
       4,
       5,
       6,
       7,
-      8,
       11,
       12,
-      13,
-      14
+      13
     ],
     "line_to_section": {
       "0": "section_blockquote-with-multiple-code-blocks",
@@ -64,7 +73,7 @@
       "11": "code",
       "12": "code",
       "13": "code",
-      "14": "code",
+      "14": "prose",
       "15": "prose",
       "16": "prose",
       "17": "prose",
@@ -75,7 +84,7 @@
       "5": "code",
       "6": "code",
       "7": "code",
-      "8": "code",
+      "8": "prose",
       "9": "prose"
     },
     "prose_lines": [
@@ -83,8 +92,10 @@
       1,
       2,
       3,
+      8,
       9,
       10,
+      14,
       15,
       16,
       17,
@@ -192,6 +203,7 @@
       "definitions": [],
       "references": []
     },
+    "frontmatter": null,
     "headings": [
       {
         "end_char": 39,
@@ -238,6 +250,7 @@
         "title": "Blockquote with multiple code blocks"
       }
     ],
-    "tables": []
+    "tables": [],
+    "tasklists": []
   }
 }
