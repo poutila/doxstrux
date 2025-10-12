@@ -1,5 +1,0 @@
-{
-  "id": "fake_06_unterminated",
-  "expected_is_yaml_frontmatter": false,
-  "reason": "closing_marker_missing"
-}

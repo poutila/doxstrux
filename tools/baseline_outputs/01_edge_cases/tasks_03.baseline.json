@@ -40,11 +40,6 @@
       20
     ],
     "line_to_section": {
-      "5": "section_refactored-tasks-03",
-      "6": "section_title",
-      "7": "section_title",
-      "8": "section_title",
-      "9": "section_sub",
       "10": "section_sub",
       "11": "section_sub",
       "12": "section_sub",
@@ -59,19 +54,16 @@
       "21": "section_sub",
       "22": "section_sub",
       "23": "section_sub",
-      "24": "section_sub"
+      "24": "section_sub",
+      "5": "section_refactored-tasks-03",
+      "6": "section_title",
+      "7": "section_title",
+      "8": "section_title",
+      "9": "section_sub"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -82,11 +74,19 @@
       "17": "code",
       "18": "code",
       "19": "code",
+      "2": "prose",
       "20": "code",
       "21": "prose",
       "22": "prose",
       "23": "prose",
-      "24": "prose"
+      "24": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -135,10 +135,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -217,6 +217,10 @@
         "type": "indented"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 100,

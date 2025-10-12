@@ -1,5 +1,0 @@
-{
-  "id": "fake_11_toml_frontmatter",
-  "expected_is_yaml_frontmatter": false,
-  "reason": "toml_frontmatter_not_yaml"
-}

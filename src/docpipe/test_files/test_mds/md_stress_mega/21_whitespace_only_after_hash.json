@@ -1,9 +1,0 @@
-{
-  "id": "21_whitespace_only_after_hash",
-  "note": "Only whitespace after #: invalid heading.",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
-}

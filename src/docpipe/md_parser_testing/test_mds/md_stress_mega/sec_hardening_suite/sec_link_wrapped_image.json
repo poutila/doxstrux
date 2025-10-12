@@ -1,6 +1,0 @@
-{
-  "category": "security",
-  "expected": {
-    "image_link_parity_required": true
-  }
-}

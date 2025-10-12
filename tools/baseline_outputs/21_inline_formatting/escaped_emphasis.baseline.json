@@ -28,14 +28,6 @@
     "line_to_section": {
       "0": "section_escaped-emphasis-characters",
       "1": "section_escaped-emphasis-characters",
-      "2": "section_escaped-emphasis-characters",
-      "3": "section_escaped-emphasis-characters",
-      "4": "section_escaped-emphasis-characters",
-      "5": "section_escaped-emphasis-characters",
-      "6": "section_escaped-emphasis-characters",
-      "7": "section_escaped-emphasis-characters",
-      "8": "section_escaped-emphasis-characters",
-      "9": "section_escaped-emphasis-characters",
       "10": "section_escaped-emphasis-characters",
       "11": "section_escaped-emphasis-characters",
       "12": "section_escaped-emphasis-characters",
@@ -43,19 +35,19 @@
       "14": "section_escaped-emphasis-characters",
       "15": "section_escaped-emphasis-characters",
       "16": "section_escaped-emphasis-characters",
-      "17": "section_escaped-emphasis-characters"
+      "17": "section_escaped-emphasis-characters",
+      "2": "section_escaped-emphasis-characters",
+      "3": "section_escaped-emphasis-characters",
+      "4": "section_escaped-emphasis-characters",
+      "5": "section_escaped-emphasis-characters",
+      "6": "section_escaped-emphasis-characters",
+      "7": "section_escaped-emphasis-characters",
+      "8": "section_escaped-emphasis-characters",
+      "9": "section_escaped-emphasis-characters"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -63,7 +55,15 @@
       "14": "prose",
       "15": "prose",
       "16": "prose",
-      "17": "prose"
+      "17": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -105,10 +105,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -140,6 +140,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 30,

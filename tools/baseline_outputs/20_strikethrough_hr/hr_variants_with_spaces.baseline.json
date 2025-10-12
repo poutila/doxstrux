@@ -34,14 +34,6 @@
     "line_to_section": {
       "0": "section_horizontal-rule-variants",
       "1": "section_horizontal-rule-variants",
-      "2": "section_horizontal-rule-variants",
-      "3": "section_horizontal-rule-variants",
-      "4": "section_horizontal-rule-variants",
-      "5": "section_horizontal-rule-variants",
-      "6": "section_horizontal-rule-variants",
-      "7": "section_horizontal-rule-variants",
-      "8": "section_horizontal-rule-variants",
-      "9": "section_horizontal-rule-variants",
       "10": "section_horizontal-rule-variants",
       "11": "section_horizontal-rule-variants",
       "12": "section_horizontal-rule-variants",
@@ -52,22 +44,22 @@
       "17": "section_horizontal-rule-variants",
       "18": "section_horizontal-rule-variants",
       "19": "section_horizontal-rule-variants",
+      "2": "section_horizontal-rule-variants",
       "20": "section_horizontal-rule-variants",
       "21": "section_horizontal-rule-variants",
       "22": "section_horizontal-rule-variants",
-      "23": "section_horizontal-rule-variants"
+      "23": "section_horizontal-rule-variants",
+      "3": "section_horizontal-rule-variants",
+      "4": "section_horizontal-rule-variants",
+      "5": "section_horizontal-rule-variants",
+      "6": "section_horizontal-rule-variants",
+      "7": "section_horizontal-rule-variants",
+      "8": "section_horizontal-rule-variants",
+      "9": "section_horizontal-rule-variants"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -78,10 +70,18 @@
       "17": "prose",
       "18": "prose",
       "19": "prose",
+      "2": "prose",
       "20": "prose",
       "21": "prose",
       "22": "prose",
-      "23": "prose"
+      "23": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -128,10 +128,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -163,6 +163,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 27,

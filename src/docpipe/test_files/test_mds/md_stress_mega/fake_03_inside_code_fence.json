@@ -1,5 +1,0 @@
-{
-  "id": "fake_03_inside_code_fence",
-  "expected_is_yaml_frontmatter": false,
-  "reason": "fence_inside_code_block"
-}

@@ -1,5 +1,0 @@
----   
-title: Trailing Spaces
----   
-
-# Content

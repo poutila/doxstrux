@@ -41,14 +41,6 @@
     ],
     "line_to_section": {
       "1": "section_refactored-admonitions-03",
-      "2": "section_refactored-admonitions-03",
-      "3": "section_refactored-admonitions-03",
-      "4": "section_refactored-admonitions-03",
-      "5": "section_refactored-admonitions-03",
-      "6": "section_refactored-admonitions-03",
-      "7": "section_refactored-admonitions-03",
-      "8": "section_refactored-admonitions-03",
-      "9": "section_refactored-admonitions-03",
       "10": "section_refactored-admonitions-03",
       "11": "section_refactored-admonitions-03",
       "12": "section_refactored-admonitions-03",
@@ -59,24 +51,24 @@
       "17": "section_refactored-admonitions-03",
       "18": "section_refactored-admonitions-03",
       "19": "section_refactored-admonitions-03",
+      "2": "section_refactored-admonitions-03",
       "20": "section_refactored-admonitions-03",
       "21": "section_refactored-admonitions-03",
       "22": "section_refactored-admonitions-03",
       "23": "section_refactored-admonitions-03",
       "24": "section_refactored-admonitions-03",
-      "25": "section_refactored-admonitions-03"
+      "25": "section_refactored-admonitions-03",
+      "3": "section_refactored-admonitions-03",
+      "4": "section_refactored-admonitions-03",
+      "5": "section_refactored-admonitions-03",
+      "6": "section_refactored-admonitions-03",
+      "7": "section_refactored-admonitions-03",
+      "8": "section_refactored-admonitions-03",
+      "9": "section_refactored-admonitions-03"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -87,12 +79,20 @@
       "17": "prose",
       "18": "code",
       "19": "code",
+      "2": "prose",
       "20": "code",
       "21": "code",
       "22": "code",
       "23": "prose",
       "24": "prose",
-      "25": "prose"
+      "25": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -142,10 +142,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -218,6 +218,10 @@
         "type": "fenced"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 118,

@@ -1,5 +1,0 @@
-{
-  "title": "JSON frontmatter"
-}
-
-# Content

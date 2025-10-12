@@ -24,6 +24,10 @@
     "line_to_section": {
       "0": "section_list-with-continuation-paragraphs",
       "1": "section_list-with-continuation-paragraphs",
+      "10": "section_list-with-continuation-paragraphs",
+      "11": "section_list-with-continuation-paragraphs",
+      "12": "section_list-with-continuation-paragraphs",
+      "13": "section_list-with-continuation-paragraphs",
       "2": "section_list-with-continuation-paragraphs",
       "3": "section_list-with-continuation-paragraphs",
       "4": "section_list-with-continuation-paragraphs",
@@ -31,15 +35,15 @@
       "6": "section_list-with-continuation-paragraphs",
       "7": "section_list-with-continuation-paragraphs",
       "8": "section_list-with-continuation-paragraphs",
-      "9": "section_list-with-continuation-paragraphs",
-      "10": "section_list-with-continuation-paragraphs",
-      "11": "section_list-with-continuation-paragraphs",
-      "12": "section_list-with-continuation-paragraphs",
-      "13": "section_list-with-continuation-paragraphs"
+      "9": "section_list-with-continuation-paragraphs"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -47,11 +51,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -89,10 +89,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -124,6 +124,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 36,

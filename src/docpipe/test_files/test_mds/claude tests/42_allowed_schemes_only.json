@@ -1,8 +1,0 @@
-{
-    "id": "42_allowed_schemes_only",
-    "note": "Allowed schemes should pass validation",
-    "prefix_lines": 2,
-    "expected_security_blocked": false,
-    "expected_disallowed_link_schemes": false,
-    "security_profile": "moderate"
-}

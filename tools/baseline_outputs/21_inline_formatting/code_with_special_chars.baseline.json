@@ -28,14 +28,6 @@
     "line_to_section": {
       "0": "section_inline-code-with-special-characters",
       "1": "section_inline-code-with-special-characters",
-      "2": "section_inline-code-with-special-characters",
-      "3": "section_inline-code-with-special-characters",
-      "4": "section_inline-code-with-special-characters",
-      "5": "section_inline-code-with-special-characters",
-      "6": "section_inline-code-with-special-characters",
-      "7": "section_inline-code-with-special-characters",
-      "8": "section_inline-code-with-special-characters",
-      "9": "section_inline-code-with-special-characters",
       "10": "section_inline-code-with-special-characters",
       "11": "section_inline-code-with-special-characters",
       "12": "section_inline-code-with-special-characters",
@@ -43,19 +35,19 @@
       "14": "section_inline-code-with-special-characters",
       "15": "section_inline-code-with-special-characters",
       "16": "section_inline-code-with-special-characters",
-      "17": "section_inline-code-with-special-characters"
+      "17": "section_inline-code-with-special-characters",
+      "2": "section_inline-code-with-special-characters",
+      "3": "section_inline-code-with-special-characters",
+      "4": "section_inline-code-with-special-characters",
+      "5": "section_inline-code-with-special-characters",
+      "6": "section_inline-code-with-special-characters",
+      "7": "section_inline-code-with-special-characters",
+      "8": "section_inline-code-with-special-characters",
+      "9": "section_inline-code-with-special-characters"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -63,7 +55,15 @@
       "14": "prose",
       "15": "prose",
       "16": "prose",
-      "17": "prose"
+      "17": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -104,10 +104,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -139,6 +139,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 38,

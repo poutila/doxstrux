@@ -41,11 +41,6 @@
       24
     ],
     "line_to_section": {
-      "5": "section_refactored-quotes-01",
-      "6": "section_refactored-quotes-01",
-      "7": "section_refactored-quotes-01",
-      "8": "section_refactored-quotes-01",
-      "9": "section_refactored-quotes-01",
       "10": "section_refactored-quotes-01",
       "11": "section_refactored-quotes-01",
       "12": "section_refactored-quotes-01",
@@ -63,19 +58,16 @@
       "24": "section_refactored-quotes-01",
       "25": "section_refactored-quotes-01",
       "26": "section_refactored-quotes-01",
-      "27": "section_refactored-quotes-01"
+      "27": "section_refactored-quotes-01",
+      "5": "section_refactored-quotes-01",
+      "6": "section_refactored-quotes-01",
+      "7": "section_refactored-quotes-01",
+      "8": "section_refactored-quotes-01",
+      "9": "section_refactored-quotes-01"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -86,6 +78,7 @@
       "17": "prose",
       "18": "prose",
       "19": "prose",
+      "2": "prose",
       "20": "prose",
       "21": "code",
       "22": "code",
@@ -93,7 +86,14 @@
       "24": "code",
       "25": "prose",
       "26": "prose",
-      "27": "prose"
+      "27": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -154,10 +154,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -259,6 +259,10 @@
         "type": "fenced"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 104,

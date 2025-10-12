@@ -1,9 +1,0 @@
-{
-  "category": "table",
-  "expected": {
-    "is_rectangular": true,
-    "ragged": false,
-    "align_mismatch": true,
-    "note": "Align row has 3 markers but 2 headers"
-  }
-}

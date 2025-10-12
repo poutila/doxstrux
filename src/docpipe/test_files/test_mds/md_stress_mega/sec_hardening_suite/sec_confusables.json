@@ -1,8 +1,0 @@
-{
-  "category": "security",
-  "expected": {
-    "confusables_present": true,
-    "nbsp_present": true,
-    "zwsp_present": true
-  }
-}

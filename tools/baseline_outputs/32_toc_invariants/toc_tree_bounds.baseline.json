@@ -25,6 +25,11 @@
     "line_to_section": {
       "0": "section_a",
       "1": "section_a",
+      "10": "section_b1-duplicate-id-check",
+      "11": "section_b1-duplicate-id-check",
+      "12": "section_b1-duplicate-id-check-2",
+      "13": "section_b1-duplicate-id-check-2",
+      "14": "section_b1-duplicate-id-check-2",
       "2": "section_a",
       "3": "section_a1",
       "4": "section_a1",
@@ -32,16 +37,16 @@
       "6": "section_a1a",
       "7": "section_a1a",
       "8": "section_a1a",
-      "9": "section_b1-duplicate-id-check",
-      "10": "section_b1-duplicate-id-check",
-      "11": "section_b1-duplicate-id-check",
-      "12": "section_b1-duplicate-id-check-2",
-      "13": "section_b1-duplicate-id-check-2",
-      "14": "section_b1-duplicate-id-check-2"
+      "9": "section_b1-duplicate-id-check"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -49,12 +54,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose",
-      "14": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -91,10 +91,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -126,6 +126,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 4,

@@ -22,6 +22,8 @@
     "line_to_section": {
       "0": "section_images-with-formatted-alt-text",
       "1": "section_images-with-formatted-alt-text",
+      "10": "section_images-with-formatted-alt-text",
+      "11": "section_images-with-formatted-alt-text",
       "2": "section_images-with-formatted-alt-text",
       "3": "section_images-with-formatted-alt-text",
       "4": "section_images-with-formatted-alt-text",
@@ -29,13 +31,13 @@
       "6": "section_images-with-formatted-alt-text",
       "7": "section_images-with-formatted-alt-text",
       "8": "section_images-with-formatted-alt-text",
-      "9": "section_images-with-formatted-alt-text",
-      "10": "section_images-with-formatted-alt-text",
-      "11": "section_images-with-formatted-alt-text"
+      "9": "section_images-with-formatted-alt-text"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -43,9 +45,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -83,10 +83,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -120,6 +120,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 33,

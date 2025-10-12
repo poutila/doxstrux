@@ -26,6 +26,12 @@
     "line_to_section": {
       "0": "section_deep-nested-blockquotes-5-levels",
       "1": "section_deep-nested-blockquotes-5-levels",
+      "10": "section_deep-nested-blockquotes-5-levels",
+      "11": "section_deep-nested-blockquotes-5-levels",
+      "12": "section_deep-nested-blockquotes-5-levels",
+      "13": "section_deep-nested-blockquotes-5-levels",
+      "14": "section_deep-nested-blockquotes-5-levels",
+      "15": "section_deep-nested-blockquotes-5-levels",
       "2": "section_deep-nested-blockquotes-5-levels",
       "3": "section_deep-nested-blockquotes-5-levels",
       "4": "section_deep-nested-blockquotes-5-levels",
@@ -33,17 +39,17 @@
       "6": "section_deep-nested-blockquotes-5-levels",
       "7": "section_deep-nested-blockquotes-5-levels",
       "8": "section_deep-nested-blockquotes-5-levels",
-      "9": "section_deep-nested-blockquotes-5-levels",
-      "10": "section_deep-nested-blockquotes-5-levels",
-      "11": "section_deep-nested-blockquotes-5-levels",
-      "12": "section_deep-nested-blockquotes-5-levels",
-      "13": "section_deep-nested-blockquotes-5-levels",
-      "14": "section_deep-nested-blockquotes-5-levels",
-      "15": "section_deep-nested-blockquotes-5-levels"
+      "9": "section_deep-nested-blockquotes-5-levels"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -51,13 +57,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose",
-      "14": "prose",
-      "15": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -96,10 +96,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -144,6 +144,10 @@
       }
     ],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 37,

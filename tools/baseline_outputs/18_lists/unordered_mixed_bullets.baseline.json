@@ -25,6 +25,9 @@
     "line_to_section": {
       "0": "section_unordered-lists-mixed-bullets",
       "1": "section_unordered-lists-mixed-bullets",
+      "10": "section_unordered-lists-mixed-bullets",
+      "11": "section_unordered-lists-mixed-bullets",
+      "12": "section_unordered-lists-mixed-bullets",
       "2": "section_unordered-lists-mixed-bullets",
       "3": "section_unordered-lists-mixed-bullets",
       "4": "section_unordered-lists-mixed-bullets",
@@ -32,14 +35,14 @@
       "6": "section_unordered-lists-mixed-bullets",
       "7": "section_unordered-lists-mixed-bullets",
       "8": "section_unordered-lists-mixed-bullets",
-      "9": "section_unordered-lists-mixed-bullets",
-      "10": "section_unordered-lists-mixed-bullets",
-      "11": "section_unordered-lists-mixed-bullets",
-      "12": "section_unordered-lists-mixed-bullets"
+      "9": "section_unordered-lists-mixed-bullets"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
       "2": "prose",
       "3": "prose",
       "4": "code",
@@ -47,10 +50,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -86,10 +86,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -131,6 +131,10 @@
         "type": "indented"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 34,

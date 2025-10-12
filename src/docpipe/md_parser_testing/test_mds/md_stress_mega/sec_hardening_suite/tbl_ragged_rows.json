@@ -1,9 +1,0 @@
-{
-  "category": "table",
-  "expected": {
-    "is_rectangular": false,
-    "ragged": true,
-    "align_mismatch": false,
-    "note": "Rows of differing widths"
-  }
-}

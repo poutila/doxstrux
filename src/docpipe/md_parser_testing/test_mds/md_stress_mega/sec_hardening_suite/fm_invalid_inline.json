@@ -1,7 +1,0 @@
-{
-  "category": "frontmatter",
-  "expected": {
-    "accepted": false,
-    "reason": "inline_triple_dash"
-  }
-}

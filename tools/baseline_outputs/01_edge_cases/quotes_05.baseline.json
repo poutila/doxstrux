@@ -38,14 +38,6 @@
     "line_to_section": {
       "0": "section_refactored-quotes-05",
       "1": "section_refactored-quotes-05",
-      "2": "section_refactored-quotes-05",
-      "3": "section_refactored-quotes-05",
-      "4": "section_refactored-quotes-05",
-      "5": "section_refactored-quotes-05",
-      "6": "section_refactored-quotes-05",
-      "7": "section_refactored-quotes-05",
-      "8": "section_refactored-quotes-05",
-      "9": "section_refactored-quotes-05",
       "10": "section_refactored-quotes-05",
       "11": "section_refactored-quotes-05",
       "12": "section_refactored-quotes-05",
@@ -56,21 +48,21 @@
       "17": "section_refactored-quotes-05",
       "18": "section_refactored-quotes-05",
       "19": "section_refactored-quotes-05",
+      "2": "section_refactored-quotes-05",
       "20": "section_refactored-quotes-05",
       "21": "section_refactored-quotes-05",
-      "22": "section_refactored-quotes-05"
+      "22": "section_refactored-quotes-05",
+      "3": "section_refactored-quotes-05",
+      "4": "section_refactored-quotes-05",
+      "5": "section_refactored-quotes-05",
+      "6": "section_refactored-quotes-05",
+      "7": "section_refactored-quotes-05",
+      "8": "section_refactored-quotes-05",
+      "9": "section_refactored-quotes-05"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -81,9 +73,17 @@
       "17": "code",
       "18": "code",
       "19": "code",
+      "2": "prose",
       "20": "prose",
       "21": "prose",
-      "22": "prose"
+      "22": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -143,10 +143,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": true,
@@ -248,6 +248,10 @@
         "type": "fenced"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 23,

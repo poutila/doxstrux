@@ -19,16 +19,17 @@
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
+      "10": "section_refactored-frontmatter-02",
       "5": "section_refactored-frontmatter-02",
       "6": "section_refactored-frontmatter-02",
       "7": "section_refactored-frontmatter-02",
       "8": "section_refactored-frontmatter-02",
-      "9": "section_refactored-frontmatter-02",
-      "10": "section_refactored-frontmatter-02"
+      "9": "section_refactored-frontmatter-02"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -36,8 +37,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -75,10 +75,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -141,6 +141,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 124,

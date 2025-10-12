@@ -1,5 +1,0 @@
-----
-title: Wrong Open
----
-
-# Content

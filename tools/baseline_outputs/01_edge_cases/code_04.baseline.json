@@ -39,14 +39,6 @@
     ],
     "line_to_section": {
       "1": "section_refactored-code-04",
-      "2": "section_title",
-      "3": "section_title",
-      "4": "section_title",
-      "5": "section_sub",
-      "6": "section_sub",
-      "7": "section_sub",
-      "8": "section_sub",
-      "9": "section_sub",
       "10": "section_sub",
       "11": "section_sub",
       "12": "section_sub",
@@ -57,19 +49,19 @@
       "17": "section_sub",
       "18": "section_sub",
       "19": "section_sub",
-      "20": "section_sub"
+      "2": "section_title",
+      "20": "section_sub",
+      "3": "section_title",
+      "4": "section_title",
+      "5": "section_sub",
+      "6": "section_sub",
+      "7": "section_sub",
+      "8": "section_sub",
+      "9": "section_sub"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "code",
       "10": "code",
       "11": "code",
       "12": "code",
@@ -80,7 +72,15 @@
       "17": "code",
       "18": "prose",
       "19": "prose",
-      "20": "prose"
+      "2": "prose",
+      "20": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "code"
     },
     "prose_lines": [
       0,
@@ -117,10 +117,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -171,6 +171,10 @@
         "type": "fenced"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 90,

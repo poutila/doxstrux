@@ -26,6 +26,12 @@
     "line_to_section": {
       "0": "section_triple-and-quadruple-markers",
       "1": "section_triple-and-quadruple-markers",
+      "10": "section_triple-and-quadruple-markers",
+      "11": "section_triple-and-quadruple-markers",
+      "12": "section_triple-and-quadruple-markers",
+      "13": "section_triple-and-quadruple-markers",
+      "14": "section_triple-and-quadruple-markers",
+      "15": "section_triple-and-quadruple-markers",
       "2": "section_triple-and-quadruple-markers",
       "3": "section_triple-and-quadruple-markers",
       "4": "section_triple-and-quadruple-markers",
@@ -33,17 +39,17 @@
       "6": "section_triple-and-quadruple-markers",
       "7": "section_triple-and-quadruple-markers",
       "8": "section_triple-and-quadruple-markers",
-      "9": "section_triple-and-quadruple-markers",
-      "10": "section_triple-and-quadruple-markers",
-      "11": "section_triple-and-quadruple-markers",
-      "12": "section_triple-and-quadruple-markers",
-      "13": "section_triple-and-quadruple-markers",
-      "14": "section_triple-and-quadruple-markers",
-      "15": "section_triple-and-quadruple-markers"
+      "9": "section_triple-and-quadruple-markers"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -51,13 +57,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose",
-      "14": "prose",
-      "15": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -97,10 +97,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -132,6 +132,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 31,

@@ -1,7 +1,0 @@
-{
-  "category": "frontmatter",
-  "expected": {
-    "accepted": false,
-    "reason": "fence_not_exact"
-  }
-}

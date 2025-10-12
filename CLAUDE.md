@@ -130,6 +130,34 @@ The `scripts/` directory contains several testing utilities:
 - `run_tests.py`: Test runner
 - `validate_all_test_files.py`: Validate test file structure
 
+### Baseline Regression Testing
+
+During refactoring (especially the zero-regex migration), parser output must remain **byte-for-byte identical** to frozen baselines to ensure no behavioral changes.
+
+**Baseline Testing Procedure**:
+1. **SSOT Test Pairs**: `tools/test_mds/` contains 542 markdown files with corresponding `.json` test specifications
+2. **Frozen Baselines**: `tools/baseline_outputs/` contains verified parser outputs (read-only, 542 `.baseline.json` files)
+3. **Verification**: Parser outputs are compared byte-by-byte against frozen baselines
+4. **Requirement**: 100% pass rate (542/542 tests) with identical output
+
+**Quick Commands**:
+```bash
+# Run parity tests (byte-by-byte comparison against baselines)
+python tools/baseline_test_runner.py --test-dir tools/test_mds --baseline-dir tools/baseline_outputs
+
+# Run feature count tests (validates parser extracts correct features)
+python tools/test_feature_counts.py --test-dir tools/test_mds
+
+# Quick subset test (fast iteration during development)
+bash tools/run_tests_fast.sh 01_edge_cases
+```
+
+**Baseline Policy**:
+- Baselines in `tools/baseline_outputs/` are **read-only** and **frozen**
+- Any parser output change triggers parity test failure
+- Baselines can only be regenerated when intentional parser improvements are verified
+- See `tools/README.md` for complete baseline testing documentation
+
 ## Important Patterns and Conventions
 
 ### Parser Initialization

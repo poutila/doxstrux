@@ -25,6 +25,11 @@
     "line_to_section": {
       "0": "section_refactored-footnotes-03",
       "1": "section_title",
+      "10": "section_sub",
+      "11": "section_sub",
+      "12": "section_sub",
+      "13": "section_sub",
+      "14": "section_sub",
       "2": "section_title",
       "3": "section_title",
       "4": "section_sub",
@@ -32,16 +37,16 @@
       "6": "section_sub",
       "7": "section_sub",
       "8": "section_sub",
-      "9": "section_sub",
-      "10": "section_sub",
-      "11": "section_sub",
-      "12": "section_sub",
-      "13": "section_sub",
-      "14": "section_sub"
+      "9": "section_sub"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -49,12 +54,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose",
-      "14": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -88,22 +88,26 @@
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "footnote": 1,
+      "footnote_anchor": 2,
+      "footnote_block": 1,
+      "footnote_ref": 2,
       "heading": 3,
       "inline": 6,
-      "link": 6,
+      "link": 3,
       "paragraph": 3,
       "root": 1,
-      "text": 16
+      "text": 13
     },
     "security": {
       "link_disallowed_schemes_raw": true,
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": true,
@@ -114,7 +118,7 @@
         "has_script": false,
         "link_schemes": {
           "https": 1,
-          "relative": 5
+          "relative": 2
         },
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -165,6 +169,34 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [
+        {
+          "byte_length": 17,
+          "content": "Second duplicate.",
+          "end_line": null,
+          "id": "d",
+          "label": "d",
+          "nested_structures": [],
+          "section_id": null,
+          "start_line": null
+        }
+      ],
+      "references": [
+        {
+          "id": "d",
+          "label": "d",
+          "line": null,
+          "section_id": null
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
     "headings": [
       {
         "end_char": 26,
@@ -203,30 +235,6 @@
     "links": [
       {
         "allowed": true,
-        "line": 8,
-        "scheme": null,
-        "text": "^d",
-        "type": "internal",
-        "url": "First."
-      },
-      {
-        "allowed": true,
-        "line": 8,
-        "scheme": null,
-        "text": "^d",
-        "type": "internal",
-        "url": "First."
-      },
-      {
-        "allowed": true,
-        "line": 11,
-        "scheme": null,
-        "text": "^d",
-        "type": "internal",
-        "url": "First."
-      },
-      {
-        "allowed": true,
         "line": 13,
         "scheme": null,
         "text": "cross3",
@@ -248,22 +256,11 @@
         "end_line": 9,
         "has_code": false,
         "has_emphasis": false,
-        "has_links": true,
+        "has_links": false,
         "id": "para_0",
         "section_id": "section_sub",
         "start_line": 8,
-        "text": "Refs^d and again^d.",
-        "word_count": 3
-      },
-      {
-        "end_line": 12,
-        "has_code": false,
-        "has_emphasis": false,
-        "has_links": true,
-        "id": "para_1",
-        "section_id": "section_sub",
-        "start_line": 11,
-        "text": "^d: Second duplicate.",
+        "text": "Refs and again.",
         "word_count": 3
       },
       {
@@ -271,11 +268,22 @@
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
-        "id": "para_2",
+        "id": "para_1",
         "section_id": "section_sub",
         "start_line": 13,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
         "word_count": 4
+      },
+      {
+        "end_line": 12,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_sub",
+        "start_line": 11,
+        "text": "Second duplicate.",
+        "word_count": 2
       }
     ],
     "sections": [
@@ -318,7 +326,7 @@
         "slug": "sub",
         "start_char": 39,
         "start_line": 4,
-        "text_content": "Sub\n\nRefs^d and again^d.\n\n^d: Second duplicate.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
+        "text_content": "Sub\n\nRefs and again.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4Second duplicate.",
         "title": "Sub"
       }
     ],

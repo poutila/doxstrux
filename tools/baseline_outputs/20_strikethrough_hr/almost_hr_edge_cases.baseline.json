@@ -28,14 +28,6 @@
     "line_to_section": {
       "0": "section_almost-hr-but-not-quite",
       "1": "section_almost-hr-but-not-quite",
-      "2": "section_almost-hr-but-not-quite",
-      "3": "section_almost-hr-but-not-quite",
-      "4": "section_almost-hr-but-not-quite",
-      "5": "section_almost-hr-but-not-quite",
-      "6": "section_almost-hr-but-not-quite",
-      "7": "section_almost-hr-but-not-quite",
-      "8": "section_almost-hr-but-not-quite",
-      "9": "section_almost-hr-but-not-quite",
       "10": "section_almost-hr-but-not-quite",
       "11": "section_almost-hr-but-not-quite",
       "12": "section_almost-hr-but-not-quite",
@@ -43,19 +35,19 @@
       "14": "section_almost-hr-but-not-quite",
       "15": "section_almost-hr-but-not-quite",
       "16": "section_almost-hr-but-not-quite",
-      "17": "section_almost-hr-but-not-quite"
+      "17": "section_almost-hr-but-not-quite",
+      "2": "section_almost-hr-but-not-quite",
+      "3": "section_almost-hr-but-not-quite",
+      "4": "section_almost-hr-but-not-quite",
+      "5": "section_almost-hr-but-not-quite",
+      "6": "section_almost-hr-but-not-quite",
+      "7": "section_almost-hr-but-not-quite",
+      "8": "section_almost-hr-but-not-quite",
+      "9": "section_almost-hr-but-not-quite"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -63,7 +55,15 @@
       "14": "prose",
       "15": "prose",
       "16": "prose",
-      "17": "prose"
+      "17": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -107,10 +107,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -142,6 +142,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 26,

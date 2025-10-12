@@ -44,14 +44,6 @@
     "line_to_section": {
       "0": "section_test-requirements-document",
       "1": "section_test-requirements-document",
-      "2": "section_section-1-basic-requirements",
-      "3": "section_section-1-basic-requirements",
-      "4": "section_section-1-basic-requirements",
-      "5": "section_section-1-basic-requirements",
-      "6": "section_section-1-basic-requirements",
-      "7": "section_section-1-basic-requirements",
-      "8": "section_section-1-basic-requirements",
-      "9": "section_section-2-requirements-in-lists",
       "10": "section_section-2-requirements-in-lists",
       "11": "section_section-2-requirements-in-lists",
       "12": "section_section-2-requirements-in-lists",
@@ -62,6 +54,7 @@
       "17": "section_section-3-mixed-content",
       "18": "section_section-3-mixed-content",
       "19": "section_section-3-mixed-content",
+      "2": "section_section-1-basic-requirements",
       "20": "section_nested-requirements",
       "21": "section_nested-requirements",
       "22": "section_nested-requirements",
@@ -72,22 +65,21 @@
       "27": "section_section-4-complex-requirements",
       "28": "section_section-4-complex-requirements",
       "29": "section_section-4-complex-requirements",
+      "3": "section_section-1-basic-requirements",
       "30": "section_section-4-complex-requirements",
       "31": "section_section-4-complex-requirements",
       "32": "section_section-4-complex-requirements",
-      "33": "section_section-4-complex-requirements"
+      "33": "section_section-4-complex-requirements",
+      "4": "section_section-1-basic-requirements",
+      "5": "section_section-1-basic-requirements",
+      "6": "section_section-1-basic-requirements",
+      "7": "section_section-1-basic-requirements",
+      "8": "section_section-1-basic-requirements",
+      "9": "section_section-2-requirements-in-lists"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -98,6 +90,7 @@
       "17": "prose",
       "18": "prose",
       "19": "prose",
+      "2": "prose",
       "20": "prose",
       "21": "prose",
       "22": "prose",
@@ -108,10 +101,17 @@
       "27": "prose",
       "28": "prose",
       "29": "prose",
+      "3": "prose",
       "30": "prose",
       "31": "prose",
       "32": "prose",
-      "33": "prose"
+      "33": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -171,10 +171,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -219,6 +219,10 @@
       }
     ],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 29,

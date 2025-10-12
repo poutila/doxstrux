@@ -25,6 +25,11 @@
     "line_to_section": {
       "0": "section_list-containing-blockquotes",
       "1": "section_list-containing-blockquotes",
+      "10": "section_list-containing-blockquotes",
+      "11": "section_list-containing-blockquotes",
+      "12": "section_list-containing-blockquotes",
+      "13": "section_list-containing-blockquotes",
+      "14": "section_list-containing-blockquotes",
       "2": "section_list-containing-blockquotes",
       "3": "section_list-containing-blockquotes",
       "4": "section_list-containing-blockquotes",
@@ -32,16 +37,16 @@
       "6": "section_list-containing-blockquotes",
       "7": "section_list-containing-blockquotes",
       "8": "section_list-containing-blockquotes",
-      "9": "section_list-containing-blockquotes",
-      "10": "section_list-containing-blockquotes",
-      "11": "section_list-containing-blockquotes",
-      "12": "section_list-containing-blockquotes",
-      "13": "section_list-containing-blockquotes",
-      "14": "section_list-containing-blockquotes"
+      "9": "section_list-containing-blockquotes"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -49,12 +54,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose",
-      "14": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -95,10 +95,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -155,6 +155,10 @@
       }
     ],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 30,

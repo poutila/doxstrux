@@ -1212,7 +1212,7 @@ class MarkdownParserCore:
             "statistics": {
                 "frontmatter_at_bof": False,
                 "ragged_tables_count": 0,
-                "allowed_schemes": list(self._ALLOWED_LINK_SCHEMES),
+                "allowed_schemes": sorted(list(self._ALLOWED_LINK_SCHEMES)),
                 "table_align_mismatches": 0,
                 "nested_headings_blocked": 0,
                 "has_html_block": False,
@@ -2966,10 +2966,10 @@ class MarkdownParserCore:
             for i in range(len(self.lines)):
                 if self._context.is_prose_line(i):
                     mappings["prose_lines"].append(i)
-                    mappings["line_to_type"][i] = "prose"
+                    mappings["line_to_type"][str(i)] = "prose"
                 else:
                     mappings["code_lines"].append(i)
-                    mappings["line_to_type"][i] = "code"
+                    mappings["line_to_type"][str(i)] = "code"
 
             # Expose contiguous code blocks with spans & language if available
             for blk in self._context.get_code_blocks():
@@ -2984,7 +2984,7 @@ class MarkdownParserCore:
             # Fallback: treat all lines as prose if ContentContext not available
             for i in range(len(self.lines)):
                 mappings["prose_lines"].append(i)
-                mappings["line_to_type"][i] = "prose"
+                mappings["line_to_type"][str(i)] = "prose"
 
         # Build section mappings directly to avoid circular dependency
         # Ensure sections are extracted (uses cache if available)
@@ -2993,7 +2993,7 @@ class MarkdownParserCore:
             if section["start_line"] is not None and section["end_line"] is not None:
                 for line_num in range(section["start_line"], section["end_line"] + 1):
                     if 0 <= line_num < len(self.lines):  # Bounds check
-                        mappings["line_to_section"][line_num] = section["id"]
+                        mappings["line_to_section"][str(line_num)] = section["id"]
 
         # Cache mappings for O(1) lookups in _find_section_id
         self._mappings_cache = mappings
@@ -3010,7 +3010,7 @@ class MarkdownParserCore:
                 if s is None or e is None:
                     continue
                 for ln in range(s, e + 1):
-                    mappings["line_to_type"][ln] = "code"
+                    mappings["line_to_type"][str(ln)] = "code"
                     if ln in mappings.get("prose_lines", []):
                         try:
                             mappings["prose_lines"].remove(ln)
@@ -3032,11 +3032,12 @@ class MarkdownParserCore:
                     continue
                 covered.update(range(s, e + 1))
             ctx_map = getattr(self._context, "context_map", {}) if self._context else {}
-            for ln, t in list(mappings["line_to_type"].items()):
+            for ln_str, t in list(mappings["line_to_type"].items()):
                 if t == "code":
+                    ln = int(ln_str)  # Convert string key back to int for context_map lookup
                     kind = ctx_map.get(ln)
                     if kind in ("fenced_code", "fence_marker") and ln not in covered:
-                        mappings["line_to_type"][ln] = "prose"
+                        mappings["line_to_type"][ln_str] = "prose"
                         if ln in mappings.get("code_lines", []):
                             try:
                                 mappings["code_lines"].remove(ln)
@@ -3591,7 +3592,7 @@ class MarkdownParserCore:
         """
         # Try to use cached line mappings first (O(1) lookup)
         if hasattr(self, "_mappings_cache") and self._mappings_cache:
-            section_id = self._mappings_cache.get("line_to_section", {}).get(line_number)
+            section_id = self._mappings_cache.get("line_to_section", {}).get(str(line_number))
             if section_id:
                 return section_id
 

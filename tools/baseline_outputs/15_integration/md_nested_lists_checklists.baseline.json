@@ -90,14 +90,6 @@
     "line_to_section": {
       "0": "section_markdown-nested-lists-and-checklists-test",
       "1": "section_markdown-nested-lists-and-checklists-test",
-      "2": "section_markdown-nested-lists-and-checklists-test",
-      "3": "section_markdown-nested-lists-and-checklists-test",
-      "4": "section_markdown-nested-lists-and-checklists-test",
-      "5": "section_markdown-nested-lists-and-checklists-test",
-      "6": "section_1-nested-unordered-lists",
-      "7": "section_1-nested-unordered-lists",
-      "8": "section_1-nested-unordered-lists",
-      "9": "section_1-nested-unordered-lists",
       "10": "section_1-nested-unordered-lists",
       "11": "section_1-nested-unordered-lists",
       "12": "section_1-nested-unordered-lists",
@@ -108,6 +100,7 @@
       "17": "section_1-nested-unordered-lists",
       "18": "section_2-nested-ordered-lists",
       "19": "section_2-nested-ordered-lists",
+      "2": "section_markdown-nested-lists-and-checklists-test",
       "20": "section_2-nested-ordered-lists",
       "21": "section_2-nested-ordered-lists",
       "22": "section_2-nested-ordered-lists",
@@ -118,6 +111,7 @@
       "27": "section_2-nested-ordered-lists",
       "28": "section_2-nested-ordered-lists",
       "29": "section_2-nested-ordered-lists",
+      "3": "section_markdown-nested-lists-and-checklists-test",
       "30": "section_3-mixed-unordered-and-ordered-lists",
       "31": "section_3-mixed-unordered-and-ordered-lists",
       "32": "section_3-mixed-unordered-and-ordered-lists",
@@ -128,6 +122,7 @@
       "37": "section_3-mixed-unordered-and-ordered-lists",
       "38": "section_3-mixed-unordered-and-ordered-lists",
       "39": "section_3-mixed-unordered-and-ordered-lists",
+      "4": "section_markdown-nested-lists-and-checklists-test",
       "40": "section_3-mixed-unordered-and-ordered-lists",
       "41": "section_3-mixed-unordered-and-ordered-lists",
       "42": "section_3-mixed-unordered-and-ordered-lists",
@@ -138,6 +133,7 @@
       "47": "section_4-checklists-with-nesting",
       "48": "section_4-checklists-with-nesting",
       "49": "section_4-checklists-with-nesting",
+      "5": "section_markdown-nested-lists-and-checklists-test",
       "50": "section_4-checklists-with-nesting",
       "51": "section_4-checklists-with-nesting",
       "52": "section_4-checklists-with-nesting",
@@ -148,6 +144,7 @@
       "57": "section_5-complex-mixed-lists-with-checklists",
       "58": "section_5-complex-mixed-lists-with-checklists",
       "59": "section_5-complex-mixed-lists-with-checklists",
+      "6": "section_1-nested-unordered-lists",
       "60": "section_5-complex-mixed-lists-with-checklists",
       "61": "section_5-complex-mixed-lists-with-checklists",
       "62": "section_5-complex-mixed-lists-with-checklists",
@@ -156,19 +153,14 @@
       "65": "section_5-complex-mixed-lists-with-checklists",
       "66": "section_5-complex-mixed-lists-with-checklists",
       "67": "section_5-complex-mixed-lists-with-checklists",
-      "68": "section_5-complex-mixed-lists-with-checklists"
+      "68": "section_5-complex-mixed-lists-with-checklists",
+      "7": "section_1-nested-unordered-lists",
+      "8": "section_1-nested-unordered-lists",
+      "9": "section_1-nested-unordered-lists"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "code",
       "11": "code",
       "12": "prose",
@@ -179,6 +171,7 @@
       "17": "prose",
       "18": "prose",
       "19": "prose",
+      "2": "prose",
       "20": "prose",
       "21": "prose",
       "22": "code",
@@ -189,6 +182,7 @@
       "27": "prose",
       "28": "prose",
       "29": "prose",
+      "3": "prose",
       "30": "prose",
       "31": "prose",
       "32": "prose",
@@ -199,6 +193,7 @@
       "37": "prose",
       "38": "prose",
       "39": "prose",
+      "4": "prose",
       "40": "prose",
       "41": "prose",
       "42": "prose",
@@ -209,6 +204,7 @@
       "47": "prose",
       "48": "code",
       "49": "code",
+      "5": "prose",
       "50": "prose",
       "51": "prose",
       "52": "prose",
@@ -219,6 +215,7 @@
       "57": "prose",
       "58": "prose",
       "59": "prose",
+      "6": "prose",
       "60": "prose",
       "61": "code",
       "62": "code",
@@ -227,7 +224,10 @@
       "65": "prose",
       "66": "prose",
       "67": "prose",
-      "68": "prose"
+      "68": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -313,10 +313,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -394,6 +394,10 @@
         "type": "indented"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 44,

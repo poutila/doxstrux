@@ -1,9 +1,0 @@
-{
-  "id": "valid_06_nested_mapping",
-  "expected_is_yaml_frontmatter": true,
-  "reason": "nested_mapping",
-  "expect_keys": [
-    "title",
-    "meta"
-  ]
-}

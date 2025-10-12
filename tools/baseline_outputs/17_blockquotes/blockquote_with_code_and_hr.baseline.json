@@ -27,6 +27,8 @@
     "line_to_section": {
       "0": "section_blockquote-with-code-and-hr",
       "1": "section_blockquote-with-code-and-hr",
+      "10": "section_blockquote-with-code-and-hr",
+      "11": "section_blockquote-with-code-and-hr",
       "2": "section_blockquote-with-code-and-hr",
       "3": "section_blockquote-with-code-and-hr",
       "4": "section_blockquote-with-code-and-hr",
@@ -34,13 +36,13 @@
       "6": "section_blockquote-with-code-and-hr",
       "7": "section_blockquote-with-code-and-hr",
       "8": "section_blockquote-with-code-and-hr",
-      "9": "section_blockquote-with-code-and-hr",
-      "10": "section_blockquote-with-code-and-hr",
-      "11": "section_blockquote-with-code-and-hr"
+      "9": "section_blockquote-with-code-and-hr"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
       "2": "prose",
       "3": "prose",
       "4": "code",
@@ -48,9 +50,7 @@
       "6": "code",
       "7": "code",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -83,10 +83,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -147,6 +147,10 @@
         "type": "fenced"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 30,

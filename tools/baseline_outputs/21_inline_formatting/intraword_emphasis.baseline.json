@@ -28,14 +28,6 @@
     "line_to_section": {
       "0": "section_intraword-emphasis",
       "1": "section_intraword-emphasis",
-      "2": "section_intraword-emphasis",
-      "3": "section_intraword-emphasis",
-      "4": "section_intraword-emphasis",
-      "5": "section_intraword-emphasis",
-      "6": "section_intraword-emphasis",
-      "7": "section_intraword-emphasis",
-      "8": "section_intraword-emphasis",
-      "9": "section_intraword-emphasis",
       "10": "section_intraword-emphasis",
       "11": "section_intraword-emphasis",
       "12": "section_intraword-emphasis",
@@ -43,19 +35,19 @@
       "14": "section_intraword-emphasis",
       "15": "section_intraword-emphasis",
       "16": "section_intraword-emphasis",
-      "17": "section_intraword-emphasis"
+      "17": "section_intraword-emphasis",
+      "2": "section_intraword-emphasis",
+      "3": "section_intraword-emphasis",
+      "4": "section_intraword-emphasis",
+      "5": "section_intraword-emphasis",
+      "6": "section_intraword-emphasis",
+      "7": "section_intraword-emphasis",
+      "8": "section_intraword-emphasis",
+      "9": "section_intraword-emphasis"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -63,7 +55,15 @@
       "14": "prose",
       "15": "prose",
       "16": "prose",
-      "17": "prose"
+      "17": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -105,10 +105,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -140,6 +140,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 21,

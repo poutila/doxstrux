@@ -21,18 +21,21 @@
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
+      "10": "section_refactored-footnotes-05",
+      "11": "section_refactored-footnotes-05",
+      "12": "section_refactored-footnotes-05",
       "5": "section_refactored-footnotes-05",
       "6": "section_refactored-footnotes-05",
       "7": "section_refactored-footnotes-05",
       "8": "section_refactored-footnotes-05",
-      "9": "section_refactored-footnotes-05",
-      "10": "section_refactored-footnotes-05",
-      "11": "section_refactored-footnotes-05",
-      "12": "section_refactored-footnotes-05"
+      "9": "section_refactored-footnotes-05"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -40,10 +43,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -70,10 +70,14 @@
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "footnote": 1,
+      "footnote_anchor": 1,
+      "footnote_block": 1,
+      "footnote_ref": 1,
       "heading": 1,
-      "inline": 4,
-      "link": 4,
-      "paragraph": 3,
+      "inline": 5,
+      "link": 3,
+      "paragraph": 4,
       "root": 1,
       "softbreak": 4,
       "text": 15
@@ -83,10 +87,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -97,7 +101,7 @@
         "has_script": false,
         "link_schemes": {
           "https": 1,
-          "relative": 3
+          "relative": 2
         },
         "nbsp_present": false,
         "nested_headings_blocked": 0,
@@ -148,6 +152,28 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [
+        {
+          "byte_length": 8,
+          "content": "Present.",
+          "end_line": null,
+          "id": "x",
+          "label": "x",
+          "nested_structures": [],
+          "section_id": null,
+          "start_line": null
+        }
+      ],
+      "references": [
+        {
+          "id": "x",
+          "label": "x",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
     "headings": [
       {
         "end_char": 116,
@@ -164,14 +190,6 @@
     "html_inline": [],
     "images": [],
     "links": [
-      {
-        "allowed": true,
-        "line": 7,
-        "scheme": null,
-        "text": "^x",
-        "type": "internal",
-        "url": "Present."
-      },
       {
         "allowed": true,
         "line": 11,
@@ -206,11 +224,11 @@
         "end_line": 8,
         "has_code": false,
         "has_emphasis": false,
-        "has_links": true,
+        "has_links": false,
         "id": "para_1",
         "section_id": "section_refactored-footnotes-05",
         "start_line": 7,
-        "text": "Refs^x and[^y], but only one.",
+        "text": "Refs and[^y], but only one.",
         "word_count": 5
       },
       {
@@ -223,6 +241,17 @@
         "start_line": 11,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
         "word_count": 4
+      },
+      {
+        "end_line": 10,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_3",
+        "section_id": "section_refactored-footnotes-05",
+        "start_line": 9,
+        "text": "Present.",
+        "word_count": 1
       }
     ],
     "sections": [
@@ -237,7 +266,7 @@
         "slug": "refactored-footnotes-05",
         "start_char": 90,
         "start_line": 5,
-        "text_content": "Refactored footnotes 05\n\nRefs^x and[^y], but only one.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
+        "text_content": "Refactored footnotes 05\n\nRefs and[^y], but only one.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4Present.",
         "title": "Refactored footnotes 05"
       }
     ],

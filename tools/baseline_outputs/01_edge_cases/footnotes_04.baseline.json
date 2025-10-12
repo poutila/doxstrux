@@ -60,22 +60,26 @@
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "footnote": 1,
+      "footnote_anchor": 1,
+      "footnote_block": 1,
+      "footnote_ref": 1,
       "heading": 1,
       "inline": 4,
       "link": 3,
       "paragraph": 3,
       "root": 1,
-      "text": 9
+      "text": 10
     },
     "security": {
       "link_disallowed_schemes_raw": true,
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": true,
@@ -137,6 +141,28 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [
+        {
+          "byte_length": 18,
+          "content": "A proper footnote.",
+          "end_line": null,
+          "id": "a",
+          "label": "a",
+          "nested_structures": [],
+          "section_id": null,
+          "start_line": null
+        }
+      ],
+      "references": [
+        {
+          "id": "a",
+          "label": "a",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
     "headings": [
       {
         "end_char": 26,
@@ -180,30 +206,30 @@
         "id": "para_0",
         "section_id": "section_refactored-footnotes-04",
         "start_line": 2,
-        "text": "Footnote ref here[^a].",
+        "text": "Footnote ref here.",
         "word_count": 3
-      },
-      {
-        "end_line": 5,
-        "has_code": false,
-        "has_emphasis": false,
-        "has_links": false,
-        "id": "para_1",
-        "section_id": "section_refactored-footnotes-04",
-        "start_line": 4,
-        "text": "[^a]: A proper footnote.",
-        "word_count": 4
       },
       {
         "end_line": 7,
         "has_code": false,
         "has_emphasis": false,
         "has_links": true,
-        "id": "para_2",
+        "id": "para_1",
         "section_id": "section_refactored-footnotes-04",
         "start_line": 6,
         "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
         "word_count": 4
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_2",
+        "section_id": "section_refactored-footnotes-04",
+        "start_line": 4,
+        "text": "A proper footnote.",
+        "word_count": 3
       }
     ],
     "sections": [
@@ -218,7 +244,7 @@
         "slug": "refactored-footnotes-04",
         "start_char": 0,
         "start_line": 0,
-        "text_content": "Refactored footnotes 04\n\nFootnote ref here[^a].\n\n[^a]: A proper footnote.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
+        "text_content": "Refactored footnotes 04\n\nFootnote ref here.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4A proper footnote.",
         "title": "Refactored footnotes 04"
       }
     ],

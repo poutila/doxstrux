@@ -25,6 +25,11 @@
     "line_to_section": {
       "0": "section_lists-with-blank-lines",
       "1": "section_lists-with-blank-lines",
+      "10": "section_lists-with-blank-lines",
+      "11": "section_lists-with-blank-lines",
+      "12": "section_lists-with-blank-lines",
+      "13": "section_lists-with-blank-lines",
+      "14": "section_lists-with-blank-lines",
       "2": "section_lists-with-blank-lines",
       "3": "section_lists-with-blank-lines",
       "4": "section_lists-with-blank-lines",
@@ -32,16 +37,16 @@
       "6": "section_lists-with-blank-lines",
       "7": "section_lists-with-blank-lines",
       "8": "section_lists-with-blank-lines",
-      "9": "section_lists-with-blank-lines",
-      "10": "section_lists-with-blank-lines",
-      "11": "section_lists-with-blank-lines",
-      "12": "section_lists-with-blank-lines",
-      "13": "section_lists-with-blank-lines",
-      "14": "section_lists-with-blank-lines"
+      "9": "section_lists-with-blank-lines"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -49,12 +54,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose",
-      "14": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -93,10 +93,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -128,6 +128,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 25,

@@ -1,9 +1,0 @@
-{
-  "id": "valid_08_anchors_aliases",
-  "expected_is_yaml_frontmatter": true,
-  "reason": "anchors_and_aliases",
-  "expect_keys": [
-    "defaults",
-    "use"
-  ]
-}

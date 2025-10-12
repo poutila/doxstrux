@@ -117,14 +117,6 @@
     "line_to_section": {
       "0": "section_markdown-test-document",
       "1": "section_markdown-test-document",
-      "2": "section_markdown-test-document",
-      "3": "section_markdown-test-document",
-      "4": "section_markdown-test-document",
-      "5": "section_markdown-test-document",
-      "6": "section_1-headings",
-      "7": "section_heading-1",
-      "8": "section_heading-2",
-      "9": "section_heading-3",
       "10": "section_heading-4",
       "11": "section_heading-5",
       "12": "section_heading-6",
@@ -135,6 +127,7 @@
       "17": "section_2-paragraphs-and-line-breaks",
       "18": "section_2-paragraphs-and-line-breaks",
       "19": "section_2-paragraphs-and-line-breaks",
+      "2": "section_markdown-test-document",
       "20": "section_2-paragraphs-and-line-breaks",
       "21": "section_2-paragraphs-and-line-breaks",
       "22": "section_3-lists",
@@ -145,6 +138,7 @@
       "27": "section_unordered-list",
       "28": "section_unordered-list",
       "29": "section_ordered-list",
+      "3": "section_markdown-test-document",
       "30": "section_ordered-list",
       "31": "section_ordered-list",
       "32": "section_ordered-list",
@@ -155,6 +149,7 @@
       "37": "section_task-list",
       "38": "section_task-list",
       "39": "section_task-list",
+      "4": "section_markdown-test-document",
       "40": "section_task-list",
       "41": "section_4-blockquotes",
       "42": "section_4-blockquotes",
@@ -165,6 +160,7 @@
       "47": "section_4-blockquotes",
       "48": "section_5-code-blocks-and-inline-code",
       "49": "section_5-code-blocks-and-inline-code",
+      "5": "section_markdown-test-document",
       "50": "section_5-code-blocks-and-inline-code",
       "51": "section_fenced-code-block",
       "52": "section_fenced-code-block",
@@ -175,6 +171,7 @@
       "57": "section_fenced-code-block",
       "58": "section_indented-code-block",
       "59": "section_indented-code-block",
+      "6": "section_1-headings",
       "60": "section_indented-code-block",
       "61": "section_indented-code-block",
       "62": "section_indented-code-block",
@@ -185,6 +182,7 @@
       "67": "section_6-links-and-images",
       "68": "section_6-links-and-images",
       "69": "section_6-links-and-images",
+      "7": "section_heading-1",
       "70": "section_6-links-and-images",
       "71": "section_7-tables",
       "72": "section_7-tables",
@@ -195,6 +193,7 @@
       "77": "section_7-tables",
       "78": "section_7-tables",
       "79": "section_8-horizontal-rules",
+      "8": "section_heading-2",
       "80": "section_8-horizontal-rules",
       "81": "section_8-horizontal-rules",
       "82": "section_8-horizontal-rules",
@@ -205,6 +204,7 @@
       "87": "section_9-html-in-markdown",
       "88": "section_9-html-in-markdown",
       "89": "section_9-html-in-markdown",
+      "9": "section_heading-3",
       "90": "section_9-html-in-markdown",
       "91": "section_10-footnotes",
       "92": "section_10-footnotes",
@@ -216,14 +216,6 @@
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -234,6 +226,7 @@
       "17": "prose",
       "18": "prose",
       "19": "prose",
+      "2": "prose",
       "20": "prose",
       "21": "prose",
       "22": "prose",
@@ -244,6 +237,7 @@
       "27": "prose",
       "28": "prose",
       "29": "prose",
+      "3": "prose",
       "30": "prose",
       "31": "prose",
       "32": "prose",
@@ -254,6 +248,7 @@
       "37": "prose",
       "38": "prose",
       "39": "prose",
+      "4": "prose",
       "40": "prose",
       "41": "prose",
       "42": "prose",
@@ -264,6 +259,7 @@
       "47": "prose",
       "48": "prose",
       "49": "prose",
+      "5": "prose",
       "50": "prose",
       "51": "prose",
       "52": "code",
@@ -274,6 +270,7 @@
       "57": "code",
       "58": "prose",
       "59": "code",
+      "6": "prose",
       "60": "code",
       "61": "code",
       "62": "prose",
@@ -284,6 +281,7 @@
       "67": "prose",
       "68": "prose",
       "69": "prose",
+      "7": "prose",
       "70": "prose",
       "71": "prose",
       "72": "prose",
@@ -294,6 +292,7 @@
       "77": "prose",
       "78": "prose",
       "79": "prose",
+      "8": "prose",
       "80": "prose",
       "81": "prose",
       "82": "prose",
@@ -304,6 +303,7 @@
       "87": "prose",
       "88": "prose",
       "89": "prose",
+      "9": "prose",
       "90": "prose",
       "91": "prose",
       "92": "prose",
@@ -416,6 +416,10 @@
       "code_inline": 1,
       "em": 2,
       "fence": 1,
+      "footnote": 1,
+      "footnote_anchor": 1,
+      "footnote_block": 1,
+      "footnote_ref": 1,
       "hardbreak": 1,
       "heading": 22,
       "hr": 13,
@@ -440,10 +444,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -533,6 +537,28 @@
         "type": "indented"
       }
     ],
+    "footnotes": {
+      "definitions": [
+        {
+          "byte_length": 26,
+          "content": "This is the footnote text.",
+          "end_line": null,
+          "id": "1",
+          "label": "1",
+          "nested_structures": [],
+          "section_id": null,
+          "start_line": null
+        }
+      ],
+      "references": [
+        {
+          "id": "1",
+          "label": "1",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
     "headings": [
       {
         "end_char": 25,
@@ -958,7 +984,7 @@
         "id": "para_5",
         "section_id": "section_heading-1",
         "start_line": 92,
-        "text": "Here is a statement with a footnote.[^1]",
+        "text": "Here is a statement with a footnote.",
         "word_count": 7
       },
       {
@@ -969,8 +995,8 @@
         "id": "para_6",
         "section_id": "section_heading-1",
         "start_line": 94,
-        "text": "[^1]: This is the footnote text.",
-        "word_count": 6
+        "text": "This is the footnote text.",
+        "word_count": 5
       }
     ],
     "sections": [
@@ -1026,7 +1052,7 @@
         "slug": "heading-1",
         "start_char": 118,
         "start_line": 7,
-        "text_content": "Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6\n\n2. Paragraphs and Line Breaks This is a normal paragraph with italic, bold, and bold italic text.\nThis is the next line in the same paragraph with a manual line break.\n\n3. Lists Unordered List Item 1 Item 2 Subitem 2.1 Subitem 2.2\n\nOrdered List First Second Second - subitem 1 Second - subitem 2\n\nTask List [ ] Incomplete task [x] Completed task\n\n4. Blockquotes This is a blockquote.\n\nIt can span multiple lines and paragraphs.\n\n5. Code Blocks and Inline Code Inline code: print(\"Hello World\")\n\nFenced Code Block\n\nIndented Code Block\n\n6. Links and Images OpenAI\n\n7. Tables Column 1Column 2Column 3\n\nRow 1DataMore Data Row 2DataMore Data\n\n8. Horizontal Rules\n\n9. HTML in Markdown\n\n10. Footnotes Here is a statement with a footnote.[^1]\n\n[^1]: This is the footnote text.",
+        "text_content": "Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6\n\n2. Paragraphs and Line Breaks This is a normal paragraph with italic, bold, and bold italic text.\nThis is the next line in the same paragraph with a manual line break.\n\n3. Lists Unordered List Item 1 Item 2 Subitem 2.1 Subitem 2.2\n\nOrdered List First Second Second - subitem 1 Second - subitem 2\n\nTask List [ ] Incomplete task [x] Completed task\n\n4. Blockquotes This is a blockquote.\n\nIt can span multiple lines and paragraphs.\n\n5. Code Blocks and Inline Code Inline code: print(\"Hello World\")\n\nFenced Code Block\n\nIndented Code Block\n\n6. Links and Images OpenAI\n\n7. Tables Column 1Column 2Column 3\n\nRow 1DataMore Data Row 2DataMore Data\n\n8. Horizontal Rules\n\n9. HTML in Markdown\n\n10. Footnotes Here is a statement with a footnote.\n\nThis is the footnote text.",
         "title": "Heading 1"
       },
       {
@@ -1307,7 +1333,7 @@
         "slug": "10-footnotes",
         "start_char": 1399,
         "start_line": 91,
-        "text_content": "10. Footnotes Here is a statement with a footnote.[^1]\n\n[^1]: This is the footnote text.",
+        "text_content": "10. Footnotes Here is a statement with a footnote.\n\nThis is the footnote text.",
         "title": "10. Footnotes"
       }
     ],

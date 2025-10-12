@@ -36,14 +36,6 @@
     "code_lines": [],
     "line_to_section": {
       "1": "section_refactored-tables-05",
-      "2": "section_title",
-      "3": "section_title",
-      "4": "section_title",
-      "5": "section_sub",
-      "6": "section_sub",
-      "7": "section_sub",
-      "8": "section_sub",
-      "9": "section_sub",
       "10": "section_sub",
       "11": "section_sub",
       "12": "section_sub",
@@ -54,25 +46,25 @@
       "17": "section_sub",
       "18": "section_sub",
       "19": "section_sub",
+      "2": "section_title",
       "20": "section_sub",
       "21": "section_sub",
       "22": "section_sub",
       "23": "section_sub",
       "24": "section_sub",
       "25": "section_sub",
-      "26": "section_sub"
+      "26": "section_sub",
+      "3": "section_title",
+      "4": "section_title",
+      "5": "section_sub",
+      "6": "section_sub",
+      "7": "section_sub",
+      "8": "section_sub",
+      "9": "section_sub"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -83,13 +75,21 @@
       "17": "prose",
       "18": "prose",
       "19": "prose",
+      "2": "prose",
       "20": "prose",
       "21": "prose",
       "22": "prose",
       "23": "prose",
       "24": "prose",
       "25": "prose",
-      "26": "prose"
+      "26": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -152,10 +152,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -223,6 +223,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 98,

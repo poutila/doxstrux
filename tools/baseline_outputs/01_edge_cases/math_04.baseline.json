@@ -25,22 +25,29 @@
     "code_blocks": [],
     "code_lines": [],
     "line_to_section": {
-      "5": "section_refactored-math-04",
-      "6": "section_refactored-math-04",
-      "7": "section_refactored-math-04",
-      "8": "section_refactored-math-04",
-      "9": "section_refactored-math-04",
       "10": "section_refactored-math-04",
       "11": "section_refactored-math-04",
       "12": "section_refactored-math-04",
       "13": "section_refactored-math-04",
       "14": "section_refactored-math-04",
       "15": "section_refactored-math-04",
-      "16": "section_refactored-math-04"
+      "16": "section_refactored-math-04",
+      "5": "section_refactored-math-04",
+      "6": "section_refactored-math-04",
+      "7": "section_refactored-math-04",
+      "8": "section_refactored-math-04",
+      "9": "section_refactored-math-04"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -48,14 +55,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose",
-      "14": "prose",
-      "15": "prose",
-      "16": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -99,10 +99,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -165,6 +165,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 96,

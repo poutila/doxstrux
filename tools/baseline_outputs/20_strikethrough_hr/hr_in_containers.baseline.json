@@ -30,14 +30,6 @@
     "line_to_section": {
       "0": "section_hr-in-blockquotes-and-lists",
       "1": "section_hr-in-blockquotes-and-lists",
-      "2": "section_hr-in-blockquotes-and-lists",
-      "3": "section_hr-in-blockquotes-and-lists",
-      "4": "section_hr-in-blockquotes-and-lists",
-      "5": "section_hr-in-blockquotes-and-lists",
-      "6": "section_hr-in-blockquotes-and-lists",
-      "7": "section_hr-in-blockquotes-and-lists",
-      "8": "section_hr-in-blockquotes-and-lists",
-      "9": "section_hr-in-blockquotes-and-lists",
       "10": "section_hr-in-blockquotes-and-lists",
       "11": "section_hr-in-blockquotes-and-lists",
       "12": "section_hr-in-blockquotes-and-lists",
@@ -47,19 +39,19 @@
       "16": "section_hr-in-blockquotes-and-lists",
       "17": "section_hr-in-blockquotes-and-lists",
       "18": "section_hr-in-blockquotes-and-lists",
-      "19": "section_hr-in-blockquotes-and-lists"
+      "19": "section_hr-in-blockquotes-and-lists",
+      "2": "section_hr-in-blockquotes-and-lists",
+      "3": "section_hr-in-blockquotes-and-lists",
+      "4": "section_hr-in-blockquotes-and-lists",
+      "5": "section_hr-in-blockquotes-and-lists",
+      "6": "section_hr-in-blockquotes-and-lists",
+      "7": "section_hr-in-blockquotes-and-lists",
+      "8": "section_hr-in-blockquotes-and-lists",
+      "9": "section_hr-in-blockquotes-and-lists"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -69,7 +61,15 @@
       "16": "prose",
       "17": "prose",
       "18": "prose",
-      "19": "prose"
+      "19": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -115,10 +115,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -163,6 +163,10 @@
       }
     ],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 30,

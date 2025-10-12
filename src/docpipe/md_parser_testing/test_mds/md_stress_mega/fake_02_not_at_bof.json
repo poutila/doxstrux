@@ -1,5 +1,0 @@
-{
-  "id": "fake_02_not_at_bof",
-  "expected_is_yaml_frontmatter": false,
-  "reason": "not_at_start_of_file"
-}

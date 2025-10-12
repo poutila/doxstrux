@@ -44,11 +44,6 @@
       26
     ],
     "line_to_section": {
-      "5": "section_refactored-admonitions-02",
-      "6": "section_refactored-admonitions-02",
-      "7": "section_refactored-admonitions-02",
-      "8": "section_refactored-admonitions-02",
-      "9": "section_refactored-admonitions-02",
       "10": "section_refactored-admonitions-02",
       "11": "section_refactored-admonitions-02",
       "12": "section_refactored-admonitions-02",
@@ -68,19 +63,16 @@
       "26": "section_refactored-admonitions-02",
       "27": "section_refactored-admonitions-02",
       "28": "section_refactored-admonitions-02",
-      "29": "section_refactored-admonitions-02"
+      "29": "section_refactored-admonitions-02",
+      "5": "section_refactored-admonitions-02",
+      "6": "section_refactored-admonitions-02",
+      "7": "section_refactored-admonitions-02",
+      "8": "section_refactored-admonitions-02",
+      "9": "section_refactored-admonitions-02"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
-      "2": "prose",
-      "3": "prose",
-      "4": "prose",
-      "5": "prose",
-      "6": "prose",
-      "7": "prose",
-      "8": "prose",
-      "9": "prose",
       "10": "prose",
       "11": "prose",
       "12": "prose",
@@ -91,6 +83,7 @@
       "17": "prose",
       "18": "prose",
       "19": "prose",
+      "2": "prose",
       "20": "prose",
       "21": "prose",
       "22": "code",
@@ -100,7 +93,14 @@
       "26": "code",
       "27": "prose",
       "28": "prose",
-      "29": "prose"
+      "29": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -154,10 +154,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -230,6 +230,10 @@
         "type": "fenced"
       }
     ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 124,

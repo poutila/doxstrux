@@ -1,9 +1,0 @@
-{
-  "id": "01_hash_in_code_fence",
-  "note": "Hashes inside fences must not become headings.",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
-}

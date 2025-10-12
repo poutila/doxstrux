@@ -1,3 +1,0 @@
----
-
-# Heading after horizontal rule

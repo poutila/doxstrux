@@ -24,6 +24,10 @@
     "line_to_section": {
       "0": "section_task-with-continuation-paragraph",
       "1": "section_task-with-continuation-paragraph",
+      "10": "section_task-with-continuation-paragraph",
+      "11": "section_task-with-continuation-paragraph",
+      "12": "section_task-with-continuation-paragraph",
+      "13": "section_task-with-continuation-paragraph",
       "2": "section_task-with-continuation-paragraph",
       "3": "section_task-with-continuation-paragraph",
       "4": "section_task-with-continuation-paragraph",
@@ -31,15 +35,15 @@
       "6": "section_task-with-continuation-paragraph",
       "7": "section_task-with-continuation-paragraph",
       "8": "section_task-with-continuation-paragraph",
-      "9": "section_task-with-continuation-paragraph",
-      "10": "section_task-with-continuation-paragraph",
-      "11": "section_task-with-continuation-paragraph",
-      "12": "section_task-with-continuation-paragraph",
-      "13": "section_task-with-continuation-paragraph"
+      "9": "section_task-with-continuation-paragraph"
     },
     "line_to_type": {
       "0": "prose",
       "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
       "2": "prose",
       "3": "prose",
       "4": "prose",
@@ -47,11 +51,7 @@
       "6": "prose",
       "7": "prose",
       "8": "prose",
-      "9": "prose",
-      "10": "prose",
-      "11": "prose",
-      "12": "prose",
-      "13": "prose"
+      "9": "prose"
     },
     "prose_lines": [
       0,
@@ -89,10 +89,10 @@
       "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "mailto",
-          "tel",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "confusables_present": false,
         "frontmatter_at_bof": false,
@@ -124,6 +124,10 @@
   "structure": {
     "blockquotes": [],
     "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "headings": [
       {
         "end_char": 35,

@@ -1,9 +1,0 @@
-{
-  "id": "05_missing_space_after_hash",
-  "note": "No space after #: not a heading under CommonMark.",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
-}

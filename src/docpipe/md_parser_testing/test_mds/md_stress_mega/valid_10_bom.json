@@ -1,8 +1,0 @@
-{
-  "id": "valid_10_bom",
-  "expected_is_yaml_frontmatter": true,
-  "reason": "bom_then_yaml_frontmatter",
-  "expect_keys": [
-    "title"
-  ]
-}

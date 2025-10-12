@@ -17,6 +17,7 @@ import time
 from pathlib import Path
 from typing import Any
 from collections import defaultdict
+from datetime import date, datetime
 import traceback
 
 # Add src to path
@@ -25,9 +26,17 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from docpipe.markdown_parser_core import MarkdownParserCore
 
 
+class DateTimeEncoder(json.JSONEncoder):
+    """JSON encoder that handles datetime and date objects."""
+    def default(self, obj):
+        if isinstance(obj, (date, datetime)):
+            return obj.isoformat()
+        return super().default(obj)
+
+
 def normalize_json(data: Any) -> str:
     """Normalize JSON for comparison."""
-    return json.dumps(data, sort_keys=True, indent=2)
+    return json.dumps(data, sort_keys=True, indent=2, cls=DateTimeEncoder)
 
 
 def compare_outputs(expected: dict, actual: dict) -> tuple[bool, list[str]]:
@@ -102,21 +111,29 @@ def run_test_pair(md_file: Path, json_file: Path, security_profile: str = "moder
     return result
 
 
-def find_test_pairs(test_dir: Path) -> list[tuple[Path, Path]]:
-    """Find all .md/.json test pairs in the test directory."""
+def find_test_pairs(test_dir: Path, baseline_dir: Path) -> list[tuple[Path, Path, Path]]:
+    """Find all .md files with corresponding baseline files.
+
+    Returns:
+        List of (md_file, baseline_file, relative_path) tuples
+    """
     pairs = []
 
     for md_file in sorted(test_dir.rglob("*.md")):
-        json_file = md_file.with_suffix(".json")
-        if json_file.exists():
-            pairs.append((md_file, json_file))
+        # Get relative path from test_dir
+        rel_path = md_file.relative_to(test_dir)
+        # Find corresponding baseline
+        baseline_file = baseline_dir / rel_path.parent / (rel_path.stem + ".baseline.json")
+
+        if baseline_file.exists():
+            pairs.append((md_file, baseline_file, rel_path))
 
     return pairs
 
 
-def run_all_tests(test_dir: Path, security_profile: str = "moderate", verbose: bool = False) -> dict:
+def run_all_tests(test_dir: Path, baseline_dir: Path, security_profile: str = "moderate", verbose: bool = False) -> dict:
     """Run all tests and return summary."""
-    pairs = find_test_pairs(test_dir)
+    pairs = find_test_pairs(test_dir, baseline_dir)
 
     print(f"Found {len(pairs)} test pairs")
     print(f"Security profile: {security_profile}")
@@ -128,13 +145,13 @@ def run_all_tests(test_dir: Path, security_profile: str = "moderate", verbose: b
 
     total_time = 0
 
-    for i, (md_file, json_file) in enumerate(pairs, 1):
+    for i, (md_file, baseline_file, rel_path) in enumerate(pairs, 1):
         category = md_file.parent.name
 
         if verbose or i % 50 == 0:
             print(f"[{i}/{len(pairs)}] Testing {md_file.name}...", end="\r")
 
-        result = run_test_pair(md_file, json_file, security_profile)
+        result = run_test_pair(md_file, baseline_file, security_profile)
         results.append(result)
         by_category[category].append(result)
         total_time += result["parse_time_ms"]
@@ -242,17 +259,27 @@ def main():
         default=Path(__file__).parent / "test_mds",
         help="Test directory (default: tools/test_mds)",
     )
+    parser.add_argument(
+        "--baseline-dir",
+        type=Path,
+        default=Path(__file__).parent / "baseline_outputs",
+        help="Baseline directory (default: tools/baseline_outputs)",
+    )
 
     args = parser.parse_args()
 
-    # Ensure test directory exists
+    # Ensure directories exist
     if not args.test_dir.exists():
         print(f"Error: Test directory not found: {args.test_dir}", file=sys.stderr)
         sys.exit(1)
 
+    if not args.baseline_dir.exists():
+        print(f"Error: Baseline directory not found: {args.baseline_dir}", file=sys.stderr)
+        sys.exit(1)
+
     # Run tests
     start_time = time.time()
-    summary = run_all_tests(args.test_dir, args.profile, args.verbose)
+    summary = run_all_tests(args.test_dir, args.baseline_dir, args.profile, args.verbose)
     elapsed = time.time() - start_time
 
     summary["elapsed_seconds"] = round(elapsed, 2)
