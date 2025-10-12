@@ -2135,6 +2135,587 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 
 ---
 
+## Phase 7: Modular Architecture
+
+**Goal**: Split monolithic parser into focused modules
+**Time**: 45-58 hours (6-7 working days)
+**Status**: ⏸️ Blocked until Phase 6 complete
+**Unlock Requirement**: `.phase-6.complete.json` must exist and be valid
+**References**: User architectural guidance (façade + IR boundary)
+
+**Design Principles:**
+- Mechanical code movement (cut/paste, minimal rewrite)
+- Single-direction dependencies (exceptions ← config ← utils ← extractors ← ir ← core)
+- Backward-compatible façade (preserve public API)
+- Document IR as boundary between parser and chunker
+- **Absolute imports only** (`from doxstrux.markdown.X import Y`, never relative imports)
+
+**Target Structure:**
+```
+src/doxstrux/markdown/
+  core.py                 # <200 lines - orchestrator
+  config.py               # Security profiles, patterns
+  budgets.py              # Node/cell/URI limits
+  extractors/             # _extract_* → extract()
+    sections.py
+    paragraphs.py
+    lists.py
+    codeblocks.py
+    tables.py
+    media.py
+    links.py
+    footnotes.py
+    blockquotes.py
+    html.py
+  security/
+    validators.py         # Moved from ../
+    policies.py           # _apply_security_policy
+    unicode.py            # BiDi, confusables
+  utils/
+    token_utils.py        # Moved from ../token_replacement_lib.py
+    line_utils.py         # Line slicing
+    text_utils.py         # Text extraction
+  ir.py                   # Moved from ../document_ir.py
+  exceptions.py           # Moved from ../exceptions.py
+  normalize.py            # Whitespace, NFC, URL redaction
+  serialize.py            # to_dict(), to_json()
+```
+
+---
+
+### Task 7.0: Phase 7 Unlock Verification
+
+**Time**: 5 minutes
+**Files**: `.phase-6.complete.json`
+
+**Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
+**⚠️ All steps must be checked! Do not skip any step.**
+
+- [ ] Verify `.phase-6.complete.json` exists
+- [ ] Validate schema version 1.0
+- [ ] Confirm baseline_pass_count matches corpus count
+- [ ] Check all CI gates passed (G1-G5)
+- [ ] Verify git_commit and git_tag present
+
+**Acceptance Criteria**:
+- [ ] Phase 6 artifact valid
+- [ ] All validations pass
+- [ ] Ready to proceed to Task 7.0.5
+
+---
+
+### Task 7.0.5: Package Rename (docpipe → doxstrux) + PyPI Preparation
+
+**Time**: 2-3 hours
+**Files**: `pyproject.toml`, `src/docpipe/` → `src/doxstrux/`, all source files
+
+**Rationale**: Rename before modularization so all new modules use correct name.
+"doxstrux" = documents + structure (extensible to PDF, HTML, DOCX in future).
+
+**Steps**:
+- [ ] **Pre-rename validation**:
+  - [ ] Run full test suite: `pytest` (verify 63/63 pass)
+  - [ ] Run baseline tests (verify 542/542 pass)
+  - [ ] Commit current state: `git add . && git commit -m "Pre-rename checkpoint"`
+
+- [ ] **Rename source directory**:
+  - [ ] `git mv src/docpipe src/doxstrux`
+
+- [ ] **Update pyproject.toml**:
+  - [ ] Change `name = "docpipe"` → `name = "doxstrux"`
+  - [ ] Update `project.scripts`: `doxstrux = "doxstrux.cli:main"`
+  - [ ] Update all URLs (Homepage, Repository, Issues, etc.) to reflect new name
+  - [ ] Update `description` to mention structure extraction
+  - [ ] Update keywords: add "structure-extraction", "document-parsing"
+  - [ ] Update `[tool.setuptools.packages.find]`: `include = ["doxstrux*"]`
+  - [ ] Update `[tool.setuptools.package-data]`: `"doxstrux" = [...]`
+  - [ ] Update `[tool.coverage.run]`: `source = ["doxstrux"]`
+  - [ ] Update `[tool.ruff.lint.isort]`: `known-first-party = ["doxstrux"]`
+  - [ ] Update `[tool.uv.sources]`: `doxstrux = { workspace = true }`
+  - [ ] Update `[dependency-groups]`: change `"docpipe"` → `"doxstrux"`
+
+- [ ] **Update imports in all source files**:
+  - [ ] Find all: `rg "from docpipe" src/`
+  - [ ] Replace: `from docpipe.` → `from doxstrux.`
+  - [ ] Find all: `import docpipe`
+  - [ ] Replace: `import docpipe` → `import doxstrux`
+
+- [ ] **Update imports in test files**:
+  - [ ] Find all: `rg "from docpipe" tests/`
+  - [ ] Replace: `from docpipe.` → `from doxstrux.`
+  - [ ] Find all: `import docpipe`
+  - [ ] Replace: `import docpipe` → `import doxstrux`
+
+- [ ] **Update other references**:
+  - [ ] `README.md`: Replace all "docpipe" → "doxstrux"
+  - [ ] `CLAUDE.md`: Replace all "docpipe" → "doxstrux"
+  - [ ] Any `*.md` in root: `rg "docpipe" *.md`
+  - [ ] Update repo description if present in `.git/description`
+
+- [ ] **PyPI preparation additions**:
+  - [ ] Add `LICENSE` file (MIT license with year and author)
+  - [ ] Update `README.md` with PyPI-ready format:
+    - [ ] Add badges (PyPI version, Python versions, License)
+    - [ ] Add "Installation" section: `pip install doxstrux`
+    - [ ] Add "Quick Start" code example
+    - [ ] Add "Features" section highlighting structure extraction
+  - [ ] Verify `CHANGELOG.md` exists (create if missing)
+  - [ ] Add entry to CHANGELOG for v0.2.0 (rename + modularization)
+  - [ ] Verify `pyproject.toml` classifiers are accurate:
+    - [ ] Development Status correct
+    - [ ] License classifier matches LICENSE file
+    - [ ] Python version classifiers accurate
+  - [ ] Create `.pypirc` template (don't commit, document in README)
+
+- [ ] **Post-rename validation**:
+  - [ ] Verify directory structure: `ls -la src/doxstrux/`
+  - [ ] Check imports work: `python -c "from doxstrux.markdown_parser_core import MarkdownParserCore; print('OK')"`
+  - [ ] Run full test suite: `pytest` (must show 63/63 pass)
+  - [ ] Run baseline tests (must show 542/542 pass)
+  - [ ] Check coverage: `pytest --cov=src/doxstrux`
+  - [ ] Type check: `mypy src/doxstrux`
+  - [ ] Lint check: `ruff check src/ tests/`
+
+- [ ] **Git commit**:
+  - [ ] Stage all changes: `git add -A`
+  - [ ] Commit: `git commit -m "Rename docpipe → doxstrux for PyPI release"`
+  - [ ] Tag: `git tag v0.2.0-renamed`
+
+- [ ] **Create rename completion artifact**:
+  - [ ] Generate `.phase-7.0.5.complete.json` with:
+    - schema_version: "1.0"
+    - phase: "7.0.5"
+    - task: "Package Rename + PyPI Prep"
+    - old_name: "docpipe"
+    - new_name: "doxstrux"
+    - pytest_pass: 63
+    - baseline_pass: 542
+    - git_commit: (hash)
+    - timestamp: (ISO 8601)
+
+**Acceptance Criteria**:
+- [ ] All `docpipe` references renamed to `doxstrux`
+- [ ] All tests pass (pytest 63/63, baselines 542/542)
+- [ ] Type checking passes
+- [ ] Linting passes
+- [ ] PyPI metadata complete and accurate
+- [ ] LICENSE file exists
+- [ ] README.md PyPI-ready
+- [ ] CHANGELOG.md updated
+- [ ] Git committed and tagged
+- [ ] Artifact `.phase-7.0.5.complete.json` created
+
+---
+
+### Task 7.1: Create Namespace Structure
+
+**Time**: 2-3 hours
+**Files**: `src/doxstrux/markdown/` (new directory)
+
+**Steps**:
+- [ ] Read module design principles (dependency rules in Phase 7 header)
+**⚠️ All steps must be checked! Do not skip any step.**
+
+- [ ] Create directory structure:
+  ```bash
+  mkdir -p src/doxstrux/markdown/{extractors,security,utils}
+  ```
+- [ ] Create placeholder `__init__.py` files:
+  - `src/doxstrux/markdown/__init__.py`
+  - `src/doxstrux/markdown/extractors/__init__.py`
+  - `src/doxstrux/markdown/security/__init__.py`
+  - `src/doxstrux/markdown/utils/__init__.py`
+- [ ] Document module boundaries in `markdown/MODULE_BOUNDARIES.md`
+- [ ] Document dependency rules (unidirectional flow)
+- [ ] Create `.phase-7.1.checkpoint.json`
+
+**Acceptance Criteria**:
+- [ ] All directories created
+- [ ] All __init__.py files exist
+- [ ] MODULE_BOUNDARIES.md documented
+- [ ] Dependency rules clear
+
+---
+
+### Task 7.2: Move Existing Modules
+
+**Time**: 4-6 hours
+**Files**: Move into `markdown/` namespace
+
+**Steps**:
+- [ ] Read existing module documentation
+**⚠️ All steps must be checked! Do not skip any step.**
+
+- [ ] Move `token_replacement_lib.py` → `markdown/utils/token_utils.py`
+- [ ] Move `security_validators.py` → `markdown/security/validators.py`
+- [ ] Move `document_ir.py` → `markdown/ir.py`
+- [ ] Move `exceptions.py` → `markdown/exceptions.py`
+- [ ] Update imports in `markdown_parser_core.py`
+- [ ] Update imports in test files
+- [ ] **TEST**: Run pytest - 63/63 must pass
+- [ ] **TEST**: Run baselines - §CORPUS_COUNT/§CORPUS_COUNT must pass
+- [ ] Create evidence block for successful migration
+
+**Acceptance Criteria**:
+- [ ] All files moved successfully
+- [ ] Imports updated everywhere
+- [ ] pytest: 63/63 pass
+- [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+- [ ] No functionality change detected
+
+**Artifact**: `.phase-7.2.complete.json`
+
+---
+
+### Task 7.3: Extract Line & Text Utilities
+
+**Time**: 3-4 hours
+**Files**: `markdown/utils/line_utils.py`, `markdown/utils/text_utils.py`
+
+**Steps**:
+- [ ] Identify utility methods in core
+**⚠️ All steps must be checked! Do not skip any step.**
+
+- [ ] Extract from `markdown_parser_core.py` → `line_utils.py`:
+  - `_slice_lines_inclusive()`
+  - `_slice_lines_raw()`
+  - `_build_line_offsets()`
+- [ ] Extract from `markdown_parser_core.py` → `text_utils.py`:
+  - `_collect_text_segments()`
+  - `_extract_text_from_inline()`
+  - `_has_child_type()`
+- [ ] Create clean interfaces: `slice_lines(start, end, lines)`
+- [ ] Update core to import from utils
+- [ ] Add unit tests for each utility function
+- [ ] **TEST**: Baselines unchanged (§CORPUS_COUNT/§CORPUS_COUNT)
+
+**Acceptance Criteria**:
+- [ ] Utilities extracted with clean interfaces
+- [ ] Core imports from utils
+- [ ] Unit tests pass
+- [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+
+**Artifact**: `.phase-7.3.complete.json`
+
+---
+
+### Task 7.4: Extract Configuration & Budgets
+
+**Time**: 3-4 hours
+**Files**: `markdown/config.py`, `markdown/budgets.py`
+
+**Steps**:
+- [ ] Read security profile structure
+**⚠️ All steps must be checked! Do not skip any step.**
+
+- [ ] Extract from core → `config.py`:
+  - `SECURITY_PROFILES` dict
+  - `_STYLE_JS_PAT` (CSS injection)
+  - `_META_REFRESH_PAT` (redirect detection)
+  - `_FRAMELIKE_PAT` (iframe/embed)
+  - `_BIDI_CONTROLS` (text direction manipulation)
+- [ ] Create `budgets.py`:
+  - Define: `MAX_NODES`, `MAX_DATA_URI_SIZE`, `MAX_TABLE_CELLS`
+  - Implement enforcement functions
+  - Return typed errors with `embedding_blocked_reason`
+- [ ] Update core to import from config/budgets
+- [ ] **TEST**: Security tests pass (13_security corpus)
+- [ ] **TEST**: Budget violations raise appropriate errors
+
+**Acceptance Criteria**:
+- [ ] Config centralized in single module
+- [ ] Budgets enforced with clear errors
+- [ ] Security tests pass
+- [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+
+**Artifact**: `.phase-7.4.complete.json`
+
+---
+
+### Task 7.5: Extract Simple Extractors (Low Interdependency)
+
+**Time**: 8-10 hours
+**Files**: `markdown/extractors/{media,footnotes,blockquotes,html}.py`
+
+**Steps**:
+**⚠️ Extract each one sequentially, testing after each extraction**
+
+**7.5.1: Extract Images**
+- [ ] Copy `_extract_images()` → `extractors/media.py`
+- [ ] Export clean interface: `extract(tree, lines, config) -> list[dict]`
+- [ ] Update core: `from .extractors import media; result = media.extract(...)`
+- [ ] **TEST**: Images unchanged in baselines
+
+**7.5.2: Extract Footnotes**
+- [ ] Copy `_extract_footnotes()` → `extractors/footnotes.py`
+- [ ] Export interface: `extract(tree, lines, config) -> dict`
+- [ ] Update core to call `footnotes.extract()`
+- [ ] **TEST**: Footnotes structure unchanged
+
+**7.5.3: Extract Blockquotes**
+- [ ] Copy `_extract_blockquotes()` → `extractors/blockquotes.py`
+- [ ] Export interface: `extract(tree, lines, config) -> list[dict]`
+- [ ] Update core to call `blockquotes.extract()`
+- [ ] **TEST**: Blockquotes unchanged
+
+**7.5.4: Extract HTML Detection**
+- [ ] Copy `_extract_html_blocks()`, `_extract_html_inline()` → `extractors/html.py`
+- [ ] Export interfaces for both functions
+- [ ] Update core to call `html.extract_blocks()`, `html.extract_inline()`
+- [ ] **TEST**: HTML detection unchanged
+
+**After ALL extractions**:
+- [ ] **TEST**: Full baseline suite (§CORPUS_COUNT/§CORPUS_COUNT)
+- [ ] **TEST**: Structure byte-for-byte identical
+
+**Acceptance Criteria**:
+- [ ] 4 extractors created with clean interfaces
+- [ ] Core delegates to extractors
+- [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+- [ ] Structure identical to pre-extraction
+
+**Artifact**: `.phase-7.5.complete.json`
+
+---
+
+### Task 7.6: Extract Complex Extractors (High Interdependency)
+
+**Time**: 12-15 hours
+**Files**: `markdown/extractors/{sections,paragraphs,lists,codeblocks,tables,links}.py`
+
+**Extraction Order** (by dependency complexity):
+
+**7.6.1: Extract Sections & Headings**
+- [ ] Copy `_extract_sections()`, `_extract_headings()` → `extractors/sections.py`
+- [ ] Handle `_slugify_base()` dependency
+- [ ] Export: `extract_sections()`, `extract_headings()`
+- [ ] Update core to call both
+- [ ] **TEST**: Section hierarchy correct
+- [ ] **TEST**: Heading slugs unchanged
+
+**7.6.2: Extract Paragraphs**
+- [ ] Copy `_extract_paragraphs()` → `extractors/paragraphs.py`
+- [ ] Export: `extract(tree, lines, config) -> list[dict]`
+- [ ] Update core
+- [ ] **TEST**: Paragraph spans correct
+- [ ] **TEST**: Word counts match
+
+**7.6.3: Extract Lists**
+- [ ] Copy `_extract_lists()`, `_extract_tasklists()` → `extractors/lists.py`
+- [ ] Copy `_detect_task_checkbox()` helper
+- [ ] Export: `extract_lists()`, `extract_tasklists()`
+- [ ] Update core
+- [ ] **TEST**: List nesting preserved
+- [ ] **TEST**: Task checkboxes correct
+
+**7.6.4: Extract Code Blocks**
+- [ ] Copy `_extract_code_blocks()` → `extractors/codeblocks.py`
+- [ ] Export: `extract(tree, lines, config) -> list[dict]`
+- [ ] Update core
+- [ ] **TEST**: Fenced code detection
+- [ ] **TEST**: Indented code detection
+- [ ] **TEST**: Language tags correct
+
+**7.6.5: Extract Tables**
+- [ ] Copy `_extract_tables()` → `extractors/tables.py`
+- [ ] Export: `extract(tree, lines, config) -> list[dict]`
+- [ ] Update core
+- [ ] **TEST**: Table structure exact
+- [ ] **TEST**: Cell content unchanged
+- [ ] **TEST**: Alignment preserved
+
+**7.6.6: Extract Links**
+- [ ] Copy `_extract_links()` → `extractors/links.py`
+- [ ] Export: `extract(tree, lines, config) -> list[dict]`
+- [ ] Update core
+- [ ] **TEST**: Links captured
+- [ ] **TEST**: Link validation unchanged
+
+**After ALL extractions**:
+- [ ] **TEST**: Full baseline suite (§CORPUS_COUNT/§CORPUS_COUNT)
+- [ ] **TEST**: All recursive structures intact
+- [ ] **TEST**: Cross-references work
+
+**Acceptance Criteria**:
+- [ ] 6 complex extractors created
+- [ ] Recursive structures intact (lists, sections)
+- [ ] All interdependencies resolved
+- [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+
+**Artifact**: `.phase-7.6.complete.json`
+
+---
+
+### Task 7.7: Extract Security & Normalization
+
+**Time**: 6-8 hours
+**Files**: `markdown/security/policies.py`, `markdown/security/unicode.py`, `markdown/normalize.py`
+
+**Steps**:
+- [ ] Read security policy implementation
+**⚠️ All steps must be checked! Do not skip any step.**
+
+**7.7.1: Extract Security Policy**
+- [ ] Copy `_apply_security_policy()` → `security/policies.py`
+- [ ] Export: `apply_policy(result, config) -> dict`
+- [ ] Update core to call `policies.apply_policy()`
+- [ ] **TEST**: Security warnings identical
+
+**7.7.2: Extract Unicode Handling**
+- [ ] Extract BiDi detection → `security/unicode.py`
+- [ ] Extract confusables detection → `security/unicode.py`
+- [ ] Export: `detect_bidi()`, `detect_confusables()`
+- [ ] Update security validators to use unicode module
+- [ ] **TEST**: Unicode warnings unchanged
+
+**7.7.3: Create Normalization**
+- [ ] Create `normalize.py`:
+  - Whitespace normalization (collapse multiple spaces)
+  - Unicode NFC normalization
+  - URL redaction (query param removal - optional)
+- [ ] Wire into IR generation pipeline
+- [ ] **TEST**: Normalization reversible
+- [ ] **TEST**: Chunk hashes stable
+
+**Acceptance Criteria**:
+- [ ] Security policies extracted
+- [ ] Unicode handling centralized
+- [ ] Normalization functions clean
+- [ ] Security tests pass
+- [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+
+**Artifact**: `.phase-7.7.complete.json`
+
+---
+
+### Task 7.8: Create Façade & Slim Core
+
+**Time**: 6-8 hours
+**Files**: `markdown/core.py`, `markdown/__init__.py`, `markdown/serialize.py`
+
+**Steps**:
+- [ ] Read façade pattern requirements
+**⚠️ All steps must be checked! Do not skip any step.**
+
+**7.8.1: Create Orchestrator**
+- [ ] Create `markdown/core.py` (<200 lines):
+  ```python
+  # Orchestrator only - delegates to extractors
+  from .extractors import sections, paragraphs, lists, ...
+  from .security import validators, policies
+  from .ir import DocumentIR
+
+  class MarkdownParserCore:
+      def parse(self):
+          # Wire all extractors
+          structure = {
+              "sections": sections.extract(...),
+              "paragraphs": paragraphs.extract(...),
+              ...
+          }
+          # Apply security
+          # Return result
+  ```
+- [ ] Import all extractors
+- [ ] Wire extraction pipeline
+- [ ] Call `to_ir()` for Document IR generation
+- [ ] **TEST**: Core is <200 lines
+
+**7.8.2: Create Package Façade**
+- [ ] Create `markdown/__init__.py`:
+  ```python
+  from .core import MarkdownParserCore
+  __all__ = ["MarkdownParserCore"]
+  ```
+- [ ] **TEST**: Import works: `from docpipe.markdown import MarkdownParserCore`
+
+**7.8.3: Backward Compatibility**
+- [ ] Keep root `markdown_parser_core.py`:
+  ```python
+  # Backward compatibility façade
+  # Existing code: from docpipe.markdown_parser_core import MarkdownParserCore
+  from docpipe.markdown import MarkdownParserCore
+  __all__ = ["MarkdownParserCore"]
+  ```
+- [ ] **TEST**: Old imports still work
+
+**7.8.4: Extract Serialization**
+- [ ] Create `serialize.py`:
+  - Extract `to_dict()`
+  - Extract `to_json()` (if exists)
+  - Clean serialization logic
+- [ ] Update core to import from serialize
+
+**Acceptance Criteria**:
+- [ ] Core orchestrator <200 lines
+- [ ] Façade maintains public API
+- [ ] Backward compatibility preserved
+- [ ] Old imports work unchanged
+- [ ] pytest: 63/63 pass
+- [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+
+**Artifact**: `.phase-7.8.complete.json`
+
+---
+
+### Task 7.9: Phase 7 Validation & Completion
+
+**Time**: 2-3 hours
+**Files**: `regex_refactor_docs/steps_taken/PHASE7_MODULAR_COMPLETION.md`
+
+**Steps**:
+- [ ] Read completion requirements
+**⚠️ All steps must be checked! Do not skip any step.**
+
+- [ ] Run full test suite:
+  - [ ] pytest: 63/63 pass
+  - [ ] baselines: §CORPUS_COUNT/§CORPUS_COUNT pass
+- [ ] Verify module structure:
+  - [ ] Count lines in each file (max 500)
+  - [ ] Verify single responsibility
+  - [ ] Check dependency direction
+- [ ] Performance comparison:
+  - [ ] Run benchmark (before/after)
+  - [ ] Verify within 5% performance
+- [ ] Create completion report in `steps_taken/PHASE7_MODULAR_COMPLETION.md`:
+  - [ ] List all modules created
+  - [ ] Document file sizes
+  - [ ] Record performance metrics
+  - [ ] Note any issues resolved
+- [ ] Generate phase artifact `.phase-7.complete.json`:
+  ```json
+  {
+    "phase": 7,
+    "completed_at": "2025-XX-XXT00:00:00Z",
+    "baseline_pass_count": 542,
+    "performance_delta_median_pct": 0.0,
+    "performance_delta_p95_pct": 2.0,
+    "ci_gates_passed": ["G1", "G2", "G3", "G4", "G5"],
+    "modules_created": 18,
+    "max_file_lines": 450,
+    "api_backward_compatible": true,
+    "git_tag": "phase-7-modular-complete",
+    "git_commit": "<commit-hash>",
+    "schema_version": "1.0",
+    "min_schema_version": "1.0"
+  }
+  ```
+- [ ] Git tag: `git tag -a phase-7-modular-complete -m "Phase 7: Modular architecture complete"`
+
+**Acceptance Criteria**:
+- [ ] All tests pass (pytest + baselines)
+- [ ] No file > 500 lines
+- [ ] Single responsibility per module
+- [ ] Clean unidirectional dependencies
+- [ ] Performance within 5%
+- [ ] Documentation complete
+- [ ] Artifact created and valid
+
+**Artifact**: `.phase-7.complete.json`
+
+---
+
 ## Appendix A: Rollback Procedures
 
 **Purpose**: Standardized recovery procedures for all phases.
@@ -2722,7 +3303,48 @@ Track here or in separate `PROGRESS.md` file:
 - [ ] Task 1.4: Phase 1 validation
 - [ ] Task 1.5: Phase 1 completion
 
-[Continue for Phases 2-6...]
+**Phase 2**:
+- [ ] Task 2.1: Identify regex patterns
+- [ ] Task 2.2: Token-based plaintext extraction
+- [ ] Task 2.3: Phase 2 completion
+
+**Phase 3**:
+- [ ] Task 3.0: Phase 3 unlock verification
+- [ ] Task 3.1: Identify regex patterns
+- [ ] Task 3.2: Token-based link extraction
+- [ ] Task 3.3: Token-based image extraction
+- [ ] Task 3.4: Phase 3 completion
+
+**Phase 4**:
+- [ ] Task 4.0: Phase 4 unlock verification
+- [ ] Task 4.1: Identify regex patterns
+- [ ] Task 4.2: Token-based table extraction
+- [ ] Task 4.3: Phase 4 completion
+
+**Phase 5**:
+- [ ] Task 5.0: Phase 5 unlock verification
+- [ ] Task 5.1: Identify regex patterns
+- [ ] Task 5.2: Token-based list extraction
+- [ ] Task 5.3: Phase 5 completion
+
+**Phase 6**:
+- [ ] Task 6.0: Phase 6 unlock verification
+- [ ] Task 6.1: Centralize security validators
+- [ ] Task 6.2: Final cleanup
+- [ ] Task 6.3: Phase 6 completion
+
+**Phase 7**:
+- [ ] Task 7.0: Phase 7 unlock verification
+- [ ] Task 7.0.5: Package rename (docpipe → doxstrux) + PyPI preparation
+- [ ] Task 7.1: Create namespace structure
+- [ ] Task 7.2: Move existing modules
+- [ ] Task 7.3: Extract line & text utilities
+- [ ] Task 7.4: Extract configuration & budgets
+- [ ] Task 7.5: Extract simple extractors (media, footnotes, blockquotes, html)
+- [ ] Task 7.6: Extract complex extractors (sections, paragraphs, lists, codeblocks, tables, links)
+- [ ] Task 7.7: Extract security & normalization
+- [ ] Task 7.8: Create façade & slim core
+- [ ] Task 7.9: Phase 7 validation & completion
 
 ### Time Tracking
 

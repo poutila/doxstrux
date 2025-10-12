@@ -9,7 +9,7 @@ Tests for token-based HTML detection in security metadata:
 """
 
 import pytest
-from docpipe.markdown_parser_core import MarkdownParserCore
+from doxstrux.markdown_parser_core import MarkdownParserCore
 
 
 def test_html_block_detection_via_tokens():

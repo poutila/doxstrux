@@ -4,7 +4,7 @@
 import sys
 from pathlib import Path
 
-from docpipe.markdown_parser_core import MarkdownParserCore
+from doxstrux.markdown_parser_core import MarkdownParserCore
 
 from json_utils import write_json_file
 
@@ -17,7 +17,7 @@ print(f"\n__package__: {__package__}\n")
 def test_imports():
     """Test basic imports."""
     try:
-        from docpipe.markdown_parser_core import MarkdownParserCore
+        from doxstrux.markdown_parser_core import MarkdownParserCore
 
         print("✅ Main import works")
     except ImportError as e:

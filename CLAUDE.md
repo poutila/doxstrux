@@ -52,12 +52,12 @@ python tools/baseline_test_runner.py        # ❌ Wrong test results
 
 ## Project Overview
 
-**Docpipe** is a comprehensive markdown enrichment and parsing library designed for both human users and AI systems. It provides robust markdown parsing with security-first design, extracting structured data from markdown documents while maintaining content integrity.
+**Doxstrux** is a comprehensive markdown enrichment and parsing library designed for both human users and AI systems. It provides robust markdown parsing with security-first design, extracting structured data from markdown documents while maintaining content integrity.
 
 ## Core Architecture
 
 ### Single-File Parser Design
-The heart of this project is `src/docpipe/markdown_parser_core.py` (3660 lines), which implements a self-contained markdown parser with:
+The heart of this project is `src/doxstrux/markdown_parser_core.py` (3660 lines), which implements a self-contained markdown parser with:
 - **MarkdownParserCore**: Main parser class using markdown-it-py as the parsing engine
 - **Security-first design**: Three security profiles (strict, moderate, permissive) with content size limits, plugin validation, and prompt injection detection
 - **Universal recursion engine**: Single-pass document parsing with configurable recursion depth limits
@@ -71,7 +71,7 @@ The heart of this project is `src/docpipe/markdown_parser_core.py` (3660 lines),
 
 ### Module Structure
 ```
-src/docpipe/
+src/doxstrux/
 ├── markdown_parser_core.py    # Core parser (3660 lines) - pure token-based
 ├── json_utils.py              # JSON serialization helpers
 ├── sluggify_util.py           # Slug generation utilities
@@ -126,7 +126,7 @@ pytest tests/test_specific.py
 pytest -v
 
 # Check test coverage (enforces 80% minimum per pyproject.toml)
-pytest --cov=src/docpipe --cov-report=term-missing
+pytest --cov=src/doxstrux --cov-report=term-missing
 
 # Test coverage analysis tool
 python scripts/test_coverage_tool.py
@@ -136,7 +136,7 @@ python scripts/test_coverage_tool.py --ci  # For CI/CD with exit codes
 ### Code Quality
 ```bash
 # Type checking with mypy (strict mode enabled)
-mypy src/docpipe
+mypy src/doxstrux
 
 # Linting with ruff
 ruff check src/ tests/
@@ -148,10 +148,10 @@ ruff check --fix src/ tests/
 black src/ tests/
 
 # Security scan with bandit
-bandit -r src/docpipe
+bandit -r src/doxstrux
 
 # Check for unused code
-vulture src/docpipe
+vulture src/doxstrux
 ```
 
 ### Running the Parser
@@ -160,7 +160,7 @@ vulture src/docpipe
 python main.py  # Parses README.md by default
 
 # Use as a library
-python -c "from src.docpipe.markdown_parser_core import MarkdownParserCore; parser = MarkdownParserCore('# Hello\\nworld'); print(parser.parse())"
+python -c "from src.doxstrux.markdown_parser_core import MarkdownParserCore; parser = MarkdownParserCore('# Hello\\nworld'); print(parser.parse())"
 ```
 
 ## Testing Standards
@@ -209,7 +209,7 @@ bash tools/run_tests_fast.sh 01_edge_cases
 
 ### Parser Initialization
 ```python
-from src.docpipe.markdown_parser_core import MarkdownParserCore
+from src.doxstrux.markdown_parser_core import MarkdownParserCore
 
 # Basic usage
 parser = MarkdownParserCore(content)
@@ -273,7 +273,7 @@ All optional dependencies gracefully degrade:
 - **Test configuration**: 80% minimum coverage, strict markers
 - **Type checking**: Strict mypy configuration
 - **Linting**: Ruff with comprehensive rule selection
-- **Entry point**: `docpipe` CLI command (future)
+- **Entry point**: `doxstrux` CLI command (future)
 
 ### Security Configuration
 - Bandit excludes test directories
@@ -290,8 +290,8 @@ All optional dependencies gracefully degrade:
 ## Working with Test Files
 
 The repository includes extensive test markdown files in:
-- `src/docpipe/test_files/test_mds/`: Core test files
-- `src/docpipe/test_files/test_mds/md_stress_mega/`: Stress test files with pandoc features, overlapping structures, mixed encoding, and math-heavy content
+- `src/doxstrux/test_files/test_mds/`: Core test files
+- `src/doxstrux/test_files/test_mds/md_stress_mega/`: Stress test files with pandoc features, overlapping structures, mixed encoding, and math-heavy content
 
 When adding tests:
 1. Mirror the source directory structure

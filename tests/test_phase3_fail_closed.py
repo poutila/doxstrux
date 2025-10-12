@@ -8,8 +8,8 @@ Tests for the fail-closed approach to link/image validation:
 """
 
 import pytest
-from docpipe.markdown_parser_core import MarkdownParserCore
-from docpipe import security_validators
+from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux import security_validators
 
 
 def test_parse_does_not_mutate_source():
