@@ -696,6 +696,7 @@ python3 tools/show_progress.py
 **Test**: N/A (creating test infrastructure)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Create `tools/run_tests_fast.sh`:
 ```bash
 #!/bin/bash
@@ -739,6 +740,7 @@ python3 tools/baseline_test_runner.py \
 **References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §1, archived/Regex_calls_with_categories__action_queue_.csv
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Create `tools/create_regex_inventory.py`:
   - [x] Scan `src/docpipe/markdown_parser_core.py` for all `import re`
   - [x] Find all `re.compile()`, `re.match()`, `re.search()`, `re.sub()`, `re.findall()`, `re.split()`
@@ -892,6 +894,7 @@ python3 tools/baseline_test_runner.py \
 **References**: POLICY_GATES.md §4.1 (lines 54-86)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Create `tools/ci/` directory: `mkdir -p tools/ci`
 - [x] Extract G1 code from POLICY_GATES.md (lines 54-86)
 - [x] Apply **CI Gate Extraction Pattern** (see above)
@@ -921,6 +924,7 @@ python3 tools/baseline_test_runner.py \
 **References**: POLICY_GATES.md §4.2 (lines 88-109)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Extract G2 code from POLICY_GATES.md (lines 88-109)
 - [x] Apply **CI Gate Extraction Pattern**
 - [x] Use dynamic count: `len(list(Path("tools/test_mds").rglob("*.md")))`
@@ -948,6 +952,7 @@ python3 tools/baseline_test_runner.py \
 **References**: POLICY_GATES.md §2 (G3)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Extract/create G3 implementation based on POLICY_GATES.md §2
 - [x] Apply **CI Gate Extraction Pattern**
 - [x] Implement structural comparison (see **Baseline Output Schema** above)
@@ -976,6 +981,7 @@ python3 tools/baseline_test_runner.py \
 **References**: POLICY_GATES.md §5
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Extract/create G4 implementation based on POLICY_GATES.md §5
 - [x] Apply **CI Gate Extraction Pattern**
 - [x] Load baseline from `tools/baseline_generation_summary.json`
@@ -1093,6 +1099,7 @@ python3 tools/baseline_test_runner.py \
 **References**: POLICY_GATES.md §4.3 (lines 111-147)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Extract G5 code from POLICY_GATES.md (lines 111-147)
 - [x] Apply **CI Gate Extraction Pattern**
 - [x] Implement **JSON-only SKIP behavior** (see pattern above, step 7)
@@ -1131,6 +1138,7 @@ python3 tools/baseline_test_runner.py \
 **References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §13 (Appendix)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 
 #### Step 0.7.1: Add Iterative Token Walker
 - [x] Git checkpoint: `git commit -m "before adding token utilities"`
@@ -1208,6 +1216,7 @@ def extract_code_blocks(tokens):
 **References**: REGEX_REFACTOR_EXECUTION_GUIDE.md §2
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Create `tools/run_tests.sh`:
 ```bash
 #!/bin/bash
@@ -1249,6 +1258,7 @@ python3 tools/baseline_test_runner.py --profile "$PROFILE" "$@"
 **References**: Best practice for phase transitions
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Script already created at `tools/preflight_check.sh` (see file)
 - [ ] Make executable: `chmod +x tools/preflight_check.sh`
 - [ ] Test Phase 0 check: `./tools/preflight_check.sh 0`
@@ -1290,6 +1300,7 @@ python3 tools/baseline_test_runner.py --profile "$PROFILE" "$@"
 **References**: Project visibility and tracking
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Script already created at `tools/show_progress.py` (see file)
 - [ ] Make executable: `chmod +x tools/show_progress.py`
 - [ ] Test: `python3 tools/show_progress.py`
@@ -1329,6 +1340,7 @@ python3 tools/baseline_test_runner.py --profile "$PROFILE" "$@"
 **Test**: All gates must pass
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [x] Run all CI gates (§CI_ALL):
   - [x] `python3 tools/ci/ci_gate_no_hybrids.py` → Exit 0
   - [x] `python3 tools/ci/ci_gate_canonical_pairs.py` → 542 canonical pairs
@@ -1433,6 +1445,7 @@ print(f"✓ Created .phase-0.complete.json ({corpus_count} test files, {regex_co
 **Test**: Unlock artifact validation
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Run unlock verification:
 ```python
 from pathlib import Path
@@ -1473,6 +1486,7 @@ verify_phase_unlock(0)  # Verify Phase 0 complete before starting Phase 1
 **Test**: N/A (analysis only)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Review `REGEX_INVENTORY.md` for Phase 1 patterns
 - [ ] Document current fence detection logic:
   - [ ] Find regex patterns for `^````, `^~~~`
@@ -1601,6 +1615,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Test**: After every modification
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Follow same pattern as Task 1.2
 - [ ] Add token-based indented code detection
 - [ ] Dual validation phase
@@ -1623,6 +1638,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Test**: All gates + full baseline
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] §TEST_FULL → verify all pass
 - [ ] §TEST_PERF → verify Δmedian ≤5%, Δp95 ≤10%
 - [ ] §CI_ALL → verify all gates pass
@@ -1648,6 +1664,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Files**: `regex_refactor_docs/steps_taken/04_PHASE1_COMPLETION.md`, `.phase-1.complete.json`
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] **Follow Appendix B: Phase Completion Template**
   - [ ] Create completion report (04_PHASE1_COMPLETION.md)
   - [ ] Create phase unlock artifact (.phase-1.complete.json)
@@ -1679,6 +1696,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Test**: N/A (analysis)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Review `REGEX_INVENTORY.md` for Phase 2 patterns
 - [ ] Find inline formatting patterns: `\*\*`, `\*`, `__`, `_`, etc.
 - [ ] Document current "strip markdown" logic
@@ -1703,6 +1721,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Test**: After every modification
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Git checkpoint before starting
 - [ ] Add `_extract_plaintext_token_based()` method
 - [ ] Implement inline token traversal
@@ -1760,6 +1779,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Test**: N/A (analysis)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Review `REGEX_INVENTORY.md` for Phase 3 patterns
 - [ ] Find link patterns: `\[.*?\]\(.*?\)`
 - [ ] Find image patterns: `!\[.*?\]\(.*?\)`
@@ -1784,6 +1804,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Test**: After every modification
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Git checkpoint
 - [ ] Add `_extract_links_token_based()` method
 - [ ] Use `collect_text_between_tokens()` utility
@@ -1809,6 +1830,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Test**: After every modification
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Similar to Task 3.2 for images
 - [ ] Extract src, alt from image tokens
 - [ ] Validate image URLs
@@ -1854,6 +1876,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Files**: `src/docpipe/markdown_parser_core.py`
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Set `html=False` at parser init (default)
 - [ ] Add check: if `html=True` externally set → raise or sanitize
 - [ ] Treat `html_inline` tokens as warnings (not errors)
@@ -1873,6 +1896,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Files**: `src/docpipe/markdown_parser_core.py`
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Review current HTML sanitization regexes
 - [ ] Update to use bleach (if available)
 - [ ] Centralize sanitization logic
@@ -1919,6 +1943,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Files**: `src/docpipe/markdown_parser_core.py`
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Add `_extract_tables_token_based()` method
 - [ ] Traverse table tokens
 - [ ] Extract rows, cells
@@ -1967,6 +1992,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Files**: `src/docpipe/security_validators.py` (or section in core)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Create centralized security module
 - [ ] Move data-URI budget checks
 - [ ] Move scheme allow/deny validation
@@ -1990,6 +2016,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Files**: All
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Remove any remaining unnecessary regex
 - [ ] Verify retained regex inventory matches policy
 - [ ] Run full baseline test
@@ -2012,6 +2039,7 @@ def _extract_fences_dual_validate(self) -> list[dict]:
 **Files**: `regex_refactor_docs/steps_taken/FINAL_COMPLETION.md`
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 - [ ] Create final completion report
 - [ ] Document all phases completed
 - [ ] List all regex patterns removed
@@ -2221,6 +2249,7 @@ Use this template for Tasks X.5 (Phase X Completion) where X = 1..6.
 2. `.phase-X.complete.json` (unlock artifact)
 
 **Steps**:
+- [ ] Read `REGEX_REFACTOR_EXECUTION_GUIDE.md` for context and principles
 
 #### Step 1: Run All Validations
 
