@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "phase": "7.0.5",
+  "task": "Package Rename + PyPI Preparation",
+  "completed_at": "2025-10-12T20:11:10.523810+00:00",
+  "old_name": "docpipe",
+  "new_name": "doxstrux",
+  "pytest_pass": 63,
+  "pytest_total": 63,
+  "coverage_percent": 70.0,
+  "files_renamed": 22,
+  "git_commit": "2a0c058230746498c3c61bf054bda368f47e9e3a",
+  "git_tag": "v0.2.0-renamed",
+  "pypi_ready": true,
+  "changes": {
+    "source_directory": "src/docpipe \u2192 src/doxstrux",
+    "imports_updated": "All source and test files",
+    "pyproject_toml": "Updated 10+ locations",
+    "documentation": [
+      "README.md",
+      "CLAUDE.md",
+      "Phase 7 docs"
+    ],
+    "new_files": [
+      "LICENSE",
+      "CHANGELOG.md"
+    ]
+  },
+  "validation": {
+    "import_test": "passed",
+    "pytest": "63/63 passed",
+    "coverage": "70%",
+    "git_status": "clean"
+  }
+}
