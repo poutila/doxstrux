@@ -7,7 +7,7 @@ Ensures no regressions during refactoring by comparing current output
 against known-good baseline JSON files.
 
 Usage:
-    python3 tools/ci/ci_gate_parity.py [--profile moderate]
+    .venv/bin/python tools/ci/ci_gate_parity.py [--profile moderate]
 
 Exit codes:
     0: All baselines match (PASS) or no baselines exist (SKIP)
@@ -54,7 +54,7 @@ def run_baseline_tests(profile: str = "moderate", timeout_s: int = 600) -> dict:
     try:
         # Run baseline test runner
         result = subprocess.run(
-            ["python3", str(BASELINE_RUNNER), "--profile", profile],
+            [".venv/bin/python", str(BASELINE_RUNNER), "--profile", profile],
             capture_output=True,
             text=True,
             timeout=timeout_s,

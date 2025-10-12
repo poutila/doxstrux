@@ -1,0 +1,71 @@
+{
+  "phase": 1,
+  "status": "complete",
+  "timestamp": "2025-10-12T05:12:28.523847",
+  "git_commit": "b3b0bcff02b8035fa8c895caa1e93c728cad608b",
+  "git_commit_short": "b3b0bcf",
+  "regex_inventory": {
+    "patterns_before_phase1": 50,
+    "patterns_removed_phase1": 1,
+    "patterns_after_phase1": 49,
+    "line_removed": 3583,
+    "file": "src/docpipe/markdown_parser_core.py"
+  },
+  "implementation": {
+    "approach": "Token-based fence detection with graceful regex fallback",
+    "token_function": "walk_tokens_iter()",
+    "token_check": "token.type == 'fence'",
+    "lines_added": 35
+  },
+  "testing": {
+    "baseline_tests_count": 542,
+    "baseline_tests_passed": 542,
+    "baseline_tests_unchanged": true,
+    "note": "Baselines unchanged from Phase 0 - _strip_markdown() is unused"
+  },
+  "performance": {
+    "delta_median_pct": -19.05,
+    "delta_p95_pct": -18.4,
+    "performance_impact": "no change (function unused)",
+    "memory_peak_mb": 0.55,
+    "note": "Performance metrics are for baseline comparison only"
+  },
+  "ci_gates_passed": [
+    "G1: No Hybrids (files_checked=9)",
+    "G2: Canonical Pairs (542)",
+    "G3: Parity (542/542)",
+    "G4: Performance (\u0394median=-19.05%, \u0394p95=-18.4%)",
+    "G5: Evidence Hash (1 block validated)"
+  ],
+  "environment": {
+    "python_required": ".venv/bin/python",
+    "note": "Must use venv Python - system python3 lacks mdit-py-plugins"
+  },
+  "evidence_blocks": [
+    {
+      "block_id": "phase1_fence_regex_removal",
+      "file": "src/docpipe/markdown_parser_core.py",
+      "sha256": "58d0908b8d2300d0ed0bc4310731349f0ad5b93f3ed0ccfd5bec754d5e120f54"
+    }
+  ],
+  "deliverables": [
+    "src/docpipe/markdown_parser_core.py (modified)",
+    "evidence_blocks.jsonl (created)",
+    "regex_refactor_docs/steps_taken/phase1_plan.md (created)",
+    "regex_refactor_docs/steps_taken/04_PHASE1_COMPLETION.md (created)",
+    ".phase-1.complete.json (this file)"
+  ],
+  "tasks_completed": [
+    "1.0: Verify Phase 0 Unlock Artifact",
+    "1.1: Identify Target Regex Patterns (analysis)",
+    "1.2: Implement Token-Based Fence Detection",
+    "1.3: Verify with .venv/bin/python (corrected environment)",
+    "1.4: Run CI Gates G1-G5",
+    "1.5: Create Evidence Blocks & Documentation"
+  ],
+  "next_phase": {
+    "phase": 2,
+    "name": "Headers & Emphasis",
+    "estimated_patterns": 6
+  }
+}

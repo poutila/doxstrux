@@ -6,7 +6,7 @@ Validates that evidence blocks have correct SHA256 hashes after normalization.
 Ensures evidence integrity for audit trail during refactoring.
 
 Usage:
-    python3 tools/ci/ci_gate_evidence_hash.py [evidence_file]
+    .venv/bin/python tools/ci/ci_gate_evidence_hash.py [evidence_file]
 
 Exit codes:
     0: All evidence hashes valid (PASS) or no evidence (SKIP)

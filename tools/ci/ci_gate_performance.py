@@ -6,7 +6,7 @@ Validates that parser performance remains within acceptable thresholds.
 Compares current performance against baseline using median and p95 metrics.
 
 Usage:
-    python3 tools/ci/ci_gate_performance.py [--profile moderate]
+    .venv/bin/python tools/ci/ci_gate_performance.py [--profile moderate]
 
 Exit codes:
     0: Performance within thresholds (PASS) or no baseline (SKIP)
@@ -63,7 +63,7 @@ def measure_performance(test_mds_dir: Path, profile: str = "moderate") -> dict:
     try:
         # Run baseline test runner and capture timing
         result = subprocess.run(
-            ["python3", "tools/baseline_test_runner.py", "--profile", profile],
+            [".venv/bin/python", "tools/baseline_test_runner.py", "--profile", profile],
             capture_output=True,
             text=True,
             timeout=600,

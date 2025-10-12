@@ -6,7 +6,7 @@ Validates that no hybrid regex/token code patterns exist in the codebase.
 Ensures clean token-based implementation without legacy regex compatibility flags.
 
 Usage:
-    python3 tools/ci/ci_gate_no_hybrids.py
+    .venv/bin/python tools/ci/ci_gate_no_hybrids.py
 
 Exit codes:
     0: No hybrid patterns found (PASS)

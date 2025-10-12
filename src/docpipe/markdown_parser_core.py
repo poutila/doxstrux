@@ -64,6 +64,14 @@ def regex_timeout(seconds: int):
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
 
+# Token utilities for zero-regex refactoring
+try:
+    from docpipe.token_replacement_lib import walk_tokens_iter
+    HAS_TOKEN_UTILS = True
+except ImportError:
+    walk_tokens_iter = None  # type: ignore
+    HAS_TOKEN_UTILS = False
+
 # Optional content context (if you ship content_context.py alongside)
 try:
     from docpipe.loaders.content_context import ContentContext  # local helper
@@ -3579,8 +3587,32 @@ class MarkdownParserCore:
         text = re.sub(r"_([^_]+)_", r"\1", text)
         # Remove links
         text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
-        # Remove code blocks markers
-        text = re.sub(r"```[^`]*```", "", text, flags=re.DOTALL)
+        # Remove code blocks markers (Phase 1: token-based fence removal)
+        if HAS_TOKEN_UTILS and walk_tokens_iter is not None:
+            # Token-based approach: parse and remove fence blocks
+            try:
+                temp_tokens = self.md.parse(text)
+                lines = text.split('\n')
+                lines_to_remove = set()
+
+                for token in walk_tokens_iter(temp_tokens):
+                    if token.type == "fence" and token.map:
+                        start_line, end_line = token.map
+                        # Mark lines for removal (fence markers + content)
+                        for line_idx in range(start_line, end_line):
+                            lines_to_remove.add(line_idx)
+
+                # Remove marked lines
+                if lines_to_remove:
+                    lines = [line for idx, line in enumerate(lines) if idx not in lines_to_remove]
+                    text = '\n'.join(lines)
+            except Exception:
+                # Fallback to regex if token parsing fails
+                text = re.sub(r"```[^`]*```", "", text, flags=re.DOTALL)
+        else:
+            # Fallback to regex if token utilities not available
+            text = re.sub(r"```[^`]*```", "", text, flags=re.DOTALL)
+
         text = re.sub(r"`([^`]+)`", r"\1", text)
         return text.strip()
 

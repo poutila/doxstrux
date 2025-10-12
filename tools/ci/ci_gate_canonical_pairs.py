@@ -6,7 +6,7 @@ Validates that test corpus structure is intact by counting canonical pairs.
 Each .md test file must have a corresponding .json specification file.
 
 Usage:
-    python3 tools/ci/ci_gate_canonical_pairs.py [test_dir]
+    .venv/bin/python tools/ci/ci_gate_canonical_pairs.py [test_dir]
 
 Exit codes:
     0: All .md files have .json specs (PASS)
