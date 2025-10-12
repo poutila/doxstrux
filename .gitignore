@@ -158,6 +158,7 @@ analysis_report.*
 ci_results.json
 release_notes.md
 validation_reports/
+goldens/
 
 # Temporary files
 *.tmp
