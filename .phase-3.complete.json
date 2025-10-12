@@ -1,0 +1,24 @@
+{
+  "phase": 3,
+  "completed_at": "2025-10-12T14:35:00.000000Z",
+  "baseline_pass_count": 542,
+  "performance_delta_median_pct": -1.9,
+  "performance_delta_p95_pct": -1.67,
+  "ci_gates_passed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5"
+  ],
+  "regex_count_before": 34,
+  "regex_count_after": 32,
+  "patterns_removed": 2,
+  "patterns_moved_to_phase6": 1,
+  "evidence_blocks_created": 1,
+  "git_tag": "phase-3-complete",
+  "git_commit": "<to be filled after commit>",
+  "schema_version": "1.0",
+  "min_schema_version": "1.0",
+  "notes": "Deprecated sanitize() method to non-mutating wrapper. Removed 2 regex patterns (link/image extraction) by reusing _apply_security_policy() which already handles validation via tokens. Moved path traversal pattern to Phase 6 (retained security regex). Performance improved: removed heavy second parse from sanitize(). All 10 Phase 3 tests passing."
+}

@@ -54,14 +54,18 @@
 
 ## Phase 3
 
-**Count**: 4
+**Count**: 2 (COMPLETE - 2 removed via sanitize() deprecation, 1 already removed in Phase 2, 1 moved to Phase 6)
+
+**Status**: ✅ COMPLETE (2025-10-12)
 
 | Line | Context | Pattern | Purpose | Replacement Strategy |
 |------|---------|---------|---------|---------------------|
-| 1062 | `_strip_bad_link` | `(?<!\!)\[([^\]]+)\]\(([^)]+)\)` | Link/image extraction | Token-based: Check token.type == 'link_open', 'ima |
-| 1089 | `_filter_image` | `!\[([^\]]*)\]\(([^)]+)\)` | Link/image extraction | Token-based: Check token.type == 'link_open', 'ima |
-| 3336 | `_check_path_traversal` | `^[a-z]:[/\\]` | Link/image extraction | Token-based: Check token.type == 'link_open', 'ima |
-| 3581 | `_strip_markdown` | `\[([^\]]+)\]\([^)]+\)` | Link/image extraction | Token-based: Check token.type == 'link_open', 'ima |
+| 1070 | `sanitize` (deprecated) | `(?<!\!)\[([^\]]+)\]\(([^)]+)\)` | Link extraction | **REMOVED**: sanitize() deprecated, fail-closed validation via _apply_security_policy() |
+| 1097 | `sanitize` (deprecated) | `!\[([^\]]*)\]\(([^)]+)\)` | Image extraction | **REMOVED**: sanitize() deprecated, fail-closed validation via _apply_security_policy() |
+| 3581 | `_strip_markdown` | `\[([^\]]+)\]\([^)]+\)` | Link removal | **REMOVED in Phase 2**: Replaced with token-based plaintext extraction |
+| 3344 | `_check_path_traversal` | `^[a-z]:[/\\]` | Windows drive detection (security) | **MOVED to Phase 6**: Security-critical string validation (retained) |
+
+**Implementation**: Deprecated `sanitize()` method to non-mutating wrapper. Validation now uses `_apply_security_policy()` which already handles link/image filtering via tokens. Returns `embedding_blocked` flag instead of mutated text.
 
 ## Phase 4
 
@@ -93,15 +97,16 @@
 
 ## Phase 6 (RETAINED)
 
-**Count**: 10
+**Count**: 11 (+1 from Phase 3)
 
 **Note**: These patterns are security-critical and will be RETAINED (not replaced).
 
 | Line | Context | Pattern | Purpose | Replacement Strategy |
 |------|---------|---------|---------|---------------------|
-| 1050 | `_strip_bad_link` | `^([a-zA-Z][a-zA-Z0-9+.\-]*):` | Link scheme validation (security) | KEEP: Security-critical scheme extraction |
+| 1058 | `sanitize` (deprecated) | `^([a-zA-Z][a-zA-Z0-9+.\-]*):` | Link scheme validation (security) | KEEP: Security-critical scheme extraction |
 | 2575 | `_parse_data_uri` | `^data:([^;,]+)?(;base64)?,(.*)$` | Data URI parsing (security) | KEEP: Security-critical data URI validation |
 | 2591 | `_parse_data_uri` | `^[^/]+/([^;]+)` | MIME type extraction (security) | KEEP: Security-critical format validation |
+| 3344 | `_check_path_traversal` | `^[a-z]:[/\\]` | Windows drive detection (security) | KEEP: Security-critical string validation (moved from Phase 3) |
 | 3420 | `_check_unicode_spoofing` | `[a-zA-Z]` | Unicode script detection (security) | KEEP: Security-critical homograph detection |
 | 3421 | `_check_unicode_spoofing` | `[\u0400-\u04FF]` | Cyrillic detection (security) | KEEP: Security-critical homograph detection |
 | 3422 | `_check_unicode_spoofing` | `[\u0370-\u03FF]` | Greek detection (security) | KEEP: Security-critical homograph detection |

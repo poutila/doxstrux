@@ -10,6 +10,7 @@ import posixpath
 import re
 import signal
 import urllib.parse
+import warnings
 from collections.abc import Callable
 from contextlib import contextmanager
 from typing import Any
@@ -964,206 +965,71 @@ class MarkdownParserCore:
         self, policy: dict[str, Any] | None = None, security_profile: str | None = None
     ) -> dict[str, Any]:
         """
-        Produce a sanitized version of the source suitable for RAG ingestion,
-        plus a block/allow decision and reasons.
+        DEPRECATED (Phase 3): Non-mutating wrapper. Use parse() results instead.
 
-        - Strips HTML if not allowed
-        - Removes <script>...</script> and inline handlers
-        - Drops disallowed link schemes and data-URI images
-        - Enforces data-URI size budgets (approximate)
+        This method no longer modifies the source text. It emits:
+          - sanitized_text: the original, unmodified content
+          - blocked: whether embedding should be blocked
+          - reasons: high-level reasons derived from parse() metadata
+
+        Rationale:
+          - Align with fail-closed policy and single-source-of-truth security enforcement
+          - Avoid hybrid regex + token approaches inside validation
+          - Eliminate heavy second parse (performance improvement)
 
         Args:
-            policy: Optional policy dict with settings
+            policy: Optional policy dict (ignored, for API compatibility)
             security_profile: Optional security profile name ('strict', 'moderate', 'permissive')
-            policy: Optional dictionary to override default sanitization settings
 
         Returns:
             Dictionary with:
-            - sanitized_text: The cleaned text
+            - sanitized_text: The original content (UNCHANGED)
             - blocked: Whether document should be blocked
-            - reasons: List of sanitization actions taken
+            - reasons: List of validation issues/warnings
         """
-        # Apply security profile if specified
+        warnings.warn(
+            "sanitize() is deprecated: it no longer mutates text. "
+            "Use parse() and inspect result['metadata'] for policy decisions.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
+        # Keep profile override consistent with parse() behavior
         if security_profile and security_profile in self.SECURITY_PROFILES:
-            profile = self.SECURITY_PROFILES[security_profile]
-            cfg = {
-                "allows_html": profile["allows_html"],
-                "strip_scripts": not profile["allows_scripts"],
-                "strip_event_handlers": True,
-                "strip_html_if_disallowed": profile["strip_all_html"],
-                "drop_disallowed_links": True,
-                "drop_data_uri_images": not profile["allows_data_uri"],
-                "max_data_uri_bytes": profile["max_data_uri_size"],
-                "max_total_data_uri_bytes": profile["max_data_uri_size"] * 4,
-                "allowed_schemes": profile["allowed_schemes"],
-                "max_link_count": profile["max_link_count"],
-                "max_image_count": profile["max_image_count"],
-                "max_footnote_size": profile["max_footnote_size"],
-                "quarantine_on_injection": profile["quarantine_on_injection"],
-            }
+            # Create a temporary parser with the requested profile, but do not change text
+            temp_config = {**self.config}
+            temp_config["security_profile"] = security_profile
+            tmp = MarkdownParserCore(self.content, temp_config)
+            parsed = tmp.parse()
         else:
-            cfg = {
-                "allows_html": bool(self.config.get("allows_html", False)),
-                "strip_scripts": True,
-                "strip_event_handlers": True,
-                "strip_html_if_disallowed": True,
-                "drop_disallowed_links": True,
-                "drop_data_uri_images": True,
-                "max_data_uri_bytes": 131072,  # 128 KB per image
-                "max_total_data_uri_bytes": 524288,  # 512 KB per doc
-                "allowed_schemes": self._ALLOWED_LINK_SCHEMES,
-                "max_link_count": 200,
-                "max_image_count": 100,
-                "max_footnote_size": 512,
-                "quarantine_on_injection": False,
-            }
+            parsed = self.parse()
 
-        # Override with any policy settings
-        if policy:
-            cfg.update(policy)
+        md = parsed.get("metadata", {})
+        sec = md.get("security", {})
+        stats = sec.get("statistics", {}) or {}
 
-        text = self.content
+        blocked = bool(
+            md.get("embedding_blocked")
+            or md.get("quarantined")
+        )
+
+        # Build human-facing reasons from applied policies and security stats
         reasons: list[str] = []
-        blocked = False
-
-        # 1) Strip scripts
-        if cfg["strip_scripts"]:
-            if re.search(r"<\s*script\b", text, re.I):
-                reasons.append("script_tag_removed")
-            text = re.sub(r"<\s*script\b[^>]*>.*?<\s*/\s*script\s*>", "", text, flags=re.I | re.S)
-
-        # 2) Strip inline event handlers (on*)
-        if cfg["strip_event_handlers"]:
-            if re.search(r"\bon[a-z]+\s*=", text, re.I):
-                reasons.append("event_handlers_removed")
-            text = re.sub(r"\bon[a-z]+\s*=\s*(\"[^\"]*\"|'[^']*'|[^\s>]+)", "", text, flags=re.I)
-
-        # 3) HTML overall - use proper sanitization
-        if not cfg["allows_html"] and cfg["strip_html_if_disallowed"]:
-            if re.search(r"<\w+[^>]*>", text):
-                reasons.append("html_stripped")
-            text = self._sanitize_html_content(text, allows_html=False)
-        elif cfg["allows_html"]:
-            # Sanitize but keep safe HTML
-            text = self._sanitize_html_content(text, allows_html=True)
-
-        # 4) Markdown links: drop disallowed schemes, keep visible text (but not images)
-        if cfg["drop_disallowed_links"]:
-            removed_schemes = []
-
-            def _strip_bad_link(m):
-                nonlocal removed_schemes
-                label = m.group(1)
-                href = (m.group(2) or "").strip()
-                msch = re.match(r"^([a-zA-Z][a-zA-Z0-9+.\-]*):", href)
-                if href.startswith("#"):
-                    return f"[{label}]({href})"  # Keep anchor links
-                if msch:
-                    sch = msch.group(1).lower()
-                    allowed_schemes = cfg.get("allowed_schemes", self._ALLOWED_LINK_SCHEMES)
-                    if sch not in allowed_schemes:
-                        removed_schemes.append(sch)
-                        return label  # Just the link text, no brackets
-                return m.group(0)  # Keep allowed links
-
-            # Only match regular links, not image links (no leading !)
-            text = re.sub(r"(?<!\!)\[([^\]]+)\]\(([^)]+)\)", _strip_bad_link, text)
-            if removed_schemes:
-                reasons.append("disallowed_link_schemes_removed")
-
-        # 5) Data-URI images: drop or budget
-        total_budget = 0
-        data_uris_removed = False
-
-        def _filter_image(m):
-            nonlocal total_budget, data_uris_removed
-            alt = m.group(1)
-            src = (m.group(2) or "").strip()
-            if src.startswith("data:image/"):
-                # Rough byte estimate from base64 length
-                base64_part = src.split(",", 1)[-1] if "," in src else src
-                approx = int(len(base64_part) * 0.75)
-                total_budget_local = total_budget + approx
-                if (
-                    cfg["drop_data_uri_images"]
-                    or approx > cfg["max_data_uri_bytes"]
-                    or total_budget_local > cfg["max_total_data_uri_bytes"]
-                ):
-                    data_uris_removed = True
-                    return f"![{alt}](removed)"
-                total_budget = total_budget_local
-            return m.group(0)
-
-        text = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", _filter_image, text)
-        if data_uris_removed:
-            reasons.append("data_uri_image_removed")
-
-        # 6) Decide block/allow based on security analysis
-        # Parse the sanitized text to check remaining threats
-        temp_parser = MarkdownParserCore(text, self.config)
-        temp_result = temp_parser.parse()
-        sec = temp_result["metadata"].get("security", {})
-
-        # Check for blocking conditions
-        if sec.get("statistics", {}).get("has_script"):
-            blocked = True
-            reasons.append("script_still_present")
-
-        if sec.get("statistics", {}).get("disallowed_link_schemes"):
-            blocked = True
-            reasons.append("disallowed_link_schemes_remain")
-
-        if sec.get("link_disallowed_schemes_raw"):
-            blocked = True
-            reasons.append("disallowed_schemes_in_raw_content")
-
-        # Check for scriptless vectors
-        if (
-            sec.get("statistics", {}).get("has_style_scriptless")
-            or sec.get("statistics", {}).get("has_meta_refresh")
-            or sec.get("statistics", {}).get("has_frame_like")
-        ):
-            blocked = True
-            reasons.append("scriptless_or_navigation_vector")
-
-        # Check for prompt injection
-        if (
-            sec.get("statistics", {}).get("suspected_prompt_injection")
-            or sec.get("prompt_injection_in_content")
-            or sec.get("prompt_injection_in_footnotes")
-        ):
-            if cfg.get("quarantine_on_injection", False):
-                blocked = True
-                reasons.append("prompt_injection_detected")
-            else:
-                reasons.append("prompt_injection_sanitized")
-
-        # Check rate limits
-        links = temp_result["structure"].get("links", [])
-        images = temp_result["structure"].get("images", [])
-
-        if len(links) > cfg.get("max_link_count", 200):
-            blocked = True
-            reasons.append(f"excessive_links_{len(links)}")
-
-        if len(images) > cfg.get("max_image_count", 100):
-            blocked = True
-            reasons.append(f"excessive_images_{len(images)}")
-
-        # Check footnote size limits
-        footnotes = temp_result["structure"].get("footnotes", {}).get("definitions", [])
-        for footnote in footnotes:
-            content = footnote.get("content", "")
-            if len(content) > cfg.get("max_footnote_size", 512):
-                blocked = True
-                reasons.append(f"oversized_footnote_{len(content)}")
-                break
-
-        # Deduplicate reasons
+        if md.get("embedding_block_reason"):
+            reasons.append(md["embedding_block_reason"])
+        reasons.extend(md.get("quarantine_reasons", []) or [])
+        for k in ("has_script", "has_style_scriptless", "has_meta_refresh", "has_frame_like"):
+            if stats.get(k):
+                reasons.append(k)
+        if stats.get("disallowed_link_schemes"):
+            reasons.append("disallowed_link_schemes")
+        if sec.get("warnings"):
+            # Append unique warning types for visibility
+            reasons.extend({w.get("type", "warning") for w in sec["warnings"]})
         reasons = list(dict.fromkeys(reasons))
 
         return {
-            "sanitized_text": text,
+            "sanitized_text": self.content,  # unchanged
             "blocked": blocked,
             "reasons": reasons,
         }

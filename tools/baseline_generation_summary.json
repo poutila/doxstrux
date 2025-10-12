@@ -3,8 +3,8 @@
   "successful": 542,
   "failed": 0,
   "success_rate": 100.0,
-  "total_time_ms": 555.45,
-  "avg_time_ms": 1.02,
+  "total_time_ms": 566.71,
+  "avg_time_ms": 1.05,
   "security_profile": "moderate",
   "output_directory": "/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/baseline_outputs",
   "by_category": {
@@ -401,7 +401,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 3.64
+      "parse_time_ms": 3.74
     },
     {
       "md_file": "test_mds/01_edge_cases/01_hash_in_code_fence.md",
@@ -572,7 +572,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.69
+      "parse_time_ms": 1.06
     },
     {
       "md_file": "test_mds/01_edge_cases/02_indented_four_spaces.md",
@@ -742,7 +742,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.64
+      "parse_time_ms": 0.75
     },
     {
       "md_file": "test_mds/01_edge_cases/03_indented_tab.md",
@@ -898,7 +898,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.67
+      "parse_time_ms": 0.99
     },
     {
       "md_file": "test_mds/01_edge_cases/04_escaped_hash.md",
@@ -1046,7 +1046,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/01_edge_cases/05_missing_space_after_hash.md",
@@ -1198,7 +1198,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.62
+      "parse_time_ms": 0.88
     },
     {
       "md_file": "test_mds/01_edge_cases/06_nbsp_after_hash.md",
@@ -1346,7 +1346,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.67
+      "parse_time_ms": 0.9
     },
     {
       "md_file": "test_mds/01_edge_cases/07_fullwidth_hash.md",
@@ -1489,7 +1489,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.62
+      "parse_time_ms": 0.68
     },
     {
       "md_file": "test_mds/01_edge_cases/08_hash_in_table_cell.md",
@@ -1661,7 +1661,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.94
+      "parse_time_ms": 1.0
     },
     {
       "md_file": "test_mds/01_edge_cases/09_hash_in_inline_code.md",
@@ -1814,7 +1814,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.73
     },
     {
       "md_file": "test_mds/01_edge_cases/10_hash_mid_paragraph.md",
@@ -1962,7 +1962,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.69
     },
     {
       "md_file": "test_mds/01_edge_cases/11_mixed_legit_and_traps.md",
@@ -2247,7 +2247,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.78
+      "parse_time_ms": 1.02
     },
     {
       "md_file": "test_mds/01_edge_cases/12_heading_in_blockquote.md",
@@ -2434,7 +2434,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.57
+      "parse_time_ms": 0.63
     },
     {
       "md_file": "test_mds/01_edge_cases/13_heading_in_list_item.md",
@@ -2656,7 +2656,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.73
+      "parse_time_ms": 0.93
     },
     {
       "md_file": "test_mds/01_edge_cases/14_setext_valid.md",
@@ -2871,7 +2871,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.64
+      "parse_time_ms": 0.71
     },
     {
       "md_file": "test_mds/01_edge_cases/15_setext_table_conflict.md",
@@ -3043,7 +3043,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.66
+      "parse_time_ms": 0.72
     },
     {
       "md_file": "test_mds/01_edge_cases/16_unclosed_fence_followed_by_hashes.md",
@@ -3201,7 +3201,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.47
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/01_edge_cases/17_three_space_indent_valid.md",
@@ -3374,7 +3374,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.64
+      "parse_time_ms": 0.71
     },
     {
       "md_file": "test_mds/01_edge_cases/18_four_space_indent_invalid.md",
@@ -3547,7 +3547,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.74
+      "parse_time_ms": 0.75
     },
     {
       "md_file": "test_mds/01_edge_cases/19_trailing_hashes_legit.md",
@@ -3761,7 +3761,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.59
     },
     {
       "md_file": "test_mds/01_edge_cases/20_heading_is_only_link.md",
@@ -3951,7 +3951,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.77
+      "parse_time_ms": 0.89
     },
     {
       "md_file": "test_mds/01_edge_cases/21_whitespace_only_after_hash.md",
@@ -4122,7 +4122,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.59
     },
     {
       "md_file": "test_mds/01_edge_cases/22_html_h1_not_markdown.md",
@@ -4268,7 +4268,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.34
+      "parse_time_ms": 1.43
     },
     {
       "md_file": "test_mds/01_edge_cases/23_yaml_block_with_hashes.md",
@@ -4453,7 +4453,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/01_edge_cases/24_hash_not_at_bol.md",
@@ -4601,7 +4601,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/01_edge_cases/25_mixed_nbsp_and_spaces.md",
@@ -4744,7 +4744,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.47
+      "parse_time_ms": 0.59
     },
     {
       "md_file": "test_mds/01_edge_cases/26_setext_one_dash_valid.md",
@@ -4919,7 +4919,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/01_edge_cases/27_heading_then_continuation_text.md",
@@ -5090,7 +5090,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.72
     },
     {
       "md_file": "test_mds/01_edge_cases/28_too_many_hashes.md",
@@ -5238,7 +5238,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.58
     },
     {
       "md_file": "test_mds/01_edge_cases/29_list_text_hash_at_start_of_item.md",
@@ -5418,7 +5418,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.69
     },
     {
       "md_file": "test_mds/01_edge_cases/admonitions_01.md",
@@ -5829,7 +5829,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.85
+      "parse_time_ms": 2.44
     },
     {
       "md_file": "test_mds/01_edge_cases/admonitions_02.md",
@@ -6189,7 +6189,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.4
+      "parse_time_ms": 1.52
     },
     {
       "md_file": "test_mds/01_edge_cases/admonitions_03.md",
@@ -6537,7 +6537,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.36
+      "parse_time_ms": 1.49
     },
     {
       "md_file": "test_mds/01_edge_cases/admonitions_04.md",
@@ -6948,7 +6948,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.51
+      "parse_time_ms": 1.58
     },
     {
       "md_file": "test_mds/01_edge_cases/admonitions_05.md",
@@ -7296,7 +7296,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.39
+      "parse_time_ms": 1.62
     },
     {
       "md_file": "test_mds/01_edge_cases/clean_01.md",
@@ -7714,7 +7714,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.73
+      "parse_time_ms": 3.18
     },
     {
       "md_file": "test_mds/01_edge_cases/clean_02.md",
@@ -8175,7 +8175,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.81
+      "parse_time_ms": 2.9
     },
     {
       "md_file": "test_mds/01_edge_cases/clean_03.md",
@@ -8653,7 +8653,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.79
+      "parse_time_ms": 2.9
     },
     {
       "md_file": "test_mds/01_edge_cases/clean_04.md",
@@ -9145,7 +9145,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 3.04
+      "parse_time_ms": 3.13
     },
     {
       "md_file": "test_mds/01_edge_cases/clean_05.md",
@@ -9561,7 +9561,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.58
+      "parse_time_ms": 2.86
     },
     {
       "md_file": "test_mds/01_edge_cases/code_01.md",
@@ -9877,7 +9877,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.91
+      "parse_time_ms": 1.18
     },
     {
       "md_file": "test_mds/01_edge_cases/code_02.md",
@@ -10184,7 +10184,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.24
+      "parse_time_ms": 1.06
     },
     {
       "md_file": "test_mds/01_edge_cases/code_03.md",
@@ -10419,7 +10419,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.98
+      "parse_time_ms": 0.91
     },
     {
       "md_file": "test_mds/01_edge_cases/code_04.md",
@@ -10710,7 +10710,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.87
+      "parse_time_ms": 0.88
     },
     {
       "md_file": "test_mds/01_edge_cases/code_05.md",
@@ -11026,7 +11026,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.15
+      "parse_time_ms": 1.16
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_01_single_line_inline.md",
@@ -11178,7 +11178,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.49
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_02_not_at_bof.md",
@@ -11359,7 +11359,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_03_inside_code_fence.md",
@@ -11511,7 +11511,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.42
+      "parse_time_ms": 0.41
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_04_horizontal_rule.md",
@@ -11783,7 +11783,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.42
+      "parse_time_ms": 0.43
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_06_unterminated.md",
@@ -11928,7 +11928,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.44
+      "parse_time_ms": 0.43
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_07_wrong_closing_marker.md",
@@ -12090,7 +12090,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.45
+      "parse_time_ms": 0.46
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_08_wrong_opening_marker.md",
@@ -12252,7 +12252,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.46
+      "parse_time_ms": 0.45
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_09_trailing_spaces.md",
@@ -12576,7 +12576,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.44
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_11_toml_frontmatter.md",
@@ -12724,7 +12724,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/01_edge_cases/fake_12_json_frontmatter.md",
@@ -13131,7 +13131,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.26
+      "parse_time_ms": 1.29
     },
     {
       "md_file": "test_mds/01_edge_cases/footnotes_02.md",
@@ -13390,7 +13390,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.14
+      "parse_time_ms": 1.18
     },
     {
       "md_file": "test_mds/01_edge_cases/footnotes_03.md",
@@ -13731,7 +13731,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.28
+      "parse_time_ms": 1.32
     },
     {
       "md_file": "test_mds/01_edge_cases/footnotes_04.md",
@@ -13990,7 +13990,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.2
+      "parse_time_ms": 1.21
     },
     {
       "md_file": "test_mds/01_edge_cases/footnotes_05.md",
@@ -14271,7 +14271,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.12
+      "parse_time_ms": 1.14
     },
     {
       "md_file": "test_mds/01_edge_cases/frontmatter_01.md",
@@ -14498,7 +14498,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.2
+      "parse_time_ms": 1.23
     },
     {
       "md_file": "test_mds/01_edge_cases/frontmatter_02.md",
@@ -14747,7 +14747,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.11
+      "parse_time_ms": 1.13
     },
     {
       "md_file": "test_mds/01_edge_cases/frontmatter_03.md",
@@ -14974,7 +14974,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.11
+      "parse_time_ms": 1.13
     },
     {
       "md_file": "test_mds/01_edge_cases/frontmatter_04.md",
@@ -15273,7 +15273,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.3
+      "parse_time_ms": 1.29
     },
     {
       "md_file": "test_mds/01_edge_cases/frontmatter_05.md",
@@ -15572,7 +15572,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.21
+      "parse_time_ms": 1.36
     },
     {
       "md_file": "test_mds/01_edge_cases/html_01.md",
@@ -15823,7 +15823,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.78
     },
     {
       "md_file": "test_mds/01_edge_cases/html_02.md",
@@ -15993,7 +15993,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.8
+      "parse_time_ms": 0.79
     },
     {
       "md_file": "test_mds/01_edge_cases/html_03.md",
@@ -16185,7 +16185,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.72
+      "parse_time_ms": 0.71
     },
     {
       "md_file": "test_mds/01_edge_cases/html_04.md",
@@ -16556,7 +16556,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.74
+      "parse_time_ms": 0.73
     },
     {
       "md_file": "test_mds/01_edge_cases/images_01.md",
@@ -17286,7 +17286,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.27
+      "parse_time_ms": 1.3
     },
     {
       "md_file": "test_mds/01_edge_cases/images_03.md",
@@ -17640,7 +17640,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.51
+      "parse_time_ms": 1.56
     },
     {
       "md_file": "test_mds/01_edge_cases/images_04.md",
@@ -18044,7 +18044,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.61
+      "parse_time_ms": 1.64
     },
     {
       "md_file": "test_mds/01_edge_cases/images_05.md",
@@ -18455,7 +18455,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.64
+      "parse_time_ms": 1.83
     },
     {
       "md_file": "test_mds/01_edge_cases/linklab_01.md",
@@ -18815,7 +18815,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.41
+      "parse_time_ms": 2.48
     },
     {
       "md_file": "test_mds/01_edge_cases/linklab_02.md",
@@ -19166,7 +19166,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.76
+      "parse_time_ms": 2.81
     },
     {
       "md_file": "test_mds/01_edge_cases/linklab_03.md",
@@ -19598,7 +19598,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.51
+      "parse_time_ms": 2.54
     },
     {
       "md_file": "test_mds/01_edge_cases/linklab_04.md",
@@ -20030,7 +20030,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.51
+      "parse_time_ms": 2.57
     },
     {
       "md_file": "test_mds/01_edge_cases/linklab_05.md",
@@ -20403,7 +20403,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.47
+      "parse_time_ms": 2.52
     },
     {
       "md_file": "test_mds/01_edge_cases/math_01.md",
@@ -20666,7 +20666,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.29
+      "parse_time_ms": 1.42
     },
     {
       "md_file": "test_mds/01_edge_cases/math_02.md",
@@ -20950,7 +20950,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.34
+      "parse_time_ms": 1.38
     },
     {
       "md_file": "test_mds/01_edge_cases/math_03.md",
@@ -21285,7 +21285,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.38
+      "parse_time_ms": 1.44
     },
     {
       "md_file": "test_mds/01_edge_cases/math_04.md",
@@ -21569,7 +21569,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.34
+      "parse_time_ms": 1.37
     },
     {
       "md_file": "test_mds/01_edge_cases/math_05.md",
@@ -21853,7 +21853,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.28
+      "parse_time_ms": 1.26
     },
     {
       "md_file": "test_mds/01_edge_cases/quotes_01.md",
@@ -22262,7 +22262,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.83
+      "parse_time_ms": 1.85
     },
     {
       "md_file": "test_mds/01_edge_cases/quotes_02.md",
@@ -22721,7 +22721,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.91
+      "parse_time_ms": 1.98
     },
     {
       "md_file": "test_mds/01_edge_cases/quotes_03.md",
@@ -23202,7 +23202,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.89
+      "parse_time_ms": 1.91
     },
     {
       "md_file": "test_mds/01_edge_cases/quotes_04.md",
@@ -23598,7 +23598,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.65
+      "parse_time_ms": 1.87
     },
     {
       "md_file": "test_mds/01_edge_cases/quotes_05.md",
@@ -23985,7 +23985,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.79
+      "parse_time_ms": 1.85
     },
     {
       "md_file": "test_mds/01_edge_cases/tables_01.md",
@@ -24553,7 +24553,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 6.81
+      "parse_time_ms": 6.94
     },
     {
       "md_file": "test_mds/01_edge_cases/tables_02.md",
@@ -25021,7 +25021,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 5.92
+      "parse_time_ms": 6.2
     },
     {
       "md_file": "test_mds/01_edge_cases/tables_03.md",
@@ -25458,7 +25458,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 5.14
+      "parse_time_ms": 5.26
     },
     {
       "md_file": "test_mds/01_edge_cases/tables_04.md",
@@ -25888,7 +25888,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 4.16
+      "parse_time_ms": 4.2
     },
     {
       "md_file": "test_mds/01_edge_cases/tables_05.md",
@@ -26414,7 +26414,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 6.27
+      "parse_time_ms": 6.51
     },
     {
       "md_file": "test_mds/01_edge_cases/tasks_01.md",
@@ -26788,7 +26788,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.83
+      "parse_time_ms": 1.89
     },
     {
       "md_file": "test_mds/01_edge_cases/tasks_02.md",
@@ -27152,7 +27152,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.92
+      "parse_time_ms": 1.91
     },
     {
       "md_file": "test_mds/01_edge_cases/tasks_03.md",
@@ -27598,7 +27598,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.88
+      "parse_time_ms": 1.87
     },
     {
       "md_file": "test_mds/01_edge_cases/tasks_04.md",
@@ -28006,7 +28006,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.5
+      "parse_time_ms": 1.51
     },
     {
       "md_file": "test_mds/01_edge_cases/tasks_05.md",
@@ -28402,7 +28402,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 2.0
+      "parse_time_ms": 2.01
     },
     {
       "md_file": "test_mds/01_edge_cases/valid_01_simple.md",
@@ -28713,7 +28713,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.7
+      "parse_time_ms": 0.71
     },
     {
       "md_file": "test_mds/01_edge_cases/valid_03_comments.md",
@@ -28866,7 +28866,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.66
+      "parse_time_ms": 0.74
     },
     {
       "md_file": "test_mds/01_edge_cases/valid_04_block_scalar_literal.md",
@@ -29019,7 +29019,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.68
     },
     {
       "md_file": "test_mds/01_edge_cases/valid_05_block_scalar_folded.md",
@@ -29172,7 +29172,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.61
     },
     {
       "md_file": "test_mds/01_edge_cases/valid_06_nested_mapping.md",
@@ -29638,7 +29638,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.83
+      "parse_time_ms": 0.82
     },
     {
       "md_file": "test_mds/01_edge_cases/valid_09_type_tag_str.md",
@@ -29790,7 +29790,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/01_edge_cases/valid_10_bom.md",
@@ -30259,7 +30259,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.64
+      "parse_time_ms": 0.63
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_01.md",
@@ -30600,7 +30600,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.56
+      "parse_time_ms": 1.54
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_02.md",
@@ -30941,7 +30941,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.4
+      "parse_time_ms": 1.44
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_03.md",
@@ -31282,7 +31282,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.36
+      "parse_time_ms": 1.37
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_04.md",
@@ -31623,7 +31623,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.44
+      "parse_time_ms": 1.42
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_05.md",
@@ -31964,7 +31964,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.35
+      "parse_time_ms": 1.48
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_06.md",
@@ -32305,7 +32305,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.44
+      "parse_time_ms": 1.48
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_07.md",
@@ -32646,7 +32646,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.39
+      "parse_time_ms": 1.37
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_08.md",
@@ -32987,7 +32987,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.65
+      "parse_time_ms": 1.55
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_09.md",
@@ -33328,7 +33328,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.41
+      "parse_time_ms": 1.37
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_10.md",
@@ -33669,7 +33669,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.84
+      "parse_time_ms": 1.69
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_11.md",
@@ -34010,7 +34010,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.46
+      "parse_time_ms": 1.4
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_12.md",
@@ -34351,7 +34351,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.38
+      "parse_time_ms": 1.35
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_13.md",
@@ -34692,7 +34692,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.46
+      "parse_time_ms": 1.56
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_14.md",
@@ -35033,7 +35033,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.39
+      "parse_time_ms": 1.38
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_15.md",
@@ -35374,7 +35374,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.67
+      "parse_time_ms": 1.45
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_16.md",
@@ -35715,7 +35715,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.94
+      "parse_time_ms": 1.4
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_17.md",
@@ -36056,7 +36056,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.55
+      "parse_time_ms": 1.45
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_18.md",
@@ -36397,7 +36397,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.38
+      "parse_time_ms": 1.36
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_19.md",
@@ -36738,7 +36738,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.44
+      "parse_time_ms": 1.42
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_20.md",
@@ -37761,7 +37761,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.42
+      "parse_time_ms": 1.52
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_23.md",
@@ -38102,7 +38102,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.42
+      "parse_time_ms": 1.48
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_24.md",
@@ -38443,7 +38443,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.59
+      "parse_time_ms": 1.49
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_25.md",
@@ -38784,7 +38784,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.37
+      "parse_time_ms": 1.35
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_26.md",
@@ -39125,7 +39125,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.46
+      "parse_time_ms": 1.67
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_27.md",
@@ -39466,7 +39466,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.36
+      "parse_time_ms": 1.37
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_28.md",
@@ -39807,7 +39807,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.42
+      "parse_time_ms": 1.43
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_29.md",
@@ -40148,7 +40148,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.41
+      "parse_time_ms": 1.42
     },
     {
       "md_file": "test_mds/02_stress_pandoc/pandoc_features__case_30.md",
@@ -40489,7 +40489,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.34
+      "parse_time_ms": 1.36
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_01.md",
@@ -40583,7 +40583,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.57
+      "parse_time_ms": 0.66
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_02.md",
@@ -40677,7 +40677,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.68
+      "parse_time_ms": 0.69
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_03.md",
@@ -40771,7 +40771,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.96
+      "parse_time_ms": 0.94
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_04.md",
@@ -40865,7 +40865,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_05.md",
@@ -41053,7 +41053,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_07.md",
@@ -41241,7 +41241,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_09.md",
@@ -41335,7 +41335,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 5.26
+      "parse_time_ms": 5.15
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_10.md",
@@ -41523,7 +41523,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_12.md",
@@ -41711,7 +41711,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_14.md",
@@ -41899,7 +41899,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_16.md",
@@ -41993,7 +41993,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_17.md",
@@ -42087,7 +42087,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_18.md",
@@ -42181,7 +42181,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.7
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_19.md",
@@ -42275,7 +42275,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.85
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_20.md",
@@ -42369,7 +42369,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_21.md",
@@ -42463,7 +42463,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.64
+      "parse_time_ms": 0.62
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_22.md",
@@ -42557,7 +42557,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_23.md",
@@ -42651,7 +42651,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_24.md",
@@ -42745,7 +42745,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_25.md",
@@ -43027,7 +43027,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.68
+      "parse_time_ms": 0.61
     },
     {
       "md_file": "test_mds/03_stress_overlapping/overlapping__case_28.md",
@@ -43309,7 +43309,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_01.md",
@@ -43497,7 +43497,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_03.md",
@@ -43685,7 +43685,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.6
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_05.md",
@@ -43779,7 +43779,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_06.md",
@@ -43873,7 +43873,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_07.md",
@@ -43967,7 +43967,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_08.md",
@@ -44155,7 +44155,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_10.md",
@@ -44437,7 +44437,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_13.md",
@@ -44531,7 +44531,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_14.md",
@@ -44719,7 +44719,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_16.md",
@@ -44813,7 +44813,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_17.md",
@@ -44907,7 +44907,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.63
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_18.md",
@@ -45001,7 +45001,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_19.md",
@@ -45377,7 +45377,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_23.md",
@@ -45471,7 +45471,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_24.md",
@@ -45565,7 +45565,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.61
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_25.md",
@@ -45659,7 +45659,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_26.md",
@@ -45847,7 +45847,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_28.md",
@@ -46035,7 +46035,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.57
     },
     {
       "md_file": "test_mds/04_stress_encoding/mixed_encoding__case_30.md",
@@ -46223,7 +46223,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.59
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_02.md",
@@ -46411,7 +46411,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_04.md",
@@ -46505,7 +46505,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_05.md",
@@ -46599,7 +46599,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_06.md",
@@ -46693,7 +46693,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_07.md",
@@ -46787,7 +46787,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_08.md",
@@ -46881,7 +46881,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.59
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_09.md",
@@ -47163,7 +47163,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_12.md",
@@ -47257,7 +47257,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_13.md",
@@ -47445,7 +47445,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.58
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_15.md",
@@ -47633,7 +47633,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_17.md",
@@ -47915,7 +47915,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_20.md",
@@ -48009,7 +48009,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_21.md",
@@ -48103,7 +48103,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.62
+      "parse_time_ms": 0.74
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_22.md",
@@ -48197,7 +48197,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.6
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_23.md",
@@ -48291,7 +48291,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_24.md",
@@ -48479,7 +48479,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_26.md",
@@ -48573,7 +48573,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_27.md",
@@ -48667,7 +48667,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_28.md",
@@ -48761,7 +48761,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.83
+      "parse_time_ms": 0.82
     },
     {
       "md_file": "test_mds/05_stress_math/math_heavy__case_29.md",
@@ -48949,7 +48949,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_01.md",
@@ -49043,7 +49043,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_02.md",
@@ -49231,7 +49231,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_04.md",
@@ -49325,7 +49325,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.7
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_05.md",
@@ -49419,7 +49419,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.63
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_06.md",
@@ -49513,7 +49513,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_07.md",
@@ -49607,7 +49607,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_08.md",
@@ -49701,7 +49701,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.58
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_09.md",
@@ -49795,7 +49795,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_10.md",
@@ -49889,7 +49889,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_11.md",
@@ -49983,7 +49983,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_12.md",
@@ -50077,7 +50077,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.62
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_13.md",
@@ -50171,7 +50171,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_14.md",
@@ -50265,7 +50265,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.7
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_15.md",
@@ -50359,7 +50359,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_16.md",
@@ -50453,7 +50453,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_17.md",
@@ -50547,7 +50547,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_18.md",
@@ -50641,7 +50641,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.61
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_19.md",
@@ -50829,7 +50829,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_21.md",
@@ -50923,7 +50923,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_22.md",
@@ -51017,7 +51017,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_23.md",
@@ -51111,7 +51111,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_24.md",
@@ -51205,7 +51205,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.88
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_25.md",
@@ -51299,7 +51299,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.78
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_26.md",
@@ -51393,7 +51393,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.64
+      "parse_time_ms": 0.65
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_27.md",
@@ -51487,7 +51487,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.6
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_28.md",
@@ -51581,7 +51581,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_29.md",
@@ -51675,7 +51675,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/06_stress_links/link_flood__case_30.md",
@@ -51769,7 +51769,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_01.md",
@@ -51863,7 +51863,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_02.md",
@@ -52051,7 +52051,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_04.md",
@@ -52145,7 +52145,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_05.md",
@@ -52239,7 +52239,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_06.md",
@@ -52333,7 +52333,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_07.md",
@@ -52427,7 +52427,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_08.md",
@@ -52521,7 +52521,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_09.md",
@@ -52709,7 +52709,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_11.md",
@@ -52803,7 +52803,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_12.md",
@@ -52897,7 +52897,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.83
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_13.md",
@@ -52991,7 +52991,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_14.md",
@@ -53085,7 +53085,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_15.md",
@@ -53179,7 +53179,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.64
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_16.md",
@@ -53273,7 +53273,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.58
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_17.md",
@@ -53367,7 +53367,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_18.md",
@@ -53461,7 +53461,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_19.md",
@@ -53555,7 +53555,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_20.md",
@@ -53649,7 +53649,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_21.md",
@@ -53743,7 +53743,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.67
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_22.md",
@@ -53837,7 +53837,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.69
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_23.md",
@@ -54025,7 +54025,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_25.md",
@@ -54119,7 +54119,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_26.md",
@@ -54213,7 +54213,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.57
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_27.md",
@@ -54307,7 +54307,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_28.md",
@@ -54401,7 +54401,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/07_stress_html/html_chaos__case_29.md",
@@ -54589,7 +54589,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_01.md",
@@ -54683,7 +54683,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_02.md",
@@ -54777,7 +54777,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.8
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_03.md",
@@ -54871,7 +54871,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.65
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_04.md",
@@ -54965,7 +54965,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_05.md",
@@ -55059,7 +55059,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_06.md",
@@ -55153,7 +55153,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.63
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_07.md",
@@ -55247,7 +55247,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_08.md",
@@ -55341,7 +55341,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_09.md",
@@ -55435,7 +55435,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_10.md",
@@ -55623,7 +55623,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_12.md",
@@ -55717,7 +55717,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.62
+      "parse_time_ms": 0.6
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_13.md",
@@ -55811,7 +55811,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_14.md",
@@ -55999,7 +55999,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_16.md",
@@ -56281,7 +56281,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_19.md",
@@ -56375,7 +56375,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.81
+      "parse_time_ms": 0.79
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_20.md",
@@ -56469,7 +56469,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_21.md",
@@ -56563,7 +56563,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.67
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_22.md",
@@ -56657,7 +56657,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_23.md",
@@ -56751,7 +56751,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_24.md",
@@ -56845,7 +56845,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_25.md",
@@ -57033,7 +57033,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.65
+      "parse_time_ms": 0.63
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_27.md",
@@ -57127,7 +57127,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_28.md",
@@ -57221,7 +57221,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_29.md",
@@ -57315,7 +57315,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/08_stress_indentation/bad_indentation__case_30.md",
@@ -57409,7 +57409,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_01.md",
@@ -57503,7 +57503,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_02.md",
@@ -57597,7 +57597,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_03.md",
@@ -57691,7 +57691,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.59
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_04.md",
@@ -57785,7 +57785,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_05.md",
@@ -57879,7 +57879,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_06.md",
@@ -57973,7 +57973,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_07.md",
@@ -58067,7 +58067,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_08.md",
@@ -58161,7 +58161,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_09.md",
@@ -58349,7 +58349,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.64
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_11.md",
@@ -58443,7 +58443,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_12.md",
@@ -58537,7 +58537,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_13.md",
@@ -58631,7 +58631,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_14.md",
@@ -58913,7 +58913,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.68
+      "parse_time_ms": 0.6
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_17.md",
@@ -59007,7 +59007,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.57
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_18.md",
@@ -59101,7 +59101,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_19.md",
@@ -59195,7 +59195,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/09_stress_huge_tables/huge_tables__case_20.md",
@@ -59289,7 +59289,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/10_frontmatter_valid/fm_valid_bom.md",
@@ -59407,7 +59407,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.47
+      "parse_time_ms": 0.46
     },
     {
       "md_file": "test_mds/10_frontmatter_valid/fm_valid_ellipsis_close.md",
@@ -59630,7 +59630,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.58
+      "parse_time_ms": 0.59
     },
     {
       "md_file": "test_mds/10_frontmatter_valid/fm_valid_simple.md",
@@ -59776,7 +59776,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_in_code.md",
@@ -59955,7 +59955,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.49
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_inline.md",
@@ -60117,7 +60117,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_json.md",
@@ -60246,7 +60246,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.54
+      "parse_time_ms": 0.53
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_nbsp_fence.md",
@@ -60430,7 +60430,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.57
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_not_bof.md",
@@ -60633,7 +60633,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.57
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_toml.md",
@@ -60762,7 +60762,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.45
+      "parse_time_ms": 0.47
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_trailing_spaces.md",
@@ -60946,7 +60946,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.61
     },
     {
       "md_file": "test_mds/11_frontmatter_invalid/fm_invalid_unclosed.md",
@@ -61113,7 +61113,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.49
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_01.md",
@@ -61278,7 +61278,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.76
+      "parse_time_ms": 0.8
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_02.md",
@@ -61443,7 +61443,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.77
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_03.md",
@@ -61608,7 +61608,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.88
+      "parse_time_ms": 0.86
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_04.md",
@@ -61773,7 +61773,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.78
+      "parse_time_ms": 0.77
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_05.md",
@@ -61938,7 +61938,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_06.md",
@@ -62103,7 +62103,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.76
+      "parse_time_ms": 0.77
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_07.md",
@@ -62268,7 +62268,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.85
+      "parse_time_ms": 0.86
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_08.md",
@@ -62433,7 +62433,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.81
+      "parse_time_ms": 0.75
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_09.md",
@@ -62763,7 +62763,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.77
+      "parse_time_ms": 0.78
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_11.md",
@@ -62928,7 +62928,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.84
+      "parse_time_ms": 0.85
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_12.md",
@@ -63093,7 +63093,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.74
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_13.md",
@@ -63258,7 +63258,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.77
+      "parse_time_ms": 0.78
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_14.md",
@@ -63423,7 +63423,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.76
+      "parse_time_ms": 0.77
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_15.md",
@@ -63588,7 +63588,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.85
+      "parse_time_ms": 0.87
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_16.md",
@@ -63753,7 +63753,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.74
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_17.md",
@@ -63918,7 +63918,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.74
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_18.md",
@@ -64083,7 +64083,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.77
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_19.md",
@@ -64413,7 +64413,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_21.md",
@@ -64578,7 +64578,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_22.md",
@@ -64743,7 +64743,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_23.md",
@@ -65238,7 +65238,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.77
+      "parse_time_ms": 0.74
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_26.md",
@@ -65403,7 +65403,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.74
+      "parse_time_ms": 0.75
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_27.md",
@@ -65568,7 +65568,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.83
+      "parse_time_ms": 0.84
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_28.md",
@@ -65733,7 +65733,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.79
+      "parse_time_ms": 0.75
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_29.md",
@@ -65898,7 +65898,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/12_frontmatter_stress/front_matter__case_30.md",
@@ -66063,7 +66063,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.74
+      "parse_time_ms": 0.77
     },
     {
       "md_file": "test_mds/13_security/hdg_code_fence.md",
@@ -66234,7 +66234,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.57
+      "parse_time_ms": 0.58
     },
     {
       "md_file": "test_mds/13_security/hdg_escaped_hash.md",
@@ -66373,7 +66373,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.46
+      "parse_time_ms": 0.45
     },
     {
       "md_file": "test_mds/13_security/hdg_fullwidth_hash.md",
@@ -66516,7 +66516,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.46
+      "parse_time_ms": 0.45
     },
     {
       "md_file": "test_mds/13_security/hdg_in_blockquote.md",
@@ -66679,7 +66679,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/13_security/hdg_in_list_item.md",
@@ -67034,7 +67034,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.68
+      "parse_time_ms": 0.66
     },
     {
       "md_file": "test_mds/13_security/hdg_nbsp_after_hash.md",
@@ -67325,7 +67325,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.47
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/13_security/hdg_setext_valid.md",
@@ -67519,7 +67519,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/13_security/hdg_three_space_indent.md",
@@ -67863,7 +67863,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.49
     },
     {
       "md_file": "test_mds/13_security/hdg_unclosed_fence_then_hash.md",
@@ -68009,7 +68009,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.43
+      "parse_time_ms": 0.42
     },
     {
       "md_file": "test_mds/13_security/sec_confusables.md",
@@ -68164,7 +68164,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.49
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/13_security/sec_data_uri_image.md",
@@ -68332,7 +68332,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.7
+      "parse_time_ms": 0.73
     },
     {
       "md_file": "test_mds/13_security/sec_footnote_injection.md",
@@ -68529,7 +68529,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.63
+      "parse_time_ms": 0.64
     },
     {
       "md_file": "test_mds/13_security/sec_html_comment.md",
@@ -68688,7 +68688,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.47
+      "parse_time_ms": 0.48
     },
     {
       "md_file": "test_mds/13_security/sec_html_inline.md",
@@ -68843,7 +68843,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.55
     },
     {
       "md_file": "test_mds/13_security/sec_html_script.md",
@@ -69010,7 +69010,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.47
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/13_security/sec_img_onerror.md",
@@ -69157,7 +69157,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.44
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/13_security/sec_kitchen_sink.md",
@@ -69352,7 +69352,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.69
+      "parse_time_ms": 0.71
     },
     {
       "md_file": "test_mds/13_security/sec_link_schemes.md",
@@ -69569,7 +69569,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.86
+      "parse_time_ms": 0.89
     },
     {
       "md_file": "test_mds/13_security/sec_link_wrapped_image.md",
@@ -69765,7 +69765,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.67
+      "parse_time_ms": 0.69
     },
     {
       "md_file": "test_mds/13_security/sec_prompt_injection.md",
@@ -70077,7 +70077,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.51
     },
     {
       "md_file": "test_mds/14_tables/md_brutal_tables.md",
@@ -72236,7 +72236,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 14.31
+      "parse_time_ms": 14.67
     },
     {
       "md_file": "test_mds/14_tables/md_brutal_tables_nohtml.md",
@@ -74265,7 +74265,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 12.78
+      "parse_time_ms": 12.98
     },
     {
       "md_file": "test_mds/14_tables/tbl_align_mismatch.md",
@@ -74471,7 +74471,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.0
+      "parse_time_ms": 1.08
     },
     {
       "md_file": "test_mds/14_tables/tbl_align_mismatch_bad.md",
@@ -74631,7 +74631,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.67
+      "parse_time_ms": 0.71
     },
     {
       "md_file": "test_mds/14_tables/tbl_clean_2x2.md",
@@ -74832,7 +74832,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.85
+      "parse_time_ms": 0.86
     },
     {
       "md_file": "test_mds/14_tables/tbl_escaped_pipes_rect.md",
@@ -75259,7 +75259,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.78
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/14_tables/tbl_in_code_fence.md",
@@ -75751,7 +75751,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 3.62
+      "parse_time_ms": 3.65
     },
     {
       "md_file": "test_mds/14_tables/tbl_loose_pipes.md",
@@ -75944,7 +75944,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.72
+      "parse_time_ms": 0.71
     },
     {
       "md_file": "test_mds/14_tables/tbl_missing_header_sep.md",
@@ -76302,7 +76302,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.02
+      "parse_time_ms": 1.03
     },
     {
       "md_file": "test_mds/14_tables/tbl_ragged_rows.md",
@@ -76508,7 +76508,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.95
+      "parse_time_ms": 0.99
     },
     {
       "md_file": "test_mds/14_tables/tbl_trailing_pipes_rect.md",
@@ -76709,7 +76709,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.9
+      "parse_time_ms": 0.91
     },
     {
       "md_file": "test_mds/15_integration/md_brutal_test.md",
@@ -79951,7 +79951,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 15.13
+      "parse_time_ms": 15.32
     },
     {
       "md_file": "test_mds/15_integration/md_brutal_test_commonmark.md",
@@ -81903,7 +81903,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 8.94
+      "parse_time_ms": 9.03
     },
     {
       "md_file": "test_mds/15_integration/md_brutal_test_gfm.md",
@@ -83870,7 +83870,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 9.65
+      "parse_time_ms": 9.82
     },
     {
       "md_file": "test_mds/15_integration/md_nested_lists_checklists.md",
@@ -84742,7 +84742,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 3.69
+      "parse_time_ms": 3.68
     },
     {
       "md_file": "test_mds/15_integration/md_test_document.md",
@@ -86126,7 +86126,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 4.01
+      "parse_time_ms": 4.1
     },
     {
       "md_file": "test_mds/15_integration/test_edge_cases.md",
@@ -87793,7 +87793,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 5.64
+      "parse_time_ms": 5.79
     },
     {
       "md_file": "test_mds/15_integration/test_mixed_nested_structures.md",
@@ -89719,7 +89719,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 8.61
+      "parse_time_ms": 8.84
     },
     {
       "md_file": "test_mds/16_performance/test_code_blocks.md",
@@ -90327,7 +90327,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.31
+      "parse_time_ms": 1.38
     },
     {
       "md_file": "test_mds/16_performance/test_performance_large.md",
@@ -93943,7 +93943,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 14.19
+      "parse_time_ms": 14.47
     },
     {
       "md_file": "test_mds/16_performance/test_requirements.md",
@@ -94461,7 +94461,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.7
+      "parse_time_ms": 1.77
     },
     {
       "md_file": "test_mds/17_blockquotes/basic_and_nested_blockquotes.md",
@@ -94713,7 +94713,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.97
+      "parse_time_ms": 0.98
     },
     {
       "md_file": "test_mds/17_blockquotes/blockquote_with_code_and_hr.md",
@@ -94909,7 +94909,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.56
     },
     {
       "md_file": "test_mds/17_blockquotes/blockquote_with_table.md",
@@ -95306,7 +95306,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.64
+      "parse_time_ms": 0.65
     },
     {
       "md_file": "test_mds/17_blockquotes/deep_nested_blockquotes.md",
@@ -95696,7 +95696,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.55
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/17_blockquotes/lazy_continuation.md",
@@ -95890,7 +95890,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.62
     },
     {
       "md_file": "test_mds/17_blockquotes/multiple_code_blocks.md",
@@ -96139,7 +96139,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.66
+      "parse_time_ms": 0.7
     },
     {
       "md_file": "test_mds/18_lists/blank_lines_between_items.md",
@@ -96383,7 +96383,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.93
+      "parse_time_ms": 1.15
     },
     {
       "md_file": "test_mds/18_lists/continuation_paragraphs.md",
@@ -96593,7 +96593,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.68
+      "parse_time_ms": 1.05
     },
     {
       "md_file": "test_mds/18_lists/deep_nesting.md",
@@ -96850,7 +96850,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.16
+      "parse_time_ms": 1.35
     },
     {
       "md_file": "test_mds/18_lists/lazy_continuation.md",
@@ -97043,7 +97043,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.63
+      "parse_time_ms": 0.67
     },
     {
       "md_file": "test_mds/18_lists/list_with_blockquotes.md",
@@ -97290,7 +97290,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.76
+      "parse_time_ms": 0.81
     },
     {
       "md_file": "test_mds/18_lists/list_with_code_blocks.md",
@@ -97547,7 +97547,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.79
     },
     {
       "md_file": "test_mds/18_lists/malformed_indentation.md",
@@ -97762,7 +97762,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.79
+      "parse_time_ms": 0.82
     },
     {
       "md_file": "test_mds/18_lists/mixed_bullet_types.md",
@@ -98047,7 +98047,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.2
+      "parse_time_ms": 1.21
     },
     {
       "md_file": "test_mds/18_lists/multiple_paragraphs_per_item.md",
@@ -98259,7 +98259,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/18_lists/ordered_custom_start.md",
@@ -98489,7 +98489,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.9
+      "parse_time_ms": 0.92
     },
     {
       "md_file": "test_mds/18_lists/ordered_variants_and_start.md",
@@ -98696,7 +98696,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.76
+      "parse_time_ms": 0.8
     },
     {
       "md_file": "test_mds/18_lists/tight_vs_loose.md",
@@ -99188,7 +99188,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.92
+      "parse_time_ms": 0.93
     },
     {
       "md_file": "test_mds/19_tasklists/basic_tasklist_states.md",
@@ -99371,7 +99371,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.92
+      "parse_time_ms": 0.94
     },
     {
       "md_file": "test_mds/19_tasklists/checkbox_not_at_start.md",
@@ -99563,7 +99563,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.76
+      "parse_time_ms": 0.78
     },
     {
       "md_file": "test_mds/19_tasklists/deep_nested_tasks.md",
@@ -99820,7 +99820,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.37
+      "parse_time_ms": 1.39
     },
     {
       "md_file": "test_mds/19_tasklists/invalid_checkbox_syntax.md",
@@ -100042,7 +100042,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.91
+      "parse_time_ms": 0.95
     },
     {
       "md_file": "test_mds/19_tasklists/malformed_checkboxes.md",
@@ -100256,7 +100256,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.21
+      "parse_time_ms": 1.23
     },
     {
       "md_file": "test_mds/19_tasklists/mixed_regular_and_tasks.md",
@@ -100479,7 +100479,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.9
+      "parse_time_ms": 0.91
     },
     {
       "md_file": "test_mds/19_tasklists/nested_tasks_and_lists.md",
@@ -100685,7 +100685,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.84
+      "parse_time_ms": 0.83
     },
     {
       "md_file": "test_mds/19_tasklists/stress_100_tasks.md",
@@ -101827,7 +101827,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 6.37
+      "parse_time_ms": 6.38
     },
     {
       "md_file": "test_mds/19_tasklists/task_with_code_block.md",
@@ -102076,7 +102076,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.69
+      "parse_time_ms": 0.72
     },
     {
       "md_file": "test_mds/19_tasklists/task_with_continuation.md",
@@ -102280,7 +102280,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.75
+      "parse_time_ms": 0.74
     },
     {
       "md_file": "test_mds/20_strikethrough_hr/almost_hr_edge_cases.md",
@@ -103038,7 +103038,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.81
+      "parse_time_ms": 0.82
     },
     {
       "md_file": "test_mds/20_strikethrough_hr/hr_variants_with_spaces.md",
@@ -103262,7 +103262,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.51
     },
     {
       "md_file": "test_mds/20_strikethrough_hr/strike_inside_links_and_code.md",
@@ -103860,7 +103860,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.08
+      "parse_time_ms": 1.07
     },
     {
       "md_file": "test_mds/21_inline_formatting/adjacent_emphasis_no_space.md",
@@ -104343,7 +104343,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.08
+      "parse_time_ms": 1.07
     },
     {
       "md_file": "test_mds/21_inline_formatting/code_with_special_chars.md",
@@ -104620,7 +104620,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.9
+      "parse_time_ms": 0.91
     },
     {
       "md_file": "test_mds/21_inline_formatting/emphasis_adjacent_punctuation_edges.md",
@@ -104761,7 +104761,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.77
+      "parse_time_ms": 0.76
     },
     {
       "md_file": "test_mds/21_inline_formatting/emphasis_at_word_boundaries.md",
@@ -105039,7 +105039,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.56
+      "parse_time_ms": 1.55
     },
     {
       "md_file": "test_mds/21_inline_formatting/escaped_emphasis.md",
@@ -105317,7 +105317,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.87
+      "parse_time_ms": 0.88
     },
     {
       "md_file": "test_mds/21_inline_formatting/images_with_formatted_alt.md",
@@ -105669,7 +105669,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 9.58
+      "parse_time_ms": 7.69
     },
     {
       "md_file": "test_mds/21_inline_formatting/intraword_emphasis.md",
@@ -106311,7 +106311,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.48
+      "parse_time_ms": 1.5
     },
     {
       "md_file": "test_mds/21_inline_formatting/mixed_delimiter_types.md",
@@ -106589,7 +106589,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.34
+      "parse_time_ms": 1.38
     },
     {
       "md_file": "test_mds/21_inline_formatting/triple_quadruple_markers.md",
@@ -106848,7 +106848,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.29
+      "parse_time_ms": 1.32
     },
     {
       "md_file": "test_mds/21_inline_formatting/unicode_in_emphasis.md",
@@ -107101,7 +107101,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.95
+      "parse_time_ms": 1.03
     },
     {
       "md_file": "test_mds/22_linebreaks_spacing/blank_line_semantics.md",
@@ -107256,7 +107256,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.52
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/22_linebreaks_spacing/hard_vs_soft_breaks.md",
@@ -107451,7 +107451,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.7
+      "parse_time_ms": 0.72
     },
     {
       "md_file": "test_mds/22_linebreaks_spacing/multiple_blank_lines_and_tabs.md",
@@ -107580,7 +107580,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.37
+      "parse_time_ms": 0.4
     },
     {
       "md_file": "test_mds/22_linebreaks_spacing/trailing_spaces_detection.md",
@@ -107829,7 +107829,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.45
+      "parse_time_ms": 0.44
     },
     {
       "md_file": "test_mds/23_autolink_linkify/email_variations.md",
@@ -107950,7 +107950,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/23_autolink_linkify/false_positives.md",
@@ -108059,7 +108059,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.51
     },
     {
       "md_file": "test_mds/23_autolink_linkify/no_link_in_code.md",
@@ -108193,7 +108193,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.44
+      "parse_time_ms": 0.46
     },
     {
       "md_file": "test_mds/23_autolink_linkify/raw_urls_emails_i18n.md",
@@ -108329,7 +108329,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.57
     },
     {
       "md_file": "test_mds/23_autolink_linkify/urls_with_special_chars.md",
@@ -108438,7 +108438,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.42
+      "parse_time_ms": 0.41
     },
     {
       "md_file": "test_mds/24_images_references/case_sensitivity_and_special_chars.md",
@@ -108585,7 +108585,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.62
     },
     {
       "md_file": "test_mds/24_images_references/image_ref_edge_cases.md",
@@ -108694,7 +108694,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.52
     },
     {
       "md_file": "test_mds/24_images_references/missing_refs_and_alt.md",
@@ -108898,7 +108898,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.71
+      "parse_time_ms": 0.72
     },
     {
       "md_file": "test_mds/24_images_references/nested_and_circular_refs.md",
@@ -109045,7 +109045,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.56
+      "parse_time_ms": 0.57
     },
     {
       "md_file": "test_mds/24_images_references/ref_style_links_images.md",
@@ -109212,7 +109212,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.67
+      "parse_time_ms": 0.68
     },
     {
       "md_file": "test_mds/25_definition_lists/basic_definition_list.md",
@@ -109344,7 +109344,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.48
+      "parse_time_ms": 0.5
     },
     {
       "md_file": "test_mds/25_definition_lists/compact_vs_loose_defs.md",
@@ -109493,7 +109493,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.62
     },
     {
       "md_file": "test_mds/25_definition_lists/link_terms_and_titles.md",
@@ -109647,7 +109647,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.62
+      "parse_time_ms": 0.65
     },
     {
       "md_file": "test_mds/25_definition_lists/malformed_missing_colon.md",
@@ -110060,7 +110060,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.49
     },
     {
       "md_file": "test_mds/25_definition_lists/term_with_multiple_blocks.md",
@@ -110207,7 +110207,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.48
+      "parse_time_ms": 0.51
     },
     {
       "md_file": "test_mds/26_admonitions_containers/admonition_with_list_and_quote.md",
@@ -110357,7 +110357,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.51
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/26_admonitions_containers/container_with_title_and_attrs.md",
@@ -110469,7 +110469,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.53
+      "parse_time_ms": 0.54
     },
     {
       "md_file": "test_mds/26_admonitions_containers/malformed_missing_end.md",
@@ -110578,7 +110578,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.4
+      "parse_time_ms": 0.38
     },
     {
       "md_file": "test_mds/26_admonitions_containers/nested_with_code_and_table.md",
@@ -110793,7 +110793,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 1.04
+      "parse_time_ms": 1.06
     },
     {
       "md_file": "test_mds/26_admonitions_containers/note_warning_nested.md",
@@ -110928,7 +110928,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.6
+      "parse_time_ms": 0.63
     },
     {
       "md_file": "test_mds/26_admonitions_containers/types_note_warning_tip_danger.md",
@@ -111441,7 +111441,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.5
+      "parse_time_ms": 0.49
     },
     {
       "md_file": "test_mds/27_heading_ids_slugs/emoji_in_headings_and_long_text.md",
@@ -111591,7 +111591,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.6
     },
     {
       "md_file": "test_mds/27_heading_ids_slugs/rtl_text_heading.md",
@@ -111713,7 +111713,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.35
+      "parse_time_ms": 0.36
     },
     {
       "md_file": "test_mds/27_heading_ids_slugs/special_chars_handling.md",
@@ -111835,7 +111835,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.37
+      "parse_time_ms": 0.38
     },
     {
       "md_file": "test_mds/28_emoji_shortcodes/emoji_adjacent_to_text.md",
@@ -111940,7 +111940,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.4
+      "parse_time_ms": 0.39
     },
     {
       "md_file": "test_mds/28_emoji_shortcodes/emoji_in_headings_lists_tables.md",
@@ -112271,7 +112271,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.87
+      "parse_time_ms": 0.89
     },
     {
       "md_file": "test_mds/28_emoji_shortcodes/emoji_vs_colons.md",
@@ -112516,7 +112516,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.44
+      "parse_time_ms": 0.45
     },
     {
       "md_file": "test_mds/29_entities_escapes/entity_boundaries_and_whitespace.md",
@@ -112621,7 +112621,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.36
+      "parse_time_ms": 0.38
     },
     {
       "md_file": "test_mds/29_entities_escapes/escaped_backslashes_and_edges.md",
@@ -112730,7 +112730,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.42
+      "parse_time_ms": 0.41
     },
     {
       "md_file": "test_mds/29_entities_escapes/html_entities_and_escapes.md",
@@ -113079,7 +113079,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.37
+      "parse_time_ms": 0.39
     },
     {
       "md_file": "test_mds/30_fenced_code_info/backtick_and_tilde_mixture.md",
@@ -113326,7 +113326,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.35
+      "parse_time_ms": 0.34
     },
     {
       "md_file": "test_mds/30_fenced_code_info/info_strings_and_attrs.md",
@@ -113475,7 +113475,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.37
+      "parse_time_ms": 0.39
     },
     {
       "md_file": "test_mds/30_fenced_code_info/invalid_info_string.md",
@@ -113582,7 +113582,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.43
+      "parse_time_ms": 0.41
     },
     {
       "md_file": "test_mds/30_fenced_code_info/no_language_specified.md",
@@ -113970,7 +113970,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.59
+      "parse_time_ms": 0.58
     },
     {
       "md_file": "test_mds/31_details_summary_html/details_without_closing_tag.md",
@@ -114078,7 +114078,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.33
+      "parse_time_ms": 0.32
     },
     {
       "md_file": "test_mds/31_details_summary_html/malformed_missing_summary.md",
@@ -114186,7 +114186,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.32
+      "parse_time_ms": 0.34
     },
     {
       "md_file": "test_mds/31_details_summary_html/nested_details_markdown_inside.md",
@@ -114348,7 +114348,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.61
+      "parse_time_ms": 0.6
     },
     {
       "md_file": "test_mds/31_details_summary_html/summary_with_inline_markup.md",
@@ -114459,7 +114459,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.34
+      "parse_time_ms": 0.33
     },
     {
       "md_file": "test_mds/32_toc_invariants/deep_nesting_and_skips.md",
@@ -114641,7 +114641,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.45
+      "parse_time_ms": 0.46
     },
     {
       "md_file": "test_mds/32_toc_invariants/duplicate_titles_different_sections.md",
@@ -115004,7 +115004,7 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.43
+      "parse_time_ms": 0.42
     },
     {
       "md_file": "test_mds/32_toc_invariants/toc_tree_bounds.md",
@@ -115337,8 +115337,8 @@
           "code_blocks": []
         }
       },
-      "parse_time_ms": 0.84
+      "parse_time_ms": 0.85
     }
   ],
-  "elapsed_seconds": 0.76
+  "elapsed_seconds": 0.77
 }
