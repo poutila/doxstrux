@@ -9,7 +9,7 @@ Tests for the fail-closed approach to link/image validation:
 
 import pytest
 from doxstrux.markdown_parser_core import MarkdownParserCore
-from doxstrux import security_validators
+from doxstrux.markdown.security import validators as security_validators
 
 
 def test_parse_does_not_mutate_source():

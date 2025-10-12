@@ -18,10 +18,10 @@ from markdown_it.tree import SyntaxTreeNode
 from mdit_py_plugins.footnote import footnote_plugin
 from mdit_py_plugins.tasklists import tasklists_plugin
 from mdit_py_plugins.front_matter import front_matter_plugin
-from doxstrux import security_validators
-from doxstrux.document_ir import DocumentIR, DocNode
-from doxstrux.token_replacement_lib import walk_tokens_iter
-from doxstrux.exceptions import MarkdownSecurityError, MarkdownSizeError
+from doxstrux.markdown.security import validators as security_validators
+from doxstrux.markdown.ir import DocumentIR, DocNode
+from doxstrux.markdown.utils.token_utils import walk_tokens_iter
+from doxstrux.markdown.exceptions import MarkdownSecurityError, MarkdownSizeError
 
 class MarkdownParserCore:
     """

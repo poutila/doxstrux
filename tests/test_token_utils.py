@@ -8,7 +8,7 @@ import pytest
 from markdown_it import MarkdownIt
 from markdown_it.token import Token
 
-from doxstrux.token_replacement_lib import (
+from doxstrux.markdown.utils.token_utils import (
     walk_tokens_iter,
     collect_text_between_tokens,
     extract_code_blocks,

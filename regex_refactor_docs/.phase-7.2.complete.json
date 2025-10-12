@@ -1,0 +1,89 @@
+{
+  "task": "7.2",
+  "name": "Move Existing Modules",
+  "status": "complete",
+  "timestamp": "2025-10-13T00:30:00Z",
+  "evidence": {
+    "files_moved": [
+      {
+        "from": "src/doxstrux/exceptions.py",
+        "to": "src/doxstrux/markdown/exceptions.py",
+        "lines": 15,
+        "dependencies": "none"
+      },
+      {
+        "from": "src/doxstrux/document_ir.py",
+        "to": "src/doxstrux/markdown/ir.py",
+        "lines": 208,
+        "dependencies": "none (pure dataclasses)"
+      },
+      {
+        "from": "src/doxstrux/security_validators.py",
+        "to": "src/doxstrux/markdown/security/validators.py",
+        "lines": 340,
+        "dependencies": "stdlib only (re, unicodedata)"
+      },
+      {
+        "from": "src/doxstrux/token_replacement_lib.py",
+        "to": "src/doxstrux/markdown/utils/token_utils.py",
+        "lines": 285,
+        "dependencies": "markdown-it-py only"
+      }
+    ],
+    "imports_updated": {
+      "source_files": [
+        "src/doxstrux/markdown_parser_core.py (4 imports updated)"
+      ],
+      "test_files": [
+        "tests/test_document_ir.py",
+        "tests/test_phase3_fail_closed.py",
+        "tests/test_token_utils.py"
+      ],
+      "documentation": [
+        "README.md (1 import updated)"
+      ],
+      "tools": [
+        "tools/baseline_test_runner.py",
+        "tools/test_feature_counts.py",
+        "tools/generate_baseline_outputs.py",
+        "tools/generate_missing_pairs.py",
+        "tools/generate_baseline.py",
+        "tools/validate_parity.py"
+      ]
+    },
+    "import_style": "absolute imports only",
+    "example_imports": [
+      "from doxstrux.markdown.exceptions import MarkdownSecurityError",
+      "from doxstrux.markdown.ir import DocumentIR, DocNode",
+      "from doxstrux.markdown.security import validators as security_validators",
+      "from doxstrux.markdown.utils.token_utils import walk_tokens_iter"
+    ]
+  },
+  "tests": {
+    "pytest": {
+      "total": 63,
+      "passed": 63,
+      "failed": 0,
+      "coverage": "70%",
+      "status": "✅ PASS"
+    },
+    "baselines": {
+      "total": 542,
+      "passed": 542,
+      "failed": 0,
+      "parity": "100.0%",
+      "time_ms": 479.54,
+      "status": "✅ PASS"
+    },
+    "behavioral_changes": "none - byte-for-byte parity maintained"
+  },
+  "module_structure": {
+    "src/doxstrux/markdown/": {
+      "exceptions.py": "error hierarchy",
+      "ir.py": "document intermediate representation",
+      "security/validators.py": "security validation functions",
+      "utils/token_utils.py": "token traversal utilities"
+    }
+  },
+  "next_task": "7.3 - Extract line & text utilities"
+}

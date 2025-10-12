@@ -26,7 +26,7 @@ from typing import Any
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from docpipe.markdown_parser_core import MarkdownParserCore
+from doxstrux.markdown_parser_core import MarkdownParserCore
 
 
 def deep_compare(obj1: Any, obj2: Any, path: str = "root") -> list[str]:

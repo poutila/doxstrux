@@ -6,7 +6,7 @@ Phase 6 Task 6.2: Document IR as contract between parsers and chunkers.
 
 import pytest
 from doxstrux.markdown_parser_core import MarkdownParserCore
-from doxstrux.document_ir import DocumentIR, DocNode, ChunkPolicy, Chunk, ChunkResult
+from doxstrux.markdown.ir import DocumentIR, DocNode, ChunkPolicy, Chunk, ChunkResult
 
 
 class TestDocumentIR:

@@ -78,7 +78,7 @@ result = parser.parse()
 Clean intermediate representation for RAG pipelines and chunking:
 
 ```python
-from doxstrux.document_ir import DocumentIR, ChunkPolicy
+from doxstrux.markdown.ir import DocumentIR, ChunkPolicy
 
 # Parse to IR
 parser = MarkdownParserCore(content)

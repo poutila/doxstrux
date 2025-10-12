@@ -23,7 +23,7 @@ import traceback
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from docpipe.markdown_parser_core import MarkdownParserCore
+from doxstrux.markdown_parser_core import MarkdownParserCore
 
 
 class DateTimeEncoder(json.JSONEncoder):
