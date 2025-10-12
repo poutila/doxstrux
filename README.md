@@ -1,8 +1,10 @@
 # 🏗️ Doxstrux
 
+[![PyPI version](https://badge.fury.io/py/doxstrux.svg)](https://badge.fury.io/py/doxstrux)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Downloads](https://pepy.tech/badge/doxstrux)](https://pepy.tech/project/doxstrux)
 
 **Document structure extraction tool** for markdown, with extensibility to PDF and HTML.
 
@@ -110,11 +112,12 @@ ruff check src/ tests/
 
 ## 📊 Project Status
 
-- **Version**: 0.2.0
+- **Version**: 0.2.0 ✅ **Published on PyPI**
 - **Python**: 3.12+
 - **Test Coverage**: 70%
 - **Tests**: 63/63 passing
 - **Regex Count**: 0 (zero-regex architecture)
+- **PyPI**: https://pypi.org/project/doxstrux/
 
 ## 🗺️ Roadmap
 

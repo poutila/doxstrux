@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0] - 2025-10-12
 
+**🎉 First PyPI Release!**
+
+Available at: https://pypi.org/project/doxstrux/
+
 ### Changed
 - **BREAKING**: Renamed package from `docpipe` to `doxstrux` for extensibility to PDF/HTML
 - All imports changed from `from docpipe.X` to `from doxstrux.X`
@@ -14,10 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Package description updated to emphasize document structure extraction
 
 ### Added
+- **Published to PyPI**: `pip install doxstrux`
 - MIT License file
 - PyPI-ready README with badges, installation instructions, and quick start
 - This CHANGELOG file
 - Phase 7 modularization plan in documentation
+- GitHub Actions workflows (CI, PyPI publishing)
+- Community files (CONTRIBUTING.md, SECURITY.md)
+- Issue and PR templates
 
 ### Fixed
 - Dead code removed (regex timeout, bleach sanitization, unused methods)
@@ -42,4 +50,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-**Note**: Version 0.1.0 was never published to PyPI. Version 0.2.0 will be the first PyPI release under the new name `doxstrux`.
+**Note**: Version 0.1.0 was never published to PyPI. Version 0.2.0 is the first PyPI release under the new name `doxstrux`.
