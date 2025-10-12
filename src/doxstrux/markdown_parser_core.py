@@ -23,6 +23,7 @@ from doxstrux.markdown.ir import DocumentIR, DocNode
 from doxstrux.markdown.utils.token_utils import walk_tokens_iter
 from doxstrux.markdown.utils import line_utils, text_utils
 from doxstrux.markdown.exceptions import MarkdownSecurityError, MarkdownSizeError
+from doxstrux.markdown import config
 
 class MarkdownParserCore:
     """
@@ -93,125 +94,28 @@ class MarkdownParserCore:
             "line_count": line_count,
         }
 
+    # Phase 7 Task 7.4: Configuration moved to markdown/config.py
+    # Use config.SECURITY_PROFILES, config.SECURITY_LIMITS, config.ALLOWED_PLUGINS
+    # Use config._STYLE_JS_PAT, config._META_REFRESH_PAT, config._FRAMELIKE_PAT
+    # Use config._BIDI_CONTROLS
+
     # Safety: Maximum recursion depth to prevent stack overflow
-    MAX_RECURSION_DEPTH = 100
+    MAX_RECURSION_DEPTH = config.MAX_RECURSION_DEPTH
 
-    # Security: Allowed link schemes for RAG safety
-    # Phase 6 Task 6.1: _ALLOWED_LINK_SCHEMES moved to security_validators.py
-    # Use security_validators.ALLOWED_LINK_SCHEMES_* constants
+    # Security: Content size limits (reference config module)
+    SECURITY_LIMITS = config.SECURITY_LIMITS
 
-    # Security: Content size limits to prevent DoS
-    SECURITY_LIMITS = {
-        "strict": {
-            "max_content_size": 100 * 1024,  # 100KB
-            "max_line_count": 2000,  # 2K lines
-            "max_token_count": 50000,  # 50K tokens
-            "max_recursion_depth": 50,  # Reduced recursion
-        },
-        "moderate": {
-            "max_content_size": 1024 * 1024,  # 1MB
-            "max_line_count": 10000,  # 10K lines
-            "max_token_count": 200000,  # 200K tokens
-            "max_recursion_depth": 100,  # Standard recursion
-        },
-        "permissive": {
-            "max_content_size": 10 * 1024 * 1024,  # 10MB
-            "max_line_count": 50000,  # 50K lines
-            "max_token_count": 1000000,  # 1M tokens
-            "max_recursion_depth": 150,  # Higher recursion
-        },
-    }
+    # Security: Allowed plugins (reference config module)
+    ALLOWED_PLUGINS = config.ALLOWED_PLUGINS
 
-    # Security: Allowed plugins by profile
-    ALLOWED_PLUGINS = {
-        "strict": {
-            "builtin": ["table"],  # Only basic table support
-            "external": ["front_matter", "tasklists"],  # Frontmatter plugin allowed (read-only extraction)
-        },
-        "moderate": {
-            "builtin": ["table", "strikethrough", "linkify"],
-            "external": ["footnote", "front_matter", "tasklists"],  # Limited external plugins
-        },
-        "permissive": {
-            "builtin": ["table", "strikethrough", "linkify"],
-            "external": ["footnote", "tasklists", "front_matter"],  # All supported plugins
-        },
-    }
+    # Security patterns (reference config module)
+    _STYLE_JS_PAT = config._STYLE_JS_PAT
+    _META_REFRESH_PAT = config._META_REFRESH_PAT
+    _FRAMELIKE_PAT = config._FRAMELIKE_PAT
+    _BIDI_CONTROLS = config._BIDI_CONTROLS
 
-    # Phase 6 Task 6.1: _PROMPT_INJECTION_PATTERNS moved to security_validators.py
-    # Use security_validators.PROMPT_INJECTION_PATTERNS
-
-    # Extra HTML/CSS/scriptless vector patterns
-    _STYLE_JS_PAT = re.compile(
-        r'style\s*=\s*["\'][^"\']*(url\s*\(\s*javascript:|expression\s*\()', re.I
-    )
-    _META_REFRESH_PAT = re.compile(r'<meta[^>]+http-equiv\s*=\s*["\']refresh["\'][^>]*>', re.I)
-    _FRAMELIKE_PAT = re.compile(r"<(iframe|object|embed)[^>]*>", re.I)  # Any frame-like element
-
-    # BiDi control characters for detecting text direction manipulation
-    _BIDI_CONTROLS = [
-        "\u202a",  # Left-to-Right Embedding
-        "\u202b",  # Right-to-Left Embedding
-        "\u202c",  # Pop Directional Formatting
-        "\u202d",  # Left-to-Right Override
-        "\u202e",  # Right-to-Left Override
-        "\u2066",  # Left-to-Right Isolate
-        "\u2067",  # Right-to-Left Isolate
-        "\u2068",  # First Strong Isolate
-        "\u2069",  # Pop Directional Isolate
-        "\u200e",  # Left-to-Right Mark
-        "\u200f",  # Right-to-Left Mark
-    ]
-
-    # Phase 6 Task 6.1: _CONFUSABLES_EXTENDED moved to security_validators.py
-    # Use security_validators.CONFUSABLES_EXTENDED
-
-    # Phase 6: Removed _ALLOWED_HTML_TAGS, _ALLOWED_HTML_ATTRIBUTES, _ALLOWED_PROTOCOLS
-    # HTML sanitization via bleach removed - security now enforced via token-based
-    # detection and centralized validators (security_validators.py)
-
-    # Security profiles for different environments
-    SECURITY_PROFILES = {
-        "strict": {
-            "allows_html": False,
-            "allows_scripts": False,
-            "allows_data_uri": False,
-            "max_data_uri_size": 0,
-            "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_STRICT,  # Phase 6 Task 6.1
-            "max_link_count": 50,
-            "max_image_count": 20,
-            "max_footnote_size": 256,
-            "max_heading_depth": 4,
-            "quarantine_on_injection": True,
-            "strip_all_html": True,
-        },
-        "moderate": {
-            "allows_html": True,
-            "allows_scripts": False,
-            "allows_data_uri": True,
-            "max_data_uri_size": 10240,  # 10KB
-            "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_MODERATE,  # Phase 6 Task 6.1
-            "max_link_count": 200,
-            "max_image_count": 100,
-            "max_footnote_size": 512,
-            "max_heading_depth": 6,
-            "quarantine_on_injection": False,
-            "strip_all_html": False,
-        },
-        "permissive": {
-            "allows_html": True,
-            "allows_scripts": False,  # Never allow scripts in RAG
-            "allows_data_uri": True,
-            "max_data_uri_size": 102400,  # 100KB
-            "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_PERMISSIVE,  # Phase 6 Task 6.1
-            "max_link_count": 1000,
-            "max_image_count": 500,
-            "max_footnote_size": 2048,
-            "max_heading_depth": 6,
-            "quarantine_on_injection": False,
-            "strip_all_html": False,
-        },
-    }
+    # Security profiles (reference config module)
+    SECURITY_PROFILES = config.SECURITY_PROFILES
 
     def __init__(
         self,

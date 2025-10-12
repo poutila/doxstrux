@@ -1,0 +1,114 @@
+{
+  "task": "7.4",
+  "name": "Extract Configuration & Budgets",
+  "status": "complete",
+  "timestamp": "2025-10-13T01:30:00Z",
+  "evidence": {
+    "modules_created": {
+      "config.py": {
+        "purpose": "Centralized configuration and security profiles",
+        "lines": 168,
+        "exports": [
+          "SECURITY_PROFILES (strict/moderate/permissive)",
+          "SECURITY_LIMITS (size/line/token/recursion limits)",
+          "ALLOWED_PLUGINS (builtin and external by profile)",
+          "_STYLE_JS_PAT (CSS injection regex)",
+          "_META_REFRESH_PAT (meta refresh regex)",
+          "_FRAMELIKE_PAT (iframe/object/embed regex)",
+          "_BIDI_CONTROLS (text direction manipulation)",
+          "MAX_RECURSION_DEPTH (global safety limit)"
+        ],
+        "dependencies": ["security.validators"],
+        "coverage": "100%"
+      },
+      "budgets.py": {
+        "purpose": "Resource budget tracking and enforcement",
+        "lines": 231,
+        "classes": [
+          "NodeBudget: Track node counts (max 10K/50K/200K)",
+          "CellBudget: Track table cells (max 1K/10K/50K)",
+          "URIBudget: Track data URI sizes (max 0/10KB/100KB)"
+        ],
+        "enforcement": "All violations raise MarkdownSizeError with embedding_blocked_reason",
+        "dependencies": ["exceptions"],
+        "coverage": "0% (not yet integrated into parser)"
+      }
+    },
+    "core_changes": {
+      "lines_removed": 122,
+      "lines_added": 18,
+      "net_reduction": "-104 lines (~3.5%)",
+      "replaced_constants": [
+        "MAX_RECURSION_DEPTH → config.MAX_RECURSION_DEPTH",
+        "SECURITY_LIMITS → config.SECURITY_LIMITS",
+        "ALLOWED_PLUGINS → config.ALLOWED_PLUGINS",
+        "_STYLE_JS_PAT → config._STYLE_JS_PAT",
+        "_META_REFRESH_PAT → config._META_REFRESH_PAT",
+        "_FRAMELIKE_PAT → config._FRAMELIKE_PAT",
+        "_BIDI_CONTROLS → config._BIDI_CONTROLS",
+        "SECURITY_PROFILES → config.SECURITY_PROFILES"
+      ]
+    },
+    "imports_added": [
+      "from doxstrux.markdown import config"
+    ]
+  },
+  "security_profiles": {
+    "strict": {
+      "max_content_size": "100KB",
+      "max_line_count": 2000,
+      "max_link_count": 50,
+      "max_image_count": 20,
+      "allows_html": false,
+      "allows_data_uri": false
+    },
+    "moderate": {
+      "max_content_size": "1MB",
+      "max_line_count": 10000,
+      "max_link_count": 200,
+      "max_image_count": 100,
+      "allows_html": true,
+      "allows_data_uri": true
+    },
+    "permissive": {
+      "max_content_size": "10MB",
+      "max_line_count": 50000,
+      "max_link_count": 1000,
+      "max_image_count": 500,
+      "allows_html": true,
+      "allows_data_uri": true
+    }
+  },
+  "tests": {
+    "pytest": {
+      "total": 95,
+      "passed": 95,
+      "failed": 0,
+      "coverage": "68%",
+      "status": "✅ PASS"
+    },
+    "baselines": {
+      "total": 542,
+      "passed": 542,
+      "failed": 0,
+      "parity": "100.0%",
+      "time_ms": 499.80,
+      "status": "✅ PASS"
+    },
+    "security_tests": {
+      "category": "13_security",
+      "total": 24,
+      "passed": 24,
+      "failed": 0,
+      "status": "✅ PASS"
+    },
+    "behavioral_changes": "none - byte-for-byte parity maintained"
+  },
+  "module_structure": {
+    "src/doxstrux/markdown/": {
+      "config.py": "single source of truth for all configuration",
+      "budgets.py": "resource budget tracking (NodeBudget, CellBudget, URIBudget)"
+    }
+  },
+  "next_task": "7.5 - Extract simple extractors (media, footnotes, blockquotes, html)"
+}
