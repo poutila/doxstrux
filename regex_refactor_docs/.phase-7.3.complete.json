@@ -1,0 +1,106 @@
+{
+  "task": "7.3",
+  "name": "Extract Line & Text Utilities",
+  "status": "complete",
+  "timestamp": "2025-10-13T01:00:00Z",
+  "evidence": {
+    "utilities_extracted": {
+      "line_utils.py": {
+        "functions": [
+          "slice_lines(lines, start_line, end_line)",
+          "slice_lines_raw(lines, start_line, end_line)",
+          "build_line_offsets(lines)"
+        ],
+        "lines": 113,
+        "tests": 21,
+        "coverage": "100%"
+      },
+      "text_utils.py": {
+        "functions": [
+          "collect_text_segments(tokens)",
+          "extract_text_from_inline(inline_token)",
+          "has_child_type(node, types)"
+        ],
+        "lines": 137,
+        "tests": 11,
+        "coverage": "98%"
+      }
+    },
+    "methods_replaced_in_core": [
+      {
+        "method": "_slice_lines_inclusive",
+        "before_lines": 12,
+        "after_lines": 1,
+        "reduction": "-11 lines",
+        "now_calls": "line_utils.slice_lines()"
+      },
+      {
+        "method": "_slice_lines_raw",
+        "before_lines": 4,
+        "after_lines": 1,
+        "reduction": "-3 lines",
+        "now_calls": "line_utils.slice_lines_raw()"
+      },
+      {
+        "method": "_build_line_offsets",
+        "before_lines": 12,
+        "after_lines": 1,
+        "reduction": "-11 lines",
+        "now_calls": "line_utils.build_line_offsets()"
+      },
+      {
+        "method": "_collect_text_segments",
+        "before_lines": 38,
+        "after_lines": 1,
+        "reduction": "-37 lines",
+        "now_calls": "text_utils.collect_text_segments()"
+      },
+      {
+        "method": "_has_child_type",
+        "before_lines": 8,
+        "after_lines": 1,
+        "reduction": "-7 lines",
+        "now_calls": "text_utils.has_child_type()"
+      }
+    ],
+    "core_reduction": {
+      "total_lines_removed": 69,
+      "percentage_reduction": "~2.3% of core parser"
+    },
+    "imports_added": [
+      "from doxstrux.markdown.utils import line_utils, text_utils"
+    ]
+  },
+  "tests": {
+    "pytest": {
+      "total": 95,
+      "passed": 95,
+      "failed": 0,
+      "new_tests": 32,
+      "original_tests": 63,
+      "coverage": "70%",
+      "status": "✅ PASS"
+    },
+    "baselines": {
+      "total": 542,
+      "passed": 542,
+      "failed": 0,
+      "parity": "100.0%",
+      "time_ms": 480.93,
+      "status": "✅ PASS"
+    },
+    "new_test_files": [
+      "tests/test_line_utils.py (21 tests, 100% coverage)",
+      "tests/test_text_utils.py (11 tests, 98% coverage)"
+    ],
+    "behavioral_changes": "none - byte-for-byte parity maintained"
+  },
+  "module_structure": {
+    "src/doxstrux/markdown/utils/": {
+      "line_utils.py": "line slicing and character offset calculations",
+      "text_utils.py": "text extraction from token trees",
+      "token_utils.py": "token traversal utilities (from Task 7.2)"
+    }
+  },
+  "next_task": "7.4 - Extract configuration & budgets"
+}

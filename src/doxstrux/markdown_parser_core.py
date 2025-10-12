@@ -21,6 +21,7 @@ from mdit_py_plugins.front_matter import front_matter_plugin
 from doxstrux.markdown.security import validators as security_validators
 from doxstrux.markdown.ir import DocumentIR, DocNode
 from doxstrux.markdown.utils.token_utils import walk_tokens_iter
+from doxstrux.markdown.utils import line_utils, text_utils
 from doxstrux.markdown.exceptions import MarkdownSecurityError, MarkdownSizeError
 
 class MarkdownParserCore:
@@ -1276,17 +1277,7 @@ class MarkdownParserCore:
             # node.map = [5, 8] means lines 5, 6, 7 contain content
             _slice_lines_inclusive(5, 8) -> self.lines[5:8] -> lines 5, 6, 7
         """
-        if start_line is None or end_line is None:
-            return []
-
-        # Bounds checking
-        if start_line < 0 or start_line >= len(self.lines):
-            return []
-        if end_line <= start_line:
-            return []
-
-        # Use end-exclusive slicing since markdown-it's end_line is already +1
-        return self.lines[start_line:end_line]
+        return line_utils.slice_lines(self.lines, start_line, end_line)
 
     def _slice_lines_raw(self, start_line: int | None, end_line: int | None) -> str:
         """
@@ -1299,8 +1290,7 @@ class MarkdownParserCore:
         Returns:
             Joined string content with newlines preserved
         """
-        lines = self._slice_lines_inclusive(start_line, end_line)
-        return "\n".join(lines)
+        return line_utils.slice_lines_raw(self.lines, start_line, end_line)
 
     def _extract_frontmatter(self) -> dict | None:
         """
@@ -2606,42 +2596,7 @@ class MarkdownParserCore:
 
     def _collect_text_segments(self) -> None:
         """Collect text-ish segments with proper line ranges for better paragraph boundary detection."""
-        segs = []
-
-        # Process inline tokens which contain the actual text content
-        for token in self.tokens:
-            if token.type == "inline" and token.children and token.map:
-                # The token.map gives the range of the containing block (e.g., paragraph)
-                start_line = token.map[0]
-                end_line = token.map[1] - 1 if token.map[1] else start_line  # Convert to inclusive
-
-                # Extract text from inline children and track line breaks
-                text_parts = []
-                current_line_offset = 0
-
-                for child in token.children:
-                    if child.type == "text":
-                        content = getattr(child, "content", "") or ""
-                        if content:
-                            text_parts.append(content)
-                            # Count explicit newlines in text content
-                            current_line_offset += content.count("\n")
-                    elif child.type == "code_inline":
-                        content = getattr(child, "content", "") or ""
-                        if content:
-                            text_parts.append(content)
-                    elif child.type in ("softbreak", "hardbreak"):
-                        text_parts.append("\n")
-                        current_line_offset += 1
-
-                # If we collected any text, add it as a segment with proper range
-                if text_parts:
-                    full_text = "".join(text_parts)
-                    # Widen the range based on actual line breaks found
-                    actual_end_line = min(start_line + current_line_offset, end_line)
-                    segs.append((start_line, actual_end_line, full_text))
-
-        self._text_segments = segs
+        self._text_segments = text_utils.collect_text_segments(self.tokens)
 
     # Utility methods
 
@@ -2877,26 +2832,11 @@ class MarkdownParserCore:
 
     def _has_child_type(self, node, types) -> bool:
         """Check if node has children of specified type(s)."""
-        if isinstance(types, str):
-            types = [types]
-
-        for child in node.walk():
-            if child.type in types:
-                return True
-        return False
+        return text_utils.has_child_type(node, types)
 
     def _build_line_offsets(self) -> None:
         """Build array of character offsets for each line start."""
-        self._line_start_offsets = [0]
-        offset = 0
-        for line in self.lines[:-1]:  # All but last
-            offset += len(line) + 1  # +1 for \n
-            self._line_start_offsets.append(offset)
-        # Total chars including final line
-        if self.lines:
-            self._total_chars_with_lf = offset + len(self.lines[-1])
-        else:
-            self._total_chars_with_lf = 0
+        self._line_start_offsets, self._total_chars_with_lf = line_utils.build_line_offsets(self.lines)
 
     def _span_from_lines(
         self, start_line: int | None, end_line: int | None
