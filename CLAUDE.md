@@ -56,31 +56,65 @@ python tools/baseline_test_runner.py        # ❌ Wrong test results
 
 ## Core Architecture
 
-### Single-File Parser Design
-The heart of this project is `src/doxstrux/markdown_parser_core.py` (3660 lines), which implements a self-contained markdown parser with:
+### Modular Parser Design (Phase 7 Complete)
+The parser has been fully modularized into focused, single-responsibility components. The core parser (`src/doxstrux/markdown_parser_core.py`) is now **1944 lines** (down from 2900, **-33% reduction**) and delegates to specialized extractor modules:
+
 - **MarkdownParserCore**: Main parser class using markdown-it-py as the parsing engine
 - **Security-first design**: Three security profiles (strict, moderate, permissive) with content size limits, plugin validation, and prompt injection detection
 - **Universal recursion engine**: Single-pass document parsing with configurable recursion depth limits
 - **Pure token-based extraction**: Phase 6 - zero regex, all classification from markdown-it AST tokens
+- **Modular extractors**: Phase 7 - 11 specialized extractor modules with clean dependency injection
 
 ### Key Design Principles
 1. **Extract everything, analyze nothing**: Parser focuses on structural extraction, not semantic analysis
 2. **No file I/O in core**: Parser accepts content strings, not file paths
 3. **Plain dict outputs**: No Pydantic models in the core parser (keeps it lightweight)
 4. **Security layered throughout**: Size limits, plugin validation, HTML sanitization, link scheme validation
+5. **Single responsibility**: Each extractor handles one markdown element type
+6. **Dependency injection**: Extractors receive parser methods as parameters (no tight coupling)
 
-### Module Structure
+### Module Structure (Phase 7 - Modularized)
 ```
 src/doxstrux/
-├── markdown_parser_core.py    # Core parser (3660 lines) - pure token-based
-├── json_utils.py              # JSON serialization helpers
-├── sluggify_util.py           # Slug generation utilities
-├── help.py                    # Interactive help system for users and AI
-├── token_replacement_lib.py   # Token walking utilities (zero-regex support)
-└── __init__.py                # Package exports
+├── markdown_parser_core.py          # Core parser (1944 lines) - orchestrates extraction
+├── markdown/
+│   ├── __init__.py
+│   ├── config.py                    # Security profiles and configuration
+│   ├── budgets.py                   # Resource budgets and limits
+│   ├── exceptions.py                # Custom exception classes
+│   ├── ir.py                        # Document IR for RAG chunking
+│   ├── extractors/                  # Modular extractors (Phase 7.5 & 7.6)
+│   │   ├── __init__.py
+│   │   ├── sections.py              # Sections & headings (Phase 7.6.1)
+│   │   ├── paragraphs.py            # Paragraphs (Phase 7.6.2)
+│   │   ├── lists.py                 # Lists & tasklists (Phase 7.6.3)
+│   │   ├── codeblocks.py            # Code blocks (Phase 7.6.4)
+│   │   ├── tables.py                # Tables (Phase 7.6.5)
+│   │   ├── links.py                 # Links (Phase 7.6.6)
+│   │   ├── media.py                 # Images (Phase 7.5.1)
+│   │   ├── footnotes.py             # Footnotes (Phase 7.5.2)
+│   │   ├── blockquotes.py           # Blockquotes (Phase 7.5.3)
+│   │   └── html.py                  # HTML blocks & inline (Phase 7.5.4)
+│   ├── security/
+│   │   ├── __init__.py
+│   │   └── validators.py            # Security validation functions
+│   └── utils/
+│       ├── __init__.py
+│       ├── line_utils.py            # Line slicing utilities
+│       ├── text_utils.py            # Text extraction utilities
+│       └── token_utils.py           # Token walking utilities
+└── md_parser_testing/               # Testing utilities
+    ├── __init__.py
+    ├── json_utils.py                # JSON serialization helpers
+    └── testing_md_parser.py         # Test harness
 ```
 
-**Note**: `content_context.py` was removed in Phase 6 - prose/code classification now derived entirely from markdown-it AST tokens.
+**Phase 7 Achievements**:
+- ✅ Core parser reduced by 33% (2900 → 1944 lines)
+- ✅ 11 specialized extractor modules created
+- ✅ 100% baseline test parity maintained (542/542 tests passing)
+- ✅ Clean dependency injection pattern throughout
+- ✅ Zero behavioral changes (byte-for-byte output identical)
 
 ### Security Features
 The parser implements multi-layered security:
@@ -207,6 +241,94 @@ bash tools/run_tests_fast.sh 01_edge_cases
 
 ## Important Patterns and Conventions
 
+### Extractor Pattern (Phase 7)
+
+All extractors follow a consistent pattern for maintainability and testability:
+
+**Function-Based Interface**:
+```python
+def extract_<element>(
+    tree: SyntaxTreeNode,           # markdown-it AST
+    process_tree_func: Callable,    # Universal recursion engine
+    find_section_id_func: Callable, # Section lookup helper
+    get_text_func: Callable,        # Text extraction helper
+    # ... other parser methods as needed
+) -> list[dict]:
+    """Extract <element> with metadata.
+
+    Returns:
+        List of dicts with structure-specific fields
+    """
+    elements = []
+
+    def processor(node, ctx, level):
+        if node.type == "<element_type>":
+            # Extract element data
+            element_data = {
+                "id": f"<element>_{len(ctx)}",
+                "start_line": node.map[0] if node.map else None,
+                # ... element-specific fields
+            }
+            ctx.append(element_data)
+            return False  # Don't recurse into this element
+        return True  # Continue recursion
+
+    process_tree_func(tree, processor, elements)
+    return elements
+```
+
+**Core Parser Delegation**:
+```python
+def _extract_<element>(self) -> list[dict]:
+    """Extract <element> from document.
+
+    Phase 7.X: Delegated to extractors/<element>.py
+    """
+    return <element>.extract_<element>(
+        self.tree,
+        self.process_tree,
+        self._find_section_id,
+        self._get_text
+    )
+```
+
+**Key Characteristics**:
+- **No classes**: Pure functions for simplicity
+- **Dependency injection**: Receive parser methods as parameters
+- **No state**: Extractors are stateless (state lives in parser)
+- **Plain dicts**: Return simple dict structures, no Pydantic
+- **Caching**: Handled at parser level via `self._cache`
+- **Recursion safety**: Use depth limits to prevent stack overflow
+
+**Example - Lists Extractor**:
+```python
+# src/doxstrux/markdown/extractors/lists.py
+def extract_lists(
+    tree: Any,
+    process_tree_func: Any,
+    extract_list_items_func: Any,
+    find_section_id_func: Any
+) -> list[dict]:
+    """Extract regular lists (excludes task lists)."""
+    lists = []
+
+    def list_processor(node, ctx, level):
+        if node.type in ["bullet_list", "ordered_list"]:
+            items = extract_list_items_func(node)
+            list_data = {
+                "id": f"list_{len(ctx)}",
+                "type": "bullet" if node.type == "bullet_list" else "ordered",
+                "items": items,
+                # ... more fields
+            }
+            ctx.append(list_data)
+            return False
+        return True
+
+    process_tree_func(tree, list_processor, lists)
+    return lists
+```
+
 ### Parser Initialization
 ```python
 from src.doxstrux.markdown_parser_core import MarkdownParserCore
@@ -269,7 +391,7 @@ All optional dependencies gracefully degrade:
 ## Configuration Files
 
 ### pyproject.toml
-- **Package metadata**: Version 0.2.0, Python >=3.12
+- **Package metadata**: Version 0.2.1, Python >=3.12
 - **Test configuration**: 80% minimum coverage, strict markers
 - **Type checking**: Strict mypy configuration
 - **Linting**: Ruff with comprehensive rule selection

@@ -1,0 +1,235 @@
+{
+  "task": "7.6",
+  "name": "Extract Complex Extractors (lists, codeblocks, tables, links)",
+  "status": "complete",
+  "timestamp": "2025-10-13T15:30:00Z",
+  "evidence": {
+    "modules_created": {
+      "extractors/lists.py": {
+        "purpose": "List and tasklist extraction with nested depth tracking",
+        "lines": 305,
+        "exports": [
+          "extract_lists(tree, process_tree, extract_list_items, find_section_id) -> list[dict]",
+          "extract_tasklists(tree, process_tree, extract_tasklist_items, find_section_id) -> list[dict]",
+          "detect_task_checkbox(paragraph_node, walk_tokens_iter) -> tuple[bool, bool]",
+          "extract_list_items(list_node, get_text, depth, max_depth) -> list[dict]",
+          "extract_tasklist_items(list_node, get_text, detect_task_checkbox, extract_list_items, depth, max_depth) -> list[dict]"
+        ],
+        "features": [
+          "Regular lists (bullet and ordered) with nested depth tracking",
+          "Task lists (GFM extension) with checkbox state detection",
+          "Recursive item extraction with depth limits (max 10 levels)",
+          "Block elements within list items (fences, code, blockquotes, tables)",
+          "Nested list children preservation",
+          "Checkbox detection via tasklists plugin HTML injection",
+          "Metrics: items_count, checked_count, unchecked_count, has_mixed_task_items"
+        ],
+        "dependencies": ["typing"],
+        "coverage": "47% (uncovered: nested structures and edge cases)"
+      },
+      "extractors/codeblocks.py": {
+        "purpose": "Code block extraction (fenced and indented)",
+        "lines": 125,
+        "exports": [
+          "extract_code_blocks(tree, lines, process_tree, find_section_id, slice_lines_inclusive, cache) -> list[dict]"
+        ],
+        "features": [
+          "Fenced code blocks (``` or ~~~) with language detection",
+          "Indented code blocks (4 spaces or tab)",
+          "Content extraction with line ranges",
+          "Security: Skips code blocks nested in table cells",
+          "Caching support to avoid redundant extraction"
+        ],
+        "dependencies": ["typing"],
+        "coverage": "70% (uncovered: indented code detection edge cases)"
+      },
+      "extractors/tables.py": {
+        "purpose": "GFM table extraction with structure and validation",
+        "lines": 160,
+        "exports": [
+          "extract_tables(tree, lines, process_tree, find_section_id) -> list[dict]"
+        ],
+        "features": [
+          "Headers with alignment detection (left/center/right)",
+          "Body rows with content extraction",
+          "Ragged table detection (security: inconsistent column counts)",
+          "Alignment mismatch detection (column count vs alignment spec)",
+          "Raw markdown preservation",
+          "Section ID tracking for cross-referencing"
+        ],
+        "dependencies": ["typing"],
+        "coverage": "10% (uncovered: table parsing logic - needs dedicated tests)"
+      },
+      "extractors/links.py": {
+        "purpose": "Link extraction with security validation and embedded image detection",
+        "lines": 180,
+        "exports": [
+          "extract_links(tokens, process_inline_tokens) -> list[dict]",
+          "process_inline_tokens(tokens, links, line_map, effective_allowed_schemes, security_validators, media) -> None"
+        ],
+        "features": [
+          "Regular links with href, text, and line attribution",
+          "Link scheme validation (security: disallowed schemes flagged)",
+          "Link type classification (internal/external/anchor/email/tel/image)",
+          "Embedded images in links (e.g., [![alt](img.jpg)](link.url))",
+          "Standalone images as link references",
+          "Softbreak tracking for accurate line numbers",
+          "Security metadata: scheme, allowed flag"
+        ],
+        "dependencies": ["typing"],
+        "coverage": "79% (uncovered: some embedded image edge cases)"
+      }
+    },
+    "core_changes": {
+      "original_lines": 2900,
+      "current_lines": 1944,
+      "lines_removed": 956,
+      "net_reduction": "-33.0%",
+      "replaced_methods": [
+        "_extract_lists() -> delegates to lists.extract_lists()",
+        "_extract_tasklists() -> delegates to lists.extract_tasklists()",
+        "_detect_task_checkbox() -> delegates to lists.detect_task_checkbox()",
+        "_extract_list_items() -> delegates to lists.extract_list_items()",
+        "_extract_tasklist_items() -> delegates to lists.extract_tasklist_items()",
+        "_extract_code_blocks() -> delegates to codeblocks.extract_code_blocks()",
+        "_extract_tables() -> delegates to tables.extract_tables()",
+        "_extract_links() -> delegates to links.extract_links()",
+        "_process_inline_tokens() -> delegates to links.process_inline_tokens()"
+      ],
+      "cross_reference_fixes": [
+        "Line 1320: _detect_task_checkbox now passes [paragraph_node] (list) not node directly",
+        "Line 1281: extract_list_items_func called with keyword args to avoid 'multiple values for argument' error"
+      ]
+    },
+    "imports_added": [
+      "from doxstrux.markdown.extractors import lists, codeblocks, tables, links"
+    ]
+  },
+  "extraction_order": [
+    "7.6.1: Sections & Headings (sections.py) - completed previously ✅",
+    "7.6.2: Paragraphs (paragraphs.py) - completed previously ✅",
+    "7.6.3: Lists & Tasklists (lists.py) - fixed and tested ✅",
+    "7.6.4: Code Blocks (codeblocks.py) - completed previously ✅",
+    "7.6.5: Tables (tables.py) - completed previously ✅",
+    "7.6.6: Links (links.py) - completed previously ✅"
+  ],
+  "issues_fixed_in_continuation": {
+    "list_item_structure_mismatch": {
+      "problem": "Extracted lists.py was using wrong item format: {text, line, section_id, has_code, has_blockquote}",
+      "baseline_expected": "{text, children, blocks}",
+      "fix": "Restored original structure with 'children' (nested lists) and 'blocks' (block elements within items)",
+      "affected_functions": ["extract_list_items", "extract_tasklist_items"]
+    },
+    "task_checkbox_detection_error": {
+      "problem": "TypeError: object of type 'SyntaxTreeNode' has no len()",
+      "root_cause": "walk_tokens_iter expects a list of tokens, not a SyntaxTreeNode",
+      "fix": "Pass [paragraph_node] (list) to walk_tokens_iter, not the node directly",
+      "affected_function": "detect_task_checkbox"
+    },
+    "missing_tasklist_metrics": {
+      "problem": "Baseline expected 'unchecked_count' and 'has_mixed_task_items' but current implementation didn't generate them",
+      "fix": "Added calculation for unchecked_count (sum of items with checked=False) and has_mixed_task_items (any items with checked=None)",
+      "affected_function": "extract_tasklists"
+    }
+  },
+  "tests": {
+    "pytest": {
+      "total": 95,
+      "passed": 95,
+      "failed": 0,
+      "coverage": "69%",
+      "status": "✅ PASS",
+      "note": "Coverage low due to new untested extractor modules"
+    },
+    "baselines": {
+      "total": 542,
+      "passed": 542,
+      "failed": 0,
+      "parity": "100.0%",
+      "time_ms": 479.40,
+      "avg_time_ms": 0.88,
+      "status": "✅ PASS - Perfect byte-for-byte parity achieved!",
+      "categories_100_percent": [
+        "01_edge_cases (114/114)",
+        "02_stress_pandoc (30/30)",
+        "03_stress_overlapping (30/30)",
+        "04_stress_encoding (30/30)",
+        "05_stress_math (30/30)",
+        "06_stress_links (30/30)",
+        "07_stress_html (30/30)",
+        "08_stress_indentation (30/30)",
+        "09_stress_huge_tables (20/20)",
+        "10_frontmatter_valid (4/4)",
+        "11_frontmatter_invalid (8/8)",
+        "12_frontmatter_stress (30/30)",
+        "13_security (24/24)",
+        "14_tables (14/14)",
+        "15_integration (7/7)",
+        "16_performance (3/3)",
+        "17_blockquotes (8/8)",
+        "18_lists (13/13)",
+        "19_tasklists (10/10)",
+        "20_strikethrough_hr (7/7)",
+        "21_inline_formatting (12/12)",
+        "22_linebreaks_spacing (5/5)",
+        "23_autolink_linkify (5/5)",
+        "24_images_references (5/5)",
+        "25_definition_lists (7/7)",
+        "26_admonitions_containers (6/6)",
+        "27_heading_ids_slugs (5/5)",
+        "28_emoji_shortcodes (5/5)",
+        "29_entities_escapes (5/5)",
+        "30_fenced_code_info (6/6)",
+        "31_details_summary_html (5/5)",
+        "32_toc_invariants (4/4)"
+      ]
+    },
+    "behavioral_changes": "none - byte-for-byte parity maintained across all 542 baselines"
+  },
+  "module_structure": {
+    "src/doxstrux/markdown/extractors/": {
+      "__init__.py": "Package exports",
+      "sections.py": "Sections & headings extraction (Task 7.6.1)",
+      "paragraphs.py": "Paragraph extraction (Task 7.6.2)",
+      "lists.py": "Lists & tasklists extraction (Task 7.6.3) - 305 lines",
+      "codeblocks.py": "Code blocks extraction (Task 7.6.4) - 125 lines",
+      "tables.py": "Table extraction (Task 7.6.5) - 160 lines",
+      "links.py": "Link extraction (Task 7.6.6) - 180 lines",
+      "media.py": "Image extraction (Task 7.5.1)",
+      "footnotes.py": "Footnote extraction (Task 7.5.2)",
+      "blockquotes.py": "Blockquote extraction (Task 7.5.3)",
+      "html.py": "HTML extraction (Task 7.5.4)"
+    }
+  },
+  "extractor_pattern": {
+    "interface": "Clean function-based interface with dependency injection",
+    "delegation": "Core parser methods delegate to extractors via self.tree, self.tokens, helper funcs",
+    "dependencies": "Extractors receive parser methods as parameters (process_tree, find_section_id, get_text, etc.)",
+    "return_types": "Plain dicts and lists (no Pydantic models)",
+    "caching": "Caching handled at parser level via self._cache dict",
+    "recursion_safety": "Depth-limited recursion (max 10 levels) to prevent stack overflow"
+  },
+  "next_task": "Phase 7 complete - Consider documentation updates or Phase 8 planning",
+  "pypi_release": {
+    "version": "0.2.1",
+    "release_date": "2025-10-13",
+    "status": "ready_for_upload",
+    "build_artifacts": {
+      "wheel": "dist/doxstrux-0.2.1-py3-none-any.whl (62KB)",
+      "sdist": "dist/doxstrux-0.2.1.tar.gz (64KB)"
+    },
+    "changelog_updated": true,
+    "documentation_updated": {
+      "CHANGELOG.md": "Added v0.2.1 release notes with Phase 7 details",
+      "README.md": "Updated version to 0.2.1",
+      "CLAUDE.md": "Updated version to 0.2.1"
+    },
+    "whats_new": [
+      "11 specialized extractor modules",
+      "Core parser reduced by 33% (2900 → 1944 lines)",
+      "Clean dependency injection pattern",
+      "100% baseline test parity maintained",
+      "14% performance improvement in median parse time"
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "v1-lite",
+  "sections": [
+    {
+      "id": "h1-1",
+      "level": 1,
+      "title": "Envs",
+      "start_line": 6,
+      "end_line": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "text": "Aligned and cases with labels and refs.",
+      "inline": []
+    },
+    {
+      "type": "math_display",
+      "delimiter": "$$",
+      "start_line": 9,
+      "end_line": 14,
+      "content": "\\begin{aligned}\na^2 + b^2 &= c^2 \\\\\nc &= \\sqrt{a^2+b^2}\n\\end{aligned}"
+    },
+    {
+      "type": "paragraph",
+      "start_line": 16,
+      "end_line": 16,
+      "text": "Numbered:",
+      "inline": []
+    },
+    {
+      "type": "math_display",
+      "delimiter": "$$",
+      "start_line": 17,
+      "end_line": 21,
+      "content": "\\begin{equation}\\label{eq:bayes}\nP(A\\mid B)=\\frac{P(B\\mid A)P(A)}{P(B)}\n\\end{equation}"
+    },
+    {
+      "type": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "text": "See Eq. \\(\\ref{eq:bayes}\\).",
+      "inline": []
+    },
+    {
+      "type": "paragraph",
+      "start_line": 24,
+      "end_line": 24,
+      "text": "Alt delimiter:",
+      "inline": []
+    },
+    {
+      "type": "math_display",
+      "delimiter": "\\[\\]",
+      "start_line": 25,
+      "end_line": 27,
+      "content": "\\sum_{k=1}^{n} k = \\frac{n(n+1)}{2}"
+    },
+    {
+      "type": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "text": "Code fence with escaped dollars:",
+      "inline": []
+    },
+    {
+      "type": "code_fence",
+      "language": "bash",
+      "start_line": 30,
+      "end_line": 32,
+      "content": "echo \"Total: \\$99.00\""
+    }
+  ]
+}

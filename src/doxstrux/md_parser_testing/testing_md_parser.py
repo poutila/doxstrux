@@ -6,7 +6,7 @@ from pathlib import Path
 
 from doxstrux.markdown_parser_core import MarkdownParserCore
 
-from json_utils import write_json_file
+from doxstrux.md_parser_testing.json_utils import write_json_file
 
 # sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 print(f"\nsys.path: {sys.path}")
@@ -26,22 +26,40 @@ def test_imports():
 
     return True
 
+def mass_test_parser():
+    """Test mass parser usage."""
+    test_files = (Path(__file__).parent / "math_valid_set").rglob("*.md")
+    counter = 0
+    for md_file in test_files:
+        # counter += 1
+        # content = md_file.read_text(encoding="utf-8")
+        # print(f"{counter}: {md_file.name}...")
+        # # Here you would call your parser and check the output
+        # # For example:
+        # parser = MarkdownParserCore(content, config=config, security_profile='moderate')
+        # result = parser.parse()
+        # print(result)
+        print(f"Testing {md_file}...")
+         # Here you would call your parser and check the output
+         # For example:
+        test_basic_usage(md_file)
 
-def test_basic_usage():
+def test_basic_usage(path: Path = None):
     """Test basic parser usage."""
 
     # content = "# Test\n\nHello world!"
-    content = (Path(__file__).parent / "CLAUDEorig.md").read_text(encoding="utf-8")
+    # content = (Path(__file__).parent / "CLAUDEorig.md").read_text(encoding="utf-8")
+    content = path.read_text(encoding="utf-8")
     config = {
     'allows_html': True,
-    'plugins': ['table', 'strikethrough', 'tasklists'],
+    'plugins': ['table', 'strikethrough', 'tasklists','math'],
     'preset': 'gfm-like'}
     parser = MarkdownParserCore(content, config=config, security_profile='moderate')
     try:
-        json_path = Path(__file__).parent / "test_output.json"
-        # print(parser.parse())
-        print(parser.get_available_features())
-        write_json_file(json_path, parser.parse())
+        json_path = Path(path.parent) / path.stem / ".json"
+        print(json_path)
+        # print(parser.get_available_features())
+        write_json_file(json_path, parser.parse(), compact=False)
         return True
     except Exception as e:
         print(f"❌ Parser failed: {e}")
@@ -52,7 +70,10 @@ if __name__ == "__main__":
 
     success = True
     success &= test_imports()
-    success &= test_basic_usage()
+    # success &= test_basic_usage()
+    mass_test_parser(
+
+    )
 
     if success:
         print("\n🎉 All tests passed!")

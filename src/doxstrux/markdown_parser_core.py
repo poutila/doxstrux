@@ -15,6 +15,7 @@ from typing import Any
 import yaml
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
+from mdit_py_plugins.texmath import texmath_plugin
 from mdit_py_plugins.footnote import footnote_plugin
 from mdit_py_plugins.tasklists import tasklists_plugin
 from mdit_py_plugins.front_matter import front_matter_plugin
@@ -24,6 +25,7 @@ from doxstrux.markdown.utils.token_utils import walk_tokens_iter
 from doxstrux.markdown.utils import line_utils, text_utils
 from doxstrux.markdown.exceptions import MarkdownSecurityError, MarkdownSizeError
 from doxstrux.markdown import config
+from doxstrux.markdown.extractors import media, footnotes, blockquotes, html, sections, paragraphs, lists, codeblocks, tables, links, math
 
 class MarkdownParserCore:
     """
@@ -207,6 +209,13 @@ class MarkdownParserCore:
             elif plugin_config == "front_matter":
                 self.md.use(front_matter_plugin)
                 self.enabled_plugins.add("front_matter")
+            elif plugin_config == "texmath":
+                self.md.use(texmath_plugin, inline_delimiter="$", block_delimiter="dollars")
+                self.enabled_plugins.add("texmath")
+        rules = self.md.get_active_rules()
+        all_rules = self.md.get_all_rules()
+        # print("\nActive rules:\n", rules)
+        # print("All rules:", all_rules)
 
         # Track enabled features for extraction logic
         self.allows_html = self.config.get("allows_html", False)
@@ -217,9 +226,6 @@ class MarkdownParserCore:
         # Parse once and create tree (frontmatter extracted by plugin to env)
         self.tokens = self.md.parse(self.content, self.md.env)
         self.tree = SyntaxTreeNode(self.tokens)
-
-        # Phase 6: ContentContext removed - use pure token-based classification
-        # Prose/code distinction now derived entirely from AST code blocks
 
         # Pre-collect text segments for faster plain text extraction
         self._text_segments = []
@@ -241,6 +247,7 @@ class MarkdownParserCore:
             "blockquotes": None,  # Cache for blockquotes
             "footnotes": None,  # Cache for footnotes
             "html_blocks": None,  # Cache for HTML blocks
+            "textmath": None,  # Cache for math blocks
         }
 
     def _validate_content_security(self, content: str) -> None:
@@ -317,7 +324,7 @@ class MarkdownParserCore:
 
         # Check external plugins
         for plugin in external_plugins:
-            if plugin in ["footnote", "tasklists", "front_matter"]:
+            if plugin in ["footnote", "tasklists", "front_matter", "texmath"]:
                 if plugin in profile_config["external"]:
                     allowed_external.append(plugin)
                 else:
@@ -401,6 +408,7 @@ class MarkdownParserCore:
                 "blockquotes": self._extract_blockquotes(),
                 "frontmatter": self._extract_frontmatter(),
                 "tasklists": self._extract_tasklists(),
+                "math": self._extract_math(),
             }
 
 
@@ -1227,839 +1235,169 @@ class MarkdownParserCore:
     # Frontmatter line numbers not needed for RAG use cases (metadata extracted, sections start after frontmatter)
 
     def _extract_sections(self) -> list[dict]:
-        """
-        Extract document sections with preserved content.
+        """Extract document sections with preserved content.
 
         Sections are defined by headings and contain all content
         until the next heading of equal or higher level.
+
+        Phase 7.6.1: Delegated to extractors/sections.py
         """
-        # Return cached result if available
-        if self._cache["sections"] is not None:
-            return self._cache["sections"]
-
-        sections = []
-        section_stack = []  # Track hierarchy
-        slug_counts = {}  # Track slug usage for stable IDs
-
-        def section_processor(node, ctx, level):
-            if node.type == "heading":
-                # Extract heading info
-                heading_level = self._heading_level(node)
-                heading_text = self._get_text(node)
-                base_slug = self._slugify_base(heading_text)
-
-                # Generate stable ID with running count
-                if base_slug in slug_counts:
-                    slug_counts[base_slug] += 1
-                    stable_slug = f"{base_slug}-{slug_counts[base_slug]}"
-                else:
-                    slug_counts[base_slug] = 1
-                    stable_slug = base_slug
-
-                stable_id = f"section_{stable_slug}"
-
-                # Create new section
-                start_line = node.map[0] if node.map else None
-                start_char, _ = (
-                    self._span_from_lines(start_line, start_line)
-                    if start_line is not None
-                    else (None, None)
-                )
-
-                section = {
-                    "id": stable_id,
-                    "level": heading_level,
-                    "title": heading_text,
-                    "slug": stable_slug,
-                    "start_line": start_line,
-                    "end_line": None,  # Set when next section starts
-                    "start_char": start_char,
-                    "end_char": None,  # Set when section content is finalized
-                    "parent_id": None,
-                    "child_ids": [],
-                }
-
-                # Set end line of previous section at same or higher level
-                while ctx["stack"] and ctx["stack"][-1]["level"] >= heading_level:
-                    prev = ctx["stack"].pop()
-                    if prev["end_line"] is None:
-                        prev["end_line"] = section["start_line"] - 1
-
-                # Set parent relationship
-                if ctx["stack"]:
-                    parent = ctx["stack"][-1]
-                    section["parent_id"] = parent["id"]
-                    parent["child_ids"].append(section["id"])
-
-                # Add to stack and results
-                ctx["stack"].append(section)
-                ctx["sections"].append(section)
-
-            return True  # Always continue traversing
-
-        context = {"sections": [], "stack": []}
-        self.process_tree(self.tree, section_processor, context)
-
-        # Set end lines for remaining sections
-        for section in context["stack"]:
-            if section["end_line"] is None:
-                section["end_line"] = len(self.lines) - 1
-
-        # Fill in section content from original lines
-        for section in context["sections"]:
-            if section["start_line"] is not None and section["end_line"] is not None:
-                start = section["start_line"]
-                end = section["end_line"] + 1
-                # Use centralized slicing utility for consistency
-                section["raw_content"] = self._slice_lines_raw(start, end)
-                section["text_content"] = self._plain_text_in_range(start, end - 1)
-                # Update end_char for completed section
-                _, section["end_char"] = self._span_from_lines(
-                    section["start_line"], section["end_line"]
-                )
-            else:
-                section["raw_content"] = ""
-                section["text_content"] = ""
-
-        self._sections = context["sections"]
-        # Cache the result
-        self._cache["sections"] = context["sections"]
-        return context["sections"]
+        result = sections.extract_sections(
+            self.tree,
+            self.lines,
+            self.process_tree,
+            self._heading_level,
+            self._get_text,
+            self._slice_lines_raw,
+            self._plain_text_in_range,
+            self._span_from_lines,
+            self._cache
+        )
+        self._sections = result
+        return result
 
     def _extract_paragraphs(self) -> list[dict]:
-        """Extract all paragraphs with metadata."""
-        paragraphs = []
+        """Extract all paragraphs with metadata.
 
-        def paragraph_processor(node, ctx, level):
-            if node.type == "paragraph":
-                # Skip if inside a list or blockquote (they handle their own paragraphs)
-                parent = getattr(node, "parent", None)
-                while parent:
-                    if parent.type in ["list_item", "blockquote"]:
-                        return False
-                    parent = getattr(parent, "parent", None)
-
-                para = {
-                    "id": f"para_{len(ctx)}",
-                    "text": self._get_text(node),
-                    "start_line": node.map[0] if node.map else None,
-                    "end_line": node.map[1] if node.map else None,
-                    "section_id": self._find_section_id(node.map[0] if node.map else 0),
-                    "word_count": len(self._get_text(node).split()),
-                    "has_links": self._has_child_type(node, "link"),
-                    "has_emphasis": self._has_child_type(node, ["em", "strong"]),
-                    "has_code": self._has_child_type(node, "code_inline"),
-                }
-                ctx.append(para)
-                return False  # Don't recurse, we extracted everything
-
-            return True
-
-        self.process_tree(self.tree, paragraph_processor, paragraphs)
-        return paragraphs
+        Phase 7.6.2: Delegated to extractors/paragraphs.py
+        """
+        return paragraphs.extract_paragraphs(
+            self.tree,
+            self.process_tree,
+            self._get_text,
+            self._find_section_id,
+            self._has_child_type
+        )
 
     def _extract_lists(self) -> list[dict]:
-        """Extract regular lists (excludes task lists - those are in _extract_tasklists)."""
-        lists = []
+        """Extract regular lists (excludes task lists - those are in _extract_tasklists).
 
-        def list_processor(node, ctx, level):
-            if node.type in ["bullet_list", "ordered_list"]:
-                # Check if this is a task list (skip if it is)
-                class_attr = ""
-                if hasattr(node, 'attrs') and node.attrs:
-                    class_attr = node.attrs.get('class', '')
-
-                if 'contains-task-list' in class_attr:
-                    # Skip task lists (handled by _extract_tasklists)
-                    return True
-
-                # Extract regular list structure
-                items = self._extract_list_items(node)
-
-                list_data = {
-                    "id": f"list_{len(ctx)}",
-                    "type": "bullet" if node.type == "bullet_list" else "ordered",
-                    "start_line": node.map[0] if node.map else None,
-                    "end_line": node.map[1] if node.map else None,
-                    "section_id": self._find_section_id(node.map[0] if node.map else 0),
-                    "items": items,
-                    "items_count": len(items),
-                }
-
-                ctx.append(list_data)
-                return False  # Don't recurse, we handled the entire list
-
-            return True
-
-        self.process_tree(self.tree, list_processor, lists)
-        return lists
+        Phase 7.6.3: Delegated to extractors/lists.py
+        """
+        return lists.extract_lists(
+            self.tree,
+            self.process_tree,
+            self._extract_list_items,
+            self._find_section_id
+        )
 
     def _extract_tasklists(self) -> list[dict]:
-        """Extract task lists (GFM extension with checkbox items)."""
-        tasklists = []
+        """Extract task lists (GFM extension with checkbox items).
 
-        def tasklist_processor(node, ctx, level):
-            if node.type in ["bullet_list", "ordered_list"]:
-                # Check if this is a task list (plugin marks it with class)
-                class_attr = ""
-                if hasattr(node, 'attrs') and node.attrs:
-                    class_attr = node.attrs.get('class', '')
-
-                if 'contains-task-list' not in class_attr:
-                    # Skip regular lists (handled by _extract_lists)
-                    return True
-
-                # Extract task list structure
-                start_line = node.map[0] if node.map else None
-                end_line = node.map[1] if node.map else None
-
-                tasklist = {
-                    "id": f"tasklist_{len(ctx)}",
-                    "type": "bullet" if node.type == "bullet_list" else "ordered",
-                    "start_line": start_line,
-                    "end_line": end_line,
-                    "section_id": self._find_section_id(start_line if start_line is not None else 0),
-                    "items": [],
-                }
-
-                # Extract task list items
-                tasklist["items"] = self._extract_tasklist_items(node)
-
-                # Calculate metrics
-                items_count = len(tasklist["items"])
-                checked_count = sum(1 for item in tasklist["items"] if item.get("checked") is True)
-                unchecked_count = sum(1 for item in tasklist["items"] if item.get("checked") is False)
-
-                tasklist["items_count"] = items_count
-                tasklist["checked_count"] = checked_count
-                tasklist["unchecked_count"] = unchecked_count
-                tasklist["has_mixed_task_items"] = any(
-                    item.get("checked") is None for item in tasklist["items"]
-                )
-
-                ctx.append(tasklist)
-                return False  # Don't recurse, we handled the entire task list
-
-            return True
-
-        self.process_tree(self.tree, tasklist_processor, tasklists)
-        return tasklists
+        Phase 7.6.3: Delegated to extractors/lists.py
+        """
+        return lists.extract_tasklists(
+            self.tree,
+            self.process_tree,
+            self._extract_tasklist_items,
+            self._find_section_id
+        )
 
     def _detect_task_checkbox(self, paragraph_node) -> tuple[bool, bool]:
         """Detect task list checkbox from tasklists plugin.
 
-        The plugin injects html_inline tokens with class="task-list-item-checkbox"
-        and checked="checked" for checked items.
-
-        Returns:
-            (has_checkbox, is_checked) tuple
+        Phase 7.6.3: Delegated to extractors/lists.detect_task_checkbox()
         """
-        if not hasattr(paragraph_node, "children"):
-            return False, False
-
-        # Walk inline tokens looking for checkbox HTML
-        for token in walk_tokens_iter([paragraph_node]):
-            if token.type == "html_inline":
-                content = getattr(token, "content", "")
-                if "task-list-item-checkbox" in content:
-                    is_checked = 'checked="checked"' in content
-                    return True, is_checked
-
-        return False, False
+        return lists.detect_task_checkbox(
+            paragraph_node,
+            walk_tokens_iter
+        )
 
     def _extract_list_items(self, list_node, depth: int = 0, max_depth: int = 10) -> list[dict]:
         """Extract regular list items (no checkbox detection) with depth limit.
 
-        Args:
-            list_node: The list node to extract items from
-            depth: Current recursion depth (default 0)
-            max_depth: Maximum allowed depth to prevent stack overflow (default 10)
-
-        Returns:
-            List of item dicts, or empty list if depth exceeded
+        Phase 7.6.3: Delegated to extractors/lists.extract_list_items()
         """
-        # Safety: Prevent stack overflow from deeply nested lists
-        if depth >= max_depth:
-            return []
-
-        items = []
-
-        for child in list_node.children or []:
-            if child.type == "list_item":
-                item = {"text": "", "children": [], "blocks": []}
-
-                # Process list item children
-                for item_child in child.children or []:
-                    if item_child.type == "paragraph":
-                        # Regular list item - just extract text (no checkbox detection)
-                        text = self._get_text(item_child)
-                        item["text"] = text
-
-                    elif item_child.type in ["bullet_list", "ordered_list"]:
-                        # Nested list (recursive with depth tracking)
-                        item["children"] = self._extract_list_items(
-                            item_child,
-                            depth=depth + 1,
-                            max_depth=max_depth
-                        )
-
-                    elif item_child.type in ["fence", "code_block", "blockquote", "table"]:
-                        # Block elements within list item
-                        item["blocks"].append({
-                            "type": item_child.type,
-                            "start_line": item_child.map[0] if item_child.map else None,
-                            "end_line": item_child.map[1] if item_child.map else None,
-                        })
-
-                items.append(item)
-
-        return items
+        return lists.extract_list_items(
+            list_node,
+            self._get_text,
+            depth,
+            max_depth
+        )
 
     def _extract_tasklist_items(self, list_node, depth: int = 0, max_depth: int = 10) -> list[dict]:
         """Extract task list items WITH checkbox detection and depth limit.
 
-        Args:
-            list_node: The task list node to extract items from
-            depth: Current recursion depth (default 0)
-            max_depth: Maximum allowed depth to prevent stack overflow (default 10)
-
-        Returns:
-            List of task item dicts with checked status, or empty list if depth exceeded
+        Phase 7.6.3: Delegated to extractors/lists.extract_tasklist_items()
         """
-        # Safety: Prevent stack overflow from deeply nested lists
-        if depth >= max_depth:
-            return []
-
-        items = []
-
-        for child in list_node.children or []:
-            if child.type == "list_item":
-                item = {"text": "", "checked": None, "children": [], "blocks": []}
-
-                # Process list item children
-                for item_child in child.children or []:
-                    if item_child.type == "paragraph":
-                        # Detect task checkbox (plugin already removed [ ] from text)
-                        has_checkbox, is_checked = self._detect_task_checkbox(item_child)
-                        text = self._get_text(item_child)
-
-                        if has_checkbox:
-                            item["checked"] = is_checked
-                            item["text"] = text.strip()
-                        else:
-                            # Regular list item mixed in task list
-                            item["text"] = text
-
-                    elif item_child.type in ["bullet_list", "ordered_list"]:
-                        # Check if nested list is also a task list
-                        nested_class = ""
-                        if hasattr(item_child, 'attrs') and item_child.attrs:
-                            nested_class = item_child.attrs.get('class', '')
-
-                        if 'contains-task-list' in nested_class:
-                            # Nested task list (recursive with depth tracking)
-                            item["children"] = self._extract_tasklist_items(
-                                item_child,
-                                depth=depth + 1,
-                                max_depth=max_depth
-                            )
-                        else:
-                            # Regular nested list inside task list item
-                            # Extract as regular list
-                            item["children"] = self._extract_list_items(
-                                item_child,
-                                depth=depth + 1,
-                                max_depth=max_depth
-                            )
-
-                    elif item_child.type in ["fence", "code_block", "blockquote", "table"]:
-                        # Block elements within list item
-                        item["blocks"].append({
-                            "type": item_child.type,
-                            "start_line": item_child.map[0] if item_child.map else None,
-                            "end_line": item_child.map[1] if item_child.map else None,
-                        })
-
-                items.append(item)
-
-        return items
+        return lists.extract_tasklist_items(
+            list_node,
+            self._get_text,
+            self._detect_task_checkbox,
+            self._extract_list_items,
+            depth,
+            max_depth
+        )
 
     def _extract_tables(self) -> list[dict]:
-        """Extract all tables with structure preserved."""
-        tables = []
+        """Extract all tables with structure preserved and security validation.
 
-        def table_processor(node, ctx, level):
-            if node.type == "table":
-                start_line = node.map[0] if node.map else None
-                end_line = node.map[1] if node.map else None
-
-                # Extract raw table content (preserve original markdown)
-                raw_content = ""
-                if start_line is not None and end_line is not None:
-                    raw_content = "\n".join(self.lines[start_line:end_line])
-
-                table = {
-                    "id": f"table_{len(ctx)}",
-                    "raw_content": raw_content,  # Original markdown table (unchanged)
-                    "headers": [],  # Parsed headers (polished)
-                    "rows": [],     # Parsed rows (polished)
-                    "align": None,  # Parsed alignment (polished)
-                    "start_line": start_line,
-                    "end_line": end_line,
-                    "section_id": self._find_section_id(start_line if start_line is not None else 0),
-                }
-
-                # Extract headers, rows, and alignment (Phase 5: token-based, zero regex)
-                for child in node.children or []:
-                    if child.type == "thead":
-                        for tr in child.children or []:
-                            # Extract header text and alignment from th nodes
-                            headers = []
-                            aligns = []
-                            for th in tr.children or []:
-                                # Header text from inline children
-                                header_text = "".join(
-                                    grandchild.content for grandchild in (th.children or [])
-                                )
-                                headers.append(header_text)
-
-                                # Alignment from th.attrs (markdown-it provides this)
-                                align = "left"  # default
-                                if hasattr(th, 'attrs') and th.attrs:
-                                    style = th.attrs.get('style', '')
-                                    if 'text-align:center' in style:
-                                        align = "center"
-                                    elif 'text-align:right' in style:
-                                        align = "right"
-                                    elif 'text-align:left' in style:
-                                        align = "left"
-                                aligns.append(align)
-
-                            table["headers"] = headers
-                            table["align"] = aligns
-                    elif child.type == "tbody":
-                        for tr in child.children or []:
-                            row = [
-                                "".join(grandchild.content for grandchild in (td.children or []))
-                                for td in tr.children or []
-                            ]
-                            if row:
-                                table["rows"].append(row)
-                # Normalize align to column count (defensive against escaped pipe miscounts)
-                # Safety guard: if header count is zero but there are body rows, use max row width
-                header_cols = len(table["headers"])
-                body_max_cols = (
-                    max((len(r) for r in table["rows"]), default=0) if table["rows"] else 0
-                )
-                cols = max(header_cols, body_max_cols)
-
-                # Guard against degenerate zero-column tables
-                if cols == 0:
-                    table["align"] = []
-                    table["is_ragged"] = False  # Empty table is not ragged
-                    ctx.append(table)
-                    return False
-                if table["align"]:
-                    if len(table["align"]) < cols:
-                        # Extend with 'left' for missing columns
-                        table["align"] += ["left"] * (cols - len(table["align"]))
-                    elif len(table["align"]) > cols:
-                        # Truncate if we have too many (likely from escaped pipe miscount)
-                        table["align"] = table["align"][:cols]
-                else:
-                    # Fallback: all left-aligned if alignment detection completely failed
-                    table["align"] = ["left"] * cols
-
-                # SECURITY: Detect ragged tables and alignment mismatches
-                # Token-based detection first (more accurate)
-                is_ragged = False
-                align_mismatch = False
-
-                # Check for ragged rows using tokenized data
-                # Markdown-it fills missing cells with empty strings, so we check for that
-                if table["rows"]:
-                    for row in table["rows"]:
-                        if len(row) != cols:
-                            is_ragged = True
-                            break
-                        # Check for trailing empty cells which likely indicate missing cells in source
-                        # A row like "| 1 |" becomes ["1", ""] for a 2-column table
-                        if cols > 1 and row[-1] == "" and any(cell != "" for cell in row):
-                            # Has trailing empty and at least one non-empty cell
-                            is_ragged = True
-                            break
-
-                # Check for alignment mismatch
-                if table["align"] and cols > 0:
-                    if len(table["align"]) != cols:
-                        align_mismatch = True
-
-                table["is_ragged"] = is_ragged
-                table["align_mismatch"] = align_mismatch
-                table["table_valid_md"] = not is_ragged and not align_mismatch
-                table["column_count"] = cols
-                table["row_count"] = len(table["rows"])
-                # Add heuristic metadata for alignment and ragged detection
-                if table["align"]:
-                    table["align_meta"] = {"heuristic": True}
-                if is_ragged:
-                    table["is_ragged_meta"] = {"heuristic": True}
-
-                ctx.append(table)
-                return False  # Don't recurse, we handled the table
-
-            return True
-
-        self.process_tree(self.tree, table_processor, tables)
-        return tables
+        Phase 7.6.5: Delegated to extractors/tables.py
+        """
+        return tables.extract_tables(
+            self.tree,
+            self.lines,
+            self.process_tree,
+            self._find_section_id
+        )
 
     def _extract_code_blocks(self) -> list[dict]:
         """Extract all code blocks (fenced and indented).
 
-        Note: Fences inside table cells won't be parsed as fence nodes by markdown-it.
-        They'll appear as text and may be caught by the indented code scanner below.
-        This is expected behavior - markdown-it doesn't nest blocks in table cells.
+        Phase 7.6.4: Delegated to extractors/codeblocks.py
         """
-        # Return cached result if available
-        if self._cache["code_blocks"] is not None:
-            return self._cache["code_blocks"]
-
-        blocks = []
-
-        def code_processor(node, ctx, level):
-            # Skip fence/code nodes that are inside table cells (defensive)
-            # markdown-it shouldn't create these, but be safe
-            parent = getattr(node, "parent", None)
-            while parent:
-                if getattr(parent, "type", "") in ("td", "th"):
-                    return True  # Skip this node, it's in a table cell
-                parent = getattr(parent, "parent", None)
-
-            if node.type == "fence":
-                block = {
-                    "id": f"code_{len(ctx)}",
-                    "type": "fenced",
-                    "language": node.info if hasattr(node, "info") else "",
-                    "content": node.content if hasattr(node, "content") else "",
-                    "start_line": node.map[0] if node.map else None,
-                    "end_line": node.map[1] if node.map else None,
-                    "section_id": self._find_section_id(node.map[0] if node.map else 0),
-                }
-                ctx.append(block)
-                return False
-            if node.type == "code_block":
-                block = {
-                    "id": f"code_{len(ctx)}",
-                    "type": "indented",
-                    "language": "",
-                    "content": node.content if hasattr(node, "content") else "",
-                    "start_line": node.map[0] if node.map else None,
-                    "end_line": node.map[1] if node.map else None,
-                    "section_id": self._find_section_id(node.map[0] if node.map else 0),
-                }
-                ctx.append(block)
-                return False
-
-            return True
-
-        self.process_tree(self.tree, code_processor, blocks)
-
-        # Also extract indented code blocks that markdown-it might miss
-        covered = set()
-        for b in blocks:
-            if b.get("start_line") is not None and b.get("end_line") is not None:
-                covered.update(range(b["start_line"], b["end_line"] + 1))
-
-        i, N = 0, len(self.lines)
-        while i < N:
-            line = self.lines[i]
-            if (line.startswith("    ") or line.startswith("\t")) and i not in covered:
-                start = i
-                i += 1
-                while i < N:
-                    nxt = self.lines[i]
-                    if not nxt.strip() or nxt.startswith("    ") or nxt.startswith("\t"):
-                        i += 1
-                    else:
-                        break
-                end = i - 1
-                # Extract and process indented content using centralized slicing
-                raw_lines = self._slice_lines_inclusive(start, end + 1)
-                content = "\n".join(l[4:] if l.startswith("    ") else l[1:] for l in raw_lines)
-                blocks.append(
-                    {
-                        "id": f"code_{len(blocks)}",
-                        "type": "indented",
-                        "language": "",
-                        "content": content,
-                        "start_line": start,
-                        "end_line": end,
-                        "section_id": self._find_section_id(start),
-                    }
-                )
-                covered.update(range(start, end + 1))
-            else:
-                i += 1
-
-        # Cache the result
-        self._cache["code_blocks"] = blocks
-        return blocks
+        return codeblocks.extract_code_blocks(
+            self.tree,
+            self.lines,
+            self.process_tree,
+            self._find_section_id,
+            self._slice_lines_inclusive,
+            self._cache
+        )
 
     def _extract_headings(self) -> list[dict]:
         """Extract all headings with hierarchy using stable slug-based IDs.
 
         SECURITY: Only extracts top-level headings (not nested in lists/blockquotes)
         to prevent heading creepage vulnerabilities.
+
+        Phase 7.6.1: Delegated to extractors/sections.py
         """
-        headings = []
-        heading_stack = []
-        slug_counts = {}  # Track slug usage for stable IDs
-
-        # First pass: collect heading tokens at document level (level=0)
-        # This prevents heading creepage from list continuations
-        heading_tokens = []
-        for token in self.tokens:
-            if token.type == "heading_open" and token.level == 0:
-                # This is a document-level heading, not nested
-                heading_tokens.append(token)
-
-        def heading_processor(node, ctx, level):
-            if node.type == "heading":
-                # SECURITY: Check if this heading corresponds to a document-level token
-                # by verifying its line mapping matches a level=0 heading token
-                is_document_level = False
-                if node.map:
-                    for h_token in heading_tokens:
-                        if h_token.map and h_token.map[0] == node.map[0]:
-                            is_document_level = True
-                            break
-
-                if not is_document_level:
-                    # Skip nested headings (security: prevent creepage)
-                    return False
-
-                heading_level = self._heading_level(node)
-                heading_text = self._get_text(node)
-                base_slug = self._slugify_base(heading_text)
-
-                # Generate stable ID with running count
-                if base_slug in slug_counts:
-                    slug_counts[base_slug] += 1
-                    stable_slug = f"{base_slug}-{slug_counts[base_slug]}"
-                else:
-                    slug_counts[base_slug] = 1
-                    stable_slug = base_slug
-
-                stable_id = f"heading_{stable_slug}"
-
-                # Find parent heading
-                parent_id = None
-                while heading_stack and heading_stack[-1]["level"] >= heading_level:
-                    heading_stack.pop()
-                if heading_stack:
-                    parent_id = heading_stack[-1]["id"]
-
-                # Add character offsets for RAG chunking
-                line_num = node.map[0] if node.map else None
-                start_char, end_char = (
-                    self._span_from_lines(line_num, line_num)
-                    if line_num is not None
-                    else (None, None)
-                )
-
-                heading = {
-                    "id": stable_id,
-                    "level": heading_level,
-                    "text": heading_text,
-                    "line": line_num,
-                    "slug": stable_slug,
-                    "parent_heading_id": parent_id,
-                    "start_char": start_char,
-                    "end_char": end_char,
-                }
-
-                ctx.append(heading)
-                heading_stack.append(heading)
-
-            return True
-
-        self.process_tree(self.tree, heading_processor, headings)
-        return headings
+        return sections.extract_headings(
+            self.tree,
+            self.tokens,
+            self.process_tree,
+            self._heading_level,
+            self._get_text,
+            self._span_from_lines
+        )
 
     def _extract_links(self) -> list[dict]:
-        """Extract links robustly using token parsing."""
-        links = []
+        """Extract links robustly using token parsing.
 
-        # Process all tokens to find links
-        for token in self.tokens:
-            if token.type == "inline" and token.children:
-                # Process inline tokens which contain links
-                self._process_inline_tokens(token.children, links, token.map)
-
-        return links
-
-    def _process_inline_tokens(self, tokens, links, line_map):
-        """Process inline tokens to extract links with improved line attribution."""
-        i = 0
-        softbreak_count = 0  # Track softbreaks for line offset
-
-        while i < len(tokens):
-            token = tokens[i]
-
-            if token.type == "link_open":
-                # Snapshot the break count at link_open for accurate line attribution
-                link_line_offset = softbreak_count
-
-                # Extract href from attributes
-                href = token.attrGet("href") or ""
-
-                # Validate link scheme for security (Phase 6 Task 6.1)
-                scheme, is_allowed = security_validators.validate_link_scheme(href, self._effective_allowed_schemes)
-
-                # Collect text until link_close and watch for embedded images
-                text_parts = []
-                saw_img = None
-                img_title = ""
-                i += 1
-                while i < len(tokens) and tokens[i].type != "link_close":
-                    if tokens[i].type == "text" or tokens[i].type == "code_inline":
-                        text_parts.append(tokens[i].content)
-                    elif tokens[i].type == "image":
-                        # Capture image info for linked images like [![alt](img.jpg)](link.url)
-                        img_src = tokens[i].attrGet("src") or ""
-                        img_alt = (
-                            getattr(tokens[i], "content", "") or tokens[i].attrGet("alt") or ""
-                        )
-                        img_title = tokens[i].attrGet("title") or ""
-                        saw_img = {
-                            "src": img_src,
-                            "alt": img_alt,
-                            "image_id": self._generate_image_id(
-                                img_src, (line_map[0] + link_line_offset) if line_map else None
-                            ),
-                        }
-                        text_parts.append(img_alt)  # Use alt text as link text
-                    elif tokens[i].type in ("softbreak", "hardbreak"):
-                        text_parts.append("\n")
-                        softbreak_count += 1  # Still track breaks for subsequent tokens
-                    i += 1
-
-                text = "".join(text_parts)
-                # Use snapshotted offset for link's line number
-                line_num = (line_map[0] + link_line_offset) if line_map else None
-
-                # Determine link type with enhanced scheme detection (Phase 6 Task 6.1)
-                link_type = security_validators.classify_link_type(href)
-
-                # Add the main link record with security metadata
-                links.append(
-                    {
-                        "text": text,
-                        "url": href,
-                        "line": line_num,
-                        "type": link_type,
-                        "scheme": scheme,  # Security: track scheme
-                        "allowed": is_allowed,  # Security: RAG safety flag
-                    }
-                )
-
-                # If there was an embedded image, add a second record for joinability
-                if saw_img:
-                    # Get unified image metadata for consistency with first-class images
-                    img_metadata = self._determine_image_metadata(saw_img["src"])
-                    links.append(
-                        {
-                            "type": "image",
-                            "url": saw_img["src"],
-                            "src": saw_img["src"],  # Consistent with first-class images
-                            "alt": saw_img["alt"],  # Consistent with first-class images
-                            "title": img_title,
-                            "text": saw_img["alt"],  # Keep for backward compatibility
-                            "line": line_num,
-                            "image_id": saw_img["image_id"],
-                            "image_kind": img_metadata["image_kind"],  # Unified metadata
-                            "format": img_metadata["format"],  # Unified metadata
-                        }
-                    )
-
-            elif token.type == "image":
-                # Snapshot the break count at image token for accurate line attribution
-                image_line_offset = softbreak_count
-
-                # Extract image attributes with stable ID
-                src = token.attrGet("src") or ""
-                alt = getattr(token, "content", "") or token.attrGet("alt") or ""
-                title = token.attrGet("title") or ""
-
-                # Use snapshotted offset for image's line number
-                line_num = (line_map[0] + image_line_offset) if line_map else None
-
-                # Generate stable ID (same as in _extract_images)
-                image_id = self._generate_image_id(src, line_num)
-
-                # Add standardized image reference to links with unified metadata
-                img_metadata = self._determine_image_metadata(src)
-                links.append(
-                    {
-                        "image_id": image_id,  # For joining with images table
-                        "text": alt,  # Keep for backward compatibility
-                        "url": src,  # Keep for backward compatibility
-                        "src": src,  # Consistent with first-class images
-                        "alt": alt,  # Consistent with first-class images
-                        "title": title,
-                        "line": line_num,
-                        "type": "image",
-                        "image_kind": img_metadata["image_kind"],  # Unified metadata
-                        "format": img_metadata["format"],  # Unified metadata
-                    }
-                )
-
-            elif token.type in ("softbreak", "hardbreak"):
-                # Track line breaks for better attribution
-                softbreak_count += 1
-
-            i += 1
-
-    def _generate_image_id(self, src: str, line: int | None) -> str:
-        """Generate stable image ID from source and line number."""
-
-        # Use src + line for stability (same image on different lines gets different ID)
-        id_source = f"{src}|{line if line is not None else -1}"
-        return hashlib.sha1(id_source.encode()).hexdigest()[:16]
-
-    def _determine_image_metadata(self, src: str) -> dict[str, str]:
-        """Determine image_kind and format from src URL for consistent metadata.
-
-        Returns:
-            Dictionary with 'image_kind' and 'format' keys.
+        Phase 7.6.6: Delegated to extractors/links.py
         """
-        # Determine image kind and parse data URIs (Phase 6 Task 6.1)
-        if src.startswith("data:"):
-            image_kind = "data"
-            data_info = security_validators.parse_data_uri(src)
-            # Extract format from mediatype (e.g., "image/png" → "png")
-            mediatype = data_info.get("mediatype", "")
-            format_type = mediatype.split("/")[1] if "/" in mediatype else "unknown"
-        elif src.startswith(("http://", "https://")):
-            image_kind = "external"
-            # Extract format from extension for external URIs
-            import os
+        return links.extract_links(
+            self.tokens,
+            self._process_inline_tokens
+        )
 
-            _, ext = os.path.splitext(src.lower())
-            format_type = ext.lstrip(".") if ext else "unknown"
-        else:
-            image_kind = "local"
-            # Extract format from extension for local paths
-            import os
+    def _process_inline_tokens(self, tokens, links_list, line_map):
+        """Process inline tokens to extract links with improved line attribution.
 
-            _, ext = os.path.splitext(src.lower())
-            format_type = ext.lstrip(".") if ext else "unknown"
+        Phase 7.6.6: Delegated to extractors/links.process_inline_tokens()
+        """
+        links.process_inline_tokens(
+            tokens,
+            links_list,
+            line_map,
+            self._effective_allowed_schemes,
+            security_validators,
+            media
+        )
 
-        return {"image_kind": image_kind, "format": format_type}
-
-    # Phase 6 Task 6.1: _classify_link_scheme() moved to security_validators.classify_link_type()
-
-    # Phase 6 Task 6.1: _parse_data_uri() moved to security_validators.parse_data_uri()
+    # Phase 7 Task 7.5.1: _generate_image_id() moved to extractors/media.py
+    # Phase 7 Task 7.5.1: _determine_image_metadata() moved to extractors/media.py
 
     def _extract_images(self) -> list[dict]:
         """Extract all images as first-class elements with enhanced metadata.
@@ -2067,148 +1405,24 @@ class MarkdownParserCore:
         Returns unified image records with stable IDs that can be joined
         with image references in links.
         """
-        # Return cached result if available
-        if self._cache.get("images") is not None:
-            return self._cache["images"]
+        return media.extract_images(self.tokens, self._effective_allowed_schemes, self._cache)
 
-        images = []
-        seen_ids = set()  # Track to avoid duplicates
-
-        # Process all tokens to find images
-        for token in self.tokens:
-            if token.type == "inline" and token.children:
-                self._process_inline_tokens_for_images(token.children, images, token.map, seen_ids)
-
-        # Cache the result
-        self._cache["images"] = images
-        return images
-
-    def _process_inline_tokens_for_images(self, tokens, images, line_map, seen_ids):
-        """Process inline tokens to extract images with enhanced metadata."""
-        softbreak_count = 0  # Track softbreaks for line offset
-
-        for i, token in enumerate(tokens):
-            if token.type == "image":
-                # Snapshot the break count at image token for accurate line attribution
-                image_line_offset = softbreak_count
-
-                # Extract image attributes with enhanced metadata
-                src = token.attrGet("src") or ""
-                alt = getattr(token, "content", "") or token.attrGet("alt") or ""
-                title = token.attrGet("title") or ""
-
-                # Use snapshotted offset for image's line number
-                line_num = (line_map[0] + image_line_offset) if line_map else None
-
-                # Generate stable ID
-                image_id = self._generate_image_id(src, line_num)
-
-                # Skip duplicates (same image on same line)
-                if image_id in seen_ids:
-                    continue
-                seen_ids.add(image_id)
-
-                # Validate image URL scheme for security (Phase 6 Task 6.1)
-                scheme, is_allowed = security_validators.validate_link_scheme(src, self._effective_allowed_schemes)
-
-                # Use centralized metadata determination for consistency
-                img_metadata = self._determine_image_metadata(src)
-                image_kind = img_metadata["image_kind"]
-                format_type = img_metadata["format"]
-
-                # Parse data URIs for additional metadata (Phase 6 Task 6.1)
-                if image_kind == "data":
-                    data_info = security_validators.parse_data_uri(src)
-                else:
-                    data_info = {}
-
-                # Build unified image record
-                image_record = {
-                    "image_id": image_id,  # Stable ID for joining
-                    "src": src,
-                    "alt": alt,
-                    "title": title,
-                    "line": line_num,
-                    "image_kind": image_kind,  # 'external'|'local'|'data'
-                    "format": format_type,
-                    "has_alt": bool(alt.strip()),
-                    "has_title": bool(title.strip()),
-                    "scheme": scheme,  # URL scheme for security validation
-                    "allowed": is_allowed,  # Whether scheme is allowed
-                }
-
-                # Add data URI info if present
-                if data_info:
-                    # Phase 6 Task 6.1: Map new security_validators field names to old baseline names
-                    image_record.update(
-                        {
-                            "media_type": data_info.get("mediatype"),  # New API uses "mediatype" not "media_type"
-                            "encoding": data_info.get("encoding"),
-                            "bytes_approx": data_info.get("size_bytes"),  # New API uses "size_bytes" not "bytes_approx"
-                        }
-                    )
-
-                images.append(image_record)
-
-            elif token.type in ("softbreak", "hardbreak"):
-                # Track line breaks for better attribution
-                softbreak_count += 1
+    # Phase 7 Task 7.5.1: _process_inline_tokens_for_images() moved to extractors/media.py
 
     def _extract_blockquotes(self) -> list[dict]:
         """Extract all blockquotes from the document.
 
         Note: For richer nested data extraction, existing extractors can be reused
         with line-range filters on the children_blocks ranges.
+
+        Phase 7.5.3: Delegated to extractors/blockquotes.py
         """
-        blockquotes = []
-
-        def blockquote_processor(node, ctx, level):
-            if node.type == "blockquote":
-                # Get blockquote content
-                content = self._get_text(node)
-                # Get line range
-                start_line = node.map[0] if node.map else None
-                end_line = node.map[1] if node.map else None
-
-                # Summarize nested structures inside this blockquote
-                counts = {"lists": 0, "tables": 0, "code": 0}
-                for n in node.walk():
-                    if n.type in ("bullet_list", "ordered_list"):
-                        counts["lists"] += 1
-                    elif n.type == "table":
-                        counts["tables"] += 1
-                    elif n.type in ("fence", "code_block"):
-                        counts["code"] += 1
-
-                ctx.append(
-                    {
-                        "content": content,
-                        "start_line": start_line,
-                        "end_line": end_line,
-                        "section_id": self._find_section_id(start_line)
-                        if start_line is not None
-                        else None,
-                        "children_summary": counts,
-                        "children_blocks": [
-                            {
-                                "type": n.type,
-                                "start_line": (n.map[0] if getattr(n, "map", None) else None),
-                                "end_line": (n.map[1] if getattr(n, "map", None) else None),
-                            }
-                            for n in node.walk()
-                            if n.type
-                            in ("bullet_list", "ordered_list", "table", "fence", "code_block")
-                        ],
-                    }
-                )
-
-                # Don't recurse into blockquote children to avoid duplication
-                return False
-
-            return True  # Continue traversing for other nodes
-
-        self.process_tree(self.tree, blockquote_processor, blockquotes)
-        return blockquotes
+        return blockquotes.extract_blockquotes(
+            self.tree,
+            self.process_tree,
+            self._find_section_id,
+            self._get_text
+        )
 
     def _extract_footnotes(self) -> dict[str, Any]:
         """Extract footnote definitions and back-references with rich metadata.
@@ -2217,106 +1431,15 @@ class MarkdownParserCore:
             Dictionary with 'definitions' and 'references' lists.
             Definitions are deduplicated by label (last-writer-wins).
             Both label and numeric ID are extracted for stability.
+
+        Phase 7.5.2: Delegated to extractors/footnotes.py
         """
-        # Use dict for deduplication of definitions
-        definitions_dict = {}
-        references = []
-
-        def get_footnote_ids(node):
-            """Extract both label (stable) and numeric id from footnote node.
-            Prefer label for stability, but include both."""
-            label = None
-            numeric_id = None
-
-            if hasattr(node, "token") and node.token:
-                meta = getattr(node.token, "meta", {})
-                label = meta.get("label", "")
-                numeric_id = meta.get("id", "")
-
-            if not label and hasattr(node, "meta"):
-                meta = getattr(node, "meta", {})
-                label = meta.get("label", "")
-                if not numeric_id:
-                    numeric_id = meta.get("id", "")
-
-            # Use label as primary key, fallback to numeric id
-            key = label if label else numeric_id
-            return key, label, numeric_id
-
-        def footnote_processor(node, ctx, level):
-            # Handle footnote references (inline)
-            if node.type == "footnote_ref":
-                key, label, numeric_id = get_footnote_ids(node)
-                line_num = node.map[0] if node.map else None
-
-                ctx["references"].append(
-                    {
-                        "label": label if label else key,  # Prefer label
-                        "id": numeric_id if numeric_id else key,  # Include numeric id
-                        "line": line_num,
-                        "section_id": self._find_section_id(line_num)
-                        if line_num is not None
-                        else None,
-                    }
-                )
-
-            # Handle footnote definitions
-            elif node.type == "footnote":
-                key, label, numeric_id = get_footnote_ids(node)
-
-                # Skip if no identifier found
-                if not key:
-                    return True
-
-                start_line = node.map[0] if node.map else None
-                end_line = node.map[1] if node.map else None
-                # Get text from the footnote content (recursively)
-                content = self._get_text(node)
-
-                # Collect nested structures for richer analysis
-                nested_structures = []
-                for child in node.walk():
-                    if child.type in (
-                        "bullet_list",
-                        "ordered_list",
-                        "table",
-                        "fence",
-                        "code_block",
-                    ):
-                        if hasattr(child, "map") and child.map:
-                            nested_structures.append(
-                                {
-                                    "type": child.type,
-                                    "start_line": child.map[0],
-                                    "end_line": child.map[1],
-                                }
-                            )
-
-                # Use dict for deduplication (last-writer-wins)
-                ctx["definitions_dict"][key] = {
-                    "label": label if label else key,  # Stable identifier
-                    "id": numeric_id if numeric_id else key,  # Numeric identifier
-                    "start_line": start_line,
-                    "end_line": end_line,
-                    "content": content,
-                    "byte_length": len(content.encode("utf-8")) if content else 0,
-                    "nested_structures": nested_structures,
-                    "section_id": self._find_section_id(start_line)
-                    if start_line is not None
-                    else None,
-                }
-
-            return True  # Continue traversing
-
-        context = {"definitions_dict": definitions_dict, "references": references}
-
-        self.process_tree(self.tree, footnote_processor, context)
-
-        # Convert definitions dict to list
-        return {
-            "definitions": list(context["definitions_dict"].values()),
-            "references": context["references"],
-        }
+        return footnotes.extract_footnotes(
+            self.tree,
+            self.process_tree,
+            self._find_section_id,
+            self._get_text
+        )
 
     def _extract_html(self) -> dict[str, list[dict]]:
         """Extract both HTML blocks and inline HTML (always, for security scanning).
@@ -2326,87 +1449,32 @@ class MarkdownParserCore:
         Returns:
             Dictionary with 'blocks' and 'inline' lists.
             Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs.
+
+        Phase 7.5.4: Delegated to extractors/html.py
         """
-        html_blocks = []
-        html_inline_dict = {}  # Use dict for deduplication
+        return html.extract_html(
+            self.tree,
+            self.tokens,
+            self.config,
+            self.process_tree,
+            self._find_section_id,
+            self._slice_lines_raw
+        )
+    def _extract_math(self) -> dict[str, list[dict]]:
+        """Extract both HTML blocks and inline HTML (always, for security scanning).
 
-        # RAG Safety: Check if HTML is allowed by configuration
-        html_allowed = self.config.get("allows_html", False)
+        RAG Safety: Always extracts HTML but marks with 'allowed' flag based on config.
 
-        def html_processor(node, ctx, level):
-            # Handle HTML blocks
-            if node.type == "html_block":
-                start_line = node.map[0] if node.map else None
-                end_line = node.map[1] if node.map else None
-                content = getattr(node, "content", "") or ""
+        Returns:
+            Dictionary with 'blocks' and 'inline' lists.
+            Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs.
 
-                # Extract raw HTML content from original lines if map available
-                raw_content = content
-                if start_line is not None and end_line is not None:
-                    raw_content = self._slice_lines_raw(start_line, end_line)
-
-                ctx["blocks"].append(
-                    {
-                        "content": content,
-                        "raw_content": raw_content,
-                        "start_line": start_line,
-                        "end_line": end_line,
-                        "inline": False,  # This is a block element
-                        "allowed": ctx["html_allowed"],  # RAG Safety: flag if HTML is allowed
-                        "section_id": self._find_section_id(start_line)
-                        if start_line is not None
-                        else None,
-                        "tag_hints": self._extract_html_tag_hints(content),
-                    }
-                )
-                return False  # Don't recurse into HTML content
-
-            # Skip inline HTML during tree traversal - we'll get them from tokens
-            return True
-
-        context = {
-            "blocks": html_blocks,
-            "inline_dict": html_inline_dict,
-            "html_allowed": html_allowed,  # Pass allowed flag to processor
-        }
-
-        self.process_tree(self.tree, html_processor, context)
-
-        # Process inline tokens which contain html_inline with proper line info
-        for token in self.tokens:
-            if token.type == "inline" and token.children:
-                line_num = token.map[0] if token.map else None
-
-                for child in token.children:
-                    if child.type == "html_inline":
-                        content = getattr(child, "content", "") or ""
-                        if content.strip():
-                            # Create unique key for deduplication
-                            key = (content, line_num)
-                            html_inline_dict[key] = {
-                                "content": content,
-                                "line": line_num,
-                                "inline": True,
-                                "allowed": html_allowed,  # RAG Safety: flag if HTML is allowed
-                                "section_id": self._find_section_id(line_num)
-                                if line_num is not None
-                                else None,
-                                "tag_hints": self._extract_html_tag_hints(content),
-                            }
-
-        # Convert dict to list for final output
-        html_inline = list(html_inline_dict.values())
-
-        # Return both blocks and inline HTML
-        return {"blocks": html_blocks, "inline": html_inline}
-
-    def _extract_html_tag_hints(self, html_content: str) -> list[str]:
-        """Extract HTML tag names for downstream sanitizer hints."""
-        import re
-
-        # Simple regex to find opening tags
-        tags = re.findall(r"<(\w+)", html_content)
-        return list(set(tags))  # Deduplicate
+        Phase 7.5.4: Delegated to extractors/html.py
+        """
+        print("Extracting math...")
+        return math.extract_math(
+            self.tokens
+        )
 
     def _build_mappings(self) -> dict[str, Any]:
         """Build line-to-content mappings.
@@ -2697,20 +1765,11 @@ class MarkdownParserCore:
         return False
 
     def _slugify_base(self, text: str) -> str:
-        """Convert text to base slug format without de-duplication for stable IDs."""
-        import re
-        import unicodedata
+        """Convert text to base slug format without de-duplication for stable IDs.
 
-        s = unicodedata.normalize("NFKD", text).lower()
-        # First replace slashes and spaces with hyphens
-        s = re.sub(r"[\s/]+", "-", s)
-        # Then remove other non-word characters (but keep hyphens)
-        s = re.sub(r"[^\w-]", "", s).strip()
-        # Clean up multiple hyphens
-        s = re.sub(r"-+", "-", s)
-        # Remove leading/trailing hyphens
-        s = s.strip("-")
-        return s or "untitled"  # Fallback for empty slugs
+        Phase 7.6.1: Delegated to extractors/sections.slugify_base()
+        """
+        return sections.slugify_base(text)
 
     def _find_section_id(self, line_number: int) -> str | None:
         """Find which section a line belongs to.

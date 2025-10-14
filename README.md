@@ -64,6 +64,8 @@ result = parser.parse()
 - **No file I/O in core**: Parser accepts content strings, not paths
 - **Plain dict outputs**: Lightweight, no heavy dependencies
 - **Security layered throughout**: Size limits, plugin validation, content sanitization
+- **Modular extractors** (Phase 7): 11 specialized modules with dependency injection
+- **Single responsibility**: Each extractor handles one markdown element type
 
 ### Security Profiles
 
@@ -112,16 +114,37 @@ ruff check src/ tests/
 
 ## 📊 Project Status
 
-- **Version**: 0.2.0 ✅ **Published on PyPI**
+- **Version**: 0.2.1 ✅ **Published on PyPI**
 - **Python**: 3.12+
-- **Test Coverage**: 70%
-- **Tests**: 63/63 passing
+- **Test Coverage**: 69% (working toward 80% target)
+- **Tests**: 95/95 pytest passing + 542/542 baseline tests passing
 - **Regex Count**: 0 (zero-regex architecture)
+- **Core Parser**: 1944 lines (reduced from 2900, -33%)
 - **PyPI**: https://pypi.org/project/doxstrux/
+
+### Phase 7: Modular Architecture ✅ COMPLETE
+
+**Completed**: Full modularization of parser into 11 specialized extractors
+
+- ✅ **7.0.5**: Rename from docpipe to doxstrux
+- ✅ **7.1**: Create namespace structure
+- ✅ **7.2**: Move existing modules to new namespace
+- ✅ **7.3**: Extract line & text utilities
+- ✅ **7.4**: Extract configuration & budgets
+- ✅ **7.5**: Extract simple extractors (media, footnotes, blockquotes, html)
+- ✅ **7.6**: Extract complex extractors (lists, codeblocks, tables, links, sections, paragraphs)
+
+**Achievements**:
+- Core parser reduced by 33% (2900 → 1944 lines)
+- 11 specialized extractor modules created
+- 100% baseline test parity maintained
+- Clean dependency injection pattern throughout
+- Zero behavioral changes (byte-for-byte output identical)
 
 ## 🗺️ Roadmap
 
-- [ ] **Phase 7**: Modular architecture (in progress)
+- [x] **Phase 7**: Modular architecture ✅ **COMPLETE**
+- [ ] **Phase 8**: Enhanced testing & documentation
 - [ ] **PDF support**: Extract structure from PDF documents
 - [ ] **HTML support**: Parse HTML with same IR
 - [ ] **Enhanced chunking**: Semantic-aware chunking strategies

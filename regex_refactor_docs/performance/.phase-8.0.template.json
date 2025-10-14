@@ -1,0 +1,105 @@
+{
+  "phase": 8.0,
+  "name": "TokenWarehouse Infrastructure",
+  "status": "template",
+  "timestamp": "YYYY-MM-DDTHH:MM:SSZ",
+  "evidence": {
+    "source_skeleton": "warehouse_phase8_skeleton/ (reference implementation with optimizations)",
+    "module_created": "src/doxstrux/markdown/utils/token_warehouse.py",
+    "test_file_created": "tests/test_token_warehouse.py",
+    "lines_of_code": 291,
+    "test_lines": 186,
+    "test_coverage_pct": 0,
+    "optimizations_applied": [
+      "O(H) section builder - Stack-based closing (was O(H²))",
+      "Correct parent assignment - All tokens get parents",
+      "O(1) ignore-mask - Bitmask checks instead of linear scans",
+      "Hot-loop micro-opts - Prebound locals in dispatch_all()"
+    ],
+    "classes_implemented": [
+      "TokenWarehouse",
+      "DispatchContext",
+      "Interest",
+      "Collector (protocol)"
+    ],
+    "indices_implemented": [
+      "by_type",
+      "pairs",
+      "parents",
+      "sections",
+      "fences"
+    ],
+    "query_api_methods": [
+      "iter_by_type",
+      "range_for",
+      "parent",
+      "section_of",
+      "text",
+      "iter_blocks",
+      "fences_list",
+      "sections_list"
+    ],
+    "routing_methods": [
+      "register_collector",
+      "dispatch_all",
+      "finalize_all"
+    ]
+  },
+  "tests": {
+    "pytest": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "coverage_pct": 0
+    },
+    "baselines": {
+      "total": 542,
+      "passed": 0,
+      "failed": 0,
+      "parity_pct": 0.0,
+      "time_ms": 0.0,
+      "note": "No behavioral changes expected - warehouse infrastructure not integrated yet"
+    }
+  },
+  "performance": {
+    "note": "Infrastructure phase - no performance impact yet (warehouse not integrated)",
+    "index_overhead_estimated_kb": 10,
+    "memory_overhead_ratio": "~20%",
+    "optimizations_expected_speedup": "15-30% on typical documents, 50-100x on heading-heavy documents"
+  },
+  "git": {
+    "branch": "feature/token-warehouse",
+    "commit": "",
+    "tag": "phase-8.0-complete"
+  },
+  "schema_version": "1.0",
+  "min_schema_version": "1.0",
+  "next_phase": "8.1 - First Collector (Links)",
+  "instructions": {
+    "how_to_complete": [
+      "1. Copy warehouse_phase8_skeleton/doxstrux/markdown/utils/token_warehouse.py → src/doxstrux/markdown/utils/",
+      "2. Copy warehouse_phase8_skeleton/tests/test_token_warehouse.py → tests/",
+      "3. Run pytest tests (5 tests including ignore-mask): pytest tests/test_token_warehouse.py -v",
+      "4. Verify ≥80% coverage: pytest tests/test_token_warehouse.py --cov=src/doxstrux/markdown/utils/token_warehouse --cov-report=term-missing",
+      "5. Run baseline tests (542/542 must pass - no integration yet): .venv/bin/python tools/baseline_test_runner.py --test-dir tools/test_mds --baseline-dir tools/baseline_outputs",
+      "6. Update this file with actual metrics (test_coverage_pct from coverage report)",
+      "7. Change status from 'template' to 'complete'",
+      "8. Add git commit hash and timestamp",
+      "9. git add . && git commit -m 'Phase 8.0: TokenWarehouse infrastructure complete'",
+      "10. git tag phase-8.0-complete",
+      "11. Move Phase 8.1 (first collector - links)"
+    ],
+    "gates": {
+      "pytest_passing": "All unit tests must pass",
+      "coverage": "≥80% test coverage for token_warehouse.py",
+      "baselines": "542/542 must pass (sanity check)",
+      "no_integration": "Parser not modified yet - just infrastructure"
+    }
+  },
+  "references": {
+    "specification": "regex_refactor_docs/performance/WAREHOUSE_OPTIMIZATION_SPEC.md",
+    "execution_plan": "regex_refactor_docs/performance/WAREHOUSE_EXECUTION_PLAN.md",
+    "parent_phase": "../.phase-7.6.complete.json",
+    "next_phase_template": ".phase-8.1.template.json"
+  }
+}

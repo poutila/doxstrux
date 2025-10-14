@@ -1,0 +1,123 @@
+{
+  "schema_version": "v1-lite",
+  "sections": [
+    {
+      "id": "h1-1",
+      "level": 1,
+      "title": "Lists",
+      "start_line": 6,
+      "end_line": 6
+    },
+    {
+      "id": "h1-2",
+      "level": 1,
+      "title": "Table",
+      "start_line": 15,
+      "end_line": 15
+    }
+  ],
+  "blocks": [
+    {
+      "type": "list_item",
+      "start_line": 7,
+      "end_line": 7,
+      "text": "1. Sum: $S=\\sum_i x_i$",
+      "inline": [
+        {
+          "type": "math_inline",
+          "content": "S=\\sum_i x_i",
+          "line": 7,
+          "span": [
+            8,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "start_line": 8,
+      "end_line": 8,
+      "text": "2. Limit: $\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}$",
+      "inline": [
+        {
+          "type": "math_inline",
+          "content": "\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}",
+          "line": 8,
+          "span": [
+            10,
+            46
+          ]
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "start_line": 9,
+      "end_line": 9,
+      "text": "- Gaussian: $\\mathcal{N}(\\mu,\\sigma^2)$",
+      "inline": [
+        {
+          "type": "math_inline",
+          "content": "\\mathcal{N}(\\mu,\\sigma^2)",
+          "line": 9,
+          "span": [
+            12,
+            39
+          ]
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "start_line": 10,
+      "end_line": 10,
+      "text": "- Display in bullet:",
+      "inline": []
+    },
+    {
+      "type": "paragraph",
+      "start_line": 11,
+      "end_line": 11,
+      "text": "  $$",
+      "inline": []
+    },
+    {
+      "type": "paragraph",
+      "start_line": 12,
+      "end_line": 12,
+      "text": "  \\mathrm{KL}(p\\|q)=\\int p(x)\\log \\frac{p(x)}{q(x)}\\,dx",
+      "inline": []
+    },
+    {
+      "type": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "text": "  $$",
+      "inline": []
+    },
+    {
+      "type": "table",
+      "start_line": 16,
+      "end_line": 20,
+      "content": "| Symbol | Meaning | Example |\n|---|---|---|\n| $\\theta$ | parameter | $\\theta\\in\\mathbb{R}^d$ |\n| $\\phi$ | features | $\\phi(x)=Wx+b$ |\n| $\\mathbb{E}$ | expectation | $\\mathbb{E}[X]=\\sum_x x\\,p(x)$ |"
+    },
+    {
+      "type": "paragraph",
+      "start_line": 22,
+      "end_line": 22,
+      "text": "Note on currency vs math: price is \\$5; keep $x+y$ as math.",
+      "inline": [
+        {
+          "type": "math_inline",
+          "content": "x+y",
+          "line": 22,
+          "span": [
+            45,
+            50
+          ]
+        }
+      ]
+    }
+  ]
+}

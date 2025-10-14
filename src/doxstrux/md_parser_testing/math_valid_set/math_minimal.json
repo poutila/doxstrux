@@ -1,0 +1,59 @@
+{
+  "schema_version": "v1-lite",
+  "sections": [
+    {
+      "id": "h1-1",
+      "level": 1,
+      "title": "Intro",
+      "start_line": 6,
+      "end_line": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "text": "This file tests inline $e^{i\\pi}+1=0$ and one display block.",
+      "inline": [
+        {
+          "type": "math_inline",
+          "content": "e^{i\\pi}+1=0",
+          "line": 7,
+          "span": [
+            23,
+            37
+          ]
+        }
+      ]
+    },
+    {
+      "type": "math_display",
+      "delimiter": "$$",
+      "start_line": 9,
+      "end_line": 11,
+      "content": "\\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}"
+    },
+    {
+      "type": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "text": "A code fence that uses dollars but is NOT math:",
+      "inline": []
+    },
+    {
+      "type": "code_fence",
+      "language": "python",
+      "start_line": 15,
+      "end_line": 17,
+      "content": "price = f\"${{amount:.2f}}\""
+    },
+    {
+      "type": "paragraph",
+      "start_line": 19,
+      "end_line": 19,
+      "text": "End.",
+      "inline": []
+    }
+  ]
+}
