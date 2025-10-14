@@ -174,7 +174,90 @@ Complete dependency documentation for Phase 8.
 
 ---
 
-### 7. **.phase-8.0.template.json**
+### 7. **ATTACK_SCENARIOS_AND_MITIGATIONS.md** 🛡️ NEW
+Concrete, realistic attack and failure modes with immediate mitigations.
+
+**Contents**:
+- **Security attacks** (3): Unsafe HTML → XSS, Unsafe URL schemes → SSRF, Malicious attrGet
+- **Runtime failures** (3): Resource exhaustion, Broken map values, Collector exceptions
+- Detection strategies (CI gates, telemetry, fuzz testing)
+- Quick prioritized mitigations (copy/paste checklist)
+- Implementation status matrix
+
+**When to read**: Before security review or when hardening the implementation.
+
+**Format**: Each attack includes: what happens, how triggered, impact, detection, and immediate fix.
+
+---
+
+### 7.5. **SECURITY_QUICK_REFERENCE.md** ⚡ NEW
+Fast-lookup security hardening checklist - apply these NOW.
+
+**Contents**:
+- 6 critical fixes with copy/paste code (input caps, map norm, URL allowlist, error isolation, HTML safety, collector caps)
+- Security checklist (before deployment, testing, docs, monitoring)
+- Detection patterns (telemetry, alert thresholds)
+- Implementation status matrix (73 LOC total)
+- Quick apply script
+
+**When to read**: When applying security fixes or responding to incidents.
+
+**Apply time**: ~30 minutes for all 6 fixes
+
+---
+
+### 7.6. **TOKEN_VIEW_CANONICALIZATION.md** 🔐 NEW
+Step-by-step implementation guide for token view canonicalization security pattern.
+
+**Contents**:
+- 9-step implementation guide (~150 LOC across warehouse and collectors)
+- Token view pattern (canonicalize tokens to primitives during init)
+- Supply-chain attack prevention (eliminates attrGet() risks)
+- Performance impact analysis (init overhead vs dispatch speedup)
+- Complete code snippets with safety annotations
+- Demo script and verification tests
+
+**When to read**: Before implementing TokenWarehouse to eliminate token method execution risks.
+
+**Key benefit**: Prevents malicious token getters from executing during hot-path dispatch (~9% faster parse, safer runtime).
+
+---
+
+### 7.7. **DEEP_VULNERABILITIES_ANALYSIS.md** 🔬 NEW
+Comprehensive analysis of 9 non-obvious, high-impact vulnerabilities beyond basic XSS/SSRF.
+
+**Contents**:
+- **Security domain** (4): Token deserialization/prototype pollution, URL normalization mismatch, template injection (SSTI), side-channel timing
+- **Runtime domain** (5): Algorithmic complexity (O(N²)), deep nesting stack overflow, bitmask fragility, heap fragmentation, race conditions (TOCTOU)
+- Combined attack chains (2 examples)
+- Detection methods with code snippets
+- Immediate mitigations (copy/paste ready)
+- Testing matrix mapping vulnerabilities to test files
+
+**When to read**: When performing deep security review or advanced threat modeling.
+
+**Format**: Each vulnerability includes severity rating, technical description, attack vectors, escalation potential, real-world scenarios, detection, and mitigation.
+
+---
+
+### 7.8. **SECURITY_DOCUMENTATION_SUMMARY.md** 📋 NEW
+Complete overview and roadmap for all security documentation.
+
+**Contents**:
+- Document hierarchy (4 layers: quick response, concrete threats, implementation guides, deep analysis)
+- Coverage matrix (15 vulnerabilities across all documents)
+- Implementation roadmap (Phase 8.0-8.2: ~443 LOC, ~2.5 hours)
+- Testing requirements (unit tests, adversarial corpus, fuzz testing)
+- Monitoring & detection (telemetry metrics, alert thresholds)
+- CI/CD integration summary
+
+**When to read**: First time reviewing security documentation or planning security implementation.
+
+**Key insight**: Hierarchical documentation allows quick action (Layer 1) while supporting deep analysis (Layer 4).
+
+---
+
+### 8. **.phase-8.0.template.json**
 Completion artifact template for Phase 8.0.
 
 **Purpose**: Mechanically gate Phase 8.1 until warehouse infrastructure passes all gates.
@@ -183,7 +266,7 @@ Completion artifact template for Phase 8.0.
 
 ---
 
-### 8. **skeleton/** (Canonical Reference Implementation)
+### 9. **skeleton/** (Canonical Reference Implementation)
 Production-ready skeleton with **all optimizations**, **complete collector set**, and **debug utilities**.
 
 **Contents**:
@@ -408,16 +491,21 @@ structure = self._warehouse.collect_all()
 
 ```
 performance/
-├── README.md                              (500 lines) - This file
-├── WAREHOUSE_OPTIMIZATION_SPEC.md        (1,213 lines) - Technical spec
-├── WAREHOUSE_EXECUTION_PLAN.md           (996 lines) - Implementation guide
-├── SECURITY_HARDENING_CHECKLIST.md       (550 lines) - Initial security review ⚡
-├── CRITICAL_VULNERABILITIES_ANALYSIS.md  (650 lines) - Deep security analysis 🔒 NEW
-├── COMPREHENSIVE_SECURITY_PATCH.md       (450 lines) - Production patches 🔒 NEW
-├── PHASE_8_SECURITY_INTEGRATION_GUIDE.md (420 lines) - Integration guide 🔒 NEW
-├── CI_CD_INTEGRATION.md                  (350 lines) - CI/CD integration 🔗 NEW
-├── LIBRARIES_NEEDED.md                   (280 lines) - Dependencies 📦 NEW
-├── .phase-8.0.template.json              (101 lines) - Completion template
+├── README.md                                (600 lines) - This file
+├── WAREHOUSE_OPTIMIZATION_SPEC.md          (1,213 lines) - Technical spec
+├── WAREHOUSE_EXECUTION_PLAN.md             (996 lines) - Implementation guide
+├── SECURITY_DOCUMENTATION_SUMMARY.md       (405 lines) - Security docs roadmap 📋 NEW
+├── SECURITY_HARDENING_CHECKLIST.md         (550 lines) - Initial security review ⚡
+├── CRITICAL_VULNERABILITIES_ANALYSIS.md    (650 lines) - Deep security analysis 🔒
+├── COMPREHENSIVE_SECURITY_PATCH.md         (450 lines) - Production patches 🔒
+├── PHASE_8_SECURITY_INTEGRATION_GUIDE.md   (420 lines) - Integration guide 🔒
+├── CI_CD_INTEGRATION.md                    (350 lines) - CI/CD integration 🔗
+├── LIBRARIES_NEEDED.md                     (280 lines) - Dependencies 📦
+├── ATTACK_SCENARIOS_AND_MITIGATIONS.md     (850 lines) - Attack modes & fixes 🛡️
+├── SECURITY_QUICK_REFERENCE.md             (320 lines) - Fast security checklist ⚡
+├── TOKEN_VIEW_CANONICALIZATION.md          (751 lines) - Token view impl guide 🔐
+├── DEEP_VULNERABILITIES_ANALYSIS.md        (1,179 lines) - Deep vulnerability analysis 🔬
+├── .phase-8.0.template.json                (101 lines) - Completion template
 ├── warehouse_phase8_patched/             - Security-hardened warehouse 🔒 NEW
 │   ├── doxstrux/markdown/
 │   │   ├── utils/token_warehouse.py   (290 lines) - Patched + hardened
@@ -445,9 +533,16 @@ performance/
 └── archived/                              - Historical documents
 ```
 
-**Total**: 5,566 lines of specification + 1,704 lines of skeleton code (includes CI/CD integration & dependency docs)
+**Total**: 9,321 lines of specification + 1,704 lines of skeleton code
 
 **Performance**: Skeleton includes O(H) section builder, O(1) ignore-mask, hot-loop optimizations, debug utilities, and comprehensive test/profiling suite.
+
+**Security**: Complete multi-layered security documentation:
+- 6 immediate attack scenarios (XSS, SSRF, DoS) with copy/paste fixes
+- 9 deep vulnerabilities (supply-chain, normalization, SSTI, O(N²), etc.)
+- Token view canonicalization (security + 9% performance improvement)
+- Quick reference guide (6 critical fixes, ~30 min apply time)
+- 3 security domains covered (injection, resource exhaustion, correctness)
 
 **Integration**: CI/CD integration guide references main project infrastructure at `../../tools/ci/` (5 CI gates + 3 Phase 8 gates)
 
@@ -456,26 +551,28 @@ performance/
 ## Quick Start
 
 ### For Implementation
-1. Read `WAREHOUSE_OPTIMIZATION_SPEC.md` (architecture)
-2. Read `WAREHOUSE_EXECUTION_PLAN.md` (roadmap)
-3. **Read `SECURITY_HARDENING_CHECKLIST.md` (apply security hardening first)** ⚡
-4. **Read `CI_CD_INTEGRATION.md` (understand CI gate requirements)** 🔗
-5. Check `LIBRARIES_NEEDED.md` (verify dependencies - zero new deps!)
-6. Review `skeleton/` (reference implementation)
-7. Create feature branch: `git checkout -b feature/token-warehouse`
-8. Copy skeleton files to main codebase:
-   ```bash
-   cp skeleton/doxstrux/markdown/utils/token_warehouse.py \
-      src/doxstrux/markdown/utils/
-   cp skeleton/doxstrux/markdown/collectors_phase8/links.py \
-      src/doxstrux/markdown/collectors_phase8/
-   cp skeleton/tests/test_token_warehouse.py \
-      tests/
-   ```
-9. Apply security patches from `COMPREHENSIVE_SECURITY_PATCH.md`
-10. Run CI gates (G1-G7 + P1-P3) per `CI_CD_INTEGRATION.md`
-11. Create `.phase-8.0.complete.json`
-12. Migrate collectors incrementally (Phases 8.1-8.N)
+1. **Read `SECURITY_DOCUMENTATION_SUMMARY.md` (security roadmap overview)** 📋 **START HERE**
+2. Read `WAREHOUSE_OPTIMIZATION_SPEC.md` (architecture)
+3. Read `WAREHOUSE_EXECUTION_PLAN.md` (roadmap)
+4. **Read `SECURITY_QUICK_REFERENCE.md` (apply 6 critical fixes first)** ⚡
+5. **Read `TOKEN_VIEW_CANONICALIZATION.md` (implement token view pattern)** 🔐
+6. **Read `CI_CD_INTEGRATION.md` (understand CI gate requirements)** 🔗
+7. Check `LIBRARIES_NEEDED.md` (verify dependencies - zero new deps!)
+8. Review `skeleton/` (reference implementation)
+9. Create feature branch: `git checkout -b feature/token-warehouse`
+10. Copy skeleton files to main codebase:
+    ```bash
+    cp skeleton/doxstrux/markdown/utils/token_warehouse.py \
+       src/doxstrux/markdown/utils/
+    cp skeleton/doxstrux/markdown/collectors_phase8/links.py \
+       src/doxstrux/markdown/collectors_phase8/
+    cp skeleton/tests/test_token_warehouse.py \
+       tests/
+    ```
+11. Apply security patches from `COMPREHENSIVE_SECURITY_PATCH.md`
+12. Run CI gates (G1-G7 + P1-P3) per `CI_CD_INTEGRATION.md`
+13. Create `.phase-8.0.complete.json`
+14. Migrate collectors incrementally (Phases 8.1-8.N)
 
 ### For Review
 1. Read this README (context)
