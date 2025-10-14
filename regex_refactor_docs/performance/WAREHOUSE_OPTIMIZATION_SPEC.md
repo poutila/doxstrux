@@ -852,18 +852,19 @@ while parent_idx is not None:
 
 ### Phase 8.0: Infrastructure
 
-**Reference Implementation**: `warehouse_phase8_skeleton/` contains production-ready code with performance optimizations (291 lines warehouse + 186 lines tests).
+**Reference Implementation**: `skeleton/` contains production-ready code with all performance optimizations (259 lines warehouse + 206 lines tests + 12 collectors).
 
 **Performance Optimizations** (applied 2025-10-14):
 - ✅ **O(H) section builder** - Stack-based closing (was O(H²), ~10-100x faster on many headings)
 - ✅ **Correct parent assignment** - All tokens get parents, not just inline (correctness fix)
 - ✅ **O(1) ignore-mask** - Bitmask checks instead of linear stack scans (~5-20% faster dispatch)
 - ✅ **Hot-loop micro-opts** - Prebound locals in dispatch_all() (~2-5% faster)
+- ✅ **Nullable should_process** - Skip redundant calls (~2% faster)
 - ✅ **Expected total speedup**: 15-30% on typical documents, 50-100x on heading-heavy documents
 
 **Tasks**:
-1. Copy `warehouse_phase8_skeleton/doxstrux/markdown/utils/token_warehouse.py` → `src/doxstrux/markdown/utils/`
-2. Copy `warehouse_phase8_skeleton/tests/test_token_warehouse.py` → `tests/`
+1. Copy `skeleton/doxstrux/markdown/utils/token_warehouse.py` → `src/doxstrux/markdown/utils/`
+2. Copy `skeleton/tests/test_token_warehouse.py` → `tests/`
 3. Verify implementation:
    - TokenWarehouse class with all indices (by_type, pairs, parents, sections, fences)
    - Query API (iter_by_type, range_for, parent, section_of with binary search, text)
@@ -874,20 +875,20 @@ while parent_idx is not None:
 5. **Do NOT modify parser yet** (just infrastructure)
 
 **Success Criteria**:
-- ✅ All unit tests pass (5 tests: indices, dispatch, lines/section boundaries, ignore-mask)
+- ✅ All unit tests pass (6 tests: indices, dispatch, lines/section boundaries, ignore-mask, invariants)
 - ✅ Warehouse builds indices correctly with O(H) complexity
 - ✅ Query API returns correct results vs manual traversal
 - ✅ Coverage ≥80% for token_warehouse.py
 
 ### Phase 8.1: First Collector (Links)
 
-**Reference Implementation**: `warehouse_phase8_skeleton/doxstrux/markdown/collectors_phase8/links.py` (56 lines).
+**Reference Implementation**: `skeleton/doxstrux/markdown/collectors_phase8/links.py` (56 lines).
 
 **Why links first**: Token-based (not tree-based), good complexity test case.
 
 **Tasks**:
-1. Copy `warehouse_phase8_skeleton/doxstrux/markdown/collectors_phase8/links.py` → `src/doxstrux/markdown/collectors_phase8/`
-2. Copy `warehouse_phase8_skeleton/doxstrux/markdown/core/parser_adapter.py` → `src/doxstrux/markdown/core/`
+1. Copy `skeleton/doxstrux/markdown/collectors_phase8/links.py` → `src/doxstrux/markdown/collectors_phase8/`
+2. Copy `skeleton/doxstrux/markdown/core/parser_adapter.py` → `src/doxstrux/markdown/core/`
 3. Add feature flag to parser: `USE_WAREHOUSE = os.getenv("USE_WAREHOUSE", "0") == "1"`
 4. Modify `_extract_links()` to use adapter:
    ```python

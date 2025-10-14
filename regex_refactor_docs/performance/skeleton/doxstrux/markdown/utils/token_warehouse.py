@@ -1,25 +1,21 @@
 
+RAISE_ON_COLLECTOR_ERROR = False
+
 from __future__ import annotations
 from typing import Any, Callable, Protocol, Dict, List, Tuple, Optional, Set
 from collections import defaultdict
 
 class DispatchContext:
-    """Mutable context used during dispatch."""
     __slots__ = ("stack", "line")
     def __init__(self):
         self.stack: List[str] = []
         self.line: int = 0
 
 class Interest:
-    """Collector interest specification for routing."""
     __slots__ = ("types", "tags", "ignore_inside", "predicate")
-    def __init__(
-        self,
-        types: Optional[Set[str]] = None,
-        tags: Optional[Set[str]] = None,
-        ignore_inside: Optional[Set[str]] = None,
-        predicate: Optional[Callable[[Any, DispatchContext, "TokenWarehouse"], bool]] = None,
-    ):
+    def __init__(self, types: Optional[Set[str]] = None, tags: Optional[Set[str]] = None,
+                 ignore_inside: Optional[Set[str]] = None,
+                 predicate: Optional[Callable[[Any, DispatchContext, "TokenWarehouse"], bool]] = None):
         self.types: Set[str] = types or set()
         self.tags: Set[str] = tags or set()
         self.ignore_inside: Set[str] = ignore_inside or set()
@@ -33,19 +29,12 @@ class Collector(Protocol):
     def finalize(self, wh: "TokenWarehouse") -> Any: ...
 
 class TokenWarehouse:
-    """
-    Single-pass token router with precomputed indices.
-    Invariants:
-    - sections sorted by start_line (strictly increasing)
-    - pairs[open] = close with open < close
-    - line_count == len(lines) when text provided; else inferred from token maps (end is exclusive in markdown-it).
-    """
     __slots__ = (
         "tokens", "tree",
         "by_type", "pairs", "parents",
         "sections", "fences",
         "lines", "line_count",
-        "_text_cache", "_section_starts",
+        "_text_cache", "_section_starts", "_collector_errors",
         "_collectors", "_routing",
         "_mask_map", "_collector_masks",
     )
@@ -60,10 +49,11 @@ class TokenWarehouse:
         self.pairs: Dict[int, int] = {}
         self.parents: Dict[int, int] = {}
         self.sections: List[Tuple[int, int, int, int, str]] = []
-        self.fences: List[Tuple[int, int, str, str]] = []  # (start_incl, end_excl, lang, raw_info)
+        self.fences: List[Tuple[int, int, str, str]] = []
 
         self._text_cache: Dict[Tuple[int, int], str] = {}
         self._section_starts: List[int] = []
+        self._collector_errors: List[tuple] = []
 
         self._collectors: List[Collector] = []
         self._routing: Dict[str, Tuple[Collector, ...]] = {}
@@ -94,10 +84,30 @@ class TokenWarehouse:
         fences = self.fences
 
         for i, tok in enumerate(tokens):
+            # normalize map tuples to safe ints
+            m_raw = getattr(tok, 'map', None)
+            if m_raw and isinstance(m_raw, (list, tuple)) and len(m_raw) == 2:
+                try:
+                    s = int(m_raw[0]) if m_raw[0] is not None else 0
+                except Exception:
+                    s = 0
+                try:
+                    e = int(m_raw[1]) if m_raw[1] is not None else s
+                except Exception:
+                    e = s
+                if s < 0: s = 0
+                if e < s: e = s
+                try:
+                    tok.map = (s, e)
+                except Exception:
+                    pass
+            else:
+                m_raw = None
+
             ttype = getattr(tok, "type", "")
             by_type[ttype].append(i)
 
-            # Assign parent BEFORE mutating stack for this token
+            # assign parent before mutating the stack to ensure correctness
             if open_stack:
                 parents[i] = open_stack[-1]
 
@@ -114,11 +124,11 @@ class TokenWarehouse:
                     info = (getattr(tok, "info", "") or "").strip()
                     fences.append((int(m[0]), int(m[1]), info, getattr(tok, "info", "") or ""))
 
-        self._build_sections()
-
-    def _build_sections(self) -> None:
+        # build sections (sort headings by normalized start to tolerate malformed order)
         heads = self.by_type.get("heading_open", [])
-        stack: List[Tuple[int, int, int, str]] = []  # (hidx, level, start, text)
+        heads = sorted(heads, key=lambda h: (getattr(self.tokens[h], 'map', (0,0))[0] or 0))
+
+        stack: List[Tuple[int, int, int, str]] = []
         last_end = self.line_count
 
         def level_of(idx: int) -> int:
@@ -131,7 +141,6 @@ class TokenWarehouse:
             m = getattr(self.tokens[hidx], "map", None) or (0, 0)
             start = int(m[0])
 
-            # Close headings with level >= current
             while stack and stack[-1][1] >= lvl:
                 ohidx, olvl, ostart, otext = stack.pop()
                 self.sections.append((ohidx, ostart, max(start - 1, ostart), olvl, otext))
@@ -178,11 +187,9 @@ class TokenWarehouse:
     # Routing
     def register_collector(self, collector: Collector) -> None:
         self._collectors.append(collector)
-        # Freeze routing lists as tuples
         for ttype in collector.interest.types:
             prev = self._routing.get(ttype)
             self._routing[ttype] = tuple([*prev, collector]) if prev else (collector,)
-        # Compute ignore mask
         mask = 0
         for t in getattr(collector.interest, "ignore_inside", set()):
             if t not in self._mask_map:
@@ -223,37 +230,13 @@ class TokenWarehouse:
                 sp = getattr(col, "should_process", None)
                 if sp is not None and not sp(tok, ctx, self):
                     continue
-                col.on_token(i, tok, ctx, self)
-
-    def finalize_all(self) -> Dict[str, Any]:
-        """Finalize all collectors and return extracted data.
-
-        Returns:
-            Dictionary mapping collector names to their extracted data
-        """
-        return {col.name: col.finalize(self) for col in self._collectors}
-
-    # Debug utilities
-    def debug_dump_sections(self, limit: Optional[int] = None) -> str:
-        """Return formatted string of section map for debugging.
-
-        Args:
-            limit: Maximum number of sections to dump (None = all)
-
-        Returns:
-            Formatted section map showing hierarchy and line ranges
-
-        Example output:
-            [00] L1    0-  12 | 'Introduction'
-            [01] L2   13-  45 | 'Background'
-            [02] L2   46-  89 | 'Methodology'
-
-        This helps visualize section boundaries and confirm that the O(H)
-        section builder behaves correctly: no overlap, correct hierarchy, etc.
-        Zero runtime impact unless explicitly called.
-        """
-        lines = []
-        sections_to_dump = self.sections[:limit] if limit else self.sections
-        for i, (hidx, start, end, level, text) in enumerate(sections_to_dump):
-            lines.append(f"[{i:02d}] L{level} {start:>4}-{end:<4} | {text!r}")
-        return "\n".join(lines)
+                try:
+                    col.on_token(i, tok, ctx, self)
+                except Exception as e:
+                    try:
+                        self._collector_errors.append((getattr(col, 'name', repr(col)), i, type(e).__name__))
+                    except Exception:
+                        pass
+                    if globals().get('RAISE_ON_COLLECTOR_ERROR'):
+                        raise
+                    # continue

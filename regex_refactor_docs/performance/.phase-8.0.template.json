@@ -4,17 +4,18 @@
   "status": "template",
   "timestamp": "YYYY-MM-DDTHH:MM:SSZ",
   "evidence": {
-    "source_skeleton": "warehouse_phase8_skeleton/ (reference implementation with optimizations)",
+    "source_skeleton": "skeleton/ (canonical reference implementation with all optimizations)",
     "module_created": "src/doxstrux/markdown/utils/token_warehouse.py",
     "test_file_created": "tests/test_token_warehouse.py",
-    "lines_of_code": 291,
-    "test_lines": 186,
+    "lines_of_code": 259,
+    "test_lines": 206,
     "test_coverage_pct": 0,
     "optimizations_applied": [
       "O(H) section builder - Stack-based closing (was O(H²))",
       "Correct parent assignment - All tokens get parents",
       "O(1) ignore-mask - Bitmask checks instead of linear scans",
-      "Hot-loop micro-opts - Prebound locals in dispatch_all()"
+      "Hot-loop micro-opts - Prebound locals in dispatch_all()",
+      "Nullable should_process - Skip redundant calls"
     ],
     "classes_implemented": [
       "TokenWarehouse",
@@ -77,9 +78,9 @@
   "next_phase": "8.1 - First Collector (Links)",
   "instructions": {
     "how_to_complete": [
-      "1. Copy warehouse_phase8_skeleton/doxstrux/markdown/utils/token_warehouse.py → src/doxstrux/markdown/utils/",
-      "2. Copy warehouse_phase8_skeleton/tests/test_token_warehouse.py → tests/",
-      "3. Run pytest tests (5 tests including ignore-mask): pytest tests/test_token_warehouse.py -v",
+      "1. Copy skeleton/doxstrux/markdown/utils/token_warehouse.py → src/doxstrux/markdown/utils/",
+      "2. Copy skeleton/tests/test_token_warehouse.py → tests/",
+      "3. Run pytest tests (6 comprehensive tests): pytest tests/test_token_warehouse.py -v",
       "4. Verify ≥80% coverage: pytest tests/test_token_warehouse.py --cov=src/doxstrux/markdown/utils/token_warehouse --cov-report=term-missing",
       "5. Run baseline tests (542/542 must pass - no integration yet): .venv/bin/python tools/baseline_test_runner.py --test-dir tools/test_mds --baseline-dir tools/baseline_outputs",
       "6. Update this file with actual metrics (test_coverage_pct from coverage report)",

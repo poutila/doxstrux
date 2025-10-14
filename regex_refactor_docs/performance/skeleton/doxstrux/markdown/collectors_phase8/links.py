@@ -3,11 +3,18 @@ from __future__ import annotations
 from typing import Any, Dict, List, Optional, Set
 from ..utils.token_warehouse import Collector, Interest, DispatchContext, TokenWarehouse
 
+ALLOWED_SCHEMES = {"http", "https", "mailto"}
+
+def _allowed(url: str) -> bool:
+    if ":" not in url:
+        return True
+    return url.split(":", 1)[0].lower() in ALLOWED_SCHEMES
+
 class LinksCollector:
     def __init__(self, allowed_schemes: Optional[Set[str]] = None):
         self.name = "links"
         self.interest = Interest(types={"link_open", "inline", "link_close"}, ignore_inside={"fence", "code_block"})
-        self.allowed_schemes = allowed_schemes or {"http", "https", "mailto"}
+        self.allowed_schemes = allowed_schemes or ALLOWED_SCHEMES
         self._links: List[Dict[str, Any]] = []
         self._current: Optional[Dict[str, Any]] = None
         self._depth = 0
@@ -24,14 +31,14 @@ class LinksCollector:
                 try:
                     href = token.attrGet("href")
                 except Exception:
-                    pass
+                    href = getattr(token, "href", None) or None
                 href = href or ""
                 self._current = {
                     "id": f"link_{len(self._links)}",
                     "url": href,
                     "text": "",
                     "line": (token.map[0] if getattr(token, "map", None) else None),
-                    "allowed": self._is_allowed(href),
+                    "allowed": _allowed(href),
                 }
         elif ttype == "inline" and self._current:
             content = getattr(token, "content", "") or ""
@@ -48,9 +55,3 @@ class LinksCollector:
 
     def finalize(self, wh: TokenWarehouse):
         return self._links
-
-    def _is_allowed(self, url: str) -> bool:
-        if ":" not in url:
-            return True
-        scheme = url.split(":", 1)[0].lower()
-        return scheme in self.allowed_schemes

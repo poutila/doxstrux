@@ -142,7 +142,39 @@ Deep technical review with security hardening and micro-optimizations.
 
 ---
 
-### 5. **.phase-8.0.template.json**
+### 5. **CI_CD_INTEGRATION.md** 🔗 NEW
+CI/CD integration guide connecting Phase 8 to main project infrastructure.
+
+**Contents**:
+- Integration with existing CI gates at `../../tools/ci/`
+- Gate G1-G7 (existing): No hybrids, canonical pairs, parity, performance, evidence
+- Gate P1-P3 (Phase 8): Adversarial corpus, vulnerability tests, fuzz testing
+- GitHub Actions/GitLab CI pipeline examples
+- Performance monitoring and rollback procedures
+
+**When to read**: Before Phase 8.0 integration to understand CI requirements.
+
+**Key Reference**: Main project CI/CD at `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/ci/`
+
+---
+
+### 6. **LIBRARIES_NEEDED.md** 📦 NEW
+Complete dependency documentation for Phase 8.
+
+**Summary**: **Zero new dependencies** required - all tools use existing deps or stdlib.
+
+**Contents**:
+- Runtime dependencies (markdown-it-py, already in project)
+- Testing dependencies (pytest, already in project)
+- Security testing (tracemalloc, weakref, gc - all stdlib)
+- Virtual environment usage (critical: always use `.venv/bin/python`)
+- Quick check commands
+
+**When to read**: Before installation or when troubleshooting missing imports.
+
+---
+
+### 7. **.phase-8.0.template.json**
 Completion artifact template for Phase 8.0.
 
 **Purpose**: Mechanically gate Phase 8.1 until warehouse infrastructure passes all gates.
@@ -151,7 +183,7 @@ Completion artifact template for Phase 8.0.
 
 ---
 
-### 6. **skeleton/** (Canonical Reference Implementation)
+### 8. **skeleton/** (Canonical Reference Implementation)
 Production-ready skeleton with **all optimizations**, **complete collector set**, and **debug utilities**.
 
 **Contents**:
@@ -376,27 +408,48 @@ structure = self._warehouse.collect_all()
 
 ```
 performance/
-├── README.md                              (446 lines) - This file
+├── README.md                              (500 lines) - This file
 ├── WAREHOUSE_OPTIMIZATION_SPEC.md        (1,213 lines) - Technical spec
 ├── WAREHOUSE_EXECUTION_PLAN.md           (996 lines) - Implementation guide
-├── SECURITY_AND_PERFORMANCE_REVIEW.md    (1,000 lines) - Security & micro-opts review
+├── SECURITY_HARDENING_CHECKLIST.md       (550 lines) - Initial security review ⚡
+├── CRITICAL_VULNERABILITIES_ANALYSIS.md  (650 lines) - Deep security analysis 🔒 NEW
+├── COMPREHENSIVE_SECURITY_PATCH.md       (450 lines) - Production patches 🔒 NEW
+├── PHASE_8_SECURITY_INTEGRATION_GUIDE.md (420 lines) - Integration guide 🔒 NEW
+├── CI_CD_INTEGRATION.md                  (350 lines) - CI/CD integration 🔗 NEW
+├── LIBRARIES_NEEDED.md                   (280 lines) - Dependencies 📦 NEW
 ├── .phase-8.0.template.json              (101 lines) - Completion template
+├── warehouse_phase8_patched/             - Security-hardened warehouse 🔒 NEW
+│   ├── doxstrux/markdown/
+│   │   ├── utils/token_warehouse.py   (290 lines) - Patched + hardened
+│   │   └── collectors_phase8/links.py (78 lines) - Patched + safe URL validation
+│   ├── tests/
+│   │   ├── test_token_warehouse_adversarial.py (38 lines)
+│   │   └── test_vulnerabilities_extended.py (380 lines) - 10+ vulnerability tests
+│   └── tools/
+│       ├── generate_adversarial_corpus.py (37 lines)
+│       └── run_adversarial.py (90 lines) - Adversarial runner
 ├── skeleton/                              - Canonical reference implementation ⭐
 │   ├── doxstrux/markdown/
 │   │   ├── utils/token_warehouse.py   (259 lines) - Optimized warehouse + debug
 │   │   ├── collectors_phase8/         (12 collectors, 436 lines) - All collectors
 │   │   ├── core/parser_adapter.py     (29 lines) - Feature flag
 │   │   └── cli/dump_sections.py       (102 lines) - Debug CLI tool
-│   ├── tests/test_token_warehouse.py  (206 lines) - 6 comprehensive tests
-│   ├── tools/benchmark_parser.py      (44 lines) - Benchmark scaffold
-│   └── README.md                      (~530 lines) - Complete guide
+│   ├── tests/
+│   │   ├── test_token_warehouse.py    (206 lines) - 6 comprehensive tests
+│   │   └── test_fuzz_collectors.py    (318 lines) - Fuzz tests ⚡ NEW
+│   ├── tools/
+│   │   ├── benchmark_parser.py        (44 lines) - Benchmark scaffold
+│   │   └── profile_collectors.py      (260 lines) - Profiling tool ⚡ NEW
+│   └── README.md                      (~640 lines) - Complete guide
 ├── steps_taken/                           - Phase completion documentation
 └── archived/                              - Historical documents
 ```
 
-**Total**: 3,756 lines of specification + 1,119 lines of skeleton code
+**Total**: 5,566 lines of specification + 1,704 lines of skeleton code (includes CI/CD integration & dependency docs)
 
-**Performance**: Skeleton includes O(H) section builder, O(1) ignore-mask, hot-loop optimizations, and debug utilities.
+**Performance**: Skeleton includes O(H) section builder, O(1) ignore-mask, hot-loop optimizations, debug utilities, and comprehensive test/profiling suite.
+
+**Integration**: CI/CD integration guide references main project infrastructure at `../../tools/ci/` (5 CI gates + 3 Phase 8 gates)
 
 ---
 
@@ -405,10 +458,12 @@ performance/
 ### For Implementation
 1. Read `WAREHOUSE_OPTIMIZATION_SPEC.md` (architecture)
 2. Read `WAREHOUSE_EXECUTION_PLAN.md` (roadmap)
-3. **Read `SECURITY_AND_PERFORMANCE_REVIEW.md` (apply security hardening first)**
-4. Review `skeleton/` (reference implementation)
-5. Create feature branch: `git checkout -b feature/token-warehouse`
-6. Copy skeleton files to main codebase:
+3. **Read `SECURITY_HARDENING_CHECKLIST.md` (apply security hardening first)** ⚡
+4. **Read `CI_CD_INTEGRATION.md` (understand CI gate requirements)** 🔗
+5. Check `LIBRARIES_NEEDED.md` (verify dependencies - zero new deps!)
+6. Review `skeleton/` (reference implementation)
+7. Create feature branch: `git checkout -b feature/token-warehouse`
+8. Copy skeleton files to main codebase:
    ```bash
    cp skeleton/doxstrux/markdown/utils/token_warehouse.py \
       src/doxstrux/markdown/utils/
@@ -417,9 +472,10 @@ performance/
    cp skeleton/tests/test_token_warehouse.py \
       tests/
    ```
-6. Implement Phase 8.0 (infrastructure)
-7. Run gates and create `.phase-8.0.complete.json`
-8. Migrate collectors incrementally (Phases 8.1-8.N)
+9. Apply security patches from `COMPREHENSIVE_SECURITY_PATCH.md`
+10. Run CI gates (G1-G7 + P1-P3) per `CI_CD_INTEGRATION.md`
+11. Create `.phase-8.0.complete.json`
+12. Migrate collectors incrementally (Phases 8.1-8.N)
 
 ### For Review
 1. Read this README (context)
@@ -433,8 +489,16 @@ performance/
 
 ### Parent Documentation
 - `../REGEX_REFACTOR_EXECUTION_GUIDE.md` - Original refactoring approach
+- `../REGEX_REFACTOR_POLICY_GATES.md` - CI/CD gates and policy (G1-G7)
 - `../DETAILED_TASK_LIST.md` - Phase 0-7 task breakdowns
 - `../.phase-7.6.complete.json` - Current completion state
+
+### Main Project CI/CD
+- `../../tools/ci/ci_gate_parity.py` - Baseline parity validation (G3)
+- `../../tools/ci/ci_gate_performance.py` - Performance regression detection (G4)
+- `../../tools/ci/ci_gate_no_hybrids.py` - No hybrid code paths (G1)
+- `../../tools/ci/ci_gate_canonical_pairs.py` - Test corpus validation (G2)
+- `../../tools/ci/ci_gate_evidence_hash.py` - Evidence block validation (G5)
 
 ### Related Code
 - `src/doxstrux/markdown_parser_core.py:378` - Current `parse()` method

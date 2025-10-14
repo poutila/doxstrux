@@ -81,12 +81,12 @@ cat regex_refactor_docs/.phase-7.6.complete.json
 
 #### 1. Copy TokenWarehouse Module from Skeleton
 
-**Source**: `warehouse_phase8_skeleton/doxstrux/markdown/utils/token_warehouse.py` (291 lines - optimized)
+**Source**: `skeleton/doxstrux/markdown/utils/token_warehouse.py` (259 lines - optimized with debug utilities)
 
 **Command**:
 ```bash
 # Copy production-ready warehouse implementation with performance optimizations
-cp warehouse_phase8_skeleton/doxstrux/markdown/utils/token_warehouse.py \
+cp skeleton/doxstrux/markdown/utils/token_warehouse.py \
    src/doxstrux/markdown/utils/
 
 # Verify structure
@@ -123,12 +123,12 @@ ls -lh src/doxstrux/markdown/utils/token_warehouse.py
 
 #### 2. Copy Unit Tests from Skeleton
 
-**Source**: `warehouse_phase8_skeleton/tests/test_token_warehouse.py` (186 lines - with ignore-mask test)
+**Source**: `skeleton/tests/test_token_warehouse.py` (206 lines - 6 comprehensive tests)
 
 **Command**:
 ```bash
 # Copy comprehensive test suite with performance optimizations tests
-cp warehouse_phase8_skeleton/tests/test_token_warehouse.py \
+cp skeleton/tests/test_token_warehouse.py \
    tests/
 
 # Verify tests copied
@@ -140,7 +140,8 @@ ls -lh tests/test_token_warehouse.py
 - ✅ `test_dispatch_links_collector()` - Tests collector registration and dispatch
 - ✅ `test_lines_property_and_inference()` - Tests lines property with/without text
 - ✅ `test_section_of_binary_search_boundaries()` - Tests binary search edge cases
-- ✅ `test_ignore_mask_links_inside_fence_are_ignored()` - Tests O(1) bitmask ignore-inside (new)
+- ✅ `test_ignore_mask_links_inside_fence_are_ignored()` - Tests O(1) bitmask ignore-inside
+- ✅ `test_invariants_pairs_and_sections_sorted()` - Tests structural invariants
 
 **Run tests**:
 ```bash
@@ -156,7 +157,7 @@ ls -lh tests/test_token_warehouse.py
 .venv/bin/python -m pytest
 ```
 
-**Gate**: All 5 tests passing (including ignore-mask test), coverage ≥80%.
+**Gate**: All 6 tests passing (including ignore-mask test and invariants), coverage ≥80%.
 
 ---
 
@@ -259,7 +260,7 @@ git tag phase-8.0-complete
 
 #### 1. Copy LinksCollector from Skeleton
 
-**Source**: `warehouse_phase8_skeleton/doxstrux/markdown/collectors_phase8/links.py` (56 lines)
+**Source**: `skeleton/doxstrux/markdown/collectors_phase8/links.py` (56 lines)
 
 **Command**:
 ```bash
@@ -267,7 +268,7 @@ git tag phase-8.0-complete
 mkdir -p src/doxstrux/markdown/collectors_phase8
 
 # Copy LinksCollector
-cp warehouse_phase8_skeleton/doxstrux/markdown/collectors_phase8/links.py \
+cp skeleton/doxstrux/markdown/collectors_phase8/links.py \
    src/doxstrux/markdown/collectors_phase8/
 
 # Copy __init__.py if needed

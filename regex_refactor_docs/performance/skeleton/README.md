@@ -76,12 +76,14 @@ skeleton/
 │       ├── __main__.py                  (8 lines) - Module entry point
 │       └── dump_sections.py             (102 lines) - Section debug tool ✨
 ├── tests/
-│   └── test_token_warehouse.py          (206 lines) - 6 comprehensive tests
+│   ├── test_token_warehouse.py          (206 lines) - 6 comprehensive tests
+│   └── test_fuzz_collectors.py          (318 lines) - Fuzz tests ⚡ NEW
 ├── tools/
-│   └── benchmark_parser.py              (44 lines) - Benchmark scaffold
-└── README.md                            (~530 lines) - Complete guide
+│   ├── benchmark_parser.py              (44 lines) - Benchmark scaffold
+│   └── profile_collectors.py            (260 lines) - Profiling tool ⚡ NEW
+└── README.md                            (~540 lines) - Complete guide
 
-Total: 22 files, 1,126 lines of code
+Total: 24 files, 1,704 lines of code
 ```
 
 ⭐ = Recommended for Phase 8.1 (first collector migration)
@@ -532,3 +534,109 @@ Statistics:
 - Debugging heading-heavy documents (where O(H) optimization matters most)
 
 **Location**: `skeleton/doxstrux/markdown/cli/dump_sections.py`
+
+---
+
+### 3. Fuzz Testing (`test_fuzz_collectors.py`)
+
+Randomized structural integrity testing to catch edge cases:
+
+```bash
+# Run fuzz tests
+pytest tests/test_fuzz_collectors.py -v
+
+# Run with many iterations (stress test)
+pytest tests/test_fuzz_collectors.py -v --count=100
+```
+
+**What it tests**:
+- Section boundaries never overlap (prevents DoS)
+- Pairs are always legal (`open < close`)
+- Binary search correctness on randomized headings
+- Collectors never raise exceptions
+- Deep nesting stability
+
+**Example test cases**:
+- `test_fuzz_sections_and_links`: 20-100 random headings + links
+- `test_fuzz_collectors_never_raise`: Collectors stable on random inputs
+- `test_fuzz_heading_permutations`: Random level sequences
+- `test_nested_blocks_pairs`: Deep nesting (10+ levels)
+
+**Location**: `skeleton/tests/test_fuzz_collectors.py`
+
+---
+
+### 4. Performance Profiling (`profile_collectors.py`)
+
+Reproducible performance measurement and profiling:
+
+```bash
+# Quick benchmark (no profiler)
+python tools/profile_collectors.py
+
+# With Scalene (detailed CPU/memory breakdown)
+pip install scalene
+scalene --reduced-profile tools/profile_collectors.py
+
+# With py-spy (sampling-based, fast)
+pip install py-spy
+py-spy top -- python tools/profile_collectors.py
+
+# With built-in cProfile
+python -m cProfile -o profile.stats tools/profile_collectors.py
+python -c "import pstats; p=pstats.Stats('profile.stats'); p.sort_stats('cumulative'); p.print_stats(30)"
+```
+
+**What it measures**:
+- Warehouse index building time (O(N) verification)
+- Collector dispatch time (O(N × C_avg) verification)
+- Memory overhead (~20% expected)
+- Scaling characteristics (1K → 100K tokens)
+
+**Example output**:
+```
+SCALING BENCHMARK (verifying O(N) complexity)
+================================================================================
+Tokens     Warehouse (ms)       Full Pipeline (ms)   Links Found
+--------------------------------------------------------------------------------
+1000       1.23                 2.45                 150
+5000       5.67                 10.23                750
+10000      11.45                20.12                1500
+50000      55.23                98.45                7500
+================================================================================
+
+Expected: Time should scale linearly (2x tokens → ~2x time)
+```
+
+**Location**: `skeleton/tools/profile_collectors.py`
+
+---
+
+## Security Hardening
+
+See `../SECURITY_HARDENING_CHECKLIST.md` for comprehensive security review covering:
+
+1. **Security** (surgical, zero perf tax):
+   - Scheme allowlist at collector edge
+   - HTML boundary documentation
+   - Structural invariant tests
+   - Fault isolation (prod vs test mode)
+
+2. **Runtime Correctness** (prevent silent bugs):
+   - Parent mapping order
+   - Section builder O(H) complexity lock
+   - Binary search invariants
+   - Fence format documentation
+
+3. **Raw Speed** (measurable wins):
+   - Hot-loop optimizations (already applied)
+   - Text accumulation audit
+   - Optional SoA cache (if profiler warrants)
+
+4. **Maintainability**:
+   - Intent-revealing names
+   - Invariants at top of class
+   - Regression test suite
+
+**Estimated time to apply**: 4-6 hours
+**Status**: All critical items identified and documented
