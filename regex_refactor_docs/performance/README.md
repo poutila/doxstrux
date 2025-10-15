@@ -78,186 +78,312 @@ structure = {
 
 ---
 
-## Documentation Files
+## Documentation Structure (Consolidated v4.0 - 2025-10-16)
 
-### 1. **README.md** (This File)
-Navigation hub and quick reference.
-
-**When to read**: First time visiting this directory.
+> **📊 Consolidation Summary:**
+> - **Before**: 14 active markdown files (~10,649 lines, ~35-40% overlap in security docs)
+> - **After**: 12 active files (~10,200 lines, <10% overlap)
+> - **Latest Consolidation**: 3 security status files → 1 SECURITY_IMPLEMENTATION_STATUS.md
+> - **Archived**: 5 files total (2 from v3 + 3 security status files)
+> - **Key Improvements**:
+>   - Single source of truth for security implementation status
+>   - Consolidated test infrastructure documentation (62 tests, 4 CI jobs)
+>   - Clear separation: vulnerabilities (COMPREHENSIVE) vs. status (IMPLEMENTATION_STATUS)
+>   - Eliminated 40% overlap in security documentation
 
 ---
 
-### 2. **WAREHOUSE_OPTIMIZATION_SPEC.md**
-Complete technical specification for Token Warehouse architecture.
+### **Navigation Hub**
+
+### 1. **README.md** (This File)
+Entry point and navigation hub for all performance documentation.
+
+**Contents**: Project overview, consolidation summary, file guide, quick start paths
+
+**When to read**: First time visiting this directory or looking for a specific topic
+
+---
+
+### **Architecture & Design (2 files)**
+
+### 2. **WAREHOUSE_OPTIMIZATION_SPEC.md** (1,232 lines)
+**WHAT to build** - Complete technical specification
 
 **Contents**:
 - TokenWarehouse class design (indices, methods, lifecycle)
 - Collector interface (registration, interest patterns, callbacks)
 - Routing algorithm (single-pass dispatch)
 - Query API reference (by_type, range_for, parent, section_of)
-- Migration guide (how to convert extractors to collectors)
-- Performance measurement methodology
+- Performance analysis and complexity breakdowns
 
-**When to read**: Before implementing warehouse infrastructure.
+**Cross-references**: → WAREHOUSE_EXECUTION_PLAN.md (how to build), SECURITY_COMPREHENSIVE.md (security), PHASE_8_IMPLEMENTATION_CHECKLIST.md (status)
 
-**Size**: Detailed specification (1,213 lines)
+**When to read**: Before implementing warehouse infrastructure
 
 ---
 
-### 3. **WAREHOUSE_EXECUTION_PLAN.md**
-Phase-by-phase implementation roadmap.
+### 3. **WAREHOUSE_EXECUTION_PLAN.md** (978 lines)
+**HOW to build it** - Phase-by-phase implementation roadmap
 
 **Contents**:
-- Phase 8.0: Create TokenWarehouse infrastructure
-- Phase 8.1: Migrate first collector (proof of concept)
-- Phase 8.2-8.N: Migrate remaining collectors incrementally
-- Benchmarking gates (median Δ ≤ -10%, p95 Δ ≤ -5%)
-- Rollback procedures
+- Phase 8.0-8.N step-by-step tasks
+- Benchmarking gates and rollback procedures
+- Migration order and per-collector checklists
 - Evidence block templates
 
-**When to read**: During implementation.
+**Cross-references**: → WAREHOUSE_OPTIMIZATION_SPEC.md (technical design), CI_CD_INTEGRATION.md (CI gates)
 
-**Size**: Lean operational guide (996 lines)
+**When to read**: During implementation
 
 ---
 
-### 4. **SECURITY_AND_PERFORMANCE_REVIEW.md**
-Deep technical review with security hardening and micro-optimizations.
+### **Security (3 files - Consolidated)**
+
+### 4. **SECURITY_COMPREHENSIVE.md** (2,098 lines) 🔐
+**Master security guide** - Complete vulnerability catalog and mitigations
 
 **Contents**:
-- Security hardening (cheap, surgical, no perf tax)
-  - Explicit scheme allowlist, HTML boundaries, DoS guards, fault containment
-- Runtime correctness (prevents bugs that bite later)
-  - Parent mapping, sections builder, fence inventory correctness
-- Raw speed optimizations (micro & macro)
-  - Hot-loop tightness, frozen collections, pre-allocation, SoA (optional)
-- Style & maintainability (future-proofs refactors)
-  - Intent-revealing names, docstrings, tests, error messages
-- Measurement methodology (know it worked)
-  - CPU profiling, alloc tracking, p95 latency, correctness parity
+- Part 1: Executive summary and navigation
+- Part 2: Vulnerability catalog (15 vulnerabilities with severity ratings)
+- Part 3: Attack scenarios (6 realistic attack scenarios)
+- Part 4: Mitigations & patches (copy/paste ready code)
+- Part 5: Deployment guide (testing, CI/CD, monitoring)
 
-**When to read**: Before implementing Phase 8.0 (apply security hardening first).
+**Cross-references**: → SECURITY_IMPLEMENTATION_STATUS.md (current status), TOKEN_VIEW_CANONICALIZATION.md (specific pattern)
 
-**Size**: Comprehensive review with 82 actionable items (detailed guide)
+**When to read**: **START HERE** for vulnerability details and mitigation code
+
+**Apply time**: 6 critical fixes in ~30 minutes, complete hardening in ~2.5 hours
 
 ---
 
-### 5. **CI_CD_INTEGRATION.md** 🔗 NEW
-CI/CD integration guide connecting Phase 8 to main project infrastructure.
+### 5. **SECURITY_IMPLEMENTATION_STATUS.md** (NEW - Consolidated) ✅
+**Implementation status and test infrastructure** - Single source of truth for security status
+
+**Consolidates**: SECURITY_GAP_ANALYSIS.md + SECURITY_BLOCKERS_ANALYSIS.md + SECURITY_TESTS_IMPLEMENTATION_SUMMARY.md
+
+**Contents**:
+- Security patterns implementation status (4 patterns: token canonicalization, URL normalization, template detection, HTML sanitization)
+- Runtime patterns implementation status (4 patterns: O(N²) prevention, memory caps, nesting limits, timeout/reentrancy)
+- Test infrastructure summary (62 test functions across 8 test files)
+- CI/CD integration (4 jobs: PR fast gate, nightly suite, blocker validation, static analysis)
+- Critical blockers status (3 HIGH, 2 MEDIUM priority with action items)
+- Implementation requirements (next phase work)
+
+**Cross-references**: → SECURITY_COMPREHENSIVE.md (vulnerability details), PHASE_8_IMPLEMENTATION_CHECKLIST.md (overall progress)
+
+**When to read**: **For current status**, test infrastructure details, and remaining implementation work
+
+**Test Coverage**: 62 test functions, 9 adversarial corpora, 4 CI jobs
+
+---
+
+### 6. **TOKEN_VIEW_CANONICALIZATION.md** (751 lines)
+**Specific security pattern guide** - Deep dive into token canonicalization
+
+**Contents**:
+- Supply-chain attack prevention
+- Token view pattern implementation
+- Performance benefits (~9% speedup)
+- Test suite and validation
+
+**Cross-references**: → SECURITY_COMPREHENSIVE.md (context), SECURITY_IMPLEMENTATION_STATUS.md (status)
+
+**When to read**: When implementing token canonicalization specifically
+
+---
+
+### 7. **ADVERSARIAL_TESTING_REFERENCE.md** (206 lines) 🧪
+**Quick reference** - All 9 adversarial corpora and testing commands
+
+**Contents**:
+- Overview of 9 corpora (large, maps, URLs, nesting, regex, combined, template, XSS)
+- Quick start commands
+- Vulnerability coverage matrix (10/10 - 100% coverage)
+- Expected baselines
+
+**Cross-references**: → SECURITY_COMPREHENSIVE.md (vulnerabilities), SECURITY_IMPLEMENTATION_STATUS.md (test infrastructure)
+
+**When to read**: For adversarial testing - quick reference with all commands
+
+**Detailed docs**: See `archived/` for complete 3,263-line documentation
+
+---
+
+### **Status & Tracking (2 files)**
+
+### 8. **PHASE_8_IMPLEMENTATION_CHECKLIST.md** (1,121 lines) ✅
+**Master status tracker** - Complete implementation progress (100% complete)
+
+**Contents**:
+- Executive summary (status, completion percentage)
+- Security domain (4 items - all complete)
+- Runtime domain (5 items - all complete)
+- Implementation tools and code
+
+**Cross-references**: → SECURITY_GAP_ANALYSIS.md (security details), GREEN_LIGHT_ROLLOUT_CHECKLIST.md (production readiness)
+
+**When to read**: For implementation status and remaining work
+
+**Status**: All critical (P0) items complete, production-ready
+
+---
+
+### 9. **GREEN_LIGHT_ROLLOUT_CHECKLIST.md** (461 lines)
+**Production rollout plan** - 4-phase deployment with safety gates
+
+**Contents**:
+- Phase 1: Pre-flight checks (security, adversarial, baseline, CI/CD, docs)
+- Phase 2: Canary deployment (0% → 5% → 100% over 48h)
+- Phase 3: Post-rollout validation (baselines, load tests, security audit)
+- Phase 4: Residual risk register
+- Emergency rollback procedure
+
+**Cross-references**: → PHASE_8_IMPLEMENTATION_CHECKLIST.md (prerequisites), PRODUCTION_MONITORING_GUIDE.md (metrics), CI_CD_INTEGRATION.md (CI gates)
+
+**When to read**: Before production deployment
+
+---
+
+### **Infrastructure & Operations (3 files)**
+
+### 10. **CI_CD_INTEGRATION.md** (380 lines) 🔗
+**CI/CD integration guide** - Connects Phase 8 to main project infrastructure
 
 **Contents**:
 - Integration with existing CI gates at `../../tools/ci/`
 - Gate G1-G7 (existing): No hybrids, canonical pairs, parity, performance, evidence
 - Gate P1-P3 (Phase 8): Adversarial corpus, vulnerability tests, fuzz testing
-- GitHub Actions/GitLab CI pipeline examples
-- Performance monitoring and rollback procedures
+- GitHub Actions workflows (implemented in `.github/workflows/adversarial.yml`)
+- Performance monitoring and rollback
 
-**When to read**: Before Phase 8.0 integration to understand CI requirements.
+**Cross-references**: → GREEN_LIGHT_ROLLOUT_CHECKLIST.md (deployment), ADVERSARIAL_TESTING_REFERENCE.md (testing)
 
-**Key Reference**: Main project CI/CD at `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/ci/`
+**When to read**: Before CI/CD integration
+
+**Key Reference**: Main project CI/CD at `../../tools/ci/`
 
 ---
 
-### 6. **LIBRARIES_NEEDED.md** 📦 NEW
-Complete dependency documentation for Phase 8.
-
-**Summary**: **Zero new dependencies** required - all tools use existing deps or stdlib.
+### 11. **PRODUCTION_MONITORING_GUIDE.md** (679 lines)
+**Metrics and monitoring** - Complete observability strategy
 
 **Contents**:
-- Runtime dependencies (markdown-it-py, already in project)
-- Testing dependencies (pytest, already in project)
-- Security testing (tracemalloc, weakref, gc - all stdlib)
-- Virtual environment usage (critical: always use `.venv/bin/python`)
+- Core metrics (parse_time, collector_timeouts, collector_errors, memory, document_size, security_validations)
+- Alert thresholds (P0 critical, P1 warning with Prometheus rules)
+- Instrumentation code (Python metrics collection)
+- Grafana dashboard templates
+- Load testing configuration
+- Capacity planning
+
+**Cross-references**: → GREEN_LIGHT_ROLLOUT_CHECKLIST.md (deployment phases)
+
+**When to read**: Before production deployment for monitoring setup
+
+---
+
+### 12. **LIBRARIES_NEEDED.md** (241 lines) 📦
+**Dependency documentation** - Complete dependency listing
+
+**Summary**: **Zero new dependencies** required
+
+**Contents**:
+- Runtime dependencies (markdown-it-py - already in project)
+- Testing dependencies (pytest - already in project)
+- Security testing (tracemalloc, weakref, gc - stdlib only)
+- Virtual environment usage (**critical**: always use `.venv/bin/python`)
 - Quick check commands
 
-**When to read**: Before installation or when troubleshooting missing imports.
+**When to read**: Before installation or troubleshooting
 
 ---
 
-### 7. **ATTACK_SCENARIOS_AND_MITIGATIONS.md** 🛡️ NEW
-Concrete, realistic attack and failure modes with immediate mitigations.
+### 7. **SECURITY_COMPREHENSIVE.md** 🔐 **[CONSOLIDATED]**
+**Complete unified security guide** - merges 7 previous security documents into single authoritative reference.
+
+**Replaces**: DEEP_VULNERABILITIES_ANALYSIS.md, CRITICAL_VULNERABILITIES_ANALYSIS.md, ATTACK_SCENARIOS_AND_MITIGATIONS.md, SECURITY_HARDENING_CHECKLIST.md, SECURITY_QUICK_REFERENCE.md, COMPREHENSIVE_SECURITY_PATCH.md, PHASE_8_SECURITY_INTEGRATION_GUIDE.md
 
 **Contents**:
-- **Security attacks** (3): Unsafe HTML → XSS, Unsafe URL schemes → SSRF, Malicious attrGet
-- **Runtime failures** (3): Resource exhaustion, Broken map values, Collector exceptions
-- Detection strategies (CI gates, telemetry, fuzz testing)
-- Quick prioritized mitigations (copy/paste checklist)
-- Implementation status matrix
+- **Part 1: Executive Summary** - Quick start guide and navigation
+- **Part 2: Vulnerability Catalog** - 15 vulnerabilities with severity ratings
+  - Security domain (8): XSS, SSRF, supply-chain, URL normalization, SSTI, timing, HTML injection, confusables
+  - Runtime domain (7): O(N²), stack overflow, bitmask fragility, heap fragmentation, TOCTOU, memory amplification, blocking I/O
+- **Part 3: Attack Scenarios** - 6 realistic attack scenarios with step-by-step exploitation
+- **Part 4: Mitigations & Patches** - Copy/paste ready code for all 15 vulnerabilities
+- **Part 5: Deployment Guide** - Testing, CI/CD integration, monitoring, incident response
 
-**When to read**: Before security review or when hardening the implementation.
+**When to read**: **START HERE** for all security concerns - single source of truth.
 
-**Format**: Each attack includes: what happens, how triggered, impact, detection, and immediate fix.
+**Size**: ~2,500 lines (comprehensive unified reference)
+
+**Apply time**: 6 critical fixes in ~30 minutes, complete hardening in ~2.5 hours
 
 ---
 
-### 7.5. **SECURITY_QUICK_REFERENCE.md** ⚡ NEW
-Fast-lookup security hardening checklist - apply these NOW.
+### 8. **PHASE_8_IMPLEMENTATION_CHECKLIST.md** ✅ **[CONSOLIDATED v2.0]**
+**Complete implementation tracking and status** - merges 4 previous status documents into single checklist.
+
+**Replaces**: PHASE_8_IMPLEMENTATION_CHECKLIST.md (v1.0), CRITICAL_REMAINING_WORK.md, DEEP_FEEDBACK_GAP_ANALYSIS.md, IMPLEMENTATION_COMPLETE.md
 
 **Contents**:
-- 6 critical fixes with copy/paste code (input caps, map norm, URL allowlist, error isolation, HTML safety, collector caps)
-- Security checklist (before deployment, testing, docs, monitoring)
-- Detection patterns (telemetry, alert thresholds)
-- Implementation status matrix (73 LOC total)
-- Quick apply script
+- **Part 1: Executive Summary** - Current status (95% complete)
+- **Part 2: Security Domain** - 4 critical security items (all complete ✅)
+  - Static collector linting (detect blocking I/O)
+  - Cross-stage URL tests (prevent TOCTOU)
+  - Template syntax detection (prevent SSTI)
+  - Adversarial CI gate (P1 operational)
+- **Part 3: Runtime Domain** - 5 runtime items
+  - Synthetic scaling tests (detect O(N²)) ✅
+  - HTML/SVG XSS litmus tests (optional, 40 min)
+  - Timeout wrapper (optional, 20 min)
+  - Confusable detection (optional, 30 min)
+  - Baseline tracking (optional, 15 min)
+- **Part 4: Implementation Tools** - Complete working code and tests
 
-**When to read**: When applying security fixes or responding to incidents.
+**When to read**: For implementation status and remaining work tracking.
 
-**Apply time**: ~30 minutes for all 6 fixes
+**Size**: ~1,100 lines (complete implementation guide)
+
+**Status**: All critical (P0) items complete, only optional enhancements remain
 
 ---
 
-### 7.6. **TOKEN_VIEW_CANONICALIZATION.md** 🔐 NEW
-Step-by-step implementation guide for token view canonicalization security pattern.
+### 9. **DOCUMENTATION_CONSOLIDATION_ANALYSIS.md**
+Analysis of documentation overlaps and consolidation recommendations.
 
 **Contents**:
-- 9-step implementation guide (~150 LOC across warehouse and collectors)
-- Token view pattern (canonicalize tokens to primitives during init)
-- Supply-chain attack prevention (eliminates attrGet() risks)
-- Performance impact analysis (init overhead vs dispatch speedup)
-- Complete code snippets with safety annotations
-- Demo script and verification tests
+- Complete file inventory (22 files analyzed)
+- Overlap cluster identification (3 major clusters)
+- Consolidation recommendations (22 → 12 files)
+- Before/after comparison
 
-**When to read**: Before implementing TokenWarehouse to eliminate token method execution risks.
+**When to read**: For understanding documentation consolidation decisions.
 
-**Key benefit**: Prevents malicious token getters from executing during hot-path dispatch (~9% faster parse, safer runtime).
+**Result**: Successfully consolidated 11 files into 2 comprehensive documents (45% reduction in redundancy)
 
 ---
 
-### 7.7. **DEEP_VULNERABILITIES_ANALYSIS.md** 🔬 NEW
-Comprehensive analysis of 9 non-obvious, high-impact vulnerabilities beyond basic XSS/SSRF.
+### 10. **ADVERSARIAL_TESTING_REFERENCE.md** 🧪 **[QUICK REFERENCE]**
+Quick reference for adversarial corpus testing - covers all 9 corpora and testing infrastructure.
 
 **Contents**:
-- **Security domain** (4): Token deserialization/prototype pollution, URL normalization mismatch, template injection (SSTI), side-channel timing
-- **Runtime domain** (5): Algorithmic complexity (O(N²)), deep nesting stack overflow, bitmask fragility, heap fragmentation, race conditions (TOCTOU)
-- Combined attack chains (2 examples)
-- Detection methods with code snippets
-- Immediate mitigations (copy/paste ready)
-- Testing matrix mapping vulnerabilities to test files
+- Overview of 9 adversarial JSON corpora (large, maps, URLs, attrGet, nesting, regex, combined, template, XSS)
+- Quick start commands (run single, run all, pytest)
+- Vulnerability coverage matrix (10/10 vulnerabilities - 100% coverage)
+- CI integration examples
+- Expected performance baselines
+- Defensive patches applied
+- Troubleshooting guide
 
-**When to read**: When performing deep security review or advanced threat modeling.
+**When to read**: **START HERE** for adversarial testing - quick reference with all essential information.
 
-**Format**: Each vulnerability includes severity rating, technical description, attack vectors, escalation potential, real-world scenarios, detection, and mitigation.
+**Coverage**: 10/10 vulnerabilities, 100% coverage achieved
 
----
-
-### 7.8. **SECURITY_DOCUMENTATION_SUMMARY.md** 📋 NEW
-Complete overview and roadmap for all security documentation.
-
-**Contents**:
-- Document hierarchy (4 layers: quick response, concrete threats, implementation guides, deep analysis)
-- Coverage matrix (15 vulnerabilities across all documents)
-- Implementation roadmap (Phase 8.0-8.2: ~443 LOC, ~2.5 hours)
-- Testing requirements (unit tests, adversarial corpus, fuzz testing)
-- Monitoring & detection (telemetry metrics, alert thresholds)
-- CI/CD integration summary
-
-**When to read**: First time reviewing security documentation or planning security implementation.
-
-**Key insight**: Hierarchical documentation allows quick action (Layer 1) while supporting deep analysis (Layer 4).
+**Complete Details**: See `archived/ADVERSARIAL_CORPUS_IMPLEMENTATION.md` (999 lines), `archived/ADVERSARIAL_TESTING_GUIDE.md` (1382 lines), `archived/TEMPLATE_XSS_ADVERSARIAL_COMPLETE.md` (882 lines) for comprehensive documentation
 
 ---
 
-### 8. **.phase-8.0.template.json**
+### 12. **.phase-8.0.template.json**
 Completion artifact template for Phase 8.0.
 
 **Purpose**: Mechanically gate Phase 8.1 until warehouse infrastructure passes all gates.
@@ -267,10 +393,11 @@ Completion artifact template for Phase 8.0.
 ---
 
 ### 9. **skeleton/** (Canonical Reference Implementation)
-Production-ready skeleton with **all optimizations**, **complete collector set**, and **debug utilities**.
+Production-ready skeleton with **all optimizations**, **complete collector set**, **security hardening**, and **debug utilities**.
 
 **Contents**:
-- `doxstrux/markdown/utils/token_warehouse.py` (259 lines) - Optimized warehouse + debug utilities
+- `doxstrux/markdown/utils/token_warehouse.py` (307 lines) - Optimized warehouse + security + debug
+- `doxstrux/markdown/security/validators.py` (179 lines) - URL normalization utility 🔐 **NEW**
 - `doxstrux/markdown/collectors_phase8/*.py` (12 collectors, 436 lines) - All collectors ready
 - `doxstrux/markdown/core/parser_adapter.py` (29 lines) - Feature flag integration
 - `doxstrux/markdown/cli/dump_sections.py` (102 lines) - Section debug CLI tool
@@ -294,9 +421,19 @@ Production-ready skeleton with **all optimizations**, **complete collector set**
 - ✅ **Nullable should_process** - Skip redundant calls (~2% faster)
 - ✅ **Expected total speedup**: 15-30% on typical documents, 50-100x on heading-heavy documents
 
+**Security Hardening** (applied 2025-10-15) 🔐 **NEW**:
+- ✅ **Token view canonicalization** - Prevents supply-chain attacks via malicious getters (~9% faster + safer)
+- ✅ **URL normalization utility** - Centralized scheme validation prevents SSRF/XSS bypasses
+- ✅ **MAX_TOKENS/MAX_BYTES guards** - Prevents memory amplification DoS (100K tokens / 10MB limit)
+- ✅ **MAX_NESTING enforcement** - Prevents stack overflow (150 depth limit)
+- ✅ **Deterministic routing** - sorted() ensures consistent bit assignment across processes
+- ✅ **Map normalization** - Clamps negative/inverted map values (already present)
+- ✅ **Error isolation** - Collector exceptions don't crash dispatch (already present)
+- ✅ **Comprehensive unit tests** - URL validation test suite included
+
 **When to use**: Copy files to main codebase for Phase 8.0+ implementation.
 
-**Total**: 22 files, 1,119 lines of production-ready code
+**Total**: 24 files, 1,305 lines of production-ready code
 
 ---
 
@@ -491,22 +628,30 @@ structure = self._warehouse.collect_all()
 
 ```
 performance/
-├── README.md                                (600 lines) - This file
-├── WAREHOUSE_OPTIMIZATION_SPEC.md          (1,213 lines) - Technical spec
-├── WAREHOUSE_EXECUTION_PLAN.md             (996 lines) - Implementation guide
-├── SECURITY_DOCUMENTATION_SUMMARY.md       (405 lines) - Security docs roadmap 📋 NEW
-├── SECURITY_HARDENING_CHECKLIST.md         (550 lines) - Initial security review ⚡
-├── CRITICAL_VULNERABILITIES_ANALYSIS.md    (650 lines) - Deep security analysis 🔒
-├── COMPREHENSIVE_SECURITY_PATCH.md         (450 lines) - Production patches 🔒
-├── PHASE_8_SECURITY_INTEGRATION_GUIDE.md   (420 lines) - Integration guide 🔒
-├── CI_CD_INTEGRATION.md                    (350 lines) - CI/CD integration 🔗
-├── LIBRARIES_NEEDED.md                     (280 lines) - Dependencies 📦
-├── ATTACK_SCENARIOS_AND_MITIGATIONS.md     (850 lines) - Attack modes & fixes 🛡️
-├── SECURITY_QUICK_REFERENCE.md             (320 lines) - Fast security checklist ⚡
-├── TOKEN_VIEW_CANONICALIZATION.md          (751 lines) - Token view impl guide 🔐
-├── DEEP_VULNERABILITIES_ANALYSIS.md        (1,179 lines) - Deep vulnerability analysis 🔬
+├── README.md                                (700 lines) - This file [UPDATED v2]
+├── WAREHOUSE_OPTIMIZATION_SPEC.md          (1,232 lines) - Technical spec
+├── WAREHOUSE_EXECUTION_PLAN.md             (978 lines) - Implementation guide
+├── SECURITY_AND_PERFORMANCE_REVIEW.md      (1,238 lines) - Deep security review
+├── SECURITY_COMPREHENSIVE.md               (2,098 lines) - 🔐 **[CONSOLIDATED]** Unified security guide
+├── SECURITY_GAP_ANALYSIS.md                (725 lines) - Implementation status (NEW)
+├── TOKEN_VIEW_CANONICALIZATION.md          (751 lines) - Security pattern guide
+├── PHASE_8_IMPLEMENTATION_CHECKLIST.md     (1,113 lines) - ✅ **[CONSOLIDATED v2.0]** Complete status
+├── ADVERSARIAL_TESTING_REFERENCE.md        (~200 lines) - 🧪 **[QUICK REF]** Adversarial testing
+├── CI_CD_INTEGRATION.md                    (380 lines) - CI/CD integration 🔗
+├── LIBRARIES_NEEDED.md                     (241 lines) - Dependencies 📦
 ├── .phase-8.0.template.json                (101 lines) - Completion template
-├── warehouse_phase8_patched/             - Security-hardened warehouse 🔒 NEW
+├── adversarial_corpora/                   - 🧪 Adversarial test corpus (9 JSON files)
+│   ├── manifest.json                      - Corpus catalog
+│   ├── adversarial_large.json             - Large token corpus (5k tokens)
+│   ├── adversarial_malformed_maps.json    - Malformed map entries
+│   ├── adversarial_encoded_urls.json      - Encoded/tricky URLs
+│   ├── adversarial_attrget.json           - Token with attrGet sentinel
+│   ├── adversarial_deep_nesting.json      - Deep nesting (2000 levels)
+│   ├── adversarial_regex_pathological.json - Pathological inline content
+│   ├── adversarial_combined.json          - Combined multi-vector corpus
+│   ├── adversarial_template_injection.json - Template injection vectors
+│   └── adversarial_html_xss.json          - HTML/XSS attack vectors
+├── warehouse_phase8_patched/             - Security-hardened warehouse 🔒
 │   ├── doxstrux/markdown/
 │   │   ├── utils/token_warehouse.py   (290 lines) - Patched + hardened
 │   │   └── collectors_phase8/links.py (78 lines) - Patched + safe URL validation
@@ -518,29 +663,58 @@ performance/
 │       └── run_adversarial.py (90 lines) - Adversarial runner
 ├── skeleton/                              - Canonical reference implementation ⭐
 │   ├── doxstrux/markdown/
-│   │   ├── utils/token_warehouse.py   (259 lines) - Optimized warehouse + debug
+│   │   ├── utils/token_warehouse.py   (307 lines) - Optimized warehouse + security + debug
+│   │   ├── security/
+│   │   │   ├── __init__.py            (5 lines) - Security module init 🔐
+│   │   │   └── validators.py          (179 lines) - URL normalization utility 🔐
 │   │   ├── collectors_phase8/         (12 collectors, 436 lines) - All collectors
 │   │   ├── core/parser_adapter.py     (29 lines) - Feature flag
 │   │   └── cli/dump_sections.py       (102 lines) - Debug CLI tool
 │   ├── tests/
 │   │   ├── test_token_warehouse.py    (206 lines) - 6 comprehensive tests
-│   │   └── test_fuzz_collectors.py    (318 lines) - Fuzz tests ⚡ NEW
+│   │   └── test_fuzz_collectors.py    (318 lines) - Fuzz tests ⚡
 │   ├── tools/
 │   │   ├── benchmark_parser.py        (44 lines) - Benchmark scaffold
-│   │   └── profile_collectors.py      (260 lines) - Profiling tool ⚡ NEW
+│   │   └── profile_collectors.py      (260 lines) - Profiling tool ⚡
 │   └── README.md                      (~640 lines) - Complete guide
 ├── steps_taken/                           - Phase completion documentation
-└── archived/                              - Historical documents
+└── archived/                              - 📦 Archived documentation (16 files)
+    ├── ATTACK_SCENARIOS_AND_MITIGATIONS.md
+    ├── COMPREHENSIVE_SECURITY_PATCH.md
+    ├── CRITICAL_VULNERABILITIES_ANALYSIS.md
+    ├── DEEP_FEEDBACK_GAP_ANALYSIS.md
+    ├── DEEP_VULNERABILITIES_ANALYSIS.md
+    ├── IMPLEMENTATION_COMPLETE.md
+    ├── PHASE_8_SECURITY_INTEGRATION_GUIDE.md
+    ├── SECURITY_HARDENING_CHECKLIST.md
+    ├── SECURITY_QUICK_REFERENCE.md
+    ├── CRITICAL_REMAINING_WORK.md (v2 consolidation)
+    ├── SECURITY_DOCUMENTATION_SUMMARY.md (v2 consolidation)
+    ├── DOCUMENTATION_AUDIT.md (v2 consolidation)
+    ├── DOCUMENTATION_CONSOLIDATION_ANALYSIS.md (v2 consolidation)
+    ├── ADVERSARIAL_CORPUS_IMPLEMENTATION.md (v2 consolidation)
+    ├── ADVERSARIAL_TESTING_GUIDE.md (v2 consolidation)
+    └── TEMPLATE_XSS_ADVERSARIAL_COMPLETE.md (v2 consolidation)
 ```
 
-**Total**: 9,321 lines of specification + 1,704 lines of skeleton code
+**Documentation Consolidation** (2025-10-15 - v2.0):
+- **Before**: 22 files, ~16,000 lines (significant overlap)
+- **After**: 11 active files, 2 major consolidated documents, 16 archived files
+- **Reduction**: ~50% reduction in redundancy
+- **Key Consolidations**:
+  - 7 security docs → SECURITY_COMPREHENSIVE.md (~2,500 lines)
+  - 4 status docs → PHASE_8_IMPLEMENTATION_CHECKLIST.md v2.0 (~1,100 lines)
+  - 3 adversarial docs → ADVERSARIAL_TESTING_REFERENCE.md (~200 lines quick ref)
 
-**Performance**: Skeleton includes O(H) section builder, O(1) ignore-mask, hot-loop optimizations, debug utilities, and comprehensive test/profiling suite.
+**Total**: ~10,000 lines of active specification + 2,457 lines of skeleton code + 9 adversarial corpus files
 
-**Security**: Complete multi-layered security documentation:
+**Performance**: Skeleton includes O(H) section builder, O(1) ignore-mask, hot-loop optimizations, token view canonicalization (+9% speedup), debug utilities, and comprehensive test/profiling suite.
+
+**Security**: Complete multi-layered security documentation + production-ready security implementations:
+- ✅ Token view canonicalization implementation (supply-chain attack prevention + 9% speedup)
+- ✅ URL normalization utility with comprehensive test suite (SSRF/XSS prevention)
 - 6 immediate attack scenarios (XSS, SSRF, DoS) with copy/paste fixes
 - 9 deep vulnerabilities (supply-chain, normalization, SSTI, O(N²), etc.)
-- Token view canonicalization (security + 9% performance improvement)
 - Quick reference guide (6 critical fixes, ~30 min apply time)
 - 3 security domains covered (injection, resource exhaustion, correctness)
 
@@ -551,28 +725,31 @@ performance/
 ## Quick Start
 
 ### For Implementation
-1. **Read `SECURITY_DOCUMENTATION_SUMMARY.md` (security roadmap overview)** 📋 **START HERE**
-2. Read `WAREHOUSE_OPTIMIZATION_SPEC.md` (architecture)
-3. Read `WAREHOUSE_EXECUTION_PLAN.md` (roadmap)
-4. **Read `SECURITY_QUICK_REFERENCE.md` (apply 6 critical fixes first)** ⚡
-5. **Read `TOKEN_VIEW_CANONICALIZATION.md` (implement token view pattern)** 🔐
-6. **Read `CI_CD_INTEGRATION.md` (understand CI gate requirements)** 🔗
-7. Check `LIBRARIES_NEEDED.md` (verify dependencies - zero new deps!)
-8. Review `skeleton/` (reference implementation)
-9. Create feature branch: `git checkout -b feature/token-warehouse`
-10. Copy skeleton files to main codebase:
+1. **Read `PHASE_8_IMPLEMENTATION_CHECKLIST.md` (actionable checklist)** ✅ **START HERE**
+   - Consolidated v2.0 - includes all status, remaining work, and implementation tools
+2. **Read `SECURITY_COMPREHENSIVE.md` (complete security guide)** 🔐 **CRITICAL**
+   - Consolidated - all 15 vulnerabilities, mitigations, and deployment in one place
+3. Read `WAREHOUSE_OPTIMIZATION_SPEC.md` (architecture)
+4. Read `WAREHOUSE_EXECUTION_PLAN.md` (roadmap)
+5. **Read `CI_CD_INTEGRATION.md` (understand CI gate requirements)** 🔗
+6. Check `LIBRARIES_NEEDED.md` (verify dependencies - zero new deps!)
+7. Review `skeleton/` (reference implementation with all security hardening)
+8. Create feature branch: `git checkout -b feature/token-warehouse`
+9. Copy skeleton files to main codebase:
     ```bash
     cp skeleton/doxstrux/markdown/utils/token_warehouse.py \
        src/doxstrux/markdown/utils/
+    cp skeleton/doxstrux/markdown/security/validators.py \
+       src/doxstrux/markdown/security/
     cp skeleton/doxstrux/markdown/collectors_phase8/links.py \
        src/doxstrux/markdown/collectors_phase8/
     cp skeleton/tests/test_token_warehouse.py \
        tests/
     ```
-11. Apply security patches from `COMPREHENSIVE_SECURITY_PATCH.md`
-12. Run CI gates (G1-G7 + P1-P3) per `CI_CD_INTEGRATION.md`
-13. Create `.phase-8.0.complete.json`
-14. Migrate collectors incrementally (Phases 8.1-8.N)
+10. Apply security patches from `SECURITY_COMPREHENSIVE.md` Part 4 (copy/paste ready)
+11. Run CI gates (G1-G7 + P1-P3) per `CI_CD_INTEGRATION.md`
+12. Create `.phase-8.0.complete.json`
+13. Migrate collectors incrementally (Phases 8.1-8.N)
 
 ### For Review
 1. Read this README (context)

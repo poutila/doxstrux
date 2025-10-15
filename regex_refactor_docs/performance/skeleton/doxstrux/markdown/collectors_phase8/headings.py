@@ -1,7 +1,14 @@
 
 from __future__ import annotations
 from typing import Any, Dict, List
+import re
 from ..utils.token_warehouse import Collector, Interest, DispatchContext, TokenWarehouse
+
+# Common template syntax patterns (SSTI risk detection)
+TEMPLATE_PATTERN = re.compile(
+    r'\{\{|\{%|<%=|<\?php|\$\{|#\{',
+    re.IGNORECASE
+)
 
 class HeadingsCollector:
     def __init__(self):
@@ -28,9 +35,18 @@ class HeadingsCollector:
             # use map of opening (idx-2) if available
             line = None
             # find opening line via pairs or map window if needed
+            heading_text = "".join(self._buf)
+
+            # ✅ Detect template syntax (SSTI risk)
+            contains_template = bool(TEMPLATE_PATTERN.search(heading_text))
+
             self._out.append({
                 "level": self._cur_level,
-                "text": "".join(self._buf),
+                "text": heading_text,
+
+                # Security metadata
+                "contains_template_syntax": contains_template,
+                "needs_escaping": contains_template,
             })
             self._cur_level = None
             self._buf.clear()

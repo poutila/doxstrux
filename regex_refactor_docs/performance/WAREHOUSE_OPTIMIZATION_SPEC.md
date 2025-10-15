@@ -5,6 +5,11 @@
 **Status**: Phase 8.0 Specification
 **Prerequisites**: Phase 7.6 complete (modular extractors)
 
+> **📖 Related Documents:**
+> - **Implementation Guide**: See [WAREHOUSE_EXECUTION_PLAN.md](WAREHOUSE_EXECUTION_PLAN.md) for step-by-step implementation instructions
+> - **Security**: See [SECURITY_COMPREHENSIVE.md](SECURITY_COMPREHENSIVE.md) for security hardening and mitigations
+> - **Status Tracking**: See [PHASE_8_IMPLEMENTATION_CHECKLIST.md](PHASE_8_IMPLEMENTATION_CHECKLIST.md) for current progress (100% complete)
+
 ---
 
 ## Table of Contents

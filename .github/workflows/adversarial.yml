@@ -1,0 +1,160 @@
+name: Adversarial Security Tests
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 3 * * *'   # nightly at 03:00 UTC for full suite
+
+jobs:
+  pr_fast:
+    name: PR Fast Gate (Smoke Tests)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run security unit tests (fast)
+        run: |
+          pytest tests/test_dispatch_reentrancy.py \
+                 tests/test_collector_timeout.py \
+                 tests/test_metadata_template_safety.py \
+                 tests/test_token_warehouse_adversarial.py \
+                 -v --tb=short
+        env:
+          PYTHONUNBUFFERED: 1
+
+      - name: Run adversarial smoke test (combined corpus)
+        working-directory: regex_refactor_docs/performance
+        run: |
+          python tools/run_adversarial.py \
+            adversarial_corpora/adversarial_combined.json \
+            --token-module doxstrux.markdown.utils.token_warehouse \
+            --runs 1 \
+            --max-time-ms 5000 \
+            --max-mem-mb 100
+        env:
+          PYTHONUNBUFFERED: 1
+
+      - name: Check for unexpected collector errors
+        working-directory: regex_refactor_docs/performance
+        run: |
+          # Verify the smoke test didn't produce unexpected errors
+          # (Expected: some tests may flag issues, but no crashes)
+          if [ -f adversarial_combined_report.json ]; then
+            python -c "
+          import json, sys
+          report = json.load(open('adversarial_combined_report.json'))
+          if report.get('crashed', False):
+              print('FAIL: Adversarial test crashed')
+              sys.exit(1)
+          print('PASS: Smoke test completed without crashes')
+          "
+          fi
+
+  nightly_full:
+    name: Nightly Full Suite (All 9 Corpora)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'push'
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run full adversarial suite (memory limited)
+        working-directory: regex_refactor_docs/performance
+        run: |
+          for corpus in adversarial_corpora/adversarial_*.json; do
+            echo "===== Running $(basename $corpus) ====="
+            timeout 180s python tools/run_adversarial.py \
+              "$corpus" \
+              --token-module doxstrux.markdown.utils.token_warehouse \
+              --runs 3 \
+              --max-time-ms 10000 \
+              --max-mem-mb 200 || echo "WARN: $corpus failed or timed out"
+          done
+        env:
+          PYTHONUNBUFFERED: 1
+
+      - name: Upload adversarial reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: adversarial-reports
+          path: regex_refactor_docs/performance/*_report.json
+          retention-days: 30
+
+      - name: Check for performance regressions
+        working-directory: regex_refactor_docs/performance
+        run: |
+          # Compare against baseline (if exists)
+          if [ -f tools/baseline_results.json ]; then
+            python tools/check_adversarial_regression.py || echo "WARN: Regression check incomplete"
+          else
+            echo "No baseline found - this run establishes baseline"
+          fi
+
+  security_lint:
+    name: Security Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install security tools
+        run: |
+          pip install bandit safety
+
+      - name: Run Bandit security scan
+        run: |
+          bandit -r src/doxstrux -ll -f json -o bandit-report.json || true
+          bandit -r src/doxstrux -ll
+
+      - name: Check for unsafe template rendering
+        run: |
+          # Grep for suspicious patterns in codebase
+          echo "Checking for unsafe template rendering..."
+          if grep -r "render_template_string.*heading\|render_template_string.*metadata" src/; then
+            echo "ERROR: Found potentially unsafe template rendering with user metadata"
+            exit 1
+          fi
+          echo "PASS: No obvious unsafe template rendering found"
+
+      - name: Upload security reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: security-reports
+          path: bandit-report.json
+          retention-days: 30

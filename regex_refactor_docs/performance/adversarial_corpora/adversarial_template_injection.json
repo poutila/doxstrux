@@ -1,0 +1,33 @@
+[
+  {"type":"heading_open","nesting":1,"tag":"h1","map":[0,0]},
+  {"type":"inline","nesting":0,"content":"Normal heading"},
+  {"type":"heading_close","nesting":-1,"tag":"h1","map":[0,0]},
+
+  {"type":"paragraph_open","nesting":1,"map":[1,1]},
+  {"type":"inline","nesting":0,"content":"Hello, {{ config.SECRET }}"},
+  {"type":"paragraph_close","nesting":-1,"map":[1,1]},
+
+  {"type":"paragraph_open","nesting":1,"map":[2,2]},
+  {"type":"inline","nesting":0,"content":"Welcome, {% if user %}{{ user.name }}{% endif %}"},
+  {"type":"paragraph_close","nesting":-1,"map":[2,2]},
+
+  {"type":"paragraph_open","nesting":1,"map":[3,3]},
+  {"type":"inline","nesting":0,"content":"${process.env.PASSWORD}"},
+  {"type":"paragraph_close","nesting":-1,"map":[3,3]},
+
+  {"type":"paragraph_open","nesting":1,"map":[4,4]},
+  {"type":"inline","nesting":0,"content":"<%= secret %>"},
+  {"type":"paragraph_close","nesting":-1,"map":[4,4]},
+
+  {"type":"paragraph_open","nesting":1,"map":[5,5]},
+  {"type":"inline","nesting":0,"content":"{{ lookup('env','DATABASE_URL') }}"},
+  {"type":"paragraph_close","nesting":-1,"map":[5,5]},
+
+  {"type":"paragraph_open","nesting":1,"map":[6,6]},
+  {"type":"inline","nesting":0,"content":"User input: ${ userInput } and raw: #{system_cmd}"},
+  {"type":"paragraph_close","nesting":-1,"map":[6,6]},
+
+  {"type":"paragraph_open","nesting":1,"map":[7,7]},
+  {"type":"inline","nesting":0,"content":"Mustache: {{{unescaped}}} and Twig-like: {{- payload -}}"},
+  {"type":"paragraph_close","nesting":-1,"map":[7,7]}
+]

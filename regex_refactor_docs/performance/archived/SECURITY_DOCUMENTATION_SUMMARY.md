@@ -9,7 +9,7 @@
 ## Document Hierarchy
 
 ### Layer 1: Quick Response (⚡ Immediate Action)
-**SECURITY_QUICK_REFERENCE.md** (320 lines)
+**SECURITY_COMPREHENSIVE.md** (320 lines)
 - **Purpose**: Fast-lookup checklist for immediate application
 - **Apply time**: ~30 minutes for all 6 fixes
 - **Audience**: Engineers implementing fixes NOW
@@ -26,7 +26,7 @@
 ---
 
 ### Layer 2: Concrete Threats (🛡️ Practical Defense)
-**ATTACK_SCENARIOS_AND_MITIGATIONS.md** (850 lines)
+**SECURITY_COMPREHENSIVE.md** (850 lines)
 - **Purpose**: Realistic attack and failure modes with immediate mitigations
 - **Coverage**: 6 security attacks + 3 runtime failures
 - **Audience**: Security reviewers and DevOps teams
@@ -67,7 +67,7 @@
 
 ---
 
-#### 3B. COMPREHENSIVE_SECURITY_PATCH.md (450 lines)
+#### 3B. SECURITY_COMPREHENSIVE.md (450 lines)
 - **Purpose**: Production-ready patches for all known vulnerabilities
 - **Coverage**: 6 security domains
 - **Audience**: Engineers applying security fixes to existing code
@@ -86,7 +86,7 @@
 
 ### Layer 4: Deep Analysis (🔬 Advanced Security)
 
-#### 4A. CRITICAL_VULNERABILITIES_ANALYSIS.md (650 lines)
+#### 4A. SECURITY_COMPREHENSIVE.md (650 lines)
 - **Purpose**: Initial deep-dive security analysis
 - **Coverage**: 7 vulnerability categories
 - **Audience**: Security engineers and architects
@@ -102,7 +102,7 @@
 
 ---
 
-#### 4B. DEEP_VULNERABILITIES_ANALYSIS.md (1,179 lines) 🔬 **NEW**
+#### 4B. SECURITY_COMPREHENSIVE.md (1,179 lines) 🔬 **NEW**
 - **Purpose**: Non-obvious, high-impact vulnerabilities beyond basic XSS/SSRF
 - **Coverage**: 9 advanced vulnerabilities + 2 combined attack chains
 - **Audience**: Security experts, advanced threat modeling
@@ -197,11 +197,11 @@
    - Prevents supply-chain attacks (Vuln #1)
    - Improves performance (-9% parse time)
 
-2. ✅ **Map normalization** (SECURITY_QUICK_REFERENCE.md Fix #2)
+2. ✅ **Map normalization** (SECURITY_COMPREHENSIVE.md Fix #2)
    - ~20 LOC, 10 min apply time
    - Prevents correctness corruption (Failure #2)
 
-3. ✅ **Collector error isolation** (SECURITY_QUICK_REFERENCE.md Fix #4)
+3. ✅ **Collector error isolation** (SECURITY_COMPREHENSIVE.md Fix #4)
    - ~10 LOC, 5 min apply time
    - Prevents partial failures (Failure #3)
 
@@ -211,15 +211,15 @@
 
 ### Phase 8.1: Security Hardening (Should Have)
 **Priority 2** - Apply before first production deployment:
-4. ✅ **URL allowlist** (COMPREHENSIVE_SECURITY_PATCH.md, lines 22-73)
+4. ✅ **URL allowlist** (SECURITY_COMPREHENSIVE.md, lines 22-73)
    - ~50 LOC, 20 min apply time
    - Prevents SSRF (Attack #2, Vuln #2)
 
-5. ✅ **Input caps** (SECURITY_QUICK_REFERENCE.md Fix #1)
+5. ✅ **Input caps** (SECURITY_COMPREHENSIVE.md Fix #1)
    - ~10 LOC, 5 min apply time
    - Prevents resource exhaustion (Failure #1)
 
-6. ✅ **Collector caps** (SECURITY_QUICK_REFERENCE.md Fix #6)
+6. ✅ **Collector caps** (SECURITY_COMPREHENSIVE.md Fix #6)
    - ~5 LOC per collector (~60 LOC total), 15 min apply time
    - Prevents memory exhaustion (Vuln #8)
 
@@ -229,15 +229,15 @@
 
 ### Phase 8.2: Advanced Hardening (Nice to Have)
 **Priority 3** - Apply for maximum security posture:
-7. ✅ **HTML safety** (SECURITY_QUICK_REFERENCE.md Fix #5)
+7. ✅ **HTML safety** (SECURITY_COMPREHENSIVE.md Fix #5)
    - ~8 LOC, 5 min apply time
    - Prevents XSS (Attack #1)
 
-8. ✅ **O(N²) mitigation** (DEEP_VULNERABILITIES_ANALYSIS.md Vuln #5)
+8. ✅ **O(N²) mitigation** (SECURITY_COMPREHENSIVE.md Vuln #5)
    - ~10 LOC per collector (~120 LOC total), 30 min apply time
    - Prevents algorithmic complexity DoS
 
-9. ✅ **Nesting limits** (DEEP_VULNERABILITIES_ANALYSIS.md Vuln #6)
+9. ✅ **Nesting limits** (SECURITY_COMPREHENSIVE.md Vuln #6)
    - ~15 LOC, 10 min apply time
    - Prevents stack overflow
 
@@ -361,16 +361,16 @@ metrics = {
 ## References
 
 ### Security Documents (This Directory)
-1. `SECURITY_QUICK_REFERENCE.md` - Fast-lookup checklist (320 lines) ⚡
-2. `ATTACK_SCENARIOS_AND_MITIGATIONS.md` - Concrete attacks (850 lines) 🛡️
+1. `SECURITY_COMPREHENSIVE.md` - Fast-lookup checklist (320 lines) ⚡
+2. `SECURITY_COMPREHENSIVE.md` - Concrete attacks (850 lines) 🛡️
 3. `TOKEN_VIEW_CANONICALIZATION.md` - Implementation guide (751 lines) 🔐
-4. `COMPREHENSIVE_SECURITY_PATCH.md` - Production patches (450 lines) 🔒
-5. `DEEP_VULNERABILITIES_ANALYSIS.md` - Advanced analysis (1,179 lines) 🔬
+4. `SECURITY_COMPREHENSIVE.md` - Production patches (450 lines) 🔒
+5. `SECURITY_COMPREHENSIVE.md` - Advanced analysis (1,179 lines) 🔬
 
 **Total**: 4,329 lines of security documentation
 
 ### Supporting Documents
-- `CRITICAL_VULNERABILITIES_ANALYSIS.md` - Initial deep-dive (650 lines)
+- `SECURITY_COMPREHENSIVE.md` - Initial deep-dive (650 lines)
 - `PHASE_8_SECURITY_INTEGRATION_GUIDE.md` - Integration guide (420 lines)
 - `CI_CD_INTEGRATION.md` - CI/CD integration (350 lines)
 - `LIBRARIES_NEEDED.md` - Dependencies (zero new deps!) (280 lines)

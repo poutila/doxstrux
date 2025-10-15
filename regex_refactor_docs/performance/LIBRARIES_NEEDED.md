@@ -117,7 +117,7 @@ All of these are **included in Python 3.12+**, no installation needed:
 
 ### 6. **urllib.parse** (Built-in, but security-critical)
 **Purpose**: URL parsing for security validation
-**Used by**: Security patches in `COMPREHENSIVE_SECURITY_PATCH.md`
+**Used by**: Security patches in `SECURITY_COMPREHENSIVE.md`
 
 **CRITICAL**: When applying security patches, the `links.py` collector needs:
 ```python
@@ -238,4 +238,4 @@ These are **not required** for Phase 8.0 deployment.
 
 **Last Updated**: 2025-10-15
 **Status**: Complete - No new dependencies needed
-**Next Step**: Apply security patches from `COMPREHENSIVE_SECURITY_PATCH.md` during Phase 8.0 integration
+**Next Step**: Apply security patches from `SECURITY_COMPREHENSIVE.md` during Phase 8.0 integration

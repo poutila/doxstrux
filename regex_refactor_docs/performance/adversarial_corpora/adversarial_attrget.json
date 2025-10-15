@@ -1,0 +1,1 @@
+[{"type": "paragraph_open", "nesting": 1, "map": [0, 1]}, {"type": "link_open", "nesting": 1, "map": [0, 1], "href": "RAISE_ATTRGET"}, {"type": "inline", "nesting": 0, "content": "click me"}, {"type": "link_close", "nesting": -1}, {"type": "paragraph_close", "nesting": -1, "map": [0, 1]}]

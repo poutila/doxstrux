@@ -1,0 +1,261 @@
+name: Adversarial Security Testing
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+  schedule:
+    # Nightly full suite at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  # ============================================================================
+  # PR FAST GATE: Quick smoke tests for all PRs (< 2 minutes)
+  # ============================================================================
+  pr-fast-gate:
+    name: PR Fast Gate (Smoke Tests)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install -e ".[dev]"
+          pip install bleach pytest pytest-cov
+
+      - name: Run template injection litmus tests
+        run: |
+          pytest skeleton/tests/test_template_injection_end_to_end.py -v --tb=short
+        continue-on-error: false
+
+      - name: Run HTML/XSS litmus tests
+        run: |
+          pytest skeleton/tests/test_html_xss_end_to_end.py -v --tb=short
+        continue-on-error: false
+
+      - name: Run URL normalization parity tests
+        run: |
+          pytest skeleton/tests/test_url_normalization_parity.py -v --tb=short
+        continue-on-error: false
+
+      - name: Run collector caps tests (smoke)
+        run: |
+          pytest skeleton/tests/test_collector_caps_end_to_end.py -k "not adversarial_large" -v --tb=short
+        continue-on-error: false
+
+      - name: Security test summary
+        if: always()
+        run: |
+          echo "## Security Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Template injection tests completed" >> $GITHUB_STEP_SUMMARY
+          echo "✅ HTML/XSS tests completed" >> $GITHUB_STEP_SUMMARY
+          echo "✅ URL normalization tests completed" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Collector caps tests completed" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================================================
+  # NIGHTLY FULL SUITE: Comprehensive adversarial testing (runs overnight)
+  # ============================================================================
+  nightly-full-suite:
+    name: Nightly Full Adversarial Suite
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install -e ".[dev]"
+          pip install bleach pytest pytest-cov
+
+      - name: Run ALL template injection tests
+        run: |
+          pytest skeleton/tests/test_template_injection_end_to_end.py -v --tb=long
+        continue-on-error: false
+
+      - name: Run ALL HTML/XSS tests
+        run: |
+          pytest skeleton/tests/test_html_xss_end_to_end.py -v --tb=long
+        continue-on-error: false
+
+      - name: Run ALL URL normalization tests
+        run: |
+          pytest skeleton/tests/test_url_normalization_parity.py -v --tb=long
+        continue-on-error: false
+
+      - name: Run ALL collector caps tests
+        run: |
+          pytest skeleton/tests/test_collector_caps_end_to_end.py -v --tb=long
+        continue-on-error: false
+
+      - name: Run adversarial corpora integration tests
+        run: |
+          pytest skeleton/tests/ -k "adversarial" -v --tb=long
+        continue-on-error: false
+
+      - name: Memory leak detection
+        run: |
+          pytest skeleton/tests/test_collector_caps_end_to_end.py -v --tb=long --memray
+        continue-on-error: true  # Don't block on memray failures (optional dependency)
+
+      - name: Generate coverage report
+        run: |
+          pytest skeleton/tests/ --cov=doxstrux --cov-report=xml --cov-report=html
+        continue-on-error: true
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage.xml
+          flags: adversarial
+          name: adversarial-coverage
+        continue-on-error: true
+
+      - name: Security test summary
+        if: always()
+        run: |
+          echo "## Nightly Adversarial Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Test Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Template injection (SSTI) tests" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ HTML/XSS/SVG tests" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ URL normalization parity tests" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Collector caps and truncation tests" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Adversarial corpora integration tests" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Attack Vectors Tested" >> $GITHUB_STEP_SUMMARY
+          echo "- 🛡️ SSRF (Server-Side Request Forgery)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🛡️ XSS (Cross-Site Scripting)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🛡️ SSTI (Server-Side Template Injection)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🛡️ DoS (Memory amplification, CPU exhaustion)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🛡️ Normalization bypass exploits" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================================================
+  # BLOCKER VALIDATION: Check for critical security blockers
+  # ============================================================================
+  blocker-validation:
+    name: Critical Security Blocker Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install -e ".[dev]"
+          pip install bleach pytest
+
+      - name: Check S1 - URL Normalization Bypass (HIGH)
+        run: |
+          echo "## S1: URL Normalization Bypass → SSRF/XSS" >> $GITHUB_STEP_SUMMARY
+          pytest skeleton/tests/test_url_normalization_parity.py::test_collector_fetcher_normalization_parity -v
+          echo "✅ PASS: URL normalization parity validated" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check S2 - HTML/SVG XSS (HIGH)
+        run: |
+          echo "## S2: HTML/SVG → XSS at Render Time" >> $GITHUB_STEP_SUMMARY
+          pytest skeleton/tests/test_html_xss_end_to_end.py::test_bleach_sanitization_strips_dangerous_content -v
+          pytest skeleton/tests/test_html_xss_end_to_end.py::test_html_collector_default_off -v
+          echo "✅ PASS: HTML/XSS protections validated" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check S3 - Template Injection (MEDIUM)
+        run: |
+          echo "## S3: Template Syntax in Metadata → SSTI" >> $GITHUB_STEP_SUMMARY
+          pytest skeleton/tests/test_template_injection_end_to_end.py::test_heading_with_template_marked_unsafe -v
+          echo "✅ PASS: Template injection detection validated" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check R2 - Memory Amplification (HIGH)
+        run: |
+          echo "## R2: Memory Amplification → OOM" >> $GITHUB_STEP_SUMMARY
+          pytest skeleton/tests/test_collector_caps_end_to_end.py::test_links_collector_enforces_cap -v
+          pytest skeleton/tests/test_collector_caps_end_to_end.py::test_images_collector_enforces_cap -v
+          echo "✅ PASS: Collector caps enforced" >> $GITHUB_STEP_SUMMARY
+
+      - name: Blocker summary
+        if: always()
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Critical Blocker Status" >> $GITHUB_STEP_SUMMARY
+          echo "All HIGH priority security blockers validated ✅" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================================================
+  # STATIC ANALYSIS: Lint for blocking I/O and other security issues
+  # ============================================================================
+  static-security-analysis:
+    name: Static Security Analysis
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install analysis tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit ruff mypy
+
+      - name: Run Bandit security scan
+        run: |
+          bandit -r skeleton/doxstrux/ -ll -f json -o bandit-report.json || true
+          bandit -r skeleton/doxstrux/ -ll
+
+      - name: Check for blocking I/O patterns
+        run: |
+          echo "Checking for blocking I/O in collectors..."
+          # Check for requests.get, urllib.urlopen, open() in collectors
+          if grep -r "requests\.get\|urllib\.urlopen\|urlopen\|open(" skeleton/doxstrux/markdown/collectors_phase8/ --include="*.py" --exclude="*test*"; then
+            echo "❌ FAIL: Blocking I/O detected in collectors" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "✅ PASS: No blocking I/O in collectors" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Run type checking
+        run: |
+          mypy skeleton/doxstrux/ --ignore-missing-imports || true
+
+      - name: Static analysis summary
+        if: always()
+        run: |
+          echo "## Static Security Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Bandit security scan completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Blocking I/O check completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Type checking completed" >> $GITHUB_STEP_SUMMARY

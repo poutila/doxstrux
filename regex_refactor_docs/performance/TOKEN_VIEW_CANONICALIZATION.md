@@ -729,9 +729,9 @@ def test_collector_error_isolation():
 ## References
 
 ### Security Documentation
-- `ATTACK_SCENARIOS_AND_MITIGATIONS.md` - Attack #3: Malicious attrGet
-- `SECURITY_QUICK_REFERENCE.md` - Fix #3: Safe attrGet wrapper
-- `CRITICAL_VULNERABILITIES_ANALYSIS.md` - Vulnerability #3
+- `SECURITY_COMPREHENSIVE.md` - Attack #3: Malicious attrGet
+- `SECURITY_COMPREHENSIVE.md` - Fix #3: Safe attrGet wrapper
+- `SECURITY_COMPREHENSIVE.md` - Vulnerability #3
 
 ### Implementation
 - `skeleton/doxstrux/markdown/utils/token_warehouse.py`

@@ -93,9 +93,9 @@ cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned
 **Purpose**: Validates evidence blocks for non-trivial changes
 
 **Phase 8 Integration**:
-- ✅ Security patches documented in `COMPREHENSIVE_SECURITY_PATCH.md`
-- ✅ Vulnerability analysis in `CRITICAL_VULNERABILITIES_ANALYSIS.md`
-- ✅ Complete integration guide in `PHASE_8_SECURITY_INTEGRATION_GUIDE.md`
+- ✅ Security patches documented in `SECURITY_COMPREHENSIVE.md`
+- ✅ Vulnerability analysis in `SECURITY_COMPREHENSIVE.md`
+- ✅ Complete integration guide in `SECURITY_COMPREHENSIVE.md`
 
 **Action Required**: Generate evidence blocks for Phase 8.0 PR
 
@@ -174,7 +174,7 @@ cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned
 
 **Expected**: 10+ tests, warnings for expected failures (pre-patch), no crashes
 
-**Critical**: After applying security patches from `COMPREHENSIVE_SECURITY_PATCH.md`, all tests should show vulnerabilities are fixed.
+**Critical**: After applying security patches from `SECURITY_COMPREHENSIVE.md`, all tests should show vulnerabilities are fixed.
 
 ---
 
@@ -209,7 +209,7 @@ cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned
 **Integration** (merge into main codebase):
 - [ ] Copy `token_warehouse.py` to `src/doxstrux/markdown/utils/`
 - [ ] Copy all 12 collectors to `src/doxstrux/markdown/collectors_phase8/`
-- [ ] Apply security patches from `COMPREHENSIVE_SECURITY_PATCH.md`
+- [ ] Apply security patches from `SECURITY_COMPREHENSIVE.md`
 - [ ] Update main parser to use TokenWarehouse
 
 **Post-Integration Validation**:
@@ -347,9 +347,9 @@ git push
 
 ### Phase 8 Documentation
 - **This Directory**: `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance/`
-- **Security Patches**: `COMPREHENSIVE_SECURITY_PATCH.md`
-- **Vulnerability Analysis**: `CRITICAL_VULNERABILITIES_ANALYSIS.md`
-- **Integration Guide**: `PHASE_8_SECURITY_INTEGRATION_GUIDE.md`
+- **Security Patches**: `SECURITY_COMPREHENSIVE.md`
+- **Vulnerability Analysis**: `SECURITY_COMPREHENSIVE.md`
+- **Integration Guide**: `SECURITY_COMPREHENSIVE.md`
 - **Libraries**: `LIBRARIES_NEEDED.md`
 
 ### Test Infrastructure
@@ -371,7 +371,7 @@ Phase 8.0 integration is successful when:
 - ✅ All security vulnerabilities patched
 - ✅ Documentation updated
 
-**Status**: Ready for integration after applying security patches from `COMPREHENSIVE_SECURITY_PATCH.md`
+**Status**: Ready for integration after applying security patches from `SECURITY_COMPREHENSIVE.md`
 
 ---
 
