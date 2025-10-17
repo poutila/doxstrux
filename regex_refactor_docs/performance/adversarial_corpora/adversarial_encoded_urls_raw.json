@@ -1,0 +1,22 @@
+[
+  "//internal/admin",
+  "JaVaScRiPt:alert(1)",
+  "java\tscript:alert(1)",
+  "java\nscript:alert(1)",
+  "java%3Ascript:alert(1)",
+  "  https://example.com/path  ",
+  "https://example.com/\u0000image",
+  "http://xn--pple-43d.com",
+  "data:text/html,<script>alert(1)</script>",
+  "file:///etc/passwd",
+  "//user:pass@internal.local/",
+  "http://[::1]/",
+  "https://example.com/%2e%2e/%2e%2e/etc/passwd",
+  "http://example.com@attacker.com/",
+  "http://example.com:70000/",
+  "http://example.com/%00",
+  "https://例子.测试",
+  "ftp://example.com/resource",
+  "http://user:pa%3Ass@host.com/",
+  "http://example.com#\u0000"
+]

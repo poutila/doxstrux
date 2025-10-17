@@ -21,9 +21,9 @@ from types import SimpleNamespace
 
 # Normalization test vectors (from adversarial_encoded_urls.json)
 NORMALIZATION_VECTORS = [
-    # Protocol-relative URLs
-    ("//evil.com/steal", "https://evil.com/steal"),
-    ("//attacker.example.com/xss", "https://attacker.example.com/xss"),
+    # Protocol-relative URLs (should be REJECTED per CLOSING_IMPLEMENTATION.md line 196)
+    ("//evil.com/steal", None),
+    ("//attacker.example.com/xss", None),
 
     # Case mixing in scheme
     ("HtTp://example.com", "http://example.com"),
@@ -126,9 +126,10 @@ def test_normalize_url_rejects_dangerous_schemes():
 
 def test_normalize_url_handles_protocol_relative():
     """
-    Test that normalize_url handles protocol-relative URLs (//example.com).
+    Test that normalize_url rejects protocol-relative URLs (//example.com).
 
-    These should be converted to absolute URLs with https:// prefix.
+    Per CLOSING_IMPLEMENTATION.md line 196: Protocol-relative URLs are rejected
+    to prevent bypass attacks. They should NOT be converted to https://.
     """
     try:
         from doxstrux.markdown.utils.url_utils import normalize_url
@@ -136,15 +137,16 @@ def test_normalize_url_handles_protocol_relative():
         pytest.skip("normalize_url not available")
 
     protocol_relative_urls = [
-        ("//example.com", "https://example.com"),
-        ("//example.com/path", "https://example.com/path"),
-        ("//example.com:8080/path", "https://example.com:8080/path"),
+        "//example.com",
+        "//example.com/path",
+        "//example.com:8080/path",
+        "//evil.com/steal",
     ]
 
-    for input_url, expected in protocol_relative_urls:
+    for input_url in protocol_relative_urls:
         result = normalize_url(input_url)
-        assert result == expected, \
-            f"normalize_url('{input_url}') returned '{result}', expected '{expected}'"
+        assert result is None or result == "", \
+            f"Protocol-relative URL should be rejected: '{input_url}' → '{result}'"
 
 
 def test_collector_uses_normalize_url():
@@ -154,7 +156,7 @@ def test_collector_uses_normalize_url():
     Critical: Collectors MUST NOT do their own normalization.
     """
     try:
-        from doxstrux.markdown.collectors_phase8.links_collector import LinksCollector
+        from doxstrux.markdown.collectors_phase8.links import LinksCollector
     except ImportError:
         pytest.skip("LinksCollector not available")
 
@@ -178,11 +180,21 @@ def test_fetcher_uses_normalize_url():
 
     Critical: Fetchers MUST use same normalization as collectors.
     """
+    # Determine base path: if running from project root, look in skeleton; otherwise look locally
+    test_dir = Path(__file__).parent.parent
+    if test_dir.name == "skeleton":
+        # Running from performance/skeleton/tests
+        base_dir = test_dir
+    else:
+        # Running from project root - look in performance/skeleton
+        base_dir = Path("regex_refactor_docs/performance/skeleton")
+
     # Check if fetcher code exists
     fetcher_paths = [
-        Path("doxstrux/markdown/fetchers/url_fetcher.py"),
-        Path("doxstrux/markdown/utils/fetcher.py"),
-        Path("doxstrux/fetchers.py"),
+        base_dir / "doxstrux/markdown/fetchers/url_fetcher.py",
+        base_dir / "doxstrux/markdown/fetchers/preview.py",
+        base_dir / "doxstrux/markdown/utils/fetcher.py",
+        base_dir / "doxstrux/fetchers.py",
     ]
 
     fetcher_found = None
@@ -215,7 +227,7 @@ def test_collector_fetcher_normalization_parity():
         pytest.skip("normalize_url not available")
 
     try:
-        from doxstrux.markdown.collectors_phase8.links_collector import LinksCollector
+        from doxstrux.markdown.collectors_phase8.links import LinksCollector
     except ImportError:
         pytest.skip("LinksCollector not available")
 
@@ -277,17 +289,26 @@ def test_collector_fetcher_normalization_parity():
         wh = TokenWarehouse(tokens, tree=None)
         wh.register_collector(collector)
         wh.dispatch_all()
-        links = collector.finalize(wh)
+        result = collector.finalize(wh)
+
+        # Handle dict return type (P0-3 truncation metadata)
+        links = result["links"] if isinstance(result, dict) else result
 
         # Verify collector normalized URL matches central function
-        assert len(links) == 1, f"Expected 1 link, got {len(links)}"
-        collector_normalized = links[0].get("url") or links[0].get("href")
+        if expected_normalized is None:
+            # URL was rejected - collector should not collect it
+            assert len(links) == 0, \
+                f"Rejected URL '{test_url}' should not be collected, but got {len(links)} links"
+        else:
+            # URL was accepted - verify normalization matches
+            assert len(links) == 1, f"Expected 1 link for '{test_url}', got {len(links)}"
+            collector_normalized = links[0].get("url") or links[0].get("href")
 
-        assert collector_normalized == expected_normalized, \
-            f"Normalization mismatch for '{test_url}':\n" \
-            f"  Collector returned: {collector_normalized}\n" \
-            f"  normalize_url returned: {expected_normalized}\n" \
-            f"  This is a CRITICAL security bug (normalization bypass possible)"
+            assert collector_normalized == expected_normalized, \
+                f"Normalization mismatch for '{test_url}':\n" \
+                f"  Collector returned: {collector_normalized}\n" \
+                f"  normalize_url returned: {expected_normalized}\n" \
+                f"  This is a CRITICAL security bug (normalization bypass possible)"
 
 
 def test_adversarial_encoded_urls_corpus_parity():
@@ -308,7 +329,7 @@ def test_adversarial_encoded_urls_corpus_parity():
         pytest.skip("normalize_url not available")
 
     try:
-        from doxstrux.markdown.collectors_phase8.links_collector import LinksCollector
+        from doxstrux.markdown.collectors_phase8.links import LinksCollector
     except ImportError:
         pytest.skip("LinksCollector not available")
 
@@ -369,7 +390,10 @@ def test_adversarial_encoded_urls_corpus_parity():
         wh = TokenWarehouse(tokens, tree=None)
         wh.register_collector(collector)
         wh.dispatch_all()
-        links = collector.finalize(wh)
+        result = collector.finalize(wh)
+
+        # Handle dict return type (P0-3 truncation metadata)
+        links = result["links"] if isinstance(result, dict) else result
 
         # Verify parity
         if expected_normalized is not None:

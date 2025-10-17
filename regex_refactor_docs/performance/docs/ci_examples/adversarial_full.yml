@@ -1,0 +1,111 @@
+# .github/workflows/adversarial_full.yml
+#
+# REFERENCE CI WORKFLOW - Adversarial Full Suite (PR + Nightly)
+#
+# PURPOSE: Runs all adversarial corpora as blocking CI gate
+# SCOPE: Production CI (NOT skeleton scope)
+# STATUS: Reference implementation for human to copy to production .github/workflows/
+#
+# SECURITY: This job MUST be marked as required in branch protection
+# POLICY: Fails PRs when any adversarial corpus reveals vulnerabilities
+#
+# SOURCE: External deep security analysis
+# REFERENCE: PLAN_CLOSING_IMPLEMENTATION_extended_3.md P3-1
+
+name: Adversarial Full Suite (PR + Nightly)
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 4 * * *'   # nightly 04:00 UTC (adjust to your timezone)
+
+jobs:
+  adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install bleach jinja2  # Security test dependencies
+
+      - name: Create reports directory
+        run: mkdir -p adversarial_reports
+
+      - name: Run adversarial corpora (fail on any nonzero)
+        run: |
+          set -e  # Exit on first failure
+          for corpus in adversarial_corpora/adversarial_*.json; do
+            out="adversarial_reports/$(basename ${corpus%.*}).report.json"
+            echo "Running: $corpus -> $out"
+
+            # Run with per-corpus timeout
+            python -u tools/run_adversarial.py "$corpus" \
+              --runs 1 \
+              --report "$out"
+
+            # Verify report exists
+            if [ ! -f "$out" ]; then
+              echo "❌ ERROR: runner did not produce report for $corpus"
+              exit 2
+            fi
+
+            # Print summary
+            python - <<PY
+import json
+with open("$out") as f:
+    d = json.load(f)
+    if isinstance(d, dict):
+        findings = d.get('findings', [])
+        print(f"✅ {len(findings)} findings in $corpus")
+PY
+          done
+
+      - name: Upload adversarial reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: adversarial-reports
+          path: adversarial_reports/*.report.json
+          retention-days: 30
+
+      - name: Fail on security regressions
+        if: failure()
+        run: |
+          echo "❌ CRITICAL: Adversarial corpus tests failed"
+          echo "This indicates a security regression in:"
+          echo "  - Template injection detection (SSTI)"
+          echo "  - XSS/HTML sanitization"
+          echo "  - URL normalization (SSRF)"
+          echo "  - Collector caps (OOM/DoS)"
+          echo ""
+          echo "Review adversarial reports artifact for details"
+          exit 1
+
+# RECOMMENDED CI POLICY:
+#
+# 1. Mark this job as REQUIRED in branch protection rules
+# 2. For fast PR feedback, also add a quick smoke test job that runs
+#    adversarial_combined.json only (< 30 seconds)
+# 3. Full suite runs on:
+#    - All PRs to main/develop
+#    - Nightly (catches infrastructure drift)
+#    - Manual dispatch (for testing)
+#
+# 4. Artifact retention: 30 days allows forensic analysis of failures
+#
+# 5. If job fails frequently due to noise, investigate and fix the
+#    root cause rather than marking as optional
+#
+# EVIDENCE ANCHOR:
+# CLAIM-P3-1-CI: Adversarial corpora run as blocking CI gate
+# Source: External deep security analysis + PLAN_CLOSING_IMPLEMENTATION_extended_3.md

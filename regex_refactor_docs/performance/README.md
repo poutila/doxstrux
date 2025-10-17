@@ -83,7 +83,7 @@ structure = {
 > **📊 Consolidation Summary:**
 > - **Before**: 14 active markdown files (~10,649 lines, ~35-40% overlap in security docs)
 > - **After**: 12 active files (~10,200 lines, <10% overlap)
-> - **Latest Consolidation**: 3 security status files → 1 SECURITY_IMPLEMENTATION_STATUS.md
+> - **Latest Consolidation**: 3 security status files → 1 EXEC_SECURITY_IMPLEMENTATION_STATUS.md
 > - **Archived**: 5 files total (2 from v3 + 3 security status files)
 > - **Key Improvements**:
 >   - Single source of truth for security implementation status
@@ -106,7 +106,7 @@ Entry point and navigation hub for all performance documentation.
 
 ### **Architecture & Design (2 files)**
 
-### 2. **WAREHOUSE_OPTIMIZATION_SPEC.md** (1,232 lines)
+### 2. **PLAN_WAREHOUSE_OPTIMIZATION_SPEC.md** (1,232 lines)
 **WHAT to build** - Complete technical specification
 
 **Contents**:
@@ -116,13 +116,13 @@ Entry point and navigation hub for all performance documentation.
 - Query API reference (by_type, range_for, parent, section_of)
 - Performance analysis and complexity breakdowns
 
-**Cross-references**: → WAREHOUSE_EXECUTION_PLAN.md (how to build), SECURITY_COMPREHENSIVE.md (security), PHASE_8_IMPLEMENTATION_CHECKLIST.md (status)
+**Cross-references**: → PLAN_WAREHOUSE_EXECUTION_PLAN.md (how to build), PLAN_SECURITY_COMPREHENSIVE.md (security), EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md (status)
 
 **When to read**: Before implementing warehouse infrastructure
 
 ---
 
-### 3. **WAREHOUSE_EXECUTION_PLAN.md** (978 lines)
+### 3. **PLAN_WAREHOUSE_EXECUTION_PLAN.md** (978 lines)
 **HOW to build it** - Phase-by-phase implementation roadmap
 
 **Contents**:
@@ -131,7 +131,7 @@ Entry point and navigation hub for all performance documentation.
 - Migration order and per-collector checklists
 - Evidence block templates
 
-**Cross-references**: → WAREHOUSE_OPTIMIZATION_SPEC.md (technical design), CI_CD_INTEGRATION.md (CI gates)
+**Cross-references**: → PLAN_WAREHOUSE_OPTIMIZATION_SPEC.md (technical design), EXEC_CI_CD_INTEGRATION.md (CI gates)
 
 **When to read**: During implementation
 
@@ -139,7 +139,7 @@ Entry point and navigation hub for all performance documentation.
 
 ### **Security (3 files - Consolidated)**
 
-### 4. **SECURITY_COMPREHENSIVE.md** (2,098 lines) 🔐
+### 4. **PLAN_SECURITY_COMPREHENSIVE.md** (2,098 lines) 🔐
 **Master security guide** - Complete vulnerability catalog and mitigations
 
 **Contents**:
@@ -149,7 +149,7 @@ Entry point and navigation hub for all performance documentation.
 - Part 4: Mitigations & patches (copy/paste ready code)
 - Part 5: Deployment guide (testing, CI/CD, monitoring)
 
-**Cross-references**: → SECURITY_IMPLEMENTATION_STATUS.md (current status), TOKEN_VIEW_CANONICALIZATION.md (specific pattern)
+**Cross-references**: → EXEC_SECURITY_IMPLEMENTATION_STATUS.md (current status), PLAN_TOKEN_VIEW_CANONICALIZATION.md (specific pattern)
 
 **When to read**: **START HERE** for vulnerability details and mitigation code
 
@@ -157,7 +157,7 @@ Entry point and navigation hub for all performance documentation.
 
 ---
 
-### 5. **SECURITY_IMPLEMENTATION_STATUS.md** (NEW - Consolidated) ✅
+### 5. **EXEC_SECURITY_IMPLEMENTATION_STATUS.md** (NEW - Consolidated) ✅
 **Implementation status and test infrastructure** - Single source of truth for security status
 
 **Consolidates**: SECURITY_GAP_ANALYSIS.md + SECURITY_BLOCKERS_ANALYSIS.md + SECURITY_TESTS_IMPLEMENTATION_SUMMARY.md
@@ -170,7 +170,7 @@ Entry point and navigation hub for all performance documentation.
 - Critical blockers status (3 HIGH, 2 MEDIUM priority with action items)
 - Implementation requirements (next phase work)
 
-**Cross-references**: → SECURITY_COMPREHENSIVE.md (vulnerability details), PHASE_8_IMPLEMENTATION_CHECKLIST.md (overall progress)
+**Cross-references**: → PLAN_SECURITY_COMPREHENSIVE.md (vulnerability details), EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md (overall progress)
 
 **When to read**: **For current status**, test infrastructure details, and remaining implementation work
 
@@ -178,7 +178,7 @@ Entry point and navigation hub for all performance documentation.
 
 ---
 
-### 6. **TOKEN_VIEW_CANONICALIZATION.md** (751 lines)
+### 6. **PLAN_TOKEN_VIEW_CANONICALIZATION.md** (751 lines)
 **Specific security pattern guide** - Deep dive into token canonicalization
 
 **Contents**:
@@ -187,13 +187,13 @@ Entry point and navigation hub for all performance documentation.
 - Performance benefits (~9% speedup)
 - Test suite and validation
 
-**Cross-references**: → SECURITY_COMPREHENSIVE.md (context), SECURITY_IMPLEMENTATION_STATUS.md (status)
+**Cross-references**: → PLAN_SECURITY_COMPREHENSIVE.md (context), EXEC_SECURITY_IMPLEMENTATION_STATUS.md (status)
 
 **When to read**: When implementing token canonicalization specifically
 
 ---
 
-### 7. **ADVERSARIAL_TESTING_REFERENCE.md** (206 lines) 🧪
+### 7. **PLAN_ADVERSARIAL_TESTING_REFERENCE.md** (206 lines) 🧪
 **Quick reference** - All 9 adversarial corpora and testing commands
 
 **Contents**:
@@ -202,7 +202,7 @@ Entry point and navigation hub for all performance documentation.
 - Vulnerability coverage matrix (10/10 - 100% coverage)
 - Expected baselines
 
-**Cross-references**: → SECURITY_COMPREHENSIVE.md (vulnerabilities), SECURITY_IMPLEMENTATION_STATUS.md (test infrastructure)
+**Cross-references**: → PLAN_SECURITY_COMPREHENSIVE.md (vulnerabilities), EXEC_SECURITY_IMPLEMENTATION_STATUS.md (test infrastructure)
 
 **When to read**: For adversarial testing - quick reference with all commands
 
@@ -212,7 +212,7 @@ Entry point and navigation hub for all performance documentation.
 
 ### **Status & Tracking (2 files)**
 
-### 8. **PHASE_8_IMPLEMENTATION_CHECKLIST.md** (1,121 lines) ✅
+### 8. **EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md** (1,121 lines) ✅
 **Master status tracker** - Complete implementation progress (100% complete)
 
 **Contents**:
@@ -221,7 +221,7 @@ Entry point and navigation hub for all performance documentation.
 - Runtime domain (5 items - all complete)
 - Implementation tools and code
 
-**Cross-references**: → SECURITY_GAP_ANALYSIS.md (security details), GREEN_LIGHT_ROLLOUT_CHECKLIST.md (production readiness)
+**Cross-references**: → SECURITY_GAP_ANALYSIS.md (security details), EXEC_GREEN_LIGHT_ROLLOUT_CHECKLIST.md (production readiness)
 
 **When to read**: For implementation status and remaining work
 
@@ -229,7 +229,7 @@ Entry point and navigation hub for all performance documentation.
 
 ---
 
-### 9. **GREEN_LIGHT_ROLLOUT_CHECKLIST.md** (461 lines)
+### 9. **EXEC_GREEN_LIGHT_ROLLOUT_CHECKLIST.md** (461 lines)
 **Production rollout plan** - 4-phase deployment with safety gates
 
 **Contents**:
@@ -239,7 +239,7 @@ Entry point and navigation hub for all performance documentation.
 - Phase 4: Residual risk register
 - Emergency rollback procedure
 
-**Cross-references**: → PHASE_8_IMPLEMENTATION_CHECKLIST.md (prerequisites), PRODUCTION_MONITORING_GUIDE.md (metrics), CI_CD_INTEGRATION.md (CI gates)
+**Cross-references**: → EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md (prerequisites), EXEC_PRODUCTION_MONITORING_GUIDE.md (metrics), EXEC_CI_CD_INTEGRATION.md (CI gates)
 
 **When to read**: Before production deployment
 
@@ -247,7 +247,7 @@ Entry point and navigation hub for all performance documentation.
 
 ### **Infrastructure & Operations (3 files)**
 
-### 10. **CI_CD_INTEGRATION.md** (380 lines) 🔗
+### 10. **EXEC_CI_CD_INTEGRATION.md** (380 lines) 🔗
 **CI/CD integration guide** - Connects Phase 8 to main project infrastructure
 
 **Contents**:
@@ -257,7 +257,7 @@ Entry point and navigation hub for all performance documentation.
 - GitHub Actions workflows (implemented in `.github/workflows/adversarial.yml`)
 - Performance monitoring and rollback
 
-**Cross-references**: → GREEN_LIGHT_ROLLOUT_CHECKLIST.md (deployment), ADVERSARIAL_TESTING_REFERENCE.md (testing)
+**Cross-references**: → EXEC_GREEN_LIGHT_ROLLOUT_CHECKLIST.md (deployment), PLAN_ADVERSARIAL_TESTING_REFERENCE.md (testing)
 
 **When to read**: Before CI/CD integration
 
@@ -265,7 +265,7 @@ Entry point and navigation hub for all performance documentation.
 
 ---
 
-### 11. **PRODUCTION_MONITORING_GUIDE.md** (679 lines)
+### 11. **EXEC_PRODUCTION_MONITORING_GUIDE.md** (679 lines)
 **Metrics and monitoring** - Complete observability strategy
 
 **Contents**:
@@ -276,7 +276,7 @@ Entry point and navigation hub for all performance documentation.
 - Load testing configuration
 - Capacity planning
 
-**Cross-references**: → GREEN_LIGHT_ROLLOUT_CHECKLIST.md (deployment phases)
+**Cross-references**: → EXEC_GREEN_LIGHT_ROLLOUT_CHECKLIST.md (deployment phases)
 
 **When to read**: Before production deployment for monitoring setup
 
@@ -298,7 +298,7 @@ Entry point and navigation hub for all performance documentation.
 
 ---
 
-### 7. **SECURITY_COMPREHENSIVE.md** 🔐 **[CONSOLIDATED]**
+### 7. **PLAN_SECURITY_COMPREHENSIVE.md** 🔐 **[CONSOLIDATED]**
 **Complete unified security guide** - merges 7 previous security documents into single authoritative reference.
 
 **Replaces**: DEEP_VULNERABILITIES_ANALYSIS.md, CRITICAL_VULNERABILITIES_ANALYSIS.md, ATTACK_SCENARIOS_AND_MITIGATIONS.md, SECURITY_HARDENING_CHECKLIST.md, SECURITY_QUICK_REFERENCE.md, COMPREHENSIVE_SECURITY_PATCH.md, PHASE_8_SECURITY_INTEGRATION_GUIDE.md
@@ -320,10 +320,10 @@ Entry point and navigation hub for all performance documentation.
 
 ---
 
-### 8. **PHASE_8_IMPLEMENTATION_CHECKLIST.md** ✅ **[CONSOLIDATED v2.0]**
+### 8. **EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md** ✅ **[CONSOLIDATED v2.0]**
 **Complete implementation tracking and status** - merges 4 previous status documents into single checklist.
 
-**Replaces**: PHASE_8_IMPLEMENTATION_CHECKLIST.md (v1.0), CRITICAL_REMAINING_WORK.md, DEEP_FEEDBACK_GAP_ANALYSIS.md, IMPLEMENTATION_COMPLETE.md
+**Replaces**: EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md (v1.0), CRITICAL_REMAINING_WORK.md, DEEP_FEEDBACK_GAP_ANALYSIS.md, IMPLEMENTATION_COMPLETE.md
 
 **Contents**:
 - **Part 1: Executive Summary** - Current status (95% complete)
@@ -363,7 +363,7 @@ Analysis of documentation overlaps and consolidation recommendations.
 
 ---
 
-### 10. **ADVERSARIAL_TESTING_REFERENCE.md** 🧪 **[QUICK REFERENCE]**
+### 10. **PLAN_ADVERSARIAL_TESTING_REFERENCE.md** 🧪 **[QUICK REFERENCE]**
 Quick reference for adversarial corpus testing - covers all 9 corpora and testing infrastructure.
 
 **Contents**:
@@ -629,15 +629,15 @@ structure = self._warehouse.collect_all()
 ```
 performance/
 ├── README.md                                (700 lines) - This file [UPDATED v2]
-├── WAREHOUSE_OPTIMIZATION_SPEC.md          (1,232 lines) - Technical spec
-├── WAREHOUSE_EXECUTION_PLAN.md             (978 lines) - Implementation guide
+├── PLAN_WAREHOUSE_OPTIMIZATION_SPEC.md          (1,232 lines) - Technical spec
+├── PLAN_WAREHOUSE_EXECUTION_PLAN.md             (978 lines) - Implementation guide
 ├── SECURITY_AND_PERFORMANCE_REVIEW.md      (1,238 lines) - Deep security review
-├── SECURITY_COMPREHENSIVE.md               (2,098 lines) - 🔐 **[CONSOLIDATED]** Unified security guide
+├── PLAN_SECURITY_COMPREHENSIVE.md               (2,098 lines) - 🔐 **[CONSOLIDATED]** Unified security guide
 ├── SECURITY_GAP_ANALYSIS.md                (725 lines) - Implementation status (NEW)
-├── TOKEN_VIEW_CANONICALIZATION.md          (751 lines) - Security pattern guide
-├── PHASE_8_IMPLEMENTATION_CHECKLIST.md     (1,113 lines) - ✅ **[CONSOLIDATED v2.0]** Complete status
-├── ADVERSARIAL_TESTING_REFERENCE.md        (~200 lines) - 🧪 **[QUICK REF]** Adversarial testing
-├── CI_CD_INTEGRATION.md                    (380 lines) - CI/CD integration 🔗
+├── PLAN_TOKEN_VIEW_CANONICALIZATION.md          (751 lines) - Security pattern guide
+├── EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md     (1,113 lines) - ✅ **[CONSOLIDATED v2.0]** Complete status
+├── PLAN_ADVERSARIAL_TESTING_REFERENCE.md        (~200 lines) - 🧪 **[QUICK REF]** Adversarial testing
+├── EXEC_CI_CD_INTEGRATION.md                    (380 lines) - CI/CD integration 🔗
 ├── LIBRARIES_NEEDED.md                     (241 lines) - Dependencies 📦
 ├── .phase-8.0.template.json                (101 lines) - Completion template
 ├── adversarial_corpora/                   - 🧪 Adversarial test corpus (9 JSON files)
@@ -702,9 +702,9 @@ performance/
 - **After**: 11 active files, 2 major consolidated documents, 16 archived files
 - **Reduction**: ~50% reduction in redundancy
 - **Key Consolidations**:
-  - 7 security docs → SECURITY_COMPREHENSIVE.md (~2,500 lines)
-  - 4 status docs → PHASE_8_IMPLEMENTATION_CHECKLIST.md v2.0 (~1,100 lines)
-  - 3 adversarial docs → ADVERSARIAL_TESTING_REFERENCE.md (~200 lines quick ref)
+  - 7 security docs → PLAN_SECURITY_COMPREHENSIVE.md (~2,500 lines)
+  - 4 status docs → EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md v2.0 (~1,100 lines)
+  - 3 adversarial docs → PLAN_ADVERSARIAL_TESTING_REFERENCE.md (~200 lines quick ref)
 
 **Total**: ~10,000 lines of active specification + 2,457 lines of skeleton code + 9 adversarial corpus files
 
@@ -725,13 +725,13 @@ performance/
 ## Quick Start
 
 ### For Implementation
-1. **Read `PHASE_8_IMPLEMENTATION_CHECKLIST.md` (actionable checklist)** ✅ **START HERE**
+1. **Read `EXEC_PHASE_8_IMPLEMENTATION_CHECKLIST.md` (actionable checklist)** ✅ **START HERE**
    - Consolidated v2.0 - includes all status, remaining work, and implementation tools
-2. **Read `SECURITY_COMPREHENSIVE.md` (complete security guide)** 🔐 **CRITICAL**
+2. **Read `PLAN_SECURITY_COMPREHENSIVE.md` (complete security guide)** 🔐 **CRITICAL**
    - Consolidated - all 15 vulnerabilities, mitigations, and deployment in one place
-3. Read `WAREHOUSE_OPTIMIZATION_SPEC.md` (architecture)
-4. Read `WAREHOUSE_EXECUTION_PLAN.md` (roadmap)
-5. **Read `CI_CD_INTEGRATION.md` (understand CI gate requirements)** 🔗
+3. Read `PLAN_WAREHOUSE_OPTIMIZATION_SPEC.md` (architecture)
+4. Read `PLAN_WAREHOUSE_EXECUTION_PLAN.md` (roadmap)
+5. **Read `EXEC_CI_CD_INTEGRATION.md` (understand CI gate requirements)** 🔗
 6. Check `LIBRARIES_NEEDED.md` (verify dependencies - zero new deps!)
 7. Review `skeleton/` (reference implementation with all security hardening)
 8. Create feature branch: `git checkout -b feature/token-warehouse`
@@ -746,14 +746,14 @@ performance/
     cp skeleton/tests/test_token_warehouse.py \
        tests/
     ```
-10. Apply security patches from `SECURITY_COMPREHENSIVE.md` Part 4 (copy/paste ready)
-11. Run CI gates (G1-G7 + P1-P3) per `CI_CD_INTEGRATION.md`
+10. Apply security patches from `PLAN_SECURITY_COMPREHENSIVE.md` Part 4 (copy/paste ready)
+11. Run CI gates (G1-G7 + P1-P3) per `EXEC_CI_CD_INTEGRATION.md`
 12. Create `.phase-8.0.complete.json`
 13. Migrate collectors incrementally (Phases 8.1-8.N)
 
 ### For Review
 1. Read this README (context)
-2. Review `WAREHOUSE_OPTIMIZATION_SPEC.md` (design)
+2. Review `PLAN_WAREHOUSE_OPTIMIZATION_SPEC.md` (design)
 3. Check benchmarking methodology
 4. Verify baseline parity requirements
 
@@ -797,8 +797,8 @@ performance/
 **Current Phase**: 8.0 (Specification complete, implementation pending)
 
 **Next Steps**:
-1. Review WAREHOUSE_OPTIMIZATION_SPEC.md
-2. Review WAREHOUSE_EXECUTION_PLAN.md
+1. Review PLAN_WAREHOUSE_OPTIMIZATION_SPEC.md
+2. Review PLAN_WAREHOUSE_EXECUTION_PLAN.md
 3. Implement TokenWarehouse class
 4. Run Phase 8.0 gates
 5. Create `.phase-8.0.complete.json`

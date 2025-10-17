@@ -1,0 +1,117 @@
+name: Adversarial Full Suite (PR + Nightly)
+
+# CRITICAL SECURITY REQUIREMENT:
+# This workflow MUST be a required status check for merging to main/develop.
+# Without this gate, regressions can slip through.
+#
+# Per External Security Audit D1:
+# - Run adversarial corpora as blocking CI gate
+# - Upload artifacts for forensic analysis
+# - Fail CI on any adversarial test failure
+#
+# Evidence Anchor: CLAIM-D1-CI-GATE
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 4 * * *'   # Nightly at 04:00 UTC
+  workflow_dispatch:      # Allow manual runs
+
+jobs:
+  adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || pip install -e ".[dev]"
+          # Install optional sanitizers/test helpers
+          pip install bleach jinja2 requests || true
+
+      - name: Create reports directory
+        run: mkdir -p adversarial_reports
+
+      - name: Run adversarial corpora (fail on any nonzero)
+        run: |
+          set -euo pipefail
+
+          # Run each corpus and fail immediately on error
+          for corpus in adversarial_corpora/adversarial_*.json; do
+            out="adversarial_reports/$(basename ${corpus%.*}).report.json"
+            echo "========================================"
+            echo "Running: $corpus"
+            echo "Output:  $out"
+            echo "========================================"
+
+            # Run runner and fail if it returns non-zero
+            # NOTE: Adjust path if your runner is in different location
+            python -u tools/run_adversarial.py "$corpus" --runs 1 --report "$out" || {
+              echo "❌ CRITICAL: Adversarial corpus failed: $corpus"
+              echo "See artifacts for details"
+              exit 1
+            }
+
+            if [ ! -f "$out" ]; then
+              echo "❌ ERROR: runner did not produce report for $corpus"
+              exit 2
+            fi
+
+            echo "✅ PASS: $corpus"
+          done
+
+          echo ""
+          echo "========================================"
+          echo "✅ ALL ADVERSARIAL CORPORA PASSED"
+          echo "========================================"
+
+      - name: Upload adversarial reports (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adversarial-reports
+          path: adversarial_reports/*.report.json
+          retention-days: 30
+
+      - name: Upload adversarial reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adversarial-reports-FAILED
+          path: |
+            adversarial_reports/*.report.json
+            adversarial_corpora/*.json
+          retention-days: 90  # Keep failures longer for forensics
+
+      - name: Comment PR with failure details
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            let artifactCount = 0;
+            try {
+              artifactCount = fs.readdirSync('adversarial_reports').length;
+            } catch (e) {
+              artifactCount = 0;
+            }
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `❌ **Adversarial test suite FAILED**\n\n` +
+                    `${artifactCount} test failure artifacts captured.\n\n` +
+                    `Download artifacts from Actions tab to investigate.\n\n` +
+                    `**This is a BLOCKING security gate - PR cannot be merged until fixed.**`
+            });

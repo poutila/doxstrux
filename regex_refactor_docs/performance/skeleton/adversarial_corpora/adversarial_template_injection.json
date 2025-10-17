@@ -1,0 +1,45 @@
+[
+  {
+    "id": "template_jinja_basic",
+    "desc": "Jinja-like server-side template injection in heading",
+    "tokens": [
+      {"type":"heading_open","tag":"h1","nesting":1,"map":[0,1]},
+      {"type":"inline","content":"Welcome {{ config.SECRET_KEY }}"},
+      {"type":"heading_close","nesting":-1}
+    ]
+  },
+  {
+    "id": "template_jinja_expr",
+    "desc": "Jinja expression attempting attribute access",
+    "tokens": [
+      {"type":"heading_open","tag":"h2","nesting":1,"map":[2,3]},
+      {"type":"inline","content":"User count: {{ users|length }}"},
+      {"type":"heading_close","nesting":-1}
+    ]
+  },
+  {
+    "id": "template_ejs",
+    "desc": "EJS / ERB style injection",
+    "tokens": [
+      {"type":"heading_open","tag":"h3","nesting":1,"map":[4,5]},
+      {"type":"inline","content":"<%= process.env['SECRET'] %>"},
+      {"type":"heading_close","nesting":-1}
+    ]
+  },
+  {
+    "id": "template_handlebars",
+    "desc": "Handlebars-like template attempt",
+    "tokens": [
+      {"type":"inline","content":"Hello {{user.name}}"}
+    ]
+  },
+  {
+    "id": "template_url_injection",
+    "desc": "Template tokens inside link text",
+    "tokens": [
+      {"type":"link_open","tag":"a","nesting":1,"href":"https://example.com"},
+      {"type":"text","content":"Click here {{ server.cred }}"},
+      {"type":"link_close","nesting":-1}
+    ]
+  }
+]

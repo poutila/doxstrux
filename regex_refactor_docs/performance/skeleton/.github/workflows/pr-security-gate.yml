@@ -1,0 +1,213 @@
+# PR Security Gate - URL Normalization Parity Enforcement
+#
+# PURPOSE: Enforce URL normalization parity across collectors and fetchers
+# SEVERITY: P0 - CRITICAL (SSRF/XSS prevention)
+# STATUS: Reference implementation for production .github/workflows/
+#
+# This workflow prevents PRs from merging if URL normalization parity tests fail.
+# Rationale: Inconsistent normalization creates TOCTOU bypass vulnerabilities.
+#
+# Attack Vector Example:
+#   1. Collector normalizes URL and stores "https://safe.example.com"
+#   2. Fetcher normalizes differently, resolves to "https://evil.attacker.com"
+#   3. Result: SSRF vulnerability (fetcher bypasses collector's security check)
+#
+# Prevention:
+#   - All PRs must pass test_url_normalization_parity.py (14 tests)
+#   - Zero tolerance: 1 failed test = PR blocked
+#   - Required for merge (configured in branch protection rules)
+
+name: PR Security Gate - URL Normalization Parity
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - 'release/**'
+    paths:
+      # Trigger on changes to security-critical code
+      - 'src/doxstrux/markdown/utils/url_utils.py'
+      - 'src/doxstrux/markdown/security/validators.py'
+      - 'src/doxstrux/markdown/collectors_phase8/**'
+      - 'src/doxstrux/markdown/fetchers/**'
+      - 'tests/test_url_normalization_parity.py'
+      - '.github/workflows/pr-security-gate.yml'
+
+  # Allow manual trigger for debugging
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write  # For adding comments to PRs
+
+jobs:
+  url-normalization-parity:
+    name: URL Normalization Parity Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better diff context
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install -e ".[dev]"
+
+      - name: Run URL normalization parity tests
+        id: parity_tests
+        run: |
+          # Run parity tests with verbose output
+          pytest tests/test_url_normalization_parity.py \
+            -v \
+            --tb=short \
+            --junit-xml=parity-test-results.xml \
+            --cov=src/doxstrux/markdown/utils/url_utils \
+            --cov=src/doxstrux/markdown/fetchers \
+            --cov-report=term-missing \
+            --cov-report=html:htmlcov \
+            --cov-fail-under=90
+        continue-on-error: false  # HARD FAIL - block PR if tests fail
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: parity-test-results
+          path: |
+            parity-test-results.xml
+            htmlcov/
+          retention-days: 30
+
+      - name: Check for dangerous URL patterns in diff
+        if: always()
+        run: |
+          # Check if PR introduces protocol-relative URLs or dangerous schemes
+          git diff origin/main...HEAD -- 'src/doxstrux/**' | \
+            grep -E '(//[a-zA-Z]|javascript:|data:|file:|vbscript:)' && \
+            echo "⚠️  WARNING: Dangerous URL patterns detected in diff" && \
+            exit 1 || true
+
+      - name: Verify single normalize_url definition
+        if: always()
+        run: |
+          # Success criterion from PLAN_CLOSING_IMPLEMENTATION.md
+          count=$(grep -r "^def normalize_url" src/doxstrux/ | wc -l)
+          if [ "$count" -ne 1 ]; then
+            echo "❌ FAILED: Found $count normalize_url definitions (expected exactly 1)"
+            echo "Locations:"
+            grep -rn "^def normalize_url" src/doxstrux/
+            exit 1
+          fi
+          echo "✅ PASSED: Exactly 1 normalize_url definition found"
+
+      - name: Verify collectors import from url_utils
+        if: always()
+        run: |
+          # Success criterion: All collectors use centralized normalize_url
+          collectors=(
+            "src/doxstrux/markdown/collectors_phase8/links.py"
+            "src/doxstrux/markdown/collectors_phase8/images.py"
+          )
+
+          for collector in "${collectors[@]}"; do
+            if ! grep -q "from.*url_utils import normalize_url" "$collector"; then
+              echo "❌ FAILED: $collector does not import normalize_url from url_utils"
+              exit 1
+            fi
+          done
+          echo "✅ PASSED: All collectors import normalize_url from url_utils"
+
+      - name: Comment on PR (Success)
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ **URL Normalization Parity: PASSED**\n\nAll 14 parity tests passed. SSRF/XSS prevention verified.'
+            })
+
+      - name: Comment on PR (Failure)
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **URL Normalization Parity: FAILED**\n\n**CRITICAL**: This PR introduces a normalization bypass vulnerability.\n\n**Required Actions**:\n1. Review test failures in artifacts\n2. Ensure all collectors/fetchers use `utils/url_utils.normalize_url()`\n3. Do NOT merge until all parity tests pass\n\n**Security Risk**: Inconsistent normalization enables SSRF/TOCTOU attacks.'
+            })
+
+  # Additional security checks
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    needs: url-normalization-parity  # Only run if parity tests pass
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install security tools
+        run: |
+          pip install bandit safety
+
+      - name: Run Bandit (security linter)
+        run: |
+          bandit -r src/doxstrux/ \
+            -f json \
+            -o bandit-report.json \
+            -ll  # Only report medium/high severity
+        continue-on-error: true
+
+      - name: Run Safety (dependency vulnerabilities)
+        run: |
+          safety check --json --output safety-report.json
+        continue-on-error: true
+
+      - name: Upload security reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            bandit-report.json
+            safety-report.json
+          retention-days: 30
+
+# Branch Protection Rules Configuration (GitHub UI)
+#
+# To enforce this CI gate in production, configure branch protection rules:
+#
+# 1. Go to: Settings > Branches > Branch protection rules
+# 2. Add rule for branch pattern: main, develop, release/**
+# 3. Enable:
+#    - ✅ Require status checks to pass before merging
+#    - ✅ Require branches to be up to date before merging
+#    - ✅ Status checks that are required:
+#        - "URL Normalization Parity Tests"
+#        - "Security Audit"
+# 4. Enable:
+#    - ✅ Do not allow bypassing the above settings
+#
+# Result: PRs cannot merge without passing parity tests

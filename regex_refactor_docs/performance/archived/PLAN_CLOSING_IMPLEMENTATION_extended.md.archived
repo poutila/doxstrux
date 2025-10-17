@@ -1,0 +1,1342 @@
+# Extended Closing Implementation Plan - Phase 8 Security Hardening
+
+**Version**: 1.0 (Extended Edition)
+**Date**: 2025-10-16
+**Status**: SKELETON-SCOPED REFERENCE IMPLEMENTATION PLAN
+**Methodology**: Golden Chain-of-Thought + CODE_QUALITY Policy
+**Purpose**: Provide implementation guidance for skeleton/ reference code based on external security analysis
+
+**Source**: Adapted from external security review recommendations
+**Scope**: `/regex_refactor_docs/performance/skeleton/` ONLY (not production code)
+
+---
+
+## ⚠️ CRITICAL - SCOPE DECLARATION
+
+### This Document Targets SKELETON Code Only
+
+**ALLOWED LOCATIONS**:
+- ✅ `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance/skeleton/`
+- ✅ `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance/policies/`
+- ✅ `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance/tools/`
+
+**OFF LIMITS** (per CLAUDE.md):
+- ❌ `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/src/doxstrux/` (production code)
+- ❌ `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tests/` (production tests)
+- ❌ `/home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/tools/ci/` (production CI - read-only)
+
+**Purpose**: Create **reference implementations** in skeleton/ for human review and migration decision.
+
+**Relationship to Main Plan**:
+- **PLAN_CLOSING_IMPLEMENTATION.md** - Original plan (already exists, 2544 lines)
+- **THIS DOCUMENT** - Extended guidance with external review insights adapted for skeleton scope
+
+---
+
+## ⚠️ CRITICAL - PYTHON ENVIRONMENT
+
+**NEVER use system python (`python`, `python3`) - ALWAYS use `.venv/bin/python`:**
+
+```bash
+# CORRECT (always):
+.venv/bin/python -m pytest skeleton/tests/test_html_render_litmus.py -v
+
+# WRONG (never):
+pytest skeleton/tests/  # May use wrong python
+```
+
+---
+
+## Executive Summary - External Review Synthesis
+
+### Current State (Evidence-Based)
+
+**CLAIM-EXT-001**: Test infrastructure 100% complete
+- **Evidence**: EXEC_SECURITY_IMPLEMENTATION_STATUS.md:16-23
+- **Verification**: 17 test files exist in `skeleton/tests/`
+- **Status**: ✅ All tests created, CI wired
+
+**CLAIM-EXT-002**: External review identifies 4 P0 gaps with 8 P1/P2 improvements
+- **Source**: External security analysis (ChatGPT-generated review)
+- **Gaps**: URL normalization litmus, HTML render litmus, collector caps implementation, platform policy
+- **Status**: ⚠️ Tests exist, skeleton implementations needed
+
+**CLAIM-EXT-003**: Subprocess isolation is YAGNI-gated
+- **Evidence**: CODE_QUALITY.json YAGNI decision tree
+- **Gate**: Windows deployment requirement not confirmed
+- **Status**: 🔴 **BLOCKED** - Document as future work, skip implementation
+
+---
+
+## Priority Matrix (Skeleton-Scoped)
+
+| ID | Item | Security Risk | YAGNI Risk | Scope | Effort | Priority |
+|----|------|---------------|------------|-------|--------|----------|
+| P0-1 | URL norm skeleton impl | HIGH (SSRF) | N/A | Skeleton | 2h | 🔴 P0 |
+| P0-2 | HTML litmus extension | HIGH (XSS) | N/A | Skeleton | 3h | 🔴 P0 |
+| P0-3 | Collector caps skeleton | HIGH (OOM) | N/A | Skeleton | 2h | 🔴 P0 |
+| P0-4 | Platform policy doc | MED (DoS) | N/A | Docs | 1h | 🔴 P0 |
+| P1-1 | Binary search reference | LOW (perf) | N/A | Skeleton | 1h | 🟡 P1 |
+| P1-2 | Subprocess doc (NOT impl) | MED | HIGH | Docs | 30min | 🟡 P1 |
+| P2-1 | YAGNI checker tool | N/A | MED | Tools | 3h | 🟢 P2 |
+| P2-2 | Routing table pattern doc | N/A | LOW | Docs | 1h | 🟢 P2 |
+
+**Total Effort** (P0 only): 8 hours
+**Total Effort** (P0+P1+P2): 13.5 hours
+
+---
+
+# PART 1: P0 CRITICAL SKELETON IMPLEMENTATIONS
+
+## P0-1: URL Normalization Skeleton Implementation
+
+### --- THINKING ---
+
+**Problem Statement**:
+- **CLAIM-P0-1-SKEL**: Tests exist but skeleton implementation needs verification
+- **Evidence**: `skeleton/tests/test_url_normalization_parity.py` (20 tests)
+- **Gap**: Verify `skeleton/doxstrux/markdown/security/validators.py` passes all tests
+- **Scope**: Skeleton code only, not production
+
+**YAGNI Assessment**:
+- Q1: Real requirement? ✅ YES - Tests already exist and CI-wired
+- Q2: Used immediately? ✅ YES - Reference for production migration
+- Q3: Backed by data? ✅ YES - adversarial_encoded_urls.json
+- Q4: Can defer? ❌ NO - Tests fail without implementation
+- **Outcome**: `implement_now = TRUE` (skeleton scope)
+
+### --- EXECUTION ---
+
+**Step 1: Verify Existing Skeleton Implementation**
+
+```bash
+# COMMAND (read-only, allowed)
+cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance
+.venv/bin/python -m pytest skeleton/tests/test_url_normalization_parity.py -v
+
+# EXPECTED OUTPUT
+# test_collector_fetcher_normalization_parity PASSED
+# ... (all 20 tests PASSED)
+
+# VALIDATION
+# Exit code 0 → Implementation complete ✅
+# Exit code 1 → Fix skeleton/doxstrux/markdown/security/validators.py
+```
+
+**Step 2: If Tests Fail - Enhance Skeleton Implementation**
+
+```python
+# FILE: skeleton/doxstrux/markdown/security/validators.py
+# (Only edit if tests fail - skeleton scope allowed)
+
+import urllib.parse
+from typing import Tuple
+
+DANGEROUS_SCHEMES = {
+    'javascript', 'data', 'file', 'vbscript',
+    'about', 'blob', 'filesystem'
+}
+
+ALLOWED_SCHEMES = {'http', 'https', 'mailto', 'tel', 'ftp', 'sftp'}
+
+def normalize_url(url: str) -> Tuple[str, bool]:
+    """
+    Centralized URL normalization for SSRF/XSS prevention.
+
+    SKELETON IMPLEMENTATION - Reference for production migration.
+
+    Returns:
+        (normalized_url, is_allowed): Tuple of normalized URL and safety flag
+
+    Raises:
+        ValueError: If URL is malformed or contains control characters
+    """
+    if not url or not isinstance(url, str):
+        raise ValueError("URL must be non-empty string")
+
+    # Step 1: Strip whitespace (bypass vector)
+    url = url.strip()
+
+    # Step 2: Reject control characters (NUL, newline, tab)
+    if any(ord(c) < 32 for c in url):
+        raise ValueError(f"URL contains control characters: {repr(url)}")
+
+    # Step 3: Handle protocol-relative URLs (//evil.com)
+    if url.startswith('//'):
+        raise ValueError(f"Protocol-relative URLs not allowed: {url}")
+
+    # Step 4: Parse and normalize
+    try:
+        parsed = urllib.parse.urlparse(url)
+    except Exception as e:
+        raise ValueError(f"Failed to parse URL: {url}") from e
+
+    # Step 5: Extract and normalize scheme
+    scheme = (parsed.scheme or '').lower()
+
+    # Step 6: Check against dangerous schemes
+    if scheme in DANGEROUS_SCHEMES:
+        return (url, False)  # Return original for logging, mark as unsafe
+
+    # Step 7: Normalize domain (lowercase, IDN punycode)
+    domain = (parsed.netloc or '').lower()
+
+    # Step 8: IDN normalization (homograph attack prevention)
+    try:
+        domain_ascii = domain.encode('idna').decode('ascii')
+    except (UnicodeError, UnicodeDecodeError):
+        domain_ascii = domain  # Fallback to original
+
+    # Step 9: Reconstruct normalized URL
+    normalized = urllib.parse.urlunparse((
+        scheme,
+        domain_ascii,
+        parsed.path,
+        parsed.params,
+        parsed.query,
+        parsed.fragment
+    ))
+
+    # Step 10: Check if scheme is in allowlist
+    is_allowed = scheme in ALLOWED_SCHEMES
+
+    return (normalized, is_allowed)
+
+# EVIDENCE ANCHOR
+# CLAIM-P0-1-SKEL-IMPL: Skeleton URL normalization prevents TOCTOU
+# Source: External review A.1 + test_url_normalization_parity.py
+# Verification: All 20 parity tests pass
+```
+
+**Success Criteria**:
+- [ ] All 20 tests in `test_url_normalization_parity.py` pass
+- [ ] Skeleton implementation demonstrates best practices
+- [ ] Ready for human review and production migration
+
+**Time Estimate**: 2 hours (1h verify + 1h fix if needed)
+
+---
+
+## P0-2: HTML/SVG Litmus Test Extension
+
+### --- THINKING ---
+
+**Problem Statement**:
+- **CLAIM-P0-2-SKEL**: `test_html_render_litmus.py` exists but may need rendering validation
+- **Evidence**: File exists at `skeleton/tests/test_html_render_litmus.py`
+- **Gap**: Verify tests include Parse → Store → **Render** pipeline validation
+- **Scope**: Skeleton test extension only
+
+**Current Status**:
+- **File Exists**: `skeleton/tests/test_html_render_litmus.py` (created previously)
+- **Needs**: Verification that Jinja2 rendering is tested, not just collection
+
+**YAGNI Assessment**:
+- Q1: Real requirement? ✅ YES - XSS prevention critical
+- Q2: Used immediately? ✅ YES - Tests must pass for green-light
+- Q3: Backed by data? ✅ YES - adversarial_html_xss.json
+- Q4: Can defer? ❌ NO - Critical security property
+- **Outcome**: `implement_now = TRUE` (test verification)
+
+### --- EXECUTION ---
+
+**Step 1: Verify Existing Test Coverage**
+
+```bash
+# COMMAND
+cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance
+.venv/bin/python -m pytest skeleton/tests/test_html_render_litmus.py -v
+
+# CHECK
+# - test_html_xss_litmus_script_tags exists and tests Jinja2 rendering?
+# - test_html_xss_litmus_svg_vectors tests SVG event handlers?
+# - test_html_default_off_policy tests fail-closed default?
+```
+
+**Step 2: If Missing - Add Jinja2 Rendering Test**
+
+```python
+# FILE: skeleton/tests/test_html_render_litmus.py
+# (Add if missing - skeleton scope allowed)
+
+def test_html_xss_litmus_with_jinja2_rendering():
+    """
+    CRITICAL LITMUS: Parse → Store → Render pipeline with actual template.
+
+    This test RENDERS collected HTML in Jinja2 to verify sanitization end-to-end.
+    Per external review: "parse → persist → server-side render into real template"
+    """
+    try:
+        from jinja2 import Template
+    except ImportError:
+        pytest.skip("jinja2 not installed")
+
+    # Step 1: Parse markdown with XSS payloads
+    markdown = """
+# Test Heading
+
+<script>alert('XSS')</script>
+<img src=x onerror="alert('XSS2')">
+<svg onload="alert('XSS3')">
+  <image xlink:href="javascript:alert('XSS4')"/>
+</svg>
+"""
+
+    # Import skeleton modules (not production)
+    try:
+        from skeleton.doxstrux.markdown_parser_core import MarkdownParserCore
+        from skeleton.doxstrux.markdown.collectors_phase8.html_collector import HTMLCollector
+    except ImportError:
+        pytest.skip("Skeleton modules not available")
+
+    # Step 2: Parse with HTMLCollector (sanitization enabled)
+    parser = MarkdownParserCore(markdown)
+    collector = HTMLCollector(allow_html=True, sanitize_on_finalize=True)
+
+    # ... register collector and dispatch ...
+    result = parser.parse()
+    html_blocks = result.get('html_blocks', [])
+
+    # Step 3: Render to Jinja2 template (simulate downstream consumer)
+    template = Template("""
+<!DOCTYPE html>
+<html>
+<body>
+{%- for block in html_blocks %}
+{{ block.content | safe }}
+{%- endfor %}
+</body>
+</html>
+""")
+
+    rendered_html = template.render(html_blocks=html_blocks)
+
+    # Step 4: CRITICAL ASSERTIONS - No executable content survives
+    assert '<script>' not in rendered_html.lower(), \
+        "❌ CRITICAL: Script tags not stripped from rendered output"
+    assert '</script>' not in rendered_html.lower(), \
+        "❌ CRITICAL: Script close tags not stripped"
+    assert 'onerror=' not in rendered_html.lower(), \
+        "❌ CRITICAL: Event handlers not stripped"
+    assert 'onload=' not in rendered_html.lower(), \
+        "❌ CRITICAL: SVG onload not stripped"
+    assert 'javascript:' not in rendered_html.lower(), \
+        "❌ CRITICAL: javascript: URLs not stripped"
+    assert 'xlink:href="javascript:' not in rendered_html.lower(), \
+        "❌ CRITICAL: SVG xlink javascript: not stripped"
+
+    # EVIDENCE ANCHOR
+    # CLAIM-P0-2-LITMUS: End-to-end rendering sanitizes XSS payloads
+    # Verification: Rendered HTML contains no executable content
+    # Source: External review A.2 + test_html_render_litmus.py
+```
+
+**Step 3: Verify ALLOW_RAW_HTML Policy Documented**
+
+```bash
+# CHECK
+ls -la policies/EXEC_ALLOW_RAW_HTML_POLICY.md
+
+# If missing, verify it exists (was created earlier)
+# No action needed if file exists
+```
+
+**Success Criteria**:
+- [ ] Test includes Jinja2 rendering (end-to-end)
+- [ ] Test asserts no `<script>`, `onerror`, `onload`, `javascript:`
+- [ ] Policy document exists: `policies/EXEC_ALLOW_RAW_HTML_POLICY.md`
+- [ ] All tests in `test_html_render_litmus.py` pass
+
+**Time Estimate**: 3 hours (1h verify + 2h add rendering if needed)
+
+---
+
+## P0-3: Per-Collector Caps Skeleton Implementation
+
+### --- THINKING ---
+
+**Problem Statement**:
+- **CLAIM-P0-3-SKEL**: Tests exist but collector implementations may lack caps
+- **Evidence**: `test_collector_caps_end_to_end.py` (11 tests) exists
+- **Evidence**: EXEC_SECURITY_IMPLEMENTATION_STATUS.md:181-188 shows caps defined but implementation pending
+- **Gap**: Add cap enforcement to skeleton collectors
+- **Scope**: `skeleton/doxstrux/markdown/collectors_phase8/*.py`
+
+**Current Status**:
+- Tests created: ✅
+- Caps defined: ✅ (MAX_LINKS_PER_DOC = 10_000, etc.)
+- Collector implementations: ⚠️ Need verification
+
+**YAGNI Assessment**:
+- Q1: Real requirement? ✅ YES - OOM prevention critical
+- Q2: Used immediately? ✅ YES - Tests fail without caps
+- Q3: Backed by data? ✅ YES - adversarial_large.json
+- Q4: Can defer? ❌ NO - Critical operational safety
+- **Outcome**: `implement_now = TRUE` (skeleton scope)
+
+### --- EXECUTION ---
+
+**Step 1: Verify Existing Collector Implementations**
+
+```bash
+# COMMAND
+cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance
+
+# Check which collectors exist
+ls -la skeleton/doxstrux/markdown/collectors_phase8/*.py
+
+# Run cap tests to see which fail
+.venv/bin/python -m pytest skeleton/tests/test_collector_caps_end_to_end.py -v
+```
+
+**Step 2: Add Cap Enforcement to Skeleton Collectors**
+
+```python
+# FILE: skeleton/doxstrux/markdown/collectors_phase8/links.py
+# (Example - repeat pattern for all collectors)
+
+from typing import List, Dict, Any, Optional
+
+# Per-collector cap (from external review P0-3)
+MAX_LINKS_PER_DOC = 10_000
+
+class LinksCollector:
+    """
+    Skeleton LinksCollector with OOM prevention via hard caps.
+
+    REFERENCE IMPLEMENTATION - demonstrates cap enforcement pattern.
+    """
+    name = "links"
+
+    def __init__(self, max_links: Optional[int] = None):
+        self.max_links = max_links if max_links is not None else MAX_LINKS_PER_DOC
+        self._links: List[Dict[str, Any]] = []
+        self._truncated: bool = False
+
+    def on_token(self, idx: int, token_view: Dict[str, Any], ctx, wh) -> None:
+        """
+        Process link token with cap enforcement.
+
+        CRITICAL: Checks cap BEFORE appending to prevent unbounded growth.
+        """
+        ttype = token_view.get("type")
+        if ttype not in ("link_open", "link"):
+            return
+
+        # ✅ CRITICAL: Enforce cap BEFORE appending
+        if len(self._links) >= self.max_links:
+            self._truncated = True
+            return  # Stop collecting links
+
+        href = token_view.get("href") or token_view.get("content")
+        self._links.append({
+            "token_index": idx,
+            "href": href,
+            "text": token_view.get("content", "") or "",
+        })
+
+    def finalize(self, wh) -> Dict[str, Any]:
+        """
+        Return collected links with truncation metadata.
+
+        CRITICAL: Truncation metadata signals when cap was hit.
+        """
+        return {
+            "name": self.name,
+            "count": len(self._links),
+            "truncated": self._truncated,
+            "links": list(self._links),
+        }
+
+# EVIDENCE ANCHOR
+# CLAIM-P0-3-SKEL-IMPL: Skeleton collector enforces caps
+# Source: External review B.2 + test_collector_caps_end_to_end.py
+# Verification: All 11 cap tests pass
+```
+
+**Repeat Pattern For**:
+- `media.py` → MAX_IMAGES_PER_DOC = 5_000
+- `sections.py` → MAX_HEADINGS_PER_DOC = 5_000
+- `codeblocks.py` → MAX_CODE_BLOCKS_PER_DOC = 2_000
+- `tables.py` → MAX_TABLES_PER_DOC = 1_000
+- `lists.py` → MAX_LIST_ITEMS_PER_DOC = 50_000
+
+**Success Criteria**:
+- [ ] All 6 skeleton collectors enforce caps
+- [ ] Truncation metadata (`truncated: bool`) returned in finalize()
+- [ ] All 11 tests in `test_collector_caps_end_to_end.py` pass
+
+**Time Estimate**: 2 hours (30min per collector × 4 collectors, assuming 2 already done)
+
+---
+
+## P0-4: Cross-Platform Support Policy Documentation
+
+### --- THINKING ---
+
+**Problem Statement**:
+- **CLAIM-P0-4-DOC**: Windows/Linux timeout support needs explicit policy
+- **Evidence**: External review B.1 mentions SIGALRM Unix-only limitation
+- **Gap**: Document platform support and STRICT_TIMEOUT_ENFORCEMENT flag
+- **Scope**: Policy documentation only (no code changes)
+
+**YAGNI Assessment**:
+- Q1: Real requirement? ✅ YES - Deployment decisions need clarity
+- Q2: Used immediately? ✅ YES - Policy referenced in deployment docs
+- Q3: Backed by data? ⚠️ PARTIAL - No Windows deployment confirmed
+- Q4: Can defer? ✅ YES - But document now for future reference
+- **Outcome**: `document_now = TRUE` (no implementation)
+
+### --- EXECUTION ---
+
+**Step 1: Verify Existing Policy Document**
+
+```bash
+# CHECK
+ls -la policies/EXEC_PLATFORM_SUPPORT_POLICY.md
+
+# If exists, verify it covers:
+# - Linux/macOS full support (SIGALRM)
+# - Windows limited support (graceful degradation)
+# - STRICT_TIMEOUT_ENFORCEMENT flag
+```
+
+**Step 2: Update Policy If Missing Content**
+
+**Policy Reference**: See `policies/EXEC_PLATFORM_SUPPORT_POLICY.md`
+
+**Required Content** (add if missing):
+
+```markdown
+## Platform Support Matrix
+
+### Fully Supported Platforms
+- **Linux** (all distributions)
+- **macOS** (all versions)
+- **Timeout Enforcement**: SIGALRM-based (full enforcement)
+
+### Limited Support Platforms
+- **Windows** (all versions)
+- **Timeout Enforcement**: Graceful degradation (warnings only)
+- **Alternative**: Subprocess isolation (YAGNI-gated, see P1-2)
+
+## Environment Variables
+
+### STRICT_TIMEOUT_ENFORCEMENT
+- **Type**: Boolean (`true` | `false`)
+- **Default**: `false`
+- **Purpose**: Enforce timeout on Windows via subprocess isolation
+- **Status**: **NOT IMPLEMENTED** (YAGNI-gated)
+- **Requirement**: Windows deployment ticket required
+
+### COLLECTOR_TIMEOUT_SECONDS
+- **Type**: Integer (1-60)
+- **Default**: `2`
+- **Purpose**: Collector finalize() timeout limit
+- **Platform**: Unix only (SIGALRM)
+
+## YAGNI Decision Point
+
+**Subprocess Isolation** (P1-2):
+- **Status**: NOT IMPLEMENTED
+- **Reason**: No confirmed Windows deployment requirement
+- **Condition**: Requires:
+  1. Windows deployment ticket
+  2. User count estimate
+  3. Tech Lead approval
+
+**Recommended**: Deploy on Linux for production with untrusted inputs
+```
+
+**Success Criteria**:
+- [ ] Policy document exists with platform matrix
+- [ ] STRICT_TIMEOUT_ENFORCEMENT flag documented
+- [ ] YAGNI decision point for subprocess isolation explicit
+- [ ] Recommendation: Linux-only for untrusted inputs
+
+**Time Estimate**: 1 hour (documentation only)
+
+---
+
+# PART 2: P1 REFERENCE PATTERNS
+
+## P1-1: Binary Search section_of() Reference Implementation
+
+### --- THINKING ---
+
+**Problem Statement**:
+- **CLAIM-P1-1-REF**: Provide O(log N) reference for section lookups
+- **Source**: External review C.2
+- **Purpose**: Demonstrate binary search pattern for production migration
+- **Scope**: Skeleton utility module (reference code)
+
+**YAGNI Assessment**:
+- Q1: Real requirement? ✅ YES - Performance optimization for large docs
+- Q2: Used immediately? ✅ YES - Reference for production
+- Q3: Backed by data? ✅ YES - O(N) vs O(log N) measurable
+- Q4: Can defer? ✅ YES - But low effort, high value
+- **Outcome**: `implement_reference = TRUE` (skeleton scope)
+
+### --- EXECUTION ---
+
+**Step 1: Add Binary Search Helper to Skeleton**
+
+```python
+# FILE: skeleton/doxstrux/markdown/utils/section_utils.py
+# (Create if missing - skeleton scope allowed)
+
+import bisect
+from typing import List, Optional, Tuple, Dict
+
+def section_index_for_line(
+    sections: List[Tuple[int, int]],
+    lineno: int
+) -> Optional[int]:
+    """
+    Find section index for given line number using binary search.
+
+    REFERENCE IMPLEMENTATION - O(log N) instead of O(N) linear scan.
+
+    Args:
+        sections: List of (start, end) tuples sorted by start line
+        lineno: Line number to search for
+
+    Returns:
+        Section index or None if not found
+
+    Example:
+        >>> sections = [(0, 4), (5, 9), (10, 14)]
+        >>> section_index_for_line(sections, 7)
+        1  # Second section (5-9) contains line 7
+    """
+    if not sections:
+        return None
+
+    # Build starts list (first element of each tuple)
+    starts = [s for (s, e) in sections]
+    i = bisect.bisect_right(starts, lineno) - 1
+
+    if i < 0:
+        return None
+
+    s, e = sections[i]
+    if s <= lineno <= e:
+        return i
+
+    return None
+
+
+def section_of_with_binary_search(
+    sections: List[Dict[str, any]],
+    lineno: int
+) -> Optional[str]:
+    """
+    Find section containing line_num using binary search.
+
+    REFERENCE IMPLEMENTATION - demonstrates pattern for production.
+
+    Args:
+        sections: List of dicts with 'start_line', 'end_line', 'id' keys
+        lineno: Line number to search for
+
+    Returns:
+        Section ID or None if not found
+    """
+    if not sections:
+        return None
+
+    # Convert to (start, end) tuples
+    ranges = [(s['start_line'], s.get('end_line', s['start_line']))
+              for s in sections]
+
+    idx = section_index_for_line(ranges, lineno)
+
+    if idx is None:
+        return None
+
+    return sections[idx]['id']
+
+# EVIDENCE ANCHOR
+# CLAIM-P1-1-REF-IMPL: Binary search reduces section lookup to O(log N)
+# Source: External review C.2
+# Verification: Benchmark shows O(log N) growth
+```
+
+**Step 2: Add Benchmark Test**
+
+```python
+# FILE: skeleton/tests/test_section_lookup_performance.py
+# (Create if missing)
+
+import time
+from skeleton.doxstrux.markdown.utils.section_utils import section_index_for_line
+
+def test_section_of_is_logarithmic():
+    """Verify section_index_for_line() scales as O(log N), not O(N)."""
+
+    def make_sections(n):
+        return [(i * 10, (i+1) * 10 - 1) for i in range(n)]
+
+    sizes = [100, 1000, 10000]
+    times = []
+
+    for size in sizes:
+        sections = make_sections(size)
+
+        start = time.perf_counter()
+        for _ in range(1000):
+            section_index_for_line(sections, size * 5)  # Mid-point lookup
+        elapsed = time.perf_counter() - start
+        times.append(elapsed)
+
+    # Check logarithmic growth
+    # If O(log N): time[1] / time[0] ≈ log(1000)/log(100) ≈ 1.5
+    # If O(N): time[1] / time[0] ≈ 1000/100 = 10
+    ratio = times[1] / times[0]
+
+    assert ratio < 3.0, \
+        f"section_index_for_line() appears O(N), not O(log N): ratio={ratio}"
+```
+
+**Success Criteria**:
+- [ ] Binary search helper implemented in skeleton
+- [ ] Benchmark test shows O(log N) scaling
+- [ ] Reference code ready for production migration
+
+**Time Estimate**: 1 hour
+
+---
+
+## P1-2: Subprocess Isolation - YAGNI Documentation Only
+
+### --- THINKING ---
+
+**YAGNI STOP CONDITION**:
+
+Per CODE_QUALITY.json:
+- **Q1**: Real requirement? ⚠️ **CONDITIONAL** - Only if Windows deployment confirmed
+- **Q2**: Used immediately? ⚠️ **UNKNOWN** - No deployment timeline
+- **Q3**: Backed by stakeholder/data? ❌ **NO** - No Windows users confirmed
+- **OUTCOME**: `STOP_DOCUMENT_ONLY = TRUE`
+
+**Decision**: Do NOT implement subprocess isolation. Document as future work.
+
+### --- EXECUTION ---
+
+**Step 1: Document Subprocess Isolation as YAGNI-Gated**
+
+```python
+# FILE: tools/collector_worker_YAGNI_PLACEHOLDER.py
+# (Create placeholder documentation file)
+
+"""
+Subprocess-based collector isolation for cross-platform timeout enforcement.
+
+YAGNI STATUS: ⛔ NOT IMPLEMENTED
+BLOCKED BY: No Windows deployment requirement (CODE_QUALITY.json Q1 fails)
+
+## When to Implement
+
+Implement if and only if ALL conditions met:
+1. ✅ User confirms Windows production deployment (Q1: Real requirement)
+2. ✅ Concrete Windows deployment timeline (Q2: Used immediately)
+3. ✅ Windows user count estimate OR stakeholder approval (Q3: Backed by data)
+4. ✅ Tech Lead approval obtained (per CODE_QUALITY.json waiver_policy)
+
+## Effort Estimate
+
+- **Design**: 2 hours
+- **Implementation**: 4 hours (worker + parent-side helper)
+- **Testing**: 2 hours
+- **Total**: 8 hours
+
+## Design Sketch (Reference Only)
+
+```
+tools/collector_worker.py (worker script)
+├── Accept JSON tokens on stdin
+├── Instantiate collector from allowlist
+├── Call on_token() for each token
+├── Return JSON results on stdout
+└── Enforce timeout via subprocess.run()
+
+skeleton/doxstrux/markdown/utils/collector_subproc.py (parent helper)
+├── run_collector_subprocess(module, class_name, tokens, timeout)
+├── Serialize tokens to JSON
+├── Spawn subprocess with timeout
+└── Deserialize results
+```
+
+## Integration Point
+
+**File**: `skeleton/doxstrux/markdown/utils/token_warehouse.py`
+**Location**: `_enforce_timeout_if_available()`
+
+```python
+if not SUPPORTS_TIMEOUT and STRICT_TIMEOUT_ENFORCEMENT:
+    # Option C: Subprocess isolation fallback
+    return self._run_collector_in_subprocess(collector, timeout_seconds)
+```
+
+## Current Recommendation
+
+**Deploy on Linux** for production with untrusted inputs.
+- Avoids subprocess overhead
+- Full SIGALRM timeout enforcement
+- Simpler operational model (KISS principle)
+
+See: `policies/EXEC_PLATFORM_SUPPORT_POLICY.md`
+"""
+
+def run_collector_isolated(collector, warehouse_state, timeout_seconds):
+    """
+    Placeholder - NOT IMPLEMENTED.
+
+    Raises:
+        NotImplementedError: Always (YAGNI-gated)
+    """
+    raise NotImplementedError(
+        "Subprocess isolation pending YAGNI waiver. "
+        "Requires: Windows deployment ticket + Tech Lead approval. "
+        "See: tools/collector_worker_YAGNI_PLACEHOLDER.py"
+    )
+```
+
+**Success Criteria**:
+- [ ] Placeholder file documents YAGNI decision
+- [ ] Design sketch provided for future reference
+- [ ] NotImplementedError raised if attempted
+
+**Time Estimate**: 30 minutes (documentation only)
+
+---
+
+# PART 3: P2 PROCESS AUTOMATION
+
+## P2-1: YAGNI Checker Tool
+
+### --- THINKING ---
+
+**Problem Statement**:
+- **CLAIM-P2-1-TOOL**: Automate YAGNI violation detection in PRs
+- **Source**: External review D.4
+- **Purpose**: Prevent speculative code from merging
+- **Scope**: Development tool (not production code)
+
+**YAGNI Assessment** (meta - checking the checker):
+- Q1: Real requirement? ✅ YES - CODE_QUALITY.json enforcement
+- Q2: Used immediately? ✅ YES - Every PR
+- Q3: Backed by data? ✅ YES - Manual checklist error-prone
+- Q4: Can defer? ✅ YES - Manual works but slow
+- **Outcome**: `implement_tool = TRUE` (P2 priority)
+
+### --- EXECUTION ---
+
+**Step 1: Create YAGNI Checker Script**
+
+```python
+# FILE: tools/check_yagni.py
+# (Create - skeleton tools allowed)
+
+#!/usr/bin/env python3
+"""
+YAGNI Compliance Checker
+
+Detects speculative code patterns per CODE_QUALITY.json.
+
+Usage:
+    python tools/check_yagni.py
+    python tools/check_yagni.py --ci  # Exit 1 on violations
+
+Violations Detected:
+- Unused function parameters
+- Boolean flags with only one code path
+- Unused hook parameters
+"""
+
+import ast
+import sys
+from pathlib import Path
+from typing import List, Dict, Any
+
+YAGNI_VIOLATIONS = [
+    ('unused_param', 'Parameter never used in function body'),
+    ('speculative_flag', 'Boolean flag with only one code path'),
+    ('unused_hook', 'Hook parameter never called'),
+]
+
+def check_file(filepath: Path) -> List[Dict[str, Any]]:
+    """Check Python file for YAGNI violations."""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            tree = ast.parse(f.read(), filename=str(filepath))
+    except Exception as e:
+        return [{
+            'file': filepath,
+            'line': 0,
+            'type': 'parse_error',
+            'message': f'Failed to parse: {e}',
+            'severity': 'error'
+        }]
+
+    violations = []
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef):
+            # Check for unused parameters
+            param_names = {arg.arg for arg in node.args.args}
+
+            # Exclude common patterns: self, cls, _
+            param_names = {p for p in param_names if p not in ('self', 'cls') and not p.startswith('_')}
+
+            # Find all names used in function body
+            used_names = set()
+            for n in ast.walk(node):
+                if isinstance(n, ast.Name):
+                    used_names.add(n.id)
+
+            unused = param_names - used_names
+
+            for param in unused:
+                violations.append({
+                    'file': filepath,
+                    'line': node.lineno,
+                    'type': 'unused_param',
+                    'message': f'Parameter "{param}" never used (YAGNI violation)',
+                    'severity': 'warning'
+                })
+
+    return violations
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description='YAGNI Compliance Checker')
+    parser.add_argument('--ci', action='store_true', help='Exit 1 on violations (CI mode)')
+    parser.add_argument('--path', default='skeleton', help='Path to check (default: skeleton)')
+    args = parser.parse_args()
+
+    src_path = Path(args.path)
+    if not src_path.exists():
+        print(f"❌ Path not found: {src_path}")
+        sys.exit(2)
+
+    py_files = list(src_path.rglob('*.py'))
+    all_violations = []
+
+    for filepath in py_files:
+        all_violations.extend(check_file(filepath))
+
+    if all_violations:
+        print(f"⚠️  YAGNI violations detected: {len(all_violations)}")
+        for v in all_violations:
+            print(f"  {v['file']}:{v['line']} - {v['message']}")
+
+        if args.ci:
+            sys.exit(1)
+        else:
+            sys.exit(0)  # Warning only in dev mode
+    else:
+        print("✅ YAGNI compliance check passed")
+        sys.exit(0)
+
+if __name__ == '__main__':
+    main()
+```
+
+**Step 2: Add to Pre-Commit (Optional)**
+
+```yaml
+# FILE: .pre-commit-config.yaml
+# (Optional - not in skeleton scope, document for reference)
+
+repos:
+  - repo: local
+    hooks:
+      - id: yagni-checker
+        name: YAGNI Compliance Check
+        entry: python tools/check_yagni.py --ci
+        language: system
+        pass_filenames: false
+```
+
+**Success Criteria**:
+- [ ] Tool detects unused parameters
+- [ ] Tool runs successfully on skeleton code
+- [ ] CI integration documented (optional)
+
+**Time Estimate**: 3 hours
+
+---
+
+## P2-2: KISS Routing Table Pattern Documentation
+
+### --- THINKING ---
+
+**Problem Statement**:
+- **CLAIM-P2-2-DOC**: Routing table bitmask logic needs simplification guidance
+- **Source**: External review D.2
+- **Purpose**: Document KISS pattern for production migration
+- **Scope**: Documentation only (no code changes)
+
+**Decision**: Document pattern, do not refactor skeleton (out of scope for Phase 8).
+
+### --- EXECUTION ---
+
+**Step 1: Create Routing Table Pattern Doc**
+
+```markdown
+# FILE: docs/PATTERN_ROUTING_TABLE_KISS.md
+# (Create - documentation allowed)
+
+# KISS Routing Table Pattern
+
+**Status**: Reference Pattern (Not Implemented in Skeleton)
+**Source**: External review D.2
+**Purpose**: Simplification guidance for production routing table
+
+## Problem Statement
+
+Current routing table uses bitmask logic which is:
+- ✅ Fast (O(1) dispatch)
+- ❌ Complex (bitmasking harder to audit)
+- ❌ Less readable (clever but opaque)
+
+## KISS Alternative Pattern
+
+### Current Approach (Bitmask)
+
+```python
+# Complex: Uses bitmasks for ignore sets
+mask = 0
+for token_type in sorted(ignore_types):
+    bit_position = self._mask_map[token_type]
+    mask |= (1 << bit_position)
+```
+
+### KISS Alternative (Set-Based)
+
+```python
+# Simple: Uses Python sets directly
+class RoutingTable:
+    def __init__(self):
+        self._collector_ignore_sets: Dict[str, Set[str]] = {}
+
+    def register_ignore_set(self, collector_name: str, ignore_types: Set[str]):
+        """Register collector's ignore set (deterministic via sorted())."""
+        self._collector_ignore_sets[collector_name] = ignore_types
+
+    def should_ignore(self, collector_name: str, token_type: str) -> bool:
+        """Check if collector should ignore token (O(1) set lookup)."""
+        ignore_set = self._collector_ignore_sets.get(collector_name, set())
+        return token_type in ignore_set
+```
+
+**Benefits**:
+- ✅ Simpler: No bitmasking complexity
+- ✅ Readable: Intent obvious
+- ✅ Still O(1): Set membership is O(1)
+- ✅ Deterministic: Sorted() ensures consistent order
+
+**Trade-Off**:
+- Memory: Slight increase (pointers vs bits) - negligible in practice
+
+## Recommendation
+
+**When to Use**:
+- Production migration (when simplicity > micro-optimization)
+- New features (KISS default)
+
+**When to Keep Bitmask**:
+- Performance-critical paths with profiling proof
+- Never for readability/maintenance
+
+## References
+
+- CODE_QUALITY.json PRIN-KISS
+- External review D.2
+```
+
+**Success Criteria**:
+- [ ] Pattern documented with code examples
+- [ ] Benefits/trade-offs explicit
+- [ ] Recommendation clear (KISS default)
+
+**Time Estimate**: 1 hour
+
+---
+
+# PART 4: TESTING STRATEGY
+
+## Running All P0 Tests
+
+### Quick Verification Commands
+
+```bash
+# From performance/ directory
+cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance
+
+# P0-1: URL Normalization Parity
+.venv/bin/python -m pytest skeleton/tests/test_url_normalization_parity.py -v
+
+# P0-2: HTML/SVG Litmus
+.venv/bin/python -m pytest skeleton/tests/test_html_render_litmus.py -v
+
+# P0-3: Collector Caps
+.venv/bin/python -m pytest skeleton/tests/test_collector_caps_end_to_end.py -v
+
+# ALL P0 Tests
+.venv/bin/python -m pytest skeleton/tests/test_*_end_to_end.py -v
+```
+
+### Success Criteria
+
+**P0 Complete** when:
+- [ ] All 20 URL normalization tests pass
+- [ ] All 4 HTML litmus tests pass
+- [ ] All 11 collector caps tests pass
+- [ ] Platform policy documented
+
+**Estimated Test Count**: 35 tests (P0 only)
+
+---
+
+# PART 5: HUMAN MIGRATION PATH
+
+## From Skeleton to Production
+
+**This section guides human in migrating skeleton reference code to production.**
+
+### Phase 1: Review Skeleton Implementations
+
+```bash
+# Human reviews skeleton code
+ls -R skeleton/doxstrux/markdown/
+
+# Compare to production
+diff -r skeleton/doxstrux/ ../src/doxstrux/ | less
+```
+
+### Phase 2: Copy Reference Implementations
+
+```bash
+# Example: Copy URL normalization
+cp skeleton/doxstrux/markdown/security/validators.py \
+   ../src/doxstrux/markdown/security/validators.py
+
+# Run production tests
+cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned
+.venv/bin/python -m pytest tests/ -v
+```
+
+### Phase 3: Verify Baseline Parity
+
+```bash
+# CRITICAL: Production changes must not break baselines
+.venv/bin/python tools/ci/ci_gate_parity.py --profile moderate
+
+# Expected: 542/542 baseline tests pass
+```
+
+### Phase 4: Integration Testing
+
+```bash
+# Run full test suite
+.venv/bin/python -m pytest tests/ --cov=src/doxstrux
+
+# Verify 80% coverage maintained
+```
+
+### Phase 5: Green-Light Checklist
+
+See: `EXEC_GREEN_LIGHT_ROLLOUT_CHECKLIST.md`
+
+---
+
+# PART 6: YAGNI DECISION POINTS
+
+## Decision Tree for Subprocess Isolation (P1-2)
+
+```
+┌─────────────────────────────────────────┐
+│ Do you have Windows deployment planned? │
+└─────────────┬───────────────────────────┘
+              │
+       ┌──────┴──────┐
+       │             │
+      YES            NO
+       │             │
+       ▼             ▼
+   ┌───────┐    ┌────────────┐
+   │ Q2: ? │    │ DOCUMENT:  │
+   │ When? │    │ Linux-only │
+   └───┬───┘    │ policy     │
+       │        └────────────┘
+    ┌──┴───┐
+    │ <6mo │
+    └──┬───┘
+       │
+       ▼
+   ┌──────────┐
+   │ Q3: ?    │
+   │ Evidence?│
+   └─────┬────┘
+         │
+     ┌───┴───┐
+     │ Ticket│
+     │ exists│
+     └───┬───┘
+         │
+         ▼
+   ┌─────────────┐
+   │ IMPLEMENT   │
+   │ Subprocess  │
+   │ Isolation   │
+   │ (8h effort) │
+   └─────────────┘
+```
+
+## Questions to Ask
+
+**Q1**: Is there a real, current Windows deployment requirement?
+- [ ] YES - Windows deployment ticket exists (ID: _______)
+- [ ] NO - Proceed with Linux-only policy
+
+**Q2**: Will it be used immediately?
+- [ ] YES - Deployment timeline < 6 months
+- [ ] NO - Defer implementation
+
+**Q3**: Is it backed by stakeholder request or concrete data?
+- [ ] YES - User count estimate: _______ Windows users
+- [ ] NO - Speculative, violates YAGNI
+
+**Q4**: Can it be deferred?
+- [ ] YES - Document as future work
+- [ ] NO - Implement now
+
+---
+
+# PART 7: EVIDENCE SUMMARY
+
+## Claims → Evidence Mapping
+
+| Claim ID | Statement | Evidence Source | Verification |
+|----------|-----------|-----------------|--------------|
+| CLAIM-EXT-001 | Test infrastructure 100% complete | EXEC_SECURITY_IMPLEMENTATION_STATUS.md:16-23 | ✅ 17 files exist |
+| CLAIM-EXT-002 | 4 P0 gaps identified | External review | ✅ Tests exist, impls needed |
+| CLAIM-P0-1-SKEL | URL norm skeleton ready | test_url_normalization_parity.py | ⏳ Verify |
+| CLAIM-P0-2-SKEL | HTML litmus needs rendering | test_html_render_litmus.py | ⏳ Verify |
+| CLAIM-P0-3-SKEL | Collector caps tests ready | test_collector_caps_end_to_end.py | ⏳ Implement |
+| CLAIM-P0-4-DOC | Platform policy needed | policies/EXEC_PLATFORM_SUPPORT_POLICY.md | ⏳ Verify |
+
+## Risk → Mitigation Traceability
+
+| Risk ID | Description | Likelihood | Impact | Mitigation | Status |
+|---------|-------------|------------|--------|------------|--------|
+| RISK-SCOPE-1 | Production code modification | MED | HIGH | Skeleton-only scope | ✅ Enforced |
+| RISK-YAGNI-1 | Subprocess over-engineering | HIGH | MED | Document-only (P1-2) | ✅ Mitigated |
+| RISK-P0-1 | SSRF via URL bypass | HIGH | HIGH | URL normalization parity | ⏳ Verify |
+| RISK-P0-2 | XSS via HTML/SVG | MED | HIGH | Render litmus tests | ⏳ Verify |
+| RISK-P0-3 | OOM via unbounded collection | MED | HIGH | Per-collector caps | ⏳ Implement |
+
+---
+
+# PART 8: TIMELINE & EFFORT
+
+## P0 Critical (Skeleton Implementations)
+
+| Task | Effort | Owner | Status |
+|------|--------|-------|--------|
+| P0-1: URL norm verification | 2h | Dev | ⏳ Pending |
+| P0-2: HTML litmus extension | 3h | Dev | ⏳ Pending |
+| P0-3: Collector caps impl | 2h | Dev | ⏳ Pending |
+| P0-4: Platform policy doc | 1h | Doc | ⏳ Pending |
+
+**Total P0**: 8 hours
+
+## P1 Reference Patterns
+
+| Task | Effort | Owner | Status |
+|------|--------|-------|--------|
+| P1-1: Binary search reference | 1h | Dev | ⏳ Pending |
+| P1-2: Subprocess YAGNI doc | 30min | Doc | ⏳ Pending |
+
+**Total P1**: 1.5 hours
+
+## P2 Process Automation
+
+| Task | Effort | Owner | Status |
+|------|--------|-------|--------|
+| P2-1: YAGNI checker tool | 3h | DevOps | ⏳ Pending |
+| P2-2: Routing pattern doc | 1h | Doc | ⏳ Pending |
+
+**Total P2**: 4 hours
+
+## Grand Total
+
+- **Minimum** (P0 only): 8 hours
+- **Recommended** (P0 + P1): 9.5 hours
+- **Full** (P0 + P1 + P2): 13.5 hours
+
+---
+
+# PART 9: SUCCESS METRICS
+
+## Skeleton Implementation Complete When:
+
+- [ ] All 35 P0 tests pass
+- [ ] Platform policy documented
+- [ ] Binary search reference implemented
+- [ ] YAGNI checker tool functional
+
+## Production Migration Complete When:
+
+(Human-led phase, not in skeleton scope)
+
+- [ ] Skeleton code reviewed by human
+- [ ] Reference implementations copied to `/src/doxstrux/`
+- [ ] Production tests pass (80% coverage maintained)
+- [ ] Baseline parity maintained (542/542)
+- [ ] Green-light checklist complete
+
+---
+
+**END OF EXTENDED PLAN**
+
+**Version**: 1.0 (Extended Edition)
+**Last Updated**: 2025-10-16
+**Status**: READY FOR SKELETON IMPLEMENTATION
+**Next Review**: After P0 completion (8h)
+**Owner**: Phase 8 Implementation Team
+
+---
+
+## Quick Start Commands
+
+```bash
+# Step 1: Verify test infrastructure
+cd /home/lasse/Documents/SERENA/MD_ENRICHER_cleaned/regex_refactor_docs/performance
+ls -la skeleton/tests/test_*_end_to_end.py
+
+# Step 2: Run P0 tests to identify gaps
+.venv/bin/python -m pytest skeleton/tests/test_url_normalization_parity.py -v
+.venv/bin/python -m pytest skeleton/tests/test_html_render_litmus.py -v
+.venv/bin/python -m pytest skeleton/tests/test_collector_caps_end_to_end.py -v
+
+# Step 3: Implement missing pieces (see PART 1 above)
+
+# Step 4: Verify all tests pass
+.venv/bin/python -m pytest skeleton/tests/test_*_end_to_end.py -v
+
+# Step 5: Human reviews skeleton/ for production migration
+```
+
+---
+
+## References
+
+- **Original Plan**: `PLAN_CLOSING_IMPLEMENTATION.md` (2544 lines)
+- **Security Status**: `EXEC_SECURITY_IMPLEMENTATION_STATUS.md`
+- **Test Infrastructure**: 17 test files in `skeleton/tests/`
+- **Golden CoT**: `CHAIN_OF_THOUGHT_GOLDEN_ALL_IN_ONE.json`
+- **Code Quality**: `CODE_QUALITY.json` (YAGNI, KISS, SOLID)
+- **External Review**: ChatGPT security analysis (adapted for skeleton scope)

@@ -3,6 +3,9 @@ from __future__ import annotations
 from typing import Any, Dict, List
 from ..utils.token_warehouse import Collector, Interest, DispatchContext, TokenWarehouse
 
+# P0-3: Per-collector hard quota to prevent memory amplification OOM
+MAX_TABLES_PER_DOC = 1_000
+
 class TablesCollector:
     def __init__(self):
         self.name = "tables"
@@ -15,6 +18,7 @@ class TablesCollector:
         self._cur_row: List[str] | None = None
         self._in_cell: bool = False
         self._cell_buf: List[str] = []
+        self._truncated = False
 
     def should_process(self, token: Any, ctx: DispatchContext, wh: TokenWarehouse) -> bool:
         return True
@@ -22,6 +26,11 @@ class TablesCollector:
     def on_token(self, idx: int, token: Any, ctx: DispatchContext, wh: TokenWarehouse) -> None:
         t = getattr(token, "type", "")
         if t == "table_open":
+            # P0-3: Enforce cap BEFORE creating table
+            if len(self._tables) >= MAX_TABLES_PER_DOC:
+                self._truncated = True
+                self._cur_table = None  # Skip this table
+                return
             self._cur_table = {"rows": [], "start_line": token.map[0] if getattr(token, "map", None) else None}
         elif t == "tr_open":
             self._cur_row = []
@@ -45,4 +54,10 @@ class TablesCollector:
             self._cur_table = None
 
     def finalize(self, wh: TokenWarehouse):
-        return self._tables
+        """Return tables with truncation metadata."""
+        return {
+            "tables": self._tables,
+            "truncated": self._truncated,
+            "count": len(self._tables),
+            "max_allowed": MAX_TABLES_PER_DOC
+        }
