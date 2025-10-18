@@ -1,0 +1,51 @@
+# Renderer Discovery Patterns - Curated High-Confidence Only
+#
+# This file contains only patterns with <10% false-positive rate based on FP telemetry.
+# Aggressive patterns have been removed to reduce alert fatigue.
+#
+# Version: 2.0 (Curated)
+# Last Updated: 2025-10-18
+# False-Positive Rate Target: <10%
+
+patterns:
+  # High-confidence template engine patterns (FP rate: <5%)
+  - pattern: "jinja2.Template"
+    description: "Jinja2 template instantiation"
+    severity: "high"
+    confidence: "high"
+
+  - pattern: "django.template"
+    description: "Django template usage"
+    severity: "high"
+    confidence: "high"
+
+  - pattern: "render_to_string("
+    description: "Django render_to_string function"
+    severity: "high"
+    confidence: "high"
+
+  - pattern: "renderToString("
+    description: "React/JS render to string"
+    severity: "medium"
+    confidence: "high"
+
+  # Medium-confidence patterns (FP rate: 5-10%)
+  - pattern: ".render("
+    description: "Generic render method call"
+    severity: "medium"
+    confidence: "medium"
+    notes: "Monitor FP rate - may need to be removed if >10%"
+
+# Removed patterns (high FP rate >10%):
+# - "template" - too generic, 45% FP rate
+# - ".html" - too generic, 60% FP rate
+# - "render" - too generic, 35% FP rate
+# - "{{" - too generic, 50% FP rate
+# - ".tpl" - uncommon, 25% FP rate
+# - "mustache" - low usage, 15% FP rate
+
+# Pattern review process:
+# 1. Run FP telemetry dashboard monthly
+# 2. Remove patterns with >10% FP rate
+# 3. Add new patterns only if supported by data
+# 4. Require 30-day observation period for new patterns

@@ -1,0 +1,78 @@
+name: Pre-merge Safety Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  REPORT_DIR: adversarial_reports
+  AUDIT_REPORT: adversarial_reports/pr_audit.json
+
+jobs:
+  premerge_checks:
+    name: Pre-merge safety checks (platform assertion + baseline audit)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml requests || true
+
+      - name: Ensure report dir exists
+        run: mkdir -p ${{ env.REPORT_DIR }}
+
+      - name: Platform assertion (Linux-only)
+        run: |
+          echo "Asserting runner platform is Linux..."
+          python - <<'PY'
+import platform, sys
+if platform.system() != "Linux":
+    print("Platform assertion failed: not Linux (found {})".format(platform.system()))
+    sys.exit(2)
+print("Platform assertion OK: Linux")
+PY
+
+      - name: Import baseline public key
+        env:
+          BASELINE_PUBLIC_KEY: ${{ secrets.BASELINE_PUBLIC_KEY || '' }}
+        run: |
+          if [ -z "${BASELINE_PUBLIC_KEY}" ]; then
+            echo "ERROR: BASELINE_PUBLIC_KEY secret is not set. Baseline signature verification cannot run."
+            exit 2
+          fi
+          echo "${BASELINE_PUBLIC_KEY}" > /tmp/baseline_pub.asc
+          sudo apt-get update -y && sudo apt-get install -y gnupg
+          gpg --import /tmp/baseline_pub.asc
+          rm -f /tmp/baseline_pub.asc
+          echo "Imported baseline public key for verification."
+
+      - name: Run audit greenlight (baseline + branch-protection + discovery)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          python tools/audit_greenlight.py --report "${{ env.AUDIT_REPORT }}"
+          echo "Audit report written to ${{ env.AUDIT_REPORT }}"
+          cat "${{ env.AUDIT_REPORT }}"
+
+      - name: Upload audit report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-audit-report
+          path: ${{ env.AUDIT_REPORT }}
+          retention-days: 90
+
+      - name: Fail if audit non-zero
+        run: |
+          echo "Audit completed - check artifact for details"

@@ -1,0 +1,151 @@
+name: Issue Automation Smoke Tests
+
+on:
+  pull_request:
+    paths:
+      - 'tools/create_issues_for_unregistered_hits.py'
+      - 'tools/auto_close_resolved_issues.py'
+      - 'tests/test_issue_automation.py'
+      - 'tests/test_auto_close.py'
+  push:
+    branches:
+      - main
+    paths:
+      - 'tools/create_issues_for_unregistered_hits.py'
+      - 'tools/auto_close_resolved_issues.py'
+
+jobs:
+  smoke-test-cap-logic:
+    name: Test Issue Cap Logic
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[dev]"
+          pip install requests pytest pytest-mock
+
+      - name: Test cap logic with force-fed input (>10 repos triggers digest)
+        run: |
+          cd regex_refactor_docs/performance
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          # Create 15 repos (exceeds MAX_ISSUES_PER_RUN=10)
+          groups = {f"org/repo{i}": [{"path": "foo.py", "pattern": "jinja2.Template"}] for i in range(15)}
+
+          # Write mock audit file
+          audit = {"org_unregistered_hits": [{"repo": repo, "path": hit["path"], "pattern": hit["pattern"]} for repo, hits in groups.items() for hit in hits]}
+          Path("audit_mock.json").write_text(json.dumps(audit))
+          PY
+
+      - name: Verify digest mode is triggered
+        run: |
+          cd regex_refactor_docs/performance
+          python tools/create_issues_for_unregistered_hits.py --audit audit_mock.json --dry-run 2>&1 | grep -q "Exceeded.*limit\|Creating digest issue"
+          echo "✓ Digest mode triggered as expected"
+
+      - name: Test cap logic with normal input (<10 repos)
+        run: |
+          cd regex_refactor_docs/performance
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          # Create 5 repos (under MAX_ISSUES_PER_RUN=10)
+          groups = {f"org/repo{i}": [{"path": "foo.py", "pattern": "jinja2.Template"}] for i in range(5)}
+
+          # Write mock audit file
+          audit = {"org_unregistered_hits": [{"repo": repo, "path": hit["path"], "pattern": hit["pattern"]} for repo, hits in groups.items() for hit in hits]}
+          Path("audit_normal.json").write_text(json.dumps(audit))
+          PY
+
+      - name: Verify individual issues mode (no digest)
+        run: |
+          cd regex_refactor_docs/performance
+          # Should NOT trigger digest mode
+          if python tools/create_issues_for_unregistered_hits.py --audit audit_normal.json --dry-run 2>&1 | grep -q "Creating digest issue"; then
+            echo "❌ Digest mode triggered when it shouldn't be"
+            exit 1
+          fi
+          echo "✓ Individual issue mode as expected"
+
+  smoke-test-permissions-check:
+    name: Test Permissions Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[dev]"
+          pip install requests pytest pytest-mock
+
+      - name: Run permissions tests
+        run: |
+          cd regex_refactor_docs/performance
+          pytest tests/test_issue_automation.py::test_permissions_check_fails_gracefully -v
+          pytest tests/test_issue_automation.py::test_permissions_check_handles_api_errors -v
+          pytest tests/test_issue_automation.py::test_permissions_check_handles_exceptions -v
+
+  smoke-test-auto-close:
+    name: Test Auto-Close Conservative Mode
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[dev]"
+          pip install requests pytest pytest-mock
+
+      - name: Run auto-close tests
+        run: |
+          cd regex_refactor_docs/performance
+          pytest tests/test_auto_close.py -v
+
+  unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[dev]"
+          pip install requests pytest pytest-mock
+
+      - name: Run all unit tests
+        run: |
+          cd regex_refactor_docs/performance
+          pytest tests/test_issue_automation.py -v

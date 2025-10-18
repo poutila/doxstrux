@@ -1,0 +1,253 @@
+# Consumer Registry - Metadata Rendering Services
+#
+# Purpose: Track all services that render markdown metadata to users
+# Why Critical: SSTI prevention requires all consumers to escape template expressions
+# Source: PLAN_CLOSING_IMPLEMENTATION_extended_6.md (Part 6, Action 4)
+#
+# Usage:
+#   - Add new consumers when they start rendering metadata
+#   - Run tools/probe_consumers.py to verify SSTI protection
+#   - Required for branch protection verification (tools/audit_greenlight.py)
+
+version: "1.0"
+metadata:
+  created: "2025-10-18"
+  owner: "Security Team"
+  audit_frequency: "daily"
+  purpose: "SSTI prevention via consumer tracking and automated probes"
+
+consumers:
+  # Example Consumer 1: Frontend Web Application
+  - name: "frontend-web"
+    repo: "org/frontend-web"
+    branch: "main"
+    owner: "frontend-lead@example.com"
+    renders_metadata: true
+    description: "Main web frontend - renders markdown metadata in document previews"
+
+    # SSTI Protection Requirements
+    ssti_protection:
+      test_file: "tests/test_consumer_ssti_litmus.py"
+      autoescape_enforced: true
+      template_engine: "jinja2"
+      escape_filter_used: true
+
+    # Staging Probe Configuration
+    probe_url: "https://staging-frontend.example.internal/__probe__"
+    probe_method: "POST"
+    probe_payload_template:
+      metadata:
+        title: "PROBE_{{marker}}"
+        description: "Test probe {{{{7*7}}}} {{marker}}"
+    probe_expected_response:
+      marker_reflected: false  # Marker should NOT appear in response
+      expression_evaluated: false  # {{7*7}} should NOT evaluate to 49
+
+    # Required CI Checks
+    required_checks:
+      - "consumer-ssti-litmus"
+      - "consumer / html-sanitization"
+      - "consumer / metadata-escape-validation"
+
+    # Compliance Status
+    compliance:
+      ssti_test_deployed: true
+      branch_protection_enabled: true
+      last_probe_passed: "2025-10-18T08:00:00Z"
+      last_audit_passed: "2025-10-18T08:05:00Z"
+
+  # Example Consumer 2: Preview Service
+  - name: "preview-service"
+    repo: "org/preview-service"
+    branch: "main"
+    owner: "preview-owner@example.com"
+    renders_metadata: true
+    description: "Document preview microservice - generates thumbnails with metadata overlays"
+
+    ssti_protection:
+      test_file: "tests/test_consumer_ssti_litmus.py"
+      autoescape_enforced: true
+      template_engine: "jinja2"
+      escape_filter_used: true
+
+    probe_url: "https://staging-preview.example.internal/__probe__"
+    probe_method: "POST"
+    probe_payload_template:
+      metadata:
+        title: "PROBE_{{marker}}"
+        author: "Test User {{{{7*7}}}}"
+
+    required_checks:
+      - "consumer-ssti-litmus"
+
+    compliance:
+      ssti_test_deployed: true
+      branch_protection_enabled: true
+      last_probe_passed: "2025-10-18T08:00:00Z"
+      last_audit_passed: "2025-10-18T08:05:00Z"
+
+  # Example Consumer 3: Email Notification Service
+  - name: "notification-service"
+    repo: "org/notification-service"
+    branch: "main"
+    owner: "notifications-team@example.com"
+    renders_metadata: false  # Does not render metadata (just passes through)
+    description: "Email notifications - includes metadata in JSON payloads (not rendered)"
+
+    ssti_protection:
+      test_file: "tests/test_consumer_ssti_litmus.py"
+      autoescape_enforced: true
+      template_engine: "jinja2"
+      escape_filter_used: true
+      notes: "Metadata not rendered in email body, but included for completeness"
+
+    # No probe needed (renders_metadata: false)
+    probe_url: null
+    probe_method: null
+
+    required_checks:
+      - "consumer-ssti-litmus"  # Still required even if not rendering
+
+    compliance:
+      ssti_test_deployed: true
+      branch_protection_enabled: true
+      last_probe_passed: null  # Not applicable
+      last_audit_passed: "2025-10-18T08:05:00Z"
+
+  # Example Consumer 4: Mobile App API
+  - name: "mobile-api"
+    repo: "org/mobile-api"
+    branch: "main"
+    owner: "mobile-team@example.com"
+    renders_metadata: true
+    description: "Mobile API backend - serves metadata to mobile apps (apps render client-side)"
+
+    ssti_protection:
+      test_file: "tests/test_consumer_ssti_litmus.py"
+      autoescape_enforced: true
+      template_engine: "none"  # API only (clients responsible for escaping)
+      escape_filter_used: false
+      notes: "API returns raw JSON - mobile apps responsible for safe rendering"
+
+    probe_url: "https://staging-mobile-api.example.internal/__probe__"
+    probe_method: "GET"
+    probe_payload_template:
+      query_params:
+        marker: "{{marker}}"
+        test_expr: "{{{{7*7}}}}"
+
+    required_checks:
+      - "consumer-ssti-litmus"
+      - "mobile-api / metadata-validation"
+
+    compliance:
+      ssti_test_deployed: true
+      branch_protection_enabled: true
+      last_probe_passed: "2025-10-18T08:00:00Z"
+      last_audit_passed: "2025-10-18T08:05:00Z"
+
+# Non-Rendering Services (tracked for completeness, no SSTI risk)
+non_rendering_services:
+  - name: "analytics-service"
+    reason: "Only logs metadata, never renders"
+    owner: "analytics@example.com"
+
+  - name: "search-indexer"
+    reason: "Indexes metadata for search, no rendering"
+    owner: "search-team@example.com"
+
+# Audit Configuration
+audit:
+  # Daily automated checks
+  daily_checks:
+    - name: "Consumer compliance audit"
+      script: "tools/audit_greenlight.py"
+      schedule: "08:00 UTC"
+      alerts_channel: "#green-light"
+
+    - name: "Staging probe sweep"
+      script: "tools/probe_consumers.py"
+      schedule: "08:00 UTC"
+      alerts_channel: "#security-alerts"
+
+  # Weekly manual reviews
+  weekly_reviews:
+    - name: "Consumer registry completeness"
+      owner: "Security Team"
+      schedule: "Monday 10:00 UTC"
+      checklist:
+        - "All metadata-consuming services registered"
+        - "All probe URLs functional"
+        - "All SSTI tests deployed and passing"
+        - "All branch protection configured"
+
+# Enforcement Policy
+enforcement:
+  # Missing SSTI test
+  missing_test:
+    severity: "P0"
+    action: "Block consumer from accessing metadata API"
+    grace_period: "48 hours after registration"
+
+  # Failed staging probe
+  failed_probe:
+    severity: "P0"
+    action: "Alert to #security-alerts + page SRE on-call"
+    response_time: "1 hour"
+
+  # Unregistered consumer
+  unregistered_consumer:
+    severity: "P0"
+    action: "API returns 403 Forbidden"
+    discovery_method: "Daily codebase scanner (tools/discover_consumers.py)"
+
+# Consumer Onboarding Checklist
+onboarding:
+  required_steps:
+    - step: "Add consumer to this registry"
+      owner: "Consumer team"
+      verification: "PR approved by Security Team"
+
+    - step: "Deploy SSTI litmus test"
+      owner: "Consumer team"
+      verification: "tests/test_consumer_ssti_litmus.py exists and passes"
+
+    - step: "Configure branch protection"
+      owner: "DevOps"
+      verification: "Required checks enforced in GitHub settings"
+
+    - step: "Add staging probe endpoint"
+      owner: "Consumer team"
+      verification: "Probe URL returns 200 OK"
+
+    - step: "Run initial probe"
+      owner: "Security Team"
+      verification: "tools/probe_consumers.py passes for new consumer"
+
+  documentation:
+    template: "docs/consumer_ssti_onboarding.md"
+    examples: "skeleton/tests/test_consumer_ssti_litmus.py"
+
+# Related Documentation
+documentation:
+  - file: "PLAN_CLOSING_IMPLEMENTATION_extended_6.md"
+    section: "Part 6, Action 4 (Deploy SSTI Litmus Tests)"
+
+  - file: "PLAN_CLOSING_IMPLEMENTATION_extended_6.md"
+    section: "Part 6, Action 7 (Consumer Registry & Staging Probes)"
+
+  - file: "skeleton/tests/test_consumer_ssti_litmus.py"
+    description: "Reference SSTI litmus test implementation"
+
+  - file: "tools/probe_consumers.py"
+    description: "Automated staging probe script"
+
+  - file: "tools/audit_greenlight.py"
+    description: "Daily compliance audit (verifies branch protection)"
+
+# Change Log
+changelog:
+  - version: "1.0"
+    date: "2025-10-18"
+    changes: "Initial registry with 4 example consumers"
+    author: "Security Team"

@@ -1,0 +1,68 @@
+name: Nightly Issue Automation (dry-run)
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # daily at 03:00 UTC (adjust as needed)
+  workflow_dispatch:
+
+jobs:
+  nightly_audit_and_issue_dryrun:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+          pip install requests pyyaml || true
+
+      - name: Ensure report dir
+        run: mkdir -p adversarial_reports
+
+      - name: Run audit (full) - best-effort
+        run: |
+          set -euo pipefail
+          if [ -f tools/run_adversarial.py ]; then
+            python tools/run_adversarial.py adversarial_corpora/adversarial_encoded_urls.json --runs 1 --report adversarial_reports/nightly_adv.json || true
+          fi
+          # run main audit script (will verify baseline & discovery if configured)
+          python tools/audit_greenlight.py --report adversarial_reports/audit_summary.json || true
+
+      - name: Dry-run create issues for unregistered hits
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python tools/create_issues_for_unregistered_hits.py --audit adversarial_reports/audit_summary.json --dry-run
+
+      - name: Upload audit artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-audit-artifacts
+          path: adversarial_reports/*
+
+      - name: Optional Slack notification (summary)
+        if: ${{ secrets.SLACK_WEBHOOK != '' }}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          python - <<'PY'
+import os, json, requests
+path = "adversarial_reports/audit_summary.json"
+if not os.path.exists(path):
+    msg = {"text": "Nightly audit ran but no audit_summary.json found."}
+else:
+    j = json.load(open(path))
+    ok = j.get("baseline_verification", {}).get("status") == "ok"
+    hits_local = len(j.get("renderer_unregistered_local", []))
+    hits_org = len(j.get("org_unregistered_hits", []))
+    text = f"Nightly audit: baseline_ok={ok}, local_hits={hits_local}, org_hits={hits_org}"
+    msg = {"text": text}
+requests.post(os.environ["SLACK_WEBHOOK"], json=msg, timeout=10)
+PY
