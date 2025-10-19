@@ -1,0 +1,578 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/src/tasklist/schemas/detailed_task_list.schema.json",
+  "title": "Detailed Task List v2",
+  "model_version": "2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "document",
+    "metadata",
+    "ci_gates",
+    "phases",
+    "render_meta"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0",
+      "description": "Semantic version of this task-list schema (renderer compatibility)."
+    },
+    "document": { "$ref": "#/$defs/document" },
+    "metadata": { "$ref": "#/$defs/metadata" },
+    "ci_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/gate" }
+    },
+    "phases": { "$ref": "#/$defs/phases" },
+    "render_meta": { "$ref": "#/$defs/render_meta" }
+  },
+  "$defs": {
+    "no_placeholders_string": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!.*\\{\\{).*",
+      "description": "Must not contain unresolved template placeholders like {{VAR}}."
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "version", "created", "owner", "audience"],
+      "properties": {
+        "id": { "$ref": "#/$defs/no_placeholders_string" },
+        "title": { "$ref": "#/$defs/no_placeholders_string" },
+        "version": { "$ref": "#/$defs/no_placeholders_string" },
+        "created": { "$ref": "#/$defs/no_placeholders_string" },
+        "owner": { "$ref": "#/$defs/no_placeholders_string" },
+        "audience": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_full_name",
+        "project_goal",
+        "status",
+        "total_estimated_time_hours",
+        "total_phases",
+        "schema_version"
+      ],
+      "properties": {
+        "project_full_name": { "$ref": "#/$defs/no_placeholders_string" },
+        "project_goal": { "$ref": "#/$defs/no_placeholders_string" },
+        "status": { "$ref": "#/$defs/no_placeholders_string" },
+        "total_estimated_time_hours": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total estimated effort in hours across all phases."
+        },
+        "total_phases": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of phases in the plan."
+        },
+        "schema_version": { "$ref": "#/$defs/no_placeholders_string" },
+        "success_criteria": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "phase_unlock_mechanism": { "$ref": "#/$defs/phase_unlock_mechanism" },
+        "environment_variables": { "$ref": "#/$defs/environment_variables" },
+        "global_utilities": { "$ref": "#/$defs/global_utilities" },
+        "test_macros": { "$ref": "#/$defs/test_macros" },
+        "corpus_metadata": { "$ref": "#/$defs/corpus_metadata" },
+        "performance_thresholds": { "$ref": "#/$defs/performance_thresholds" },
+        "git_macros": { "$ref": "#/$defs/git_macros" },
+        "core_principle": { "$ref": "#/$defs/core_principle" },
+        "testing_strategy": { "$ref": "#/$defs/testing_strategy" },
+        "phase_completion": { "$ref": "#/$defs/phase_completion" },
+        "rollback_procedures": { "$ref": "#/$defs/rollback_procedures" },
+        "progress_tracking": { "$ref": "#/$defs/progress_tracking" },
+        "template_metadata": { "$ref": "#/$defs/template_metadata" }
+      }
+    },
+    "phase_unlock_mechanism": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enforcement", "artifact_schema", "validation_command"],
+      "properties": {
+        "enforcement": { "$ref": "#/$defs/no_placeholders_string" },
+        "validation_command": { "$ref": "#/$defs/no_placeholders_string" },
+        "artifact_schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "min_schema_version",
+            "phase",
+            "phase_name",
+            "baseline_pass_count",
+            "ci_gates_passed",
+            "metric_before",
+            "metric_after",
+            "performance_delta_median",
+            "performance_delta_p95",
+            "git_commit",
+            "completion_date"
+          ],
+          "properties": {
+            "schema_version": { "$ref": "#/$defs/no_placeholders_string" },
+            "min_schema_version": { "$ref": "#/$defs/no_placeholders_string" },
+            "phase": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "phase_name": { "$ref": "#/$defs/no_placeholders_string" },
+            "baseline_pass_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "ci_gates_passed": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/no_placeholders_string" }
+            },
+            "metric_before": { "$ref": "#/$defs/no_placeholders_string" },
+            "metric_after": { "$ref": "#/$defs/no_placeholders_string" },
+            "performance_delta_median": {
+              "type": "number"
+            },
+            "performance_delta_p95": {
+              "type": "number"
+            },
+            "git_commit": { "$ref": "#/$defs/no_placeholders_string" },
+            "completion_date": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "environment_variables": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "description", "default"],
+            "properties": {
+              "name": { "$ref": "#/$defs/no_placeholders_string" },
+              "description": { "$ref": "#/$defs/no_placeholders_string" },
+              "default": { "$ref": "#/$defs/no_placeholders_string" }
+            }
+          }
+        }
+      }
+    },
+    "global_utilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timeout_helper": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["file", "description", "default_timeout"],
+          "properties": {
+            "file": { "$ref": "#/$defs/no_placeholders_string" },
+            "description": { "$ref": "#/$defs/no_placeholders_string" },
+            "default_timeout": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "atomic_write": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["file", "description"],
+          "properties": {
+            "file": { "$ref": "#/$defs/no_placeholders_string" },
+            "description": { "$ref": "#/$defs/no_placeholders_string" }
+          }
+        },
+        "schema_validator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["file", "description"],
+          "properties": {
+            "file": { "$ref": "#/$defs/no_placeholders_string" },
+            "description": { "$ref": "#/$defs/no_placeholders_string" }
+          }
+        },
+        "evidence_creator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "file",
+            "description",
+            "snippet_max_chars",
+            "base64_min_length",
+            "token_min_length",
+            "lock_timeout"
+          ],
+          "properties": {
+            "file": { "$ref": "#/$defs/no_placeholders_string" },
+            "description": { "$ref": "#/$defs/no_placeholders_string" },
+            "snippet_max_chars": { "type": "integer", "minimum": 0 },
+            "base64_min_length": { "type": "integer", "minimum": 0 },
+            "token_min_length": { "type": "integer", "minimum": 0 },
+            "lock_timeout": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "test_macros": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fast_test", "full_test", "performance_test", "ci_gates"],
+      "properties": {
+        "fast_test": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["command", "duration_seconds", "file_count"],
+          "properties": {
+            "command": { "$ref": "#/$defs/no_placeholders_string" },
+            "duration_seconds": { "type": "number", "minimum": 0 },
+            "file_count": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "full_test": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["command", "duration_seconds"],
+          "properties": {
+            "command": { "$ref": "#/$defs/no_placeholders_string" },
+            "duration_seconds": { "type": "number", "minimum": 0 }
+          }
+        },
+        "performance_test": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["command"],
+          "properties": {
+            "command": { "$ref": "#/$defs/no_placeholders_string" }
+          }
+        },
+        "ci_gates": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enforcement", "sequence"],
+          "properties": {
+            "enforcement": { "$ref": "#/$defs/no_placeholders_string" },
+            "sequence": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/no_placeholders_string" }
+            }
+          }
+        }
+      }
+    },
+    "corpus_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["directory", "pattern", "original_count", "counting_policy"],
+      "properties": {
+        "directory": { "$ref": "#/$defs/no_placeholders_string" },
+        "pattern": { "$ref": "#/$defs/no_placeholders_string" },
+        "original_count": { "type": "integer", "minimum": 0 },
+        "counting_policy": { "$ref": "#/$defs/no_placeholders_string" }
+      }
+    },
+    "performance_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy_document", "section", "specification"],
+      "properties": {
+        "policy_document": { "$ref": "#/$defs/no_placeholders_string" },
+        "section": { "type": "integer", "minimum": 0 },
+        "specification": { "$ref": "#/$defs/no_placeholders_string" }
+      }
+    },
+    "git_macros": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint", "rollback", "tag"],
+      "properties": {
+        "checkpoint": { "$ref": "#/$defs/no_placeholders_string" },
+        "rollback": { "$ref": "#/$defs/no_placeholders_string" },
+        "tag": { "$ref": "#/$defs/no_placeholders_string" }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "command"],
+      "properties": {
+        "id": { "$ref": "#/$defs/no_placeholders_string" },
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "command": { "$ref": "#/$defs/no_placeholders_string" },
+        "description": { "$ref": "#/$defs/no_placeholders_string" },
+        "fix_hint": { "$ref": "#/$defs/no_placeholders_string" },
+        "thresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["median", "p95"],
+          "properties": {
+            "median": { "type": "number" },
+            "p95": { "type": "number" }
+          }
+        }
+      }
+    },
+    "core_principle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "rule"],
+      "properties": {
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "rule": { "$ref": "#/$defs/no_placeholders_string" }
+      }
+    },
+    "testing_strategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fast_iteration", "full_validation", "failure_response"],
+      "properties": {
+        "fast_iteration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description", "command", "duration_seconds"],
+          "properties": {
+            "description": { "$ref": "#/$defs/no_placeholders_string" },
+            "command": { "$ref": "#/$defs/no_placeholders_string" },
+            "duration_seconds": { "type": "number", "minimum": 0 }
+          }
+        },
+        "full_validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["description", "commands"],
+          "properties": {
+            "description": { "$ref": "#/$defs/no_placeholders_string" },
+            "commands": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/no_placeholders_string" }
+            }
+          }
+        },
+        "failure_response": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        }
+      }
+    },
+    "phase_task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "time_estimate_hours", "steps", "acceptance_criteria", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/no_placeholders_string" },
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "time_estimate_hours": { "type": "number", "minimum": 0 },
+        "files": {
+          "anyOf": [
+            { "$ref": "#/$defs/no_placeholders_string" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/no_placeholders_string" }
+            }
+          ]
+        },
+        "test": { "$ref": "#/$defs/no_placeholders_string" },
+        "references": { "$ref": "#/$defs/no_placeholders_string" },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "status": { "$ref": "#/$defs/no_placeholders_string" }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "goal", "time_estimate_hours", "status", "tasks"],
+      "properties": {
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "goal": { "$ref": "#/$defs/no_placeholders_string" },
+        "time_estimate_hours": { "type": "number", "minimum": 0 },
+        "status": { "$ref": "#/$defs/no_placeholders_string" },
+        "prerequisites": { "$ref": "#/$defs/no_placeholders_string" },
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/phase_task" }
+        }
+      }
+    },
+    "phase_template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase_number",
+        "name",
+        "goal",
+        "time_estimate_hours",
+        "status",
+        "prerequisites",
+        "tasks"
+      ],
+      "properties": {
+        "phase_number": { "type": "integer", "minimum": 0 },
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "goal": { "$ref": "#/$defs/no_placeholders_string" },
+        "time_estimate_hours": { "type": "number", "minimum": 0 },
+        "status": { "$ref": "#/$defs/no_placeholders_string" },
+        "prerequisites": { "$ref": "#/$defs/no_placeholders_string" },
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/phase_task" }
+        }
+      }
+    },
+    "phases": {
+      "type": "object",
+      "required": ["phase_template"],
+      "minProperties": 2,
+      "properties": {
+        "phase_template": { "$ref": "#/$defs/phase_template" }
+      },
+      "patternProperties": {
+        "^phase_\\d+$": { "$ref": "#/$defs/phase" }
+      },
+      "additionalProperties": false
+    },
+    "rollback_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "command": { "$ref": "#/$defs/no_placeholders_string" },
+        "commands": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "description": { "$ref": "#/$defs/no_placeholders_string" }
+      },
+      "anyOf": [
+        { "required": ["description"] },
+        { "required": ["command"] },
+        { "required": ["commands"] }
+      ]
+    },
+    "rollback_procedure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "steps"],
+      "properties": {
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/rollback_step" }
+        }
+      }
+    },
+    "rollback_procedures": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/rollback_procedure" }
+    },
+    "phase_completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptance_criteria", "checklist"],
+      "properties": {
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "checklist": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "artifact_creation_script",
+            "completion_report_template",
+            "evidence_creation",
+            "git_checkpoint",
+            "git_tag",
+            "validation_commands"
+          ],
+          "properties": {
+            "artifact_creation_script": { "$ref": "#/$defs/no_placeholders_string" },
+            "completion_report_template": { "$ref": "#/$defs/no_placeholders_string" },
+            "evidence_creation": { "type": "boolean" },
+            "git_checkpoint": { "type": "boolean" },
+            "git_tag": { "$ref": "#/$defs/no_placeholders_string" },
+            "validation_commands": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/no_placeholders_string" }
+            }
+          }
+        }
+      }
+    },
+    "progress_tracking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completed_tasks_file", "time_tracking_columns"],
+      "properties": {
+        "completed_tasks_file": { "$ref": "#/$defs/no_placeholders_string" },
+        "time_tracking_columns": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        }
+      }
+    },
+    "template_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generated_by", "last_updated", "render_command", "schema_version", "template_type"],
+      "properties": {
+        "generated_by": { "$ref": "#/$defs/no_placeholders_string" },
+        "last_updated": { "$ref": "#/$defs/no_placeholders_string" },
+        "last_rendered_utc": { "$ref": "#/$defs/no_placeholders_string" },
+        "render_command": { "$ref": "#/$defs/no_placeholders_string" },
+        "schema_version": { "$ref": "#/$defs/no_placeholders_string" },
+        "template_type": { "$ref": "#/$defs/no_placeholders_string" }
+      }
+    },
+    "render_meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_file", "schema_version", "sha256_of_yaml", "rendered_utc"],
+      "properties": {
+        "source_file": { "$ref": "#/$defs/no_placeholders_string" },
+        "schema_version": { "$ref": "#/$defs/no_placeholders_string" },
+        "sha256_of_yaml": { "$ref": "#/$defs/no_placeholders_string" },
+        "rendered_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

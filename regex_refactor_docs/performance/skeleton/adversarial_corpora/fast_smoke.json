@@ -1,0 +1,17 @@
+[
+  {
+    "id": "fast-1",
+    "desc": "percent-encoded url vector",
+    "input": "http://example.com/%3Cscript%3Ealert(1)%3C/script%3E"
+  },
+  {
+    "id": "fast-2",
+    "desc": "template method token attempt",
+    "input": "{{ __class__.__mro__ }}"
+  },
+  {
+    "id": "fast-3",
+    "desc": "html anchor with javascript",
+    "input": "<a href=\"javascript:alert('x')\">x</a>"
+  }
+]

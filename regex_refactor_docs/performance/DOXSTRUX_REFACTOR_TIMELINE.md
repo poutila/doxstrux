@@ -56,6 +56,22 @@
 
 ---
 
+## 📌 Phase/Test Matrix (authoritative)
+
+| Phase Step | Code Artifact | Mandatory Tests | CI Gate |
+|---|---|---|---|
+| Step 1 (indices) | `token_warehouse._build_indices` | `test_indices.py` (+property: pairs/parents invariants) | Unit green + coverage |
+| Step 2 (section_of) | `token_warehouse.section_of` | `test_section_of.py` (Setext/ATX mix) | Unit green |
+| Step 3 (helpers) | `tokens_between`, `text_between`, etc. | `test_helper_methods.py` (bisect windowing perf) | Unit green + perf |
+| Step 4 (dispatch) | `register_collector`, `dispatch_all` | `test_dispatch.py` (O(N+M), order determinism) | Unit + determinism |
+| Step 5 (collectors) | migrated 3 refs | `test_collectors_*` | Unit + baseline parity |
+| Step 6 (API shim) | parser normalization | `test_normalization_map.py` | Unit + parity |
+| Step 8 (parity) | baseline runner | `double-run` parity & JSON canonicalization | Baseline green |
+
+> CI rejects PRs lacking a valid Phase tag that maps to at least one row above.
+
+---
+
 ## Context Analysis
 
 Based on DOXSTRUX_REFACTOR.md, the work remaining falls into two categories:
@@ -75,6 +91,22 @@ Based on DOXSTRUX_REFACTOR.md, the work remaining falls into two categories:
 - Step 8: Baseline parity fixes
 
 **Dependencies**: Needs test infrastructure to verify work incrementally
+
+---
+
+## CI Enhancements (Required)
+
+1) **Determinism Check**
+   - Job `determinism`: run the same docs twice in fresh processes; **fail** if byte outputs differ. Serialize with **sorted keys** (canonical JSON).
+2) **Windows Job for Timeouts**
+   - Add `windows-latest` to exercise the **cooperative timeout** path. `test_windows_timeout.py` MUST pass.
+   - Note: Windows timeout is **cooperative** (flag-based), not pre-emptive like Unix.
+3) **Performance Trend Artifact**
+   - Persist `baselines/*.json` and render p50/p95 and max RSS Δ in `$GITHUB_STEP_SUMMARY`.
+   - Thresholds: Δp50 ≤ 5%, Δp95 ≤ 10% (rolling median).
+   - Fail gate if Δp95 > 10%.
+
+> These are required to proceed past Step 4.
 
 ---
 
@@ -155,13 +187,13 @@ Execute Steps 1-6, 8 from DOXSTRUX_REFACTOR.md:
 - Step 6: API shim
 - Step 8: Baseline parity
 
-**Gate**: 542/542 baseline tests pass, all new unit tests pass
+**Gate**: 542/542 baseline tests pass, all new unit tests pass, **determinism job green**, **Windows timeout job green**, **perf trend within Δp50 ≤ 5% / Δp95 ≤ 10%**
 
 ---
 
 ### Phase 3: Post-Refactoring Validation (2.25 days)
 1. Complete remaining 12 unit test files (Step 7)
-2. Create 5 missing adversarial corpora (Step 10)
+2. Create **5 missing corpora in markdown+expected_outcome format** (Step 10) and convert legacy token-based corpora
 3. Create 3 CI monitoring tools (Step 9)
 
 **Gate**: All 38 tests passing, 17 corpora passing, CI tools functional
@@ -203,6 +235,8 @@ This approach:
 - ✅ Avoids wasted work on tests that need updates
 - ✅ Follows TDD principles (test structure exists, implementation fills in)
 - ✅ Maintains 13-20 day timeline (0.75 days prep is built into estimate)
+- ✅ **Prevents** nondeterministic output drift via order-preserving routing & canonical JSON
+- ✅ **Catches** Windows-specific timeout issues early via matrix CI
 
 ---
 
@@ -292,7 +326,7 @@ This approach:
   - `test_api_compat.py`
   - `test_error_handling.py`
 
-**Adversarial Corpora** (skeleton/adversarial_corpora/):
+**Adversarial Corpora** (skeleton/adversarial_corpora/, **markdown+expected_outcome**):
 - [ ] `oversized_tables.json` - 1000+ rows, 100+ cols
 - [ ] `huge_lists.json` - 10K items, 50+ nesting
 - [ ] `bidi_attacks.json` - BiDi control characters

@@ -1,0 +1,147 @@
+{
+  "generated_at": "2025-10-19T06:00:02.596317+00:00",
+  "total_files": 17,
+  "description": "Comprehensive adversarial corpus for security and performance testing",
+  "files": [
+    {
+      "name": "adversarial_large.json",
+      "desc": "Large token corpus (5k tokens, mixed links)",
+      "size_category": "large",
+      "purpose": "Performance testing with large documents"
+    },
+    {
+      "name": "adversarial_deep_nesting.json",
+      "desc": "Deep nesting (2000 levels) to test nesting limits",
+      "size_category": "large",
+      "purpose": "Stack overflow prevention"
+    },
+    {
+      "name": "adversarial_regex_pathological.json",
+      "desc": "Regex-pathological inline content (100k 'a')",
+      "size_category": "large",
+      "purpose": "ReDoS (Regular Expression Denial of Service) prevention"
+    },
+    {
+      "name": "adversarial_html_xss.json",
+      "desc": "HTML/XSS vectors (script tags, event handlers, SVG)",
+      "size_category": "small",
+      "purpose": "XSS attack prevention"
+    },
+    {
+      "name": "adversarial_template_injection.json",
+      "desc": "Template injection vectors (Jinja, EJS, ERB, etc.)",
+      "size_category": "small",
+      "purpose": "SSTI (Server-Side Template Injection) prevention"
+    },
+    {
+      "name": "adversarial_encoded_urls.json",
+      "desc": "Encoded/tricky URLs (percent, NUL, protocol-relative, data:)",
+      "size_category": "small",
+      "purpose": "URL validation and encoding handling"
+    },
+    {
+      "name": "adversarial_encoded_urls_raw.json",
+      "desc": "Raw URL variants for encoding tests",
+      "size_category": "small",
+      "purpose": "URL encoding edge cases"
+    },
+    {
+      "name": "adversarial_combined.json",
+      "desc": "Combined small corpus exercising multiple vectors",
+      "size_category": "small",
+      "purpose": "Multi-vector smoke test"
+    },
+    {
+      "name": "adversarial_malformed_maps.json",
+      "desc": "Malformed map entries (negative/inverted)",
+      "size_category": "small",
+      "purpose": "Token.map validation"
+    },
+    {
+      "name": "adversarial_attrget.json",
+      "desc": "Token with href sentinel 'RAISE_ATTRGET' to simulate attrGet raising",
+      "size_category": "small",
+      "purpose": "Supply-chain attack prevention (malicious token methods)"
+    },
+    {
+      "name": "fast_smoke.json",
+      "desc": "Quick smoke test (3 vectors)",
+      "size_category": "small",
+      "purpose": "Fast validation during development"
+    },
+    {
+      "name": "adversarial_oversized_tables.json",
+      "desc": "Oversized table: 1000 rows × 100 columns (100K cells total)",
+      "size_category": "large",
+      "purpose": "Table parser memory limits and O(N) performance testing"
+    },
+    {
+      "name": "adversarial_huge_lists.json",
+      "desc": "Huge list: 10,000 items with 50+ nesting levels",
+      "size_category": "large",
+      "purpose": "List collector O(N) performance and deep nesting handling"
+    },
+    {
+      "name": "adversarial_bidi_attacks.json",
+      "desc": "BiDi control characters (U+202E, U+200F, etc.) for visual spoofing",
+      "size_category": "small",
+      "purpose": "Visual spoofing prevention, text direction attack detection"
+    },
+    {
+      "name": "adversarial_unicode_exploits.json",
+      "desc": "Unicode exploits: NUL bytes, overlong UTF-8, invalid sequences, homoglyphs",
+      "size_category": "small",
+      "purpose": "Unicode parsing safety, normalization testing"
+    },
+    {
+      "name": "adversarial_malicious_uris.json",
+      "desc": "Malicious URI schemes: javascript:, data:, file:, vbscript:, blob:, etc.",
+      "size_category": "small",
+      "purpose": "URL scheme validation, XSS/SSRF prevention"
+    },
+    {
+      "name": "manifest.json",
+      "desc": "This manifest file",
+      "size_category": "meta",
+      "purpose": "Corpus inventory and metadata"
+    }
+  ],
+  "categories": {
+    "xss_prevention": [
+      "adversarial_html_xss.json",
+      "adversarial_malicious_uris.json"
+    ],
+    "template_injection": [
+      "adversarial_template_injection.json"
+    ],
+    "url_validation": [
+      "adversarial_encoded_urls.json",
+      "adversarial_encoded_urls_raw.json",
+      "adversarial_malicious_uris.json"
+    ],
+    "performance": [
+      "adversarial_large.json",
+      "adversarial_oversized_tables.json",
+      "adversarial_huge_lists.json"
+    ],
+    "deep_nesting": [
+      "adversarial_deep_nesting.json",
+      "adversarial_huge_lists.json"
+    ],
+    "unicode_safety": [
+      "adversarial_unicode_exploits.json",
+      "adversarial_bidi_attacks.json"
+    ],
+    "redos_prevention": [
+      "adversarial_regex_pathological.json"
+    ],
+    "token_validation": [
+      "adversarial_malformed_maps.json",
+      "adversarial_attrget.json"
+    ],
+    "smoke_tests": [
+      "fast_smoke.json",
+      "adversarial_combined.json"
+    ]
+  }
+}

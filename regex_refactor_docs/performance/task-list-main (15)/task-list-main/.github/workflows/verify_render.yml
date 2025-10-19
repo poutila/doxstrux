@@ -1,0 +1,117 @@
+name: Verify Render Synchronization
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  verify-render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Re-render from YAML
+        run: tasklist-render --strict
+
+      - name: Schema validate rendered JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from importlib import resources as resources
+          from jsonschema import Draft202012Validator
+
+          data = json.loads(Path('DETAILED_TASK_LIST_template.json').read_text(encoding='utf-8'))
+          with resources.as_file(resources.files('tasklist.schemas').joinpath('detailed_task_list.schema.json')) as schema_path:
+              schema = json.loads(schema_path.read_text(encoding='utf-8'))
+          validator = Draft202012Validator(schema)
+          errors = sorted(validator.iter_errors(data), key=lambda error: error.path)
+          if errors:
+              for error in errors:
+                  path = ".".join(str(p) for p in error.path)
+                  print(f"❌ {error.message} at {path}")
+              raise SystemExit('Schema validation failed')
+          print('✅ Schema validation passed')
+          PY
+
+      - name: Validate task and gate IDs
+        run: tasklist-validate
+
+      - name: Validate command safety
+        run: tasklist-commands
+
+      - name: Validate artifact paths
+        run: tasklist-sanitize
+
+      - name: Check SHA256 synchronization
+        run: |
+          set -euo pipefail
+          YAML_SHA=$(sha256sum DETAILED_TASK_LIST_template.yaml | awk '{print $1}')
+          JSON_SHA=$(python - <<'PY'
+          import json
+          from pathlib import Path
+
+          print(
+              json.loads(Path('DETAILED_TASK_LIST_template.json').read_text()).get(
+                  'render_meta', {}
+              ).get('sha256_of_yaml', '')
+          )
+          PY
+          )
+          if [ -z "$JSON_SHA" ]; then
+            echo "❌ Missing render_meta.sha256_of_yaml in JSON"
+            exit 1
+          fi
+          if [ "$YAML_SHA" != "$JSON_SHA" ]; then
+            echo "❌ SHA256 mismatch - JSON out of sync"
+            echo "YAML: $YAML_SHA"
+            echo "JSON: $JSON_SHA"
+            exit 1
+          fi
+
+      - name: Check for uncommitted changes
+        run: |
+          if ! git diff --exit-code DETAILED_TASK_LIST_template.json DETAILED_TASK_LIST_template.md; then
+            echo "❌ Rendered files have uncommitted changes"
+            echo "Run: tasklist-render --strict"
+            exit 1
+          fi
+
+      - name: Scan for placeholder leakage
+        run: |
+          if grep -E '\{\{[^}]+\}\}' DETAILED_TASK_LIST_template.json DETAILED_TASK_LIST_template.md; then
+            echo "❌ Unresolved placeholders detected"
+            exit 1
+          fi
+
+      - name: Fail on TBD_ placeholders in rendered artifacts
+        run: |
+          if grep -E 'TBD_' DETAILED_TASK_LIST_template.json DETAILED_TASK_LIST_template.md; then
+            echo "❌ Draft placeholder (TBD_) detected in rendered artifacts"
+            exit 1
+          fi
+
+      - name: Validate phase completion artifacts (if present)
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          artifacts=(.phase-*.complete.json)
+          if [ ${#artifacts[@]} -eq 0 ]; then
+            echo "No phase completion artifacts to validate"
+            exit 0
+          fi
+          for artifact in "${artifacts[@]}"; do
+            echo "Validating ${artifact}"
+            python -m jsonschema -i "$artifact" src/tasklist/schemas/phase_complete.schema.json
+          done

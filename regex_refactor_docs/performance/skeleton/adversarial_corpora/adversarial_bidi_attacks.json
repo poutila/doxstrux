@@ -1,0 +1,51 @@
+[
+  {
+    "id": "bidi-1",
+    "desc": "RTL override - email spoofing",
+    "input": "Contact: user@evil.com‮moc.ligit@resu",
+    "attack": "U+202E (RTL override) makes text appear as 'user@legit.com' visually",
+    "purpose": "Visual spoofing - appears legitimate but isn't"
+  },
+  {
+    "id": "bidi-2",
+    "desc": "RTL mark in URL",
+    "input": "Visit https://legitimate.com‏moc.laicosolaiv",
+    "attack": "U+200F (RTL mark) can hide malicious domain",
+    "purpose": "URL spoofing attack"
+  },
+  {
+    "id": "bidi-3",
+    "desc": "LTR mark injection",
+    "input": "File: important‎.exe.txt",
+    "attack": "U+200E (LTR mark) can hide file extension",
+    "purpose": "File extension spoofing"
+  },
+  {
+    "id": "bidi-4",
+    "desc": "Mixed RTL/LTR embedding",
+    "input": "‫This is‬ ‪reversed‬ text",
+    "attack": "U+202B (RTL embedding) + U+202A (LTR embedding) with U+202C (pop directional formatting)",
+    "purpose": "Text direction manipulation"
+  },
+  {
+    "id": "bidi-5",
+    "desc": "RTL isolate",
+    "input": "Price: $100⁧€50⁩",
+    "attack": "U+2067 (RTL isolate) + U+2069 (pop directional isolate) to confuse price display",
+    "purpose": "Financial information spoofing"
+  },
+  {
+    "id": "bidi-6",
+    "desc": "First strong isolate",
+    "input": "Paypal⁨SECURE⁩.phishing.com",
+    "attack": "U+2068 (first strong isolate) can reorder domain parts",
+    "purpose": "Domain spoofing"
+  },
+  {
+    "id": "bidi-7",
+    "desc": "Combined BiDi + homoglyphs",
+    "input": "‮moc.elgoog‬ (Google.com)",
+    "attack": "RTL override + look-alike characters",
+    "purpose": "Advanced visual spoofing"
+  }
+]

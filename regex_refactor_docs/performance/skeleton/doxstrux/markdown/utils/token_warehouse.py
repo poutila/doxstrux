@@ -1,9 +1,9 @@
 from __future__ import annotations
 from typing import Any, Callable, Protocol, Dict, List, Tuple, Optional, Set
 from collections import defaultdict
-import signal
-from contextlib import contextmanager
 import warnings
+from .section import Section
+from .timeout import collector_timeout
 
 RAISE_ON_COLLECTOR_ERROR = False
 
@@ -42,16 +42,35 @@ class Collector(Protocol):
 class TokenWarehouse:
     __slots__ = (
         "tokens", "tree",
-        "by_type", "pairs", "parents",
+        "by_type", "pairs", "pairs_rev", "parents", "_children",
         "sections", "fences",
         "lines", "line_count",
         "_text_cache", "_section_starts", "_collector_errors",
-        "_collectors", "_routing",
+        "_collectors", "_routing", "_registered_collector_ids",
         "_mask_map", "_collector_masks",
         "_dispatching", "COLLECTOR_TIMEOUT_SECONDS",
     )
 
     def __init__(self, tokens: List[Any], tree: Any, text: str | None = None):
+        """
+        Initialize TokenWarehouse with parsed tokens.
+
+        CRITICAL INVARIANT: text must be pre-normalized (NFC + LF).
+
+        Do NOT normalize here - tokens are already parsed from this text.
+        If you normalize after parsing, token.map offsets will mismatch line indices.
+
+        Use parse_markdown_normalized() from text_normalization.py to ensure
+        correct normalization order.
+
+        Args:
+            tokens: Parsed markdown-it tokens (from normalized text)
+            tree: SyntaxTreeNode from tokens
+            text: The SAME normalized text that was parsed (NFC + LF)
+
+        Raises:
+            DocumentTooLarge: If document exceeds safety limits
+        """
         # ✅ Fail fast BEFORE building indices (prevents R-2: Memory amplification)
         if len(tokens) > MAX_TOKENS:
             raise DocumentTooLarge(
@@ -71,8 +90,11 @@ class TokenWarehouse:
 
         self.by_type: Dict[str, List[int]] = defaultdict(list)
         self.pairs: Dict[int, int] = {}
+        self.pairs_rev: Dict[int, int] = {}  # Reverse pairs: close_idx -> open_idx
         self.parents: Dict[int, int] = {}
-        self.sections: List[Tuple[int, int, int, int, str]] = []
+        self._children: Optional[Dict[int, List[int]]] = None  # Lazy: built on first access
+        # Canonical format: (start_line, end_line, token_idx, level, title)
+        self.sections: List[Tuple[int, Optional[int], int, int, str]] = []
         self.fences: List[Tuple[int, int, str, str]] = []
 
         self._text_cache: Dict[Tuple[int, int], str] = {}
@@ -81,6 +103,8 @@ class TokenWarehouse:
 
         self._collectors: List[Collector] = []
         self._routing: Dict[str, Tuple[Collector, ...]] = {}
+        # Deterministic dispatch: track registered collectors to prevent duplicates
+        self._registered_collector_ids: Set[int] = set()
 
         self._mask_map: Dict[str, int] = {}
         self._collector_masks: Dict[Collector, int] = {}
@@ -142,124 +166,242 @@ class TokenWarehouse:
 
         return canonicalized
 
-    @staticmethod
-    @contextmanager
-    def _collector_timeout(seconds: Optional[int]):
-        """Context manager to raise TimeoutError if a collector runs longer than `seconds`.
-
-        Uses SIGALRM on Unix. On Windows, this gracefully degrades (no enforcement).
-        """
-        if seconds is None or seconds <= 0:
-            yield
-            return
-
-        # Check if SIGALRM is available (Unix-only)
-        if not hasattr(signal, 'SIGALRM'):
-            warnings.warn(
-                "SIGALRM not available on this platform - collector timeout not enforced",
-                RuntimeWarning
-            )
-            yield
-            return
-
-        def timeout_handler(signum, frame):
-            raise TimeoutError(f"Collector exceeded {seconds}s timeout")
-
-        old_handler = signal.signal(signal.SIGALRM, timeout_handler)
-        signal.alarm(seconds)
-        try:
-            yield
-        finally:
-            signal.alarm(0)
-            signal.signal(signal.SIGALRM, old_handler)
+    # NOTE: timeout logic lives in utils/timeout.py; dispatcher is sole owner of timers.
 
     def _build_indices(self) -> None:
-        open_stack: list[int] = []
-        tokens = self.tokens
-        by_type = self.by_type
-        parents = self.parents
-        pairs = self.pairs
-        fences = self.fences
+        """
+        Orchestrate index building in logical stages.
 
-        for i, tok in enumerate(tokens):
-            # ✅ Enforce nesting depth limit (prevents R-3: Stack overflow)
+        This method coordinates index building through micro-functions,
+        each responsible for one concern. This makes failures easier to isolate
+        and each stage independently testable.
+
+        Stages:
+            1. Normalize token.map fields to safe integers
+            2. Build structural indices (single pass over tokens)
+            3. Build sections from headings
+        """
+        # Stage 1: Normalize token maps (prevents crashes from malformed data)
+        self._normalize_token_maps()
+
+        # Stage 2: Build structural indices in single pass
+        self._index_structure()
+
+        # Stage 3: Build sections from headings
+        self._build_sections()
+
+    def _normalize_token_maps(self) -> None:
+        """
+        Normalize all token.map fields to safe (int, int) tuples.
+
+        Prevents crashes from malformed token data by converting all map
+        fields to validated integers, replacing None/invalid values with 0.
+
+        This must run BEFORE indexing because _index_structure() assumes
+        maps are (int, int) tuples.
+
+        Modifies: self.tokens[*].map in-place
+        """
+        for tok in self.tokens:
+            m_raw = getattr(tok, 'map', None)
+
+            if m_raw and isinstance(m_raw, (list, tuple)) and len(m_raw) == 2:
+                # Convert to safe integers
+                try:
+                    s = int(m_raw[0]) if m_raw[0] is not None else 0
+                except Exception:
+                    s = 0
+
+                try:
+                    e = int(m_raw[1]) if m_raw[1] is not None else s
+                except Exception:
+                    e = s
+
+                # Validate: start >= 0, end >= start
+                if s < 0:
+                    s = 0
+                if e < s:
+                    e = s
+
+                # Update token with normalized map
+                try:
+                    tok.map = (s, e)
+                except Exception:
+                    # Token is immutable or read-only - skip normalization
+                    pass
+
+    def _index_structure(self) -> None:
+        """
+        Build structural indices in single pass over tokens.
+
+        Populates:
+            - self.by_type: token_type -> [indices]
+            - self.pairs: open_idx -> close_idx (and pairs_rev)
+            - self.parents: token_idx -> parent_idx
+            - self.fences: list of (start_line, end_line, info, lang)
+
+        Uses a stack to track nesting and enforce depth limits.
+
+        CRITICAL INVARIANT: Closing token parent = matching opening token.
+        We set parents[close_idx] = open_idx explicitly, then skip the
+        generic parent assignment for closing tokens to avoid overwriting.
+
+        Raises:
+            ValueError: If nesting depth exceeds MAX_NESTING
+        """
+        open_stack: list[int] = []
+
+        for i, tok in enumerate(self.tokens):
+            # Enforce nesting depth limit (prevents stack overflow attacks)
             if len(open_stack) > MAX_NESTING:
                 raise ValueError(
                     f"Nesting depth exceeds limit: {len(open_stack)} > {MAX_NESTING} "
                     f"at token {i} (type={getattr(tok, 'type', '?')})"
                 )
 
-            # normalize map tuples to safe ints
-            m_raw = getattr(tok, 'map', None)
-            if m_raw and isinstance(m_raw, (list, tuple)) and len(m_raw) == 2:
-                try:
-                    s = int(m_raw[0]) if m_raw[0] is not None else 0
-                except Exception:
-                    s = 0
-                try:
-                    e = int(m_raw[1]) if m_raw[1] is not None else s
-                except Exception:
-                    e = s
-                if s < 0: s = 0
-                if e < s: e = s
-                try:
-                    tok.map = (s, e)
-                except Exception:
-                    pass
-            else:
-                m_raw = None
-
+            # Index by type
             ttype = getattr(tok, "type", "")
-            by_type[ttype].append(i)
+            self.by_type[ttype].append(i)
 
-            # assign parent before mutating the stack to ensure correctness
-            if open_stack:
-                parents[i] = open_stack[-1]
-
+            # Track pairs (open ↔ close) - MUST happen before parent assignment
             nesting = getattr(tok, "nesting", 0)
-            if nesting == 1:
+            if nesting == 1:  # Opening token
                 open_stack.append(i)
-            elif nesting == -1:
+            elif nesting == -1:  # Closing token
                 if open_stack:
-                    pairs[open_stack.pop()] = i
+                    open_idx = open_stack.pop()
+                    self.pairs[open_idx] = i
+                    self.pairs_rev[i] = open_idx
+                    # CRITICAL: Set closing token parent = opening token
+                    # This prevents corruption from generic parent assignment below
+                    self.parents[i] = open_idx
 
+            # Track container parent (for non-closing tokens only)
+            # Closing tokens already have parents set to their matching opener
+            if nesting != -1 and open_stack:
+                self.parents[i] = open_stack[-1]
+
+            # Collect fence blocks (code blocks with language info)
             if ttype == "fence":
                 m = getattr(tok, "map", None) or (None, None)
                 if m[0] is not None and m[1] is not None:
                     info = (getattr(tok, "info", "") or "").strip()
-                    fences.append((int(m[0]), int(m[1]), info, getattr(tok, "info", "") or ""))
+                    self.fences.append((
+                        int(m[0]),
+                        int(m[1]),
+                        info,
+                        getattr(tok, "info", "") or ""
+                    ))
 
-        # build sections (sort headings by normalized start to tolerate malformed order)
+    def _build_sections(self) -> None:
+        """
+        Build section boundaries from heading tokens.
+
+        Populates:
+            - self.sections: list of (start_line, end_line, token_idx, level, title) tuples
+            - self._section_starts: list of section start lines (for binary search)
+
+        Algorithm:
+            1. Find all heading_open tokens
+            2. Sort by line number (tolerates malformed ordering)
+            3. Build nested section structure using stack
+            4. Close higher-level sections when lower-level headings appear
+            5. Close remaining sections at document end
+
+        Uses Section dataclass internally for type safety, converts to tuples
+        for API compatibility.
+        """
+        # Get and sort headings by line number
         heads = self.by_type.get("heading_open", [])
         heads = sorted(heads, key=lambda h: (getattr(self.tokens[h], 'map', (0,0))[0] or 0))
 
-        stack: List[Tuple[int, int, int, str]] = []
+        sections_list: List[Section] = []
+        section_stack: List[Section] = []
         last_end = self.line_count
 
         def level_of(idx: int) -> int:
+            """Extract heading level from h1/h2/etc tag."""
             tok = self.tokens[idx]
             tag = getattr(tok, "tag", "") or ""
             return int(tag[1:]) if tag.startswith("h") and tag[1:].isdigit() else 1
 
+        def get_heading_title(hidx: int) -> str:
+            """
+            Extract title text from inline token SCOPED to heading_open.
+
+            CRITICAL INVARIANT: Only capture inline tokens that are children
+            of the heading_open token (parent relationship must be verified).
+
+            This prevents globally greedy capture of unrelated inline tokens.
+            """
+            if hidx + 1 < len(self.tokens):
+                next_tok = self.tokens[hidx + 1]
+                next_idx = hidx + 1
+                # Check: (1) token is inline, (2) parent is this heading_open
+                if (getattr(next_tok, "type", "") == "inline" and
+                    self.parents.get(next_idx) == hidx):
+                    content = getattr(next_tok, "content", "") or ""
+                    # Strip extra whitespace and compact multiple spaces
+                    # (prevents double spaces from inline children)
+                    return " ".join(content.split())
+            return ""
+
+        # Build sections
         for hidx in heads:
             lvl = level_of(hidx)
             m = getattr(self.tokens[hidx], "map", None) or (0, 0)
             start = int(m[0])
 
-            while stack and stack[-1][1] >= lvl:
-                ohidx, olvl, ostart, otext = stack.pop()
-                self.sections.append((ohidx, ostart, max(start - 1, ostart), olvl, otext))
+            # Close higher/equal level sections
+            while section_stack and section_stack[-1].level >= lvl:
+                old_section = section_stack.pop()
+                end_line = max(start - 1, old_section.start_line)
 
-            text = ""
-            if hidx + 1 < len(self.tokens) and getattr(self.tokens[hidx + 1], "type", "") == "inline":
-                text = getattr(self.tokens[hidx + 1], "content", "") or ""
+                # Replace with closed version (fill end_line)
+                closed_section = Section(
+                    start_line=old_section.start_line,
+                    end_line=end_line,
+                    token_idx=old_section.token_idx,
+                    level=old_section.level,
+                    title=old_section.title
+                )
 
-            stack.append((hidx, lvl, start, text))
+                # Find and replace in sections list
+                for i, s in enumerate(sections_list):
+                    if s.token_idx == old_section.token_idx:
+                        sections_list[i] = closed_section
+                        break
 
-        for ohidx, olvl, ostart, otext in stack:
-            self.sections.append((ohidx, ostart, max(last_end, ostart), olvl, otext))
+            # Open new section (end_line=None initially)
+            new_section = Section(
+                start_line=start,
+                end_line=None,
+                token_idx=hidx,
+                level=lvl,
+                title=get_heading_title(hidx)
+            )
+            sections_list.append(new_section)
+            section_stack.append(new_section)
 
-        self._section_starts = [s for _, s, _, _, _ in self.sections]
+        # Close any remaining open sections at document end
+        for section in section_stack:
+            end_line = max(last_end, section.start_line)
+            closed = Section(
+                start_line=section.start_line,
+                end_line=end_line,
+                token_idx=section.token_idx,
+                level=section.level,
+                title=section.title
+            )
+            # Find and replace
+            for i, s in enumerate(sections_list):
+                if s.token_idx == section.token_idx:
+                    sections_list[i] = closed
+                    break
+
+        # Store as tuples for API compatibility
+        self.sections = [s.to_tuple() for s in sections_list]
+        self._section_starts = [s.start_line for s in sections_list]
 
     # Query API
     def iter_by_type(self, token_type: str) -> List[int]:
@@ -271,30 +413,161 @@ class TokenWarehouse:
     def parent(self, token_idx: int) -> Optional[int]:
         return self.parents.get(token_idx)
 
-    def sections_list(self) -> List[Tuple[int, int, int, int, str]]:
+    @property
+    def children(self) -> Dict[int, List[int]]:
+        """
+        Lazy children index: parent_idx -> [child_idx, ...].
+
+        Built on-demand from parents index to reduce memory overhead.
+        Cached after first access.
+
+        CRITICAL: This is O(N) on first access, O(1) thereafter.
+        """
+        if self._children is None:
+            ch: Dict[int, List[int]] = defaultdict(list)
+            for idx, parent_idx in self.parents.items():
+                ch[parent_idx].append(idx)
+            self._children = dict(ch)  # Convert to regular dict
+        return self._children
+
+    def tokens_between(
+        self,
+        start_idx: int,
+        end_idx: int,
+        type_filter: Optional[str] = None
+    ) -> List[int]:
+        """
+        Return token indices between start_idx and end_idx (exclusive).
+
+        Uses binary search (bisect) when type_filter is provided for O(log N + K)
+        performance instead of O(N) linear scan.
+
+        Args:
+            start_idx: Start index (exclusive)
+            end_idx: End index (exclusive)
+            type_filter: Optional token type to filter by
+
+        Returns:
+            List of token indices in range (start_idx, end_idx)
+
+        Example:
+            >>> wh = TokenWarehouse(tokens, tree, text)
+            >>> # Get all tokens between heading_open and heading_close
+            >>> heading_open_idx = 5
+            >>> heading_close_idx = wh.pairs[heading_open_idx]
+            >>> inline_tokens = wh.tokens_between(
+            ...     heading_open_idx, heading_close_idx, type_filter="inline"
+            ... )
+        """
+        if type_filter is None:
+            # No filter: return all indices in range
+            return list(range(start_idx + 1, end_idx))
+
+        # With filter: use bisect for O(log N + K) performance
+        import bisect
+        indices = self.by_type.get(type_filter, [])
+        if not indices:
+            return []
+
+        # Binary search for start and end positions
+        left = bisect.bisect_left(indices, start_idx + 1)
+        right = bisect.bisect_left(indices, end_idx)
+
+        return indices[left:right]
+
+    def text_between(self, start_idx: int, end_idx: int, join_spaces: bool = True) -> str:
+        """
+        Extract text content from inline tokens between start_idx and end_idx.
+
+        Args:
+            start_idx: Start index (exclusive)
+            end_idx: End index (exclusive)
+            join_spaces: If True, join with spaces; if False, concatenate directly
+
+        Returns:
+            Combined text content from inline tokens in range
+
+        Example:
+            >>> wh = TokenWarehouse(tokens, tree, text)
+            >>> # Get heading text between heading_open and heading_close
+            >>> text = wh.text_between(heading_open_idx, heading_close_idx)
+            >>> # Get text without spaces (for compact titles)
+            >>> compact = wh.text_between(start, end, join_spaces=False)
+        """
+        inline_indices = self.tokens_between(start_idx, end_idx, type_filter="inline")
+        parts = []
+        for i in inline_indices:
+            tok = self.tokens[i]
+            content = getattr(tok, "content", "")
+            if content:
+                parts.append(content)
+
+        return (" " if join_spaces else "").join(parts)
+
+    def sections_list(self) -> List[Tuple[int, Optional[int], int, int, str]]:
+        """Return sections in canonical format: (start_line, end_line, token_idx, level, title)."""
         return self.sections
 
     def fences_list(self) -> List[Tuple[int, int, str, str]]:
         return self.fences
 
-    def section_of(self, line_num: int) -> Optional[str]:
+    def section_of(self, line_num: int) -> Optional[Section]:
+        """
+        Find the section containing the given line number.
+
+        Uses binary search for O(log N) performance.
+
+        Args:
+            line_num: Line number to search for (0-indexed)
+
+        Returns:
+            Section dataclass if line is within a section, None otherwise
+
+        Example:
+            >>> section = wh.section_of(42)
+            >>> if section:
+            ...     print(f"Line 42 is in section: {section.title}")
+        """
         from bisect import bisect_right
         if not self.sections:
             return None
         idx = bisect_right(self._section_starts, line_num) - 1
         if idx < 0 or idx >= len(self.sections):
             return None
-        _, start, end, _, _ = self.sections[idx]
-        if start <= line_num <= end:
-            return f"section_{idx}"
-        return None
+
+        # sections are stored as tuples: (start_line, end_line, token_idx, level, title)
+        section_tuple = self.sections[idx]
+        section = Section.from_tuple(section_tuple)
+
+        # Verify line is within section bounds
+        if section.end_line is not None and line_num > section.end_line:
+            return None
+        if line_num < section.start_line:
+            return None
+
+        return section
 
     # Routing
     def register_collector(self, collector: Collector) -> None:
+        """
+        Register collector with deterministic order.
+
+        INVARIANT: Dispatch order matches registration order (stable).
+        Uses collector id() for dedup to prevent duplicates while preserving order.
+        """
+        collector_id = id(collector)
+
+        # Skip if already registered (stable dedup - no set() randomness)
+        if collector_id in self._registered_collector_ids:
+            return
+
+        self._registered_collector_ids.add(collector_id)
         self._collectors.append(collector)
+
         for ttype in collector.interest.types:
             prev = self._routing.get(ttype)
             self._routing[ttype] = tuple([*prev, collector]) if prev else (collector,)
+
         mask = 0
         # ✅ Deterministic routing: sorted() ensures consistent bit assignment across processes
         for t in sorted(getattr(collector.interest, "ignore_inside", set())):
@@ -348,7 +621,7 @@ class TokenWarehouse:
 
                     # ✅ Per-collector timeout wrapper (prevents DoS from hanging collectors)
                     try:
-                        with self._collector_timeout(self.COLLECTOR_TIMEOUT_SECONDS):
+                        with collector_timeout(self.COLLECTOR_TIMEOUT_SECONDS or 0):
                             col.on_token(i, tok, ctx, self)
                     except TimeoutError as te:
                         try:

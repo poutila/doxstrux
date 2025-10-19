@@ -1,0 +1,48 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+        name: Check YAML syntax
+      - id: check-json
+        name: Check JSON syntax
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: local
+    hooks:
+      - id: render-strict
+        name: Render task templates with --strict
+        entry: tasklist-render --strict
+        language: system
+        files: ^DETAILED_TASK_LIST_template\.yaml$
+        pass_filenames: false
+        always_run: false
+
+      - id: validate-ids
+        name: Validate task/gate IDs
+        entry: tasklist-validate
+        language: system
+        files: ^DETAILED_TASK_LIST_template\.(yaml|json)$
+        pass_filenames: false
+
+      - id: validate-commands
+        name: Validate command safety
+        entry: tasklist-commands
+        language: system
+        files: ^DETAILED_TASK_LIST_template\.(yaml|json)$
+        pass_filenames: false
+
+      - id: sanitize-paths
+        name: Validate artifact paths
+        entry: tasklist-sanitize
+        language: system
+        files: ^DETAILED_TASK_LIST_template\.(yaml|json)$
+        pass_filenames: false
+
+      - id: scan-placeholders
+        name: Scan for placeholder leakage
+        entry: bash -c "! grep -E '\\{\\{[^}]+\\}\\}' DETAILED_TASK_LIST_template.json"
+        language: system
+        files: \.json$
+        pass_filenames: false

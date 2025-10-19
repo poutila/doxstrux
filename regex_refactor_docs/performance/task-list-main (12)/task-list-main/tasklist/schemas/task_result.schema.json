@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/task_result.schema.json",
+  "title": "Task Execution Result",
+  "description": "Standard format for task execution outputs, emitted by AI agents and CI pipelines.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_id", "status", "stdout", "stderr", "return_code", "timestamp"],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "description": "Task identifier matching detailed_task_list (e.g., '1.2')."
+    },
+    "status": {
+      "enum": ["success", "failed", "skipped"],
+      "description": "Execution outcome."
+    },
+    "stdout": {
+      "type": "string",
+      "description": "Standard output from command execution."
+    },
+    "stderr": {
+      "type": "string",
+      "description": "Standard error from command execution."
+    },
+    "return_code": {
+      "type": "integer",
+      "description": "Exit code from command (0 = success)."
+    },
+    "duration_sec": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Execution time in seconds."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp (UTC) when task completed."
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of file paths created by this task."
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "executor": {
+          "type": "string",
+          "description": "Who/what executed the task (e.g., 'AI-Agent', 'CI', 'Human')."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Execution environment (e.g., 'local', 'ci', 'production')."
+        },
+        "hostname": { "type": "string" },
+        "git_commit": { "type": "string" }
+      }
+    }
+  }
+}

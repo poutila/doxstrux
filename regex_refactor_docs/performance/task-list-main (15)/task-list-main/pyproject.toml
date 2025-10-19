@@ -1,0 +1,41 @@
+[build-system]
+requires = []
+build-backend = "tasklist_build_backend"
+backend-path = ["."]
+
+[project]
+name = "tasklist-tools"
+version = "0.1.0"
+description = "Rendering and validation utilities for detailed task list plans."
+readme = "README.md"
+authors = [{name = "Task List Maintainers"}]
+requires-python = ">=3.10"
+dependencies = [
+  "PyYAML>=6.0",
+  "jsonschema>=4.17",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.4",
+]
+
+[project.scripts]
+tasklist-render = "tasklist.render_task_templates:main"
+tasklist-validate = "tasklist.validate_task_ids:main"
+tasklist-sanitize = "tasklist.sanitize_paths:main"
+tasklist-commands = "tasklist.validate_commands:main"
+tasklist-render-template = "tasklist.render_template:main"
+tasklist-emit-result = "tasklist.emit_task_result:main"
+tasklist-prose2yaml = "tasklist.prose2yaml:main"
+tasklist-prose-template = "tasklist.prose_template:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+tasklist = ["schemas/*.json"]

@@ -1,0 +1,9 @@
+{
+  "description": "Baseline metrics from production src/ parser",
+  "latency_p50_ms": 10.5,
+  "latency_p95_ms": 25.3,
+  "latency_p99_ms": 45.2,
+  "error_rate_pct": 0.02,
+  "parse_count": 1000000,
+  "timestamp": "2025-10-19T00:00:00Z"
+}

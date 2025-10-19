@@ -1,0 +1,284 @@
+name: Skeleton Tests + Determinism + Perf
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'skeleton/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'skeleton/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+env:
+  PYTHONHASHSEED: "0"   # reproducible hashing for determinism
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  FORCE_COLOR: "1"
+
+jobs:
+  tests:
+    name: Unit tests (${{ matrix.os }} / py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+        python-version: [ '3.12' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip wheel
+          # core + dev tools (ruff, mypy, bandit, pytest, coverage, psutil, etc.)
+          pip install -e . ".[dev]"
+
+      - name: Lint & type check
+        run: |
+          ruff check .
+          mypy --install-types --non-interactive || true
+          bandit -q -r skeleton || true
+
+      - name: Run unit tests (Linux/Windows)
+        run: |
+          pytest -q skeleton/tests \
+            --maxfail=1 --durations=20 \
+            --cov=skeleton/doxstrux \
+            --cov-report=xml --cov-report=term-missing
+
+      # Optional: ensure the Windows timeout path is actually exercised
+      - name: Windows timeout sanity
+        if: runner.os == 'Windows'
+        run: |
+          pytest -q skeleton/tests/test_windows_timeout_cooperative.py
+
+      - name: Upload coverage.xml
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.os }}
+          path: coverage.xml
+          retention-days: 30
+
+      - name: Test summary
+        if: always()
+        run: |
+          echo "### ✅ Unit tests finished on ${{ matrix.os }}" >> $GITHUB_STEP_SUMMARY
+
+  determinism:
+    name: Determinism (double-run byte-compare)
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip wheel
+          pip install -e . ".[dev]"
+
+      - name: Write determinism script
+        run: |
+          mkdir -p tools
+          cat > tools/_determinism_check.py << 'PY'
+          import json, hashlib, os, sys, tempfile, importlib
+          from glob import glob
+
+          # Canonical JSON: sorted keys, compact separators
+          def dumps(obj):
+              return json.dumps(obj, sort_keys=True, separators=(",", ":"))
+
+          # Minimal runner that parses MD and returns a canonical JSON string
+          def parse_to_json(md_text: str) -> str:
+              from skeleton.doxstrux.markdown.utils.text_normalization import parse_markdown_normalized
+              from skeleton.doxstrux.markdown.utils.token_warehouse import TokenWarehouse
+
+              tokens, tree, normalized = parse_markdown_normalized(md_text)
+              wh = TokenWarehouse(tokens, tree, normalized)
+
+              # Example output: sections + token stats
+              out = {
+                  "sections": [
+                      {
+                        "start_line": s[0],
+                        "end_line": s[1],
+                        "open_idx": s[2],
+                        "level": s[3],
+                        "title": s[4],
+                      } for s in wh.sections
+                  ],
+                  "counts": {k: len(v) for k, v in wh.by_type.items()},
+              }
+              return dumps(out)
+
+          def sha(b: bytes) -> str:
+              return hashlib.sha256(b).hexdigest()
+
+          def run_once(md_path: str) -> str:
+              with open(md_path, "r", encoding="utf-8") as f:
+                  txt = f.read()
+              js = parse_to_json(txt).encode("utf-8")
+              return sha(js)
+
+          # Use adversarial_corpora fast_smoke.json as test input
+          smoke_path = "adversarial_corpora/fast_smoke.json"
+          if os.path.exists(smoke_path):
+              with open(smoke_path, "r", encoding="utf-8") as f:
+                  data = json.load(f)
+              # Create temp file with markdown content
+              os.makedirs("tests/fixtures", exist_ok=True)
+              test_file = "tests/fixtures/_determinism_test.md"
+              with open(test_file, "w", encoding="utf-8") as f:
+                  f.write(data.get("input", "# Test\n\nParagraph\n"))
+              docs = [test_file]
+          else:
+              # Fallback: generate a tiny synthetic doc
+              os.makedirs("tests/fixtures", exist_ok=True)
+              p = "tests/fixtures/smoke.md"
+              open(p, "w", encoding="utf-8").write("# H\n\nPara\n")
+              docs = [p]
+
+          mismatches = []
+          for pth in docs:
+              h1 = run_once(pth)
+              h2 = run_once(pth)  # fresh process replacement is CI job-level; here we re-import same proc
+              if h1 != h2:
+                  mismatches.append((pth, h1, h2))
+
+          if mismatches:
+              print("❌ Determinism failures:")
+              for p, a, b in mismatches:
+                  print(f" - {p}: {a} != {b}")
+              sys.exit(1)
+          print(f"✅ Determinism OK on {len(docs)} docs")
+          PY
+
+      - name: Run determinism check
+        run: |
+          python tools/_determinism_check.py
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### 🔁 Determinism check completed" >> $GITHUB_STEP_SUMMARY
+
+  perf-trend:
+    name: Perf trend (p50/p95 + RSS)
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip wheel
+          pip install -e . ".[dev]"
+          pip install psutil
+
+      - name: Write perf benchmark
+        run: |
+          mkdir -p tools
+          cat > tools/_perf_benchmark.py << 'PY'
+          import json, os, time, statistics, psutil, gc, random, string
+          from skeleton.doxstrux.markdown.utils.text_normalization import parse_markdown_normalized
+          from skeleton.doxstrux.markdown.utils.token_warehouse import TokenWarehouse
+
+          def synthetic_doc(n_sections=200, para_len=200):
+              rnd = random.Random(1337)
+              words = [''.join(rnd.choice(string.ascii_lowercase) for _ in range(6)) for _ in range(1000)]
+              parts = []
+              for i in range(n_sections):
+                  parts.append(f"# H{i}\n")
+                  for _ in range(3):
+                      parts.append(" ".join(rnd.choice(words) for _ in range(para_len)) + "\n\n")
+              return "".join(parts)
+
+          def bench_once(md):
+              p0 = psutil.Process()
+              rss0 = p0.memory_info().rss
+              t0 = time.perf_counter()
+              tokens, tree, normalized = parse_markdown_normalized(md)
+              wh = TokenWarehouse(tokens, tree, normalized)
+              # Trigger lazy indices
+              _ = wh.by_type
+              _ = wh.sections
+              t1 = time.perf_counter()
+              rss1 = p0.memory_info().rss
+              return (t1 - t0) * 1000.0, max(0, rss1 - rss0)
+
+          def main():
+              md = synthetic_doc()
+              samples = []
+              rss_spikes = []
+              for _ in range(15):
+                  gc.collect()
+                  dt, rss = bench_once(md)
+                  samples.append(dt)
+                  rss_spikes.append(rss)
+              p50 = statistics.median(samples)
+              p95 = statistics.quantiles(samples, n=20)[18]  # ~95th
+              out = {
+                "parser_version": "skeleton-ci",
+                "samples": len(samples),
+                "latency_ms": {"p50": p50, "p95": p95},
+                "rss_bytes_max_delta": max(rss_spikes),
+                "timestamp": time.time(),
+              }
+              os.makedirs("baselines", exist_ok=True)
+              with open("baselines/skeleton_metrics.json", "w", encoding="utf-8") as f:
+                  json.dump(out, f, indent=2, sort_keys=True)
+              print(json.dumps(out, indent=2, sort_keys=True))
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Run perf benchmark
+        run: |
+          python tools/_perf_benchmark.py
+
+      - name: Upload perf metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-baselines-${{ github.run_number }}
+          path: baselines/skeleton_metrics.json
+          retention-days: 30
+
+      - name: Append perf summary
+        run: |
+          METRICS=$(cat baselines/skeleton_metrics.json)
+          P50=$(python -c "import json; print(json.load(open('baselines/skeleton_metrics.json'))['latency_ms']['p50'])")
+          P95=$(python -c "import json; print(json.load(open('baselines/skeleton_metrics.json'))['latency_ms']['p95'])")
+          RSS=$(python -c "import json; print(json.load(open('baselines/skeleton_metrics.json'))['rss_bytes_max_delta'])")
+          echo "### 📈 Perf trend" >> $GITHUB_STEP_SUMMARY
+          echo "- p50: ${P50} ms" >> $GITHUB_STEP_SUMMARY
+          echo "- p95: ${P95} ms" >> $GITHUB_STEP_SUMMARY
+          echo "- max RSS Δ: ${RSS} bytes" >> $GITHUB_STEP_SUMMARY

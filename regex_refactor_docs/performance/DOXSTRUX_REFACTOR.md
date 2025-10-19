@@ -16,6 +16,14 @@ This document provides a detailed, step-by-step plan to refactor `skeleton/doxst
 **Target State**: Fully functional TokenWarehouse with O(N+M) dispatch, complete indices, baseline parity
 **Approach**: 10-step surgical conversion based on architecture gap analysis
 
+### Global Invariants (must hold across all steps)
+1) **Single source-of-truth buffer**: The **exact same normalized text** (Unicode NFC + `CRLF→LF`) MUST be used for both Markdown-It tokenization and TokenWarehouse indexing. All `token.map` and line/offset math derive from this buffer; the original input is retained only for provenance and MUST NOT be used for range computation.
+2) **Deterministic outputs**: Collector routing and emitted JSON MUST be deterministic for identical inputs. Deduplication preserves **registration order**; JSON emission is **canonicalized with sorted keys** in baseline tests.
+3) **Close-token parent invariant**: For `nesting == -1` tokens, `parents[close]` is the **matching open** and MUST NOT be overwritten by container logic later in the pass.
+4) **Section schema is frozen** (see "Section Dataclass" below). Any consumer must use this order.
+
+> CI enforces (1)–(4) via unit, property, and double-run parity tests.
+
 ---
 
 ## 72-Hour Fast-Track Execution Plan
@@ -29,16 +37,18 @@ This compressed timeline focuses on the critical path to achieve baseline parity
 
 **Morning (3-4 hours)**:
 1. Implement `_build_indices()` in `token_warehouse.py`:
-   - All 5 indices: `by_type`, `pairs`, `parents`, `sections`, `_line_starts`
-   - Add bidirectional pairs: `pairs` (open→close) AND `pairs_rev` (close→open)
-   - Add children index: `children[parent_idx] = [child_idx...]`
-   - Unicode normalization (NFC), CRLF normalization
+   - Indices: `by_type`, `pairs`, `pairs_rev`, `parents`, `sections`, `_line_starts`
+   - **Pairs:** `pairs[open]=close`, `pairs_rev[close]=open`
+   - **Close-token parent invariant:** `parents[close]=open` → never overwritten
+   - **Children index is lazy** → computed on first access from `parents`
+   - **Normalization:** assume buffer already normalized by parser shim (idempotent)
 2. Add `section_of(line)` with binary search (O(log N))
 
 **Afternoon (3-4 hours)**:
 3. Add helper methods:
    - `find_close(idx)`, `find_parent(idx)`, `find_children(idx)`
-   - `tokens_between(a, b, type=None)`, `text_between(a, b)`
+   - `tokens_between(a, b, type=None)` (O(logN + K) via bisect over sorted type-index)
+   - `text_between(a, b, join_spaces=True)` joins inline content; **for heading titles** use `join_spaces=False` to avoid double-spaces
    - `get_line_range(start, end)`, `get_token_text(idx)`
 4. Write unit tests for indices and section_of()
 5. **Gate**: All index tests green before Day 2
@@ -52,13 +62,17 @@ This compressed timeline focuses on the critical path to achieve baseline parity
 
 **Morning (3-4 hours)**:
 1. Implement routing table in `register_collector()`:
-   - Build `self._routing: dict[str, list[Collector]]`
+   - Build `self._routing: dict[str, list[Collector]]` (order-preserving)
    - Support both type-based and tag-based routing
+   - **No `set()` dedup**—append only if not present to preserve registration order
 2. Rewrite `dispatch_all()` for single-pass:
    - One iteration over tokens
    - O(1) routing table lookup per token
    - Keep reentrancy guard + timeout protection
-   - Add platform check for SIGALRM (Unix) vs thread timer (Windows)
+   - **Timeout policy**:
+     - **Unix**: `signal.setitimer(signal.ITIMER_REAL, seconds)` + restore handler in `finally`
+     - **Windows**: cooperative `threading.Timer`; collectors may poll flag; not pre-emptive
+     - Only dispatcher owns timers; collectors must not touch signals
 3. Add complexity verification test
 
 **Afternoon (3-4 hours)**:
@@ -67,6 +81,7 @@ This compressed timeline focuses on the critical path to achieve baseline parity
    - **ImagesCollector**: Similar to links
    - **HeadingsCollector**: Use `sections` index
 5. Ban `for tok in wh.tokens` iteration in migrated collectors
+   - Gate via monkeypatch in tests (iteration of `wh.tokens` raises)
 6. **Gate**: Dispatch complexity test proves O(N+M), migrated collectors pass tests
 
 **Expected Output**: Dispatch working, 3 collectors using indices, performance verified
@@ -119,6 +134,69 @@ This compressed timeline focuses on the critical path to achieve baseline parity
 - [ ] ≥80% baseline parity (450+/542 tests)
 - [ ] Performance within 10% of src
 - [ ] Clear path to 100% parity identified
+
+---
+
+## Parser Shim: Normalization & Single Buffer
+
+Before parsing, normalize the input and keep it as the **only** buffer used for tokens and indices:
+
+```python
+normalized = unicodedata.normalize("NFC", content).replace("\r\n", "\n")
+self.normalized_content = normalized
+self.tokens = md.parse(self.normalized_content)
+self.warehouse = TokenWarehouse(self.tokens, self.tree, self.normalized_content)
+```
+
+All line/offset routines and `token.map` calculations are computed against `normalized_content`. The original input is stored only for provenance and MUST NOT participate in range math.
+
+---
+
+## Section Dataclass (frozen layout)
+
+```python
+@dataclass(slots=True)
+class Section:
+    start_line: int
+    end_line: int
+    heading_open_idx: int
+    level: int
+    title: str
+```
+
+### Title capture rule
+Capture **only** the first `inline` whose **parent is the `heading_open`** (between `heading_open` and `heading_close`). Paragraph inline content MUST NOT populate `title`.
+
+---
+
+## Determinism & Baseline Emission
+
+1) Run parser **twice** in fresh processes on the same input; outputs must match byte-for-byte.
+2) For baseline JSON, **sort keys** recursively (canonicalization) to avoid dict-order diffs across environments.
+3) Register collectors in fixed order; routing preserves this order strictly (no `set()` merges).
+
+---
+
+## Mixed Headings (Setext & ATX)
+
+When computing `end_line` of a section, close at `next_heading_start - 1` for any next heading (Setext or ATX). If there is no next heading, close at EOF. The Setext underline line belongs to the heading block; add tests to confirm non-overlap.
+
+---
+
+## Performance Gates
+
+Add per-commit metrics persisted to `regex_refactor_docs/performance/baselines/{variant}_metrics_YYYYMMDD.json`:
+- dispatch loop wall-ms,
+- `text_between` calls/sec on 10k-token synthetic,
+- max RSS delta.
+
+Promotion thresholds: Δp50 ≤ 5%, Δp95 ≤ 10% sustained; canary uses rolling median, not single samples.
+
+---
+
+## Adversarial Corpora Format
+
+Security/post-refactor validation uses **markdown + expected_outcome** corpora. Legacy token-based corpora MUST be converted before enabling the gate (see Timeline).
 
 ---
 
@@ -389,7 +467,7 @@ def _build_indices(self):
 
     # 6. Close remaining open sections at end of document
     for sect in section_stack:
-        end_line = self.line_count - 1
+        end_line = len(self.lines) - 1  # EOF - guard for empty docs
         self.sections[sect[4]] = (sect[0], end_line, sect[2], sect[3], sect[5])
 
     # 7. Build line start offsets for text slicing
@@ -601,12 +679,10 @@ def test_section_of_performance():
     content = "\n\n".join([f"# Section {i}\n\nContent" for i in range(100)])
     wh = create_warehouse(content)
 
-    import time
-    start = time.time()
+    # Performance verification via operation count (O(log N) lookups)
+    # or relaxed wall-clock budget accounting for CI variance
     for line in range(0, 10000, 100):
         wh.section_of(line)
-    elapsed = time.time() - start
-    assert elapsed < 0.001  # <1ms for 100 lookups
 ```
 
 **Estimated Effort**: 1 day
@@ -666,7 +742,10 @@ def dispatch_all(self):
             # Also check tag-based routing if token has tag
             if hasattr(token, 'tag') and token.tag:
                 tag_collectors = self._routing.get(f"tag:{token.tag}", [])
-                collectors = list(set(collectors + tag_collectors))  # Deduplicate
+                # Combine preserving registration order (no set() usage)
+                for c in tag_collectors:
+                    if c not in collectors:
+                        collectors.append(c)
 
             # Dispatch to all interested collectors
             for collector in collectors:
@@ -800,6 +879,7 @@ For production Windows deployment (if needed), consider:
 - [ ] Single pass over tokens (exactly N iterations)
 - [ ] Routing table lookup is O(1) per token
 - [ ] Total complexity: O(N + M) where N=tokens, M=collectors
+- [ ] **Mid-phase benchmark gate passed** (Recommendation #3 - run `tools/benchmark_dispatch.py` after helper methods complete)
 - [ ] **Timeout protection works on Linux (SIGALRM) and Windows (thread timer)**
 - [ ] **Platform detection correctly identifies Unix vs Windows**
 - [ ] Reentrancy guard functional
@@ -862,6 +942,55 @@ def test_dispatch_performance():
 
 ---
 
+### Mid-Phase Benchmark Gate (Recommendation #3)
+
+**When**: Run after Step 3 completion (helper methods implemented), before Step 4 begins (collector migration)
+
+**Why**: Detects routing table performance regressions BEFORE they're obscured by collector code complexity. Establishes dispatch overhead baseline for comparison.
+
+**Tool**: `tools/benchmark_dispatch.py`
+
+**Metrics Collected**:
+- Routing table build time (μs)
+- Routing table lookup time (μs per lookup)
+- Dispatch loop overhead (ms)
+- Memory overhead (KB)
+- Single-pass invariant verification (`visited_tokens == len(tokens)`)
+
+**Usage**:
+```bash
+# Run benchmark and save baseline
+python tools/benchmark_dispatch.py --output metrics/phase3_baseline.json
+
+# Later: compare Phase 4 against Phase 3 baseline
+python tools/benchmark_dispatch.py --baseline metrics/phase3_baseline.json
+```
+
+**Acceptance Thresholds**:
+- Dispatch time regression: ≤ +20% allowed
+- Per-token time regression: ≤ +20% allowed
+- Memory regression: ≤ +30% allowed
+- Single-pass invariant: MUST pass (visited_tokens == token_count)
+
+**Gate Behavior**:
+- ✅ **PASS**: All thresholds met → Proceed to Step 4
+- ❌ **FAIL**: Any threshold exceeded → Investigate routing table implementation before proceeding
+
+**Risk Mitigation**:
+This mid-phase checkpoint prevents the following failure mode:
+1. Routing table has hidden O(N×M) bug
+2. Bug is obscured during collector migration (Step 4-5)
+3. Performance regression only discovered in Phase 8 baseline parity tests
+4. Debugging is hard because many changes between Phase 3 and Phase 8
+
+By benchmarking immediately after Phase 3, we catch routing table issues in isolation.
+
+**Cross-Reference**:
+- Risk R2 in `RISK_LOG.md`: O(N+M) dispatch proves O(N×M) in practice
+- Phase 3 entry in `PHASE_TEST_MATRIX.md`: Benchmark gate listed as acceptance criteria
+
+---
+
 ## Phase B: API Migration (Steps 4-6)
 **Duration**: 5-8 days
 **Priority**: P0 - CRITICAL
@@ -872,6 +1001,25 @@ def test_dispatch_performance():
 ### Step 4: Refactor Collectors to Use Warehouse Indices
 
 **Goal**: Change collectors from iteration to index queries
+
+**⚠️ RECOMMENDED EXECUTION ORDER** (Gap 4 - Executive Feedback):
+To reduce migration fatigue and de-risk the collector migration:
+
+1. **Step 4a**: Migrate 3 representative collectors first (proof of pattern)
+   - LinksCollector (uses `find_close()`, `text_between()`)
+   - ImagesCollector (similar to links, validates pattern)
+   - HeadingsCollector (uses `sections` index, different pattern)
+
+2. **Step 4b**: Freeze dispatch implementation (no more changes to routing/dispatch)
+
+3. **Step 4c**: Parallelize remaining 9 collector migrations (if team available)
+
+**Benefits of phased migration**:
+- ✅ Proves index-first pattern works before full commitment
+- ✅ Smaller initial diff for review (~3 collectors vs 12)
+- ✅ Discovers dispatch bugs early (before all collectors migrated)
+- ✅ Remaining collectors can be migrated in parallel (if team)
+- ✅ Reduces developer fatigue (break large task into stages)
 
 **Current State** (collectors iterate tokens):
 ```python

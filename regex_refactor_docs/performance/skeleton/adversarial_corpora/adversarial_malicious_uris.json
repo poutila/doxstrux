@@ -1,0 +1,107 @@
+[
+  {
+    "id": "uri-1",
+    "desc": "javascript: protocol - XSS",
+    "input": "javascript:alert('XSS')",
+    "attack": "Execute JavaScript via href",
+    "purpose": "Test URL scheme validation"
+  },
+  {
+    "id": "uri-2",
+    "desc": "javascript: with encoding",
+    "input": "javascript:alert(String.fromCharCode(88,83,83))",
+    "attack": "Obfuscated JavaScript execution",
+    "purpose": "Test scheme detection with obfuscation"
+  },
+  {
+    "id": "uri-3",
+    "desc": "data: URI with HTML",
+    "input": "data:text/html,<script>alert('XSS')</script>",
+    "attack": "Embed malicious HTML via data: URI",
+    "purpose": "Data URI validation"
+  },
+  {
+    "id": "uri-4",
+    "desc": "data: URI with base64",
+    "input": "data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4=",
+    "attack": "Base64-encoded <script>alert('XSS')</script>",
+    "purpose": "Base64 data URI detection"
+  },
+  {
+    "id": "uri-5",
+    "desc": "file: protocol - local file access",
+    "input": "file:///etc/passwd",
+    "attack": "Access local files",
+    "purpose": "File protocol blocking"
+  },
+  {
+    "id": "uri-6",
+    "desc": "file: protocol - Windows",
+    "input": "file:///C:/Windows/System32/config/SAM",
+    "attack": "Access Windows system files",
+    "purpose": "Platform-specific file access"
+  },
+  {
+    "id": "uri-7",
+    "desc": "vbscript: protocol",
+    "input": "vbscript:msgbox(\"XSS\")",
+    "attack": "VBScript execution (IE legacy)",
+    "purpose": "VBScript protocol blocking"
+  },
+  {
+    "id": "uri-8",
+    "desc": "blob: URI",
+    "input": "blob:https://example.com/550e8400-e29b-41d4-a716-446655440000",
+    "attack": "Blob URLs can bypass CSP",
+    "purpose": "Blob URL handling"
+  },
+  {
+    "id": "uri-9",
+    "desc": "Mixed protocol - javascript with spaces",
+    "input": "java\nscript:alert('XSS')",
+    "attack": "Newline in protocol to bypass filters",
+    "purpose": "Protocol parsing robustness"
+  },
+  {
+    "id": "uri-10",
+    "desc": "Mixed protocol - tabs",
+    "input": "java\tscript:alert('XSS')",
+    "attack": "Tab character in protocol",
+    "purpose": "Whitespace handling in protocols"
+  },
+  {
+    "id": "uri-11",
+    "desc": "about:blank with payload",
+    "input": "about:blank#<script>alert('XSS')</script>",
+    "attack": "about:blank with fragment",
+    "purpose": "Special protocol handling"
+  },
+  {
+    "id": "uri-12",
+    "desc": "Protocol-relative URL",
+    "input": "//evil.com/xss.js",
+    "attack": "Protocol-relative URL to bypass same-origin",
+    "purpose": "Protocol-relative URL validation"
+  },
+  {
+    "id": "uri-13",
+    "desc": "FTP protocol",
+    "input": "ftp://anonymous:password@ftp.evil.com/file.exe",
+    "attack": "FTP URL with credentials",
+    "purpose": "Non-HTTP protocol handling"
+  },
+  {
+    "id": "uri-14",
+    "desc": "Jar protocol (Java)",
+    "input": "jar:http://evil.com/malicious.jar!/",
+    "attack": "Java JAR protocol",
+    "purpose": "Exotic protocol detection"
+  },
+  {
+    "id": "uri-15",
+    "desc": "Gopher protocol",
+    "input": "gopher://evil.com:70/1",
+    "attack": "Gopher protocol (legacy, can SSRF)",
+    "purpose": "Legacy protocol blocking"
+  }
+]

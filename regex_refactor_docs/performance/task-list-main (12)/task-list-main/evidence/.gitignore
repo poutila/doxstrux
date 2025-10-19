@@ -1,0 +1,18 @@
+# Evidence directory - runtime/execution files only
+# Do not commit execution logs, results, or artifacts to git
+
+# Logs (execution traces, debugging)
+logs/
+
+# Results (task execution outcomes)
+results/
+
+# Artifacts (build outputs, test reports)
+artifacts/
+
+# Hashes (auto-generated on every render)
+hashes/
+
+# Keep this README
+!README.md
+!.gitignore

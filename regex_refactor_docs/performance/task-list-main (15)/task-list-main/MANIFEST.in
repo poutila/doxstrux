@@ -1,0 +1,3 @@
+include README.md
+recursive-include src/tasklist/schemas *.json
+recursive-include docs *.md

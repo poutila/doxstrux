@@ -1,0 +1,338 @@
+# Detailed Task List Template (Machine-Readable YAML Format)
+# Fill placeholders before use.
+
+schema_version: "2.0.0"
+
+document:
+  id: "DTL-2025-10-19-001"
+  title: "Task List Render Reliability Hardening"
+  version: "1.0.0"
+  created: "2025-10-19"
+  owner: "Task List Maintainers <tasklist@openai.com>"
+  audience:
+    - dev
+    - sre
+    - security
+
+metadata:
+  project_full_name: "Task List Render Reliability Hardening"
+  project_goal: "Stabilize and document the render/validation pipeline for task list templates."
+  status: "In progress"
+  total_estimated_time_hours: 36.0
+  total_phases: 2
+  schema_version: "2.0.0"
+
+success_criteria:
+  - "CI renders the YAML template without placeholder leakage."
+  - "Schema validation passes for every render invocation."
+  - "Phase completion evidence is stored with reproducible hashes."
+
+phase_unlock_mechanism:
+  enforcement: "Each phase N+1 cannot start until .phase-N.complete.json exists"
+  artifact_schema:
+    schema_version: "2.0.0"
+    min_schema_version: "2.0.0"
+    phase: 0
+    phase_name: "phase_1 - Render automation"
+    baseline_pass_count: 42
+    ci_gates_passed: ["G1", "G2", "G3", "G4", "G5"]
+    metric_before: "4 failing CI checks"
+    metric_after: "0 failing CI checks"
+    performance_delta_median: -65.0
+    performance_delta_p95: -120.0
+    git_commit: "b1c2d3e4f5061728394a5b6c7d8e9f0011223344"
+    completion_date: "1970-01-01T00:00:00Z"
+  validation_command: "python -m jsonschema -i .phase-0.complete.json src/tasklist/schemas/phase_complete.schema.json"
+
+environment_variables:
+  required:
+    - name: "TASKLIST_RENDER_PROFILE"
+      description: "Rendering profile (strict or draft) used by tasklist-render."
+      default: "strict"
+    - name: "TASKLIST_SCHEMA_ROOT"
+      description: "Filesystem path to the packaged JSON schemas."
+      default: "src/tasklist/schemas"
+    - name: "TASKLIST_EVIDENCE_DIR"
+      description: "Directory where render evidence and hashes are written."
+      default: "evidence"
+
+global_utilities:
+  timeout_helper:
+    file: "tools/timeout_guard.py"
+    description: "Prevents indefinite hangs in CI"
+    default_timeout: 300
+  atomic_write:
+    file: "tools/atomic_write.py"
+    description: "Prevents partial writes and race conditions"
+  schema_validator:
+    file: "tools/validate_phase_artifact.py"
+    description: "Validates phase unlock artifacts"
+  evidence_creator:
+    file: "tools/evidence_block_writer.py"
+    description: "Creates evidence blocks with atomic append"
+    snippet_max_chars: 2000
+    base64_min_length: 32
+    token_min_length: 8
+    lock_timeout: 10
+
+test_macros:
+  fast_test:
+    command: "pytest -q"
+    duration_seconds: 120
+    file_count: 28
+  full_test:
+    command: "pytest --maxfail=1 --disable-warnings -q"
+    duration_seconds: 320
+  performance_test:
+    command: "python tools/profile_render.py"
+  ci_gates:
+    sequence:
+      - "tasklist-render --strict"
+      - "tasklist-validate"
+      - "tasklist-commands"
+      - "tasklist-sanitize"
+      - "python tools/verify_evidence_hash.py"
+    enforcement: "Sequential execution (G1→G5)"
+
+corpus_metadata:
+  directory: "schemas"
+  pattern: "*.json"
+  original_count: 6
+  counting_policy: "Dynamic runtime computation using Python (cross-platform)"
+
+performance_thresholds:
+  specification: "Render pipeline completes in under five minutes with p95 under three minutes."
+  policy_document: "RISK_ANALYSIS_AND_MITIGATION.md"
+  section: 4
+
+git_macros:
+  checkpoint: "git add -A && git commit -m '<msg>'"
+  tag: "git tag <name>"
+  rollback: "git reset --hard HEAD~1"
+
+ci_gates:
+  - id: "G1"
+    name: "Strict render"
+    description: "Render YAML to JSON and Markdown in strict mode"
+    command: "tasklist-render --strict"
+    fix_hint: "Run tasklist-render --strict locally and resolve placeholder mismatches."
+  - id: "G2"
+    name: "Task integrity"
+    description: "Validate task ordering and acceptance criteria"
+    command: "tasklist-validate"
+    fix_hint: "Ensure IDs are monotonic and criteria lists are not empty."
+  - id: "G3"
+    name: "Command safety"
+    description: "Ensure no unsafe shell commands ship in the plan"
+    command: "tasklist-commands"
+    fix_hint: "Remove or sandbox commands flagged by tasklist-commands."
+  - id: "G4"
+    name: "Performance"
+    description: "Performance within thresholds"
+    command: "python tools/profile_render.py --assert-under 300"
+    thresholds:
+      median: 5.0
+      p95: 10.0
+  - id: "G5"
+    name: "Evidence Hash"
+    description: "Validate evidence_blocks.jsonl integrity"
+    command: "python tools/verify_evidence_hash.py"
+
+core_principle:
+  name: "Single source of truth"
+  rule: "Always update the YAML template first and regenerate downstream artifacts."
+
+testing_strategy:
+  fast_iteration:
+    description: "Quick test during development"
+    command: "pytest -q"
+    duration_seconds: 120
+  full_validation:
+    description: "Comprehensive validation before commit"
+    commands:
+      - "pytest --maxfail=1 --disable-warnings -q"
+      - "python tools/profile_render.py"
+      - "tasklist-render --strict && tasklist-validate && tasklist-commands && tasklist-sanitize"
+  failure_response:
+    - "git status"
+    - "git restore <file> or git reset --hard HEAD"
+    - "Identify specific line that broke gate validation"
+    - "Make more granular modification"
+    - "Verify fix works"
+    - "Document issue in evidence/issues.md"
+
+phases:
+  phase_0:
+    name: "Bootstrap render pipeline"
+    goal: "Capture baseline details and enable strict rendering in CI."
+    time_estimate_hours: 16.0
+    status: "🚧 In progress"
+    tasks:
+      - id: "0.0"
+        name: "Document render workflow contract"
+        time_estimate_hours: 6.0
+        files:
+          - "README.md"
+          - "USER_MANUAL.md"
+        test: "tasklist-render --strict"
+        steps:
+          - "Read USER_MANUAL.md for context"
+          - "Summarize render expectations in README.md"
+          - "Review schema change log"
+          - "Capture open questions in evidence/issues.md"
+        acceptance_criteria:
+          - "README.md describes strict render pipeline"
+          - "Manual references align with schema version 2.0.0"
+          - "tasklist-render --strict completes without errors"
+        status: "✅ Complete"
+
+      - id: "0.1"
+        name: "Automate local validation"
+        time_estimate_hours: 10.0
+        files:
+          - "quickpush.sh"
+        test: "pytest tests/test_cli.py -k render"
+        references: "tests/test_cli.py"
+        steps:
+          - "Review quickpush.sh for existing automation"
+          - "Add strict render and validation commands"
+          - "Run quickpush.sh to confirm automation"
+        acceptance_criteria:
+          - "quickpush.sh runs without manual edits"
+          - "Local validation fails when artifacts drift"
+          - "Tests cover the automation entry point"
+        status: "🚧 In progress"
+
+  phase_template:
+    phase_number: 1
+    name: "Reusable render hardening phase"
+    goal: "Provide structure for future render automation work."
+    time_estimate_hours: 20.0
+    status: "⏳ Not started"
+    prerequisites: "Phase 0 complete (.phase-0.complete.json exists)"
+    tasks:
+      - id: "1.0"
+        name: "Design new validation gate"
+        time_estimate_hours: 8.0
+        files:
+          - "docs/phase_playbook.md"
+        test: "pytest tests/test_cli.py -k validate"
+        references: "CRITICAL_GAPS_IMPLEMENTATION_GUIDE.md"
+        steps:
+          - "Collect requirements from stakeholders"
+          - "Draft gate behavior in docs/phase_playbook.md"
+          - "Implement the gate in src/tasklist"
+          - "Add automated coverage"
+        acceptance_criteria:
+          - "Gate design approved by maintainers"
+          - "Implementation merged with unit tests"
+          - "Gate documented in docs/phase_playbook.md"
+        status: "⏳ Not started"
+
+rollback_procedures:
+  single_test_failure:
+    name: "Targeted Revert"
+    steps:
+      - command: "git status && git diff"
+        description: "Check what changed"
+      - command: "git restore src/tasklist/render_task_templates.py"
+        description: "Revert specific file"
+      - command: "pytest -q"
+        description: "Quick retest"
+      - command: "git reset --hard HEAD && pytest --maxfail=1 --disable-warnings -q"
+        description: "Full revert if still failing"
+
+  multiple_test_failures:
+    name: "Full Revert"
+    steps:
+      - command: "git reset --hard HEAD~1"
+        description: "Immediate rollback to last checkpoint"
+      - command: "pytest --maxfail=1 --disable-warnings -q"
+        description: "Verify strict render pipeline restored"
+      - command: "git reset --hard phase-1-complete"
+        description: "Rollback to phase tag if still broken"
+      - command: "cat .phase-1.complete.json && git log -1 --format=%H"
+        description: "Verify phase unlock artifact matches"
+      - command: "tasklist-render --strict && tasklist-validate && tasklist-commands && tasklist-sanitize"
+        description: "Full validation"
+
+  performance_regression:
+    name: "Profile & Decide"
+    steps:
+      - command: "python tools/profile_render.py --samples 3"
+        description: "Profile the slow code"
+      - description: "Analyze top 5 hotspots"
+      - description: "Decision: Can fix in <30 minutes?"
+      - command: "git reset --hard HEAD~1 && python tools/profile_render.py"
+        description: "Rollback if needed"
+
+  ci_gate_failure:
+    name: "Diagnose & Fix"
+    steps:
+      - description: "Run gates individually to isolate failure"
+        commands:
+          - "tasklist-render --strict"
+          - "tasklist-validate"
+          - "tasklist-commands"
+      - description: "Apply gate-specific fixes"
+      - command: "git reset --hard HEAD~1"
+        description: "Rollback if can't fix in 15 minutes"
+
+  emergency_lost_changes:
+    name: "Emergency Recovery"
+    steps:
+      - command: "git reflog"
+        description: "Check reflog (30-day retention)"
+      - command: "git reflog | grep 'render pipeline'"
+        description: "Find last good commit"
+      - command: "git reset --hard HEAD@{1}"
+        description: "Restore to that commit"
+      - command: "ls -la .phase-*.complete.json"
+        description: "Verify phase unlock artifacts"
+      - command: "tasklist-render --strict && tasklist-validate && tasklist-commands && tasklist-sanitize"
+        description: "Full validation"
+
+phase_completion:
+  checklist:
+    validation_commands:
+      - "pytest --maxfail=1 --disable-warnings -q"
+      - "python tools/report_metrics.py --mode corpus"
+      - "python tools/profile_render.py"
+      - "tasklist-render --strict && tasklist-validate && tasklist-commands && tasklist-sanitize"
+      - "python tools/report_metrics.py --mode gating"
+    artifact_creation_script: "tools/create_phase_completion.py"
+    completion_report_template: "Phase 1 Completion Report"
+    evidence_creation: true
+    git_checkpoint: true
+    git_tag: "phase-1-complete"
+
+  acceptance_criteria:
+    - "All pytest suites pass (corpus/performance/ci)"
+    - "Performance within budget (p95 under 300s)"
+    - "All CI gates pass (G1-G5)"
+    - "Evidence metrics show zero drift (≤5% variance)"
+    - "Phase unlock artifact created and valid"
+    - "Completion report created with all sections filled"
+    - "evidence/README.md updated"
+    - "Evidence blocks created (if code changes significant)"
+    - "Git checkpoint created"
+    - "Git tag created (phase-1-complete)"
+    - "Temporary render artifacts cleaned from evidence/tmp"
+
+progress_tracking:
+  completed_tasks_file: "evidence/progress.csv"
+  time_tracking_columns:
+    - Phase
+    - Task
+    - Estimated
+    - Actual
+    - Variance
+    - Notes
+
+template_metadata:
+  schema_version: "2.0.0"
+  generated_by: "detailed_task_list_template_generator"
+  template_type: "yaml"
+  last_updated: "2025-10-19T00:00:00Z"
+  last_rendered_utc: "1970-01-01T00:00:00Z"
+  render_command: "tasklist-render --strict"
