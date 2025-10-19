@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/detailed_task_list.schema.json",
+  "title": "Detailed Task List",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "meta", "ai", "tasks", "gates"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Semantic version of this task-list schema (renderer compatibility).",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "meta": { "$ref": "#/$defs/meta" },
+    "ai": { "$ref": "#/$defs/ai" },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/task" }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/gate" }
+    }
+  },
+
+  "$defs": {
+    "no_placeholders_string": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!.*\\{\\{).*",
+      "description": "Must not contain unresolved template placeholders like {{VAR}}."
+    },
+
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase", "title", "author", "created_utc"],
+      "properties": {
+        "phase": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Refactor phase number (e.g., 8)."
+        },
+        "title": { "$ref": "#/$defs/no_placeholders_string" },
+        "summary": { "type": "string" },
+        "author": { "$ref": "#/$defs/no_placeholders_string" },
+        "created_utc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp (UTC)."
+        },
+        "updated_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+
+    "ai": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "objectives", "constraints", "stop_conditions", "interaction_policy", "runbook"],
+      "properties": {
+        "role": { "$ref": "#/$defs/no_placeholders_string" },
+        "objectives": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" },
+          "minItems": 1
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" },
+          "minItems": 1
+        },
+        "stop_conditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" },
+          "minItems": 1
+        },
+        "interaction_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ask_on_ambiguity", "max_questions", "escalation_note"],
+          "properties": {
+            "ask_on_ambiguity": { "type": "boolean" },
+            "max_questions": { "type": "integer", "minimum": 0 },
+            "escalation_note": { "$ref": "#/$defs/no_placeholders_string" }
+          }
+        },
+        "runbook": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fast_loop_cmd", "full_validation_cmd", "perf_cmd", "gates_cmd"],
+          "properties": {
+            "fast_loop_cmd": { "$ref": "#/$defs/no_placeholders_string" },
+            "full_validation_cmd": { "$ref": "#/$defs/no_placeholders_string" },
+            "perf_cmd": { "$ref": "#/$defs/no_placeholders_string" },
+            "gates_cmd": { "$ref": "#/$defs/no_placeholders_string" }
+          }
+        }
+      }
+    },
+
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "kind", "impact", "command_sequence", "acceptance_criteria"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable dotted identifier (e.g., 1, 1.2, 2.3.1).",
+          "pattern": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "kind": {
+          "type": "string",
+          "enum": ["code_change", "test_change", "doc_change", "ops"]
+        },
+        "impact": {
+          "type": "string",
+          "enum": ["P0", "P1", "P2"]
+        },
+        "description": { "type": "string" },
+        "files": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" },
+          "uniqueItems": false
+        },
+        "inputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "command_sequence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "blockers_if_missing": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "rollback": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/no_placeholders_string" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "command"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^G[1-9][0-9]*$",
+          "description": "Gate identifier (e.g., G1, G2, ...)."
+        },
+        "name": { "$ref": "#/$defs/no_placeholders_string" },
+        "command": { "$ref": "#/$defs/no_placeholders_string" },
+        "description": { "type": "string" },
+        "required": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}
+

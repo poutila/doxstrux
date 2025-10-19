@@ -26,8 +26,8 @@ def benchmark_dummy(runs: int = 3, n_tokens: int = 10000):
         tokens.append(Tok("link_close", -1, ""))
         tokens.append(Tok("paragraph_close", -1, "", (i, i+1)))
 
-    from doxstrux.markdown.utils.token_warehouse import TokenWarehouse
-    from doxstrux.markdown.collectors_phase8.links import LinksCollector
+    from skeleton.doxstrux.markdown.utils.token_warehouse import TokenWarehouse
+    from skeleton.doxstrux.markdown.collectors_phase8.links import LinksCollector
 
     times = []
     for _ in range(runs):

@@ -1,0 +1,178 @@
+# Phase 8 Security Hardening - Template Values Configuration
+# Generated: 2025-10-18
+# Source: Extracted from performance/ documentation
+
+# =============================================================================
+# PROJECT METADATA
+# =============================================================================
+DOCUMENT_ID: "phase8-security-hardening-detailed-task-list"
+PROJECT_NAME: "Phase 8 Security Hardening"
+PROJECT_FULL_NAME: "Token Warehouse Security Hardening & Performance Optimization"
+DATE: "2025-10-18"
+VERSION: "3.0"
+STATUS: "Production-Ready Canary"
+OWNER: "Security & SRE Teams"
+
+# =============================================================================
+# PROJECT GOALS & CRITERIA
+# =============================================================================
+PROJECT_GOAL: "Ship 5 mandatory safety nets with 4 behavioral tests and 48-hour canary monitoring"
+
+CRITERIA_1: "All 5 safety nets verified and functional (S1, S2, R1, R2, C1)"
+CRITERIA_2: "All 4 behavioral tests passing with 100% pass rate (14/14 sub-tests)"
+CRITERIA_3: "Green-light audit exits with code 0 and 48-hour clean canary run"
+
+# =============================================================================
+# TIME & EFFORT
+# =============================================================================
+TOTAL_TIME_ESTIMATE: "90 minutes implementation + 48 hours monitoring"
+NUM_PHASES: 5
+FINAL_PHASE_NUM: 4
+
+PHASE_0_NAME: "Prerequisites & Setup"
+PHASE_0_GOAL: "Verify environment, tools, and baseline configuration"
+PHASE_0_TIME: "15 minutes"
+
+# =============================================================================
+# TEST CONFIGURATION
+# =============================================================================
+FAST_TEST_COMMAND: "bash tools/run_5_tests.sh"
+FAST_TEST_TIME: "~2 minutes"
+FAST_TEST_COUNT: 5
+
+FULL_TEST_COMMAND: ".venv/bin/python -m pytest tests/ -v"
+FULL_TEST_TIME: "~5 minutes"
+
+PERF_TEST_COMMAND: "python tools/capture_baseline_metrics.py --auto --out /tmp/metrics.json"
+PERF_CHECK_COMMAND: "python tools/audit_greenlight.py --report /tmp/audit.json"
+
+CORPUS_DIR: "adversarial_corpora"
+CORPUS_PATTERN: "*.json"
+ORIGINAL_CORPUS_COUNT: 9
+CORPUS_COUNT_COMMAND: "ls -1 adversarial_corpora/*.json | wc -l"
+
+# =============================================================================
+# CI/CD GATES (5 GATES)
+# =============================================================================
+NUM_GATES: 5
+
+CI_GATE_1: "bash tools/verify_5_guards.sh"
+CI_GATE_2: ".venv/bin/python -m pytest tests/test_*.py -v"
+CI_GATE_3: "python tools/audit_greenlight.py --report /tmp/audit.json"
+CI_GATE_4: "grep -r 'POLICY_REQUIRE_HMAC' .github/workflows/"
+CI_GATE_5: "ls -la prometheus/rules/audit_rules.yml .github/workflows/ingest_and_dryrun.yml"
+
+CI_ALL_COMMAND: "bash tools/verify_5_guards.sh && .venv/bin/python -m pytest tests/ -v && python tools/audit_greenlight.py --report /tmp/audit.json"
+CI_GATE_SEQUENCE: "G1 → G2 → G3 → G4 → G5 (sequential execution required)"
+
+GATE_1_NAME: "5 Safety Nets Verification"
+GATE_1_DESCRIPTION: "Verify all 5 safety nets (S1, S2, R1, R2, C1) are present and functional"
+GATE_1_FIX: "Check .github/workflows/, tools/, and prometheus/ directories for missing files"
+
+GATE_2_NAME: "Behavioral Tests"
+GATE_2_DESCRIPTION: "Run all 4 behavioral tests with 100% pass requirement"
+GATE_2_FIX: "Review test output, fix mock issues, ensure test environment is clean"
+
+GATE_3_NAME: "Green-Light Audit"
+GATE_3_DESCRIPTION: "Run audit_greenlight.py and verify exit code 0"
+GATE_3_FIX: "Review audit report JSON, fix P0 failures (exit 5/6), ensure GITHUB_TOKEN set"
+
+GATE_4_NAME: "HMAC Policy Check"
+GATE_4_DESCRIPTION: "Verify POLICY_REQUIRE_HMAC environment variable is referenced in CI"
+GATE_4_FIX: "Add POLICY_REQUIRE_HMAC check to ingest_and_dryrun.yml workflow"
+
+GATE_5_NAME: "Telemetry Infrastructure"
+GATE_5_DESCRIPTION: "Verify Prometheus rules and ingest workflow exist"
+GATE_5_FIX: "Create prometheus/rules/audit_rules.yml with 5 required metrics"
+
+# =============================================================================
+# ENVIRONMENT VARIABLES
+# =============================================================================
+ENV_VAR_NAME_1: "POLICY_REQUIRE_HMAC"
+ENV_VAR_DESCRIPTION_1: "When 'true', ingest gate rejects unsigned artifacts (exit 2)"
+DEFAULT_VALUE_1: "false"
+
+ENV_VAR_NAME_2: "MAX_ISSUES_PER_RUN"
+ENV_VAR_DESCRIPTION_2: "Maximum GitHub issues created per audit run (digest cap)"
+DEFAULT_VALUE_2: "10"
+
+ENV_VAR_NAME_3: "GITHUB_TOKEN"
+ENV_VAR_DESCRIPTION_3: "GitHub API token for issue creation and branch protection queries"
+DEFAULT_VALUE_3: "${{ secrets.GITHUB_TOKEN }}"
+
+# =============================================================================
+# GLOBAL UTILITIES
+# =============================================================================
+TIMEOUT_HELPER_SCRIPT: "subprocess_timeout"
+TIMEOUT: 30
+EVIDENCE_SCRIPT: "create_evidence_block"
+SNIPPET_MAX_CHARS: 1000
+BASE64_MIN_LENGTH: 40
+TOKEN_MIN_LENGTH: 20
+LOCK_TIMEOUT: 10
+
+# =============================================================================
+# METRICS & PERFORMANCE
+# =============================================================================
+METRIC_NAME: "Safety Nets"
+METRIC_1: "safety_nets_count"
+METRIC_DIRECTION: "verified"
+METRIC_CONDITION: "5/5 present"
+METRIC_COUNT_COMMAND: "bash tools/verify_5_guards.sh | grep -c 'VERIFIED'"
+
+PERF_THRESHOLD_SPEC: "Exit code 0 from audit_greenlight.py"
+PERF_POLICY_DOC: "RUN_TO_GREEN.md"
+PERF_SECTION: "Step 6: Run Green-Light Audit"
+PERF_DELTA_MEDIAN: "N/A (no performance regression expected)"
+PERF_DELTA_P95: "N/A (security hardening, not performance optimization)"
+
+# =============================================================================
+# TOOLS & SCRIPTS
+# =============================================================================
+ARTIFACT_CREATION_SCRIPT: "python tools/generate_decision_artifact.py"
+ISSUES_FILE: "docs/CENTRAL_BACKLOG_README.md"
+INVENTORY_FILE: "tools/README.md"
+CLEANUP_CRITERIA: "No leftover fallback artifacts in workspace"
+PROGRESS_FILE: "PROGRESS_TRACKING.md"
+
+# =============================================================================
+# CORE PRINCIPLE
+# =============================================================================
+CORE_PRINCIPLE: "YAGNI (You Aren't Gonna Need It)"
+CORE_RULE: "Build only what has explicit metric triggers or P0 security requirement"
+
+# =============================================================================
+# PHASE-SPECIFIC VALUES
+# =============================================================================
+
+# Phase 0 - Prerequisites
+TASK_0_0_NAME: "Verify Python Environment"
+TASK_0_0_TIME: "5 minutes"
+TASK_0_0_FILES: ".venv/bin/python, pyproject.toml"
+TASK_0_0_TEST: ".venv/bin/python --version"
+
+TASK_0_1_NAME: "Verify Tool Inventory"
+TASK_0_1_TIME: "5 minutes"
+TASK_0_1_FILES: "tools/*.py, tools/*.sh"
+TASK_0_1_TEST: "ls -la tools/"
+TASK_0_1_REFERENCES: "tools/README.md"
+
+# Phase Completion
+BASELINE_PASS_COUNT: "14/14"
+GIT_COMMIT: "HEAD"
+COMPLETION_DATE: "2025-10-18"
+PREV_PHASE: 0
+
+# Rollback Procedures
+TEST_TYPE: "behavioral"
+PHASE_NUM: 1
+TOP_N: 5
+FIX_TIME_LIMIT: "30 minutes"
+EMERGENCY_TIME_LIMIT: "60 minutes"
+REFLOG_RETENTION: "90 days"
+SEARCH_PATTERN: "phase"
+
+# Additional Context
+GUIDE_FILE: "PLAN_CLOSING_IMPLEMENTATION.md"
+FAILURE_TYPE: "test"
+LAST_UPDATED: "2025-10-18"

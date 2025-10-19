@@ -1,0 +1,2 @@
+# TYPE audit_digest_created_total counter
+audit_digest_created_total 5

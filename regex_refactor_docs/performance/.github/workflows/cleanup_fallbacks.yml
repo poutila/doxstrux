@@ -1,0 +1,47 @@
+name: Cleanup Old Fallback Artifacts
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 2 AM UTC daily
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Delete old fallback files (>7 days)
+        run: |
+          echo "Cleaning up fallback artifacts older than 7 days..."
+
+          # Count files before cleanup
+          BEFORE_COUNT=$(find adversarial_reports/fallback_*.json -type f 2>/dev/null | wc -l || echo 0)
+          echo "Found $BEFORE_COUNT fallback artifacts"
+
+          # Delete files older than 7 days
+          find adversarial_reports/fallback_*.json -type f -mtime +7 -delete 2>/dev/null || true
+
+          # Count files after cleanup
+          AFTER_COUNT=$(find adversarial_reports/fallback_*.json -type f 2>/dev/null | wc -l || echo 0)
+          DELETED=$((BEFORE_COUNT - AFTER_COUNT))
+
+          echo "Deleted $DELETED fallback artifacts"
+          echo "Remaining: $AFTER_COUNT fallback artifacts"
+
+      - name: Check disk usage
+        run: |
+          echo "Disk usage for adversarial_reports/:"
+          du -sh adversarial_reports/ 2>/dev/null || echo "Directory not found"
+
+      - name: Report cleanup summary
+        run: |
+          echo "=== Cleanup Summary ==="
+          echo "Cleanup completed at: $(date)"
+          echo "Next cleanup: Tomorrow at 2 AM UTC"
+          echo ""
+          echo "Retention policy: 7 days"
+          echo "Files are deleted automatically to prevent disk exhaustion"
+          echo ""
+          echo "To manually trigger cleanup: gh workflow run cleanup_fallbacks.yml"

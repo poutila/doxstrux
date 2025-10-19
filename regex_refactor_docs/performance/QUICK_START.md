@@ -23,7 +23,7 @@ Phase 8 security hardening is **complete** in the performance/ directory with:
 ## Essential Files (Must Read)
 
 ### 1. Green-Light Checklist (Start Here)
-**File**: `PLAN_CLOSING_IMPLEMENTATION_extended_5.md`
+**File**: `archived/plans/PLAN_CLOSING_IMPLEMENTATION_extended_5.md`
 **Lines**: ~2,500
 **Read Time**: 20 minutes
 
@@ -38,7 +38,7 @@ Phase 8 security hardening is **complete** in the performance/ directory with:
 ---
 
 ### 2. Operational Tools Guide
-**File**: `PLAN_CLOSING_IMPLEMENTATION_extended_6.md`
+**File**: `archived/plans/PLAN_CLOSING_IMPLEMENTATION_extended_6.md`
 **Lines**: ~3,000
 **Read Time**: 30 minutes
 
@@ -53,7 +53,7 @@ Phase 8 security hardening is **complete** in the performance/ directory with:
 ---
 
 ### 3. Fatal Enforcement Guide
-**File**: `PLAN_CLOSING_IMPLEMENTATION_extended_7.md`
+**File**: `archived/plans/PLAN_CLOSING_IMPLEMENTATION_extended_7.md`
 **Lines**: ~1,600
 **Read Time**: 20 minutes
 
@@ -184,7 +184,7 @@ consumers:
 
 ### Step 1: Read Green-Light Checklist (5 min)
 ```bash
-cat PLAN_CLOSING_IMPLEMENTATION_extended_5.md | grep "Acceptance Criteria" -A 50
+cat archived/plans/PLAN_CLOSING_IMPLEMENTATION_extended_5.md | grep "Acceptance Criteria" -A 50
 ```
 
 ### Step 2: Run Audit (2 min)
@@ -210,7 +210,7 @@ cat docs/PLATFORM_POLICY.md | grep -A 10 "Default Policy"
 ## 1-Hour Deep Dive
 
 ### Phase 1: Understand Acceptance Criteria (20 min)
-1. Read `PLAN_CLOSING_IMPLEMENTATION_extended_5.md` (Part 3: Green-Light Checklist)
+1. Read `archived/plans/PLAN_CLOSING_IMPLEMENTATION_extended_5.md` (Part 3: Green-Light Checklist)
 2. Note P0 items (5 critical security tasks)
 3. Review machine-verifiable commands
 
@@ -220,7 +220,7 @@ cat docs/PLATFORM_POLICY.md | grep -A 10 "Default Policy"
 3. Read `consumer_registry.yml` structure
 
 ### Phase 3: Understand Enforcement (20 min)
-1. Read `PLAN_CLOSING_IMPLEMENTATION_extended_7.md` (Patch 1 & 2)
+1. Read `archived/plans/PLAN_CLOSING_IMPLEMENTATION_extended_7.md` (Patch 1 & 2)
 2. Understand exit codes (0, 2, 5, 6)
 3. Review `docs/PLATFORM_POLICY.md` enforcement
 
@@ -382,7 +382,7 @@ env:
 
 For complete details, see:
 
-**DOCUMENTATION_UPDATE_TOUR.md** - Complete map of all 27 files (~115,500 lines)
+**archived/misc/DOCUMENTATION_UPDATE_TOUR.md** - Complete map of all 27 files (~115,500 lines)
 
 **Key Sections**:
 - Planning Documents Tour (7 files)
@@ -430,13 +430,13 @@ echo "❌ BLOCKED - Fix P0 failures"
 
 ## Next Steps
 
-1. **Read**: PLAN_CLOSING_IMPLEMENTATION_extended_5.md (green-light checklist)
+1. **Read**: archived/plans/PLAN_CLOSING_IMPLEMENTATION_extended_5.md (green-light checklist)
 2. **Run**: `python tools/audit_greenlight.py --report /tmp/audit.json`
 3. **Review**: Exit code and report
 4. **Fix**: Any P0 failures (exit 5/6)
 5. **Deploy**: When audit returns 0
 
-**Questions?** See DOCUMENTATION_UPDATE_TOUR.md for complete guide
+**Questions?** See archived/misc/DOCUMENTATION_UPDATE_TOUR.md for complete guide
 
 ---
 

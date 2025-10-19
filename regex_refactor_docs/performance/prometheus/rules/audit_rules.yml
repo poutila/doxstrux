@@ -1,0 +1,68 @@
+---
+# Prometheus Alert Rules for Audit Issue Automation
+# Safety Net 3: FP Telemetry + Operational Visibility
+#
+# Load these rules into Prometheus with:
+#   rule_files:
+#     - "prometheus/rules/audit_rules.yml"
+
+groups:
+  - name: audit_issue_automation
+    interval: 30s
+    rules:
+      # Alert when issue creation failures occur
+      - alert: AuditIssueCreateFailed
+        expr: increase(audit_issue_create_failures_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: page
+          component: audit_automation
+        annotations:
+          summary: "Audit issue creation failures detected"
+          description: "{{ $value }} issue creation failure(s) in the last 5 minutes. Check GitHub token permissions and API quota."
+          runbook_url: "https://github.com/org/repo/blob/main/docs/runbooks/audit_issue_failures.md"
+
+      # Alert when digest mode is triggered frequently (potential overload)
+      - alert: AuditDigestFrequencyHigh
+        expr: increase(audit_digest_created_total[24h]) > 3
+        for: 30m
+        labels:
+          severity: warning
+          component: audit_automation
+        annotations:
+          summary: "Many audit digests created (>3 in 24h)"
+          description: "Digest mode triggered {{ $value }} times in 24h. This may indicate too many unregistered repos or MAX_ISSUES_PER_RUN set too low."
+          runbook_url: "https://github.com/org/repo/blob/main/docs/runbooks/audit_digest_frequency.md"
+
+      # Alert when false-positive rate exceeds threshold
+      - alert: AuditFPRateHigh
+        expr: (increase(audit_fp_marked_total[7d]) / max(increase(audit_unregistered_repos_total[7d]), 1)) > 0.10
+        for: 1h
+        labels:
+          severity: warning
+          component: audit_automation
+        annotations:
+          summary: "High false-positive rate (>10% over 7 days)"
+          description: "FP rate: {{ $value | humanizePercentage }}. Pattern tuning may be needed to reduce noise."
+          runbook_url: "https://github.com/org/repo/blob/main/docs/runbooks/audit_fp_rate.md"
+
+      # Alert when no repos scanned recently (automation may be broken)
+      - alert: AuditNoReposScanned
+        expr: increase(audit_unregistered_repos_total[24h]) == 0
+        for: 2h
+        labels:
+          severity: warning
+          component: audit_automation
+        annotations:
+          summary: "No repos scanned in 24 hours"
+          description: "Audit automation may be broken or disabled. Check scheduled jobs and CI workflows."
+          runbook_url: "https://github.com/org/repo/blob/main/docs/runbooks/audit_no_activity.md"
+
+      # Recording rule for FP rate calculation (7-day window)
+      - record: audit:fp_rate:7d
+        expr: |
+          (
+            increase(audit_fp_marked_total[7d])
+            /
+            max(increase(audit_unregistered_repos_total[7d]), 1)
+          )

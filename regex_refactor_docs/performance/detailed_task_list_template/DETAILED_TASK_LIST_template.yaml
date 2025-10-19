@@ -1,0 +1,330 @@
+# Detailed Task List Template (Machine-Readable YAML Format)
+# Fill placeholders before use.
+
+document:
+  id: "{{DOCUMENT_ID}}"
+  title: "{{PROJECT_NAME}}"
+  version: "{{VERSION}}"
+  created: "{{DATE}}"
+  owner: "{{OWNER}}"
+  audience:
+    - dev
+    - sre
+    - security
+
+metadata:
+  project_full_name: "{{PROJECT_FULL_NAME}}"
+  project_goal: "{{PROJECT_GOAL}}"
+  status: "{{STATUS}}"
+  total_estimated_time: "{{TOTAL_TIME_ESTIMATE}}"
+  total_phases: {{NUM_PHASES}}
+  schema_version: "1.0"
+
+success_criteria:
+  - "{{CRITERIA_1}}"
+  - "{{CRITERIA_2}}"
+  - "{{CRITERIA_3}}"
+
+phase_unlock_mechanism:
+  enforcement: "Each phase N+1 cannot start until .phase-N.complete.json exists"
+  artifact_schema:
+    schema_version: "1.0"
+    min_schema_version: "1.0"
+    phase: "{{PHASE_NUM}}"
+    phase_name: "{{PHASE_NAME}}"
+    baseline_pass_count: "{{BASELINE_PASS_COUNT}}"
+    ci_gates_passed: ["G1", "G2", "G3", "G4", "G5"]
+    metric_before: "{{VALUE_BEFORE}}"
+    metric_after: "{{VALUE_AFTER}}"
+    performance_delta_median: "{{PERF_DELTA_MEDIAN}}"
+    performance_delta_p95: "{{PERF_DELTA_P95}}"
+    git_commit: "{{GIT_COMMIT}}"
+    completion_date: "{{COMPLETION_DATE}}"
+  validation_command: "python3 tools/validate_phase_artifact.py .phase-{{PREV_PHASE}}.complete.json"
+
+environment_variables:
+  required:
+    - name: "{{ENV_VAR_NAME_1}}"
+      description: "{{ENV_VAR_DESCRIPTION_1}}"
+      default: "{{DEFAULT_VALUE_1}}"
+    - name: "{{ENV_VAR_NAME_2}}"
+      description: "{{ENV_VAR_DESCRIPTION_2}}"
+      default: "{{DEFAULT_VALUE_2}}"
+    - name: "{{ENV_VAR_NAME_3}}"
+      description: "{{ENV_VAR_DESCRIPTION_3}}"
+      default: "{{DEFAULT_VALUE_3}}"
+
+global_utilities:
+  timeout_helper:
+    file: "tools/{{TIMEOUT_HELPER_SCRIPT}}.py"
+    description: "Prevents indefinite hangs in CI"
+    default_timeout: {{TIMEOUT}}
+  atomic_write:
+    file: "tools/atomic_write.py"
+    description: "Prevents partial writes and race conditions"
+  schema_validator:
+    file: "tools/validate_phase_artifact.py"
+    description: "Validates phase unlock artifacts"
+  evidence_creator:
+    file: "tools/{{EVIDENCE_SCRIPT}}.py"
+    description: "Creates evidence blocks with atomic append"
+    snippet_max_chars: {{SNIPPET_MAX_CHARS}}
+    base64_min_length: {{BASE64_MIN_LENGTH}}
+    token_min_length: {{TOKEN_MIN_LENGTH}}
+    lock_timeout: {{LOCK_TIMEOUT}}
+
+test_macros:
+  fast_test:
+    command: "{{FAST_TEST_COMMAND}}"
+    duration: "{{FAST_TEST_TIME}}"
+    file_count: {{FAST_TEST_COUNT}}
+  full_test:
+    command: "{{FULL_TEST_COMMAND}}"
+    duration: "{{FULL_TEST_TIME}}"
+  performance_test:
+    command: "{{PERF_TEST_COMMAND}}"
+  ci_gates:
+    sequence:
+      - "{{CI_GATE_1}}"
+      - "{{CI_GATE_2}}"
+      - "{{CI_GATE_3}}"
+      - "{{CI_GATE_4}}"
+      - "{{CI_GATE_5}}"
+    enforcement: "Sequential execution (G1→G{{NUM_GATES}})"
+
+corpus_metadata:
+  directory: "{{CORPUS_DIR}}"
+  pattern: "{{CORPUS_PATTERN}}"
+  original_count: {{ORIGINAL_CORPUS_COUNT}}
+  counting_policy: "Dynamic runtime computation using Python (cross-platform)"
+
+performance_thresholds:
+  specification: "{{PERF_THRESHOLD_SPEC}}"
+  policy_document: "{{PERF_POLICY_DOC}}"
+  section: "{{PERF_SECTION}}"
+
+git_macros:
+  checkpoint: "git add -A && git commit -m '<msg>'"
+  tag: "git tag <name>"
+  rollback: "git reset --hard HEAD~1"
+
+ci_gates:
+  - id: "G1"
+    name: "{{GATE_1_NAME}}"
+    description: "{{GATE_1_DESCRIPTION}}"
+    command: "{{CI_GATE_1}}"
+    fix_hint: "{{GATE_1_FIX}}"
+  - id: "G2"
+    name: "{{GATE_2_NAME}}"
+    description: "{{GATE_2_DESCRIPTION}}"
+    command: "{{CI_GATE_2}}"
+    fix_hint: "{{GATE_2_FIX}}"
+  - id: "G3"
+    name: "{{GATE_3_NAME}}"
+    description: "{{GATE_3_DESCRIPTION}}"
+    command: "{{CI_GATE_3}}"
+    fix_hint: "{{GATE_3_FIX}}"
+  - id: "G4"
+    name: "Performance"
+    description: "Performance within thresholds"
+    command: "{{PERF_TEST_COMMAND}}"
+    thresholds:
+      median: "≤5%"
+      p95: "≤10%"
+  - id: "G5"
+    name: "Evidence Hash"
+    description: "Validate evidence_blocks.jsonl integrity"
+    command: "{{CI_GATE_5}}"
+
+core_principle:
+  name: "{{CORE_PRINCIPLE}}"
+  rule: "{{CORE_RULE}}"
+
+testing_strategy:
+  fast_iteration:
+    description: "Quick test during development"
+    command: "{{FAST_TEST_COMMAND}}"
+    duration: "{{FAST_TEST_TIME}}"
+  full_validation:
+    description: "Comprehensive validation before commit"
+    commands:
+      - "{{FULL_TEST_COMMAND}}"
+      - "{{PERF_CHECK_COMMAND}}"
+      - "{{CI_GATE_SEQUENCE}}"
+  failure_response:
+    - "git status"
+    - "git restore <file> or git reset --hard HEAD"
+    - "Identify specific line that broke {{FAILURE_TYPE}}"
+    - "Make more granular modification"
+    - "Verify fix works"
+    - "Document issue in {{ISSUES_FILE}}"
+
+phases:
+  phase_0:
+    name: "{{PHASE_0_NAME}}"
+    goal: "{{PHASE_0_GOAL}}"
+    time_estimate: "{{PHASE_0_TIME}}"
+    status: "⏳ Not started"
+    tasks:
+      - id: "0.0"
+        name: "{{TASK_0_0_NAME}}"
+        time_estimate: "{{TASK_0_0_TIME}}"
+        files: "{{TASK_0_0_FILES}}"
+        test: "{{TASK_0_0_TEST}}"
+        steps:
+          - "Read {{GUIDE_FILE}} for context"
+          - "{{STEP_1}}"
+          - "{{STEP_2}}"
+          - "{{STEP_3}}"
+        acceptance_criteria:
+          - "{{CRITERIA_1}}"
+          - "{{CRITERIA_2}}"
+          - "{{CRITERIA_3}}"
+        status: "⏳ Not started"
+
+      - id: "0.1"
+        name: "{{TASK_0_1_NAME}}"
+        time_estimate: "{{TASK_0_1_TIME}}"
+        files: "{{TASK_0_1_FILES}}"
+        test: "{{TASK_0_1_TEST}}"
+        references: "{{TASK_0_1_REFERENCES}}"
+        steps:
+          - "{{STEP_1}}"
+          - "{{STEP_2}}"
+          - "{{STEP_3}}"
+        acceptance_criteria:
+          - "{{CRITERIA_1}}"
+          - "{{CRITERIA_2}}"
+          - "{{CRITERIA_3}}"
+        status: "⏳ Not started"
+
+  phase_template:
+    phase_number: "{{PHASE_NUM}}"
+    name: "{{PHASE_NAME}}"
+    goal: "{{PHASE_GOAL}}"
+    time_estimate: "{{PHASE_TIME}}"
+    status: "⏳ Not started"
+    prerequisites: "Phase {{PREV_PHASE}} complete (.phase-{{PREV_PHASE}}.complete.json exists)"
+    tasks:
+      - id: "{{TASK_NUM}}"
+        name: "{{TASK_NAME}}"
+        time_estimate: "{{TASK_TIME}}"
+        files: "{{TASK_FILES}}"
+        test: "{{TASK_TEST}}"
+        references: "{{TASK_REFERENCES}}"
+        steps:
+          - "{{STEP_1}}"
+          - "{{STEP_2}}"
+          - "{{STEP_3}}"
+        acceptance_criteria:
+          - "{{CRITERIA_1}}"
+          - "{{CRITERIA_2}}"
+          - "{{CRITERIA_3}}"
+        status: "⏳ Not started"
+
+rollback_procedures:
+  single_test_failure:
+    name: "Targeted Revert"
+    steps:
+      - command: "git status && git diff"
+        description: "Check what changed"
+      - command: "git restore {{FILE_PATH}}"
+        description: "Revert specific file"
+      - command: "{{FAST_TEST_COMMAND}}"
+        description: "Quick retest"
+      - command: "git reset --hard HEAD && {{FULL_TEST_COMMAND}}"
+        description: "Full revert if still failing"
+
+  multiple_test_failures:
+    name: "Full Revert"
+    steps:
+      - command: "git reset --hard HEAD~1"
+        description: "Immediate rollback to last checkpoint"
+      - command: "{{FULL_TEST_COMMAND}}"
+        description: "Verify {{TEST_TYPE}} restored"
+      - command: "git reset --hard phase-{{PHASE_NUM}}-complete"
+        description: "Rollback to phase tag if still broken"
+      - command: "cat .phase-{{PHASE_NUM}}.complete.json && git log -1 --format=%H"
+        description: "Verify phase unlock artifact matches"
+      - command: "{{CI_ALL_COMMAND}}"
+        description: "Full validation"
+
+  performance_regression:
+    name: "Profile & Decide"
+    steps:
+      - command: "{{PROFILE_COMMAND}}"
+        description: "Profile the slow code"
+      - description: "Analyze top {{TOP_N}} hotspots"
+      - description: "Decision: Can fix in <{{FIX_TIME_LIMIT}}>?"
+      - command: "git reset --hard HEAD~1 && {{PERF_TEST_COMMAND}}"
+        description: "Rollback if needed"
+
+  ci_gate_failure:
+    name: "Diagnose & Fix"
+    steps:
+      - description: "Run gates individually to isolate failure"
+        commands:
+          - "{{CI_GATE_1}}"
+          - "{{CI_GATE_2}}"
+          - "{{CI_GATE_3}}"
+      - description: "Apply gate-specific fixes"
+      - command: "git reset --hard HEAD~1"
+        description: "Rollback if can't fix in {{EMERGENCY_TIME_LIMIT}}"
+
+  emergency_lost_changes:
+    name: "Emergency Recovery"
+    steps:
+      - command: "git reflog"
+        description: "Check reflog ({{REFLOG_RETENTION}} retention)"
+      - command: "git reflog | grep '{{SEARCH_PATTERN}}'"
+        description: "Find last good commit"
+      - command: "git reset --hard {{COMMIT_HASH}}"
+        description: "Restore to that commit"
+      - command: "ls -la .phase-*.complete.json"
+        description: "Verify phase unlock artifacts"
+      - command: "{{CI_ALL_COMMAND}}"
+        description: "Full validation"
+
+phase_completion:
+  checklist:
+    validation_commands:
+      - "{{FULL_TEST_COMMAND}}"
+      - "{{CORPUS_COUNT_COMMAND}}"
+      - "{{PERF_TEST_COMMAND}}"
+      - "{{CI_ALL_COMMAND}}"
+      - "{{METRIC_COUNT_COMMAND}}"
+    artifact_creation_script: "{{ARTIFACT_CREATION_SCRIPT}}"
+    completion_report_template: "Phase {{PHASE_NUM}} Completion Report"
+    evidence_creation: true
+    git_checkpoint: true
+    git_tag: "phase-{{PHASE_NUM}}-complete"
+
+  acceptance_criteria:
+    - "All {{TEST_TYPE}} tests pass (§CORPUS_COUNT/§CORPUS_COUNT)"
+    - "Performance within budget ({{PERF_THRESHOLD}})"
+    - "All CI gates pass (G1-G{{NUM_GATES}})"
+    - "{{METRIC_NAME}} count {{METRIC_DIRECTION}} ({{METRIC_CONDITION}})"
+    - "Phase unlock artifact created and valid"
+    - "Completion report created with all sections filled"
+    - "{{INVENTORY_FILE}} updated"
+    - "Evidence blocks created (if code changes significant)"
+    - "Git checkpoint created"
+    - "Git tag created (phase-{{PHASE_NUM}}-complete)"
+    - "{{CLEANUP_CRITERIA}}"
+
+progress_tracking:
+  completed_tasks_file: "{{PROGRESS_FILE}}"
+  time_tracking_columns:
+    - Phase
+    - Task
+    - Estimated
+    - Actual
+    - Variance
+    - Notes
+
+template_metadata:
+  schema_version: "1.0"
+  generated_by: "detailed_task_list_template_generator"
+  template_type: "yaml"
+  last_updated: "{{LAST_UPDATED}}"
+  render_command: "python tools/render_template.py -t DETAILED_TASK_LIST_template.yaml -r config/values.yml"

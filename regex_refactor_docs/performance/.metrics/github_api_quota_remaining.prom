@@ -1,0 +1,2 @@
+# TYPE github_api_quota_remaining gauge
+github_api_quota_remaining 0

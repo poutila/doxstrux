@@ -43,19 +43,43 @@ if platform.system() != "Linux":
 print("Platform assertion OK: Linux")
 PY
 
-      - name: Import baseline public key
+      - name: Run fast adversarial smoke (PR velocity)
+        run: |
+          if [ -f tools/run_adversarial.py ] && [ -f adversarial_corpora/fast_smoke.json ]; then
+            python tools/run_adversarial.py adversarial_corpora/fast_smoke.json --runs 1 --report adversarial_reports/pr_adv_smoke.json || true
+            echo "Fast smoke adversarial tests completed"
+          else
+            echo "Fast smoke tests skipped (tools/run_adversarial.py or adversarial_corpora/fast_smoke.json not found)"
+          fi
+
+      - name: Verify baseline signature (KMS or GPG)
         env:
           BASELINE_PUBLIC_KEY: ${{ secrets.BASELINE_PUBLIC_KEY || '' }}
+          AWS_KMS_KEY_ID: ${{ secrets.AWS_KMS_KEY_ID || '' }}
         run: |
-          if [ -z "${BASELINE_PUBLIC_KEY}" ]; then
-            echo "ERROR: BASELINE_PUBLIC_KEY secret is not set. Baseline signature verification cannot run."
+          # Try KMS verification first (production)
+          if [ -n "${AWS_KMS_KEY_ID}" ] && [ -f baselines/metrics_baseline_v1.json.sig ]; then
+            echo "Verifying baseline signature with AWS KMS..."
+            aws kms verify \
+              --key-id "${AWS_KMS_KEY_ID}" \
+              --message fileb://baselines/metrics_baseline_v1.json \
+              --message-type RAW \
+              --signing-algorithm RSASSA_PKCS1_V1_5_SHA_256 \
+              --signature fileb://baselines/metrics_baseline_v1.json.sig
+            echo "✓ KMS signature verification passed"
+          # Fallback to GPG verification (local dev)
+          elif [ -n "${BASELINE_PUBLIC_KEY}" ]; then
+            echo "Verifying baseline signature with GPG..."
+            echo "${BASELINE_PUBLIC_KEY}" > /tmp/baseline_pub.asc
+            sudo apt-get update -y && sudo apt-get install -y gnupg
+            gpg --import /tmp/baseline_pub.asc
+            rm -f /tmp/baseline_pub.asc
+            gpg --batch --verify baselines/metrics_baseline_v1.json.asc baselines/metrics_baseline_v1.json
+            echo "✓ GPG signature verification passed"
+          else
+            echo "ERROR: Neither AWS_KMS_KEY_ID nor BASELINE_PUBLIC_KEY secret is set. Baseline signature verification cannot run."
             exit 2
           fi
-          echo "${BASELINE_PUBLIC_KEY}" > /tmp/baseline_pub.asc
-          sudo apt-get update -y && sudo apt-get install -y gnupg
-          gpg --import /tmp/baseline_pub.asc
-          rm -f /tmp/baseline_pub.asc
-          echo "Imported baseline public key for verification."
 
       - name: Run audit greenlight (baseline + branch-protection + discovery)
         env:

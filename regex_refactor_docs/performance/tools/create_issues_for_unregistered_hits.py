@@ -28,6 +28,7 @@ import time
 import textwrap
 import hashlib
 import logging
+import uuid
 import requests
 from collections import defaultdict, Counter
 from datetime import datetime, timezone
@@ -47,18 +48,34 @@ GITHUB_QUOTA_THRESHOLD = 500  # Trigger digest mode when quota falls below this
 # In production, replace with prometheus_client library
 class SimpleMetric:
     """Simple metric collector for quota tracking (replace with prometheus_client in production)."""
-    def __init__(self, name: str):
+    def __init__(self, name: str, metric_type: str = "gauge"):
         self.name = name
+        self.metric_type = metric_type
         self.value = 0
 
     def set(self, value: int):
         self.value = value
-        # Write to textfile for node_exporter scraping
+        self._write()
+
+    def inc(self, amount: int = 1):
+        """Increment counter metric."""
+        self.value += amount
+        self._write()
+
+    def _write(self):
+        """Write metric to textfile for node_exporter scraping."""
         metrics_dir = Path(".metrics")
         metrics_dir.mkdir(exist_ok=True)
-        (metrics_dir / f"{self.name}.prom").write_text(f"# TYPE {self.name} gauge\n{self.name} {value}\n")
+        (metrics_dir / f"{self.name}.prom").write_text(
+            f"# TYPE {self.name} {self.metric_type}\n{self.name} {self.value}\n"
+        )
 
-github_quota_gauge = SimpleMetric("github_api_quota_remaining")
+# Safety Net 3: FP Telemetry Metrics
+github_quota_gauge = SimpleMetric("github_api_quota_remaining", "gauge")
+audit_unregistered_repos_total = SimpleMetric("audit_unregistered_repos_total", "counter")
+audit_digest_created_total = SimpleMetric("audit_digest_created_total", "counter")
+audit_issue_create_failures_total = SimpleMetric("audit_issue_create_failures_total", "counter")
+audit_fp_marked_total = SimpleMetric("audit_fp_marked_total", "counter")
 
 # Setup logging
 logging.basicConfig(
@@ -187,6 +204,51 @@ def safe_request(session: requests.Session, method: str, url: str, **kwargs) -> 
     raise RuntimeError(f"Exceeded retries for {method} {url}")
 
 
+def check_rate_limit(session: requests.Session) -> bool:
+    """
+    Check GitHub API rate limit and switch to digest mode if low.
+
+    Returns:
+        True if quota is OK to proceed with individual issues
+        False if quota is low (< 500) and should force digest mode
+
+    Raises:
+        SystemExit if quota is completely exhausted
+    """
+    try:
+        resp = session.get("https://api.github.com/rate_limit", timeout=10)
+        if resp.status_code != 200:
+            logging.warning("Warning: Could not check rate limit")
+            return True  # Proceed with caution
+
+        rate_limit = resp.json()
+        remaining = rate_limit.get("rate", {}).get("remaining", 0)
+        limit = rate_limit.get("rate", {}).get("limit", 5000)
+
+        logging.info(f"GitHub API quota: {remaining}/{limit} remaining")
+
+        # Update Prometheus metric
+        github_quota_gauge.set(remaining)
+
+        if remaining < GITHUB_QUOTA_THRESHOLD:
+            logging.warning(f"WARNING: API quota low ({remaining} < {GITHUB_QUOTA_THRESHOLD}) - switching to digest-only mode")
+            return False  # Force digest mode
+
+        if remaining == 0:
+            reset_time = rate_limit.get("rate", {}).get("reset", 0)
+            reset_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(reset_time))
+            logging.error(f"ERROR: API quota exhausted - resets at {reset_str}")
+            raise SystemExit(3)
+
+        return True  # OK to proceed
+
+    except SystemExit:
+        raise
+    except Exception as e:
+        logging.warning(f"Error checking rate limit: {e}")
+        return True  # Proceed with caution
+
+
 def find_existing_issue(repo_full_name: str, session: requests.Session) -> Optional[dict]:
     api = f"https://api.github.com/repos/{repo_full_name}/issues"
     params = {"state": "open", "per_page": 100}
@@ -302,20 +364,52 @@ def determine_severity(hits: List[dict]) -> str:
     return "medium"
 
 
-def create_digest_issue(groups: Dict[str, List[dict]], session: requests.Session, args, audit_path: Path) -> None:
-    """Create single digest issue for multiple repos with provenance metadata."""
+def create_digest_issue(groups: Dict[str, List[dict]], session: requests.Session, args, audit_path: Path, audit_id: str = None) -> None:
+    """Create or update single digest issue for multiple repos with provenance metadata (idempotent).
+
+    Args:
+        groups: Dict of repo -> hits
+        session: Requests session
+        args: Argument namespace
+        audit_path: Path to audit report
+        audit_id: Unique audit run ID (generated if not provided)
+    """
     total_repos = len(groups)
     total_hits = sum(len(hits) for hits in groups.values())
-    logging.info(f"Creating digest issue for {total_repos} repos (exceeds limit {MAX_ISSUES_PER_RUN})")
+
+    # Generate audit_id if not provided (for idempotency)
+    if not audit_id:
+        audit_id = str(uuid.uuid4())
+
+    logging.info(f"Creating/updating digest issue for {total_repos} repos (audit_id: {audit_id})")
+
+    # Safety Net 3: Track digest creation
+    audit_digest_created_total.inc()
 
     # Provenance metadata
     timestamp = datetime.now(timezone.utc).isoformat()
     run_id = os.environ.get("GITHUB_RUN_ID", "local")
 
-    body_sections = [ISSUE_MARKER, "\n# Audit Digest: Multiple repos with unregistered renderers\n\n"]
+    # Check for existing digest with this audit_id
+    existing_digest = None
+    search_api = f"https://api.github.com/search/issues"
+    search_query = f'repo:{args.central_repo} is:issue "audit_id:{audit_id}"'
+    headers = {"Authorization": f"token {os.environ.get('GITHUB_TOKEN','')}", "User-Agent": USER_AGENT}
+    try:
+        r = session.get(search_api, headers=headers, params={"q": search_query}, timeout=10)
+        if r.status_code == 200:
+            results = r.json()
+            if results.get("total_count", 0) > 0:
+                existing_digest = results["items"][0]
+                logging.info(f"Found existing digest issue #{existing_digest['number']} with audit_id {audit_id}")
+    except Exception as e:
+        logging.warning(f"Could not search for existing digest: {e}")
+
+    body_sections = [ISSUE_MARKER, f"\n<!-- audit_id:{audit_id} -->\n\n# Audit Digest: Multiple repos with unregistered renderers\n\n"]
 
     # Provenance section
     body_sections.append("## Provenance\n\n")
+    body_sections.append(f"- **Audit ID**: {audit_id}\n")
     body_sections.append(f"- **Audit Run**: {timestamp}\n")
     body_sections.append(f"- **Tool Version**: {TOOL_VERSION}\n")
     body_sections.append(f"- **Run ID**: {run_id}\n")
@@ -341,13 +435,26 @@ def create_digest_issue(groups: Dict[str, List[dict]], session: requests.Session
     body = "".join(body_sections)
     labels = ["security/digest", "triage"]
 
-    created = create_issue(args.central_repo,
-                          f"[Audit Digest] {len(groups)} repos with unregistered renderers",
-                          body, session, labels=labels)
-    if created:
-        logging.info(f"Created digest issue: {created.get('html_url')}")
+    if existing_digest:
+        # Update existing issue
+        update_api = f"https://api.github.com/repos/{args.central_repo}/issues/{existing_digest['number']}"
+        r = safe_request(session, "PATCH", update_api, json={"body": body}, headers=headers, timeout=20)
+        if r.status_code in (200, 201):
+            logging.info(f"Updated existing digest issue #{existing_digest['number']}: {existing_digest.get('html_url')}")
+            # Post comment about update
+            comment = f"Digest updated at {timestamp} (audit_id: {audit_id})\n\nNew scan found {total_repos} repos with {total_hits} total hits."
+            post_comment(existing_digest.get("comments_url"), comment, session)
+        else:
+            logging.error(f"Failed to update existing digest issue: HTTP {r.status_code}")
     else:
-        logging.error("Failed to create digest issue")
+        # Create new issue
+        created = create_issue(args.central_repo,
+                              f"[Audit Digest] {len(groups)} repos with unregistered renderers",
+                              body, session, labels=labels)
+        if created:
+            logging.info(f"Created digest issue: {created.get('html_url')} (audit_id: {audit_id})")
+        else:
+            logging.error("Failed to create digest issue")
 
 
 def main():
@@ -369,32 +476,38 @@ def main():
         logging.info("No unregistered hits found. Nothing to do.")
         return
 
+    # Safety Net 3: Track repos with unregistered hits
+    audit_unregistered_repos_total.inc(len(groups))
+
     token = os.environ.get("GITHUB_TOKEN")
     if not token and not args.dry_run:
         raise SystemExit("GITHUB_TOKEN not set - required to create issues (or run --dry-run)")
 
     session = requests.Session()
-    session.headers.update({"User-Agent": USER_AGENT})
+    session.headers.update({"User-Agent": USER_AGENT, "Authorization": f"token {token}" if token else ""})
 
-    # Check permissions before attempting issue creation (fail-fast with graceful fallback)
+    # Safety Net 2: Permission check with deterministic fallback
     if not args.dry_run and args.confirm:
-        if not check_issue_create_permission(args.central_repo, session, token):
-            logging.error(f"PERMISSIONS CHECK FAILED: Token lacks issue create permission for {args.central_repo}")
-            logging.info("Falling back to artifact upload for manual triage")
-            # Upload audit artifact to GitHub Actions artifacts or local file
-            artifact_dir = Path("adversarial_reports")
-            artifact_dir.mkdir(exist_ok=True)
-            artifact_path = artifact_dir / "audit_summary_failed_permissions.json"
-            artifact_path.write_text(json.dumps(audit_json, indent=2))
-            logging.info(f"Audit artifact saved to {artifact_path}")
-            logging.info("MANUAL ACTION REQUIRED: Grant issue create permission or triage manually from artifact")
-            # Exit gracefully with non-zero code to signal failure
-            raise SystemExit(1)
+        # Import permission_fallback module
+        from permission_fallback import ensure_issue_create_permissions
+
+        ok = ensure_issue_create_permissions(args.central_repo, session, str(audit_path))
+        if not ok:
+            logging.error("Permission fallback executed: artifact saved and security notified. Exiting.")
+            raise SystemExit(2)
 
     registry = load_consumer_registry(Path("consumer_registry.yml"))
     # labels and assignees from args
     label_list = [l.strip() for l in (args.label or "").split(",") if l.strip()]
     assignees = [a.strip() for a in (args.assignees or "").split(",") if a.strip()]
+
+    # Blocker 5: Check API rate limit before proceeding
+    if not args.dry_run:
+        rate_limit_ok = check_rate_limit(session)
+        if not rate_limit_ok:
+            logging.warning("Forcing digest mode due to low API quota")
+            create_digest_issue(groups, session, args, audit_path)
+            return
 
     # Check if hit count exceeds cap
     if len(groups) > MAX_ISSUES_PER_RUN:
@@ -504,6 +617,8 @@ def main():
             logging.info(f"Created issue: {created.get('html_url')}")
         else:
             logging.warning(f"Failed to create issue for {repo_full_name}")
+            # Safety Net 3: Track issue creation failures
+            audit_issue_create_failures_total.inc()
 
 
 if __name__ == "__main__":
