@@ -32,17 +32,11 @@ MAX_TABLE_CELLS = {
     "permissive": 50000,
 }
 
-# Maximum data URI size (already defined in config, but tracked here)
-MAX_DATA_URI_SIZE = {
-    "strict": 0,  # No data URIs allowed
-    "moderate": 10240,  # 10KB
-    "permissive": 102400,  # 100KB
-}
-
-
 # ============================================================================
 # Budget Helper Functions (SSOT Access)
 # ============================================================================
+# Note: MAX_DATA_URI_SIZE dict removed - use get_max_data_uri_size() instead
+# SSOT is SECURITY_PROFILES in config.py per SECURITY_KERNEL_SPEC.md §8
 
 def get_max_data_uri_size(profile: str) -> int:
     """Get max data URI size from SECURITY_PROFILES (SSOT).
@@ -224,7 +218,8 @@ class URIBudget:
             security_profile: Security profile ('strict', 'moderate', 'permissive')
         """
         self.profile = security_profile
-        self.max_uri_size = MAX_DATA_URI_SIZE.get(security_profile, MAX_DATA_URI_SIZE["moderate"])
+        # Use SSOT helper instead of duplicate dict
+        self.max_uri_size = get_max_data_uri_size(security_profile)
         # Total size is 10x single URI limit
         self.max_total_size = self.max_uri_size * 10 if self.max_uri_size > 0 else 0
         self.current_count = 0
