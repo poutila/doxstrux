@@ -1508,32 +1508,30 @@ class MarkdownParserCore:
 
         # Pure token-based code block classification (Phase 6)
         # Extract code blocks from AST and mark those lines as code
-        try:
-            code_blocks = self._get_cached("code_blocks", self._extract_code_blocks)
-            for b in code_blocks:
-                s, e = b.get("start_line"), b.get("end_line")
-                if s is None or e is None:
-                    continue
+        # Per CLEAN_TABLE_PRINCIPLE: No silent exceptions - removed try/except
+        code_blocks = self._get_cached("code_blocks", self._extract_code_blocks)
+        for b in code_blocks:
+            s, e = b.get("start_line"), b.get("end_line")
+            if s is None or e is None:
+                continue
 
-                # Add to code_blocks list for mappings
-                # Note: structure uses exclusive end_line, but mappings uses inclusive for backward compat
-                mappings["code_blocks"].append({
-                    "start_line": s,
-                    "end_line": e - 1,  # Convert exclusive to inclusive
-                    "language": b.get("language"),
-                })
+            # Add to code_blocks list for mappings
+            # Note: structure uses exclusive end_line, but mappings uses inclusive for backward compat
+            mappings["code_blocks"].append({
+                "start_line": s,
+                "end_line": e - 1,  # Convert exclusive to inclusive
+                "language": b.get("language"),
+            })
 
-                # Mark these lines as code (end_line from structure is exclusive)
-                for ln in range(s, e):
-                    mappings["line_to_type"][str(ln)] = "code"
-                    # Remove from prose_lines if present
-                    if ln in mappings["prose_lines"]:
-                        mappings["prose_lines"].remove(ln)
-                    # Add to code_lines if not present
-                    if ln not in mappings["code_lines"]:
-                        mappings["code_lines"].append(ln)
-        except Exception:
-            pass
+            # Mark these lines as code (end_line from structure is exclusive)
+            for ln in range(s, e):
+                mappings["line_to_type"][str(ln)] = "code"
+                # Remove from prose_lines if present
+                if ln in mappings["prose_lines"]:
+                    mappings["prose_lines"].remove(ln)
+                # Add to code_lines if not present
+                if ln not in mappings["code_lines"]:
+                    mappings["code_lines"].append(ln)
 
         return mappings
 
@@ -1610,82 +1608,60 @@ class MarkdownParserCore:
         self.process_tree(node, text_collector, text_parts)
         return "".join(text_parts)
 
-    def _check_path_traversal(self, url: str) -> bool:
+    def _check_path_traversal(self, target: str) -> bool:
         """
-        Comprehensive path traversal detection.
+        Return True if the string looks like a path traversal attempt.
+
+        Per SECURITY_KERNEL_SPEC.md §6.2:
+        - Parse URLs using urlparse for benign schemes
+        - Only inspect path component for http/https/mailto/tel
+        - Normalize slashes and decode URL-encoded segments
+        - Flag traversal (..), file://, Windows drives, UNC paths
+
+        Per SECURITY_KERNEL_SPEC.md §6.3:
+        - MUST NOT treat '//' as sufficient evidence of traversal
 
         Args:
-            url: URL or path to check
+            target: URL or path to check
 
         Returns:
             True if path traversal detected, False otherwise
         """
-        if not url:
+        if not target:
             return False
 
-        # URL decode first (handle multiple encoding levels)
-        decoded = url
-        for _ in range(3):  # Handle triple encoding
-            try:
-                prev = decoded
-                decoded = urllib.parse.unquote(decoded)
-                if prev == decoded:
-                    break
-            except:
-                return True  # Suspicious if can't decode
+        # URL-decode to catch %2e%2e encoded traversal
+        decoded = urllib.parse.unquote(target)
 
-        # Convert to lowercase for pattern matching
-        decoded_lower = decoded.lower()
-
-        # Check for file:// scheme first (always suspicious in web context)
-        if decoded_lower.startswith("file://"):
+        # IMPORTANT: Check UNC paths BEFORE normalizing \ to /
+        # Otherwise \\server\share becomes //server/share and we miss it
+        # Per spec §6.3: Only Windows UNC (\\), NOT // which could be protocol-relative
+        if decoded.startswith("\\\\"):
             return True
 
-        # Check multiple path traversal patterns
-        patterns = [
-            "../",
-            "..\\",  # Direct traversal
-            "..%2f",
-            "..%5c",  # Mixed encoding
-            "%2e%2e/",
-            "%2e%2e\\",  # Fully encoded
-            "%2e%2e%2f",
-            "%2e%2e%5c",  # Fully encoded variations
-            "%252e%252e",  # Double encoded
-            "..;",
-            "..//",  # Variations
-            "//",
-            "\\\\",  # UNC paths
-            "%5c%5c",  # Encoded UNC paths
-            "file://",
-            "file:\\",  # File protocol
-        ]
-
-        # Check for Windows drive letters
-        if re.match(r"^[a-z]:[/\\]", decoded_lower):
+        # Windows absolute path (C:\, D:\, etc.) - also check before normalizing
+        if len(decoded) >= 2 and decoded[1] == ":" and decoded[0].isalpha():
             return True
 
-        for pattern in patterns:
-            if pattern in decoded_lower:
-                return True
+        # Parse as URL
+        parsed = urllib.parse.urlparse(decoded)
 
-        # Normalize path and check
-        try:
-            # Use posixpath for consistent handling
-            normalized = posixpath.normpath(decoded)
+        # file:// scheme is always suspicious
+        if parsed.scheme.lower() == "file":
+            return True
 
-            # Check if path tries to escape
-            if normalized.startswith(".."):
-                return True
-            if "/../" in normalized or "/.." in normalized:
-                return True
+        # Safe schemes: only inspect path component
+        if parsed.scheme.lower() in ("http", "https", "mailto", "tel"):
+            candidate = parsed.path or ""
+        else:
+            candidate = decoded
 
-            # Check for absolute paths that might be suspicious
-            if normalized.startswith("/etc/") or normalized.startswith("/proc/"):
-                return True
+        # Normalize backslashes to forward slashes (AFTER UNC check)
+        normalized = candidate.replace("\\", "/")
 
-        except:
-            return True  # Suspicious if can't normalize
+        # Check for traversal segments
+        if ".." in normalized.split("/"):
+            return True
 
         return False
 

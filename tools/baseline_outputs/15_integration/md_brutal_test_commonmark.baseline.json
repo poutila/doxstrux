@@ -852,7 +852,7 @@
         "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
         "unicode_risk_score": 1,
@@ -861,40 +861,10 @@
       "summary": {
         "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 7,
+        "total_warnings": 2,
         "unicode_risk_score": 1
       },
       "warnings": [
-        {
-          "line": 12,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "line": 13,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://via.placeholder.com/80x40.png?text=MD"
-        },
-        {
-          "line": 26,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://example.com"
-        },
-        {
-          "line": 26,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://via.placeholder.com/30"
-        },
-        {
-          "line": 155,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://spec.commonmark.org/"
-        },
         {
           "line": null,
           "message": "Document mixes multiple scripts with Latin (potential spoofing)",

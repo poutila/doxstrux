@@ -61,26 +61,19 @@
         },
         "nbsp_present": false,
         "nested_headings_blocked": 0,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
         "unicode_risk_score": 0,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": true,
+        "has_dangerous_content": false,
         "ragged_tables_count": 0,
-        "total_warnings": 1,
+        "total_warnings": 0,
         "unicode_risk_score": 0
       },
-      "warnings": [
-        {
-          "line": 0,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://example.com"
-        }
-      ]
+      "warnings": []
     },
     "total_chars": 101,
     "total_lines": 4

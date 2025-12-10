@@ -62,32 +62,19 @@
         },
         "nbsp_present": false,
         "nested_headings_blocked": 0,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
         "unicode_risk_score": 0,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": true,
+        "has_dangerous_content": false,
         "ragged_tables_count": 0,
-        "total_warnings": 2,
+        "total_warnings": 0,
         "unicode_risk_score": 0
       },
-      "warnings": [
-        {
-          "line": 3,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://UP.example/%C3%A4?x=1"
-        },
-        {
-          "line": 3,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://UP.example/%C3%A4?x=1"
-        }
-      ]
+      "warnings": []
     },
     "total_chars": 100,
     "total_lines": 5

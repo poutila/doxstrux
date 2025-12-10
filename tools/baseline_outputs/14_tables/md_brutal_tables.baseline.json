@@ -900,7 +900,7 @@
         "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
         "unicode_risk_score": 1,
@@ -909,7 +909,7 @@
       "summary": {
         "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 10,
+        "total_warnings": 4,
         "unicode_risk_score": 1
       },
       "warnings": [
@@ -922,42 +922,6 @@
           "line": null,
           "message": "<iframe|object|embed src|data> present",
           "type": "frame_like"
-        },
-        {
-          "line": 8,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "line": 8,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://github.github.com/gfm/"
-        },
-        {
-          "line": 8,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://via.placeholder.com/60x20?text=MD"
-        },
-        {
-          "line": 133,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "line": 133,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://github.github.com/gfm/"
-        },
-        {
-          "line": 134,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://via.placeholder.com/60x20?text=MD"
         },
         {
           "line": null,

@@ -116,7 +116,7 @@
         },
         "nbsp_present": false,
         "nested_headings_blocked": 0,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "raw_dangerous_schemes": true,
         "table_align_mismatches": 0,
@@ -126,46 +126,10 @@
       "summary": {
         "has_dangerous_content": true,
         "ragged_tables_count": 0,
-        "total_warnings": 8,
+        "total_warnings": 2,
         "unicode_risk_score": 0
       },
       "warnings": [
-        {
-          "line": 7,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "ht!tp://broken%5E2"
-        },
-        {
-          "line": 7,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://example.com/4"
-        },
-        {
-          "line": 7,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "ht!tp://broken%5E7"
-        },
-        {
-          "line": 7,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://example.com/9"
-        },
-        {
-          "line": 7,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "ht!tp://broken%5E12"
-        },
-        {
-          "line": 7,
-          "message": "Link contains path traversal pattern",
-          "type": "path_traversal",
-          "url": "https://example.com/14"
-        },
         {
           "message": "Raw content contains potentially dangerous scheme: file:",
           "type": "disallowed_schemes_raw"
