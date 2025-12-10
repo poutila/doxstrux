@@ -303,7 +303,8 @@ def detect_unicode_issues(content: str, max_scan_bytes: int = 10240) -> dict[str
                 if unicodedata.bidirectional(char) in ("R", "AL"):
                     issues["has_rtl"] = True
             except (ValueError, IndexError):
-                pass
+                # Skip chars that can't be processed - continue to next char
+                continue
 
         # Mixed scripts with Latin (potential spoofing)
         if has_latin and scripts_seen:

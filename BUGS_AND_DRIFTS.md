@@ -11,7 +11,10 @@ Deep analysis of doxstrux package. Issues categorized by severity.
 
 ## CRITICAL BUGS
 
-### 1. Path Traversal False Positive on All HTTPS URLs
+### 1. Path Traversal False Positive on All HTTPS URLs [RESOLVED]
+
+**Status:** ✅ Fixed in NO_SILENTS Phase 1.1
+**Fix:** Replaced pattern-based check with `urlparse()` approach per SECURITY_KERNEL_SPEC.md §6.2
 
 **File:** `markdown_parser_core.py:1645-1662`
 
@@ -39,7 +42,10 @@ True  # FALSE POSITIVE
 
 ---
 
-### 2. Silent Exception Swallowing (Rule Violation)
+### 2. Silent Exception Swallowing (Rule Violation) [RESOLVED]
+
+**Status:** ✅ Fixed in NO_SILENTS Phase 1.2
+**Fix:** Removed bare `except Exception: pass` from `_build_mappings()`
 
 **File:** `markdown_parser_core.py:1535`
 
@@ -54,7 +60,10 @@ except Exception:
 
 ---
 
-### 3. Documented Fail-Open in Security Code
+### 3. Documented Fail-Open in Security Code [RESOLVED]
+
+**Status:** ✅ Fixed in NO_SILENTS Phase 1.3
+**Fix:** `check_prompt_injection()` now returns `PromptInjectionCheck(suspected=True, reason="validator_error")` on errors (fail-closed)
 
 **File:** `markdown/security/validators.py:301-303`
 
@@ -246,7 +255,10 @@ All have docstrings but no re-exports. Users must import from individual modules
 
 ---
 
-### 14. Duplicate Constants (Drift Risk)
+### 14. Duplicate Constants (Drift Risk) [RESOLVED]
+
+**Status:** ✅ Fixed in NO_SILENTS Phase 1.4
+**Fix:** Removed `MAX_DATA_URI_SIZE` dict from `budgets.py`. Added `get_max_data_uri_size()` and `get_max_injection_scan_chars()` helpers that read from SSOT (`SECURITY_PROFILES` in config.py)
 
 **Files:** `budgets.py` vs `config.py`
 
