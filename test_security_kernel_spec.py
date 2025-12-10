@@ -181,31 +181,30 @@ def test_path_traversal_flags_obvious_traversal(value: str):
     ), f"Traversal-like value {value!r} must be flagged as path traversal"
 
 
-def test_path_traversal_error_behavior():
+def test_path_traversal_error_behavior(monkeypatch):
     """
     INV-SEC-2: Path traversal errors must not silently return 'safe'.
 
     Note: Spec allows either raising or returning True (suspicious).
     Returning False (safe) on internal error is forbidden.
+
+    We patch urllib.parse.urlparse at the SOURCE module level.
+    This works regardless of how the implementation imports it
+    (from urllib.parse import urlparse OR import urllib.parse).
     """
-    import urllib.parse
-
-    original_urlparse = urllib.parse.urlparse
-
     def broken_urlparse(url, *args, **kwargs):
         raise RuntimeError("urlparse exploded")
 
+    # Patch at the source - affects all callers regardless of import style
+    monkeypatch.setattr("urllib.parse.urlparse", broken_urlparse)
+
     try:
-        urllib.parse.urlparse = broken_urlparse
-        try:
-            result = PATH_TRAVERSAL_FN("https://example.com")
-            # If it returns, it must be True (suspicious), not False (safe)
-            assert result is True, "Internal error must not return 'safe' (False)"
-        except Exception:
-            # Raising is acceptable fail-closed behavior
-            pass
-    finally:
-        urllib.parse.urlparse = original_urlparse
+        result = PATH_TRAVERSAL_FN("https://example.com")
+        # If it returns, it must be True (suspicious), not False (safe)
+        assert result is True, "Internal error must not return 'safe' (False)"
+    except Exception:
+        # Raising is acceptable fail-closed behavior
+        pass
 
 
 # ---------------------------------------------------------------------------
@@ -269,7 +268,11 @@ def test_prompt_injection_error_fails_closed(monkeypatch):
 
     original_patterns = getattr(validators, "PROMPT_INJECTION_PATTERNS", None)
     if original_patterns is None:
-        pytest.skip("PROMPT_INJECTION_PATTERNS not exposed; cannot test error path")
+        raise AssertionError(
+            "SECURITY_KERNEL_SPEC requires PROMPT_INJECTION_PATTERNS "
+            "to be exported from doxstrux.markdown.security.validators "
+            "for fail-closed error path testing"
+        )
 
     class Boom:
         def search(self, text: str) -> bool:  # pragma: no cover - forced error
@@ -408,6 +411,9 @@ def test_security_modules_do_not_use_bare_except_pass(module):
     """
     Meta check: security modules MUST NOT contain a bare 'except: pass' /
     'except Exception: pass' handler which would create silent failures.
+
+    Note: This is stricter than INV-SEC-1 (which only bans `except Exception: pass`).
+    We ban ALL pass-only handlers in security modules as defence in depth.
     """
     assert not _module_has_bare_except_pass(module), (
         f"{module.__name__} MUST NOT contain bare 'except ...: pass' "

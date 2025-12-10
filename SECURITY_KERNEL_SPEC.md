@@ -1,6 +1,6 @@
 # SECURITY_KERNEL_SPEC.md
 
-Version: 0.1.4  
+Version: 0.1.6  
 Applies to: doxstrux >= 0.2.2 (target)  
 Status: Draft / Implementation-guiding
 
@@ -242,8 +242,13 @@ SECURITY_PROFILES = {
 - `max_data_uri_size` is the maximum size (in bytes or characters, as defined)
   of data URI content that the parser will accept.
 - If a data URI exceeds this budget:
-  - The behaviour MUST be clearly defined per profile (e.g. reject vs warn).
-  - The decision MUST be testable and consistent.
+  - The behaviour SHOULD be clearly defined per profile (e.g. reject vs warn).
+  - The decision SHOULD be testable and consistent.
+
+> Implementation note: For v0.2.2, data URI budget enforcement is deferred.
+> The budget values exist in SECURITY_PROFILES for future use, but the
+> "what happens when exceeded" behavior is not yet specified or tested.
+> Priority is on prompt injection and path traversal invariants.
 
 ### PROF-3 — Injection Scan Budgets
 
@@ -295,20 +300,31 @@ configuration.
 
 The guard MUST:
 
-1. Parse URLs using a standard URL parser where appropriate (e.g. `urlparse`).  
+1. Parse URLs using a standard URL parser where appropriate (e.g. `urlparse`).
 2. For benign schemes (`http`, `https`, `mailto`, `tel`):
-   - Only inspect the **path** and **query**, not the full raw string.
+   - Only inspect the **path** component, not the full raw string (scheme, host,
+     fragment are irrelevant for traversal).
+   - Query string inspection is OPTIONAL; implementations MAY choose to inspect
+     query parameters for traversal patterns but this is not required.
 3. Normalize slashes (`\` to `/`) before inspection.
 4. Flag traversal when:
    - The normalized path segments contain `..` (e.g. `../` or `/../`); or
-   - The normalized path is clearly an absolute path into sensitive areas
-     (e.g. `/etc/`, `/var/`, `/root/`); or
    - The string matches a Windows absolute path pattern (`C:\...`); or
    - The string matches a Windows UNC path (e.g. `\\server\share\...`).
+
+> Implementation note: Detecting "absolute sensitive paths" (e.g. `/etc/passwd`
+> without `..`) is NOT required by this spec. Such detection is prone to false
+> positives and platform-specific. Implementations MAY add this as an optional
+> strictness level but it is not part of the core invariants.
 
 Implementations SHOULD also decode typical URL-encoded traversal segments
 (e.g. `%2e%2e` for `..`). If the decoded path contains traversal segments, it
 MUST be treated as suspicious.
+
+**Fail-closed on internal error**: If the guard encounters an internal error
+(e.g. URL parser failure, encoding exception), implementations MUST either
+raise a domain error or treat the value as suspicious (return `True`).
+Returning `False` (safe) in this scenario is forbidden by INV-SEC-2.
 
 ### 6.3 Non-Goals
 
@@ -357,6 +373,9 @@ and a function:
 def check_prompt_injection(text: str, profile: str = "strict") -> PromptInjectionCheck:
     ...
 ```
+
+Calling `check_prompt_injection(text)` with no `profile` argument MUST behave
+identically to `check_prompt_injection(text, profile="strict")`.
 
 > Compatibility note: previously `check_prompt_injection(text, timeout_seconds=0.1) -> bool`
 > existed. Implementations MAY keep that as a thin wrapper around the new API for
@@ -498,13 +517,17 @@ Within the security kernel:
 
 Security components SHOULD record structured diagnostics, including:
 
-- Component name (`"path_traversal"`, `"prompt_injection"`, etc.)  
-- Reason (`"pattern_match"`, `"validator_error"`, `"truncated"`, etc.)  
-- Pattern (if applicable)  
+- Component name (`"path_traversal"`, `"prompt_injection"`, etc.)
+- Reason (`"pattern_match"`, `"validator_error"`, `"truncated"`, etc.)
+- Pattern (if applicable)
 - Error representation (if applicable)
 
 How these diagnostics are surfaced (logs, warnings array, etc.) is an
-implementation detail but MUST be unit-testable.
+implementation detail and SHOULD be unit-testable where practical.
+
+> Implementation note: For v0.2.2, diagnostics are considered a SHOULD, not a
+> gate. The core invariants (fail-closed, no silent failures, structured results)
+> take priority. Diagnostics infrastructure may be added in a future release.
 
 ---
 
