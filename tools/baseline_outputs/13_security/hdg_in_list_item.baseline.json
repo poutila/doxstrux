@@ -126,6 +126,10 @@
         "type": "bullet"
       }
     ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
     "paragraphs": [],
     "sections": [
       {

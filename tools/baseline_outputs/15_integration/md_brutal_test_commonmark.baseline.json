@@ -1616,6 +1616,10 @@
         "type": "bullet"
       }
     ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
     "paragraphs": [
       {
         "end_line": 4,

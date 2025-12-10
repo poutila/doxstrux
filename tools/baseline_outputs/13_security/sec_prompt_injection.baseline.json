@@ -111,6 +111,10 @@
     "images": [],
     "links": [],
     "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
     "paragraphs": [
       {
         "end_line": 3,

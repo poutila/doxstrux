@@ -1429,6 +1429,10 @@
         "type": "ordered"
       }
     ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
     "paragraphs": [
       {
         "end_line": 8,

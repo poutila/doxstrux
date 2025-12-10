@@ -180,6 +180,10 @@
         "type": "ordered"
       }
     ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
     "paragraphs": [],
     "sections": [
       {
