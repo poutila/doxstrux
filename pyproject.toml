@@ -39,6 +39,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "golden-validator-hybrid",
     "jsonschema>=4.25.0",
     "markdown-it-py>=3.0.0",
     "mdit-py-plugins>=0.5.0",
@@ -78,6 +79,7 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["doxstrux*"]
+exclude = ["doxstrux.md_parser_testing*"]
 namespaces = false
 
 [tool.setuptools.package-data]
@@ -182,6 +184,9 @@ ignore_names = ["model_config", "metadata", "field_validator"]
 members = [
     ".",
 ]
+
+[tool.uv.sources]
+golden-validator-hybrid = { path = "../hybrid_validate", editable = true }
 
 
 [dependency-groups]

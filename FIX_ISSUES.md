@@ -2,7 +2,7 @@
 
 Issues identified from external code review, validated against codebase.
 
-## Issue 1: Empty Root `__init__.py`
+## Issue 1: Empty Root `__init__.py` [RESOLVED]
 
 **File:** `src/doxstrux/__init__.py`
 
@@ -23,7 +23,7 @@ __version__ = "0.2.1"
 
 ---
 
-## Issue 2: Version Mismatch
+## Issue 2: Version Mismatch [RESOLVED]
 
 **Files:**
 - `pyproject.toml` → `0.2.1`
@@ -47,7 +47,7 @@ B) Manual sync (simpler):
 
 ---
 
-## Issue 3: Missing `py.typed` Marker
+## Issue 3: Missing `py.typed` Marker [RESOLVED]
 
 **Problem:** `pyproject.toml` declares `py.typed` in package-data but file doesn't exist. Users can't get type checking benefits.
 
@@ -62,7 +62,7 @@ Empty file is sufficient as a PEP 561 marker.
 
 ---
 
-## Issue 4: Path Traversal False Positive on URLs
+## Issue 4: Path Traversal False Positive on URLs [RESOLVED]
 
 **File:** `src/doxstrux/markdown_parser_core.py` lines 1645-1662
 
@@ -126,7 +126,7 @@ def _check_path_traversal(self, url: str) -> bool:
 
 ---
 
-## Issue 5: md_parser_testing Distribution
+## Issue 5: md_parser_testing Distribution [RESOLVED]
 
 **Files:** `src/doxstrux/md_parser_testing/`
 
@@ -155,13 +155,13 @@ B) Move to `tests/` directory (outside src)
 
 After fixes, verify:
 
-- [ ] `from doxstrux import MarkdownParserCore` works
-- [ ] `python -c "import doxstrux; print(doxstrux.__version__)"` shows 0.2.1
-- [ ] `py.typed` exists and is included in wheel
-- [ ] `https://example.com` does not trigger path traversal warning
-- [ ] `../etc/passwd` still triggers path traversal warning
-- [ ] 542 baseline tests still pass
-- [ ] mypy recognizes package as typed
+- [x] `from doxstrux import MarkdownParserCore` works ✅
+- [x] `python -c "import doxstrux; print(doxstrux.__version__)"` shows 0.2.1 ✅
+- [x] `py.typed` exists and is included in wheel ✅
+- [x] `https://example.com` does not trigger path traversal warning ✅ (Phase 1.1)
+- [x] `../etc/passwd` still triggers path traversal warning ✅ (Phase 1.1)
+- [x] 542 baseline tests still pass ✅
+- [ ] mypy recognizes package as typed (not verified)
 
 ---
 

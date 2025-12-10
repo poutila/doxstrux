@@ -12,7 +12,7 @@ Extract hierarchical structure, metadata, and content from documents without sem
 
 ## ✨ Features
 
-- **Zero-regex parsing**: Token-based extraction using markdown-it-py
+- **Token-based parsing**: Structure extraction via markdown-it-py AST (no regex in parser)
 - **Security-first design**: Three security profiles (strict/moderate/permissive)
 - **Document IR**: Clean intermediate representation for RAG chunking
 - **Structure extraction**: Headings, lists, tables, code blocks, links, images
@@ -118,7 +118,7 @@ ruff check src/ tests/
 - **Python**: 3.12+
 - **Test Coverage**: 69% (working toward 80% target)
 - **Tests**: 95/95 pytest passing + 542/542 baseline tests passing
-- **Regex Count**: 0 (zero-regex architecture)
+- **Regex Count**: 10 (only prompt injection patterns in security layer)
 - **Core Parser**: 1944 lines (reduced from 2900, -33%)
 - **PyPI**: https://pypi.org/project/doxstrux/
 

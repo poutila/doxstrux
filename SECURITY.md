@@ -21,6 +21,11 @@ Three profiles with different trust levels:
 | **moderate** | 1MB | 10K | Standard use (default) |
 | **permissive** | 10MB | 50K | Trusted internal documents |
 
+**Default behavior**:
+- `MarkdownParserCore` defaults to `security_profile="moderate"` for content limits
+- `check_prompt_injection()` defaults to `profile="strict"` for maximum safety
+- Both can be overridden explicitly when needed
+
 ### Built-in Protections
 
 - **Content size limits** - Prevents resource exhaustion
@@ -32,14 +37,20 @@ Three profiles with different trust levels:
 - **Script tag detection** - Warns about embedded scripts
 - **Event handler detection** - Detects onclick, onerror, etc.
 
-### Zero-Regex Architecture
+### Token-Based Parser Architecture
 
-Phase 6 completed: **Zero regex patterns** in parsing logic. All structure extraction is token-based from markdown-it-py AST. This eliminates:
-- ReDoS (Regular Expression Denial of Service) vulnerabilities
-- Regex complexity attacks
-- Backtracking explosions
+Phase 6 completed: **Zero regex patterns in the core parser**. All structure extraction is token-based from markdown-it-py AST. This eliminates:
+- ReDoS (Regular Expression Denial of Service) vulnerabilities in parsing
+- Regex complexity attacks on document structure
+- Backtracking explosions from malformed markdown
 
-**Exception**: Security validation patterns (BiDi, confusables) use regex for detection only, not parsing.
+**Security layer regex**: The security kernel uses ~15 vetted regex patterns for:
+- Prompt injection detection (`PROMPT_INJECTION_PATTERNS`)
+- BiDi/confusable character detection
+- URL scheme classification
+- Dangerous HTML pattern detection
+
+These patterns operate on bounded input (truncated per security profile) and are not exposed to arbitrary document length.
 
 ## Reporting a Vulnerability
 
@@ -168,7 +179,7 @@ Security advisories will be published at:
 
 ## Dependencies
 
-Current minimal dependencies (v0.2.0):
+Current minimal dependencies (v0.2.1):
 - `markdown-it-py>=3.0.0` - Parsing engine
 - `mdit-py-plugins>=0.5.0` - Extended features
 - `pyyaml>=6.0.2` - YAML frontmatter
@@ -184,5 +195,5 @@ Subscribe to security updates:
 
 ---
 
-**Last Updated**: 2025-10-12
-**Version**: 0.2.0
+**Last Updated**: 2025-12-10
+**Version**: 0.2.1

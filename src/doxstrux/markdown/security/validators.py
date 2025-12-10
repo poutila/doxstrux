@@ -56,28 +56,75 @@ class PromptInjectionCheck:
     error: Optional[Exception] = None
 
 # ============================================================================
-# REGEX RETAINED (§6 Security) - Scheme Detection
+# Scheme Detection (ZERO-REGEX)
 # ============================================================================
-# Rationale: Raw content scan for dangerous schemes that markdown-it might not
-# parse as links (e.g., in code blocks, escaped contexts, malformed syntax).
-# Token-based link extraction only catches valid markdown links.
+# Phase 8: Replaced regex with string-based detection
 
-_DISALLOWED_SCHEMES_RAW_RE = re.compile(
-    r"(?:javascript:|file:|vbscript:|data:text/html)",
-    re.IGNORECASE
-)  # REGEX RETAINED (§6 Security)
-
-# Scheme extraction from URLs
-_URL_SCHEME_RE = re.compile(r"^([a-z][a-z0-9+.-]*):(?://)?", re.IGNORECASE)  # REGEX RETAINED (§6 Security)
+# Disallowed schemes to scan for in raw content
+_DISALLOWED_SCHEMES = ("javascript:", "file:", "vbscript:", "data:text/html")
 
 
-# ============================================================================
-# REGEX RETAINED (§6 Security) - Data URI Parsing
-# ============================================================================
-# Rationale: Parse data URIs to extract mediatype, encoding, and estimate size
-# for budget enforcement. O(1) size check without full decode.
+def _find_disallowed_scheme(content: str) -> str | None:
+    """Find first disallowed scheme in content (case-insensitive)."""
+    lower = content.lower()
+    for scheme in _DISALLOWED_SCHEMES:
+        if scheme in lower:
+            # Return the actual matched text (preserving case)
+            pos = lower.find(scheme)
+            return content[pos:pos + len(scheme)]
+    return None
 
-_DATA_URI_RE = re.compile(r"^data:([^;,]+)?(;base64)?,(.*)$", re.IGNORECASE)  # REGEX RETAINED (§6 Security)
+
+def _extract_url_scheme(url: str) -> str | None:
+    """Extract scheme from URL (e.g., 'https' from 'https://...')."""
+    # Find colon position
+    colon_pos = url.find(":")
+    if colon_pos == -1 or colon_pos == 0:
+        return None
+
+    # Extract potential scheme (everything before colon)
+    potential_scheme = url[:colon_pos].lower()
+
+    # Validate: first char must be alpha, rest can be alphanumeric or +.-
+    if not potential_scheme[0].isalpha():
+        return None
+    for char in potential_scheme[1:]:
+        if not (char.isalnum() or char in "+.-"):
+            return None
+
+    return potential_scheme
+
+
+def _parse_data_uri_parts(uri: str) -> tuple[bool, str | None, bool, str]:
+    """Parse data URI into components.
+
+    Returns:
+        (is_data_uri, mediatype, is_base64, data)
+    """
+    lower = uri.lower()
+    if not lower.startswith("data:"):
+        return False, None, False, ""
+
+    # Remove 'data:' prefix
+    rest = uri[5:]
+
+    # Find the comma that separates metadata from data
+    comma_pos = rest.find(",")
+    if comma_pos == -1:
+        return False, None, False, ""
+
+    metadata = rest[:comma_pos]
+    data = rest[comma_pos + 1:]
+
+    # Parse metadata for mediatype and base64
+    is_base64 = ";base64" in metadata.lower()
+    if is_base64:
+        # Remove ;base64 to get mediatype
+        mediatype = metadata.lower().replace(";base64", "").strip() or "text/plain"
+    else:
+        mediatype = metadata.strip() or "text/plain"
+
+    return True, mediatype, is_base64, data
 
 
 # ============================================================================
@@ -138,10 +185,7 @@ def scan_raw_for_disallowed_schemes(content: str) -> dict[str, Any]:
     """
     Scan raw content for disallowed schemes that markdown-it might not parse.
 
-    # REGEX RETAINED (§6 Security)
-    Rationale: Markdown-it only parses valid markdown links. Dangerous schemes
-    can appear in code blocks, escaped contexts, or malformed syntax where they
-    won't be caught by token-based link extraction.
+    Phase 8: Zero-regex implementation using string operations.
 
     Args:
         content: Raw markdown content to scan
@@ -149,10 +193,10 @@ def scan_raw_for_disallowed_schemes(content: str) -> dict[str, Any]:
     Returns:
         dict with 'found' (bool) and 'match' (str or None)
     """
-    match = _DISALLOWED_SCHEMES_RAW_RE.search(content)
+    match = _find_disallowed_scheme(content)
     return {
         "found": match is not None,
-        "match": match.group(0) if match else None
+        "match": match
     }
 
 
@@ -160,9 +204,7 @@ def validate_link_scheme(url: str, allowed_schemes: set[str]) -> tuple[str | Non
     """
     Extract and validate URL scheme.
 
-    # REGEX RETAINED (§6 Security)
-    Rationale: Scheme extraction requires regex parsing of URL structure.
-    Cannot be done with markdown tokens (URLs are atomic strings in tokens).
+    Phase 8: Zero-regex implementation using string operations.
 
     Args:
         url: URL string to validate
@@ -173,10 +215,8 @@ def validate_link_scheme(url: str, allowed_schemes: set[str]) -> tuple[str | Non
         - scheme: The URL scheme or None for relative/anchor links
         - is_allowed: True if scheme is in allowed_schemes or is relative/anchor
     """
-    # Check for scheme
-    match = _URL_SCHEME_RE.match(url)
-    if match:
-        scheme = match.group(1).lower()
+    scheme = _extract_url_scheme(url)
+    if scheme:
         is_allowed = scheme in allowed_schemes
         return scheme, is_allowed
 
@@ -188,9 +228,7 @@ def parse_data_uri(uri: str) -> dict[str, Any]:
     """
     Parse data URI to extract media type, encoding, and size estimate.
 
-    # REGEX RETAINED (§6 Security)
-    Rationale: Data URI parsing requires regex to extract components.
-    Size budget enforcement needs O(1) estimation without full decode.
+    Phase 8: Zero-regex implementation using string operations.
 
     Args:
         uri: Data URI string (e.g., "data:image/png;base64,iVBORw0...")
@@ -203,8 +241,9 @@ def parse_data_uri(uri: str) -> dict[str, Any]:
         - size_bytes: int (estimated decoded size)
         - data_preview: str (first 50 chars of data)
     """
-    match = _DATA_URI_RE.match(uri)
-    if not match:
+    is_data, mediatype, is_base64, data = _parse_data_uri_parts(uri)
+
+    if not is_data:
         return {
             "is_data_uri": False,
             "mediatype": None,
@@ -212,10 +251,6 @@ def parse_data_uri(uri: str) -> dict[str, Any]:
             "size_bytes": 0,
             "data_preview": ""
         }
-
-    mediatype = match.group(1) or "text/plain"
-    is_base64 = match.group(2) == ";base64"
-    data = match.group(3)
 
     # Estimate size without full decode (O(1))
     if is_base64:
@@ -351,6 +386,9 @@ def check_prompt_injection(text: str, profile: str = "strict") -> PromptInjectio
 
     max_len = SECURITY_PROFILES[profile]["max_injection_scan_chars"]
 
+    if text is None:
+        raise TypeError("text must be str, not None")
+
     if not text:
         return PromptInjectionCheck(suspected=False, reason="no_match", pattern=None)
 
@@ -379,9 +417,7 @@ def classify_link_type(url: str) -> str:
     """
     Classify URL into type: absolute, relative, anchor, malformed.
 
-    # REGEX RETAINED (§6 Security)
-    Rationale: URL structure analysis requires regex. Used for security
-    classification and link validation.
+    Phase 8: Zero-regex implementation using string operations.
 
     Args:
         url: URL string to classify
@@ -397,11 +433,10 @@ def classify_link_type(url: str) -> str:
         return "anchor"
 
     # Check for scheme
-    match = _URL_SCHEME_RE.match(url)
-    if match:
-        scheme_part = match.group(1)
-        # Validate scheme is alphanumeric
-        if scheme_part.isalpha():
+    scheme = _extract_url_scheme(url)
+    if scheme:
+        # Validate scheme is alphabetic (our extractor already validates structure)
+        if scheme.isalpha():
             return "absolute"
         else:
             return "malformed"  # Non-alphabetic scheme

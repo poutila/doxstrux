@@ -10,7 +10,6 @@ Functions:
     extract_html_tag_hints: Extract tag names from HTML content
 """
 
-import re
 from typing import Any
 
 
@@ -115,12 +114,31 @@ def extract_html(
 def extract_html_tag_hints(html_content: str) -> list[str]:
     """Extract HTML tag names for downstream sanitizer hints.
 
+    Phase 8: Zero-regex implementation using string operations.
+
     Args:
         html_content: HTML content string
 
     Returns:
         List of tag names found in the HTML (deduplicated)
     """
-    # Simple regex to find opening tags
-    tags = re.findall(r"<(\w+)", html_content)
-    return list(set(tags))  # Deduplicate
+    tags = set()
+    i = 0
+    while i < len(html_content):
+        # Find opening <
+        start = html_content.find("<", i)
+        if start == -1:
+            break
+        # Skip if it's a closing tag or comment
+        if start + 1 < len(html_content) and html_content[start + 1] in "/!":
+            i = start + 1
+            continue
+        # Extract tag name (alphanumeric characters after <)
+        tag_start = start + 1
+        tag_end = tag_start
+        while tag_end < len(html_content) and html_content[tag_end].isalnum():
+            tag_end += 1
+        if tag_end > tag_start:
+            tags.add(html_content[tag_start:tag_end])
+        i = tag_end
+    return list(tags)

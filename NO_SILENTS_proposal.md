@@ -1,13 +1,13 @@
 # NO_SILENTS_proposal.md - Security Kernel Hardening
 
-**Status**: Phase 0 - PLANNED
+**Status**: Phase 1 - COMPLETE
 **Version**: 3.4 (Aligned with SECURITY_KERNEL_SPEC.md v0.1.6)
 **Last Updated**: 2025-12-10
 **Last Verified**: -
 
 **Related Documents**:
 - [SECURITY_KERNEL_SPEC.md] - **SSOT** for security kernel API and invariants
-- [test_security_kernel_spec.py] - Spec-level tests (expected to fail until implementation complete)
+- [tests/test_security_kernel_spec.py] - Spec-level contract tests (39/39 passing)
 - [BUGS_AND_DRIFTS.md] - Issues #1, #2, #3, #14
 - [.claude/rules/CLEAN_TABLE_PRINCIPLE.md] - Governing rule
 - [.claude/rules/NO_WEAK_TESTS.md] - Test quality standard

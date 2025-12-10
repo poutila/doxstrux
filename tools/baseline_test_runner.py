@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Baseline Test Runner for Docpipe Markdown Parser
+Baseline Test Runner for Doxstrux Markdown Parser
 
 Tests the current parser implementation against all test pairs in tools/test_mds/
 Validates that .md files produce output matching their corresponding .json files.

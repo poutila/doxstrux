@@ -9,35 +9,95 @@ Constants:
     SECURITY_LIMITS: Content size and recursion limits by profile
     ALLOWED_PLUGINS: Allowed markdown-it plugins by profile
 
-Security Patterns (regex, retained for §6 Security):
-    _STYLE_JS_PAT: CSS injection pattern (javascript: in style)
-    _META_REFRESH_PAT: Meta refresh redirect detection
-    _FRAMELIKE_PAT: Frame-like tags (iframe/object/embed)
+Security Detection Functions (zero-regex):
+    has_style_js_injection: CSS injection detection (javascript: in style)
+    has_meta_refresh: Meta refresh redirect detection
+    has_framelike_tag: Frame-like tags (iframe/object/embed)
     _BIDI_CONTROLS: BiDi control characters for text direction manipulation
 """
 
-import re
 from doxstrux.markdown.security import validators as security_validators
 
 
 # ============================================================================
-# Security Patterns (REGEX RETAINED - §6 Security)
+# Security Detection Functions (ZERO-REGEX)
 # ============================================================================
 
-# Phase 6 Task 6.1: These regex patterns validate content security and cannot
-# be replaced by markdown-it tokens because they operate on raw content.
+# Phase 8: Replaced regex with string-based detection
 
-_STYLE_JS_PAT = re.compile(
-    r'style\s*=\s*["\'][^"\']*(url\s*\(\s*javascript:|expression\s*\()', re.I
-)  # REGEX RETAINED (§6 Security)
 
-_META_REFRESH_PAT = re.compile(
-    r'<meta[^>]+http-equiv\s*=\s*["\']refresh["\'][^>]*>', re.I
-)  # REGEX RETAINED (§6 Security)
+def has_style_js_injection(content: str) -> bool:
+    """Detect style-based JavaScript injection (url(javascript:) or expression()).
 
-_FRAMELIKE_PAT = re.compile(
-    r"<(iframe|object|embed)[^>]*>", re.I
-)  # REGEX RETAINED (§6 Security)
+    Checks for CSS-based script injection patterns in style attributes.
+    """
+    lower = content.lower()
+    # Look for style= followed by dangerous patterns
+    idx = 0
+    while True:
+        style_pos = lower.find("style", idx)
+        if style_pos == -1:
+            return False
+        # Find the attribute value after style=
+        eq_pos = lower.find("=", style_pos + 5)
+        if eq_pos == -1 or eq_pos > style_pos + 10:  # style and = should be close
+            idx = style_pos + 5
+            continue
+        # Check content after = for dangerous patterns
+        check_region = lower[eq_pos:eq_pos + 200]  # Check reasonable window
+        if "url" in check_region and "javascript:" in check_region:
+            return True
+        if "expression(" in check_region:
+            return True
+        idx = style_pos + 5
+
+
+def has_meta_refresh(content: str) -> bool:
+    """Detect <meta http-equiv='refresh'> tags."""
+    lower = content.lower()
+    idx = 0
+    while True:
+        meta_pos = lower.find("<meta", idx)
+        if meta_pos == -1:
+            return False
+        # Find end of tag
+        end_pos = lower.find(">", meta_pos)
+        if end_pos == -1:
+            return False
+        tag_content = lower[meta_pos:end_pos + 1]
+        if "http-equiv" in tag_content and "refresh" in tag_content:
+            return True
+        idx = meta_pos + 5
+
+
+def has_framelike_tag(content: str) -> bool:
+    """Detect frame-like tags: <iframe>, <object>, <embed>."""
+    lower = content.lower()
+    for tag in ("<iframe", "<object", "<embed"):
+        pos = lower.find(tag)
+        if pos != -1:
+            # Verify it's a tag (followed by space or >)
+            next_char_pos = pos + len(tag)
+            if next_char_pos < len(lower):
+                next_char = lower[next_char_pos]
+                if next_char in (" ", ">", "\t", "\n", "/"):
+                    return True
+    return False
+
+
+# Legacy pattern objects for backward compatibility (wrap functions)
+class _PatternWrapper:
+    """Wrapper to provide .search() interface for string-based detection."""
+    def __init__(self, func: callable):
+        self._func = func
+
+    def search(self, content: str) -> bool:
+        return self._func(content)
+
+
+_STYLE_JS_PAT = _PatternWrapper(has_style_js_injection)
+_META_REFRESH_PAT = _PatternWrapper(has_meta_refresh)
+_FRAMELIKE_PAT = _PatternWrapper(has_framelike_tag)
 
 
 # ============================================================================

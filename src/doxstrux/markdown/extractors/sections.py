@@ -11,7 +11,6 @@ Functions:
     slugify_base: Convert text to base slug format
 """
 
-import re
 import unicodedata
 from typing import Any
 
@@ -244,6 +243,8 @@ def extract_headings(
 def slugify_base(text: str) -> str:
     """Convert text to base slug format without de-duplication for stable IDs.
 
+    Phase 8: Zero-regex implementation using string operations.
+
     Args:
         text: Text to slugify
 
@@ -251,12 +252,23 @@ def slugify_base(text: str) -> str:
         Slugified text or "untitled" if empty
     """
     s = unicodedata.normalize("NFKD", text).lower()
-    # First replace slashes and spaces with hyphens
-    s = re.sub(r"[\s/]+", "-", s)
-    # Then remove other non-word characters (but keep hyphens)
-    s = re.sub(r"[^\w-]", "", s).strip()
-    # Clean up multiple hyphens
-    s = re.sub(r"-+", "-", s)
-    # Remove leading/trailing hyphens
-    s = s.strip("-")
-    return s or "untitled"  # Fallback for empty slugs
+
+    # Replace whitespace and slashes with hyphens
+    result = []
+    prev_hyphen = False
+    for char in s:
+        if char.isspace() or char == "/":
+            if not prev_hyphen:  # Collapse consecutive
+                result.append("-")
+                prev_hyphen = True
+        elif char.isalnum() or char == "_":
+            result.append(char)
+            prev_hyphen = False
+        elif char == "-":
+            if not prev_hyphen:  # Collapse consecutive
+                result.append("-")
+                prev_hyphen = True
+        # Skip other characters
+
+    slug = "".join(result).strip("-")
+    return slug or "untitled"  # Fallback for empty slugs

@@ -7,7 +7,6 @@ No backward compatibility burden - fresh architecture.
 
 import hashlib
 import posixpath
-import re
 import urllib.parse
 import warnings
 from collections.abc import Callable
@@ -73,20 +72,42 @@ class MarkdownParserCore:
         if line_count > limits["max_line_count"]:
             issues.append(f"Line count {line_count} exceeds {limits['max_line_count']} limit")
 
-        # Quick malicious pattern scan
-        malicious_patterns = [
-            (r"<script[^>]*>", "script tag"),
-            (r"javascript:", "javascript protocol"),
-            (r"data:text/html", "HTML data URI"),
-            (r"vbscript:", "vbscript protocol"),
-            (r"on\w+\s*=", "event handler"),
-        ]
+        # Quick malicious pattern scan (zero-regex)
+        check_content = content[:10000].lower()
 
-        for pattern, description in malicious_patterns:
-            if re.search(pattern, content[:10000], re.IGNORECASE):  # Check first 10KB
-                issues.append(f"Suspicious pattern detected: {description}")
+        # Check for script tags
+        if "<script" in check_content:
+            issues.append("Suspicious pattern detected: script tag")
+            if security_profile == "strict":
+                return {"valid": False, "issues": issues, "security_profile": security_profile,
+                        "content_size": content_size, "line_count": line_count}
+
+        # Check for dangerous protocols
+        for protocol, desc in [("javascript:", "javascript protocol"),
+                               ("vbscript:", "vbscript protocol"),
+                               ("data:text/html", "HTML data URI")]:
+            if protocol in check_content:
+                issues.append(f"Suspicious pattern detected: {desc}")
                 if security_profile == "strict":
-                    break  # Stop on first issue in strict mode
+                    return {"valid": False, "issues": issues, "security_profile": security_profile,
+                            "content_size": content_size, "line_count": line_count}
+
+        # Check for event handlers (common ones)
+        event_handlers = ["onclick", "onerror", "onload", "onmouseover", "onmouseout",
+                         "onfocus", "onblur", "onsubmit", "onchange", "onkeydown",
+                         "onkeyup", "onkeypress", "ondblclick", "oncontextmenu"]
+        for handler in event_handlers:
+            # Look for handler= pattern
+            pos = check_content.find(handler)
+            if pos != -1:
+                # Check if followed by = (with optional whitespace)
+                rest = check_content[pos + len(handler):pos + len(handler) + 5]
+                if "=" in rest.lstrip():
+                    issues.append("Suspicious pattern detected: event handler")
+                    if security_profile == "strict":
+                        return {"valid": False, "issues": issues, "security_profile": security_profile,
+                                "content_size": content_size, "line_count": line_count}
+                    break  # Only report once
 
         return {
             "valid": len(issues) == 0,
@@ -275,25 +296,38 @@ class MarkdownParserCore:
                 {"lines": line_count, "limit": limits["max_line_count"]},
             )
 
-        # Quick scan for obviously malicious patterns
-        malicious_patterns = [
-            r"<script[^>]*>",
-            r"javascript:",
-            r"data:text/html",
-            r"vbscript:",
-            r"on\w+\s*=",  # Event handlers
-        ]
+        # Quick scan for obviously malicious patterns (zero-regex)
+        check_content = content[:10000].lower()
+        detected_pattern = None
 
-        for pattern in malicious_patterns:
-            if re.search(pattern, content[:10000], re.IGNORECASE):  # Check first 10KB
-                if self.security_profile == "strict":
-                    raise MarkdownSecurityError(
-                        f"Malicious pattern detected: {pattern}",
-                        self.security_profile,
-                        {"pattern": pattern},
-                    )
-                # In moderate/permissive, we'll catch it in detailed analysis
-                break
+        if "<script" in check_content:
+            detected_pattern = "script tag"
+        elif "javascript:" in check_content:
+            detected_pattern = "javascript protocol"
+        elif "data:text/html" in check_content:
+            detected_pattern = "HTML data URI"
+        elif "vbscript:" in check_content:
+            detected_pattern = "vbscript protocol"
+        else:
+            # Check for event handlers
+            event_handlers = ["onclick", "onerror", "onload", "onmouseover", "onmouseout",
+                             "onfocus", "onblur", "onsubmit", "onchange", "onkeydown",
+                             "onkeyup", "onkeypress", "ondblclick", "oncontextmenu"]
+            for handler in event_handlers:
+                pos = check_content.find(handler)
+                if pos != -1:
+                    rest = check_content[pos + len(handler):pos + len(handler) + 5]
+                    if "=" in rest.lstrip():
+                        detected_pattern = "event handler"
+                        break
+
+        if detected_pattern:
+            if self.security_profile == "strict":
+                raise MarkdownSecurityError(
+                    f"Malicious pattern detected: {detected_pattern}",
+                    self.security_profile,
+                    {"pattern": detected_pattern},
+                )
 
     def _validate_plugins(
         self, plugins: list[str], external_plugins: list[str]
@@ -1106,32 +1140,33 @@ class MarkdownParserCore:
         disallowed_html_blocks = [b for b in html_blocks if not b.get("allowed", True)]
         disallowed_html_inline = [i for i in html_inline if not i.get("allowed", True)]
 
-        # Check for CSP headers in HTML blocks
+        # Check for CSP headers in HTML blocks (zero-regex)
         for block in html_blocks:
             content = block.get("content", "") if isinstance(block, dict) else str(block)
-            # Check for Content Security Policy in meta tags
-            csp_pattern = r'<meta[^>]*http-equiv=["\']Content-Security-Policy["\'][^>]*>'
-            if re.search(csp_pattern, content, re.IGNORECASE):
-                security["statistics"]["has_csp_header"] = True
-                security["warnings"].append(
-                    {
-                        "type": "csp_header_detected",
-                        "line": block.get("line") if isinstance(block, dict) else None,
-                        "message": "Content Security Policy header detected in HTML",
-                    }
-                )
+            lower_content = content.lower()
 
-            # Check for X-Frame-Options
-            xfo_pattern = r'<meta[^>]*http-equiv=["\']X-Frame-Options["\'][^>]*>'
-            if re.search(xfo_pattern, content, re.IGNORECASE):
-                security["statistics"]["has_xframe_options"] = True
-                security["warnings"].append(
-                    {
-                        "type": "xframe_options_detected",
-                        "line": block.get("line") if isinstance(block, dict) else None,
-                        "message": "X-Frame-Options header detected in HTML",
-                    }
-                )
+            # Check for Content Security Policy in meta tags
+            if "<meta" in lower_content and "http-equiv" in lower_content:
+                if "content-security-policy" in lower_content:
+                    security["statistics"]["has_csp_header"] = True
+                    security["warnings"].append(
+                        {
+                            "type": "csp_header_detected",
+                            "line": block.get("line") if isinstance(block, dict) else None,
+                            "message": "Content Security Policy header detected in HTML",
+                        }
+                    )
+
+                # Check for X-Frame-Options
+                if "x-frame-options" in lower_content:
+                    security["statistics"]["has_xframe_options"] = True
+                    security["warnings"].append(
+                        {
+                            "type": "xframe_options_detected",
+                            "line": block.get("line") if isinstance(block, dict) else None,
+                            "message": "X-Frame-Options header detected in HTML",
+                        }
+                    )
 
         if disallowed_html_blocks or disallowed_html_inline:
             security["statistics"]["html_disallowed"] = True
@@ -1474,7 +1509,6 @@ class MarkdownParserCore:
 
         Phase 7.5.4: Delegated to extractors/html.py
         """
-        print("Extracting math...")
         return math.extract_math(
             self.tokens
         )
@@ -1732,14 +1766,6 @@ class MarkdownParserCore:
             content = footnote.get("content", "")
             if security_validators.check_prompt_injection(content, profile=self.security_profile).suspected:
                 return True
-
-            # Also check for oversized footnotes (potential payload hiding)
-            if len(content) > 512:
-                # Check more aggressively in long footnotes
-                if re.search(
-                    r"(system|prompt|instruction|ignore|override)", content, re.IGNORECASE
-                ):
-                    return True
 
         return False
 

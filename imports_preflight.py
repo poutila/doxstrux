@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-imports_preflight_docpipe.py — diagnostic for Python import setup,
-customized for the 'docpipe' package.
+imports_preflight.py — diagnostic for Python import setup,
+customized for the 'doxstrux' package.
 """
 
 from __future__ import annotations

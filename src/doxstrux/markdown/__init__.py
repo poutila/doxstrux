@@ -17,4 +17,4 @@ This package contains the modular components of the markdown parser:
 All modules use absolute imports: from doxstrux.markdown.X import Y
 """
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
