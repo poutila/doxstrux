@@ -188,7 +188,6 @@ members = [
 dev = [
     "build>=1.3.0",
     "twine>=5.0.0",
-    "doxstrux",
     "hypothesis>=6.138.2",
     "pytest>=8.4.1",
     "pytest-cov>=6.2.1",
@@ -203,7 +202,3 @@ existing_file_1 = "src/ptool_test/important_file.some"
 
 [tool.project_paths.file_validators]
 some_file_validator = "some_file_validator.py"
-
-[tool.uv.sources]
-# ptool = { path = "../PTOOL_SERENA", editable = true }  # Local dev only
-doxstrux = { workspace = true }

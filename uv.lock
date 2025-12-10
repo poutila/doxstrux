@@ -475,7 +475,6 @@ dev = [
 [package.dev-dependencies]
 dev = [
     { name = "build" },
-    { name = "doxstrux" },
     { name = "hypothesis" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -510,7 +509,6 @@ provides-extras = ["dev"]
 [package.metadata.requires-dev]
 dev = [
     { name = "build", specifier = ">=1.3.0" },
-    { name = "doxstrux", editable = "." },
     { name = "hypothesis", specifier = ">=6.138.2" },
     { name = "pytest", specifier = ">=8.4.1" },
     { name = "pytest-cov", specifier = ">=6.2.1" },
