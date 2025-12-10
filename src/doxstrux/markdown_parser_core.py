@@ -987,7 +987,8 @@ class MarkdownParserCore:
         # RAG Safety: Comprehensive prompt injection detection
 
         # Check main content (Phase 6 Task 6.1)
-        if security_validators.check_prompt_injection(raw_content):
+        # Note: check_prompt_injection now returns PromptInjectionCheck, use .suspected
+        if security_validators.check_prompt_injection(raw_content, profile=self.security_profile).suspected:
             security["statistics"]["suspected_prompt_injection"] = True
             security["warnings"].append(
                 {
@@ -1001,7 +1002,8 @@ class MarkdownParserCore:
         for img in images:
             alt_text = img.get("alt", "")
             title = img.get("title", "")
-            if security_validators.check_prompt_injection(alt_text) or security_validators.check_prompt_injection(title):
+            if (security_validators.check_prompt_injection(alt_text, profile=self.security_profile).suspected or
+                security_validators.check_prompt_injection(title, profile=self.security_profile).suspected):
                 security["statistics"]["prompt_injection_in_images"] = True
                 security["warnings"].append(
                     {
@@ -1016,7 +1018,8 @@ class MarkdownParserCore:
         for link in links:
             title = link.get("title", "")
             text = link.get("text", "")
-            if security_validators.check_prompt_injection(title) or security_validators.check_prompt_injection(text):
+            if (security_validators.check_prompt_injection(title, profile=self.security_profile).suspected or
+                security_validators.check_prompt_injection(text, profile=self.security_profile).suspected):
                 security["statistics"]["prompt_injection_in_links"] = True
                 security["warnings"].append(
                     {
@@ -1031,7 +1034,7 @@ class MarkdownParserCore:
         code_blocks = self._get_cached("code_blocks", self._extract_code_blocks)
         for block in code_blocks:
             code = block.get("code", "")
-            if security_validators.check_prompt_injection(code):
+            if security_validators.check_prompt_injection(code, profile=self.security_profile).suspected:
                 security["statistics"]["prompt_injection_in_code"] = True
                 security["warnings"].append(
                     {
@@ -1046,7 +1049,7 @@ class MarkdownParserCore:
         for table in tables:
             # Check headers
             for header in table.get("headers", []):
-                if security_validators.check_prompt_injection(header):
+                if security_validators.check_prompt_injection(header, profile=self.security_profile).suspected:
                     security["statistics"]["prompt_injection_in_tables"] = True
                     security["warnings"].append(
                         {
@@ -1058,7 +1061,7 @@ class MarkdownParserCore:
                     break
             # Check rows
             for row in table.get("rows", []):
-                if any(security_validators.check_prompt_injection(cell) for cell in row):
+                if any(security_validators.check_prompt_injection(cell, profile=self.security_profile).suspected for cell in row):
                     security["statistics"]["prompt_injection_in_tables"] = True
                     security["warnings"].append(
                         {
@@ -1727,7 +1730,7 @@ class MarkdownParserCore:
         definitions = footnotes.get("definitions", [])
         for footnote in definitions:
             content = footnote.get("content", "")
-            if security_validators.check_prompt_injection(content):
+            if security_validators.check_prompt_injection(content, profile=self.security_profile).suspected:
                 return True
 
             # Also check for oversized footnotes (potential payload hiding)

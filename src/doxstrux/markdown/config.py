@@ -112,12 +112,25 @@ ALLOWED_PLUGINS = {
 # ============================================================================
 
 # Security profiles define policies for different trust levels
+#
+# SECURITY_PROFILES semantics (per SECURITY_KERNEL_SPEC.md §5):
+#
+# Most limits: strict < moderate < permissive (smaller = stricter)
+#   - max_content_size: 100KB < 1MB < 10MB
+#   - max_data_uri_size: 0 < 10KB < 100KB
+#
+# Exception - max_injection_scan_chars: strict > moderate > permissive
+#   - Scanning MORE chars = more thorough = stricter security
+#   - 4096 > 2048 > 1024 chars scanned
+#   - Recommended defaults per SECURITY_KERNEL_SPEC.md §5 PROF-3
+#
 SECURITY_PROFILES = {
     "strict": {
         "allows_html": False,
         "allows_scripts": False,
         "allows_data_uri": False,
         "max_data_uri_size": 0,
+        "max_injection_scan_chars": 4096,  # Strict scans more chars
         "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_STRICT,
         "max_link_count": 50,
         "max_image_count": 20,
@@ -131,6 +144,7 @@ SECURITY_PROFILES = {
         "allows_scripts": False,
         "allows_data_uri": True,
         "max_data_uri_size": 10240,  # 10KB
+        "max_injection_scan_chars": 2048,
         "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_MODERATE,
         "max_link_count": 200,
         "max_image_count": 100,
@@ -144,6 +158,7 @@ SECURITY_PROFILES = {
         "allows_scripts": False,  # Never allow scripts in RAG
         "allows_data_uri": True,
         "max_data_uri_size": 102400,  # 100KB
+        "max_injection_scan_chars": 1024,  # Permissive scans fewer chars
         "allowed_schemes": security_validators.ALLOWED_LINK_SCHEMES_PERMISSIVE,
         "max_link_count": 1000,
         "max_image_count": 500,

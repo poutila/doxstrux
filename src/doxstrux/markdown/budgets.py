@@ -41,6 +41,54 @@ MAX_DATA_URI_SIZE = {
 
 
 # ============================================================================
+# Budget Helper Functions (SSOT Access)
+# ============================================================================
+
+def get_max_data_uri_size(profile: str) -> int:
+    """Get max data URI size from SECURITY_PROFILES (SSOT).
+
+    Per SECURITY_KERNEL_SPEC.md §8.2.
+
+    Args:
+        profile: Security profile name (strict/moderate/permissive)
+
+    Returns:
+        Maximum data URI size in bytes for the profile
+
+    Raises:
+        ValueError: If profile is unknown
+    """
+    from .config import SECURITY_PROFILES
+
+    try:
+        return SECURITY_PROFILES[profile]["max_data_uri_size"]
+    except KeyError as exc:
+        raise ValueError(f"Unknown profile: {profile}") from exc
+
+
+def get_max_injection_scan_chars(profile: str) -> int:
+    """Get max injection scan chars from SECURITY_PROFILES (SSOT).
+
+    Per SECURITY_KERNEL_SPEC.md §8.2.
+
+    Args:
+        profile: Security profile name (strict/moderate/permissive)
+
+    Returns:
+        Maximum characters to scan for prompt injection
+
+    Raises:
+        ValueError: If profile is unknown
+    """
+    from .config import SECURITY_PROFILES
+
+    try:
+        return SECURITY_PROFILES[profile]["max_injection_scan_chars"]
+    except KeyError as exc:
+        raise ValueError(f"Unknown profile: {profile}") from exc
+
+
+# ============================================================================
 # Budget Tracking Classes
 # ============================================================================
 

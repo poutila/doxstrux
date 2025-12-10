@@ -10,7 +10,50 @@ All functions tagged with: # REGEX RETAINED (§6 Security)
 
 import re
 import unicodedata
-from typing import Any
+from dataclasses import dataclass
+from typing import Any, Optional
+
+
+# ============================================================================
+# Module Exports
+# ============================================================================
+
+__all__ = [
+    "PromptInjectionCheck",
+    "check_prompt_injection",
+    "PROMPT_INJECTION_PATTERNS",
+    "scan_raw_for_disallowed_schemes",
+    "validate_link_scheme",
+    "parse_data_uri",
+    "detect_unicode_issues",
+    "classify_link_type",
+    "ALLOWED_LINK_SCHEMES_STRICT",
+    "ALLOWED_LINK_SCHEMES_MODERATE",
+    "ALLOWED_LINK_SCHEMES_PERMISSIVE",
+    "CONFUSABLES_EXTENDED",
+]
+
+
+# ============================================================================
+# Data Classes
+# ============================================================================
+
+@dataclass
+class PromptInjectionCheck:
+    """Result of prompt injection check - structured for traceability.
+
+    Per SECURITY_KERNEL_SPEC.md §7.1 (INV-SEC-5).
+
+    Attributes:
+        suspected: True if injection found OR error occurred (fail-closed)
+        reason: 'pattern_match', 'validator_error', or 'no_match'
+        pattern: The matched pattern string (if any)
+        error: The exception that occurred (if any), for internal diagnostics
+    """
+    suspected: bool
+    reason: str
+    pattern: Optional[str]
+    error: Optional[Exception] = None
 
 # ============================================================================
 # REGEX RETAINED (§6 Security) - Scheme Detection
@@ -273,36 +316,62 @@ def detect_unicode_issues(content: str, max_scan_bytes: int = 10240) -> dict[str
     return issues
 
 
-def check_prompt_injection(text: str, timeout_seconds: float = 0.1) -> bool:
+def check_prompt_injection(text: str, profile: str = "strict") -> PromptInjectionCheck:
     """
-    Check for prompt injection patterns in text.
+    Check for prompt injection patterns in text. FAIL-CLOSED on errors.
 
     # REGEX RETAINED (§6 Security)
     Rationale: Prompt injection detection requires pattern matching on content.
     These patterns describe semantic attack vectors, not markdown structure.
 
+    Per SECURITY_KERNEL_SPEC.md §7.2:
+    1. Resolve profile via SECURITY_PROFILES
+    2. Determine max_len from profile's max_injection_scan_chars
+    3. Truncate text to max_len
+    4. Check patterns, return structured result
+    5. On error, return suspected=True (fail-closed)
+
     Args:
         text: Text content to check
-        timeout_seconds: Timeout for regex matching (safety limit)
+        profile: Security profile name (strict/moderate/permissive)
 
     Returns:
-        bool: True if prompt injection patterns detected
-    """
-    if not text:
-        return False
+        PromptInjectionCheck with suspected=True if injection OR error
 
-    # Truncate for performance (only check first 1KB)
-    check_text = text[:1024]
+    Raises:
+        ValueError: If profile is unknown
+    """
+    # Lazy import to avoid circular dependency (config imports validators)
+    from ..config import SECURITY_PROFILES
+
+    # Resolve profile (fail hard on unknown)
+    if profile not in SECURITY_PROFILES:
+        raise ValueError(f"Unknown security profile: {profile}")
+
+    max_len = SECURITY_PROFILES[profile]["max_injection_scan_chars"]
+
+    if not text:
+        return PromptInjectionCheck(suspected=False, reason="no_match", pattern=None)
+
+    check_text = text[:max_len]
 
     try:
         for pattern in PROMPT_INJECTION_PATTERNS:
             if pattern.search(check_text):
-                return True
-    except Exception:
-        # On regex timeout or error, return False (fail-open for this check)
-        pass
-
-    return False
+                return PromptInjectionCheck(
+                    suspected=True,
+                    reason="pattern_match",
+                    pattern=pattern.pattern,
+                )
+        return PromptInjectionCheck(suspected=False, reason="no_match", pattern=None)
+    except Exception as exc:
+        # FAIL-CLOSED per INV-SEC-2
+        return PromptInjectionCheck(
+            suspected=True,
+            reason="validator_error",
+            pattern=None,
+            error=exc,
+        )
 
 
 def classify_link_type(url: str) -> str:
