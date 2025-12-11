@@ -27,7 +27,7 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux import parse_markdown_file
 
 
 def should_exclude(file_path: Path, exclude_pattern: str) -> bool:
@@ -106,13 +106,11 @@ def generate_missing_pairs(
             continue
 
         try:
-            content = md_file.read_text(encoding='utf-8')
-            parser = MarkdownParserCore(
-                content,
+            output = parse_markdown_file(
+                md_file,
                 config=config,
                 security_profile=profile
             )
-            output = parser.parse()
 
             # Write JSON
             with json_file.open('w', encoding='utf-8') as f:

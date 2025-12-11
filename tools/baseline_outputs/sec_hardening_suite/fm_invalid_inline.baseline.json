@@ -1,0 +1,171 @@
+{
+  "content": {
+    "lines": [
+      "# Test: fm_invalid_inline",
+      "",
+      "--- this is not yaml ---",
+      "",
+      "Content.",
+      ""
+    ],
+    "raw": "# Test: fm_invalid_inline\n\n--- this is not yaml ---\n\nContent.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-fm_invalid_inline",
+      "1": "section_test-fm_invalid_inline",
+      "2": "section_test-fm_invalid_inline",
+      "3": "section_test-fm_invalid_inline",
+      "4": "section_test-fm_invalid_inline",
+      "5": "section_test-fm_invalid_inline"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "inline": 3,
+      "paragraph": 2,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/fm_invalid_inline.md",
+    "total_chars": 62,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 26,
+        "id": "heading_test-fm_invalid_inline",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-fm_invalid_inline",
+        "start_char": 0,
+        "text": "Test: fm_invalid_inline"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-fm_invalid_inline",
+        "start_line": 2,
+        "text": "--- this is not yaml ---",
+        "word_count": 6
+      },
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_1",
+        "section_id": "section_test-fm_invalid_inline",
+        "start_line": 4,
+        "text": "Content.",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 62,
+        "end_line": 5,
+        "id": "section_test-fm_invalid_inline",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: fm_invalid_inline\n\n--- this is not yaml ---\n\nContent.\n",
+        "slug": "test-fm_invalid_inline",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: fm_invalid_inline\n\n--- this is not yaml ---\n\nContent.",
+        "title": "Test: fm_invalid_inline"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

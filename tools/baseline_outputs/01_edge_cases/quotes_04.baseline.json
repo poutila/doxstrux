@@ -119,6 +119,10 @@
   "metadata": {
     "embedding_block_reason": "Raw content contains disallowed link schemes",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": true,
@@ -144,9 +148,13 @@
     },
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -194,6 +202,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/quotes_04.md",
     "total_chars": 460,
     "total_lines": 24
   },
@@ -376,7 +385,9 @@
           "V"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "> > | Q | V |\n> > |---|---|\n> > | 1 | 2 |",
         "row_count": 1,
         "rows": [

@@ -26,7 +26,7 @@ from typing import Any
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux import parse_markdown_file
 
 
 def deep_compare(obj1: Any, obj2: Any, path: str = "root") -> list[str]:
@@ -150,9 +150,7 @@ def validate_against_baseline(baseline_path: str, compare_path: str | None = Non
         else:
             # Parse with current code
             try:
-                content = full_path.read_text(encoding='utf-8')
-                parser = MarkdownParserCore(content, config=config, security_profile=profile)
-                current_output = parser.parse()
+                current_output = parse_markdown_file(full_path, config=config, security_profile=profile)
             except Exception as e:
                 print(f"  ❌ [{total}] {file_path} - parse error: {e}")
                 failures.append({

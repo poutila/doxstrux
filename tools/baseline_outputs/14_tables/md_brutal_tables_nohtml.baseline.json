@@ -827,6 +827,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.5786,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": true,
@@ -864,9 +868,13 @@
     ],
     "quarantined": true,
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -910,7 +918,7 @@
           "type": "ragged_table"
         },
         {
-          "line": 186,
+          "line": 158,
           "message": "Table has inconsistent column counts",
           "type": "ragged_table"
         },
@@ -921,6 +929,7 @@
         }
       ]
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/14_tables/md_brutal_tables_nohtml.md",
     "total_chars": 4007,
     "total_lines": 203
   },
@@ -1563,10 +1572,15 @@
           "Outer B"
         ],
         "id": "table_0",
+        "is_pure": false,
         "is_ragged": true,
         "is_ragged_meta": {
-          "heuristic": true
+          "source_col_counts": [
+            1,
+            2
+          ]
         },
+        "malformed_lines": [],
         "raw_content": "> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | ",
         "row_count": 1,
         "rows": [
@@ -1595,7 +1609,16 @@
           "Col B"
         ],
         "id": "table_1",
+        "is_pure": false,
         "is_ragged": false,
+        "malformed_lines": [
+          55,
+          56,
+          57,
+          58,
+          59,
+          60
+        ],
         "raw_content": "| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |",
         "row_count": 7,
         "rows": [
@@ -1630,7 +1653,7 @@
         ],
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "start_line": 53,
-        "table_valid_md": true
+        "table_valid_md": false
       },
       {
         "align": [
@@ -1648,10 +1671,20 @@
           "Content"
         ],
         "id": "table_2",
+        "is_pure": false,
         "is_ragged": true,
         "is_ragged_meta": {
-          "heuristic": true
+          "source_col_counts": [
+            1,
+            2,
+            4
+          ]
         },
+        "malformed_lines": [
+          72,
+          74,
+          82
+        ],
         "raw_content": "| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |",
         "row_count": 18,
         "rows": [
@@ -1748,7 +1781,14 @@
           "Status"
         ],
         "id": "table_3",
+        "is_pure": false,
         "is_ragged": false,
+        "malformed_lines": [
+          98,
+          99,
+          100,
+          101
+        ],
         "raw_content": "> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |",
         "row_count": 5,
         "rows": [
@@ -1775,7 +1815,7 @@
         ],
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "start_line": 96,
-        "table_valid_md": true
+        "table_valid_md": false
       },
       {
         "align": [
@@ -1793,7 +1833,13 @@
           "Demo"
         ],
         "id": "table_4",
+        "is_pure": false,
         "is_ragged": false,
+        "malformed_lines": [
+          135,
+          136,
+          137
+        ],
         "raw_content": "| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |",
         "row_count": 7,
         "rows": [
@@ -1828,7 +1874,7 @@
         ],
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "start_line": 130,
-        "table_valid_md": true
+        "table_valid_md": false
       },
       {
         "align": [
@@ -1846,7 +1892,13 @@
           "Value"
         ],
         "id": "table_5",
+        "is_pure": false,
         "is_ragged": false,
+        "malformed_lines": [
+          148,
+          149,
+          150
+        ],
         "raw_content": "| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |",
         "row_count": 4,
         "rows": [
@@ -1869,7 +1921,7 @@
         ],
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "start_line": 146,
-        "table_valid_md": true
+        "table_valid_md": false
       },
       {
         "align": [
@@ -1889,7 +1941,15 @@
           "Right"
         ],
         "id": "table_6",
-        "is_ragged": false,
+        "is_pure": false,
+        "is_ragged": true,
+        "is_ragged_meta": {
+          "source_col_counts": [
+            3,
+            4
+          ]
+        },
+        "malformed_lines": [],
         "raw_content": "| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |",
         "row_count": 6,
         "rows": [
@@ -1926,7 +1986,7 @@
         ],
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "start_line": 158,
-        "table_valid_md": true
+        "table_valid_md": false
       },
       {
         "align": [
@@ -1944,7 +2004,9 @@
           "Head B"
         ],
         "id": "table_7",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |",
         "row_count": 2,
         "rows": [
@@ -1977,10 +2039,9 @@
           "Value"
         ],
         "id": "table_8",
-        "is_ragged": true,
-        "is_ragged_meta": {
-          "heuristic": true
-        },
+        "is_pure": true,
+        "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |",
         "row_count": 3,
         "rows": [
@@ -1999,7 +2060,7 @@
         ],
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "start_line": 186,
-        "table_valid_md": false
+        "table_valid_md": true
       }
     ],
     "tasklists": []

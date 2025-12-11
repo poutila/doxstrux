@@ -47,6 +47,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -69,9 +73,13 @@
     ],
     "quarantined": true,
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -107,6 +115,7 @@
         }
       ]
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/14_tables/tbl_ragged_rows.md",
     "total_chars": 92,
     "total_lines": 8
   },
@@ -168,19 +177,25 @@
         },
         "align_mismatch": false,
         "column_count": 3,
-        "end_line": 7,
+        "end_line": 6,
         "headers": [
           "A",
           "B",
           "C"
         ],
         "id": "table_0",
+        "is_pure": false,
         "is_ragged": true,
         "is_ragged_meta": {
-          "heuristic": true
+          "source_col_counts": [
+            2,
+            3,
+            4
+          ]
         },
-        "raw_content": "| A | B | C |\n|---|---|---|\n| 1 | 2 |\n| 3 | 4 | 5 | 6 |\nParagraph.",
-        "row_count": 3,
+        "malformed_lines": [],
+        "raw_content": "| A | B | C |\n|---|---|---|\n| 1 | 2 |\n| 3 | 4 | 5 | 6 |",
+        "row_count": 2,
         "rows": [
           [
             "1",
@@ -191,11 +206,6 @@
             "3",
             "4",
             "5"
-          ],
-          [
-            "Paragraph.",
-            "",
-            ""
           ]
         ],
         "section_id": "section_test-tbl_ragged_rows",

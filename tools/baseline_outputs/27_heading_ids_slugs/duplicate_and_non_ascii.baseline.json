@@ -35,6 +35,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.4211,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -47,9 +51,13 @@
       "text": 3
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -86,6 +94,7 @@
         }
       ]
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/27_heading_ids_slugs/duplicate_and_non_ascii.md",
     "total_chars": 54,
     "total_lines": 5
   },

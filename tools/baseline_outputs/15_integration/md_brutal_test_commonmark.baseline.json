@@ -792,6 +792,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.6744,
+      "detected": "utf_8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": true,
@@ -829,9 +833,13 @@
       "tr": 5
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -881,6 +889,7 @@
     "security_policies_applied": [
       "stripped_9_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/15_integration/md_brutal_test_commonmark.md",
     "total_chars": 3676,
     "total_lines": 185
   },
@@ -1879,7 +1888,9 @@
           "**L4 Col B**"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": ">   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | strike    |\n>   > | *italics*    | **bold**      |",
         "row_count": 2,
         "rows": [
@@ -1912,7 +1923,9 @@
           "v"
         ],
         "id": "table_1",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": ">   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |",
         "row_count": 1,
         "rows": [

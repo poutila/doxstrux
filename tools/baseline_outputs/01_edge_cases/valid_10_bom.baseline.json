@@ -1,7 +1,7 @@
 {
   "content": {
     "lines": [
-      "\ufeff---",
+      "---",
       "title: With BOM",
       "",
       "---",
@@ -12,7 +12,7 @@
       "This is regular markdown content.",
       ""
     ],
-    "raw": "\ufeff---\ntitle: With BOM\n\n---\n\n\n# Content\n\nThis is regular markdown content.\n"
+    "raw": "---\ntitle: With BOM\n\n---\n\n\n# Content\n\nThis is regular markdown content.\n"
   },
   "mappings": {
     "code_blocks": [],
@@ -49,61 +49,65 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 1.0,
+      "detected": "utf-8-sig"
+    },
+    "frontmatter": {
+      "title": "With BOM"
+    },
     "has_code": false,
-    "has_frontmatter": false,
+    "has_frontmatter": true,
     "has_lists": false,
     "has_sections": true,
     "has_tables": false,
     "node_counts": {
+      "front_matter": 1,
       "heading": 1,
-      "hr": 1,
-      "inline": 3,
-      "paragraph": 2,
+      "inline": 2,
+      "paragraph": 1,
       "root": 1,
-      "softbreak": 1,
-      "text": 4
+      "text": 2
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
           "tel"
         ],
         "confusables_present": false,
-        "frontmatter_at_bof": false,
+        "frontmatter_at_bof": true,
         "has_data_uri_images": false,
         "has_event_handlers": false,
         "has_html_block": false,
         "has_html_inline": false,
         "has_script": false,
         "link_schemes": {},
-        "mixed_scripts": true,
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
         "ragged_tables_count": 0,
         "table_align_mismatches": 0,
-        "unicode_risk_score": 1,
+        "unicode_risk_score": 0,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": true,
+        "has_dangerous_content": false,
         "ragged_tables_count": 0,
-        "total_warnings": 1,
-        "unicode_risk_score": 1
+        "total_warnings": 0,
+        "unicode_risk_score": 0
       },
-      "warnings": [
-        {
-          "line": null,
-          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
-          "type": "mixed_scripts"
-        }
-      ]
+      "warnings": []
     },
-    "total_chars": 73,
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/valid_10_bom.md",
+    "total_chars": 72,
     "total_lines": 10
   },
   "structure": {
@@ -113,16 +117,18 @@
       "definitions": [],
       "references": []
     },
-    "frontmatter": null,
+    "frontmatter": {
+      "title": "With BOM"
+    },
     "headings": [
       {
-        "end_char": 38,
+        "end_char": 37,
         "id": "heading_content",
         "level": 1,
         "line": 6,
         "parent_heading_id": null,
         "slug": "content",
-        "start_char": 28,
+        "start_char": 27,
         "text": "Content"
       }
     ],
@@ -137,22 +143,11 @@
     },
     "paragraphs": [
       {
-        "end_line": 2,
-        "has_code": false,
-        "has_emphasis": false,
-        "has_links": false,
-        "id": "para_0",
-        "section_id": null,
-        "start_line": 0,
-        "text": "\ufeff---\ntitle: With BOM",
-        "word_count": 4
-      },
-      {
         "end_line": 9,
         "has_code": false,
         "has_emphasis": false,
         "has_links": false,
-        "id": "para_1",
+        "id": "para_0",
         "section_id": "section_content",
         "start_line": 8,
         "text": "This is regular markdown content.",
@@ -162,14 +157,14 @@
     "sections": [
       {
         "child_ids": [],
-        "end_char": 73,
+        "end_char": 72,
         "end_line": 9,
         "id": "section_content",
         "level": 1,
         "parent_id": null,
         "raw_content": "# Content\n\nThis is regular markdown content.\n",
         "slug": "content",
-        "start_char": 28,
+        "start_char": 27,
         "start_line": 6,
         "text_content": "Content\n\nThis is regular markdown content.",
         "title": "Content"

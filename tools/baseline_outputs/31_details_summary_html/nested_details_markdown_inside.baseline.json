@@ -51,6 +51,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": true,
@@ -67,9 +71,13 @@
       "text": 3
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -110,6 +118,7 @@
     "security_policies_applied": [
       "stripped_2_html_blocks"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/31_details_summary_html/nested_details_markdown_inside.md",
     "total_chars": 131,
     "total_lines": 10
   },

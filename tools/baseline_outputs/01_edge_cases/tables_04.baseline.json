@@ -104,6 +104,10 @@
   "metadata": {
     "embedding_block_reason": "Raw content contains disallowed link schemes",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -129,9 +133,13 @@
     "quarantined": true,
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -184,6 +192,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/tables_04.md",
     "total_chars": 1279,
     "total_lines": 22
   },
@@ -310,10 +319,17 @@
           "H4"
         ],
         "id": "table_0",
+        "is_pure": false,
         "is_ragged": true,
         "is_ragged_meta": {
-          "heuristic": true
+          "source_col_counts": [
+            2,
+            3,
+            4,
+            5
+          ]
         },
+        "malformed_lines": [],
         "raw_content": "| H1 | H2 | H3 | H4 |\n|:--:|:--:|---:|---:|\n| 1\\\\:1 zulu | 1:2 papa kilo zulu | 1\\\\:3 bravo | 1:4 november |\n| 2\\\\:1 uniform | 2:2 alpha quebec yankee | 2\\\\:3 uniform | 2:4 yankee lima xray | 2\\\\:5 uniform |\n| 3\\\\:1 oscar november whiskey | 3:2 alpha victor | 3\\\\:3 golf | 3:4 hotel kilo | 3\\\\:5 tango yankee alpha |\n| 4\\\\:1 hotel | 4:2 charlie echo | 4\\\\:3 echo november | 4:4 november papa | 4\\\\:5 alpha charlie |\n| 5\\\\:1 alpha | 5:2 mike | 5\\\\:3 hotel |\n| 6\\\\:1 india romeo foxtrot | 6:2 hotel india zulu | 6\\\\:3 golf romeo |\n| 7\\\\:1 kilo papa | 7:2 victor papa alpha |",
         "row_count": 7,
         "rows": [
@@ -386,7 +402,9 @@
           "H5"
         ],
         "id": "table_1",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| H1 | H2 | H3 | H4 | H5 |\n|----|----|---:|:---|---:|\n| 1:1 uniform charlie | 1:2 juliet | 1:3 oscar india uniform | 1:4 uniform bravo | 1:5 golf quebec |\n| 2:1 golf | 2:2 bravo whiskey delta | 2:3 uniform | 2:4 india india india | 2:5 foxtrot whiskey |\n| 3:1 zulu golf oscar | 3:2 papa echo charlie | 3:3 delta | 3:4 november | 3:5 bravo romeo |\n| 4:1 charlie zulu | 4:2 quebec alpha | 4:3 bravo mike | 4:4 bravo mike hotel | 4:5 november kilo uniform |",
         "row_count": 4,
         "rows": [

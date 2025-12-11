@@ -1,0 +1,192 @@
+{
+  "content": {
+    "lines": [
+      "# Test: sec_link_wrapped_image",
+      "",
+      "[![alt](https://via.placeholder.com/24)](https://dest.example)",
+      ""
+    ],
+    "raw": "# Test: sec_link_wrapped_image\n\n[![alt](https://via.placeholder.com/24)](https://dest.example)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-sec_link_wrapped_image",
+      "1": "section_test-sec_link_wrapped_image",
+      "2": "section_test-sec_link_wrapped_image",
+      "3": "section_test-sec_link_wrapped_image"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "image": 1,
+      "inline": 2,
+      "link": 1,
+      "paragraph": 1,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "https": 1,
+          "relative": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_link_wrapped_image.md",
+    "total_chars": 95,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_test-sec_link_wrapped_image",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-sec_link_wrapped_image",
+        "start_char": 0,
+        "text": "Test: sec_link_wrapped_image"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [
+      {
+        "allowed": true,
+        "alt": "alt",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": false,
+        "image_id": "34cac02474ccefde",
+        "image_kind": "external",
+        "line": 2,
+        "scheme": "https",
+        "src": "https://via.placeholder.com/24",
+        "title": ""
+      }
+    ],
+    "links": [
+      {
+        "allowed": true,
+        "line": 2,
+        "scheme": "https",
+        "text": "alt",
+        "type": "absolute",
+        "url": "https://dest.example"
+      },
+      {
+        "alt": "alt",
+        "format": "unknown",
+        "image_id": "34cac02474ccefde",
+        "image_kind": "external",
+        "line": 2,
+        "src": "https://via.placeholder.com/24",
+        "text": "alt",
+        "title": "",
+        "type": "image",
+        "url": "https://via.placeholder.com/24"
+      }
+    ],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [
+      {
+        "end_line": 3,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": "section_test-sec_link_wrapped_image",
+        "start_line": 2,
+        "text": "altalt",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 95,
+        "end_line": 3,
+        "id": "section_test-sec_link_wrapped_image",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: sec_link_wrapped_image\n\n[![alt](https://via.placeholder.com/24)](https://dest.example)\n",
+        "slug": "test-sec_link_wrapped_image",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: sec_link_wrapped_image",
+        "title": "Test: sec_link_wrapped_image"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

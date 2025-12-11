@@ -60,6 +60,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": false,
@@ -80,14 +84,14 @@
       "thead": 1,
       "tr": 6
     },
-    "quarantine_reasons": [
-      "ragged_tables:1"
-    ],
-    "quarantined": true,
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -104,25 +108,20 @@
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
-        "ragged_tables_count": 1,
+        "ragged_tables_count": 0,
         "table_align_mismatches": 0,
         "unicode_risk_score": 0,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": true,
-        "ragged_tables_count": 1,
-        "total_warnings": 1,
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
         "unicode_risk_score": 0
       },
-      "warnings": [
-        {
-          "line": 5,
-          "message": "Table has inconsistent column counts",
-          "type": "ragged_table"
-        }
-      ]
+      "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/26_admonitions_containers/nested_with_code_and_table.md",
     "total_chars": 110,
     "total_lines": 13
   },
@@ -179,43 +178,26 @@
         },
         "align_mismatch": false,
         "column_count": 2,
-        "end_line": 12,
+        "end_line": 8,
         "headers": [
           "A",
           "B"
         ],
         "id": "table_0",
-        "is_ragged": true,
-        "is_ragged_meta": {
-          "heuristic": true
-        },
-        "raw_content": "| A | B |\n| - | - |\n| 1 | 2 |\n::: warning Inner\n**Be careful**\n:::\n:::",
-        "row_count": 5,
+        "is_pure": true,
+        "is_ragged": false,
+        "malformed_lines": [],
+        "raw_content": "| A | B |\n| - | - |\n| 1 | 2 |",
+        "row_count": 1,
         "rows": [
           [
             "1",
             "2"
-          ],
-          [
-            "::: warning Inner",
-            ""
-          ],
-          [
-            "**Be careful**",
-            ""
-          ],
-          [
-            ":::",
-            ""
-          ],
-          [
-            ":::",
-            ""
           ]
         ],
         "section_id": null,
         "start_line": 5,
-        "table_valid_md": false
+        "table_valid_md": true
       }
     ],
     "tasklists": []

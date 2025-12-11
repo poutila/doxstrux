@@ -1,0 +1,221 @@
+{
+  "content": {
+    "lines": [
+      "# Test: sec_link_schemes",
+      "",
+      "[ext](https://example.com) [mail](mailto:a@b.com) [file](file:///C:/x.txt)",
+      "[bad](ht!tp://broken) [anchor](#part) [rel](./doc.md)",
+      ""
+    ],
+    "raw": "# Test: sec_link_schemes\n\n[ext](https://example.com) [mail](mailto:a@b.com) [file](file:///C:/x.txt)\n[bad](ht!tp://broken) [anchor](#part) [rel](./doc.md)\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-sec_link_schemes",
+      "1": "section_test-sec_link_schemes",
+      "2": "section_test-sec_link_schemes",
+      "3": "section_test-sec_link_schemes",
+      "4": "section_test-sec_link_schemes"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "metadata": {
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "inline": 2,
+      "link": 5,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 1,
+      "text": 10
+    },
+    "security": {
+      "link_disallowed_schemes_raw": true,
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {
+          "anchor": 1,
+          "https": 1,
+          "mailto": 1,
+          "relative": 2
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "raw_dangerous_schemes": true,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "message": "Raw content contains potentially dangerous scheme: file:",
+          "type": "disallowed_schemes_raw"
+        },
+        {
+          "message": "Dangerous scheme \"file:\" found in raw content",
+          "scheme": "file",
+          "type": "raw_dangerous_scheme"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_link_schemes.md",
+    "total_chars": 155,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 25,
+        "id": "heading_test-sec_link_schemes",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-sec_link_schemes",
+        "start_char": 0,
+        "text": "Test: sec_link_schemes"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 2,
+        "scheme": "https",
+        "text": "ext",
+        "type": "absolute",
+        "url": "https://example.com"
+      },
+      {
+        "allowed": true,
+        "line": 2,
+        "scheme": "mailto",
+        "text": "mail",
+        "type": "absolute",
+        "url": "mailto:a@b.com"
+      },
+      {
+        "allowed": true,
+        "line": 3,
+        "scheme": null,
+        "text": "bad",
+        "type": "relative",
+        "url": "ht!tp://broken"
+      },
+      {
+        "allowed": true,
+        "line": 3,
+        "scheme": null,
+        "text": "anchor",
+        "type": "anchor",
+        "url": "#part"
+      },
+      {
+        "allowed": true,
+        "line": 3,
+        "scheme": null,
+        "text": "rel",
+        "type": "relative",
+        "url": "./doc.md"
+      }
+    ],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": "section_test-sec_link_schemes",
+        "start_line": 2,
+        "text": "ext mail [file](file:///C:/x.txt)\nbad anchor rel",
+        "word_count": 6
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 155,
+        "end_line": 4,
+        "id": "section_test-sec_link_schemes",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: sec_link_schemes\n\n[ext](https://example.com) [mail](mailto:a@b.com) [file](file:///C:/x.txt)\n[bad](ht!tp://broken) [anchor](#part) [rel](./doc.md)\n",
+        "slug": "test-sec_link_schemes",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: sec_link_schemes\n\next mail [file](file:///C:/x.txt)\nbad anchor rel",
+        "title": "Test: sec_link_schemes"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

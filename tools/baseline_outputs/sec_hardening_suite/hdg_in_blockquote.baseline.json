@@ -1,0 +1,172 @@
+{
+  "content": {
+    "lines": [
+      "# Test: hdg_in_blockquote",
+      "",
+      "> # Quote H1",
+      "> text",
+      ""
+    ],
+    "raw": "# Test: hdg_in_blockquote\n\n> # Quote H1\n> text\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-hdg_in_blockquote",
+      "1": "section_test-hdg_in_blockquote",
+      "2": "section_quote-h1",
+      "3": "section_quote-h1",
+      "4": "section_quote-h1"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "blockquote": 1,
+      "heading": 2,
+      "inline": 3,
+      "paragraph": 1,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/hdg_in_blockquote.md",
+    "total_chars": 47,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [
+      {
+        "children_blocks": [],
+        "children_summary": {
+          "code": 0,
+          "lists": 0,
+          "tables": 0
+        },
+        "content": "Quote H1text",
+        "end_line": 4,
+        "section_id": "section_quote-h1",
+        "start_line": 2
+      }
+    ],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 26,
+        "id": "heading_test-hdg_in_blockquote",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-hdg_in_blockquote",
+        "start_char": 0,
+        "text": "Test: hdg_in_blockquote"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 27,
+        "end_line": 1,
+        "id": "section_test-hdg_in_blockquote",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: hdg_in_blockquote\n",
+        "slug": "test-hdg_in_blockquote",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: hdg_in_blockquote",
+        "title": "Test: hdg_in_blockquote"
+      },
+      {
+        "child_ids": [],
+        "end_char": 47,
+        "end_line": 4,
+        "id": "section_quote-h1",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "> # Quote H1\n> text\n",
+        "slug": "quote-h1",
+        "start_char": 27,
+        "start_line": 2,
+        "text_content": "Quote H1 text",
+        "title": "Quote H1"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

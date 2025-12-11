@@ -58,6 +58,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "summary": "Folded text that will be joined into a single line.\n",
       "title": "Folded"
@@ -76,9 +80,13 @@
       "text": 2
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -108,6 +116,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/valid_05_block_scalar_folded.md",
     "total_chars": 137,
     "total_lines": 13
   },

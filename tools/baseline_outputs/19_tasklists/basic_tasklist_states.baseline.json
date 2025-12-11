@@ -43,6 +43,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.4444,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": true,
@@ -60,9 +64,13 @@
       "text": 7
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -109,6 +117,7 @@
     "security_policies_applied": [
       "stripped_4_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/19_tasklists/basic_tasklist_states.md",
     "total_chars": 100,
     "total_lines": 7
   },

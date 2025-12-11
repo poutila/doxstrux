@@ -1,0 +1,196 @@
+{
+  "content": {
+    "lines": [
+      "# Test: hdg_list_cont_4sp",
+      "",
+      "- item",
+      "    # not doc heading (list cont)",
+      "  text",
+      ""
+    ],
+    "raw": "# Test: hdg_list_cont_4sp\n\n- item\n    # not doc heading (list cont)\n  text\n"
+  },
+  "mappings": {
+    "code_blocks": [
+      {
+        "end_line": 2,
+        "language": "",
+        "start_line": 3
+      }
+    ],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-hdg_list_cont_4sp",
+      "1": "section_test-hdg_list_cont_4sp",
+      "2": "section_test-hdg_list_cont_4sp",
+      "3": "section_not-doc-heading-list-cont",
+      "4": "section_not-doc-heading-list-cont",
+      "5": "section_not-doc-heading-list-cont"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 2,
+      "inline": 4,
+      "list_item": 1,
+      "paragraph": 2,
+      "root": 1,
+      "text": 4
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/hdg_list_cont_4sp.md",
+    "total_chars": 75,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [
+      {
+        "content": "# not doc heading (list cont)",
+        "end_line": 3,
+        "id": "code_0",
+        "language": "",
+        "section_id": "section_not-doc-heading-list-cont",
+        "start_line": 3,
+        "type": "indented"
+      }
+    ],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 26,
+        "id": "heading_test-hdg_list_cont_4sp",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-hdg_list_cont_4sp",
+        "start_char": 0,
+        "text": "Test: hdg_list_cont_4sp"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 5,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "children": [],
+            "text": "text"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_test-hdg_list_cont_4sp",
+        "start_line": 2,
+        "type": "bullet"
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 34,
+        "end_line": 2,
+        "id": "section_test-hdg_list_cont_4sp",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: hdg_list_cont_4sp\n\n- item",
+        "slug": "test-hdg_list_cont_4sp",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: hdg_list_cont_4sp\n\nitem",
+        "title": "Test: hdg_list_cont_4sp"
+      },
+      {
+        "child_ids": [],
+        "end_char": 75,
+        "end_line": 5,
+        "id": "section_not-doc-heading-list-cont",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "    # not doc heading (list cont)\n  text\n",
+        "slug": "not-doc-heading-list-cont",
+        "start_char": 34,
+        "start_line": 3,
+        "text_content": "not doc heading (list cont) text",
+        "title": "not doc heading (list cont)"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

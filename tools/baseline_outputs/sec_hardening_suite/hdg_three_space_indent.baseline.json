@@ -1,0 +1,165 @@
+{
+  "content": {
+    "lines": [
+      "# Test: hdg_three_space_indent",
+      "",
+      "   ## Valid doc H2",
+      ""
+    ],
+    "raw": "# Test: hdg_three_space_indent\n\n   ## Valid doc H2\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-hdg_three_space_indent",
+      "1": "section_test-hdg_three_space_indent",
+      "2": "section_valid-doc-h2",
+      "3": "section_valid-doc-h2"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 2,
+      "inline": 2,
+      "root": 1,
+      "text": 2
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/hdg_three_space_indent.md",
+    "total_chars": 51,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 31,
+        "id": "heading_test-hdg_three_space_indent",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-hdg_three_space_indent",
+        "start_char": 0,
+        "text": "Test: hdg_three_space_indent"
+      },
+      {
+        "end_char": 51,
+        "id": "heading_valid-doc-h2",
+        "level": 2,
+        "line": 2,
+        "parent_heading_id": "heading_test-hdg_three_space_indent",
+        "slug": "valid-doc-h2",
+        "start_char": 32,
+        "text": "Valid doc H2"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [
+          "section_valid-doc-h2"
+        ],
+        "end_char": 51,
+        "end_line": 3,
+        "id": "section_test-hdg_three_space_indent",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: hdg_three_space_indent\n\n   ## Valid doc H2\n",
+        "slug": "test-hdg_three_space_indent",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: hdg_three_space_indent\n\nValid doc H2",
+        "title": "Test: hdg_three_space_indent"
+      },
+      {
+        "child_ids": [],
+        "end_char": 51,
+        "end_line": 3,
+        "id": "section_valid-doc-h2",
+        "level": 2,
+        "parent_id": "section_test-hdg_three_space_indent",
+        "raw_content": "   ## Valid doc H2\n",
+        "slug": "valid-doc-h2",
+        "start_char": 32,
+        "start_line": 2,
+        "text_content": "Valid doc H2",
+        "title": "Valid doc H2"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

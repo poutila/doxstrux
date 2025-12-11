@@ -131,6 +131,10 @@
   "metadata": {
     "embedding_block_reason": "Raw content contains disallowed link schemes",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "id": "ref_clean_02",
       "note": "clean-case",
@@ -161,9 +165,13 @@
     },
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -211,6 +219,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/clean_02.md",
     "total_chars": 856,
     "total_lines": 28
   },
@@ -445,7 +454,9 @@
           "H5"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| H1 | H2 | H3 | H4 | H5 |\n|:--:|:--:|:---|----|----|\n| 1:1 zulu | 1:2 papa romeo yankee | 1:3 xray lima xray | 1:4 zulu sierra uniform | 1:5 india charlie |\n| 2:1 echo bravo foxtrot | 2:2 charlie golf | 2:3 romeo india | 2:4 romeo | 2:5 november |\n| 3:1 tango whiskey | 3:2 november | 3:3 xray echo | 3:4 uniform | 3:5 lima mike |",
         "row_count": 3,
         "rows": [

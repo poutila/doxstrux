@@ -22,9 +22,9 @@ from datetime import date, datetime
 import traceback
 
 # Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+# sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux import parse_markdown_file
 
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -46,13 +46,13 @@ def generate_baseline(md_file: Path, security_profile: str = "moderate") -> dict
     }
 
     try:
-        # Read and parse
-        md_content = md_file.read_text(encoding="utf-8")
-
         start_time = time.perf_counter()
-        parser = MarkdownParserCore(md_content, security_profile=security_profile)
-        output = parser.parse()
+        output = parse_markdown_file(md_file, security_profile=security_profile)
         parse_time = (time.perf_counter() - start_time) * 1000
+
+        # Extract encoding info from result
+        result["detected_encoding"] = output["metadata"]["encoding"]["detected"]
+        result["encoding_confidence"] = output["metadata"]["encoding"]["confidence"]
 
         result["status"] = "SUCCESS"
         result["output"] = output
@@ -192,7 +192,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generate baseline outputs for docpipe parser")
     parser.add_argument(
         "--profile",
-        default="moderate",
+        default="permissive",
         choices=["strict", "moderate", "permissive"],
         help="Security profile to use",
     )

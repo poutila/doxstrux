@@ -163,6 +163,10 @@
   "metadata": {
     "embedding_block_reason": "Raw content contains disallowed link schemes",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "id": "ref_admonitions_01",
       "note": "admonitions-case",
@@ -187,9 +191,13 @@
     },
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -237,6 +245,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/admonitions_01.md",
     "total_chars": 489,
     "total_lines": 36
   },

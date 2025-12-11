@@ -38,6 +38,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "allows_html": false,
       "id": "link_flood_01",
@@ -55,9 +59,13 @@
       "root": 1
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -87,6 +95,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/06_stress_links/link_flood__case_01.md",
     "total_chars": 101,
     "total_lines": 8
   },

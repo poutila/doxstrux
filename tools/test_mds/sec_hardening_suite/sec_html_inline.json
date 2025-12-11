@@ -1,0 +1,7 @@
+{
+  "category": "security",
+  "expected": {
+    "has_html_inline": true,
+    "has_html_block": false
+  }
+}

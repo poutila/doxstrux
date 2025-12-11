@@ -54,6 +54,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "id": "ref_html_02",
       "note": "html-case",
@@ -75,9 +79,13 @@
       "text": 3
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -119,6 +127,7 @@
       "stripped_1_html_blocks",
       "stripped_2_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/html_02.md",
     "total_chars": 145,
     "total_lines": 11
   },

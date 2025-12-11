@@ -55,6 +55,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "created": "2020-01-02",
       "title": "Dates",
@@ -74,9 +78,13 @@
       "text": 2
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -106,6 +114,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/valid_12_dates.md",
     "total_chars": 119,
     "total_lines": 12
   },

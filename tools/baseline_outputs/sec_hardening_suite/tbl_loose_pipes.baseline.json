@@ -1,0 +1,209 @@
+{
+  "content": {
+    "lines": [
+      "# Test: tbl_loose_pipes",
+      "",
+      "A | B",
+      "---|---",
+      "1 | 2",
+      "",
+      "Paragraph.",
+      ""
+    ],
+    "raw": "# Test: tbl_loose_pipes\n\nA | B\n---|---\n1 | 2\n\nParagraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-tbl_loose_pipes",
+      "1": "section_test-tbl_loose_pipes",
+      "2": "section_test-tbl_loose_pipes",
+      "3": "section_test-tbl_loose_pipes",
+      "4": "section_test-tbl_loose_pipes",
+      "5": "section_test-tbl_loose_pipes",
+      "6": "section_test-tbl_loose_pipes",
+      "7": "section_test-tbl_loose_pipes"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": true,
+    "node_counts": {
+      "heading": 1,
+      "inline": 6,
+      "paragraph": 1,
+      "root": 1,
+      "table": 1,
+      "tbody": 1,
+      "td": 2,
+      "text": 6,
+      "th": 2,
+      "thead": 1,
+      "tr": 2
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/tbl_loose_pipes.md",
+    "total_chars": 57,
+    "total_lines": 8
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 24,
+        "id": "heading_test-tbl_loose_pipes",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-tbl_loose_pipes",
+        "start_char": 0,
+        "text": "Test: tbl_loose_pipes"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [
+      {
+        "end_line": 7,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_test-tbl_loose_pipes",
+        "start_line": 6,
+        "text": "Paragraph.",
+        "word_count": 1
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 57,
+        "end_line": 7,
+        "id": "section_test-tbl_loose_pipes",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: tbl_loose_pipes\n\nA | B\n---|---\n1 | 2\n\nParagraph.\n",
+        "slug": "test-tbl_loose_pipes",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: tbl_loose_pipes\n\nAB\n\n12\n\nParagraph.",
+        "title": "Test: tbl_loose_pipes"
+      }
+    ],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 5,
+        "headers": [
+          "A",
+          "B"
+        ],
+        "id": "table_0",
+        "is_pure": false,
+        "is_ragged": false,
+        "malformed_lines": [
+          2,
+          4
+        ],
+        "raw_content": "A | B\n---|---\n1 | 2",
+        "row_count": 1,
+        "rows": [
+          [
+            "1",
+            "2"
+          ]
+        ],
+        "section_id": "section_test-tbl_loose_pipes",
+        "start_line": 2,
+        "table_valid_md": false
+      }
+    ],
+    "tasklists": []
+  }
+}

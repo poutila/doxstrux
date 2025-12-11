@@ -50,6 +50,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": false,
@@ -60,9 +64,13 @@
       "root": 1
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -92,6 +100,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/30_fenced_code_info/backtick_and_tilde_mixture.md",
     "total_chars": 53,
     "total_lines": 8
   },

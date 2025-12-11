@@ -1,0 +1,156 @@
+{
+  "content": {
+    "lines": [
+      "# Test: sec_img_onerror",
+      "",
+      "<img src=\"x\" onerror=\"fetch('/steal')\" />",
+      ""
+    ],
+    "raw": "# Test: sec_img_onerror\n\n<img src=\"x\" onerror=\"fetch('/steal')\" />\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-sec_img_onerror",
+      "1": "section_test-sec_img_onerror",
+      "2": "section_test-sec_img_onerror",
+      "3": "section_test-sec_img_onerror"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "html_block": 1,
+      "inline": 1,
+      "root": 1,
+      "text": 1
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": true,
+        "has_html_block": true,
+        "has_html_inline": false,
+        "has_script": false,
+        "html_disallowed": true,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 2,
+          "message": "Document contains HTML event handler attributes",
+          "type": "event_handlers"
+        },
+        {
+          "blocks": 1,
+          "inline": 0,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "stripped_1_html_blocks"
+    ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_img_onerror.md",
+    "total_chars": 67,
+    "total_lines": 4
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 24,
+        "id": "heading_test-sec_img_onerror",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-sec_img_onerror",
+        "start_char": 0,
+        "text": "Test: sec_img_onerror"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 67,
+        "end_line": 3,
+        "id": "section_test-sec_img_onerror",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: sec_img_onerror\n\n<img src=\"x\" onerror=\"fetch('/steal')\" />\n",
+        "slug": "test-sec_img_onerror",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: sec_img_onerror",
+        "title": "Test: sec_img_onerror"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

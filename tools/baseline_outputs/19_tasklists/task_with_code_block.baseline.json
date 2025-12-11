@@ -95,6 +95,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": true,
@@ -112,9 +116,13 @@
       "text": 4
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -155,6 +163,7 @@
     "security_policies_applied": [
       "stripped_3_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/19_tasklists/task_with_code_block.md",
     "total_chars": 210,
     "total_lines": 17
   },

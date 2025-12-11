@@ -124,6 +124,10 @@
   "metadata": {
     "embedding_block_reason": "Raw content contains disallowed link schemes",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -149,9 +153,13 @@
     "quarantined": true,
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -204,6 +212,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/tables_05.md",
     "total_chars": 1820,
     "total_lines": 27
   },
@@ -386,10 +395,16 @@
           "H8"
         ],
         "id": "table_0",
+        "is_pure": false,
         "is_ragged": true,
         "is_ragged_meta": {
-          "heuristic": true
+          "source_col_counts": [
+            8,
+            9,
+            7
+          ]
         },
+        "malformed_lines": [],
         "raw_content": "| H1 | H2 | H3 | H4 | H5 | H6 | H7 | H8 |\n|---|---|---|---|---|---|---|---|\n| 1\\\\:1 bravo foxtrot | 1:2 quebec yankee sierra | 1\\\\:3 kilo | 1:4 tango hotel | 1\\\\:5 charlie | 1:6 xray delta sierra | 1\\\\:7 foxtrot |\n| 2\\\\:1 zulu kilo | 2:2 lima quebec delta | 2\\\\:3 hotel victor oscar | 2:4 november xray | 2\\\\:5 juliet mike foxtrot | 2:6 victor | 2\\\\:7 tango echo |\n| 3\\\\:1 zulu golf | 3:2 golf kilo | 3\\\\:3 uniform | 3:4 kilo uniform romeo | 3\\\\:5 november yankee | 3:6 quebec | 3\\\\:7 golf | 3:8 romeo india foxtrot |\n| 4\\\\:1 golf zulu | 4:2 hotel echo | 4\\\\:3 golf november | 4:4 november | 4\\\\:5 whiskey | 4:6 uniform foxtrot | 4\\\\:7 bravo alpha | 4:8 tango | 4\\\\:9 oscar yankee india |\n| 5\\\\:1 india | 5:2 foxtrot | 5\\\\:3 kilo echo whiskey | 5:4 victor xray sierra | 5\\\\:5 xray juliet | 5:6 tango xray juliet | 5\\\\:7 tango zulu | 5:8 lima india | 5\\\\:9 tango |\n| 6\\\\:1 tango lima quebec | 6:2 papa tango | 6\\\\:3 whiskey echo tango | 6:4 mike | 6\\\\:5 echo | 6:6 charlie uniform hotel | 6\\\\:7 hotel | 6:8 zulu sierra |\n| 7\\\\:1 sierra lima | 7:2 tango | 7\\\\:3 golf yankee yankee | 7:4 alpha juliet | 7\\\\:5 lima india papa | 7:6 lima | 7\\\\:7 charlie | 7:8 xray foxtrot zulu |\n| 8\\\\:1 echo hotel | 8:2 india juliet golf | 8\\\\:3 victor charlie sierra | 8:4 charlie juliet bravo | 8\\\\:5 whiskey | 8:6 delta xray | 8\\\\:7 mike bravo quebec | 8:8 mike yankee echo |",
         "row_count": 8,
         "rows": [
@@ -498,7 +513,9 @@
           "H4"
         ],
         "id": "table_1",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| H1 | H2 | H3 | H4 |\n|:--:|:---|:--:|---:|\n| 1:1 golf | 1:2 victor | 1:3 juliet echo | 1:4 quebec quebec victor |\n| 2:1 uniform | 2:2 india romeo | 2:3 yankee delta | 2:4 foxtrot papa |",
         "row_count": 2,
         "rows": [

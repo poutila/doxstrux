@@ -73,6 +73,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.6316,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": true,
@@ -88,9 +92,13 @@
       "text": 9
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -127,6 +135,7 @@
         }
       ]
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/18_lists/unordered_mixed_bullets.md",
     "total_chars": 111,
     "total_lines": 13
   },

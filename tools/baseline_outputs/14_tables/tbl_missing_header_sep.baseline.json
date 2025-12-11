@@ -39,6 +39,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -53,9 +57,13 @@
       "text": 4
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -85,6 +93,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/14_tables/tbl_missing_header_sep.md",
     "total_chars": 63,
     "total_lines": 6
   },

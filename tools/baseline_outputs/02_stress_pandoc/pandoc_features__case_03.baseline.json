@@ -123,6 +123,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "allows_html": true,
       "id": "pandoc_features_03",
@@ -151,9 +155,13 @@
       "tr": 2
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -183,6 +191,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/02_stress_pandoc/pandoc_features__case_03.md",
     "total_chars": 350,
     "total_lines": 29
   },
@@ -352,7 +361,9 @@
           "v"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| k | v |\n|:-:|:-:|\n| a | b |",
         "row_count": 1,
         "rows": [

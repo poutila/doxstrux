@@ -1,0 +1,9 @@
+{
+  "category": "table",
+  "expected": {
+    "is_rectangular": false,
+    "ragged": false,
+    "align_mismatch": false,
+    "note": "No separator line; not a table"
+  }
+}

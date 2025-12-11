@@ -1,0 +1,9 @@
+{
+  "category": "table",
+  "expected": {
+    "is_rectangular": true,
+    "ragged": false,
+    "align_mismatch": false,
+    "note": "Align matches cols (control)"
+  }
+}

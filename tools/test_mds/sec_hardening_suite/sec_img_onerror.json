@@ -1,0 +1,9 @@
+{
+  "category": "security",
+  "expected": {
+    "has_html_block": true,
+    "has_script": false,
+    "event_handler_attrs": true,
+    "suspected_prompt_injection": false
+  }
+}

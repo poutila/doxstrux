@@ -56,13 +56,19 @@ class MarkdownParserCore:
     def validate_content(cls, content: str, security_profile: str = "moderate") -> dict[str, Any]:
         """Quick validation without full parsing - for CLI --validate-only mode.
 
+        Note: This is an internal method. Use parse_markdown_file() for the public API.
+
+        Args:
+            content: Markdown content as string
+            security_profile: Security profile to validate against
+
         Returns:
             Dict with 'valid' bool and 'issues' list
         """
         issues = []
         limits = cls.SECURITY_LIMITS.get(security_profile, cls.SECURITY_LIMITS["moderate"])
 
-        # Size check
+        # Size check (in bytes - security limits are byte-based)
         content_size = len(content.encode("utf-8"))
         if content_size > limits["max_content_size"]:
             issues.append(f"Content size {content_size} exceeds {limits['max_content_size']} limit")
@@ -148,6 +154,9 @@ class MarkdownParserCore:
     ):
         """
         Initialize parser with markdown content.
+
+        Note: This is an internal class. Use parse_markdown_file() for the public API,
+        which handles encoding detection automatically.
 
         Args:
             content: Raw markdown content as string

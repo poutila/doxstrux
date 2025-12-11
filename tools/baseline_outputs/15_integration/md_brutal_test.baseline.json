@@ -1318,6 +1318,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.6482,
+      "detected": "utf_8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": true,
@@ -1357,10 +1361,18 @@
       "thead": 4,
       "tr": 11
     },
+    "quarantine_reasons": [
+      "ragged_tables:1"
+    ],
+    "quarantined": true,
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -1382,18 +1394,23 @@
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
-        "ragged_tables_count": 0,
+        "ragged_tables_count": 1,
         "table_align_mismatches": 0,
         "unicode_risk_score": 1,
         "zwsp_present": false
       },
       "summary": {
         "has_dangerous_content": true,
-        "ragged_tables_count": 0,
-        "total_warnings": 2,
+        "ragged_tables_count": 1,
+        "total_warnings": 3,
         "unicode_risk_score": 1
       },
       "warnings": [
+        {
+          "line": 220,
+          "message": "Table has inconsistent column counts",
+          "type": "ragged_table"
+        },
         {
           "line": null,
           "message": "Document mixes multiple scripts with Latin (potential spoofing)",
@@ -1411,6 +1428,7 @@
       "stripped_6_html_blocks",
       "stripped_18_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/15_integration/md_brutal_test.md",
     "total_chars": 6609,
     "total_lines": 309
   },
@@ -3074,7 +3092,9 @@
           "**L4 Col B**"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": ">   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |",
         "row_count": 2,
         "rows": [
@@ -3107,7 +3127,9 @@
           "L4 B"
         ],
         "id": "table_1",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |",
         "row_count": 2,
         "rows": [
@@ -3142,7 +3164,15 @@
           "Right"
         ],
         "id": "table_2",
-        "is_ragged": false,
+        "is_pure": false,
+        "is_ragged": true,
+        "is_ragged_meta": {
+          "source_col_counts": [
+            3,
+            4
+          ]
+        },
+        "malformed_lines": [],
         "raw_content": "| Left align | Center | Right |\n|:-----------|:------:|------:|\n| `|` pipe   | `\\|`   |  1234 |\n| text \\| more | **bold** |  -3.14 |",
         "row_count": 2,
         "rows": [
@@ -3159,7 +3189,7 @@
         ],
         "section_id": "section_brutal-markdown-parser-torture-test",
         "start_line": 220,
-        "table_valid_md": true
+        "table_valid_md": false
       },
       {
         "align": [
@@ -3177,7 +3207,9 @@
           "v"
         ],
         "id": "table_3",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": ">   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |",
         "row_count": 1,
         "rows": [

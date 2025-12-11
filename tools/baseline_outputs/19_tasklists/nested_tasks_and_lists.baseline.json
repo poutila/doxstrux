@@ -54,6 +54,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.5333,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": true,
@@ -71,9 +75,13 @@
       "text": 6
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -120,6 +128,7 @@
     "security_policies_applied": [
       "stripped_3_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/19_tasklists/nested_tasks_and_lists.md",
     "total_chars": 101,
     "total_lines": 8
   },

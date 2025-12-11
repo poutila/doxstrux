@@ -51,6 +51,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -70,9 +74,13 @@
       "tr": 3
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -102,6 +110,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/14_tables/tbl_trailing_pipes_rect.md",
     "total_chars": 87,
     "total_lines": 9
   },
@@ -180,7 +189,9 @@
           "B"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| A | B | \n|---|---|\n| 1 | 2 |\n| 3 | 4 | ",
         "row_count": 2,
         "rows": [

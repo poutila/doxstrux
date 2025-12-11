@@ -47,6 +47,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.6875,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -61,9 +65,13 @@
       "text": 4
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -93,6 +101,7 @@
       },
       "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/11_frontmatter_invalid/fm_invalid_nbsp_fence.md",
     "total_chars": 65,
     "total_lines": 8
   },

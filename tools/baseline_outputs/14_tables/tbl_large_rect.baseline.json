@@ -79,6 +79,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -96,14 +100,14 @@
       "thead": 1,
       "tr": 12
     },
-    "quarantine_reasons": [
-      "ragged_tables:1"
-    ],
-    "quarantined": true,
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -120,25 +124,20 @@
         "nbsp_present": false,
         "nested_headings_blocked": 0,
         "path_traversal_pattern": false,
-        "ragged_tables_count": 1,
+        "ragged_tables_count": 0,
         "table_align_mismatches": 0,
         "unicode_risk_score": 0,
         "zwsp_present": false
       },
       "summary": {
-        "has_dangerous_content": true,
-        "ragged_tables_count": 1,
-        "total_warnings": 1,
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
         "unicode_risk_score": 0
       },
-      "warnings": [
-        {
-          "line": 2,
-          "message": "Table has inconsistent column counts",
-          "type": "ragged_table"
-        }
-      ]
+      "warnings": []
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/14_tables/tbl_large_rect.md",
     "total_chars": 393,
     "total_lines": 16
   },
@@ -203,7 +202,7 @@
         },
         "align_mismatch": false,
         "column_count": 6,
-        "end_line": 15,
+        "end_line": 14,
         "headers": [
           "H1",
           "H2",
@@ -213,12 +212,11 @@
           "H6"
         ],
         "id": "table_0",
-        "is_ragged": true,
-        "is_ragged_meta": {
-          "heuristic": true
-        },
-        "raw_content": "| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 2 | 3 | 4 | 5 | 6 |\n| 2 | 4 | 6 | 8 | 10 | 12 |\n| 3 | 6 | 9 | 12 | 15 | 18 |\n| 4 | 8 | 12 | 16 | 20 | 24 |\n| 5 | 10 | 15 | 20 | 25 | 30 |\n| 6 | 12 | 18 | 24 | 30 | 36 |\n| 7 | 14 | 21 | 28 | 35 | 42 |\n| 8 | 16 | 24 | 32 | 40 | 48 |\n| 9 | 18 | 27 | 36 | 45 | 54 |\n| 10 | 20 | 30 | 40 | 50 | 60 |\nParagraph.",
-        "row_count": 11,
+        "is_pure": true,
+        "is_ragged": false,
+        "malformed_lines": [],
+        "raw_content": "| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 2 | 3 | 4 | 5 | 6 |\n| 2 | 4 | 6 | 8 | 10 | 12 |\n| 3 | 6 | 9 | 12 | 15 | 18 |\n| 4 | 8 | 12 | 16 | 20 | 24 |\n| 5 | 10 | 15 | 20 | 25 | 30 |\n| 6 | 12 | 18 | 24 | 30 | 36 |\n| 7 | 14 | 21 | 28 | 35 | 42 |\n| 8 | 16 | 24 | 32 | 40 | 48 |\n| 9 | 18 | 27 | 36 | 45 | 54 |\n| 10 | 20 | 30 | 40 | 50 | 60 |",
+        "row_count": 10,
         "rows": [
           [
             "1",
@@ -299,19 +297,11 @@
             "40",
             "50",
             "60"
-          ],
-          [
-            "Paragraph.",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         ],
         "section_id": "section_test-tbl_large_rect",
         "start_line": 2,
-        "table_valid_md": false
+        "table_valid_md": true
       }
     ],
     "tasklists": []

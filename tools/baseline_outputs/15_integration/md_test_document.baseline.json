@@ -415,6 +415,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": true,
@@ -453,9 +457,13 @@
       "tr": 3
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -500,6 +508,7 @@
       "stripped_1_html_blocks",
       "stripped_2_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/15_integration/md_test_document.md",
     "total_chars": 1492,
     "total_lines": 97
   },
@@ -1326,7 +1335,9 @@
           "Column 3"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| Column 1 | Column 2 | Column 3 |\n|----------|----------|----------|\n| Row 1    | Data     | More Data|\n| Row 2    | Data     | More Data|",
         "row_count": 2,
         "rows": [

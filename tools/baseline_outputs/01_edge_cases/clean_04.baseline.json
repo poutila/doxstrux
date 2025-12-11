@@ -147,6 +147,10 @@
   "metadata": {
     "embedding_block_reason": "Raw content contains disallowed link schemes",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "id": "ref_clean_04",
       "note": "clean-case",
@@ -177,9 +181,13 @@
     },
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -227,6 +235,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/clean_04.md",
     "total_chars": 953,
     "total_lines": 32
   },
@@ -471,7 +480,9 @@
           "H4"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| H1 | H2 | H3 | H4 |\n|:---|----|:--:|---:|\n| 1:1 kilo india sierra | 1:2 victor | 1:3 echo quebec yankee | 1:4 victor uniform bravo |\n| 2:1 romeo papa juliet | 2:2 echo | 2:3 oscar | 2:4 uniform |\n| 3:1 tango papa oscar | 3:2 xray alpha foxtrot | 3:3 foxtrot | 3:4 yankee |\n| 4:1 uniform | 4:2 whiskey | 4:3 zulu oscar oscar | 4:4 zulu mike victor |",
         "row_count": 4,
         "rows": [

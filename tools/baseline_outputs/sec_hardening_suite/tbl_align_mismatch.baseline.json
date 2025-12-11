@@ -1,0 +1,201 @@
+{
+  "content": {
+    "lines": [
+      "# Test: tbl_align_mismatch",
+      "",
+      "| A | B | C |",
+      "|:--|--:|:--:|",
+      "| 1 | 2 | 3 |",
+      "| 4 | 5 | 6 |",
+      "Paragraph.",
+      ""
+    ],
+    "raw": "# Test: tbl_align_mismatch\n\n| A | B | C |\n|:--|--:|:--:|\n| 1 | 2 | 3 |\n| 4 | 5 | 6 |\nParagraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-tbl_align_mismatch",
+      "1": "section_test-tbl_align_mismatch",
+      "2": "section_test-tbl_align_mismatch",
+      "3": "section_test-tbl_align_mismatch",
+      "4": "section_test-tbl_align_mismatch",
+      "5": "section_test-tbl_align_mismatch",
+      "6": "section_test-tbl_align_mismatch",
+      "7": "section_test-tbl_align_mismatch"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": true,
+    "node_counts": {
+      "heading": 1,
+      "inline": 13,
+      "root": 1,
+      "table": 1,
+      "tbody": 1,
+      "td": 9,
+      "text": 11,
+      "th": 3,
+      "thead": 1,
+      "tr": 4
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/tbl_align_mismatch.md",
+    "total_chars": 96,
+    "total_lines": 8
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 27,
+        "id": "heading_test-tbl_align_mismatch",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-tbl_align_mismatch",
+        "start_char": 0,
+        "text": "Test: tbl_align_mismatch"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 96,
+        "end_line": 7,
+        "id": "section_test-tbl_align_mismatch",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: tbl_align_mismatch\n\n| A | B | C |\n|:--|--:|:--:|\n| 1 | 2 | 3 |\n| 4 | 5 | 6 |\nParagraph.\n",
+        "slug": "test-tbl_align_mismatch",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: tbl_align_mismatch\n\nABC\n\n123 456 Paragraph.",
+        "title": "Test: tbl_align_mismatch"
+      }
+    ],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "right",
+          "center"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 3,
+        "end_line": 6,
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "id": "table_0",
+        "is_pure": true,
+        "is_ragged": false,
+        "malformed_lines": [],
+        "raw_content": "| A | B | C |\n|:--|--:|:--:|\n| 1 | 2 | 3 |\n| 4 | 5 | 6 |",
+        "row_count": 2,
+        "rows": [
+          [
+            "1",
+            "2",
+            "3"
+          ],
+          [
+            "4",
+            "5",
+            "6"
+          ]
+        ],
+        "section_id": "section_test-tbl_align_mismatch",
+        "start_line": 2,
+        "table_valid_md": true
+      }
+    ],
+    "tasklists": []
+  }
+}

@@ -72,6 +72,10 @@
   "metadata": {
     "embedding_block_reason": "Raw content contains disallowed link schemes",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "frontmatter": {
       "id": "ref_linklab_02",
       "note": "linklab-case",
@@ -99,9 +103,13 @@
     },
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -149,6 +157,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/01_edge_cases/linklab_02.md",
     "total_chars": 838,
     "total_lines": 15
   },
@@ -330,7 +339,9 @@
           "H3"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| H1 | H2 | H3 |\n|---:|:--:|---:|\n| 1:1 xray delta india | 1:2 yankee alpha | 1:3 alpha bravo delta |\n| 2:1 juliet lima | 2:2 papa sierra | 2:3 zulu kilo whiskey |\n| 3:1 romeo lima xray | 3:2 india juliet echo | 3:3 romeo uniform hotel |",
         "row_count": 3,
         "rows": [

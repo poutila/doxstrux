@@ -32,6 +32,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.619,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -45,9 +49,13 @@
       "text": 4
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -84,6 +92,7 @@
         }
       ]
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/23_autolink_linkify/raw_urls_emails_i18n.md",
     "total_chars": 197,
     "total_lines": 6
   },

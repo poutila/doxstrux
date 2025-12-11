@@ -12,7 +12,7 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux import parse_markdown_file
 
 
 def extract_feature_counts(result: dict) -> dict[str, int]:
@@ -96,15 +96,12 @@ def test_file_pair(md_file: Path, json_file: Path, profile: str = "moderate") ->
 
     # Parse markdown
     try:
-        content = md_file.read_text(encoding="utf-8")
-
         # Use config from spec if available
         config = {}
         if "allows_html" in spec:
             config["allows_html"] = spec["allows_html"]
 
-        parser = MarkdownParserCore(content, config=config, security_profile=profile)
-        result = parser.parse()
+        result = parse_markdown_file(md_file, config=config, security_profile=profile)
     except Exception as e:
         return False, [f"Parser error: {e}"]
 

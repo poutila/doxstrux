@@ -16,8 +16,7 @@ def test_build_mappings_propagates_type_errors():
     Per CLEAN_TABLE_PRINCIPLE: No silent exceptions.
     This tests that exceptions are NOT swallowed.
     """
-    content = "# Test\n\n```python\ncode\n```"
-    parser = MarkdownParserCore(content)
+    parser = MarkdownParserCore("# Test\n\n```python\ncode\n```")
 
     # Inject non-iterable where list expected - triggers TypeError
     def mock_get_cached(key, extractor):
@@ -37,8 +36,7 @@ def test_build_mappings_handles_missing_keys_gracefully():
     This is INTENTIONAL behavior - missing keys skip the block.
     Separate from exception propagation.
     """
-    content = "# Test\n\n```python\ncode\n```"
-    parser = MarkdownParserCore(content)
+    parser = MarkdownParserCore("# Test\n\n```python\ncode\n```")
 
     # Block with missing keys - should be skipped, not crash
     def mock_get_cached(key, extractor):
@@ -69,8 +67,7 @@ def test_build_mappings_correct_classification():
     # Line 4: ```py    -> code
     # Line 5: x = 1    -> code
     # Line 6: ```      -> code
-    content = "# Heading\n\nParagraph\n\n```python\nx = 1\n```"
-    parser = MarkdownParserCore(content)
+    parser = MarkdownParserCore("# Heading\n\nParagraph\n\n```python\nx = 1\n```")
     mappings = parser._build_mappings()
 
     assert mappings["line_to_type"]["0"] == "prose"

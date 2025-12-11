@@ -75,6 +75,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.7143,
+      "detected": "utf_8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": true,
@@ -91,9 +95,13 @@
       "text": 9
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -130,6 +138,7 @@
         }
       ]
     },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/17_blockquotes/basic_and_nested_blockquotes.md",
     "total_chars": 176,
     "total_lines": 15
   },

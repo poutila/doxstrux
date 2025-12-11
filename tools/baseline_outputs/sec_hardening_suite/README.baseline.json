@@ -1,0 +1,643 @@
+{
+  "content": {
+    "lines": [
+      "# Security Hardening Test Suite",
+      "",
+      "Covers: (1) BOF-only YAML frontmatter, (2) Heading creepage prevention,",
+      "(3) Table ragged detection, (4) Security metadata reporting.",
+      "",
+      "## Index",
+      "- fm_invalid_in_code.md \u21c4 fm_invalid_in_code.json \u2014 frontmatter",
+      "- fm_invalid_inline.md \u21c4 fm_invalid_inline.json \u2014 frontmatter",
+      "- fm_invalid_json.md \u21c4 fm_invalid_json.json \u2014 frontmatter",
+      "- fm_invalid_nbsp_fence.md \u21c4 fm_invalid_nbsp_fence.json \u2014 frontmatter",
+      "- fm_invalid_not_bof.md \u21c4 fm_invalid_not_bof.json \u2014 frontmatter",
+      "- fm_invalid_toml.md \u21c4 fm_invalid_toml.json \u2014 frontmatter",
+      "- fm_invalid_trailing_spaces.md \u21c4 fm_invalid_trailing_spaces.json \u2014 frontmatter",
+      "- fm_invalid_unclosed.md \u21c4 fm_invalid_unclosed.json \u2014 frontmatter",
+      "- fm_valid_bom.md \u21c4 fm_valid_bom.json \u2014 frontmatter",
+      "- fm_valid_ellipsis_close.md \u21c4 fm_valid_ellipsis_close.json \u2014 frontmatter",
+      "- fm_valid_folded.md \u21c4 fm_valid_folded.json \u2014 frontmatter",
+      "- fm_valid_simple.md \u21c4 fm_valid_simple.json \u2014 frontmatter",
+      "- hdg_code_fence.md \u21c4 hdg_code_fence.json \u2014 heading",
+      "- hdg_escaped_hash.md \u21c4 hdg_escaped_hash.json \u2014 heading",
+      "- hdg_fullwidth_hash.md \u21c4 hdg_fullwidth_hash.json \u2014 heading",
+      "- hdg_in_blockquote.md \u21c4 hdg_in_blockquote.json \u2014 heading",
+      "- hdg_in_list_item.md \u21c4 hdg_in_list_item.json \u2014 heading",
+      "- hdg_list_cont_4sp.md \u21c4 hdg_list_cont_4sp.json \u2014 heading",
+      "- hdg_nbsp_after_hash.md \u21c4 hdg_nbsp_after_hash.json \u2014 heading",
+      "- hdg_no_space.md \u21c4 hdg_no_space.json \u2014 heading",
+      "- hdg_setext_valid.md \u21c4 hdg_setext_valid.json \u2014 heading",
+      "- hdg_three_space_indent.md \u21c4 hdg_three_space_indent.json \u2014 heading",
+      "- hdg_trailing_hashes.md \u21c4 hdg_trailing_hashes.json \u2014 heading",
+      "- hdg_unclosed_fence_then_hash.md \u21c4 hdg_unclosed_fence_then_hash.json \u2014 heading",
+      "- sec_confusables.md \u21c4 sec_confusables.json \u2014 security",
+      "- sec_data_uri_image.md \u21c4 sec_data_uri_image.json \u2014 security",
+      "- sec_footnote_injection.md \u21c4 sec_footnote_injection.json \u2014 security",
+      "- sec_html_comment.md \u21c4 sec_html_comment.json \u2014 security",
+      "- sec_html_inline.md \u21c4 sec_html_inline.json \u2014 security",
+      "- sec_html_script.md \u21c4 sec_html_script.json \u2014 security",
+      "- sec_img_onerror.md \u21c4 sec_img_onerror.json \u2014 security",
+      "- sec_kitchen_sink.md \u21c4 sec_kitchen_sink.json \u2014 security",
+      "- sec_link_schemes.md \u21c4 sec_link_schemes.json \u2014 security",
+      "- sec_link_wrapped_image.md \u21c4 sec_link_wrapped_image.json \u2014 security",
+      "- sec_prompt_injection.md \u21c4 sec_prompt_injection.json \u2014 security",
+      "- sec_relative_paths.md \u21c4 sec_relative_paths.json \u2014 security",
+      "- tbl_align_mismatch.md \u21c4 tbl_align_mismatch.json \u2014 table",
+      "- tbl_align_mismatch_bad.md \u21c4 tbl_align_mismatch_bad.json \u2014 table",
+      "- tbl_clean_2x2.md \u21c4 tbl_clean_2x2.json \u2014 table",
+      "- tbl_escaped_pipes_rect.md \u21c4 tbl_escaped_pipes_rect.json \u2014 table",
+      "- tbl_in_blockquote.md \u21c4 tbl_in_blockquote.json \u2014 table",
+      "- tbl_in_code_fence.md \u21c4 tbl_in_code_fence.json \u2014 table",
+      "- tbl_large_rect.md \u21c4 tbl_large_rect.json \u2014 table",
+      "- tbl_loose_pipes.md \u21c4 tbl_loose_pipes.json \u2014 table",
+      "- tbl_missing_header_sep.md \u21c4 tbl_missing_header_sep.json \u2014 table",
+      "- tbl_ragged_missing_cells.md \u21c4 tbl_ragged_missing_cells.json \u2014 table",
+      "- tbl_ragged_rows.md \u21c4 tbl_ragged_rows.json \u2014 table",
+      "- tbl_trailing_pipes_rect.md \u21c4 tbl_trailing_pipes_rect.json \u2014 table",
+      ""
+    ],
+    "raw": "# Security Hardening Test Suite\n\nCovers: (1) BOF-only YAML frontmatter, (2) Heading creepage prevention,\n(3) Table ragged detection, (4) Security metadata reporting.\n\n## Index\n- fm_invalid_in_code.md \u21c4 fm_invalid_in_code.json \u2014 frontmatter\n- fm_invalid_inline.md \u21c4 fm_invalid_inline.json \u2014 frontmatter\n- fm_invalid_json.md \u21c4 fm_invalid_json.json \u2014 frontmatter\n- fm_invalid_nbsp_fence.md \u21c4 fm_invalid_nbsp_fence.json \u2014 frontmatter\n- fm_invalid_not_bof.md \u21c4 fm_invalid_not_bof.json \u2014 frontmatter\n- fm_invalid_toml.md \u21c4 fm_invalid_toml.json \u2014 frontmatter\n- fm_invalid_trailing_spaces.md \u21c4 fm_invalid_trailing_spaces.json \u2014 frontmatter\n- fm_invalid_unclosed.md \u21c4 fm_invalid_unclosed.json \u2014 frontmatter\n- fm_valid_bom.md \u21c4 fm_valid_bom.json \u2014 frontmatter\n- fm_valid_ellipsis_close.md \u21c4 fm_valid_ellipsis_close.json \u2014 frontmatter\n- fm_valid_folded.md \u21c4 fm_valid_folded.json \u2014 frontmatter\n- fm_valid_simple.md \u21c4 fm_valid_simple.json \u2014 frontmatter\n- hdg_code_fence.md \u21c4 hdg_code_fence.json \u2014 heading\n- hdg_escaped_hash.md \u21c4 hdg_escaped_hash.json \u2014 heading\n- hdg_fullwidth_hash.md \u21c4 hdg_fullwidth_hash.json \u2014 heading\n- hdg_in_blockquote.md \u21c4 hdg_in_blockquote.json \u2014 heading\n- hdg_in_list_item.md \u21c4 hdg_in_list_item.json \u2014 heading\n- hdg_list_cont_4sp.md \u21c4 hdg_list_cont_4sp.json \u2014 heading\n- hdg_nbsp_after_hash.md \u21c4 hdg_nbsp_after_hash.json \u2014 heading\n- hdg_no_space.md \u21c4 hdg_no_space.json \u2014 heading\n- hdg_setext_valid.md \u21c4 hdg_setext_valid.json \u2014 heading\n- hdg_three_space_indent.md \u21c4 hdg_three_space_indent.json \u2014 heading\n- hdg_trailing_hashes.md \u21c4 hdg_trailing_hashes.json \u2014 heading\n- hdg_unclosed_fence_then_hash.md \u21c4 hdg_unclosed_fence_then_hash.json \u2014 heading\n- sec_confusables.md \u21c4 sec_confusables.json \u2014 security\n- sec_data_uri_image.md \u21c4 sec_data_uri_image.json \u2014 security\n- sec_footnote_injection.md \u21c4 sec_footnote_injection.json \u2014 security\n- sec_html_comment.md \u21c4 sec_html_comment.json \u2014 security\n- sec_html_inline.md \u21c4 sec_html_inline.json \u2014 security\n- sec_html_script.md \u21c4 sec_html_script.json \u2014 security\n- sec_img_onerror.md \u21c4 sec_img_onerror.json \u2014 security\n- sec_kitchen_sink.md \u21c4 sec_kitchen_sink.json \u2014 security\n- sec_link_schemes.md \u21c4 sec_link_schemes.json \u2014 security\n- sec_link_wrapped_image.md \u21c4 sec_link_wrapped_image.json \u2014 security\n- sec_prompt_injection.md \u21c4 sec_prompt_injection.json \u2014 security\n- sec_relative_paths.md \u21c4 sec_relative_paths.json \u2014 security\n- tbl_align_mismatch.md \u21c4 tbl_align_mismatch.json \u2014 table\n- tbl_align_mismatch_bad.md \u21c4 tbl_align_mismatch_bad.json \u2014 table\n- tbl_clean_2x2.md \u21c4 tbl_clean_2x2.json \u2014 table\n- tbl_escaped_pipes_rect.md \u21c4 tbl_escaped_pipes_rect.json \u2014 table\n- tbl_in_blockquote.md \u21c4 tbl_in_blockquote.json \u2014 table\n- tbl_in_code_fence.md \u21c4 tbl_in_code_fence.json \u2014 table\n- tbl_large_rect.md \u21c4 tbl_large_rect.json \u2014 table\n- tbl_loose_pipes.md \u21c4 tbl_loose_pipes.json \u2014 table\n- tbl_missing_header_sep.md \u21c4 tbl_missing_header_sep.json \u2014 table\n- tbl_ragged_missing_cells.md \u21c4 tbl_ragged_missing_cells.json \u2014 table\n- tbl_ragged_rows.md \u21c4 tbl_ragged_rows.json \u2014 table\n- tbl_trailing_pipes_rect.md \u21c4 tbl_trailing_pipes_rect.json \u2014 table\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_security-hardening-test-suite",
+      "1": "section_security-hardening-test-suite",
+      "10": "section_index",
+      "11": "section_index",
+      "12": "section_index",
+      "13": "section_index",
+      "14": "section_index",
+      "15": "section_index",
+      "16": "section_index",
+      "17": "section_index",
+      "18": "section_index",
+      "19": "section_index",
+      "2": "section_security-hardening-test-suite",
+      "20": "section_index",
+      "21": "section_index",
+      "22": "section_index",
+      "23": "section_index",
+      "24": "section_index",
+      "25": "section_index",
+      "26": "section_index",
+      "27": "section_index",
+      "28": "section_index",
+      "29": "section_index",
+      "3": "section_security-hardening-test-suite",
+      "30": "section_index",
+      "31": "section_index",
+      "32": "section_index",
+      "33": "section_index",
+      "34": "section_index",
+      "35": "section_index",
+      "36": "section_index",
+      "37": "section_index",
+      "38": "section_index",
+      "39": "section_index",
+      "4": "section_security-hardening-test-suite",
+      "40": "section_index",
+      "41": "section_index",
+      "42": "section_index",
+      "43": "section_index",
+      "44": "section_index",
+      "45": "section_index",
+      "46": "section_index",
+      "47": "section_index",
+      "48": "section_index",
+      "49": "section_index",
+      "5": "section_index",
+      "50": "section_index",
+      "51": "section_index",
+      "52": "section_index",
+      "53": "section_index",
+      "54": "section_index",
+      "6": "section_index",
+      "7": "section_index",
+      "8": "section_index",
+      "9": "section_index"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "2": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "prose",
+      "29": "prose",
+      "3": "prose",
+      "30": "prose",
+      "31": "prose",
+      "32": "prose",
+      "33": "prose",
+      "34": "prose",
+      "35": "prose",
+      "36": "prose",
+      "37": "prose",
+      "38": "prose",
+      "39": "prose",
+      "4": "prose",
+      "40": "prose",
+      "41": "prose",
+      "42": "prose",
+      "43": "prose",
+      "44": "prose",
+      "45": "prose",
+      "46": "prose",
+      "47": "prose",
+      "48": "prose",
+      "49": "prose",
+      "5": "prose",
+      "50": "prose",
+      "51": "prose",
+      "52": "prose",
+      "53": "prose",
+      "54": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.574,
+      "detected": "utf_8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 2,
+      "inline": 51,
+      "list_item": 48,
+      "paragraph": 49,
+      "root": 1,
+      "softbreak": 1,
+      "text": 52
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "mixed_scripts": true,
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 1,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "unicode_risk_score": 1
+      },
+      "warnings": [
+        {
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)",
+          "type": "mixed_scripts"
+        }
+      ]
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/README.md",
+    "total_chars": 3080,
+    "total_lines": 55
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 32,
+        "id": "heading_security-hardening-test-suite",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "security-hardening-test-suite",
+        "start_char": 0,
+        "text": "Security Hardening Test Suite"
+      },
+      {
+        "end_char": 176,
+        "id": "heading_index",
+        "level": 2,
+        "line": 5,
+        "parent_heading_id": "heading_security-hardening-test-suite",
+        "slug": "index",
+        "start_char": 167,
+        "text": "Index"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 54,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_in_code.md \u21c4 fm_invalid_in_code.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_inline.md \u21c4 fm_invalid_inline.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_json.md \u21c4 fm_invalid_json.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_nbsp_fence.md \u21c4 fm_invalid_nbsp_fence.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_not_bof.md \u21c4 fm_invalid_not_bof.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_toml.md \u21c4 fm_invalid_toml.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_trailing_spaces.md \u21c4 fm_invalid_trailing_spaces.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_invalid_unclosed.md \u21c4 fm_invalid_unclosed.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_valid_bom.md \u21c4 fm_valid_bom.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_valid_ellipsis_close.md \u21c4 fm_valid_ellipsis_close.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_valid_folded.md \u21c4 fm_valid_folded.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "fm_valid_simple.md \u21c4 fm_valid_simple.json \u2014 frontmatter"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_code_fence.md \u21c4 hdg_code_fence.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_escaped_hash.md \u21c4 hdg_escaped_hash.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_fullwidth_hash.md \u21c4 hdg_fullwidth_hash.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_in_blockquote.md \u21c4 hdg_in_blockquote.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_in_list_item.md \u21c4 hdg_in_list_item.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_list_cont_4sp.md \u21c4 hdg_list_cont_4sp.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_nbsp_after_hash.md \u21c4 hdg_nbsp_after_hash.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_no_space.md \u21c4 hdg_no_space.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_setext_valid.md \u21c4 hdg_setext_valid.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_three_space_indent.md \u21c4 hdg_three_space_indent.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_trailing_hashes.md \u21c4 hdg_trailing_hashes.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "hdg_unclosed_fence_then_hash.md \u21c4 hdg_unclosed_fence_then_hash.json \u2014 heading"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_confusables.md \u21c4 sec_confusables.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_data_uri_image.md \u21c4 sec_data_uri_image.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_footnote_injection.md \u21c4 sec_footnote_injection.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_html_comment.md \u21c4 sec_html_comment.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_html_inline.md \u21c4 sec_html_inline.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_html_script.md \u21c4 sec_html_script.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_img_onerror.md \u21c4 sec_img_onerror.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_kitchen_sink.md \u21c4 sec_kitchen_sink.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_link_schemes.md \u21c4 sec_link_schemes.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_link_wrapped_image.md \u21c4 sec_link_wrapped_image.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_prompt_injection.md \u21c4 sec_prompt_injection.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "sec_relative_paths.md \u21c4 sec_relative_paths.json \u2014 security"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_align_mismatch.md \u21c4 tbl_align_mismatch.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_align_mismatch_bad.md \u21c4 tbl_align_mismatch_bad.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_clean_2x2.md \u21c4 tbl_clean_2x2.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_escaped_pipes_rect.md \u21c4 tbl_escaped_pipes_rect.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_in_blockquote.md \u21c4 tbl_in_blockquote.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_in_code_fence.md \u21c4 tbl_in_code_fence.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_large_rect.md \u21c4 tbl_large_rect.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_loose_pipes.md \u21c4 tbl_loose_pipes.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_missing_header_sep.md \u21c4 tbl_missing_header_sep.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_ragged_missing_cells.md \u21c4 tbl_ragged_missing_cells.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_ragged_rows.md \u21c4 tbl_ragged_rows.json \u2014 table"
+          },
+          {
+            "blocks": [],
+            "children": [],
+            "text": "tbl_trailing_pipes_rect.md \u21c4 tbl_trailing_pipes_rect.json \u2014 table"
+          }
+        ],
+        "items_count": 48,
+        "section_id": "section_security-hardening-test-suite",
+        "start_line": 6,
+        "type": "bullet"
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [
+      {
+        "end_line": 4,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": false,
+        "id": "para_0",
+        "section_id": "section_security-hardening-test-suite",
+        "start_line": 2,
+        "text": "Covers: (1) BOF-only YAML frontmatter, (2) Heading creepage prevention,\n(3) Table ragged detection, (4) Security metadata reporting.",
+        "word_count": 17
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [
+          "section_index"
+        ],
+        "end_char": 3080,
+        "end_line": 54,
+        "id": "section_security-hardening-test-suite",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Security Hardening Test Suite\n\nCovers: (1) BOF-only YAML frontmatter, (2) Heading creepage prevention,\n(3) Table ragged detection, (4) Security metadata reporting.\n\n## Index\n- fm_invalid_in_code.md \u21c4 fm_invalid_in_code.json \u2014 frontmatter\n- fm_invalid_inline.md \u21c4 fm_invalid_inline.json \u2014 frontmatter\n- fm_invalid_json.md \u21c4 fm_invalid_json.json \u2014 frontmatter\n- fm_invalid_nbsp_fence.md \u21c4 fm_invalid_nbsp_fence.json \u2014 frontmatter\n- fm_invalid_not_bof.md \u21c4 fm_invalid_not_bof.json \u2014 frontmatter\n- fm_invalid_toml.md \u21c4 fm_invalid_toml.json \u2014 frontmatter\n- fm_invalid_trailing_spaces.md \u21c4 fm_invalid_trailing_spaces.json \u2014 frontmatter\n- fm_invalid_unclosed.md \u21c4 fm_invalid_unclosed.json \u2014 frontmatter\n- fm_valid_bom.md \u21c4 fm_valid_bom.json \u2014 frontmatter\n- fm_valid_ellipsis_close.md \u21c4 fm_valid_ellipsis_close.json \u2014 frontmatter\n- fm_valid_folded.md \u21c4 fm_valid_folded.json \u2014 frontmatter\n- fm_valid_simple.md \u21c4 fm_valid_simple.json \u2014 frontmatter\n- hdg_code_fence.md \u21c4 hdg_code_fence.json \u2014 heading\n- hdg_escaped_hash.md \u21c4 hdg_escaped_hash.json \u2014 heading\n- hdg_fullwidth_hash.md \u21c4 hdg_fullwidth_hash.json \u2014 heading\n- hdg_in_blockquote.md \u21c4 hdg_in_blockquote.json \u2014 heading\n- hdg_in_list_item.md \u21c4 hdg_in_list_item.json \u2014 heading\n- hdg_list_cont_4sp.md \u21c4 hdg_list_cont_4sp.json \u2014 heading\n- hdg_nbsp_after_hash.md \u21c4 hdg_nbsp_after_hash.json \u2014 heading\n- hdg_no_space.md \u21c4 hdg_no_space.json \u2014 heading\n- hdg_setext_valid.md \u21c4 hdg_setext_valid.json \u2014 heading\n- hdg_three_space_indent.md \u21c4 hdg_three_space_indent.json \u2014 heading\n- hdg_trailing_hashes.md \u21c4 hdg_trailing_hashes.json \u2014 heading\n- hdg_unclosed_fence_then_hash.md \u21c4 hdg_unclosed_fence_then_hash.json \u2014 heading\n- sec_confusables.md \u21c4 sec_confusables.json \u2014 security\n- sec_data_uri_image.md \u21c4 sec_data_uri_image.json \u2014 security\n- sec_footnote_injection.md \u21c4 sec_footnote_injection.json \u2014 security\n- sec_html_comment.md \u21c4 sec_html_comment.json \u2014 security\n- sec_html_inline.md \u21c4 sec_html_inline.json \u2014 security\n- sec_html_script.md \u21c4 sec_html_script.json \u2014 security\n- sec_img_onerror.md \u21c4 sec_img_onerror.json \u2014 security\n- sec_kitchen_sink.md \u21c4 sec_kitchen_sink.json \u2014 security\n- sec_link_schemes.md \u21c4 sec_link_schemes.json \u2014 security\n- sec_link_wrapped_image.md \u21c4 sec_link_wrapped_image.json \u2014 security\n- sec_prompt_injection.md \u21c4 sec_prompt_injection.json \u2014 security\n- sec_relative_paths.md \u21c4 sec_relative_paths.json \u2014 security\n- tbl_align_mismatch.md \u21c4 tbl_align_mismatch.json \u2014 table\n- tbl_align_mismatch_bad.md \u21c4 tbl_align_mismatch_bad.json \u2014 table\n- tbl_clean_2x2.md \u21c4 tbl_clean_2x2.json \u2014 table\n- tbl_escaped_pipes_rect.md \u21c4 tbl_escaped_pipes_rect.json \u2014 table\n- tbl_in_blockquote.md \u21c4 tbl_in_blockquote.json \u2014 table\n- tbl_in_code_fence.md \u21c4 tbl_in_code_fence.json \u2014 table\n- tbl_large_rect.md \u21c4 tbl_large_rect.json \u2014 table\n- tbl_loose_pipes.md \u21c4 tbl_loose_pipes.json \u2014 table\n- tbl_missing_header_sep.md \u21c4 tbl_missing_header_sep.json \u2014 table\n- tbl_ragged_missing_cells.md \u21c4 tbl_ragged_missing_cells.json \u2014 table\n- tbl_ragged_rows.md \u21c4 tbl_ragged_rows.json \u2014 table\n- tbl_trailing_pipes_rect.md \u21c4 tbl_trailing_pipes_rect.json \u2014 table\n",
+        "slug": "security-hardening-test-suite",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Security Hardening Test Suite\n\nCovers: (1) BOF-only YAML frontmatter, (2) Heading creepage prevention,\n(3) Table ragged detection, (4) Security metadata reporting.\n\nIndex fm_invalid_in_code.md \u21c4 fm_invalid_in_code.json \u2014 frontmatter fm_invalid_inline.md \u21c4 fm_invalid_inline.json \u2014 frontmatter fm_invalid_json.md \u21c4 fm_invalid_json.json \u2014 frontmatter fm_invalid_nbsp_fence.md \u21c4 fm_invalid_nbsp_fence.json \u2014 frontmatter fm_invalid_not_bof.md \u21c4 fm_invalid_not_bof.json \u2014 frontmatter fm_invalid_toml.md \u21c4 fm_invalid_toml.json \u2014 frontmatter fm_invalid_trailing_spaces.md \u21c4 fm_invalid_trailing_spaces.json \u2014 frontmatter fm_invalid_unclosed.md \u21c4 fm_invalid_unclosed.json \u2014 frontmatter fm_valid_bom.md \u21c4 fm_valid_bom.json \u2014 frontmatter fm_valid_ellipsis_close.md \u21c4 fm_valid_ellipsis_close.json \u2014 frontmatter fm_valid_folded.md \u21c4 fm_valid_folded.json \u2014 frontmatter fm_valid_simple.md \u21c4 fm_valid_simple.json \u2014 frontmatter hdg_code_fence.md \u21c4 hdg_code_fence.json \u2014 heading hdg_escaped_hash.md \u21c4 hdg_escaped_hash.json \u2014 heading hdg_fullwidth_hash.md \u21c4 hdg_fullwidth_hash.json \u2014 heading hdg_in_blockquote.md \u21c4 hdg_in_blockquote.json \u2014 heading hdg_in_list_item.md \u21c4 hdg_in_list_item.json \u2014 heading hdg_list_cont_4sp.md \u21c4 hdg_list_cont_4sp.json \u2014 heading hdg_nbsp_after_hash.md \u21c4 hdg_nbsp_after_hash.json \u2014 heading hdg_no_space.md \u21c4 hdg_no_space.json \u2014 heading hdg_setext_valid.md \u21c4 hdg_setext_valid.json \u2014 heading hdg_three_space_indent.md \u21c4 hdg_three_space_indent.json \u2014 heading hdg_trailing_hashes.md \u21c4 hdg_trailing_hashes.json \u2014 heading hdg_unclosed_fence_then_hash.md \u21c4 hdg_unclosed_fence_then_hash.json \u2014 heading sec_confusables.md \u21c4 sec_confusables.json \u2014 security sec_data_uri_image.md \u21c4 sec_data_uri_image.json \u2014 security sec_footnote_injection.md \u21c4 sec_footnote_injection.json \u2014 security sec_html_comment.md \u21c4 sec_html_comment.json \u2014 security sec_html_inline.md \u21c4 sec_html_inline.json \u2014 security sec_html_script.md \u21c4 sec_html_script.json \u2014 security sec_img_onerror.md \u21c4 sec_img_onerror.json \u2014 security sec_kitchen_sink.md \u21c4 sec_kitchen_sink.json \u2014 security sec_link_schemes.md \u21c4 sec_link_schemes.json \u2014 security sec_link_wrapped_image.md \u21c4 sec_link_wrapped_image.json \u2014 security sec_prompt_injection.md \u21c4 sec_prompt_injection.json \u2014 security sec_relative_paths.md \u21c4 sec_relative_paths.json \u2014 security tbl_align_mismatch.md \u21c4 tbl_align_mismatch.json \u2014 table tbl_align_mismatch_bad.md \u21c4 tbl_align_mismatch_bad.json \u2014 table tbl_clean_2x2.md \u21c4 tbl_clean_2x2.json \u2014 table tbl_escaped_pipes_rect.md \u21c4 tbl_escaped_pipes_rect.json \u2014 table tbl_in_blockquote.md \u21c4 tbl_in_blockquote.json \u2014 table tbl_in_code_fence.md \u21c4 tbl_in_code_fence.json \u2014 table tbl_large_rect.md \u21c4 tbl_large_rect.json \u2014 table tbl_loose_pipes.md \u21c4 tbl_loose_pipes.json \u2014 table tbl_missing_header_sep.md \u21c4 tbl_missing_header_sep.json \u2014 table tbl_ragged_missing_cells.md \u21c4 tbl_ragged_missing_cells.json \u2014 table tbl_ragged_rows.md \u21c4 tbl_ragged_rows.json \u2014 table tbl_trailing_pipes_rect.md \u21c4 tbl_trailing_pipes_rect.json \u2014 table",
+        "title": "Security Hardening Test Suite"
+      },
+      {
+        "child_ids": [],
+        "end_char": 3080,
+        "end_line": 54,
+        "id": "section_index",
+        "level": 2,
+        "parent_id": "section_security-hardening-test-suite",
+        "raw_content": "## Index\n- fm_invalid_in_code.md \u21c4 fm_invalid_in_code.json \u2014 frontmatter\n- fm_invalid_inline.md \u21c4 fm_invalid_inline.json \u2014 frontmatter\n- fm_invalid_json.md \u21c4 fm_invalid_json.json \u2014 frontmatter\n- fm_invalid_nbsp_fence.md \u21c4 fm_invalid_nbsp_fence.json \u2014 frontmatter\n- fm_invalid_not_bof.md \u21c4 fm_invalid_not_bof.json \u2014 frontmatter\n- fm_invalid_toml.md \u21c4 fm_invalid_toml.json \u2014 frontmatter\n- fm_invalid_trailing_spaces.md \u21c4 fm_invalid_trailing_spaces.json \u2014 frontmatter\n- fm_invalid_unclosed.md \u21c4 fm_invalid_unclosed.json \u2014 frontmatter\n- fm_valid_bom.md \u21c4 fm_valid_bom.json \u2014 frontmatter\n- fm_valid_ellipsis_close.md \u21c4 fm_valid_ellipsis_close.json \u2014 frontmatter\n- fm_valid_folded.md \u21c4 fm_valid_folded.json \u2014 frontmatter\n- fm_valid_simple.md \u21c4 fm_valid_simple.json \u2014 frontmatter\n- hdg_code_fence.md \u21c4 hdg_code_fence.json \u2014 heading\n- hdg_escaped_hash.md \u21c4 hdg_escaped_hash.json \u2014 heading\n- hdg_fullwidth_hash.md \u21c4 hdg_fullwidth_hash.json \u2014 heading\n- hdg_in_blockquote.md \u21c4 hdg_in_blockquote.json \u2014 heading\n- hdg_in_list_item.md \u21c4 hdg_in_list_item.json \u2014 heading\n- hdg_list_cont_4sp.md \u21c4 hdg_list_cont_4sp.json \u2014 heading\n- hdg_nbsp_after_hash.md \u21c4 hdg_nbsp_after_hash.json \u2014 heading\n- hdg_no_space.md \u21c4 hdg_no_space.json \u2014 heading\n- hdg_setext_valid.md \u21c4 hdg_setext_valid.json \u2014 heading\n- hdg_three_space_indent.md \u21c4 hdg_three_space_indent.json \u2014 heading\n- hdg_trailing_hashes.md \u21c4 hdg_trailing_hashes.json \u2014 heading\n- hdg_unclosed_fence_then_hash.md \u21c4 hdg_unclosed_fence_then_hash.json \u2014 heading\n- sec_confusables.md \u21c4 sec_confusables.json \u2014 security\n- sec_data_uri_image.md \u21c4 sec_data_uri_image.json \u2014 security\n- sec_footnote_injection.md \u21c4 sec_footnote_injection.json \u2014 security\n- sec_html_comment.md \u21c4 sec_html_comment.json \u2014 security\n- sec_html_inline.md \u21c4 sec_html_inline.json \u2014 security\n- sec_html_script.md \u21c4 sec_html_script.json \u2014 security\n- sec_img_onerror.md \u21c4 sec_img_onerror.json \u2014 security\n- sec_kitchen_sink.md \u21c4 sec_kitchen_sink.json \u2014 security\n- sec_link_schemes.md \u21c4 sec_link_schemes.json \u2014 security\n- sec_link_wrapped_image.md \u21c4 sec_link_wrapped_image.json \u2014 security\n- sec_prompt_injection.md \u21c4 sec_prompt_injection.json \u2014 security\n- sec_relative_paths.md \u21c4 sec_relative_paths.json \u2014 security\n- tbl_align_mismatch.md \u21c4 tbl_align_mismatch.json \u2014 table\n- tbl_align_mismatch_bad.md \u21c4 tbl_align_mismatch_bad.json \u2014 table\n- tbl_clean_2x2.md \u21c4 tbl_clean_2x2.json \u2014 table\n- tbl_escaped_pipes_rect.md \u21c4 tbl_escaped_pipes_rect.json \u2014 table\n- tbl_in_blockquote.md \u21c4 tbl_in_blockquote.json \u2014 table\n- tbl_in_code_fence.md \u21c4 tbl_in_code_fence.json \u2014 table\n- tbl_large_rect.md \u21c4 tbl_large_rect.json \u2014 table\n- tbl_loose_pipes.md \u21c4 tbl_loose_pipes.json \u2014 table\n- tbl_missing_header_sep.md \u21c4 tbl_missing_header_sep.json \u2014 table\n- tbl_ragged_missing_cells.md \u21c4 tbl_ragged_missing_cells.json \u2014 table\n- tbl_ragged_rows.md \u21c4 tbl_ragged_rows.json \u2014 table\n- tbl_trailing_pipes_rect.md \u21c4 tbl_trailing_pipes_rect.json \u2014 table\n",
+        "slug": "index",
+        "start_char": 167,
+        "start_line": 5,
+        "text_content": "Index fm_invalid_in_code.md \u21c4 fm_invalid_in_code.json \u2014 frontmatter fm_invalid_inline.md \u21c4 fm_invalid_inline.json \u2014 frontmatter fm_invalid_json.md \u21c4 fm_invalid_json.json \u2014 frontmatter fm_invalid_nbsp_fence.md \u21c4 fm_invalid_nbsp_fence.json \u2014 frontmatter fm_invalid_not_bof.md \u21c4 fm_invalid_not_bof.json \u2014 frontmatter fm_invalid_toml.md \u21c4 fm_invalid_toml.json \u2014 frontmatter fm_invalid_trailing_spaces.md \u21c4 fm_invalid_trailing_spaces.json \u2014 frontmatter fm_invalid_unclosed.md \u21c4 fm_invalid_unclosed.json \u2014 frontmatter fm_valid_bom.md \u21c4 fm_valid_bom.json \u2014 frontmatter fm_valid_ellipsis_close.md \u21c4 fm_valid_ellipsis_close.json \u2014 frontmatter fm_valid_folded.md \u21c4 fm_valid_folded.json \u2014 frontmatter fm_valid_simple.md \u21c4 fm_valid_simple.json \u2014 frontmatter hdg_code_fence.md \u21c4 hdg_code_fence.json \u2014 heading hdg_escaped_hash.md \u21c4 hdg_escaped_hash.json \u2014 heading hdg_fullwidth_hash.md \u21c4 hdg_fullwidth_hash.json \u2014 heading hdg_in_blockquote.md \u21c4 hdg_in_blockquote.json \u2014 heading hdg_in_list_item.md \u21c4 hdg_in_list_item.json \u2014 heading hdg_list_cont_4sp.md \u21c4 hdg_list_cont_4sp.json \u2014 heading hdg_nbsp_after_hash.md \u21c4 hdg_nbsp_after_hash.json \u2014 heading hdg_no_space.md \u21c4 hdg_no_space.json \u2014 heading hdg_setext_valid.md \u21c4 hdg_setext_valid.json \u2014 heading hdg_three_space_indent.md \u21c4 hdg_three_space_indent.json \u2014 heading hdg_trailing_hashes.md \u21c4 hdg_trailing_hashes.json \u2014 heading hdg_unclosed_fence_then_hash.md \u21c4 hdg_unclosed_fence_then_hash.json \u2014 heading sec_confusables.md \u21c4 sec_confusables.json \u2014 security sec_data_uri_image.md \u21c4 sec_data_uri_image.json \u2014 security sec_footnote_injection.md \u21c4 sec_footnote_injection.json \u2014 security sec_html_comment.md \u21c4 sec_html_comment.json \u2014 security sec_html_inline.md \u21c4 sec_html_inline.json \u2014 security sec_html_script.md \u21c4 sec_html_script.json \u2014 security sec_img_onerror.md \u21c4 sec_img_onerror.json \u2014 security sec_kitchen_sink.md \u21c4 sec_kitchen_sink.json \u2014 security sec_link_schemes.md \u21c4 sec_link_schemes.json \u2014 security sec_link_wrapped_image.md \u21c4 sec_link_wrapped_image.json \u2014 security sec_prompt_injection.md \u21c4 sec_prompt_injection.json \u2014 security sec_relative_paths.md \u21c4 sec_relative_paths.json \u2014 security tbl_align_mismatch.md \u21c4 tbl_align_mismatch.json \u2014 table tbl_align_mismatch_bad.md \u21c4 tbl_align_mismatch_bad.json \u2014 table tbl_clean_2x2.md \u21c4 tbl_clean_2x2.json \u2014 table tbl_escaped_pipes_rect.md \u21c4 tbl_escaped_pipes_rect.json \u2014 table tbl_in_blockquote.md \u21c4 tbl_in_blockquote.json \u2014 table tbl_in_code_fence.md \u21c4 tbl_in_code_fence.json \u2014 table tbl_large_rect.md \u21c4 tbl_large_rect.json \u2014 table tbl_loose_pipes.md \u21c4 tbl_loose_pipes.json \u2014 table tbl_missing_header_sep.md \u21c4 tbl_missing_header_sep.json \u2014 table tbl_ragged_missing_cells.md \u21c4 tbl_ragged_missing_cells.json \u2014 table tbl_ragged_rows.md \u21c4 tbl_ragged_rows.json \u2014 table tbl_trailing_pipes_rect.md \u21c4 tbl_trailing_pipes_rect.json \u2014 table",
+        "title": "Index"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

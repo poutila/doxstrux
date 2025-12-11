@@ -727,6 +727,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.848,
+      "detected": "utf_8"
+    },
     "has_code": true,
     "has_frontmatter": false,
     "has_lists": true,
@@ -756,9 +760,13 @@
       "tr": 9
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -805,6 +813,7 @@
     "security_policies_applied": [
       "stripped_12_html_inline"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/15_integration/test_mixed_nested_structures.md",
     "total_chars": 4186,
     "total_lines": 160
   },
@@ -1821,7 +1830,9 @@
           "Value"
         ],
         "id": "table_0",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "       | Header | Value |\n       |--------|-------|\n       | Data   | 123   |",
         "row_count": 1,
         "rows": [
@@ -1852,7 +1863,9 @@
           "Requirement"
         ],
         "id": "table_1",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "| Feature | Status | Requirement |\n|---------|--------|-------------|\n| Parsing | \u2705 Done | MUST parse all markdown |\n| Nesting | \ud83d\udd04 WIP | SHOULD support 3 levels |\n| Tables | \u2705 Done | MAY include nested content |\n| Code in table | `inline()` | MUST NOT break |",
         "row_count": 4,
         "rows": [
@@ -1899,7 +1912,9 @@
           "List"
         ],
         "id": "table_2",
+        "is_pure": true,
         "is_ragged": false,
+        "malformed_lines": [],
         "raw_content": "  | Table | In | List |\n  |-------|----|----|\n  | Yes   | It | SHOULD |",
         "row_count": 1,
         "rows": [

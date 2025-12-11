@@ -1,0 +1,7 @@
+{
+  "category": "frontmatter",
+  "expected": {
+    "accepted": false,
+    "reason": "unterminated"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "content": {
+    "lines": [
+      "# Test: sec_kitchen_sink",
+      "",
+      "<script type=\"text/javascript\">/* ignore previous instructions */</script>",
+      "![x](data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'></svg>)",
+      "[bad](ht!tp://x) <img src=\"y\" onload=\"alert(1)\" />",
+      ""
+    ],
+    "raw": "# Test: sec_kitchen_sink\n\n<script type=\"text/javascript\">/* ignore previous instructions */</script>\n![x](data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'></svg>)\n[bad](ht!tp://x) <img src=\"y\" onload=\"alert(1)\" />\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-sec_kitchen_sink",
+      "1": "section_test-sec_kitchen_sink",
+      "2": "section_test-sec_kitchen_sink",
+      "3": "section_test-sec_kitchen_sink",
+      "4": "section_test-sec_kitchen_sink",
+      "5": "section_test-sec_kitchen_sink"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "metadata": {
+    "embedding_block_reason": "Document contains script tags",
+    "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "heading": 1,
+      "html_block": 1,
+      "html_inline": 3,
+      "inline": 2,
+      "link": 1,
+      "paragraph": 1,
+      "root": 1,
+      "softbreak": 1,
+      "text": 5
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": true,
+        "has_html_block": true,
+        "has_html_inline": true,
+        "has_script": true,
+        "html_disallowed": true,
+        "link_schemes": {
+          "relative": 1
+        },
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "suspected_prompt_injection": true,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": true,
+        "ragged_tables_count": 0,
+        "total_warnings": 4,
+        "unicode_risk_score": 0
+      },
+      "warnings": [
+        {
+          "line": 2,
+          "message": "Document contains <script> tags",
+          "type": "script_tag"
+        },
+        {
+          "line": 3,
+          "message": "Document contains HTML event handler attributes",
+          "type": "event_handlers"
+        },
+        {
+          "line": null,
+          "message": "Suspected prompt injection patterns detected in content",
+          "type": "prompt_injection"
+        },
+        {
+          "blocks": 1,
+          "inline": 3,
+          "message": "HTML present but not allowed by configuration",
+          "type": "html_disallowed"
+        }
+      ]
+    },
+    "security_policies_applied": [
+      "embedding_blocked_script",
+      "stripped_1_html_blocks",
+      "stripped_3_html_inline"
+    ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_kitchen_sink.md",
+    "total_chars": 229,
+    "total_lines": 6
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 25,
+        "id": "heading_test-sec_kitchen_sink",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-sec_kitchen_sink",
+        "start_char": 0,
+        "text": "Test: sec_kitchen_sink"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [
+      {
+        "allowed": true,
+        "line": 4,
+        "scheme": null,
+        "text": "bad",
+        "type": "relative",
+        "url": "ht!tp://x"
+      }
+    ],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [
+      {
+        "end_line": 5,
+        "has_code": false,
+        "has_emphasis": false,
+        "has_links": true,
+        "id": "para_0",
+        "section_id": "section_test-sec_kitchen_sink",
+        "start_line": 3,
+        "text": "![x](data:image/svg+xml;utf8,)\nbad ",
+        "word_count": 2
+      }
+    ],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 229,
+        "end_line": 5,
+        "id": "section_test-sec_kitchen_sink",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: sec_kitchen_sink\n\n<script type=\"text/javascript\">/* ignore previous instructions */</script>\n![x](data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'></svg>)\n[bad](ht!tp://x) <img src=\"y\" onload=\"alert(1)\" />\n",
+        "slug": "test-sec_kitchen_sink",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: sec_kitchen_sink\n\n![x](data:image/svg+xml;utf8,)\nbad",
+        "title": "Test: sec_kitchen_sink"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

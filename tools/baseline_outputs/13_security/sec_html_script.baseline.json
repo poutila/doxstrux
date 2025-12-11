@@ -37,6 +37,10 @@
   "metadata": {
     "embedding_block_reason": "Document contains script tags",
     "embedding_blocked": true,
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": false,
@@ -51,9 +55,13 @@
       "text": 2
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -100,6 +108,7 @@
       "embedding_blocked_script",
       "stripped_1_html_blocks"
     ],
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/13_security/sec_html_script.md",
     "total_chars": 64,
     "total_lines": 5
   },

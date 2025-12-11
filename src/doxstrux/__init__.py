@@ -1,11 +1,11 @@
 """Doxstrux - Markdown parsing for RAG pipelines."""
 
-from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux.api import parse_markdown_file
 from doxstrux.markdown.ir import DocumentIR, DocNode, ChunkPolicy, Chunk
 from doxstrux.markdown.security.validators import PromptInjectionCheck
 
 __all__ = [
-    "MarkdownParserCore",
+    "parse_markdown_file",
     "DocumentIR",
     "DocNode",
     "ChunkPolicy",

@@ -27,7 +27,8 @@ from typing import Any
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux import parse_markdown_file
+from doxstrux.markdown.utils.encoding import read_file_robust
 
 
 def hash_content(content: str) -> str:
@@ -37,8 +38,13 @@ def hash_content(content: str) -> str:
     return hashlib.sha256(normalized.encode('utf-8')).hexdigest()
 
 
-def parse_with_timing(content: str, config: dict, profile: str) -> tuple[dict, float, int]:
-    """Parse content and measure timing + memory.
+def parse_with_timing(md_file: Path, config: dict, profile: str) -> tuple[dict, float, int]:
+    """Parse file and measure timing + memory.
+
+    Args:
+        md_file: Path to markdown file
+        config: Parser configuration
+        profile: Security profile
 
     Returns:
         (output_dict, elapsed_ms, peak_memory_bytes)
@@ -47,8 +53,7 @@ def parse_with_timing(content: str, config: dict, profile: str) -> tuple[dict, f
     start = time.perf_counter()
 
     try:
-        parser = MarkdownParserCore(content, config=config, security_profile=profile)
-        result = parser.parse()
+        result = parse_markdown_file(md_file, config=config, security_profile=profile)
     except Exception as e:
         result = {
             'error': str(e),
@@ -152,44 +157,49 @@ def generate_baseline(
         rel_path = md_file.relative_to(corpus) if md_file.is_relative_to(corpus) else md_file.name
         print(f"  [{i}/{len(md_files)}] Parsing {rel_path}...", end='')
 
-        try:
-            content = md_file.read_text(encoding='utf-8')
-        except Exception as e:
-            print(f" ❌ Read error: {e}")
-            baseline['outputs'][str(rel_path)] = {
-                'error': f'File read error: {e}',
-                'hash': None,
-                'output': None,
-            }
-            continue
-
         # Run multiple times for performance measurement
         timings = []
         memory_peaks = []
 
         # Cold runs
         for _ in range(runs_cold):
-            _, elapsed, peak = parse_with_timing(content, config, profile)
+            _, elapsed, peak = parse_with_timing(md_file, config, profile)
             timings.append(elapsed)
             memory_peaks.append(peak)
 
         # Warm runs (parser already initialized)
         for _ in range(runs_warm):
-            _, elapsed, peak = parse_with_timing(content, config, profile)
+            _, elapsed, peak = parse_with_timing(md_file, config, profile)
             timings.append(elapsed)
             memory_peaks.append(peak)
 
         # Final parse for output capture
-        output, _, _ = parse_with_timing(content, config, profile)
+        output, _, _ = parse_with_timing(md_file, config, profile)
+
+        # Check for error
+        if 'error' in output:
+            print(f" ❌ Parse error: {output['error']}")
+            baseline['outputs'][str(rel_path)] = {
+                'error': output['error'],
+                'hash': None,
+                'output': None,
+            }
+            continue
+
+        # Get content for hash/size (read file for stats)
+        file_result = read_file_robust(md_file)
+        content_text = file_result.text
 
         # Store results
         baseline['outputs'][str(rel_path)] = {
-            'hash': hash_content(content),
-            'size_bytes': len(content.encode('utf-8')),
-            'line_count': content.count('\n') + 1,
+            'hash': hash_content(content_text),
+            'size_bytes': len(content_text.encode('utf-8')),
+            'line_count': content_text.count('\n') + 1,
             'output': output,
             'timings_ms': timings,
             'memory_peaks_bytes': memory_peaks,
+            'detected_encoding': output["metadata"]["encoding"]["detected"],
+            'encoding_confidence': output["metadata"]["encoding"]["confidence"],
         }
 
         # Aggregate performance metrics

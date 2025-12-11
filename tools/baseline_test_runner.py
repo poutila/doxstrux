@@ -23,7 +23,7 @@ import traceback
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from doxstrux.markdown_parser_core import MarkdownParserCore
+from doxstrux import parse_markdown_file
 
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -82,15 +82,17 @@ def run_test_pair(md_file: Path, json_file: Path, security_profile: str = "moder
     }
 
     try:
-        # Read input and expected output
-        md_content = md_file.read_text(encoding="utf-8")
+        # Read expected output (JSON is always UTF-8)
         expected_output = json.loads(json_file.read_text(encoding="utf-8"))
 
-        # Parse with current implementation
+        # Parse with public API (handles encoding automatically)
         start_time = time.perf_counter()
-        parser = MarkdownParserCore(md_content, security_profile=security_profile)
-        actual_output = parser.parse()
+        actual_output = parse_markdown_file(md_file, security_profile=security_profile)
         parse_time = (time.perf_counter() - start_time) * 1000
+
+        # Extract encoding info from result
+        result["detected_encoding"] = actual_output["metadata"]["encoding"]["detected"]
+        result["encoding_confidence"] = actual_output["metadata"]["encoding"]["confidence"]
 
         result["parse_time_ms"] = round(parse_time, 2)
 

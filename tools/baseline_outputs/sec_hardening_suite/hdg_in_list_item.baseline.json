@@ -1,0 +1,176 @@
+{
+  "content": {
+    "lines": [
+      "# Test: hdg_in_list_item",
+      "",
+      "- # H1 in list",
+      "  body",
+      ""
+    ],
+    "raw": "# Test: hdg_in_list_item\n\n- # H1 in list\n  body\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-hdg_in_list_item",
+      "1": "section_test-hdg_in_list_item",
+      "2": "section_h1-in-list",
+      "3": "section_h1-in-list",
+      "4": "section_h1-in-list"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": true,
+    "has_sections": true,
+    "has_tables": false,
+    "node_counts": {
+      "bullet_list": 1,
+      "heading": 2,
+      "inline": 3,
+      "list_item": 1,
+      "paragraph": 1,
+      "root": 1,
+      "text": 3
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/hdg_in_list_item.md",
+    "total_chars": 48,
+    "total_lines": 5
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 25,
+        "id": "heading_test-hdg_in_list_item",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-hdg_in_list_item",
+        "start_char": 0,
+        "text": "Test: hdg_in_list_item"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [
+      {
+        "end_line": 4,
+        "id": "list_0",
+        "items": [
+          {
+            "blocks": [],
+            "children": [],
+            "text": "body"
+          }
+        ],
+        "items_count": 1,
+        "section_id": "section_h1-in-list",
+        "start_line": 2,
+        "type": "bullet"
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 26,
+        "end_line": 1,
+        "id": "section_test-hdg_in_list_item",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: hdg_in_list_item\n",
+        "slug": "test-hdg_in_list_item",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: hdg_in_list_item",
+        "title": "Test: hdg_in_list_item"
+      },
+      {
+        "child_ids": [],
+        "end_char": 48,
+        "end_line": 4,
+        "id": "section_h1-in-list",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "- # H1 in list\n  body\n",
+        "slug": "h1-in-list",
+        "start_char": 26,
+        "start_line": 2,
+        "text_content": "H1 in list body",
+        "title": "H1 in list"
+      }
+    ],
+    "tables": [],
+    "tasklists": []
+  }
+}

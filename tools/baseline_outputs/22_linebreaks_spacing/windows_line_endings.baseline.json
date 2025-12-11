@@ -1,13 +1,13 @@
 {
   "content": {
     "lines": [
-      "Line1",
-      "Line2",
-      "",
-      "- Item",
+      "Line1\r",
+      "Line2\r",
+      "\r",
+      "- Item\r",
       ""
     ],
-    "raw": "Line1\nLine2\n\n- Item\n"
+    "raw": "Line1\r\nLine2\r\n\r\n- Item\r\n"
   },
   "mappings": {
     "code_blocks": [],
@@ -29,6 +29,10 @@
     ]
   },
   "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
     "has_code": false,
     "has_frontmatter": false,
     "has_lists": true,
@@ -44,9 +48,13 @@
       "text": 3
     },
     "security": {
-      "profile_used": "moderate",
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
       "statistics": {
         "allowed_schemes": [
+          "ftp",
           "http",
           "https",
           "mailto",
@@ -76,7 +84,8 @@
       },
       "warnings": []
     },
-    "total_chars": 20,
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/22_linebreaks_spacing/windows_line_endings.md",
+    "total_chars": 24,
     "total_lines": 5
   },
   "structure": {

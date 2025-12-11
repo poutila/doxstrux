@@ -1,0 +1,197 @@
+{
+  "content": {
+    "lines": [
+      "# Test: tbl_clean_2x2",
+      "",
+      "| A | B |",
+      "|---|---|",
+      "| 1 | 2 |",
+      "| 3 | 4 |",
+      "Paragraph.",
+      ""
+    ],
+    "raw": "# Test: tbl_clean_2x2\n\n| A | B |\n|---|---|\n| 1 | 2 |\n| 3 | 4 |\nParagraph.\n"
+  },
+  "mappings": {
+    "code_blocks": [],
+    "code_lines": [],
+    "line_to_section": {
+      "0": "section_test-tbl_clean_2x2",
+      "1": "section_test-tbl_clean_2x2",
+      "2": "section_test-tbl_clean_2x2",
+      "3": "section_test-tbl_clean_2x2",
+      "4": "section_test-tbl_clean_2x2",
+      "5": "section_test-tbl_clean_2x2",
+      "6": "section_test-tbl_clean_2x2",
+      "7": "section_test-tbl_clean_2x2"
+    },
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "metadata": {
+    "encoding": {
+      "confidence": 0.9,
+      "detected": "utf-8"
+    },
+    "has_code": false,
+    "has_frontmatter": false,
+    "has_lists": false,
+    "has_sections": true,
+    "has_tables": true,
+    "node_counts": {
+      "heading": 1,
+      "inline": 9,
+      "root": 1,
+      "table": 1,
+      "tbody": 1,
+      "td": 6,
+      "text": 8,
+      "th": 2,
+      "thead": 1,
+      "tr": 4
+    },
+    "security": {
+      "profile_used": "permissive",
+      "rejected_plugins": [
+        "unknown:deflist"
+      ],
+      "statistics": {
+        "allowed_schemes": [
+          "ftp",
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "confusables_present": false,
+        "frontmatter_at_bof": false,
+        "has_data_uri_images": false,
+        "has_event_handlers": false,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "link_schemes": {},
+        "nbsp_present": false,
+        "nested_headings_blocked": 0,
+        "path_traversal_pattern": false,
+        "ragged_tables_count": 0,
+        "table_align_mismatches": 0,
+        "unicode_risk_score": 0,
+        "zwsp_present": false
+      },
+      "summary": {
+        "has_dangerous_content": false,
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "unicode_risk_score": 0
+      },
+      "warnings": []
+    },
+    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/tbl_clean_2x2.md",
+    "total_chars": 74,
+    "total_lines": 8
+  },
+  "structure": {
+    "blockquotes": [],
+    "code_blocks": [],
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "frontmatter": null,
+    "headings": [
+      {
+        "end_char": 22,
+        "id": "heading_test-tbl_clean_2x2",
+        "level": 1,
+        "line": 0,
+        "parent_heading_id": null,
+        "slug": "test-tbl_clean_2x2",
+        "start_char": 0,
+        "text": "Test: tbl_clean_2x2"
+      }
+    ],
+    "html_blocks": [],
+    "html_inline": [],
+    "images": [],
+    "links": [],
+    "lists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "paragraphs": [],
+    "sections": [
+      {
+        "child_ids": [],
+        "end_char": 74,
+        "end_line": 7,
+        "id": "section_test-tbl_clean_2x2",
+        "level": 1,
+        "parent_id": null,
+        "raw_content": "# Test: tbl_clean_2x2\n\n| A | B |\n|---|---|\n| 1 | 2 |\n| 3 | 4 |\nParagraph.\n",
+        "slug": "test-tbl_clean_2x2",
+        "start_char": 0,
+        "start_line": 0,
+        "text_content": "Test: tbl_clean_2x2\n\nAB\n\n12 34 Paragraph.",
+        "title": "Test: tbl_clean_2x2"
+      }
+    ],
+    "tables": [
+      {
+        "align": [
+          "left",
+          "left"
+        ],
+        "align_meta": {
+          "heuristic": true
+        },
+        "align_mismatch": false,
+        "column_count": 2,
+        "end_line": 6,
+        "headers": [
+          "A",
+          "B"
+        ],
+        "id": "table_0",
+        "is_pure": true,
+        "is_ragged": false,
+        "malformed_lines": [],
+        "raw_content": "| A | B |\n|---|---|\n| 1 | 2 |\n| 3 | 4 |",
+        "row_count": 2,
+        "rows": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ],
+        "section_id": "section_test-tbl_clean_2x2",
+        "start_line": 2,
+        "table_valid_md": true
+      }
+    ],
+    "tasklists": []
+  }
+}
