@@ -25,6 +25,8 @@ Clear module-level separation, but `MarkdownParserCore` is a God Object.
 
 *These numbers are frozen as of 2025-12-12. They are a diagnostic snapshot, not targets to maintain.*
 
+**⚠️ Guidelines superseded:** DOXSTRUX_SPEC explicitly allows the registry to import concrete collectors. Do not use "0 imports" as a design goal — that would lead to unnecessary abstraction.
+
 ---
 
 ## S — Single Responsibility Principle

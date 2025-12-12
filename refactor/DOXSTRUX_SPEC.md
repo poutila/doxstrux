@@ -1,22 +1,20 @@
 # DOXSTRUX_SPEC
 
-Single source of truth for the doxstrux parser/warehouse/collector/registry wiring and contracts.
+Architectural scaffolding for the doxstrux parser refactor.
+
+**What this is:** A guide to the parser/warehouse/collector/registry structure — which modules exist, what they expose, and how they wire together.
+
+**What this is not:** A formal specification. Semantic details (exact behavior of `text_between`, edge cases in collectors, security logic) are defined by the existing code and tests, not this document.
 
 ---
 
 ## 1. Problem
 
-`MarkdownParserCore` is a 2075-line God Object with 49 methods. Key violations:
+`MarkdownParserCore` accumulates too many responsibilities: security, plugins, parsing, extraction, metadata, caching. This makes it hard to modify any one concern without touching the others.
 
-| Principle | Issue |
-|-----------|-------|
-| SRP | 8 responsibilities in one class |
-| OCP | Extractors hardcoded, no registry |
-| DIP | Parser imports 11 concrete modules |
+**Goal:** Split responsibilities. Parser orchestrates; warehouse owns tokens and dispatch; collectors extract features; registry wires them together.
 
-**Goal:** Split the God Object. Parser orchestrates; warehouse owns tokens and dispatch; collectors extract features; registry wires them together.
-
-**Non-goal:** Full DIP purity. We accept that the registry is tightly coupled to concrete collector modules. This is the *only* place where that coupling is allowed.
+**Non-goal:** Full DIP purity. The registry is tightly coupled to concrete collector modules — we moved the coupling to one file, not eliminated it.
 
 ---
 
@@ -69,14 +67,18 @@ class CollectorInterest:
 class Collector(Protocol):
     """Feature extractor interface.
     
-    INTENTIONALLY WEAK: This protocol only standardises registration surface
-    (name, interest) and output (finalize). It does NOT protect warehouse
-    usage — collectors are trusted to call warehouse methods correctly.
+    What this guarantees:
+    - Collectors have name, interest, and the three methods below.
+    - finalize_all() will raise RuntimeError on duplicate keys.
     
-    If you want type safety for warehouse calls, that's a future enhancement.
+    What this does NOT guarantee:
+    - Type safety for token or warehouse usage (both untyped).
+    - Semantic correctness of collector output.
+    - That collectors call only valid warehouse methods.
     
-    Key contract: finalize() must return a dict with keys unique across all
-    collectors. Duplicate keys raise RuntimeError in finalize_all().
+    This is barely stronger than duck typing. Collectors are trusted to
+    behave correctly; this protocol only standardizes the registration
+    and output interface.
     """
     
     @property
@@ -92,7 +94,7 @@ class Collector(Protocol):
         """Process token. Accumulate results internally."""
     
     def finalize(self) -> dict[str, Any]:
-        """Return collected data. Keys must be unique across all collectors."""
+        """Return collected data. Keys must not collide with other collectors."""
 ```
 
 ---
@@ -144,31 +146,22 @@ def register_default_collectors(warehouse) -> None:
 
 **Constraint:** Do not change the TokenWarehouse constructor signature. Only add `_collectors` and `_routing` to its existing `__init__`.
 
-### 5.1 Existing Surface (collectors may use these)
+### 5.1 Existing Surface (collectors currently use these)
 
-Collectors are allowed to call these existing methods/properties. Their signatures and semantics must not change:
+Collectors currently call these methods. Their exact semantics are defined by the existing implementation, not this document.
 
 ```python
 @property
 def tokens(self) -> Sequence[Token]: ...
 
-def get_token_text(self, idx: int) -> str:
-    """Returns text content for token at index."""
-
-def find_close(self, open_idx: int) -> int | None:
-    """Returns index of matching close token, or None."""
-
-def find_parent(self, idx: int) -> int | None:
-    """Returns index of parent token, or None."""
-
-def text_between(self, start: int, end: int) -> str:
-    """Returns concatenated text content in range [start, end)."""
-
-def section_of(self, idx: int) -> int | None:
-    """Returns section index (int) containing token, or None if not in a section."""
+def get_token_text(self, idx: int) -> str: ...
+def find_close(self, open_idx: int) -> int | None: ...
+def find_parent(self, idx: int) -> int | None: ...
+def text_between(self, start: int, end: int) -> str: ...
+def section_of(self, idx: int) -> int | None: ...
 ```
 
-If any of these change signature or semantics, collector code will break.
+**Warning:** If you change these signatures, collector code will break. If you change their semantics, collector behavior may change in ways this spec cannot predict — the spec doesn't define what these methods do, only that collectors depend on them.
 
 ### 5.2 New Attributes (add to existing `__init__`)
 
@@ -199,11 +192,11 @@ def register_collector(self, collector: Collector) -> None:
 def dispatch_all(self) -> None:
     """Single-pass dispatch to registered collectors.
     
-    Observable contract:
+    Observable behavior:
     - Each token is visited exactly once, in order.
     - For each token, each interested collector is called at most once,
       even if it registered interest in both the token's type AND tag.
-    - ctx.stack tracks nesting; ctx.line tracks source position (best-effort).
+    - ctx.stack tracks nesting; ctx.line tracks source position (unreliable).
     """
     ctx = DispatchContext(stack=[], line=0)
     for idx, token in enumerate(self.tokens):
@@ -237,9 +230,8 @@ def finalize_all(self) -> dict:
 def _get_collectors_for(self, token) -> list[Collector]:
     """Get collectors interested in this token, deduplicated.
     
-    Observable contract: Returns each interested collector at most once.
-    Implementation note: Currently dedupes via id(); this is not part of
-    the contract and may change.
+    Behavior: Returns each interested collector at most once.
+    Implementation: Currently dedupes via id(); this detail may change.
     """
     seen: set[int] = set()
     result: list[Collector] = []
@@ -257,12 +249,14 @@ def _get_collectors_for(self, token) -> list[Collector]:
 
 ### 5.4 Line Semantics
 
-`ctx.line` provides **best-effort source line tracking**:
+`ctx.line` provides **unreliable** source line tracking:
 
 - If `token.map` exists, `ctx.line` = first line of that token's source range
-- If `token.map` is None, `ctx.line` = last known line (inherited from previous token)
+- If `token.map` is None, `ctx.line` = last known line (inherited)
 
-Collectors should treat `ctx.line` as approximate. It's suitable for diagnostics and section mapping, not precise source reconstruction.
+**No invariants guaranteed.** Line numbers may be 0, may skip, may not correspond to actual source lines for synthetic tokens. 
+
+**Collectors should not rely on `ctx.line` for control flow.** It's acceptable for diagnostics, logging, or approximate source mapping — but any logic that depends on specific line values is fragile.
 
 ---
 
@@ -270,33 +264,33 @@ Collectors should treat `ctx.line` as approximate. It's suitable for diagnostics
 
 **Location:** `doxstrux/markdown/parser.py`
 
-**Scope:** Only the collector wiring changes. Security, caching, metadata, and tree-building logic remain exactly as-is.
+**Intent:** Only change the collector wiring. Security, caching, metadata, and tree-building logic should remain as-is.
+
+**Reality check:** This spec cannot enforce that constraint. The snippet below shows the intended change; discipline and code review must ensure nothing else changes.
 
 ```python
 from doxstrux.markdown.collector_registry import register_default_collectors
 
 class MarkdownParserCore:
-    # __init__ UNCHANGED
-    # Security/plugin configuration UNCHANGED
+    # __init__ should remain unchanged
+    # Security/plugin configuration should remain unchanged
     
     def parse(self) -> dict:
-        # ... existing security precheck (UNCHANGED) ...
-        # ... existing token parsing (UNCHANGED) ...
+        # ... existing code up to warehouse creation ...
         
-        self.warehouse = TokenWarehouse(...)  # UNCHANGED args
+        self.warehouse = TokenWarehouse(...)  # keep existing args
         
-        # --- NEW (replaces manual collector wiring) ---
+        # --- Replace manual collector wiring with: ---
         register_default_collectors(self.warehouse)
         self.warehouse.dispatch_all()
         metadata = self.warehouse.finalize_all()
-        # --- END NEW ---
+        # --- End replacement ---
         
-        # ... existing security policy (UNCHANGED) ...
-        # ... existing metadata assembly (UNCHANGED) ...
+        # ... existing security/metadata code should remain ...
         return metadata
 ```
 
-**Constraint:** Do not simplify or restructure `parse()` beyond swapping collector wiring. This is a surgical change.
+**Warning:** This snippet is illustrative, not prescriptive. The real `parse()` likely has more structure. Don't simplify it to match this snippet.
 
 ---
 
@@ -335,17 +329,20 @@ class HeadingsCollector:
 
 ### Step 0 — Baseline (required before any code changes)
 
-Create golden tests that exercise:
+Create tests that establish a baseline. These are **minimum requirements**, not a guarantee of correctness.
 
 | Category | Requirement |
 |----------|-------------|
-| **Per-collector** | One test per collector in `default_collectors()`. Must assert specific structure, not just non-empty. E.g. Headings: exact levels/text/line for a known input. |
-| **Complex collectors** | Tables, Lists, and Html collectors need at least one edge-case test each (e.g. nested lists, table with colspan, mixed HTML/markdown). |
-| **Nesting** | Lists in lists, tables with headings, blockquotes with code |
-| **Security** | One doc that triggers security flags. Assert both keys AND critical values (e.g. `blocked=True`, at least one issue code) match pre-refactor output. |
-| **End-to-end** | One rich document exercising multiple collectors. Assert on combined `parse()` output: number of sections, heading texts, presence of expected links/tables. |
+| **Per-collector** | One test per collector in `default_collectors()`. Should assert on structure, not just non-empty. |
+| **Complex collectors** | Tables, Lists, and Html need at least one edge-case test each (nested structures, mixed content). |
+| **Security** | One doc that triggers security flags. Assert on key values like `blocked` and issue codes. |
+| **End-to-end** | One document exercising multiple collectors. Assert on combined output structure. |
 
-**Exit:** Every collector in `default_collectors()` has at least one anchored test. Complex collectors have edge-case coverage. One end-to-end golden test exists. Security values are pinned.
+**What these tests catch:** Catastrophic breakage — collectors that stop working entirely, wiring that fails to connect.
+
+**What these tests won't catch:** Subtle semantic drift, edge cases not covered, performance regressions, interactions between collectors.
+
+**Exit:** Tests exist and pass. This establishes a baseline, not a safety guarantee.
 
 ### Step 1 — Add infrastructure
 
@@ -365,9 +362,9 @@ self.warehouse.dispatch_all()
 metadata = self.warehouse.finalize_all()
 ```
 
-**Constraint:** No other changes to parse(). Security logic untouched.
+**Intent:** No other changes to parse(). Security logic untouched. (This requires discipline; the spec cannot enforce it.)
 
-**Exit:** Parser no longer imports concrete collectors. All tests pass including security metadata test.
+**Exit:** Parser no longer imports concrete collectors. All tests pass.
 
 ### Step 3 — Conform collectors
 
@@ -375,10 +372,10 @@ Update each collector to implement Collector protocol (name, interest, should_pr
 
 **Guardrails:**
 - No algorithmic changes; only signature/ctx wiring
-- Each collector's golden test must still pass
+- Each collector's test must still pass
 - Diff review: confirm only wiring changes, not logic rewrites
 
-**Exit:** All 12 collectors conform. All tests pass.
+**Exit:** All collectors in `default_collectors()` conform. All tests pass.
 
 ---
 
@@ -399,4 +396,4 @@ parse(self) -> dict
 
 ---
 
-*This is the single source of truth for parser/warehouse/collector/registry wiring and contracts. If code matches this spec, that wiring and those contracts are correct.*
+*This document describes the intended structure. It does not formally specify semantics. Correctness ultimately depends on the code, tests, and careful review — not this spec alone.*
