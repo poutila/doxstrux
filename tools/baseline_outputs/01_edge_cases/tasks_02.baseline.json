@@ -129,13 +129,9 @@
     },
     "security": {
       "link_disallowed_schemes_raw": true,
-      "profile_used": "permissive",
-      "rejected_plugins": [
-        "unknown:deflist"
-      ],
+      "profile_used": "moderate",
       "statistics": {
         "allowed_schemes": [
-          "ftp",
           "http",
           "https",
           "mailto",

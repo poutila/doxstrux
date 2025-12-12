@@ -454,6 +454,7 @@ dependencies = [
     { name = "polars" },
     { name = "pyaml" },
     { name = "pyyaml" },
+    { name = "ruff" },
 ]
 
 [package.optional-dependencies]
@@ -506,6 +507,7 @@ requires-dist = [
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "pytest-mock", marker = "extra == 'dev'" },
     { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "ruff", specifier = ">=0.12.7" },
     { name = "ruff", marker = "extra == 'dev'" },
     { name = "safety", marker = "extra == 'dev'" },
     { name = "vulture", marker = "extra == 'dev'" },

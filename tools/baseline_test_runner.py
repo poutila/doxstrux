@@ -14,11 +14,11 @@ Usage:
 import json
 import sys
 import time
-from pathlib import Path
-from typing import Any
+import traceback
 from collections import defaultdict
 from datetime import date, datetime
-import traceback
+from pathlib import Path
+from typing import Any
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
@@ -39,9 +39,26 @@ def normalize_json(data: Any) -> str:
     return json.dumps(data, sort_keys=True, indent=2, cls=DateTimeEncoder)
 
 
+def _remove_source_path(data: dict) -> dict:
+    """Remove source_path from metadata for comparison.
+
+    source_path varies between absolute/relative depending on how the parser
+    is called, so we exclude it from baseline comparison.
+    """
+    import copy
+    result = copy.deepcopy(data)
+    if "metadata" in result and "source_path" in result["metadata"]:
+        del result["metadata"]["source_path"]
+    return result
+
+
 def compare_outputs(expected: dict, actual: dict) -> tuple[bool, list[str]]:
     """Compare expected and actual outputs, return (matches, differences)."""
     differences = []
+
+    # Remove source_path before comparison (varies based on invocation context)
+    expected = _remove_source_path(expected)
+    actual = _remove_source_path(actual)
 
     # Normalize and compare
     expected_str = normalize_json(expected)

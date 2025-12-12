@@ -6,25 +6,40 @@ No backward compatibility burden - fresh architecture.
 """
 
 import hashlib
-import posixpath
+import unicodedata
 import urllib.parse
 import warnings
 from collections.abc import Callable
 from typing import Any
+
 import yaml
 from markdown_it import MarkdownIt
 from markdown_it.tree import SyntaxTreeNode
-from mdit_py_plugins.texmath import texmath_plugin
 from mdit_py_plugins.footnote import footnote_plugin
-from mdit_py_plugins.tasklists import tasklists_plugin
 from mdit_py_plugins.front_matter import front_matter_plugin
-from doxstrux.markdown.security import validators as security_validators
-from doxstrux.markdown.ir import DocumentIR, DocNode
-from doxstrux.markdown.utils.token_utils import walk_tokens_iter
-from doxstrux.markdown.utils import line_utils, text_utils
-from doxstrux.markdown.exceptions import MarkdownSecurityError, MarkdownSizeError
+from mdit_py_plugins.tasklists import tasklists_plugin
+from mdit_py_plugins.texmath import texmath_plugin
+
 from doxstrux.markdown import config
-from doxstrux.markdown.extractors import media, footnotes, blockquotes, html, sections, paragraphs, lists, codeblocks, tables, links, math
+from doxstrux.markdown.exceptions import MarkdownSecurityError, MarkdownSizeError
+from doxstrux.markdown.extractors import (
+    blockquotes,
+    codeblocks,
+    footnotes,
+    html,
+    links,
+    lists,
+    math,
+    media,
+    paragraphs,
+    sections,
+    tables,
+)
+from doxstrux.markdown.ir import DocNode, DocumentIR
+from doxstrux.markdown.security import validators as security_validators
+from doxstrux.markdown.utils import line_utils, text_utils
+from doxstrux.markdown.utils.token_utils import walk_tokens_iter
+
 
 class MarkdownParserCore:
     """
@@ -192,8 +207,11 @@ class MarkdownParserCore:
         self._max_token_count = limits["max_token_count"]
         self.MAX_RECURSION_DEPTH = limits["max_recursion_depth"]
 
-        # Use original content (frontmatter will be extracted by plugin after parsing)
-        self.content = content
+        # Phase 8: Content normalization (THREE_ADDITIONS.md)
+        # Order: raw input → security checks (above) → normalization → parsing
+        # INV-1.7: Normalization is idempotent (safe to call on already-normalized content)
+        # INV-1.8: original_content preserves raw input (set at line 176)
+        self.content = self._normalize_content(content)
         self.lines = self.content.split("\n")
 
         # Build character offset map for RAG chunking
@@ -337,6 +355,35 @@ class MarkdownParserCore:
                     self.security_profile,
                     {"pattern": detected_pattern},
                 )
+
+    def _normalize_content(self, content: str) -> str:
+        """Normalize content for consistent parsing.
+
+        Phase 8 (THREE_ADDITIONS.md) content normalization:
+        - INV-1.1: CRLF/LF equivalence - normalize all line endings to LF
+        - INV-1.3: Bare CR handling - treat bare CR as line separator
+        - INV-1.4: Unicode NFC normalization for consistent text comparison
+        - INV-1.7: Idempotent - calling twice produces same result
+
+        Order: CRLF → LF, then bare CR → LF, then NFC normalization.
+        This ensures all line ending styles become LF before Unicode normalization.
+
+        Args:
+            content: Raw markdown content
+
+        Returns:
+            Normalized content with LF line endings and NFC Unicode
+        """
+        # Step 1: Normalize line endings
+        # Replace CRLF first (Windows), then bare CR (old Mac)
+        # Order matters: CRLF before CR to avoid double conversion
+        normalized = content.replace("\r\n", "\n").replace("\r", "\n")
+
+        # Step 2: Unicode NFC normalization
+        # Precomposed form for consistent text matching
+        normalized = unicodedata.normalize("NFC", normalized)
+
+        return normalized
 
     def _validate_plugins(
         self, plugins: list[str], external_plugins: list[str]
@@ -759,7 +806,6 @@ class MarkdownParserCore:
         Returns:
             Dictionary with security warnings and statistics
         """
-        import re
 
         security = {
             "warnings": [],
@@ -1867,7 +1913,6 @@ class MarkdownParserCore:
             chunks = chunker.chunk(ir, policy)
             ```
         """
-        import hashlib
 
         # Parse if not already done
         if not hasattr(self, '_parsed') or not self._parsed:
