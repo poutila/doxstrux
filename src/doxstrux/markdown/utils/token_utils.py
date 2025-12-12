@@ -15,12 +15,12 @@ Classes:
     TokenAdapter: Wrapper for safe dual-shape token handling
 """
 
-from typing import Generator, Optional, Any
+from collections.abc import Generator
+from typing import Any
+
 from markdown_it import MarkdownIt
 from markdown_it.token import Token
-
 from mdit_py_plugins.tasklists import tasklists_plugin as tasklists
-
 
 md = (
     MarkdownIt("commonmark", options_update={"html": False, "linkify": True}).enable('table')
@@ -215,7 +215,7 @@ class TokenAdapter:
         return self.get('content', '')
 
     @property
-    def children(self) -> Optional[list]:
+    def children(self) -> list | None:
         """Get token children."""
         return self.get('children', None)
 
@@ -247,8 +247,12 @@ def iter_blocks(text: str) -> Generator[dict[str, Any], None, None]:
             inline = tokens[i+1] if i + 1 < len(tokens) else None
             heading_text = ""
             if inline and inline.type == "inline" and inline.children:
-                heading_text = "".join(c.content for c in inline.children if c.type == "text")
-            yield {"kind": "heading", "level": int(t.tag[1]), "text": heading_text, "map": t.map}
+                heading_text = "".join((c.content or "") for c in inline.children if c.type == "text")
+            # Safe heading level extraction - guard against malformed tags
+            level = 1  # Default to h1 if malformed
+            if t.tag and len(t.tag) > 1 and t.tag[1:].isdigit():
+                level = int(t.tag[1:])
+            yield {"kind": "heading", "level": level, "text": heading_text, "map": t.map}
         i += 1
 
 
@@ -280,6 +284,6 @@ def extract_links_and_images(text: str) -> tuple[list[str], list[tuple[str, str]
             src = attrs.get("src","")
             alt = ""
             if tok.children:
-                alt = "".join(c.content for c in tok.children if c.type == "text")
+                alt = "".join((c.content or "") for c in tok.children if c.type == "text")
             images.append((src, alt))
     return links, images

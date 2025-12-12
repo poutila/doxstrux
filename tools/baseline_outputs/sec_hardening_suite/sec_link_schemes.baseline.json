@@ -108,7 +108,7 @@
     "security_policies_applied": [
       "embedding_blocked_schemes_raw"
     ],
-    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_link_schemes.md",
+    "source_path": "tools/test_mds/sec_hardening_suite/sec_link_schemes.md",
     "total_chars": 155,
     "total_lines": 5
   },

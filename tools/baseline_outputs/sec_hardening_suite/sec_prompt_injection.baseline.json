@@ -49,6 +49,7 @@
     },
     "security": {
       "profile_used": "moderate",
+      "prompt_injection_in_content": true,
       "statistics": {
         "allowed_schemes": [
           "http",
@@ -87,7 +88,7 @@
         }
       ]
     },
-    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_prompt_injection.md",
+    "source_path": "tools/test_mds/sec_hardening_suite/sec_prompt_injection.md",
     "total_chars": 89,
     "total_lines": 4
   },

@@ -63,6 +63,7 @@
     },
     "security": {
       "profile_used": "moderate",
+      "prompt_injection_in_content": true,
       "statistics": {
         "allowed_schemes": [
           "http",
@@ -125,7 +126,7 @@
       "stripped_1_html_blocks",
       "stripped_3_html_inline"
     ],
-    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_kitchen_sink.md",
+    "source_path": "tools/test_mds/sec_hardening_suite/sec_kitchen_sink.md",
     "total_chars": 229,
     "total_lines": 6
   },

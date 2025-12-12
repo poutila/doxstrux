@@ -61,7 +61,7 @@ def extract_math(
             blocks.append({
                 "id": f"math_block_{len(blocks)}",
                 "kind": "display",
-                "content": tok.content.strip(),
+                "content": (tok.content or "").strip(),
                 "start_line": start_line,
                 "end_line": end_line
             })
@@ -72,7 +72,7 @@ def extract_math(
             blocks.append({
                 "id": f"math_block_{len(blocks)}",
                 "kind": "fenced",
-                "content": tok.content.strip(),
+                "content": (tok.content or "").strip(),
                 "start_line": start_line,
                 "end_line": end_line
             })
@@ -85,7 +85,7 @@ def extract_math(
                     line = tok.map[0] if tok.map else None
                     inline.append({
                         "id": f"math_inline_{len(inline)}",
-                        "content": child.content,
+                        "content": child.content or "",
                         "line": line
                     })
 

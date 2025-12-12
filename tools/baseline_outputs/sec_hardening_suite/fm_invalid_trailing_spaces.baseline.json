@@ -97,7 +97,7 @@
       },
       "warnings": []
     },
-    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/fm_invalid_trailing_spaces.md",
+    "source_path": "tools/test_mds/sec_hardening_suite/fm_invalid_trailing_spaces.md",
     "total_chars": 68,
     "total_lines": 8
   },

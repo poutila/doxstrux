@@ -121,7 +121,7 @@ def extract_tables(
                         for th in tr.children or []:
                             # Header text from inline children
                             header_text = "".join(
-                                grandchild.content for grandchild in (th.children or [])
+                                (grandchild.content or "") for grandchild in (th.children or [])
                             )
                             headers.append(header_text)
 
@@ -159,7 +159,7 @@ def extract_tables(
                                 break
                             actual_end_line = row_line + 1
                         row = [
-                            "".join(grandchild.content for grandchild in (td.children or []))
+                            "".join((grandchild.content or "") for grandchild in (td.children or []))
                             for td in tr.children or []
                         ]
                         if row:

@@ -81,7 +81,7 @@ def process_inline_tokens(
             i += 1
             while i < len(tokens) and tokens[i].type != "link_close":
                 if tokens[i].type == "text" or tokens[i].type == "code_inline":
-                    text_parts.append(tokens[i].content)
+                    text_parts.append(tokens[i].content or "")
                 elif tokens[i].type == "image":
                     # Capture image info for linked images like [![alt](img.jpg)](link.url)
                     img_src = tokens[i].attrGet("src") or ""

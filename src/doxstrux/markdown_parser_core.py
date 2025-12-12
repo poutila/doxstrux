@@ -21,6 +21,7 @@ from mdit_py_plugins.tasklists import tasklists_plugin
 from mdit_py_plugins.texmath import texmath_plugin
 
 from doxstrux.markdown import config
+from doxstrux.markdown.budgets import URIBudget
 from doxstrux.markdown.exceptions import MarkdownSecurityError, MarkdownSizeError
 from doxstrux.markdown.extractors import (
     blockquotes,
@@ -181,6 +182,10 @@ class MarkdownParserCore:
                 - 'preset': str, markdown-it preset ('commonmark', 'gfm', etc.)
             security_profile: Optional security profile ('strict', 'moderate', 'permissive')
         """
+        # Validate content is not None
+        if content is None:
+            raise TypeError("content must be str, not None")
+
         # Validate security profile if provided
         valid_profiles = {"strict", "moderate", "permissive"}
         if security_profile and security_profile not in valid_profiles:
@@ -671,13 +676,19 @@ class MarkdownParserCore:
                     quarantine_reasons.append(f"long_footnote:{footnote.get('label', 'unknown')}")
                     break
 
-        # Check for prompt injection in footnotes
-        if security.get("prompt_injection_in_footnotes"):
-            quarantine_reasons.append("prompt_injection_footnotes")
+        # Check for prompt injection - only quarantine if profile setting enables it
+        # P1-2 security fix: wire up quarantine_on_injection config
+        profile_settings = config.SECURITY_PROFILES.get(self.security_profile, {})
+        quarantine_on_injection = profile_settings.get("quarantine_on_injection", True)
 
-        # Check for prompt injection in content
-        if security.get("prompt_injection_in_content"):
-            quarantine_reasons.append("prompt_injection_content")
+        if quarantine_on_injection:
+            # Check for prompt injection in footnotes
+            if security.get("prompt_injection_in_footnotes"):
+                quarantine_reasons.append("prompt_injection_footnotes")
+
+            # Check for prompt injection in content
+            if security.get("prompt_injection_in_content"):
+                quarantine_reasons.append("prompt_injection_content")
 
         # Set quarantine status if needed
         if quarantine_reasons:
@@ -937,19 +948,40 @@ class MarkdownParserCore:
                 }
             )
 
-        # Check images for data URIs
+        # Check images for data URIs with size enforcement (P0-3 security fix)
         images = self._get_cached("images", self._extract_images)
+        uri_budget = URIBudget(self.security_profile)
         for img in images:
-            if img.get("src", "").startswith("data:"):  # Images use 'src' not 'url'
+            src = img.get("src", "")
+            if src.startswith("data:"):
                 security["statistics"]["has_data_uri_images"] = True
+                uri_size = len(src)
+
+                # Check against URI budget - fail-closed on oversized URIs
+                try:
+                    uri_budget.add_uri(uri_size)
+                except MarkdownSizeError as e:
+                    # Data URI too large - block embedding
+                    security["embedding_blocked"] = True
+                    security["embedding_blocked_reason"] = str(e)
+                    security["warnings"].append(
+                        {
+                            "type": "data_uri_oversized",
+                            "line": img.get("line"),
+                            "message": f"Data URI exceeds size limit: {uri_size} bytes",
+                            "size": uri_size,
+                        }
+                    )
+                    # Continue checking other URIs but document is blocked
+
                 security["warnings"].append(
                     {
                         "type": "data_uri_image",
                         "line": img.get("line"),
                         "message": "Image uses data: URI scheme",
+                        "size": uri_size,
                     }
                 )
-                break
 
         # Link scheme analysis with RAG safety validation
         links = self._get_cached("links", self._extract_links)
@@ -1079,6 +1111,8 @@ class MarkdownParserCore:
         # Note: check_prompt_injection now returns PromptInjectionCheck, use .suspected
         if security_validators.check_prompt_injection(raw_content, profile=self.security_profile).suspected:
             security["statistics"]["suspected_prompt_injection"] = True
+            # Set flag for quarantine logic (P0 security fix)
+            security["prompt_injection_in_content"] = True
             security["warnings"].append(
                 {
                     "type": "prompt_injection",
@@ -1165,6 +1199,8 @@ class MarkdownParserCore:
         footnotes = structure.get("footnotes", {})
         if self._check_footnote_injection(footnotes):
             security["statistics"]["footnote_injection"] = True
+            # Set flag for quarantine logic (P0 security fix)
+            security["prompt_injection_in_footnotes"] = True
             security["warnings"].append(
                 {
                     "type": "footnote_injection",
@@ -1318,9 +1354,10 @@ class MarkdownParserCore:
                         # Return parsed YAML if it's a dict or list
                         if isinstance(parsed_yaml, (dict, list)):
                             return parsed_yaml
-                    except yaml.YAMLError:
-                        # Invalid YAML - return None
-                        pass
+                    except yaml.YAMLError as e:
+                        # Invalid YAML - set error for metadata and return None
+                        self.frontmatter_error = str(e)
+                        return None
                 break
         return None
 
@@ -1688,11 +1725,10 @@ class MarkdownParserCore:
                 alt = ""
                 tok = getattr(n, "token", None)
                 if tok:
-                    try:
-                        # Prefer token.content - this is where markdown-it puts the canonical alt text
-                        alt = getattr(tok, "content", "") or tok.attrGet("alt") or ""
-                    except Exception:
-                        alt = ""
+                    # Safe extraction: getattr has default, attrGet may not exist
+                    alt = getattr(tok, "content", "") or ""
+                    if not alt and hasattr(tok, "attrGet"):
+                        alt = tok.attrGet("alt") or ""
                 if alt:
                     ctx.append(alt)
             return True
@@ -1722,8 +1758,15 @@ class MarkdownParserCore:
         if not target:
             return False
 
-        # URL-decode to catch %2e%2e encoded traversal
-        decoded = urllib.parse.unquote(target)
+        # URL-decode REPEATEDLY to catch double/triple encoding attacks
+        # e.g., %252e%252e → %2e%2e → .. (needs 2 passes)
+        # Loop until stable (no more decoding possible)
+        decoded = target
+        for _ in range(10):  # Max 10 iterations to prevent infinite loop
+            next_decoded = urllib.parse.unquote(decoded)
+            if next_decoded == decoded:
+                break
+            decoded = next_decoded
 
         # IMPORTANT: Check UNC paths BEFORE normalizing \ to /
         # Otherwise \\server\share becomes //server/share and we miss it
@@ -1770,14 +1813,28 @@ class MarkdownParserCore:
         Returns:
             Dictionary with spoofing indicators (legacy field names for backward compatibility)
         """
-        # Skip very large texts
-        if not text or len(text) > 100000:
+        # Empty text: safe, return False for all
+        if not text:
             return {
                 "has_bidi": False,
                 "has_confusables": False,
                 "has_mixed_scripts": False,
                 "has_invisible_chars": False,
                 "has_zero_width": False,
+            }
+
+        # FAIL-CLOSED for large texts (P1-1 security fix):
+        # If text exceeds scan limit, assume it MAY contain malicious content
+        # rather than bypassing all checks. This prevents padding attacks where
+        # attacker adds 100KB of benign content to bypass unicode checks.
+        if len(text) > 100000:
+            return {
+                "has_bidi": True,  # Assume may have BiDi
+                "has_confusables": True,  # Assume may have confusables
+                "has_mixed_scripts": True,  # Assume may have mixed scripts
+                "has_invisible_chars": True,  # Assume may have invisible chars
+                "has_zero_width": True,  # Assume may have zero-width chars
+                "scan_limit_exceeded": True,  # Flag that we hit the limit
             }
 
         # Use centralized security validator

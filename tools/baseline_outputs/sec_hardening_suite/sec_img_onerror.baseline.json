@@ -96,7 +96,7 @@
     "security_policies_applied": [
       "stripped_1_html_blocks"
     ],
-    "source_path": "/home/lasse/Dropbox/python/omat/doxstrux/tools/test_mds/sec_hardening_suite/sec_img_onerror.md",
+    "source_path": "tools/test_mds/sec_hardening_suite/sec_img_onerror.md",
     "total_chars": 67,
     "total_lines": 4
   },
