@@ -33,9 +33,15 @@ Three profiles with different trust levels:
 - **Link scheme validation** - Blocks javascript:, data:, etc.
 - **BiDi control detection** - Detects text direction manipulation
 - **Confusable character detection** - Detects homograph attacks
-- **HTML sanitization** - Configurable HTML filtering
+- **HTML detection** - Detects dangerous HTML (see note below)
 - **Script tag detection** - Warns about embedded scripts
 - **Event handler detection** - Detects onclick, onerror, etc.
+
+> **⚠️ HTML Sanitization Note**: Doxstrux **detects** dangerous HTML patterns and sets
+> `embedding_blocked: True` when found, but it does **NOT** sanitize/strip HTML content.
+> If you render parsed HTML content in a web UI, you MUST sanitize it downstream using
+> a library like `bleach.clean()`. For untrusted input, use `security_profile='strict'`
+> with `allows_html: False` to prevent HTML from being parsed entirely.
 
 ### Token-Based Parser Architecture
 
@@ -161,6 +167,9 @@ for warning in warnings:
 - **Markdown bombs** - Deeply nested structures (use recursion limits)
 - **External resource exhaustion** - Image/link fetching (validate URLs before fetching)
 - **Semantic attacks** - Misleading content (requires semantic analysis)
+- **Novel prompt injections** - Pattern-based detection is a blocklist approach; new jailbreak
+  techniques will bypass it. Treat `suspected_prompt_injection` as a signal, not a guarantee.
+  Implement LLM-level guardrails for comprehensive protection.
 
 ### Protected Against
 

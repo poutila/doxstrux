@@ -68,6 +68,9 @@ def parse_gfm_table_line(line: str) -> tuple[int, list[str]] | None:
         ]
         return (len(cells), cells)
     except Exception:
+        # Any parse failure means "not a valid table line" - fail-closed behavior.
+        # This covers: polars errors, empty DataFrames, malformed input.
+        # Returning None tells the caller to skip this line.
         return None
 
 
