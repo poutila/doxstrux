@@ -1,7 +1,7 @@
 # DOXSTRUX_SOLID_ANALYSIS
 
 > **Status:** ARCHIVED — Pre-refactor diagnosis. Preserved as historical evidence.
-> See **DOXSTRUX_REFACTOR.md** for the active plan.
+> See **DOXSTRUX_SPEC.md** for the active specification.
 
 ---
 
@@ -15,13 +15,15 @@ Clear module-level separation, but `MarkdownParserCore` is a God Object.
 
 ## Quantitative Assessment
 
-| Metric | Value | Guideline |
-|--------|-------|-----------|
+| Metric | Value | Historical Guideline |
+|--------|-------|----------------------|
 | `MarkdownParserCore` lines | 2075 | 300-500 |
 | Methods | 49 | — |
 | `_extract_*` methods | 17 | — |
 | Concrete module imports | 11 | 0 (use abstractions) |
 | Extractor callback params | 8 | 1 (context object) |
+
+*These numbers are frozen as of 2025-12-12. They are a diagnostic snapshot, not targets to maintain.*
 
 ---
 
@@ -82,6 +84,8 @@ Parser imports 11 concrete extractor modules directly.
 | ISP | VIOLATED | Warehouse context |
 | DIP | VIOLATED | Registry indirection |
 
+**Note:** The DIP guideline ("0 concrete imports") was intentionally relaxed in DOXSTRUX_SPEC. The registry is allowed to import concrete collectors — that coupling is moved to one place rather than eliminated.
+
 ---
 
-*Captured: 2025-12-12. This analysis informed DOXSTRUX_REFACTOR.md.*
+*Captured: 2025-12-12. This analysis originally informed an earlier refactor plan; its role now is historical context for DOXSTRUX_SPEC.md.*

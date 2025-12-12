@@ -455,6 +455,7 @@ dependencies = [
     { name = "pyaml" },
     { name = "pyyaml" },
     { name = "ruff" },
+    { name = "vulture" },
 ]
 
 [package.optional-dependencies]
@@ -510,6 +511,7 @@ requires-dist = [
     { name = "ruff", specifier = ">=0.12.7" },
     { name = "ruff", marker = "extra == 'dev'" },
     { name = "safety", marker = "extra == 'dev'" },
+    { name = "vulture", specifier = ">=2.14" },
     { name = "vulture", marker = "extra == 'dev'" },
 ]
 provides-extras = ["dev"]
