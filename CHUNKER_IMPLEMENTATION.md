@@ -837,9 +837,9 @@ The chunker's job is simple:
 
 ### 10.3 Implementation Priority
 
-1. **Week 1**: Core chunker with semantic mode
-2. **Week 2**: Code-aware mode + tests
-3. **Week 3**: Overlap + deduplication
-4. **Week 4**: tiktoken integration + optimization
+1. Core chunker with semantic mode
+2. Code-aware mode + tests
+3. Overlap + deduplication
+4. tiktoken integration (optional)
 
 The architecture is ready. The data is there. The chunker is just a tree walk with size checks.
