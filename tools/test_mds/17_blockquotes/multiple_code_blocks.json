@@ -1,12 +1,265 @@
 {
-  "id": "multiple_code_blocks",
-  "category": "blockquotes",
-  "expected": {
-    "min_quote_depth": 1,
-    "max_quote_depth": 1,
-    "contains_lazy_continuation": true,
-    "contains_list_in_quote": false,
-    "fenced_code_in_quote": true,
-    "hr_in_quote": false
+  "metadata": {
+    "total_lines": 19,
+    "total_chars": 206,
+    "has_sections": true,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 5,
+      "text": 5,
+      "blockquote": 1,
+      "paragraph": 4,
+      "fence": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/17_blockquotes/multiple_code_blocks.md"
+  },
+  "content": {
+    "raw": "# Blockquote with multiple code blocks\n\n> First paragraph\n>\n> ```python\n> def first():\n>     pass\n> ```\n>\n> Middle paragraph\n>\n> ```javascript\n> function second() {}\n> ```\n>\n> Final paragraph\n\nNormal text.\n",
+    "lines": [
+      "# Blockquote with multiple code blocks",
+      "",
+      "> First paragraph",
+      ">",
+      "> ```python",
+      "> def first():",
+      ">     pass",
+      "> ```",
+      ">",
+      "> Middle paragraph",
+      ">",
+      "> ```javascript",
+      "> function second() {}",
+      "> ```",
+      ">",
+      "> Final paragraph",
+      "",
+      "Normal text.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_blockquote-with-multiple-code-blocks",
+        "level": 1,
+        "title": "Blockquote with multiple code blocks",
+        "slug": "blockquote-with-multiple-code-blocks",
+        "start_line": 0,
+        "end_line": 18,
+        "start_char": 0,
+        "end_char": 206,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Blockquote with multiple code blocks\n\n> First paragraph\n>\n> ```python\n> def first():\n>     pass\n> ```\n>\n> Middle paragraph\n>\n> ```javascript\n> function second() {}\n> ```\n>\n> Final paragraph\n\nNormal text.\n",
+        "text_content": "Blockquote with multiple code blocks\n\nFirst paragraph\n\nMiddle paragraph\n\nFinal paragraph\n\nNormal text."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Normal text.",
+        "start_line": 17,
+        "end_line": 18,
+        "section_id": "section_blockquote-with-multiple-code-blocks",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "python",
+        "content": "def first():\n    pass\n",
+        "start_line": 4,
+        "end_line": 8,
+        "section_id": "section_blockquote-with-multiple-code-blocks"
+      },
+      {
+        "id": "code_1",
+        "type": "fenced",
+        "language": "javascript",
+        "content": "function second() {}\n",
+        "start_line": 11,
+        "end_line": 14,
+        "section_id": "section_blockquote-with-multiple-code-blocks"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_blockquote-with-multiple-code-blocks",
+        "level": 1,
+        "text": "Blockquote with multiple code blocks",
+        "line": 0,
+        "slug": "blockquote-with-multiple-code-blocks",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 39
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "content": "First paragraphMiddle paragraphFinal paragraph",
+        "start_line": 2,
+        "end_line": 16,
+        "section_id": "section_blockquote-with-multiple-code-blocks",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 2
+        },
+        "children_blocks": [
+          {
+            "type": "fence",
+            "start_line": 4,
+            "end_line": 8
+          },
+          {
+            "type": "fence",
+            "start_line": 11,
+            "end_line": 14
+          }
+        ]
+      }
+    ],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "code",
+      "12": "code",
+      "13": "code",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose"
+    },
+    "line_to_section": {
+      "0": "section_blockquote-with-multiple-code-blocks",
+      "1": "section_blockquote-with-multiple-code-blocks",
+      "2": "section_blockquote-with-multiple-code-blocks",
+      "3": "section_blockquote-with-multiple-code-blocks",
+      "4": "section_blockquote-with-multiple-code-blocks",
+      "5": "section_blockquote-with-multiple-code-blocks",
+      "6": "section_blockquote-with-multiple-code-blocks",
+      "7": "section_blockquote-with-multiple-code-blocks",
+      "8": "section_blockquote-with-multiple-code-blocks",
+      "9": "section_blockquote-with-multiple-code-blocks",
+      "10": "section_blockquote-with-multiple-code-blocks",
+      "11": "section_blockquote-with-multiple-code-blocks",
+      "12": "section_blockquote-with-multiple-code-blocks",
+      "13": "section_blockquote-with-multiple-code-blocks",
+      "14": "section_blockquote-with-multiple-code-blocks",
+      "15": "section_blockquote-with-multiple-code-blocks",
+      "16": "section_blockquote-with-multiple-code-blocks",
+      "17": "section_blockquote-with-multiple-code-blocks",
+      "18": "section_blockquote-with-multiple-code-blocks"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "code_lines": [
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      13
+    ],
+    "code_blocks": [
+      {
+        "start_line": 4,
+        "end_line": 7,
+        "language": "python"
+      },
+      {
+        "start_line": 11,
+        "end_line": 13,
+        "language": "javascript"
+      }
+    ]
   }
 }

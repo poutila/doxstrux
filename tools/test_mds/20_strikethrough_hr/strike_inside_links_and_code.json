@@ -1,8 +1,141 @@
 {
-  "id": "strike_inside_links_and_code",
-  "category": "strikethrough_hr",
-  "expected": {
-    "del_inside_link_text": true,
-    "code_literally_shows_tildes": true
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 101,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 2,
+      "inline": 2,
+      "text": 6,
+      "s": 2,
+      "link": 1,
+      "code_inline": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "https": 1
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/20_strikethrough_hr/strike_inside_links_and_code.md"
+  },
+  "content": {
+    "raw": "Link with ~~strikethrough~~: [~~old~~ link](https://example.com)\n\nCode should not strike: `~~code~~`\n",
+    "lines": [
+      "Link with ~~strikethrough~~: [~~old~~ link](https://example.com)",
+      "",
+      "Code should not strike: `~~code~~`",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Link with strikethrough: old link",
+        "start_line": 0,
+        "end_line": 1,
+        "section_id": null,
+        "word_count": 5,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Code should not strike: ~~code~~",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": null,
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": true
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [
+      {
+        "text": "old link",
+        "url": "https://example.com",
+        "line": 0,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

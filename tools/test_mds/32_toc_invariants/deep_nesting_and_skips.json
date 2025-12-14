@@ -1,10 +1,187 @@
 {
-  "id": "deep_nesting_and_skips",
-  "category": "toc_invariants",
-  "expected": {
-    "max_depth": 4,
-    "skipped_levels_detected": [
-      2
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 33,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 3,
+      "inline": 3,
+      "text": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/32_toc_invariants/deep_nesting_and_skips.md"
+  },
+  "content": {
+    "raw": "# L1\n### L3 (skipped L2)\n#### L4\n",
+    "lines": [
+      "# L1",
+      "### L3 (skipped L2)",
+      "#### L4",
+      ""
     ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_l1",
+        "level": 1,
+        "title": "L1",
+        "slug": "l1",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 33,
+        "parent_id": null,
+        "child_ids": [
+          "section_l3-skipped-l2"
+        ],
+        "raw_content": "# L1\n### L3 (skipped L2)\n#### L4\n",
+        "text_content": "L1 L3 (skipped L2) L4"
+      },
+      {
+        "id": "section_l3-skipped-l2",
+        "level": 3,
+        "title": "L3 (skipped L2)",
+        "slug": "l3-skipped-l2",
+        "start_line": 1,
+        "end_line": 3,
+        "start_char": 5,
+        "end_char": 33,
+        "parent_id": "section_l1",
+        "child_ids": [
+          "section_l4"
+        ],
+        "raw_content": "### L3 (skipped L2)\n#### L4\n",
+        "text_content": "L3 (skipped L2) L4"
+      },
+      {
+        "id": "section_l4",
+        "level": 4,
+        "title": "L4",
+        "slug": "l4",
+        "start_line": 2,
+        "end_line": 3,
+        "start_char": 25,
+        "end_char": 33,
+        "parent_id": "section_l3-skipped-l2",
+        "child_ids": [],
+        "raw_content": "#### L4\n",
+        "text_content": "L4"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_l1",
+        "level": 1,
+        "text": "L1",
+        "line": 0,
+        "slug": "l1",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "id": "heading_l3-skipped-l2",
+        "level": 3,
+        "text": "L3 (skipped L2)",
+        "line": 1,
+        "slug": "l3-skipped-l2",
+        "parent_heading_id": "heading_l1",
+        "start_char": 5,
+        "end_char": 25
+      },
+      {
+        "id": "heading_l4",
+        "level": 4,
+        "text": "L4",
+        "line": 2,
+        "slug": "l4",
+        "parent_heading_id": "heading_l3-skipped-l2",
+        "start_char": 25,
+        "end_char": 33
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_l1",
+      "1": "section_l3-skipped-l2",
+      "2": "section_l4",
+      "3": "section_l4"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

@@ -1,14 +1,285 @@
 {
-  "id": "adjacent_emphasis_no_space",
-  "category": "inline_formatting",
-  "expected": {
-    "italic_variants": 2,
-    "bold_variants": 7,
-    "bolditalic_variants": 2,
-    "nested_ok": true,
-    "escapes_ok": false,
-    "code_spans_ok": true,
-    "no_intraword_underscore_emphasis": true,
-    "handles_adjacent_punctuation": false
+  "metadata": {
+    "total_lines": 18,
+    "total_chars": 192,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 28,
+      "paragraph": 8,
+      "strong": 7,
+      "em": 5,
+      "s": 2,
+      "code_inline": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/21_inline_formatting/adjacent_emphasis_no_space.md"
+  },
+  "content": {
+    "raw": "# Adjacent emphasis without spaces\n\n**bold***italic*\n\n***bolditalic***next\n\n*italic***bold**\n\n~~strike~~**bold**\n\n**bold**`code`\n\n`code`*italic*\n\n***combo***~~strike~~`code`\n\nText**bold**text\n",
+    "lines": [
+      "# Adjacent emphasis without spaces",
+      "",
+      "**bold***italic*",
+      "",
+      "***bolditalic***next",
+      "",
+      "*italic***bold**",
+      "",
+      "~~strike~~**bold**",
+      "",
+      "**bold**`code`",
+      "",
+      "`code`*italic*",
+      "",
+      "***combo***~~strike~~`code`",
+      "",
+      "Text**bold**text",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_adjacent-emphasis-without-spaces",
+        "level": 1,
+        "title": "Adjacent emphasis without spaces",
+        "slug": "adjacent-emphasis-without-spaces",
+        "start_line": 0,
+        "end_line": 17,
+        "start_char": 0,
+        "end_char": 192,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Adjacent emphasis without spaces\n\n**bold***italic*\n\n***bolditalic***next\n\n*italic***bold**\n\n~~strike~~**bold**\n\n**bold**`code`\n\n`code`*italic*\n\n***combo***~~strike~~`code`\n\nText**bold**text\n",
+        "text_content": "Adjacent emphasis without spaces\n\nbolditalic\n\nbolditalicnext\n\nitalicbold\n\nstrikebold\n\nboldcode\n\ncodeitalic\n\ncombostrikecode\n\nTextboldtext"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "bolditalic",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "bolditalicnext",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "italicbold",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "strikebold",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "boldcode",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": true
+      },
+      {
+        "id": "para_5",
+        "text": "codeitalic",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": true
+      },
+      {
+        "id": "para_6",
+        "text": "combostrikecode",
+        "start_line": 14,
+        "end_line": 15,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": true
+      },
+      {
+        "id": "para_7",
+        "text": "Textboldtext",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_adjacent-emphasis-without-spaces",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_adjacent-emphasis-without-spaces",
+        "level": 1,
+        "text": "Adjacent emphasis without spaces",
+        "line": 0,
+        "slug": "adjacent-emphasis-without-spaces",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 35
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "line_to_section": {
+      "0": "section_adjacent-emphasis-without-spaces",
+      "1": "section_adjacent-emphasis-without-spaces",
+      "2": "section_adjacent-emphasis-without-spaces",
+      "3": "section_adjacent-emphasis-without-spaces",
+      "4": "section_adjacent-emphasis-without-spaces",
+      "5": "section_adjacent-emphasis-without-spaces",
+      "6": "section_adjacent-emphasis-without-spaces",
+      "7": "section_adjacent-emphasis-without-spaces",
+      "8": "section_adjacent-emphasis-without-spaces",
+      "9": "section_adjacent-emphasis-without-spaces",
+      "10": "section_adjacent-emphasis-without-spaces",
+      "11": "section_adjacent-emphasis-without-spaces",
+      "12": "section_adjacent-emphasis-without-spaces",
+      "13": "section_adjacent-emphasis-without-spaces",
+      "14": "section_adjacent-emphasis-without-spaces",
+      "15": "section_adjacent-emphasis-without-spaces",
+      "16": "section_adjacent-emphasis-without-spaces",
+      "17": "section_adjacent-emphasis-without-spaces"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

@@ -40,12 +40,14 @@ classifiers = [
 ]
 dependencies = [
     "charset-normalizer>=3.4.2",
+    "genson>=1.3.0",
     "golden-validator-hybrid",
     "jsonschema>=4.25.0",
     "markdown-it-py>=4.0.0",
     "mdit-py-plugins>=0.5.0",
     "polars>=1.36.1",
     "pyaml>=25.7.0",
+    "pydantic>=2.11.7",
     "pyyaml>=6.0.2",
     "ruff>=0.12.7",
     "vulture>=2.14",

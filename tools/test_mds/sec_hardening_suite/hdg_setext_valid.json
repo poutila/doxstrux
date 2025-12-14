@@ -1,10 +1,199 @@
 {
-  "category": "heading",
-  "expected": {
-    "doc_level_count": 2,
-    "in_list_count": 0,
-    "in_blockquote_count": 0,
-    "total_count": 2,
-    "notes": "Setext"
+  "metadata": {
+    "total_lines": 8,
+    "total_chars": 49,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 3,
+      "inline": 3,
+      "text": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/sec_hardening_suite/hdg_setext_valid.md"
+  },
+  "content": {
+    "raw": "# Test: hdg_setext_valid\n\nTitle\n=====\n\nSub\n-----\n",
+    "lines": [
+      "# Test: hdg_setext_valid",
+      "",
+      "Title",
+      "=====",
+      "",
+      "Sub",
+      "-----",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-hdg_setext_valid",
+        "level": 1,
+        "title": "Test: hdg_setext_valid",
+        "slug": "test-hdg_setext_valid",
+        "start_line": 0,
+        "end_line": 1,
+        "start_char": 0,
+        "end_char": 26,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: hdg_setext_valid\n",
+        "text_content": "Test: hdg_setext_valid"
+      },
+      {
+        "id": "section_title",
+        "level": 1,
+        "title": "Title",
+        "slug": "title",
+        "start_line": 2,
+        "end_line": 4,
+        "start_char": 26,
+        "end_char": 39,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "Title\n=====\n",
+        "text_content": "Title"
+      },
+      {
+        "id": "section_sub",
+        "level": 1,
+        "title": "Sub",
+        "slug": "sub",
+        "start_line": 5,
+        "end_line": 7,
+        "start_char": 39,
+        "end_char": 49,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "Sub\n-----\n",
+        "text_content": "Sub"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-hdg_setext_valid",
+        "level": 1,
+        "text": "Test: hdg_setext_valid",
+        "line": 0,
+        "slug": "test-hdg_setext_valid",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 25
+      },
+      {
+        "id": "heading_title",
+        "level": 1,
+        "text": "Title",
+        "line": 2,
+        "slug": "title",
+        "parent_heading_id": null,
+        "start_char": 26,
+        "end_char": 32
+      },
+      {
+        "id": "heading_sub",
+        "level": 1,
+        "text": "Sub",
+        "line": 5,
+        "slug": "sub",
+        "parent_heading_id": null,
+        "start_char": 39,
+        "end_char": 43
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-hdg_setext_valid",
+      "1": "section_test-hdg_setext_valid",
+      "2": "section_title",
+      "3": "section_title",
+      "4": "section_title",
+      "5": "section_sub",
+      "6": "section_sub",
+      "7": "section_sub"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

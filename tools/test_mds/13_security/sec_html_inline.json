@@ -1,7 +1,186 @@
 {
-  "category": "security",
-  "expected": {
-    "has_html_inline": true,
-    "has_html_block": false
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 76,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 6,
+      "paragraph": 1,
+      "html_inline": 4
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/13_security/sec_html_inline.md"
+  },
+  "content": {
+    "raw": "# Test: sec_html_inline\n\nText <span data-x=1>inline</span> and <em>ok</em>.\n",
+    "lines": [
+      "# Test: sec_html_inline",
+      "",
+      "Text <span data-x=1>inline</span> and <em>ok</em>.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-sec_html_inline",
+        "level": 1,
+        "title": "Test: sec_html_inline",
+        "slug": "test-sec_html_inline",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 76,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: sec_html_inline\n\nText <span data-x=1>inline</span> and <em>ok</em>.\n",
+        "text_content": "Test: sec_html_inline\n\nText inline and ok."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Text inline and ok.",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_test-sec_html_inline",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-sec_html_inline",
+        "level": 1,
+        "text": "Test: sec_html_inline",
+        "line": 0,
+        "slug": "test-sec_html_inline",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 24
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<span data-x=1>",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_test-sec_html_inline",
+        "tag_hints": [
+          "span"
+        ]
+      },
+      {
+        "content": "</span>",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_test-sec_html_inline",
+        "tag_hints": []
+      },
+      {
+        "content": "<em>",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_test-sec_html_inline",
+        "tag_hints": [
+          "em"
+        ]
+      },
+      {
+        "content": "</em>",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_test-sec_html_inline",
+        "tag_hints": []
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-sec_html_inline",
+      "1": "section_test-sec_html_inline",
+      "2": "section_test-sec_html_inline",
+      "3": "section_test-sec_html_inline"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

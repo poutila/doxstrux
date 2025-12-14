@@ -1,9 +1,181 @@
 {
-  "id": "08_hash_in_table_cell",
-  "note": "Hash inside table cells must not become headings.",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 6,
+    "total_chars": 76,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 5,
+      "text": 5,
+      "table": 1,
+      "thead": 1,
+      "tr": 2,
+      "th": 2,
+      "tbody": 1,
+      "td": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/08_hash_in_table_cell.md"
+  },
+  "content": {
+    "raw": "# Test: 08_hash_in_table_cell\n\n| A | B |\n|---|---|\n| # not heading | text |\n",
+    "lines": [
+      "# Test: 08_hash_in_table_cell",
+      "",
+      "| A | B |",
+      "|---|---|",
+      "| # not heading | text |",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-08_hash_in_table_cell",
+        "level": 1,
+        "title": "Test: 08_hash_in_table_cell",
+        "slug": "test-08_hash_in_table_cell",
+        "start_line": 0,
+        "end_line": 5,
+        "start_char": 0,
+        "end_char": 76,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 08_hash_in_table_cell\n\n| A | B |\n|---|---|\n| # not heading | text |\n",
+        "text_content": "Test: 08_hash_in_table_cell\n\nAB\n\n# not headingtext"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| A | B |\n|---|---|\n| # not heading | text |",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "# not heading",
+            "text"
+          ]
+        ],
+        "align": [
+          "left",
+          "left"
+        ],
+        "start_line": 2,
+        "end_line": 5,
+        "section_id": "section_test-08_hash_in_table_cell",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 2,
+        "row_count": 1,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-08_hash_in_table_cell",
+        "level": 1,
+        "text": "Test: 08_hash_in_table_cell",
+        "line": 0,
+        "slug": "test-08_hash_in_table_cell",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 30
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-08_hash_in_table_cell",
+      "1": "section_test-08_hash_in_table_cell",
+      "2": "section_test-08_hash_in_table_cell",
+      "3": "section_test-08_hash_in_table_cell",
+      "4": "section_test-08_hash_in_table_cell",
+      "5": "section_test-08_hash_in_table_cell"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

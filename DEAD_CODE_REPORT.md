@@ -2,18 +2,45 @@ Dead Code Analysis Report
 Executive Summary
 Scanned: src/doxstrux/ (vulture at 60% confidence)
 Candidates: 70+ items flagged
-Confirmed Dead: 3 items
+Confirmed Dead: 2 items (revised after validation)
 Test-Only (Keep): ~40 items (classes/methods with test coverage)
 False Positives: ~30 items (dataclass fields, attributes)
 
+---
+
+## ⚠️ VALIDATION FEEDBACK (2025-12-13)
+
+**Original report claimed 3 dead items. After validation: only 2 confirmed.**
+
+| Item | Original Claim | Validation Result |
+|------|----------------|-------------------|
+| `sanitize()` | Dead (0 callers) | **WRONG** - 25+ calls in tests |
+| `_slugify_base()` | Dead | ✅ Confirmed |
+| `MarkdownPluginError` | Dead | ✅ Confirmed |
+
+**`sanitize()` validation details:**
+- `tests/test_phase3_fail_closed.py`: 4 calls
+- `test_scripts/test_sanitize.py`: 12 calls
+- `test_scripts/test_enterprise_security.py`: 7 calls
+- `test_scripts/test_critical_fixes.py`: 2 calls
+
+The claim "grep returns 0 results" was factually incorrect.
+
+**Revised totals:**
+- Lines recoverable: ~10 (not ~80)
+- Items to delete: 2 (not 3)
+
+---
+
 ✅ Confirmed Dead Code - Safe to Remove
-1. MarkdownParserCore.sanitize() (lines 705-776)
-Item	Details
-File	markdown_parser_core.py
-Lines	705-776 (~70 lines)
-Evidence	grep "\.sanitize\(" returns 0 results across entire codebase
-Marked	DEPRECATED (Phase 3) in docstring
-Recommendation: DELETE. This method is deprecated and never called.
+
+### ~~1. MarkdownParserCore.sanitize() (lines 705-776)~~ ❌ INVALIDATED
+
+| Item | Details |
+|------|---------|
+| Status | **NOT DEAD** - Used in tests |
+| Evidence | 25+ calls found in `tests/` and `test_scripts/` |
+| Recommendation | **KEEP** - Active test coverage |
 
 2. MarkdownParserCore._slugify_base() (lines 1884-1889)
 Item	Details
@@ -49,14 +76,17 @@ validators.py:56 - PromptInjectionCheck.error field
 Decision: KEEP. These are structural definitions, not executable code.
 
 Summary
-Category	Count	Action
-Confirmed Dead	3	DELETE
-Test-Only	~40	KEEP
-False Positives	~30	KEEP
-Lines Recoverable
-Item	Lines
-sanitize()	~70
-_slugify_base()	~6
-MarkdownPluginError	~4
-Total	~80 lines
+| Category | Count | Action |
+|----------|-------|--------|
+| Confirmed Dead | 2 | DELETE |
+| Test-Only | ~40 | KEEP |
+| False Positives | ~31 (includes sanitize) | KEEP |
+
+Lines Recoverable (Revised)
+| Item | Lines |
+|------|-------|
+| ~~sanitize()~~ | ~~70~~ KEEP |
+| _slugify_base() | ~6 |
+| MarkdownPluginError | ~4 |
+| **Total** | **~10 lines** |
 

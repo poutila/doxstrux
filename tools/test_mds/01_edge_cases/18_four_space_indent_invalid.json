@@ -1,9 +1,178 @@
 {
-  "id": "18_four_space_indent_invalid",
-  "note": "Four-space indent converts to code; not heading.",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 5,
+    "total_chars": 78,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 2,
+      "inline": 3,
+      "text": 3,
+      "paragraph": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/18_four_space_indent_invalid.md"
+  },
+  "content": {
+    "raw": "# Test: 18_four_space_indent_invalid\n\n### Looks like H3 but is code\nNext line\n",
+    "lines": [
+      "# Test: 18_four_space_indent_invalid",
+      "",
+      "### Looks like H3 but is code",
+      "Next line",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-18_four_space_indent_invalid",
+        "level": 1,
+        "title": "Test: 18_four_space_indent_invalid",
+        "slug": "test-18_four_space_indent_invalid",
+        "start_line": 0,
+        "end_line": 4,
+        "start_char": 0,
+        "end_char": 78,
+        "parent_id": null,
+        "child_ids": [
+          "section_looks-like-h3-but-is-code"
+        ],
+        "raw_content": "# Test: 18_four_space_indent_invalid\n\n### Looks like H3 but is code\nNext line\n",
+        "text_content": "Test: 18_four_space_indent_invalid\n\nLooks like H3 but is code Next line"
+      },
+      {
+        "id": "section_looks-like-h3-but-is-code",
+        "level": 3,
+        "title": "Looks like H3 but is code",
+        "slug": "looks-like-h3-but-is-code",
+        "start_line": 2,
+        "end_line": 4,
+        "start_char": 38,
+        "end_char": 78,
+        "parent_id": "section_test-18_four_space_indent_invalid",
+        "child_ids": [],
+        "raw_content": "### Looks like H3 but is code\nNext line\n",
+        "text_content": "Looks like H3 but is code Next line"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Next line",
+        "start_line": 3,
+        "end_line": 4,
+        "section_id": "section_test-18_four_space_indent_invalid",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-18_four_space_indent_invalid",
+        "level": 1,
+        "text": "Test: 18_four_space_indent_invalid",
+        "line": 0,
+        "slug": "test-18_four_space_indent_invalid",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 37
+      },
+      {
+        "id": "heading_looks-like-h3-but-is-code",
+        "level": 3,
+        "text": "Looks like H3 but is code",
+        "line": 2,
+        "slug": "looks-like-h3-but-is-code",
+        "parent_heading_id": "heading_test-18_four_space_indent_invalid",
+        "start_char": 38,
+        "end_char": 68
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-18_four_space_indent_invalid",
+      "1": "section_test-18_four_space_indent_invalid",
+      "2": "section_looks-like-h3-but-is-code",
+      "3": "section_looks-like-h3-but-is-code",
+      "4": "section_looks-like-h3-but-is-code"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

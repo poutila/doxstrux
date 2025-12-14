@@ -10,7 +10,7 @@
       "root": 1,
       "heading": 22,
       "inline": 116,
-      "text": 235,
+      "text": 238,
       "paragraph": 69,
       "hardbreak": 2,
       "strong": 44,
@@ -23,8 +23,10 @@
       "image": 3,
       "em": 7,
       "s": 2,
+      "footnote_ref": 3,
       "ordered_list": 4,
       "fence": 6,
+      "html_inline": 18,
       "table": 4,
       "thead": 4,
       "tr": 11,
@@ -33,87 +35,33 @@
       "td": 16,
       "html_block": 6,
       "code_block": 1,
-      "html_inline": 12,
-      "softbreak": 1
+      "softbreak": 1,
+      "footnote_block": 1,
+      "footnote": 2,
+      "footnote_anchor": 3
     },
     "has_frontmatter": false,
     "security": {
       "warnings": [
         {
-          "type": "path_traversal",
-          "line": 12,
-          "message": "Link contains path traversal pattern",
-          "url": "https://spec.commonmark.org/"
+          "type": "ragged_table",
+          "line": 220,
+          "message": "Table has inconsistent column counts"
         },
         {
-          "type": "path_traversal",
-          "line": 13,
-          "message": "Link contains path traversal pattern",
-          "url": "https://via.placeholder.com/80x40.png?text=MD"
-        },
-        {
-          "type": "path_traversal",
-          "line": 14,
-          "message": "Link contains path traversal pattern",
-          "url": "https://example.org"
-        },
-        {
-          "type": "path_traversal",
-          "line": 26,
-          "message": "Link contains path traversal pattern",
-          "url": "https://example.com"
-        },
-        {
-          "type": "path_traversal",
-          "line": 26,
-          "message": "Link contains path traversal pattern",
-          "url": "https://via.placeholder.com/30"
-        },
-        {
-          "type": "path_traversal",
-          "line": 139,
-          "message": "Link contains path traversal pattern",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "type": "path_traversal",
-          "line": 172,
-          "message": "Link contains path traversal pattern",
-          "url": "https://example.com"
-        },
-        {
-          "type": "path_traversal",
-          "line": 172,
-          "message": "Link contains path traversal pattern",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "type": "path_traversal",
-          "line": 172,
-          "message": "Link contains path traversal pattern",
-          "url": "https://via.placeholder.com/20"
-        },
-        {
-          "type": "path_traversal",
-          "line": 278,
-          "message": "Link contains path traversal pattern",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "type": "html_disallowed",
-          "blocks": 6,
-          "inline": 12,
-          "message": "HTML present but not allowed by configuration"
+          "type": "mixed_scripts",
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)"
         }
       ],
       "statistics": {
         "frontmatter_at_bof": false,
-        "ragged_tables_count": 0,
+        "ragged_tables_count": 1,
         "allowed_schemes": [
-          "tel",
-          "mailto",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "table_align_mismatches": 0,
         "nested_headings_blocked": 0,
@@ -125,35 +73,40 @@
         "confusables_present": false,
         "nbsp_present": false,
         "zwsp_present": false,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "link_schemes": {
           "https": 7,
           "relative": 3
         },
-        "unicode_risk_score": 0,
-        "html_disallowed": true
+        "mixed_scripts": true,
+        "unicode_risk_score": 1
       },
       "summary": {
-        "ragged_tables_count": 0,
-        "total_warnings": 11,
+        "ragged_tables_count": 1,
+        "total_warnings": 2,
         "has_dangerous_content": true,
-        "unicode_risk_score": 0
+        "unicode_risk_score": 1
       },
       "profile_used": "moderate"
     },
-    "security_policies_applied": [
-      "stripped_6_html_blocks",
-      "stripped_12_html_inline"
-    ]
+    "quarantined": true,
+    "quarantine_reasons": [
+      "ragged_tables:1"
+    ],
+    "encoding": {
+      "detected": "utf_8",
+      "confidence": 0.6482
+    },
+    "source_path": "tools/test_mds/15_integration/md_brutal_test.md"
   },
   "content": {
-    "raw": "# 🧪 BRUTAL Markdown Parser Torture Test\n\nA deliberately gnarly Markdown file to stress-test renderers and parsers.  \n**Goal:** nest a wide variety of elements to **depth = 4** and mix syntaxes.  \n> Note: CommonMark does **not** allow “paragraph inside paragraph”. We simulate via HTML containers (`<div><p>`…`</p></div>`).\n\n---\n\n## 0. Global Reference Links and Assets\n\nThis doc uses reference-style links and images:\n\n- Link ref: [MD Spec][spec]\n- Image ref: ![Ref Logo][logo]\n- Autolink: <https://example.org>\n- Escapes: \\*not italic\\* \\_not italic\\_ \\`not code\\`\n\n[spec]: https://spec.commonmark.org/\n[logo]: https://via.placeholder.com/80x40.png?text=MD\n\n---\n\n## 1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)\n\n> **L1** Blockquote\n> - **L2** List item with mixed _inline_ **markdown** and `code`\n>   > **L3** Nested quote with a [link](https://example.com) and an image ![img](https://via.placeholder.com/30)\n>   >\n>   > - **L4** List item as deepest level — *emphasis* with `code` and ~~strikethrough~~\n>   >\n>   >   Paragraph at depth 4 that includes **_bold italic_**, `inline_code`, and a footnote marker[^deep1].\n>\n> Back to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth‑4 paragraph.\n\n\n---\n\n## 2) Depth‑4: List → List → Blockquote → Fenced Code\n\n1. **L1** Ordered\n   - **L2** Unordered\n     > **L3** Quote wrapping code block below\n     >\n     > ```python\n     > # L4 fenced code\n     > def depth_four(a: int) -> int:\n     >     return (a ** 2) // 3  # simulate work\n     > ```\n2. Continue list after deep structure.\n\n\n---\n\n## 3) Depth‑4: Quote → List → List → Task Checklist\n\n> **L1** Quote\n> - **L2** Bullet group\n>   1. **L3** Numbered group\n>      - [ ] **L4** task *unchecked*\n>      - [x] **L4** task **checked**\n>      - [ ] **L4** task with subtext  \n>            Plain continuation line.\n\n\n---\n\n## 4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)\n\n> **L1** Quote starts a table nest\n> - **L2** Pre-table note\n>   > **L3** Inner quote containing table:\n>   >\n>   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |\n\n\n---\n\n## 5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)\n\n- **L1**\n  > **L2** Quote\n  > - **L3** Bullet\n  >   ```\n  >   ~~~\n  >   L4 raw block fenced with tildes (shown inside triple‑backtick fence)\n  >   ~~~\n  >   ```\n\n\n---\n\n## 6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph\n\n<div>\n  <p><strong>L1 DIV→P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL→LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE→P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV→P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>\n\n\n---\n\n## 7) Depth‑4: List → Task List → Quote → Indented Code Block\n\n- **L1** Top\n  - [ ] **L2** Task\n    > **L3** Quote intro\n    >\n        # L4 indented code block (not fenced)\n        for i in range(3):\n            print(i)\n\n\n---\n\n## 8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)\n\n> ### **L2** Heading inside quote (L1)\n> - **L3** Bullet under heading\n>   > **L4** Final quoted line with `inline_code`\n\n\n---\n\n## 9) Depth‑4: Complex Inline Mix + Table in List → Quote\n\n- **L1** Start with inline: **bold** *italic* `code` [ref][spec]\n  > **L2** Quote for context\n  > - **L3** List hosting a table next:\n  >\n  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |\n\n\n---\n\n## 10) Depth‑4: Details/Summary (HTML) → List → Quote → Code\n\n<details>\n  <summary><strong>L1</strong> details summary</summary>\n\n  - <em>L2</em> list item inside details\n    > <strong>L3</strong> quoted block explaining final code:\n    >\n    > ```json\n    > {\n    >   \"level\": 4,\n    >   \"message\": \"Deeply nested JSON block inside HTML → list → quote → code\"\n    > }\n    > ```\n</details>\n\n\n---\n\n## 11) Links, Images, Footnotes, Smart Punctuation, Entities\n\n- Plain [link](https://example.com), reference link [spec], image ![inline](https://via.placeholder.com/20)\n- Smart quotes: “curly”, dashes: en–dash, em—dash\n- HTML entities: &copy; &amp; &lt; &gt; &nbsp;\n- Footnote call[^a] and repeated call[^a].\n- Definition list (HTML):\n  <dl>\n    <dt>Term</dt>\n    <dd>Definition line 1<br/>Definition line 2</dd>\n  </dl>\n\n[^a]: A single footnote referenced twice.\n\n\n---\n\n## 12) Edge Cases: Tight/Loose Lists, HTML Comments, Escapes\n\n- Tight item 1\n- Tight item 2\n  <!-- HTML comment between items -->\n- Tight item 3\n\n1. Loose ordered item 1\n\n   Paragraph in between makes list **loose**.\n\n2. Loose ordered item 2 with a blockquote:\n\n   > Nested quote after blank line.\n\nBackslash escape test: \\\\* \\\\_ \\\\` \\\\# \\\\[ \\\\] \\\\( \\\\)\n\n\n---\n\n## 13) Code Fences Within Lists and Quotes (language hints)\n\n> - ```bash\n>   # L3 fenced code inside quote / list\n>   set -euo pipefail\n>   printf '%s\\n' \"Depth 4 imminent\"\n>   ```\n\n\n---\n\n## 14) Table With Alignment, Inline Pipes, and Code\n\n| Left align | Center | Right |\n|:-----------|:------:|------:|\n| `|` pipe   | `\\|`   |  1234 |\n| text \\| more | **bold** |  -3.14 |\n\n\n---\n\n## 15) Raw HTML Block With Nested Markdown (often ignored)\n\n<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code — raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>\n\n\n---\n\n## 16) Para→List→Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\n- Bullet 1\n  Continuation line as part of same list item paragraph.\n- Bullet 2\n\nParagraph after list.\n\n\n---\n\n## 17) Math-ish (literal; let your renderer decide)\n\nInline: `$E = mc^2$` vs escaped: \\$E = mc^2\\$.\n\nBlock (fenced, not math-aware here):\n```tex\n% Depth-agnostic fenced block\n\\begin{align}\n  a^2 + b^2 &= c^2 \\\\\n  \\alpha + \\beta &= \\gamma\n\\end{align}\n```\n\n\n---\n\n## 18) The Kitchen Sink at Depth 4 (all-in-one)\n\n> **L1**\n> - **L2** bullet with [link][spec] and `code`\n>   > **L3**\n>   > 1. **L4** ordered item with a tiny table:\n>   >\n>   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |\n>   >\n>   >    and a fenced block:\n>   >\n>   >    ```yaml\n>   >    level: 4\n>   >    ok: true\n>   >    ```\n>   >\n>   >    plus a checklist:\n>   >\n>   >    - [x] done\n>   >    - [ ] todo\n\n\n---\n\n## 19) Final Sanity: HRs, Thematic Breaks, & EOF\n\n---\n***\n___\n\n_EOF_\n",
+    "raw": "# \ud83e\uddea BRUTAL Markdown Parser Torture Test\n\nA deliberately gnarly Markdown file to stress-test renderers and parsers.  \n**Goal:** nest a wide variety of elements to **depth = 4** and mix syntaxes.  \n> Note: CommonMark does **not** allow \u201cparagraph inside paragraph\u201d. We simulate via HTML containers (`<div><p>`\u2026`</p></div>`).\n\n---\n\n## 0. Global Reference Links and Assets\n\nThis doc uses reference-style links and images:\n\n- Link ref: [MD Spec][spec]\n- Image ref: ![Ref Logo][logo]\n- Autolink: <https://example.org>\n- Escapes: \\*not italic\\* \\_not italic\\_ \\`not code\\`\n\n[spec]: https://spec.commonmark.org/\n[logo]: https://via.placeholder.com/80x40.png?text=MD\n\n---\n\n## 1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)\n\n> **L1** Blockquote\n> - **L2** List item with mixed _inline_ **markdown** and `code`\n>   > **L3** Nested quote with a [link](https://example.com) and an image ![img](https://via.placeholder.com/30)\n>   >\n>   > - **L4** List item as deepest level \u2014 *emphasis* with `code` and ~~strikethrough~~\n>   >\n>   >   Paragraph at depth 4 that includes **_bold italic_**, `inline_code`, and a footnote marker[^deep1].\n>\n> Back to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth\u20114 paragraph.\n\n\n---\n\n## 2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code\n\n1. **L1** Ordered\n   - **L2** Unordered\n     > **L3** Quote wrapping code block below\n     >\n     > ```python\n     > # L4 fenced code\n     > def depth_four(a: int) -> int:\n     >     return (a ** 2) // 3  # simulate work\n     > ```\n2. Continue list after deep structure.\n\n\n---\n\n## 3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist\n\n> **L1** Quote\n> - **L2** Bullet group\n>   1. **L3** Numbered group\n>      - [ ] **L4** task *unchecked*\n>      - [x] **L4** task **checked**\n>      - [ ] **L4** task with subtext  \n>            Plain continuation line.\n\n\n---\n\n## 4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)\n\n> **L1** Quote starts a table nest\n> - **L2** Pre-table note\n>   > **L3** Inner quote containing table:\n>   >\n>   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |\n\n\n---\n\n## 5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)\n\n- **L1**\n  > **L2** Quote\n  > - **L3** Bullet\n  >   ```\n  >   ~~~\n  >   L4 raw block fenced with tildes (shown inside triple\u2011backtick fence)\n  >   ~~~\n  >   ```\n\n\n---\n\n## 6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph\n\n<div>\n  <p><strong>L1 DIV\u2192P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL\u2192LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE\u2192P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV\u2192P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>\n\n\n---\n\n## 7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block\n\n- **L1** Top\n  - [ ] **L2** Task\n    > **L3** Quote intro\n    >\n        # L4 indented code block (not fenced)\n        for i in range(3):\n            print(i)\n\n\n---\n\n## 8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)\n\n> ### **L2** Heading inside quote (L1)\n> - **L3** Bullet under heading\n>   > **L4** Final quoted line with `inline_code`\n\n\n---\n\n## 9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote\n\n- **L1** Start with inline: **bold** *italic* `code` [ref][spec]\n  > **L2** Quote for context\n  > - **L3** List hosting a table next:\n  >\n  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |\n\n\n---\n\n## 10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code\n\n<details>\n  <summary><strong>L1</strong> details summary</summary>\n\n  - <em>L2</em> list item inside details\n    > <strong>L3</strong> quoted block explaining final code:\n    >\n    > ```json\n    > {\n    >   \"level\": 4,\n    >   \"message\": \"Deeply nested JSON block inside HTML \u2192 list \u2192 quote \u2192 code\"\n    > }\n    > ```\n</details>\n\n\n---\n\n## 11) Links, Images, Footnotes, Smart Punctuation, Entities\n\n- Plain [link](https://example.com), reference link [spec], image ![inline](https://via.placeholder.com/20)\n- Smart quotes: \u201ccurly\u201d, dashes: en\u2013dash, em\u2014dash\n- HTML entities: &copy; &amp; &lt; &gt; &nbsp;\n- Footnote call[^a] and repeated call[^a].\n- Definition list (HTML):\n  <dl>\n    <dt>Term</dt>\n    <dd>Definition line 1<br/>Definition line 2</dd>\n  </dl>\n\n[^a]: A single footnote referenced twice.\n\n\n---\n\n## 12) Edge Cases: Tight/Loose Lists, HTML Comments, Escapes\n\n- Tight item 1\n- Tight item 2\n  <!-- HTML comment between items -->\n- Tight item 3\n\n1. Loose ordered item 1\n\n   Paragraph in between makes list **loose**.\n\n2. Loose ordered item 2 with a blockquote:\n\n   > Nested quote after blank line.\n\nBackslash escape test: \\\\* \\\\_ \\\\` \\\\# \\\\[ \\\\] \\\\( \\\\)\n\n\n---\n\n## 13) Code Fences Within Lists and Quotes (language hints)\n\n> - ```bash\n>   # L3 fenced code inside quote / list\n>   set -euo pipefail\n>   printf '%s\\n' \"Depth 4 imminent\"\n>   ```\n\n\n---\n\n## 14) Table With Alignment, Inline Pipes, and Code\n\n| Left align | Center | Right |\n|:-----------|:------:|------:|\n| `|` pipe   | `\\|`   |  1234 |\n| text \\| more | **bold** |  -3.14 |\n\n\n---\n\n## 15) Raw HTML Block With Nested Markdown (often ignored)\n\n<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code \u2014 raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>\n\n\n---\n\n## 16) Para\u2192List\u2192Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\n- Bullet 1\n  Continuation line as part of same list item paragraph.\n- Bullet 2\n\nParagraph after list.\n\n\n---\n\n## 17) Math-ish (literal; let your renderer decide)\n\nInline: `$E = mc^2$` vs escaped: \\$E = mc^2\\$.\n\nBlock (fenced, not math-aware here):\n```tex\n% Depth-agnostic fenced block\n\\begin{align}\n  a^2 + b^2 &= c^2 \\\\\n  \\alpha + \\beta &= \\gamma\n\\end{align}\n```\n\n\n---\n\n## 18) The Kitchen Sink at Depth 4 (all-in-one)\n\n> **L1**\n> - **L2** bullet with [link][spec] and `code`\n>   > **L3**\n>   > 1. **L4** ordered item with a tiny table:\n>   >\n>   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |\n>   >\n>   >    and a fenced block:\n>   >\n>   >    ```yaml\n>   >    level: 4\n>   >    ok: true\n>   >    ```\n>   >\n>   >    plus a checklist:\n>   >\n>   >    - [x] done\n>   >    - [ ] todo\n\n\n---\n\n## 19) Final Sanity: HRs, Thematic Breaks, & EOF\n\n---\n***\n___\n\n_EOF_\n",
     "lines": [
-      "# 🧪 BRUTAL Markdown Parser Torture Test",
+      "# \ud83e\uddea BRUTAL Markdown Parser Torture Test",
       "",
       "A deliberately gnarly Markdown file to stress-test renderers and parsers.  ",
       "**Goal:** nest a wide variety of elements to **depth = 4** and mix syntaxes.  ",
-      "> Note: CommonMark does **not** allow “paragraph inside paragraph”. We simulate via HTML containers (`<div><p>`…`</p></div>`).",
+      "> Note: CommonMark does **not** allow \u201cparagraph inside paragraph\u201d. We simulate via HTML containers (`<div><p>`\u2026`</p></div>`).",
       "",
       "---",
       "",
@@ -171,24 +124,24 @@
       "",
       "---",
       "",
-      "## 1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)",
+      "## 1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)",
       "",
       "> **L1** Blockquote",
       "> - **L2** List item with mixed _inline_ **markdown** and `code`",
       ">   > **L3** Nested quote with a [link](https://example.com) and an image ![img](https://via.placeholder.com/30)",
       ">   >",
-      ">   > - **L4** List item as deepest level — *emphasis* with `code` and ~~strikethrough~~",
+      ">   > - **L4** List item as deepest level \u2014 *emphasis* with `code` and ~~strikethrough~~",
       ">   >",
       ">   >   Paragraph at depth 4 that includes **_bold italic_**, `inline_code`, and a footnote marker[^deep1].",
       ">",
       "> Back to L1 paragraph.",
       "",
-      "[^deep1]: Footnote attached to a depth‑4 paragraph.",
+      "[^deep1]: Footnote attached to a depth\u20114 paragraph.",
       "",
       "",
       "---",
       "",
-      "## 2) Depth‑4: List → List → Blockquote → Fenced Code",
+      "## 2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code",
       "",
       "1. **L1** Ordered",
       "   - **L2** Unordered",
@@ -204,7 +157,7 @@
       "",
       "---",
       "",
-      "## 3) Depth‑4: Quote → List → List → Task Checklist",
+      "## 3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist",
       "",
       "> **L1** Quote",
       "> - **L2** Bullet group",
@@ -217,7 +170,7 @@
       "",
       "---",
       "",
-      "## 4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)",
+      "## 4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)",
       "",
       "> **L1** Quote starts a table nest",
       "> - **L2** Pre-table note",
@@ -231,30 +184,30 @@
       "",
       "---",
       "",
-      "## 5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)",
+      "## 5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)",
       "",
       "- **L1**",
       "  > **L2** Quote",
       "  > - **L3** Bullet",
       "  >   ```",
       "  >   ~~~",
-      "  >   L4 raw block fenced with tildes (shown inside triple‑backtick fence)",
+      "  >   L4 raw block fenced with tildes (shown inside triple\u2011backtick fence)",
       "  >   ~~~",
       "  >   ```",
       "",
       "",
       "---",
       "",
-      "## 6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph",
+      "## 6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph",
       "",
       "<div>",
-      "  <p><strong>L1 DIV→P.</strong> Contains a list nesting next.</p>",
+      "  <p><strong>L1 DIV\u2192P.</strong> Contains a list nesting next.</p>",
       "  <ul>",
-      "    <li><em>L2 UL→LI.</em>",
+      "    <li><em>L2 UL\u2192LI.</em>",
       "      <blockquote>",
-      "        <p><code>L3 QUOTE→P</code> wrapping an inner container.</p>",
+      "        <p><code>L3 QUOTE\u2192P</code> wrapping an inner container.</p>",
       "        <div>",
-      "          <p><u>L4 DIV→P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>",
+      "          <p><u>L4 DIV\u2192P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>",
       "        </div>",
       "      </blockquote>",
       "    </li>",
@@ -264,7 +217,7 @@
       "",
       "---",
       "",
-      "## 7) Depth‑4: List → Task List → Quote → Indented Code Block",
+      "## 7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block",
       "",
       "- **L1** Top",
       "  - [ ] **L2** Task",
@@ -277,7 +230,7 @@
       "",
       "---",
       "",
-      "## 8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)",
+      "## 8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)",
       "",
       "> ### **L2** Heading inside quote (L1)",
       "> - **L3** Bullet under heading",
@@ -286,7 +239,7 @@
       "",
       "---",
       "",
-      "## 9) Depth‑4: Complex Inline Mix + Table in List → Quote",
+      "## 9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote",
       "",
       "- **L1** Start with inline: **bold** *italic* `code` [ref][spec]",
       "  > **L2** Quote for context",
@@ -300,7 +253,7 @@
       "",
       "---",
       "",
-      "## 10) Depth‑4: Details/Summary (HTML) → List → Quote → Code",
+      "## 10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code",
       "",
       "<details>",
       "  <summary><strong>L1</strong> details summary</summary>",
@@ -311,7 +264,7 @@
       "    > ```json",
       "    > {",
       "    >   \"level\": 4,",
-      "    >   \"message\": \"Deeply nested JSON block inside HTML → list → quote → code\"",
+      "    >   \"message\": \"Deeply nested JSON block inside HTML \u2192 list \u2192 quote \u2192 code\"",
       "    > }",
       "    > ```",
       "</details>",
@@ -322,7 +275,7 @@
       "## 11) Links, Images, Footnotes, Smart Punctuation, Entities",
       "",
       "- Plain [link](https://example.com), reference link [spec], image ![inline](https://via.placeholder.com/20)",
-      "- Smart quotes: “curly”, dashes: en–dash, em—dash",
+      "- Smart quotes: \u201ccurly\u201d, dashes: en\u2013dash, em\u2014dash",
       "- HTML entities: &copy; &amp; &lt; &gt; &nbsp;",
       "- Footnote call[^a] and repeated call[^a].",
       "- Definition list (HTML):",
@@ -386,7 +339,7 @@
       "    <li>",
       "      <blockquote>",
       "        <p>L3 quoted HTML paragraph with <code>code</code>.</p>",
-      "        <pre><code>L4 pre/code — raw, not parsed as MD</code></pre>",
+      "        <pre><code>L4 pre/code \u2014 raw, not parsed as MD</code></pre>",
       "      </blockquote>",
       "    </li>",
       "  </ul>",
@@ -395,7 +348,7 @@
       "",
       "---",
       "",
-      "## 16) Para→List→Para Sandwich (renderer-dependent)",
+      "## 16) Para\u2192List\u2192Para Sandwich (renderer-dependent)",
       "",
       "Paragraph before list.",
       "",
@@ -465,7 +418,7 @@
       {
         "id": "section_brutal-markdown-parser-torture-test",
         "level": 1,
-        "title": "🧪 BRUTAL Markdown Parser Torture Test",
+        "title": "\ud83e\uddea BRUTAL Markdown Parser Torture Test",
         "slug": "brutal-markdown-parser-torture-test",
         "start_line": 0,
         "end_line": 308,
@@ -494,8 +447,8 @@
           "section_18-the-kitchen-sink-at-depth-4-all-in-one",
           "section_19-final-sanity-hrs-thematic-breaks-eof"
         ],
-        "raw_content": "# 🧪 BRUTAL Markdown Parser Torture Test\n\nA deliberately gnarly Markdown file to stress-test renderers and parsers.  \n**Goal:** nest a wide variety of elements to **depth = 4** and mix syntaxes.  \n> Note: CommonMark does **not** allow “paragraph inside paragraph”. We simulate via HTML containers (`<div><p>`…`</p></div>`).\n\n---\n\n## 0. Global Reference Links and Assets\n\nThis doc uses reference-style links and images:\n\n- Link ref: [MD Spec][spec]\n- Image ref: ![Ref Logo][logo]\n- Autolink: <https://example.org>\n- Escapes: \\*not italic\\* \\_not italic\\_ \\`not code\\`\n\n[spec]: https://spec.commonmark.org/\n[logo]: https://via.placeholder.com/80x40.png?text=MD\n\n---\n\n## 1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)\n\n> **L1** Blockquote\n> - **L2** List item with mixed _inline_ **markdown** and `code`\n>   > **L3** Nested quote with a [link](https://example.com) and an image ![img](https://via.placeholder.com/30)\n>   >\n>   > - **L4** List item as deepest level — *emphasis* with `code` and ~~strikethrough~~\n>   >\n>   >   Paragraph at depth 4 that includes **_bold italic_**, `inline_code`, and a footnote marker[^deep1].\n>\n> Back to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth‑4 paragraph.\n\n\n---\n\n## 2) Depth‑4: List → List → Blockquote → Fenced Code\n\n1. **L1** Ordered\n   - **L2** Unordered\n     > **L3** Quote wrapping code block below\n     >\n     > ```python\n     > # L4 fenced code\n     > def depth_four(a: int) -> int:\n     >     return (a ** 2) // 3  # simulate work\n     > ```\n2. Continue list after deep structure.\n\n\n---\n\n## 3) Depth‑4: Quote → List → List → Task Checklist\n\n> **L1** Quote\n> - **L2** Bullet group\n>   1. **L3** Numbered group\n>      - [ ] **L4** task *unchecked*\n>      - [x] **L4** task **checked**\n>      - [ ] **L4** task with subtext  \n>            Plain continuation line.\n\n\n---\n\n## 4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)\n\n> **L1** Quote starts a table nest\n> - **L2** Pre-table note\n>   > **L3** Inner quote containing table:\n>   >\n>   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |\n\n\n---\n\n## 5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)\n\n- **L1**\n  > **L2** Quote\n  > - **L3** Bullet\n  >   ```\n  >   ~~~\n  >   L4 raw block fenced with tildes (shown inside triple‑backtick fence)\n  >   ~~~\n  >   ```\n\n\n---\n\n## 6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph\n\n<div>\n  <p><strong>L1 DIV→P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL→LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE→P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV→P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>\n\n\n---\n\n## 7) Depth‑4: List → Task List → Quote → Indented Code Block\n\n- **L1** Top\n  - [ ] **L2** Task\n    > **L3** Quote intro\n    >\n        # L4 indented code block (not fenced)\n        for i in range(3):\n            print(i)\n\n\n---\n\n## 8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)\n\n> ### **L2** Heading inside quote (L1)\n> - **L3** Bullet under heading\n>   > **L4** Final quoted line with `inline_code`\n\n\n---\n\n## 9) Depth‑4: Complex Inline Mix + Table in List → Quote\n\n- **L1** Start with inline: **bold** *italic* `code` [ref][spec]\n  > **L2** Quote for context\n  > - **L3** List hosting a table next:\n  >\n  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |\n\n\n---\n\n## 10) Depth‑4: Details/Summary (HTML) → List → Quote → Code\n\n<details>\n  <summary><strong>L1</strong> details summary</summary>\n\n  - <em>L2</em> list item inside details\n    > <strong>L3</strong> quoted block explaining final code:\n    >\n    > ```json\n    > {\n    >   \"level\": 4,\n    >   \"message\": \"Deeply nested JSON block inside HTML → list → quote → code\"\n    > }\n    > ```\n</details>\n\n\n---\n\n## 11) Links, Images, Footnotes, Smart Punctuation, Entities\n\n- Plain [link](https://example.com), reference link [spec], image ![inline](https://via.placeholder.com/20)\n- Smart quotes: “curly”, dashes: en–dash, em—dash\n- HTML entities: &copy; &amp; &lt; &gt; &nbsp;\n- Footnote call[^a] and repeated call[^a].\n- Definition list (HTML):\n  <dl>\n    <dt>Term</dt>\n    <dd>Definition line 1<br/>Definition line 2</dd>\n  </dl>\n\n[^a]: A single footnote referenced twice.\n\n\n---\n\n## 12) Edge Cases: Tight/Loose Lists, HTML Comments, Escapes\n\n- Tight item 1\n- Tight item 2\n  <!-- HTML comment between items -->\n- Tight item 3\n\n1. Loose ordered item 1\n\n   Paragraph in between makes list **loose**.\n\n2. Loose ordered item 2 with a blockquote:\n\n   > Nested quote after blank line.\n\nBackslash escape test: \\\\* \\\\_ \\\\` \\\\# \\\\[ \\\\] \\\\( \\\\)\n\n\n---\n\n## 13) Code Fences Within Lists and Quotes (language hints)\n\n> - ```bash\n>   # L3 fenced code inside quote / list\n>   set -euo pipefail\n>   printf '%s\\n' \"Depth 4 imminent\"\n>   ```\n\n\n---\n\n## 14) Table With Alignment, Inline Pipes, and Code\n\n| Left align | Center | Right |\n|:-----------|:------:|------:|\n| `|` pipe   | `\\|`   |  1234 |\n| text \\| more | **bold** |  -3.14 |\n\n\n---\n\n## 15) Raw HTML Block With Nested Markdown (often ignored)\n\n<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code — raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>\n\n\n---\n\n## 16) Para→List→Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\n- Bullet 1\n  Continuation line as part of same list item paragraph.\n- Bullet 2\n\nParagraph after list.\n\n\n---\n\n## 17) Math-ish (literal; let your renderer decide)\n\nInline: `$E = mc^2$` vs escaped: \\$E = mc^2\\$.\n\nBlock (fenced, not math-aware here):\n```tex\n% Depth-agnostic fenced block\n\\begin{align}\n  a^2 + b^2 &= c^2 \\\\\n  \\alpha + \\beta &= \\gamma\n\\end{align}\n```\n\n\n---\n\n## 18) The Kitchen Sink at Depth 4 (all-in-one)\n\n> **L1**\n> - **L2** bullet with [link][spec] and `code`\n>   > **L3**\n>   > 1. **L4** ordered item with a tiny table:\n>   >\n>   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |\n>   >\n>   >    and a fenced block:\n>   >\n>   >    ```yaml\n>   >    level: 4\n>   >    ok: true\n>   >    ```\n>   >\n>   >    plus a checklist:\n>   >\n>   >    - [x] done\n>   >    - [ ] todo\n\n\n---\n\n## 19) Final Sanity: HRs, Thematic Breaks, & EOF\n\n---\n***\n___\n\n_EOF_\n",
-        "text_content": "🧪 BRUTAL Markdown Parser Torture Test\n\nA deliberately gnarly Markdown file to stress-test renderers and parsers.\nGoal: nest a wide variety of elements to depth = 4 and mix syntaxes. Note: CommonMark does not allow “paragraph inside paragraph”. We simulate via HTML containers (<div><p>…</p></div>).\n\n0. Global Reference Links and Assets\n\nThis doc uses reference-style links and images:\n\nLink ref: MD Spec Image ref:  Autolink: https://example.org Escapes: *not italic* _not italic_ `not code`\n\n1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)\n\nL1 Blockquote L2 List item with mixed inline markdown and code L3 Nested quote with a link and an image \n\nL4 List item as deepest level — emphasis with code and strikethrough\n\nParagraph at depth 4 that includes bold italic, inline_code, and a footnote marker[^deep1].\n\nBack to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth‑4 paragraph.\n\n2) Depth‑4: List → List → Blockquote → Fenced Code\n\nL1 Ordered L2 Unordered L3 Quote wrapping code block below\n\nContinue list after deep structure.\n\n3) Depth‑4: Quote → List → List → Task Checklist\n\nL1 Quote L2 Bullet group L3 Numbered group [ ] L4 task unchecked [x] L4 task checked [ ] L4 task with subtext\nPlain continuation line.\n\n4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)\n\nL1 Quote starts a table nest L2 Pre-table note L3 Inner quote containing table:\n\nL4 Col AL4 Col B\n\ncodestrike italicsbold\n\n5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)\n\nL1 L2 Quote L3 Bullet\n\n6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph\n\n7) Depth‑4: List → Task List → Quote → Indented Code Block\n\nL1 Top [ ] L2 Task L3 Quote intro\n\n8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)\n\nL2 Heading inside quote (L1) L3 Bullet under heading L4 Final quoted line with inline_code\n\n9) Depth‑4: Complex Inline Mix + Table in List → Quote\n\nL1 Start with inline: bold italic code ref L2 Quote for context L3 List hosting a table next:\n\nL4 AL4 B\n\nsubsup Escmark\n\n10) Depth‑4: Details/Summary (HTML) → List → Quote → Code\n\nL2 list item inside details L3 quoted block explaining final code:\n\n11) Links, Images, Footnotes, Smart Punctuation, Entities\n\nPlain link, reference link spec, image  Smart quotes: “curly”, dashes: en–dash, em—dash HTML entities: © & < >   Footnote call[^a] and repeated call[^a]. Definition list (HTML):\n\n[^a]: A single footnote referenced twice.\n\n12) Edge Cases: Tight/Loose Lists, HTML Comments, Escapes\n\nTight item 1 Tight item 2\n\nTight item 3\n\nLoose ordered item 1\n\nParagraph in between makes list loose.\n\nLoose ordered item 2 with a blockquote:\n\nNested quote after blank line.\n\nBackslash escape test: \\* \\_ \\` \\# \\[ \\] \\( \\)\n\n13) Code Fences Within Lists and Quotes (language hints)\n\n14) Table With Alignment, Inline Pipes, and Code\n\nLeft alignCenterRight\n\n`` pipe| text | morebold-3.14\n\n15) Raw HTML Block With Nested Markdown (often ignored)\n\n16) Para→List→Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\nBullet 1\nContinuation line as part of same list item paragraph. Bullet 2\n\nParagraph after list.\n\n17) Math-ish (literal; let your renderer decide)\n\nInline: $E = mc^2$ vs escaped: $E = mc^2$.\n\nBlock (fenced, not math-aware here):\n\n18) The Kitchen Sink at Depth 4 (all-in-one)\n\nL1 L2 bullet with link and code L3 L4 ordered item with a tiny table:\n\nkv\n\na1\n\nand a fenced block:\n\nplus a checklist:\n\n[x] done [ ] todo\n\n19) Final Sanity: HRs, Thematic Breaks, & EOF\n\nEOF"
+        "raw_content": "# \ud83e\uddea BRUTAL Markdown Parser Torture Test\n\nA deliberately gnarly Markdown file to stress-test renderers and parsers.  \n**Goal:** nest a wide variety of elements to **depth = 4** and mix syntaxes.  \n> Note: CommonMark does **not** allow \u201cparagraph inside paragraph\u201d. We simulate via HTML containers (`<div><p>`\u2026`</p></div>`).\n\n---\n\n## 0. Global Reference Links and Assets\n\nThis doc uses reference-style links and images:\n\n- Link ref: [MD Spec][spec]\n- Image ref: ![Ref Logo][logo]\n- Autolink: <https://example.org>\n- Escapes: \\*not italic\\* \\_not italic\\_ \\`not code\\`\n\n[spec]: https://spec.commonmark.org/\n[logo]: https://via.placeholder.com/80x40.png?text=MD\n\n---\n\n## 1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)\n\n> **L1** Blockquote\n> - **L2** List item with mixed _inline_ **markdown** and `code`\n>   > **L3** Nested quote with a [link](https://example.com) and an image ![img](https://via.placeholder.com/30)\n>   >\n>   > - **L4** List item as deepest level \u2014 *emphasis* with `code` and ~~strikethrough~~\n>   >\n>   >   Paragraph at depth 4 that includes **_bold italic_**, `inline_code`, and a footnote marker[^deep1].\n>\n> Back to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth\u20114 paragraph.\n\n\n---\n\n## 2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code\n\n1. **L1** Ordered\n   - **L2** Unordered\n     > **L3** Quote wrapping code block below\n     >\n     > ```python\n     > # L4 fenced code\n     > def depth_four(a: int) -> int:\n     >     return (a ** 2) // 3  # simulate work\n     > ```\n2. Continue list after deep structure.\n\n\n---\n\n## 3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist\n\n> **L1** Quote\n> - **L2** Bullet group\n>   1. **L3** Numbered group\n>      - [ ] **L4** task *unchecked*\n>      - [x] **L4** task **checked**\n>      - [ ] **L4** task with subtext  \n>            Plain continuation line.\n\n\n---\n\n## 4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)\n\n> **L1** Quote starts a table nest\n> - **L2** Pre-table note\n>   > **L3** Inner quote containing table:\n>   >\n>   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |\n\n\n---\n\n## 5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)\n\n- **L1**\n  > **L2** Quote\n  > - **L3** Bullet\n  >   ```\n  >   ~~~\n  >   L4 raw block fenced with tildes (shown inside triple\u2011backtick fence)\n  >   ~~~\n  >   ```\n\n\n---\n\n## 6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph\n\n<div>\n  <p><strong>L1 DIV\u2192P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL\u2192LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE\u2192P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV\u2192P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>\n\n\n---\n\n## 7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block\n\n- **L1** Top\n  - [ ] **L2** Task\n    > **L3** Quote intro\n    >\n        # L4 indented code block (not fenced)\n        for i in range(3):\n            print(i)\n\n\n---\n\n## 8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)\n\n> ### **L2** Heading inside quote (L1)\n> - **L3** Bullet under heading\n>   > **L4** Final quoted line with `inline_code`\n\n\n---\n\n## 9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote\n\n- **L1** Start with inline: **bold** *italic* `code` [ref][spec]\n  > **L2** Quote for context\n  > - **L3** List hosting a table next:\n  >\n  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |\n\n\n---\n\n## 10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code\n\n<details>\n  <summary><strong>L1</strong> details summary</summary>\n\n  - <em>L2</em> list item inside details\n    > <strong>L3</strong> quoted block explaining final code:\n    >\n    > ```json\n    > {\n    >   \"level\": 4,\n    >   \"message\": \"Deeply nested JSON block inside HTML \u2192 list \u2192 quote \u2192 code\"\n    > }\n    > ```\n</details>\n\n\n---\n\n## 11) Links, Images, Footnotes, Smart Punctuation, Entities\n\n- Plain [link](https://example.com), reference link [spec], image ![inline](https://via.placeholder.com/20)\n- Smart quotes: \u201ccurly\u201d, dashes: en\u2013dash, em\u2014dash\n- HTML entities: &copy; &amp; &lt; &gt; &nbsp;\n- Footnote call[^a] and repeated call[^a].\n- Definition list (HTML):\n  <dl>\n    <dt>Term</dt>\n    <dd>Definition line 1<br/>Definition line 2</dd>\n  </dl>\n\n[^a]: A single footnote referenced twice.\n\n\n---\n\n## 12) Edge Cases: Tight/Loose Lists, HTML Comments, Escapes\n\n- Tight item 1\n- Tight item 2\n  <!-- HTML comment between items -->\n- Tight item 3\n\n1. Loose ordered item 1\n\n   Paragraph in between makes list **loose**.\n\n2. Loose ordered item 2 with a blockquote:\n\n   > Nested quote after blank line.\n\nBackslash escape test: \\\\* \\\\_ \\\\` \\\\# \\\\[ \\\\] \\\\( \\\\)\n\n\n---\n\n## 13) Code Fences Within Lists and Quotes (language hints)\n\n> - ```bash\n>   # L3 fenced code inside quote / list\n>   set -euo pipefail\n>   printf '%s\\n' \"Depth 4 imminent\"\n>   ```\n\n\n---\n\n## 14) Table With Alignment, Inline Pipes, and Code\n\n| Left align | Center | Right |\n|:-----------|:------:|------:|\n| `|` pipe   | `\\|`   |  1234 |\n| text \\| more | **bold** |  -3.14 |\n\n\n---\n\n## 15) Raw HTML Block With Nested Markdown (often ignored)\n\n<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code \u2014 raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>\n\n\n---\n\n## 16) Para\u2192List\u2192Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\n- Bullet 1\n  Continuation line as part of same list item paragraph.\n- Bullet 2\n\nParagraph after list.\n\n\n---\n\n## 17) Math-ish (literal; let your renderer decide)\n\nInline: `$E = mc^2$` vs escaped: \\$E = mc^2\\$.\n\nBlock (fenced, not math-aware here):\n```tex\n% Depth-agnostic fenced block\n\\begin{align}\n  a^2 + b^2 &= c^2 \\\\\n  \\alpha + \\beta &= \\gamma\n\\end{align}\n```\n\n\n---\n\n## 18) The Kitchen Sink at Depth 4 (all-in-one)\n\n> **L1**\n> - **L2** bullet with [link][spec] and `code`\n>   > **L3**\n>   > 1. **L4** ordered item with a tiny table:\n>   >\n>   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |\n>   >\n>   >    and a fenced block:\n>   >\n>   >    ```yaml\n>   >    level: 4\n>   >    ok: true\n>   >    ```\n>   >\n>   >    plus a checklist:\n>   >\n>   >    - [x] done\n>   >    - [ ] todo\n\n\n---\n\n## 19) Final Sanity: HRs, Thematic Breaks, & EOF\n\n---\n***\n___\n\n_EOF_\n",
+        "text_content": "\ud83e\uddea BRUTAL Markdown Parser Torture Test\n\nA deliberately gnarly Markdown file to stress-test renderers and parsers.\nGoal: nest a wide variety of elements to depth = 4 and mix syntaxes. Note: CommonMark does not allow \u201cparagraph inside paragraph\u201d. We simulate via HTML containers (<div><p>\u2026</p></div>).\n\n0. Global Reference Links and Assets\n\nThis doc uses reference-style links and images:\n\nLink ref: MD Spec Image ref:  Autolink: https://example.org Escapes: *not italic* _not italic_ `not code`\n\n1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)\n\nL1 Blockquote L2 List item with mixed inline markdown and code L3 Nested quote with a link and an image \n\nL4 List item as deepest level \u2014 emphasis with code and strikethrough\n\nParagraph at depth 4 that includes bold italic, inline_code, and a footnote marker.\n\nBack to L1 paragraph.\n\n2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code\n\nL1 Ordered L2 Unordered L3 Quote wrapping code block below\n\nContinue list after deep structure.\n\n3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist\n\nL1 Quote L2 Bullet group L3 Numbered group  L4 task unchecked  L4 task checked  L4 task with subtext\nPlain continuation line.\n\n4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)\n\nL1 Quote starts a table nest L2 Pre-table note L3 Inner quote containing table:\n\nL4 Col AL4 Col B\n\ncodestrike italicsbold\n\n5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)\n\nL1 L2 Quote L3 Bullet\n\n6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph\n\n7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block\n\nL1 Top  L2 Task L3 Quote intro\n\n8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)\n\nL2 Heading inside quote (L1) L3 Bullet under heading L4 Final quoted line with inline_code\n\n9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote\n\nL1 Start with inline: bold italic code ref L2 Quote for context L3 List hosting a table next:\n\nL4 AL4 B\n\nsubsup Escmark\n\n10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code\n\nL2 list item inside details L3 quoted block explaining final code:\n\n11) Links, Images, Footnotes, Smart Punctuation, Entities\n\nPlain link, reference link spec, image  Smart quotes: \u201ccurly\u201d, dashes: en\u2013dash, em\u2014dash HTML entities: \u00a9 & < > \u00a0 Footnote call and repeated call. Definition list (HTML):\n\n12) Edge Cases: Tight/Loose Lists, HTML Comments, Escapes\n\nTight item 1 Tight item 2\n\nTight item 3\n\nLoose ordered item 1\n\nParagraph in between makes list loose.\n\nLoose ordered item 2 with a blockquote:\n\nNested quote after blank line.\n\nBackslash escape test: \\* \\_ \\` \\# \\[ \\] \\( \\)\n\n13) Code Fences Within Lists and Quotes (language hints)\n\n14) Table With Alignment, Inline Pipes, and Code\n\nLeft alignCenterRight\n\n`` pipe| text | morebold-3.14\n\n15) Raw HTML Block With Nested Markdown (often ignored)\n\n16) Para\u2192List\u2192Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\nBullet 1\nContinuation line as part of same list item paragraph. Bullet 2\n\nParagraph after list.\n\n17) Math-ish (literal; let your renderer decide)\n\nInline: $E = mc^2$ vs escaped: $E = mc^2$.\n\nBlock (fenced, not math-aware here):\n\n18) The Kitchen Sink at Depth 4 (all-in-one)\n\nL1 L2 bullet with link and code L3 L4 ordered item with a tiny table:\n\nkv\n\na1\n\nand a fenced block:\n\nplus a checklist:\n\n done  todo\n\n19) Final Sanity: HRs, Thematic Breaks, & EOF\n\nEOFFootnote attached to a depth\u20114 paragraph.\n\nA single footnote referenced twice."
       },
       {
         "id": "section_0-global-reference-links-and-assets",
@@ -514,7 +467,7 @@
       {
         "id": "section_1-depth4-blockquote-list-blockquote-paragraph-inline-styles",
         "level": 2,
-        "title": "1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)",
+        "title": "1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)",
         "slug": "1-depth4-blockquote-list-blockquote-paragraph-inline-styles",
         "start_line": 22,
         "end_line": 38,
@@ -522,13 +475,13 @@
         "end_char": 1233,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)\n\n> **L1** Blockquote\n> - **L2** List item with mixed _inline_ **markdown** and `code`\n>   > **L3** Nested quote with a [link](https://example.com) and an image ![img](https://via.placeholder.com/30)\n>   >\n>   > - **L4** List item as deepest level — *emphasis* with `code` and ~~strikethrough~~\n>   >\n>   >   Paragraph at depth 4 that includes **_bold italic_**, `inline_code`, and a footnote marker[^deep1].\n>\n> Back to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth‑4 paragraph.\n\n\n---\n",
-        "text_content": "1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)\n\nL1 Blockquote L2 List item with mixed inline markdown and code L3 Nested quote with a link and an image \n\nL4 List item as deepest level — emphasis with code and strikethrough\n\nParagraph at depth 4 that includes bold italic, inline_code, and a footnote marker[^deep1].\n\nBack to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth‑4 paragraph."
+        "raw_content": "## 1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)\n\n> **L1** Blockquote\n> - **L2** List item with mixed _inline_ **markdown** and `code`\n>   > **L3** Nested quote with a [link](https://example.com) and an image ![img](https://via.placeholder.com/30)\n>   >\n>   > - **L4** List item as deepest level \u2014 *emphasis* with `code` and ~~strikethrough~~\n>   >\n>   >   Paragraph at depth 4 that includes **_bold italic_**, `inline_code`, and a footnote marker[^deep1].\n>\n> Back to L1 paragraph.\n\n[^deep1]: Footnote attached to a depth\u20114 paragraph.\n\n\n---\n",
+        "text_content": "1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)\n\nL1 Blockquote L2 List item with mixed inline markdown and code L3 Nested quote with a link and an image \n\nL4 List item as deepest level \u2014 emphasis with code and strikethrough\n\nParagraph at depth 4 that includes bold italic, inline_code, and a footnote marker.\n\nBack to L1 paragraph.\n\nFootnote attached to a depth\u20114 paragraph."
       },
       {
         "id": "section_2-depth4-list-list-blockquote-fenced-code",
         "level": 2,
-        "title": "2) Depth‑4: List → List → Blockquote → Fenced Code",
+        "title": "2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code",
         "slug": "2-depth4-list-list-blockquote-fenced-code",
         "start_line": 39,
         "end_line": 54,
@@ -536,13 +489,13 @@
         "end_char": 1566,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 2) Depth‑4: List → List → Blockquote → Fenced Code\n\n1. **L1** Ordered\n   - **L2** Unordered\n     > **L3** Quote wrapping code block below\n     >\n     > ```python\n     > # L4 fenced code\n     > def depth_four(a: int) -> int:\n     >     return (a ** 2) // 3  # simulate work\n     > ```\n2. Continue list after deep structure.\n\n\n---\n",
-        "text_content": "2) Depth‑4: List → List → Blockquote → Fenced Code\n\nL1 Ordered L2 Unordered L3 Quote wrapping code block below\n\nContinue list after deep structure."
+        "raw_content": "## 2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code\n\n1. **L1** Ordered\n   - **L2** Unordered\n     > **L3** Quote wrapping code block below\n     >\n     > ```python\n     > # L4 fenced code\n     > def depth_four(a: int) -> int:\n     >     return (a ** 2) // 3  # simulate work\n     > ```\n2. Continue list after deep structure.\n\n\n---\n",
+        "text_content": "2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code\n\nL1 Ordered L2 Unordered L3 Quote wrapping code block below\n\nContinue list after deep structure."
       },
       {
         "id": "section_3-depth4-quote-list-list-task-checklist",
         "level": 2,
-        "title": "3) Depth‑4: Quote → List → List → Task Checklist",
+        "title": "3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist",
         "slug": "3-depth4-quote-list-list-task-checklist",
         "start_line": 55,
         "end_line": 67,
@@ -550,13 +503,13 @@
         "end_char": 1846,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 3) Depth‑4: Quote → List → List → Task Checklist\n\n> **L1** Quote\n> - **L2** Bullet group\n>   1. **L3** Numbered group\n>      - [ ] **L4** task *unchecked*\n>      - [x] **L4** task **checked**\n>      - [ ] **L4** task with subtext  \n>            Plain continuation line.\n\n\n---\n",
-        "text_content": "3) Depth‑4: Quote → List → List → Task Checklist\n\nL1 Quote L2 Bullet group L3 Numbered group [ ] L4 task unchecked [x] L4 task checked [ ] L4 task with subtext\nPlain continuation line."
+        "raw_content": "## 3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist\n\n> **L1** Quote\n> - **L2** Bullet group\n>   1. **L3** Numbered group\n>      - [ ] **L4** task *unchecked*\n>      - [x] **L4** task **checked**\n>      - [ ] **L4** task with subtext  \n>            Plain continuation line.\n\n\n---\n",
+        "text_content": "3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist\n\nL1 Quote L2 Bullet group L3 Numbered group  L4 task unchecked  L4 task checked  L4 task with subtext\nPlain continuation line."
       },
       {
         "id": "section_4-depth4-quote-list-quote-table-yes-inside-a-quote",
         "level": 2,
-        "title": "4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)",
+        "title": "4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)",
         "slug": "4-depth4-quote-list-quote-table-yes-inside-a-quote",
         "start_line": 68,
         "end_line": 81,
@@ -564,13 +517,13 @@
         "end_char": 2184,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)\n\n> **L1** Quote starts a table nest\n> - **L2** Pre-table note\n>   > **L3** Inner quote containing table:\n>   >\n>   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |\n\n\n---\n",
-        "text_content": "4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)\n\nL1 Quote starts a table nest L2 Pre-table note L3 Inner quote containing table:\n\nL4 Col AL4 Col B\n\ncodestrike italicsbold"
+        "raw_content": "## 4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)\n\n> **L1** Quote starts a table nest\n> - **L2** Pre-table note\n>   > **L3** Inner quote containing table:\n>   >\n>   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |\n\n\n---\n",
+        "text_content": "4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)\n\nL1 Quote starts a table nest L2 Pre-table note L3 Inner quote containing table:\n\nL4 Col AL4 Col B\n\ncodestrike italicsbold"
       },
       {
         "id": "section_5-depth4-list-quote-list-fenced-code-tildes-inside-backticks-test",
         "level": 2,
-        "title": "5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)",
+        "title": "5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)",
         "slug": "5-depth4-list-quote-list-fenced-code-tildes-inside-backticks-test",
         "start_line": 82,
         "end_line": 95,
@@ -578,13 +531,13 @@
         "end_char": 2433,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)\n\n- **L1**\n  > **L2** Quote\n  > - **L3** Bullet\n  >   ```\n  >   ~~~\n  >   L4 raw block fenced with tildes (shown inside triple‑backtick fence)\n  >   ~~~\n  >   ```\n\n\n---\n",
-        "text_content": "5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)\n\nL1 L2 Quote L3 Bullet"
+        "raw_content": "## 5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)\n\n- **L1**\n  > **L2** Quote\n  > - **L3** Bullet\n  >   ```\n  >   ~~~\n  >   L4 raw block fenced with tildes (shown inside triple\u2011backtick fence)\n  >   ~~~\n  >   ```\n\n\n---\n",
+        "text_content": "5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)\n\nL1 L2 Quote L3 Bullet"
       },
       {
         "id": "section_6-depth4-html-containers-to-simulate-paragraphinparagraph",
         "level": 2,
-        "title": "6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph",
+        "title": "6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph",
         "slug": "6-depth4-html-containers-to-simulate-paragraphinparagraph",
         "start_line": 96,
         "end_line": 114,
@@ -592,13 +545,13 @@
         "end_char": 2920,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph\n\n<div>\n  <p><strong>L1 DIV→P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL→LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE→P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV→P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>\n\n\n---\n",
-        "text_content": "6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph"
+        "raw_content": "## 6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph\n\n<div>\n  <p><strong>L1 DIV\u2192P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL\u2192LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE\u2192P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV\u2192P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>\n\n\n---\n",
+        "text_content": "6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph"
       },
       {
         "id": "section_7-depth4-list-task-list-quote-indented-code-block",
         "level": 2,
-        "title": "7) Depth‑4: List → Task List → Quote → Indented Code Block",
+        "title": "7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block",
         "slug": "7-depth4-list-task-list-quote-indented-code-block",
         "start_line": 115,
         "end_line": 127,
@@ -606,13 +559,13 @@
         "end_char": 3148,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 7) Depth‑4: List → Task List → Quote → Indented Code Block\n\n- **L1** Top\n  - [ ] **L2** Task\n    > **L3** Quote intro\n    >\n        # L4 indented code block (not fenced)\n        for i in range(3):\n            print(i)\n\n\n---\n",
-        "text_content": "7) Depth‑4: List → Task List → Quote → Indented Code Block\n\nL1 Top [ ] L2 Task L3 Quote intro"
+        "raw_content": "## 7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block\n\n- **L1** Top\n  - [ ] **L2** Task\n    > **L3** Quote intro\n    >\n        # L4 indented code block (not fenced)\n        for i in range(3):\n            print(i)\n\n\n---\n",
+        "text_content": "7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block\n\nL1 Top  L2 Task L3 Quote intro"
       },
       {
         "id": "section_8-depth4-blockquote-heading-list-blockquote-headings-in-quotes",
         "level": 2,
-        "title": "8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)",
+        "title": "8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)",
         "slug": "8-depth4-blockquote-heading-list-blockquote-headings-in-quotes",
         "start_line": 128,
         "end_line": 136,
@@ -622,8 +575,8 @@
         "child_ids": [
           "section_l2-heading-inside-quote-l1"
         ],
-        "raw_content": "## 8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)\n\n> ### **L2** Heading inside quote (L1)\n> - **L3** Bullet under heading\n>   > **L4** Final quoted line with `inline_code`\n\n\n---\n",
-        "text_content": "8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)\n\nL2 Heading inside quote (L1) L3 Bullet under heading L4 Final quoted line with inline_code"
+        "raw_content": "## 8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)\n\n> ### **L2** Heading inside quote (L1)\n> - **L3** Bullet under heading\n>   > **L4** Final quoted line with `inline_code`\n\n\n---\n",
+        "text_content": "8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)\n\nL2 Heading inside quote (L1) L3 Bullet under heading L4 Final quoted line with inline_code"
       },
       {
         "id": "section_l2-heading-inside-quote-l1",
@@ -642,7 +595,7 @@
       {
         "id": "section_9-depth4-complex-inline-mix-table-in-list-quote",
         "level": 2,
-        "title": "9) Depth‑4: Complex Inline Mix + Table in List → Quote",
+        "title": "9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote",
         "slug": "9-depth4-complex-inline-mix-table-in-list-quote",
         "start_line": 137,
         "end_line": 150,
@@ -650,13 +603,13 @@
         "end_char": 3689,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 9) Depth‑4: Complex Inline Mix + Table in List → Quote\n\n- **L1** Start with inline: **bold** *italic* `code` [ref][spec]\n  > **L2** Quote for context\n  > - **L3** List hosting a table next:\n  >\n  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |\n\n\n---\n",
-        "text_content": "9) Depth‑4: Complex Inline Mix + Table in List → Quote\n\nL1 Start with inline: bold italic code ref L2 Quote for context L3 List hosting a table next:\n\nL4 AL4 B\n\nsubsup Escmark"
+        "raw_content": "## 9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote\n\n- **L1** Start with inline: **bold** *italic* `code` [ref][spec]\n  > **L2** Quote for context\n  > - **L3** List hosting a table next:\n  >\n  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |\n\n\n---\n",
+        "text_content": "9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote\n\nL1 Start with inline: bold italic code ref L2 Quote for context L3 List hosting a table next:\n\nL4 AL4 B\n\nsubsup Escmark"
       },
       {
         "id": "section_10-depth4-details-summary-html-list-quote-code",
         "level": 2,
-        "title": "10) Depth‑4: Details/Summary (HTML) → List → Quote → Code",
+        "title": "10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code",
         "slug": "10-depth4-details-summary-html-list-quote-code",
         "start_line": 151,
         "end_line": 169,
@@ -664,8 +617,8 @@
         "end_char": 4086,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 10) Depth‑4: Details/Summary (HTML) → List → Quote → Code\n\n<details>\n  <summary><strong>L1</strong> details summary</summary>\n\n  - <em>L2</em> list item inside details\n    > <strong>L3</strong> quoted block explaining final code:\n    >\n    > ```json\n    > {\n    >   \"level\": 4,\n    >   \"message\": \"Deeply nested JSON block inside HTML → list → quote → code\"\n    > }\n    > ```\n</details>\n\n\n---\n",
-        "text_content": "10) Depth‑4: Details/Summary (HTML) → List → Quote → Code\n\nL2 list item inside details L3 quoted block explaining final code:"
+        "raw_content": "## 10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code\n\n<details>\n  <summary><strong>L1</strong> details summary</summary>\n\n  - <em>L2</em> list item inside details\n    > <strong>L3</strong> quoted block explaining final code:\n    >\n    > ```json\n    > {\n    >   \"level\": 4,\n    >   \"message\": \"Deeply nested JSON block inside HTML \u2192 list \u2192 quote \u2192 code\"\n    > }\n    > ```\n</details>\n\n\n---\n",
+        "text_content": "10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code\n\nL2 list item inside details L3 quoted block explaining final code:"
       },
       {
         "id": "section_11-links-images-footnotes-smart-punctuation-entities",
@@ -678,8 +631,8 @@
         "end_char": 4558,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 11) Links, Images, Footnotes, Smart Punctuation, Entities\n\n- Plain [link](https://example.com), reference link [spec], image ![inline](https://via.placeholder.com/20)\n- Smart quotes: “curly”, dashes: en–dash, em—dash\n- HTML entities: &copy; &amp; &lt; &gt; &nbsp;\n- Footnote call[^a] and repeated call[^a].\n- Definition list (HTML):\n  <dl>\n    <dt>Term</dt>\n    <dd>Definition line 1<br/>Definition line 2</dd>\n  </dl>\n\n[^a]: A single footnote referenced twice.\n\n\n---\n",
-        "text_content": "11) Links, Images, Footnotes, Smart Punctuation, Entities\n\nPlain link, reference link spec, image  Smart quotes: “curly”, dashes: en–dash, em—dash HTML entities: © & < >   Footnote call[^a] and repeated call[^a]. Definition list (HTML):\n\n[^a]: A single footnote referenced twice."
+        "raw_content": "## 11) Links, Images, Footnotes, Smart Punctuation, Entities\n\n- Plain [link](https://example.com), reference link [spec], image ![inline](https://via.placeholder.com/20)\n- Smart quotes: \u201ccurly\u201d, dashes: en\u2013dash, em\u2014dash\n- HTML entities: &copy; &amp; &lt; &gt; &nbsp;\n- Footnote call[^a] and repeated call[^a].\n- Definition list (HTML):\n  <dl>\n    <dt>Term</dt>\n    <dd>Definition line 1<br/>Definition line 2</dd>\n  </dl>\n\n[^a]: A single footnote referenced twice.\n\n\n---\n",
+        "text_content": "11) Links, Images, Footnotes, Smart Punctuation, Entities\n\nPlain link, reference link spec, image  Smart quotes: \u201ccurly\u201d, dashes: en\u2013dash, em\u2014dash HTML entities: \u00a9 & < > \u00a0 Footnote call and repeated call. Definition list (HTML):\n\nA single footnote referenced twice."
       },
       {
         "id": "section_12-edge-cases-tight-loose-lists-html-comments-escapes",
@@ -734,13 +687,13 @@
         "end_char": 5671,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 15) Raw HTML Block With Nested Markdown (often ignored)\n\n<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code — raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>\n\n\n---\n",
+        "raw_content": "## 15) Raw HTML Block With Nested Markdown (often ignored)\n\n<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code \u2014 raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>\n\n\n---\n",
         "text_content": "15) Raw HTML Block With Nested Markdown (often ignored)"
       },
       {
         "id": "section_16-paralistpara-sandwich-renderer-dependent",
         "level": 2,
-        "title": "16) Para→List→Para Sandwich (renderer-dependent)",
+        "title": "16) Para\u2192List\u2192Para Sandwich (renderer-dependent)",
         "slug": "16-paralistpara-sandwich-renderer-dependent",
         "start_line": 246,
         "end_line": 258,
@@ -748,8 +701,8 @@
         "end_char": 5857,
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
-        "raw_content": "## 16) Para→List→Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\n- Bullet 1\n  Continuation line as part of same list item paragraph.\n- Bullet 2\n\nParagraph after list.\n\n\n---\n",
-        "text_content": "16) Para→List→Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\nBullet 1\nContinuation line as part of same list item paragraph. Bullet 2\n\nParagraph after list."
+        "raw_content": "## 16) Para\u2192List\u2192Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\n- Bullet 1\n  Continuation line as part of same list item paragraph.\n- Bullet 2\n\nParagraph after list.\n\n\n---\n",
+        "text_content": "16) Para\u2192List\u2192Para Sandwich (renderer-dependent)\n\nParagraph before list.\n\nBullet 1\nContinuation line as part of same list item paragraph. Bullet 2\n\nParagraph after list."
       },
       {
         "id": "section_17-math-ish-literal-let-your-renderer-decide",
@@ -777,7 +730,7 @@
         "parent_id": "section_brutal-markdown-parser-torture-test",
         "child_ids": [],
         "raw_content": "## 18) The Kitchen Sink at Depth 4 (all-in-one)\n\n> **L1**\n> - **L2** bullet with [link][spec] and `code`\n>   > **L3**\n>   > 1. **L4** ordered item with a tiny table:\n>   >\n>   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |\n>   >\n>   >    and a fenced block:\n>   >\n>   >    ```yaml\n>   >    level: 4\n>   >    ok: true\n>   >    ```\n>   >\n>   >    plus a checklist:\n>   >\n>   >    - [x] done\n>   >    - [ ] todo\n\n\n---\n",
-        "text_content": "18) The Kitchen Sink at Depth 4 (all-in-one)\n\nL1 L2 bullet with link and code L3 L4 ordered item with a tiny table:\n\nkv\n\na1\n\nand a fenced block:\n\nplus a checklist:\n\n[x] done [ ] todo"
+        "text_content": "18) The Kitchen Sink at Depth 4 (all-in-one)\n\nL1 L2 bullet with link and code L3 L4 ordered item with a tiny table:\n\nkv\n\na1\n\nand a fenced block:\n\nplus a checklist:\n\n done  todo"
       },
       {
         "id": "section_19-final-sanity-hrs-thematic-breaks-eof",
@@ -819,28 +772,6 @@
       },
       {
         "id": "para_2",
-        "text": "[^deep1]: Footnote attached to a depth‑4 paragraph.",
-        "start_line": 34,
-        "end_line": 35,
-        "section_id": "section_brutal-markdown-parser-torture-test",
-        "word_count": 7,
-        "has_links": false,
-        "has_emphasis": false,
-        "has_code": false
-      },
-      {
-        "id": "para_3",
-        "text": "[^a]: A single footnote referenced twice.",
-        "start_line": 182,
-        "end_line": 183,
-        "section_id": "section_brutal-markdown-parser-torture-test",
-        "word_count": 6,
-        "has_links": false,
-        "has_emphasis": false,
-        "has_code": false
-      },
-      {
-        "id": "para_4",
         "text": "Backslash escape test: \\* \\_ \\` \\# \\[ \\] \\( \\)",
         "start_line": 202,
         "end_line": 203,
@@ -851,7 +782,7 @@
         "has_code": false
       },
       {
-        "id": "para_5",
+        "id": "para_3",
         "text": "Paragraph before list.",
         "start_line": 248,
         "end_line": 249,
@@ -862,7 +793,7 @@
         "has_code": false
       },
       {
-        "id": "para_6",
+        "id": "para_4",
         "text": "Paragraph after list.",
         "start_line": 254,
         "end_line": 255,
@@ -873,7 +804,7 @@
         "has_code": false
       },
       {
-        "id": "para_7",
+        "id": "para_5",
         "text": "Inline: $E = mc^2$ vs escaped: $E = mc^2$.",
         "start_line": 261,
         "end_line": 262,
@@ -884,7 +815,7 @@
         "has_code": true
       },
       {
-        "id": "para_8",
+        "id": "para_6",
         "text": "Block (fenced, not math-aware here):",
         "start_line": 263,
         "end_line": 264,
@@ -895,7 +826,7 @@
         "has_code": false
       },
       {
-        "id": "para_9",
+        "id": "para_7",
         "text": "EOF",
         "start_line": 307,
         "end_line": 308,
@@ -903,6 +834,28 @@
         "word_count": 1,
         "has_links": false,
         "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_8",
+        "text": "Footnote attached to a depth\u20114 paragraph.",
+        "start_line": 34,
+        "end_line": 35,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "word_count": 6,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_9",
+        "text": "A single footnote referenced twice.",
+        "start_line": 182,
+        "end_line": 183,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
         "has_code": false
       }
     ],
@@ -916,32 +869,26 @@
         "items": [
           {
             "text": "Link ref: MD Spec",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Image ref: Ref LogoRef Logo",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Autolink: https://example.org",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Escapes: *not italic* _not italic_ `not code`",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 4,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 4
       },
       {
         "id": "list_1",
@@ -952,7 +899,6 @@
         "items": [
           {
             "text": "L2 List item with mixed inline markdown and code",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -963,9 +909,7 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_2",
@@ -976,11 +920,9 @@
         "items": [
           {
             "text": "L1 Ordered",
-            "checked": null,
             "children": [
               {
                 "text": "L2 Unordered",
-                "checked": null,
                 "children": [],
                 "blocks": [
                   {
@@ -995,14 +937,11 @@
           },
           {
             "text": "Continue list after deep structure.",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 2
       },
       {
         "id": "list_3",
@@ -1013,27 +952,22 @@
         "items": [
           {
             "text": "L2 Bullet group",
-            "checked": null,
             "children": [
               {
                 "text": "L3 Numbered group",
-                "checked": null,
                 "children": [
                   {
-                    "text": "L4 task unchecked",
-                    "checked": false,
+                    "text": " L4 task unchecked",
                     "children": [],
                     "blocks": []
                   },
                   {
-                    "text": "L4 task checked",
-                    "checked": true,
+                    "text": " L4 task checked",
                     "children": [],
                     "blocks": []
                   },
                   {
-                    "text": "L4 task with subtext\nPlain continuation line.",
-                    "checked": false,
+                    "text": " L4 task with subtext\nPlain continuation line.",
                     "children": [],
                     "blocks": []
                   }
@@ -1044,9 +978,7 @@
             "blocks": []
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_4",
@@ -1057,7 +989,6 @@
         "items": [
           {
             "text": "L2 Pre-table note",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1068,9 +999,7 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_5",
@@ -1081,7 +1010,6 @@
         "items": [
           {
             "text": "L1",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1092,9 +1020,7 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_6",
@@ -1105,11 +1031,9 @@
         "items": [
           {
             "text": "L1 Top",
-            "checked": null,
             "children": [
               {
-                "text": "L2 Task",
-                "checked": false,
+                "text": " L2 Task",
                 "children": [],
                 "blocks": [
                   {
@@ -1128,9 +1052,7 @@
             "blocks": []
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_7",
@@ -1141,7 +1063,6 @@
         "items": [
           {
             "text": "L3 Bullet under heading",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1152,9 +1073,7 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_8",
@@ -1165,7 +1084,6 @@
         "items": [
           {
             "text": "L1 Start with inline: bold italic code ref",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1176,9 +1094,7 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_9",
@@ -1189,7 +1105,6 @@
         "items": [
           {
             "text": "L2 list item inside details",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1200,9 +1115,7 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_10",
@@ -1213,38 +1126,31 @@
         "items": [
           {
             "text": "Plain link, reference link spec, image inlineinline",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
-            "text": "Smart quotes: “curly”, dashes: en–dash, em—dash",
-            "checked": null,
+            "text": "Smart quotes: \u201ccurly\u201d, dashes: en\u2013dash, em\u2014dash",
             "children": [],
             "blocks": []
           },
           {
-            "text": "HTML entities: © & < >  ",
-            "checked": null,
+            "text": "HTML entities: \u00a9 & < > \u00a0",
             "children": [],
             "blocks": []
           },
           {
-            "text": "Footnote call[^a] and repeated call[^a].",
-            "checked": null,
+            "text": "Footnote call and repeated call.",
             "children": [],
             "blocks": []
           },
           {
             "text": "Definition list (HTML):",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 5,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 5
       },
       {
         "id": "list_11",
@@ -1255,26 +1161,21 @@
         "items": [
           {
             "text": "Tight item 1",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Tight item 2",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Tight item 3",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 3,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 3
       },
       {
         "id": "list_12",
@@ -1285,13 +1186,11 @@
         "items": [
           {
             "text": "Paragraph in between makes list loose.",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Loose ordered item 2 with a blockquote:",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1302,9 +1201,7 @@
             ]
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 2
       },
       {
         "id": "list_13",
@@ -1315,7 +1212,6 @@
         "items": [
           {
             "text": "",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1326,9 +1222,7 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_14",
@@ -1339,20 +1233,16 @@
         "items": [
           {
             "text": "Bullet 1\nContinuation line as part of same list item paragraph.",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Bullet 2",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 2
       },
       {
         "id": "list_15",
@@ -1363,7 +1253,6 @@
         "items": [
           {
             "text": "L2 bullet with link and code",
-            "checked": null,
             "children": [],
             "blocks": [
               {
@@ -1374,30 +1263,29 @@
             ]
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       }
     ],
     "tables": [
       {
         "id": "table_0",
+        "raw_content": ">   > | **L4 Col A** | **L4 Col B** |\n>   > |:------------:|:------------:|\n>   > | `code`       | ~~strike~~    |\n>   > | *italics*    | **bold**      |",
         "headers": [
-          "L4 Col A",
-          "L4 Col B"
+          "**L4 Col A**",
+          "**L4 Col B**"
         ],
         "rows": [
           [
-            "code",
-            "strike"
+            "`code`",
+            "~~strike~~"
           ],
           [
-            "italics",
-            "bold"
+            "*italics*",
+            "**bold**"
           ]
         ],
         "align": [
-          "left",
+          "center",
           "center"
         ],
         "start_line": 74,
@@ -1405,6 +1293,9 @@
         "section_id": "section_brutal-markdown-parser-torture-test",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
         "column_count": 2,
         "row_count": 2,
         "align_meta": {
@@ -1413,18 +1304,19 @@
       },
       {
         "id": "table_1",
+        "raw_content": "  >   | L4 A | L4 B |\n  >   |------|------|\n  >   | <sub>sub</sub> | <sup>sup</sup> |\n  >   | <kbd>Esc</kbd> | <mark>mark</mark> |",
         "headers": [
           "L4 A",
           "L4 B"
         ],
         "rows": [
           [
-            "sub",
-            "sup"
+            "<sub>sub</sub>",
+            "<sup>sup</sup>"
           ],
           [
-            "Esc",
-            "mark"
+            "<kbd>Esc</kbd>",
+            "<mark>mark</mark>"
           ]
         ],
         "align": [
@@ -1436,6 +1328,9 @@
         "section_id": "section_brutal-markdown-parser-torture-test",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
         "column_count": 2,
         "row_count": 2,
         "align_meta": {
@@ -1444,6 +1339,7 @@
       },
       {
         "id": "table_2",
+        "raw_content": "| Left align | Center | Right |\n|:-----------|:------:|------:|\n| `|` pipe   | `\\|`   |  1234 |\n| text \\| more | **bold** |  -3.14 |",
         "headers": [
           "Left align",
           "Center",
@@ -1453,11 +1349,11 @@
           [
             "`",
             "` pipe",
-            "|"
+            "`|`"
           ],
           [
             "text | more",
-            "bold",
+            "**bold**",
             "-3.14"
           ]
         ],
@@ -1469,16 +1365,26 @@
         "start_line": 220,
         "end_line": 224,
         "section_id": "section_brutal-markdown-parser-torture-test",
-        "is_ragged": false,
+        "is_ragged": true,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 3,
         "row_count": 2,
         "align_meta": {
           "heuristic": true
+        },
+        "is_ragged_meta": {
+          "source_col_counts": [
+            3,
+            4
+          ]
         }
       },
       {
         "id": "table_3",
+        "raw_content": ">   >    | k | v |\n>   >    |---|---|\n>   >    | a | 1 |",
         "headers": [
           "k",
           "v"
@@ -1498,6 +1404,9 @@
         "section_id": "section_brutal-markdown-parser-torture-test",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
         "column_count": 2,
         "row_count": 1,
         "align_meta": {
@@ -1519,7 +1428,7 @@
         "id": "code_1",
         "type": "fenced",
         "language": "",
-        "content": "~~~\nL4 raw block fenced with tildes (shown inside triple‑backtick fence)\n~~~\n",
+        "content": "~~~\nL4 raw block fenced with tildes (shown inside triple\u2011backtick fence)\n~~~\n",
         "start_line": 87,
         "end_line": 92,
         "section_id": "section_brutal-markdown-parser-torture-test"
@@ -1537,7 +1446,7 @@
         "id": "code_3",
         "type": "fenced",
         "language": "json",
-        "content": "{\n  \"level\": 4,\n  \"message\": \"Deeply nested JSON block inside HTML → list → quote → code\"\n}\n",
+        "content": "{\n  \"level\": 4,\n  \"message\": \"Deeply nested JSON block inside HTML \u2192 list \u2192 quote \u2192 code\"\n}\n",
         "start_line": 159,
         "end_line": 165,
         "section_id": "section_brutal-markdown-parser-torture-test"
@@ -1582,7 +1491,7 @@
         "id": "code_8",
         "type": "indented",
         "language": "",
-        "content": "<li><em>L2 UL→LI.</em>\n  <blockquote>\n    <p><code>L3 QUOTE→P</code> wrapping an inner container.</p>\n    <div>\n      <p><u>L4 DIV→P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n    </div>\n  </blockquote>\n</li>",
+        "content": "<li><em>L2 UL\u2192LI.</em>\n  <blockquote>\n    <p><code>L3 QUOTE\u2192P</code> wrapping an inner container.</p>\n    <div>\n      <p><u>L4 DIV\u2192P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n    </div>\n  </blockquote>\n</li>",
         "start_line": 101,
         "end_line": 108,
         "section_id": "section_brutal-markdown-parser-torture-test"
@@ -1600,7 +1509,7 @@
         "id": "code_10",
         "type": "indented",
         "language": "",
-        "content": "> <strong>L3</strong> quoted block explaining final code:\n>\n> ```json\n> {\n>   \"level\": 4,\n>   \"message\": \"Deeply nested JSON block inside HTML → list → quote → code\"\n> }\n> ```",
+        "content": "> <strong>L3</strong> quoted block explaining final code:\n>\n> ```json\n> {\n>   \"level\": 4,\n>   \"message\": \"Deeply nested JSON block inside HTML \u2192 list \u2192 quote \u2192 code\"\n> }\n> ```",
         "start_line": 157,
         "end_line": 164,
         "section_id": "section_brutal-markdown-parser-torture-test"
@@ -1618,7 +1527,7 @@
         "id": "code_12",
         "type": "indented",
         "language": "",
-        "content": "<li>L2 item with <em>inline</em> markdown</li>\n<li>\n  <blockquote>\n    <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n    <pre><code>L4 pre/code — raw, not parsed as MD</code></pre>\n  </blockquote>\n</li>",
+        "content": "<li>L2 item with <em>inline</em> markdown</li>\n<li>\n  <blockquote>\n    <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n    <pre><code>L4 pre/code \u2014 raw, not parsed as MD</code></pre>\n  </blockquote>\n</li>",
         "start_line": 233,
         "end_line": 239,
         "section_id": "section_brutal-markdown-parser-torture-test"
@@ -1628,7 +1537,7 @@
       {
         "id": "heading_brutal-markdown-parser-torture-test",
         "level": 1,
-        "text": "🧪 BRUTAL Markdown Parser Torture Test",
+        "text": "\ud83e\uddea BRUTAL Markdown Parser Torture Test",
         "line": 0,
         "slug": "brutal-markdown-parser-torture-test",
         "parent_heading_id": null,
@@ -1648,7 +1557,7 @@
       {
         "id": "heading_1-depth4-blockquote-list-blockquote-paragraph-inline-styles",
         "level": 2,
-        "text": "1) Depth‑4: Blockquote → List → Blockquote → Paragraph (+inline styles)",
+        "text": "1) Depth\u20114: Blockquote \u2192 List \u2192 Blockquote \u2192 Paragraph (+inline styles)",
         "line": 22,
         "slug": "1-depth4-blockquote-list-blockquote-paragraph-inline-styles",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1658,7 +1567,7 @@
       {
         "id": "heading_2-depth4-list-list-blockquote-fenced-code",
         "level": 2,
-        "text": "2) Depth‑4: List → List → Blockquote → Fenced Code",
+        "text": "2) Depth\u20114: List \u2192 List \u2192 Blockquote \u2192 Fenced Code",
         "line": 39,
         "slug": "2-depth4-list-list-blockquote-fenced-code",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1668,7 +1577,7 @@
       {
         "id": "heading_3-depth4-quote-list-list-task-checklist",
         "level": 2,
-        "text": "3) Depth‑4: Quote → List → List → Task Checklist",
+        "text": "3) Depth\u20114: Quote \u2192 List \u2192 List \u2192 Task Checklist",
         "line": 55,
         "slug": "3-depth4-quote-list-list-task-checklist",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1678,7 +1587,7 @@
       {
         "id": "heading_4-depth4-quote-list-quote-table-yes-inside-a-quote",
         "level": 2,
-        "text": "4) Depth‑4: Quote → List → Quote → Table (yes, inside a quote)",
+        "text": "4) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Table (yes, inside a quote)",
         "line": 68,
         "slug": "4-depth4-quote-list-quote-table-yes-inside-a-quote",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1688,7 +1597,7 @@
       {
         "id": "heading_5-depth4-list-quote-list-fenced-code-tildes-inside-backticks-test",
         "level": 2,
-        "text": "5) Depth‑4: List → Quote → List → Fenced Code (tildes inside backticks test)",
+        "text": "5) Depth\u20114: List \u2192 Quote \u2192 List \u2192 Fenced Code (tildes inside backticks test)",
         "line": 82,
         "slug": "5-depth4-list-quote-list-fenced-code-tildes-inside-backticks-test",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1698,7 +1607,7 @@
       {
         "id": "heading_6-depth4-html-containers-to-simulate-paragraphinparagraph",
         "level": 2,
-        "text": "6) Depth‑4: HTML Containers to Simulate Paragraph‑in‑Paragraph",
+        "text": "6) Depth\u20114: HTML Containers to Simulate Paragraph\u2011in\u2011Paragraph",
         "line": 96,
         "slug": "6-depth4-html-containers-to-simulate-paragraphinparagraph",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1708,7 +1617,7 @@
       {
         "id": "heading_7-depth4-list-task-list-quote-indented-code-block",
         "level": 2,
-        "text": "7) Depth‑4: List → Task List → Quote → Indented Code Block",
+        "text": "7) Depth\u20114: List \u2192 Task List \u2192 Quote \u2192 Indented Code Block",
         "line": 115,
         "slug": "7-depth4-list-task-list-quote-indented-code-block",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1718,7 +1627,7 @@
       {
         "id": "heading_8-depth4-blockquote-heading-list-blockquote-headings-in-quotes",
         "level": 2,
-        "text": "8) Depth‑4: Blockquote → Heading → List → Blockquote (Headings in quotes)",
+        "text": "8) Depth\u20114: Blockquote \u2192 Heading \u2192 List \u2192 Blockquote (Headings in quotes)",
         "line": 128,
         "slug": "8-depth4-blockquote-heading-list-blockquote-headings-in-quotes",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1728,7 +1637,7 @@
       {
         "id": "heading_9-depth4-complex-inline-mix-table-in-list-quote",
         "level": 2,
-        "text": "9) Depth‑4: Complex Inline Mix + Table in List → Quote",
+        "text": "9) Depth\u20114: Complex Inline Mix + Table in List \u2192 Quote",
         "line": 137,
         "slug": "9-depth4-complex-inline-mix-table-in-list-quote",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1738,7 +1647,7 @@
       {
         "id": "heading_10-depth4-details-summary-html-list-quote-code",
         "level": 2,
-        "text": "10) Depth‑4: Details/Summary (HTML) → List → Quote → Code",
+        "text": "10) Depth\u20114: Details/Summary (HTML) \u2192 List \u2192 Quote \u2192 Code",
         "line": 151,
         "slug": "10-depth4-details-summary-html-list-quote-code",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1798,7 +1707,7 @@
       {
         "id": "heading_16-paralistpara-sandwich-renderer-dependent",
         "level": 2,
-        "text": "16) Para→List→Para Sandwich (renderer-dependent)",
+        "text": "16) Para\u2192List\u2192Para Sandwich (renderer-dependent)",
         "line": 246,
         "slug": "16-paralistpara-sandwich-renderer-dependent",
         "parent_heading_id": "heading_brutal-markdown-parser-torture-test",
@@ -1841,7 +1750,7 @@
         "text": "MD Spec",
         "url": "https://spec.commonmark.org/",
         "line": 12,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1861,7 +1770,7 @@
         "text": "https://example.org",
         "url": "https://example.org",
         "line": 14,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1869,7 +1778,7 @@
         "text": "link",
         "url": "https://example.com",
         "line": 26,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1889,7 +1798,7 @@
         "text": "ref",
         "url": "https://spec.commonmark.org/",
         "line": 139,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1897,7 +1806,7 @@
         "text": "link",
         "url": "https://example.com",
         "line": 172,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1905,7 +1814,7 @@
         "text": "spec",
         "url": "https://spec.commonmark.org/",
         "line": 172,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1925,7 +1834,7 @@
         "text": "link",
         "url": "https://spec.commonmark.org/",
         "line": 278,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       }
@@ -1973,7 +1882,7 @@
     ],
     "blockquotes": [
       {
-        "content": "Note: CommonMark does not allow “paragraph inside paragraph”. We simulate via HTML containers (<div><p>…</p></div>).",
+        "content": "Note: CommonMark does not allow \u201cparagraph inside paragraph\u201d. We simulate via HTML containers (<div><p>\u2026</p></div>).",
         "start_line": 4,
         "end_line": 5,
         "section_id": "section_brutal-markdown-parser-torture-test",
@@ -1985,7 +1894,7 @@
         "children_blocks": []
       },
       {
-        "content": "L1 BlockquoteL2 List item with mixed inline markdown and codeL3 Nested quote with a link and an image imgimgL4 List item as deepest level — emphasis with code and strikethroughParagraph at depth 4 that includes bold italic, inline_code, and a footnote marker[^deep1].Back to L1 paragraph.",
+        "content": "L1 BlockquoteL2 List item with mixed inline markdown and codeL3 Nested quote with a link and an image imgimgL4 List item as deepest level \u2014 emphasis with code and strikethroughParagraph at depth 4 that includes bold italic, inline_code, and a footnote marker.Back to L1 paragraph.",
         "start_line": 24,
         "end_line": 33,
         "section_id": "section_brutal-markdown-parser-torture-test",
@@ -2026,7 +1935,7 @@
         ]
       },
       {
-        "content": "L1 QuoteL2 Bullet groupL3 Numbered group[ ] L4 task unchecked[x] L4 task checked[ ] L4 task with subtext\nPlain continuation line.",
+        "content": "L1 QuoteL2 Bullet groupL3 Numbered group L4 task unchecked L4 task checked L4 task with subtext\nPlain continuation line.",
         "start_line": 57,
         "end_line": 64,
         "section_id": "section_brutal-markdown-parser-torture-test",
@@ -2206,7 +2115,7 @@
         ]
       },
       {
-        "content": "L1L2 bullet with link and codeL3L4 ordered item with a tiny table:kva1and a fenced block:plus a checklist:[x] done[ ] todo",
+        "content": "L1L2 bullet with link and codeL3L4 ordered item with a tiny table:kva1and a fenced block:plus a checklist: done todo",
         "start_line": 277,
         "end_line": 297,
         "section_id": "section_brutal-markdown-parser-torture-test",
@@ -2244,8 +2153,406 @@
         ]
       }
     ],
-    "html_blocks": [],
-    "html_inline": []
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 60,
+        "end_line": 64,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "items": [
+          {
+            "text": "L4 task unchecked",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "L4 task checked",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "L4 task with subtext\nPlain continuation line.",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 3,
+        "checked_count": 1,
+        "unchecked_count": 2,
+        "has_mixed_task_items": false
+      },
+      {
+        "id": "tasklist_1",
+        "type": "bullet",
+        "start_line": 118,
+        "end_line": 126,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "items": [
+          {
+            "text": "L2 Task",
+            "checked": false,
+            "children": [],
+            "blocks": [
+              {
+                "type": "blockquote",
+                "start_line": 119,
+                "end_line": 121
+              },
+              {
+                "type": "code_block",
+                "start_line": 121,
+                "end_line": 124
+              }
+            ]
+          }
+        ],
+        "items_count": 1,
+        "checked_count": 0,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      },
+      {
+        "id": "tasklist_2",
+        "type": "bullet",
+        "start_line": 295,
+        "end_line": 297,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "items": [
+          {
+            "text": "done",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "todo",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 2,
+        "checked_count": 1,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [
+        {
+          "label": "deep1",
+          "id": "deep1",
+          "start_line": null,
+          "end_line": null,
+          "content": "Footnote attached to a depth\u20114 paragraph.",
+          "byte_length": 43,
+          "nested_structures": [],
+          "section_id": null
+        },
+        {
+          "label": "a",
+          "id": 1,
+          "start_line": null,
+          "end_line": null,
+          "content": "A single footnote referenced twice.",
+          "byte_length": 35,
+          "nested_structures": [],
+          "section_id": null
+        }
+      ],
+      "references": [
+        {
+          "label": "deep1",
+          "id": "deep1",
+          "line": null,
+          "section_id": null
+        },
+        {
+          "label": "a",
+          "id": 1,
+          "line": null,
+          "section_id": null
+        },
+        {
+          "label": "a",
+          "id": 1,
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
+    "html_blocks": [
+      {
+        "content": "<div>\n  <p><strong>L1 DIV\u2192P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL\u2192LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE\u2192P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV\u2192P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>\n",
+        "raw_content": "<div>\n  <p><strong>L1 DIV\u2192P.</strong> Contains a list nesting next.</p>\n  <ul>\n    <li><em>L2 UL\u2192LI.</em>\n      <blockquote>\n        <p><code>L3 QUOTE\u2192P</code> wrapping an inner container.</p>\n        <div>\n          <p><u>L4 DIV\u2192P.</u> Final inline <a href=\"https://example.com\">link</a> and <img src=\"https://via.placeholder.com/24\" alt=\"img\" />.</p>\n        </div>\n      </blockquote>\n    </li>\n  </ul>\n</div>",
+        "start_line": 98,
+        "end_line": 111,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "a",
+          "li",
+          "code",
+          "u",
+          "img",
+          "p",
+          "em",
+          "strong",
+          "ul",
+          "div",
+          "blockquote"
+        ]
+      },
+      {
+        "content": "<details>\n  <summary><strong>L1</strong> details summary</summary>\n",
+        "raw_content": "<details>\n  <summary><strong>L1</strong> details summary</summary>",
+        "start_line": 153,
+        "end_line": 155,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "details",
+          "strong",
+          "summary"
+        ]
+      },
+      {
+        "content": "</details>\n",
+        "raw_content": "</details>",
+        "start_line": 165,
+        "end_line": 166,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<dl>\n  <dt>Term</dt>\n  <dd>Definition line 1<br/>Definition line 2</dd>\n</dl>\n",
+        "raw_content": "  <dl>\n    <dt>Term</dt>\n    <dd>Definition line 1<br/>Definition line 2</dd>\n  </dl>",
+        "start_line": 177,
+        "end_line": 181,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "dl",
+          "dd",
+          "dt",
+          "br"
+        ]
+      },
+      {
+        "content": "<!-- HTML comment between items -->\n",
+        "raw_content": "  <!-- HTML comment between items -->",
+        "start_line": 191,
+        "end_line": 192,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code \u2014 raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>\n",
+        "raw_content": "<section>\n  <h4>L1 HTML section</h4>\n  <ul>\n    <li>L2 item with <em>inline</em> markdown</li>\n    <li>\n      <blockquote>\n        <p>L3 quoted HTML paragraph with <code>code</code>.</p>\n        <pre><code>L4 pre/code \u2014 raw, not parsed as MD</code></pre>\n      </blockquote>\n    </li>\n  </ul>\n</section>",
+        "start_line": 230,
+        "end_line": 242,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "li",
+          "section",
+          "h4",
+          "code",
+          "p",
+          "em",
+          "pre",
+          "ul",
+          "blockquote"
+        ]
+      }
+    ],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 60,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 61,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 62,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 118,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<sub>",
+        "line": 145,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "sub"
+        ]
+      },
+      {
+        "content": "</sub>",
+        "line": 145,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<sup>",
+        "line": 145,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "sup"
+        ]
+      },
+      {
+        "content": "</sup>",
+        "line": 145,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<kbd>",
+        "line": 146,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "kbd"
+        ]
+      },
+      {
+        "content": "</kbd>",
+        "line": 146,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<mark>",
+        "line": 146,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "mark"
+        ]
+      },
+      {
+        "content": "</mark>",
+        "line": 146,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<em>",
+        "line": 156,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "em"
+        ]
+      },
+      {
+        "content": "</em>",
+        "line": 156,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<strong>",
+        "line": 157,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "strong"
+        ]
+      },
+      {
+        "content": "</strong>",
+        "line": 157,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": []
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 295,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 296,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_brutal-markdown-parser-torture-test",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
   },
   "mappings": {
     "line_to_type": {
@@ -2299,7 +2606,7 @@
       "47": "code",
       "48": "code",
       "49": "code",
-      "50": "code",
+      "50": "prose",
       "51": "prose",
       "52": "prose",
       "53": "prose",
@@ -2341,7 +2648,7 @@
       "89": "code",
       "90": "code",
       "91": "code",
-      "92": "code",
+      "92": "prose",
       "93": "prose",
       "94": "prose",
       "95": "prose",
@@ -2357,7 +2664,7 @@
       "105": "code",
       "106": "code",
       "107": "code",
-      "108": "code",
+      "108": "prose",
       "109": "prose",
       "110": "prose",
       "111": "prose",
@@ -2374,7 +2681,7 @@
       "122": "code",
       "123": "code",
       "124": "code",
-      "125": "code",
+      "125": "prose",
       "126": "prose",
       "127": "prose",
       "128": "prose",
@@ -2414,7 +2721,7 @@
       "162": "code",
       "163": "code",
       "164": "code",
-      "165": "code",
+      "165": "prose",
       "166": "prose",
       "167": "prose",
       "168": "prose",
@@ -2428,7 +2735,7 @@
       "176": "prose",
       "177": "prose",
       "178": "code",
-      "179": "code",
+      "179": "prose",
       "180": "prose",
       "181": "prose",
       "182": "prose",
@@ -2463,7 +2770,7 @@
       "211": "code",
       "212": "code",
       "213": "code",
-      "214": "code",
+      "214": "prose",
       "215": "prose",
       "216": "prose",
       "217": "prose",
@@ -2488,7 +2795,7 @@
       "236": "code",
       "237": "code",
       "238": "code",
-      "239": "code",
+      "239": "prose",
       "240": "prose",
       "241": "prose",
       "242": "prose",
@@ -2520,7 +2827,7 @@
       "268": "code",
       "269": "code",
       "270": "code",
-      "271": "code",
+      "271": "prose",
       "272": "prose",
       "273": "prose",
       "274": "prose",
@@ -2541,7 +2848,7 @@
       "289": "code",
       "290": "code",
       "291": "code",
-      "292": "code",
+      "292": "prose",
       "293": "prose",
       "294": "prose",
       "295": "prose",
@@ -2914,6 +3221,7 @@
       40,
       41,
       42,
+      50,
       51,
       52,
       53,
@@ -2950,6 +3258,7 @@
       84,
       85,
       86,
+      92,
       93,
       94,
       95,
@@ -2958,6 +3267,7 @@
       98,
       99,
       100,
+      108,
       109,
       110,
       111,
@@ -2968,6 +3278,7 @@
       116,
       117,
       118,
+      125,
       126,
       127,
       128,
@@ -2999,6 +3310,7 @@
       154,
       155,
       156,
+      165,
       166,
       167,
       168,
@@ -3011,6 +3323,7 @@
       175,
       176,
       177,
+      179,
       180,
       181,
       182,
@@ -3040,6 +3353,7 @@
       206,
       207,
       208,
+      214,
       215,
       216,
       217,
@@ -3058,6 +3372,7 @@
       230,
       231,
       232,
+      239,
       240,
       241,
       242,
@@ -3082,6 +3397,7 @@
       261,
       262,
       263,
+      271,
       272,
       273,
       274,
@@ -3098,6 +3414,7 @@
       285,
       286,
       287,
+      292,
       293,
       294,
       295,
@@ -3121,30 +3438,25 @@
       47,
       48,
       49,
-      50,
       87,
       88,
       89,
       90,
       91,
-      92,
       121,
       122,
       123,
-      124,
       159,
       160,
       161,
       162,
       163,
       164,
-      165,
       209,
       210,
       211,
       212,
       213,
-      214,
       264,
       265,
       266,
@@ -3152,12 +3464,10 @@
       268,
       269,
       270,
-      271,
       288,
       289,
       290,
       291,
-      292,
       43,
       44,
       101,
@@ -3167,22 +3477,85 @@
       105,
       106,
       107,
-      108,
       119,
       120,
-      125,
+      124,
       157,
       158,
       178,
-      179,
       233,
       234,
       235,
       236,
       237,
-      238,
-      239
+      238
     ],
-    "code_blocks": []
+    "code_blocks": [
+      {
+        "start_line": 45,
+        "end_line": 49,
+        "language": "python"
+      },
+      {
+        "start_line": 87,
+        "end_line": 91,
+        "language": ""
+      },
+      {
+        "start_line": 121,
+        "end_line": 123,
+        "language": ""
+      },
+      {
+        "start_line": 159,
+        "end_line": 164,
+        "language": "json"
+      },
+      {
+        "start_line": 209,
+        "end_line": 213,
+        "language": "bash"
+      },
+      {
+        "start_line": 264,
+        "end_line": 270,
+        "language": "tex"
+      },
+      {
+        "start_line": 288,
+        "end_line": 291,
+        "language": "yaml"
+      },
+      {
+        "start_line": 43,
+        "end_line": 48,
+        "language": ""
+      },
+      {
+        "start_line": 101,
+        "end_line": 107,
+        "language": ""
+      },
+      {
+        "start_line": 119,
+        "end_line": 124,
+        "language": ""
+      },
+      {
+        "start_line": 157,
+        "end_line": 163,
+        "language": ""
+      },
+      {
+        "start_line": 178,
+        "end_line": 178,
+        "language": ""
+      },
+      {
+        "start_line": 233,
+        "end_line": 238,
+        "language": ""
+      }
+    ]
   }
 }

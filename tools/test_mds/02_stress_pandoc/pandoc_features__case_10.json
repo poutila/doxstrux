@@ -1,29 +1,378 @@
 {
-  "id": "pandoc_features_10",
-  "title": "Pandoc Features 10",
-  "md_file": "case_10.md",
-  "md_flavor": "pandoc",
-  "allows_html": true,
-  "scenario_note": "def-lists-fenced-divs",
-  "feature_counts": {
-    "headings": 3,
-    "blockquotes": 0,
-    "unordered_list_items": 0,
-    "ordered_list_items": 0,
-    "task_items": 0,
-    "tables": 3,
-    "code_fences": 0,
-    "indented_code": 0,
-    "inline_code": 0,
-    "links": 0,
-    "ref_links": 0,
-    "images": 0,
-    "html_blocks": 0,
-    "footnotes": 0,
-    "autolinks": 0,
-    "hrules": 2
+  "metadata": {
+    "total_lines": 29,
+    "total_chars": 350,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "front_matter": 1,
+      "heading": 3,
+      "inline": 11,
+      "text": 15,
+      "paragraph": 4,
+      "softbreak": 4,
+      "table": 1,
+      "thead": 1,
+      "tr": 2,
+      "th": 2,
+      "tbody": 1,
+      "td": 2
+    },
+    "frontmatter": {
+      "title": "Pandoc Features 10",
+      "id": "pandoc_features_10",
+      "md_flavor": "pandoc",
+      "allows_html": true,
+      "note": "def-lists-fenced-divs"
+    },
+    "has_frontmatter": true,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": true,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/02_stress_pandoc/pandoc_features__case_10.md"
   },
-  "intended_errors": [
-    "duplicate-ids"
-  ]
+  "content": {
+    "raw": "---\ntitle: \"Pandoc Features 10\"\nid: pandoc_features_10\nmd_flavor: pandoc\nallows_html: true\nnote: def-lists-fenced-divs\n---\n\n# Pandoc Goodies\n\nTerm 1\n: Definition 1\n: Definition 2\n\n::: note\nBlock with attributes {.class #id}\n:::\n\nParagraph with attributes {.lead}\n\n### Heading {#dup-id}\n#### Another {#dup-id}\n\nA table:\n\n| k | v |\n|:-:|:-:|\n| a | b |\n",
+    "lines": [
+      "---",
+      "title: \"Pandoc Features 10\"",
+      "id: pandoc_features_10",
+      "md_flavor: pandoc",
+      "allows_html: true",
+      "note: def-lists-fenced-divs",
+      "---",
+      "",
+      "# Pandoc Goodies",
+      "",
+      "Term 1",
+      ": Definition 1",
+      ": Definition 2",
+      "",
+      "::: note",
+      "Block with attributes {.class #id}",
+      ":::",
+      "",
+      "Paragraph with attributes {.lead}",
+      "",
+      "### Heading {#dup-id}",
+      "#### Another {#dup-id}",
+      "",
+      "A table:",
+      "",
+      "| k | v |",
+      "|:-:|:-:|",
+      "| a | b |",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_pandoc-goodies",
+        "level": 1,
+        "title": "Pandoc Goodies",
+        "slug": "pandoc-goodies",
+        "start_line": 8,
+        "end_line": 28,
+        "start_char": 124,
+        "end_char": 350,
+        "parent_id": null,
+        "child_ids": [
+          "section_heading-dup-id"
+        ],
+        "raw_content": "# Pandoc Goodies\n\nTerm 1\n: Definition 1\n: Definition 2\n\n::: note\nBlock with attributes {.class #id}\n:::\n\nParagraph with attributes {.lead}\n\n### Heading {#dup-id}\n#### Another {#dup-id}\n\nA table:\n\n| k | v |\n|:-:|:-:|\n| a | b |\n",
+        "text_content": "Pandoc Goodies\n\nTerm 1\n: Definition 1\n: Definition 2\n\n::: note\nBlock with attributes {.class #id}\n:::\n\nParagraph with attributes {.lead}\n\nHeading {#dup-id} Another {#dup-id}\n\nA table:\n\nkv\n\nab"
+      },
+      {
+        "id": "section_heading-dup-id",
+        "level": 3,
+        "title": "Heading {#dup-id}",
+        "slug": "heading-dup-id",
+        "start_line": 20,
+        "end_line": 28,
+        "start_char": 264,
+        "end_char": 350,
+        "parent_id": "section_pandoc-goodies",
+        "child_ids": [
+          "section_another-dup-id"
+        ],
+        "raw_content": "### Heading {#dup-id}\n#### Another {#dup-id}\n\nA table:\n\n| k | v |\n|:-:|:-:|\n| a | b |\n",
+        "text_content": "Heading {#dup-id} Another {#dup-id}\n\nA table:\n\nkv\n\nab"
+      },
+      {
+        "id": "section_another-dup-id",
+        "level": 4,
+        "title": "Another {#dup-id}",
+        "slug": "another-dup-id",
+        "start_line": 21,
+        "end_line": 28,
+        "start_char": 286,
+        "end_char": 350,
+        "parent_id": "section_heading-dup-id",
+        "child_ids": [],
+        "raw_content": "#### Another {#dup-id}\n\nA table:\n\n| k | v |\n|:-:|:-:|\n| a | b |\n",
+        "text_content": "Another {#dup-id}\n\nA table:\n\nkv\n\nab"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Term 1\n: Definition 1\n: Definition 2",
+        "start_line": 10,
+        "end_line": 13,
+        "section_id": "section_pandoc-goodies",
+        "word_count": 8,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "::: note\nBlock with attributes {.class #id}\n:::",
+        "start_line": 14,
+        "end_line": 17,
+        "section_id": "section_pandoc-goodies",
+        "word_count": 8,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "Paragraph with attributes {.lead}",
+        "start_line": 18,
+        "end_line": 19,
+        "section_id": "section_pandoc-goodies",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "A table:",
+        "start_line": 23,
+        "end_line": 24,
+        "section_id": "section_pandoc-goodies",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| k | v |\n|:-:|:-:|\n| a | b |",
+        "headers": [
+          "k",
+          "v"
+        ],
+        "rows": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "align": [
+          "center",
+          "center"
+        ],
+        "start_line": 25,
+        "end_line": 28,
+        "section_id": "section_pandoc-goodies",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 2,
+        "row_count": 1,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_pandoc-goodies",
+        "level": 1,
+        "text": "Pandoc Goodies",
+        "line": 8,
+        "slug": "pandoc-goodies",
+        "parent_heading_id": null,
+        "start_char": 124,
+        "end_char": 141
+      },
+      {
+        "id": "heading_heading-dup-id",
+        "level": 3,
+        "text": "Heading {#dup-id}",
+        "line": 20,
+        "slug": "heading-dup-id",
+        "parent_heading_id": "heading_pandoc-goodies",
+        "start_char": 264,
+        "end_char": 286
+      },
+      {
+        "id": "heading_another-dup-id",
+        "level": 4,
+        "text": "Another {#dup-id}",
+        "line": 21,
+        "slug": "another-dup-id",
+        "parent_heading_id": "heading_heading-dup-id",
+        "start_char": 286,
+        "end_char": 309
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": {
+      "title": "Pandoc Features 10",
+      "id": "pandoc_features_10",
+      "md_flavor": "pandoc",
+      "allows_html": true,
+      "note": "def-lists-fenced-divs"
+    },
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "prose"
+    },
+    "line_to_section": {
+      "8": "section_pandoc-goodies",
+      "9": "section_pandoc-goodies",
+      "10": "section_pandoc-goodies",
+      "11": "section_pandoc-goodies",
+      "12": "section_pandoc-goodies",
+      "13": "section_pandoc-goodies",
+      "14": "section_pandoc-goodies",
+      "15": "section_pandoc-goodies",
+      "16": "section_pandoc-goodies",
+      "17": "section_pandoc-goodies",
+      "18": "section_pandoc-goodies",
+      "19": "section_pandoc-goodies",
+      "20": "section_heading-dup-id",
+      "21": "section_another-dup-id",
+      "22": "section_another-dup-id",
+      "23": "section_another-dup-id",
+      "24": "section_another-dup-id",
+      "25": "section_another-dup-id",
+      "26": "section_another-dup-id",
+      "27": "section_another-dup-id",
+      "28": "section_another-dup-id"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

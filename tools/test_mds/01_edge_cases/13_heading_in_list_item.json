@@ -1,12 +1,228 @@
 {
-  "id": "13_heading_in_list_item",
-  "note": "Heading inside list item is legit.",
-  "expected_has_headings": true,
-  "expected_heading_count": 2,
-  "expected_heading_lines_0based": [
-    2,
-    5
-  ],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 8,
+    "total_chars": 90,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 3,
+      "inline": 6,
+      "text": 6,
+      "bullet_list": 2,
+      "list_item": 3,
+      "paragraph": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/13_heading_in_list_item.md"
+  },
+  "content": {
+    "raw": "# Test: 13_heading_in_list_item\n\n- # H1 in item\n  text\n- item 2\n  - ## H2 nested\n    body\n",
+    "lines": [
+      "# Test: 13_heading_in_list_item",
+      "",
+      "- # H1 in item",
+      "  text",
+      "- item 2",
+      "  - ## H2 nested",
+      "    body",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-13_heading_in_list_item",
+        "level": 1,
+        "title": "Test: 13_heading_in_list_item",
+        "slug": "test-13_heading_in_list_item",
+        "start_line": 0,
+        "end_line": 1,
+        "start_char": 0,
+        "end_char": 33,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 13_heading_in_list_item\n",
+        "text_content": "Test: 13_heading_in_list_item"
+      },
+      {
+        "id": "section_h1-in-item",
+        "level": 1,
+        "title": "H1 in item",
+        "slug": "h1-in-item",
+        "start_line": 2,
+        "end_line": 7,
+        "start_char": 33,
+        "end_char": 90,
+        "parent_id": null,
+        "child_ids": [
+          "section_h2-nested"
+        ],
+        "raw_content": "- # H1 in item\n  text\n- item 2\n  - ## H2 nested\n    body\n",
+        "text_content": "H1 in item text item 2 H2 nested body"
+      },
+      {
+        "id": "section_h2-nested",
+        "level": 2,
+        "title": "H2 nested",
+        "slug": "h2-nested",
+        "start_line": 5,
+        "end_line": 7,
+        "start_char": 64,
+        "end_char": 90,
+        "parent_id": "section_h1-in-item",
+        "child_ids": [],
+        "raw_content": "  - ## H2 nested\n    body\n",
+        "text_content": "H2 nested body"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 7,
+        "section_id": "section_h1-in-item",
+        "items": [
+          {
+            "text": "text",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "item 2",
+            "children": [
+              {
+                "text": "body",
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 2
+      }
+    ],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "indented",
+        "language": "",
+        "content": "body\n",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_h1-in-item"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_test-13_heading_in_list_item",
+        "level": 1,
+        "text": "Test: 13_heading_in_list_item",
+        "line": 0,
+        "slug": "test-13_heading_in_list_item",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 32
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "code",
+      "7": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-13_heading_in_list_item",
+      "1": "section_test-13_heading_in_list_item",
+      "2": "section_h1-in-item",
+      "3": "section_h1-in-item",
+      "4": "section_h1-in-item",
+      "5": "section_h2-nested",
+      "6": "section_h2-nested",
+      "7": "section_h2-nested"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "code_lines": [
+      6
+    ],
+    "code_blocks": [
+      {
+        "start_line": 6,
+        "end_line": 6,
+        "language": ""
+      }
+    ]
+  }
 }

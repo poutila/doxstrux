@@ -1,24 +1,517 @@
 {
-  "id": "clean_04",
-  "kind": "clean",
-  "features": {
-    "headings": 4,
-    "lists": 5,
-    "tables": 6,
-    "fences": 0,
-    "indented_code_lines": 1,
-    "images": 0,
-    "links": 8,
-    "math_blocks": 0,
-    "html_blocks": 0,
-    "footnote_refs": 0,
-    "footnote_defs": 0,
-    "admonitions": 0,
-    "definition_list": 0
+  "metadata": {
+    "total_lines": 32,
+    "total_chars": 953,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "front_matter": 1,
+      "heading": 3,
+      "inline": 30,
+      "text": 43,
+      "paragraph": 7,
+      "bullet_list": 5,
+      "list_item": 5,
+      "softbreak": 2,
+      "table": 1,
+      "thead": 1,
+      "tr": 5,
+      "th": 4,
+      "tbody": 1,
+      "td": 16,
+      "link": 6
+    },
+    "frontmatter": {
+      "title": "Refactored clean 04",
+      "id": "ref_clean_04",
+      "note": "clean-case"
+    },
+    "has_frontmatter": true,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": true,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 4,
+          "https": 1,
+          "mailto": 1
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/clean_04.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links",
-    "ragged-table"
-  ]
+  "content": {
+    "raw": "---\ntitle: \"Refactored clean 04\"\nid: ref_clean_04\nnote: clean-case\n---\n# Refactored clean 04\nTitle\n=====\n\nSub\n----\n\n\nA simple paragraph with india papa quebec tango mike echo bravo quebec sierra mike golf uniform.\n\n- list level 1\n  * list level 2\n    - list level 3\n      * list level 4\n        - list level 5\n              code in list\n          \tindented with tab\n\n| H1 | H2 | H3 | H4 |\n|:---|----|:--:|---:|\n| 1:1 kilo india sierra | 1:2 victor | 1:3 echo quebec yankee | 1:4 victor uniform bravo |\n| 2:1 romeo papa juliet | 2:2 echo | 2:3 oscar | 2:4 uniform |\n| 3:1 tango papa oscar | 3:2 xray alpha foxtrot | 3:3 foxtrot | 3:4 yankee |\n| 4:1 uniform | 4:2 whiskey | 4:3 zulu oscar oscar | 4:4 zulu mike victor |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_05.md#sec2)\n",
+    "lines": [
+      "---",
+      "title: \"Refactored clean 04\"",
+      "id: ref_clean_04",
+      "note: clean-case",
+      "---",
+      "# Refactored clean 04",
+      "Title",
+      "=====",
+      "",
+      "Sub",
+      "----",
+      "",
+      "",
+      "A simple paragraph with india papa quebec tango mike echo bravo quebec sierra mike golf uniform.",
+      "",
+      "- list level 1",
+      "  * list level 2",
+      "    - list level 3",
+      "      * list level 4",
+      "        - list level 5",
+      "              code in list",
+      "          \tindented with tab",
+      "",
+      "| H1 | H2 | H3 | H4 |",
+      "|:---|----|:--:|---:|",
+      "| 1:1 kilo india sierra | 1:2 victor | 1:3 echo quebec yankee | 1:4 victor uniform bravo |",
+      "| 2:1 romeo papa juliet | 2:2 echo | 2:3 oscar | 2:4 uniform |",
+      "| 3:1 tango papa oscar | 3:2 xray alpha foxtrot | 3:3 foxtrot | 3:4 yankee |",
+      "| 4:1 uniform | 4:2 whiskey | 4:3 zulu oscar oscar | 4:4 zulu mike victor |",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_05.md#sec2)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-clean-04",
+        "level": 1,
+        "title": "Refactored clean 04",
+        "slug": "refactored-clean-04",
+        "start_line": 5,
+        "end_line": 5,
+        "start_char": 71,
+        "end_char": 93,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored clean 04",
+        "text_content": "Refactored clean 04"
+      },
+      {
+        "id": "section_title",
+        "level": 1,
+        "title": "Title",
+        "slug": "title",
+        "start_line": 6,
+        "end_line": 8,
+        "start_char": 93,
+        "end_char": 106,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "Title\n=====\n",
+        "text_content": "Title"
+      },
+      {
+        "id": "section_sub",
+        "level": 1,
+        "title": "Sub",
+        "slug": "sub",
+        "start_line": 9,
+        "end_line": 31,
+        "start_char": 106,
+        "end_char": 953,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "Sub\n----\n\n\nA simple paragraph with india papa quebec tango mike echo bravo quebec sierra mike golf uniform.\n\n- list level 1\n  * list level 2\n    - list level 3\n      * list level 4\n        - list level 5\n              code in list\n          \tindented with tab\n\n| H1 | H2 | H3 | H4 |\n|:---|----|:--:|---:|\n| 1:1 kilo india sierra | 1:2 victor | 1:3 echo quebec yankee | 1:4 victor uniform bravo |\n| 2:1 romeo papa juliet | 2:2 echo | 2:3 oscar | 2:4 uniform |\n| 3:1 tango papa oscar | 3:2 xray alpha foxtrot | 3:3 foxtrot | 3:4 yankee |\n| 4:1 uniform | 4:2 whiskey | 4:3 zulu oscar oscar | 4:4 zulu mike victor |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./clean_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./clean_05.md#sec2)\n",
+        "text_content": "Sub\n\nA simple paragraph with india papa quebec tango mike echo bravo quebec sierra mike golf uniform.\n\nlist level 1 list level 2 list level 3 list level 4 list level 5\ncode in list\nindented with tab\n\nH1H2H3H4\n\n1:1 kilo india sierra1:2 victor1:3 echo quebec yankee1:4 victor uniform bravo 2:1 romeo papa juliet2:2 echo2:3 oscar2:4 uniform 3:1 tango papa oscar3:2 xray alpha foxtrot3:3 foxtrot3:4 yankee 4:1 uniform4:2 whiskey4:3 zulu oscar oscar4:4 zulu mike victor\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt) bad7 cross8"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "A simple paragraph with india papa quebec tango mike echo bravo quebec sierra mike golf uniform.",
+        "start_line": 13,
+        "end_line": 14,
+        "section_id": "section_sub",
+        "word_count": 16,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt) bad7 cross8",
+        "start_line": 30,
+        "end_line": 31,
+        "section_id": "section_sub",
+        "word_count": 8,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 15,
+        "end_line": 23,
+        "section_id": "section_sub",
+        "items": [
+          {
+            "text": "list level 1",
+            "children": [
+              {
+                "text": "list level 2",
+                "children": [
+                  {
+                    "text": "list level 3",
+                    "children": [
+                      {
+                        "text": "list level 4",
+                        "children": [
+                          {
+                            "text": "list level 5\ncode in list\nindented with tab",
+                            "children": [],
+                            "blocks": []
+                          }
+                        ],
+                        "blocks": []
+                      }
+                    ],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 1
+      }
+    ],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| H1 | H2 | H3 | H4 |\n|:---|----|:--:|---:|\n| 1:1 kilo india sierra | 1:2 victor | 1:3 echo quebec yankee | 1:4 victor uniform bravo |\n| 2:1 romeo papa juliet | 2:2 echo | 2:3 oscar | 2:4 uniform |\n| 3:1 tango papa oscar | 3:2 xray alpha foxtrot | 3:3 foxtrot | 3:4 yankee |\n| 4:1 uniform | 4:2 whiskey | 4:3 zulu oscar oscar | 4:4 zulu mike victor |",
+        "headers": [
+          "H1",
+          "H2",
+          "H3",
+          "H4"
+        ],
+        "rows": [
+          [
+            "1:1 kilo india sierra",
+            "1:2 victor",
+            "1:3 echo quebec yankee",
+            "1:4 victor uniform bravo"
+          ],
+          [
+            "2:1 romeo papa juliet",
+            "2:2 echo",
+            "2:3 oscar",
+            "2:4 uniform"
+          ],
+          [
+            "3:1 tango papa oscar",
+            "3:2 xray alpha foxtrot",
+            "3:3 foxtrot",
+            "3:4 yankee"
+          ],
+          [
+            "4:1 uniform",
+            "4:2 whiskey",
+            "4:3 zulu oscar oscar",
+            "4:4 zulu mike victor"
+          ]
+        ],
+        "align": [
+          "left",
+          "left",
+          "center",
+          "right"
+        ],
+        "start_line": 23,
+        "end_line": 29,
+        "section_id": "section_sub",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 4,
+        "row_count": 4,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "indented",
+        "language": "",
+        "content": "- list level 3\n  * list level 4\n    - list level 5\n          code in list\n      \tindented with tab\n",
+        "start_line": 17,
+        "end_line": 22,
+        "section_id": "section_sub"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_refactored-clean-04",
+        "level": 1,
+        "text": "Refactored clean 04",
+        "line": 5,
+        "slug": "refactored-clean-04",
+        "parent_heading_id": null,
+        "start_char": 71,
+        "end_char": 93
+      },
+      {
+        "id": "heading_title",
+        "level": 1,
+        "text": "Title",
+        "line": 6,
+        "slug": "title",
+        "parent_heading_id": null,
+        "start_char": 93,
+        "end_char": 99
+      },
+      {
+        "id": "heading_sub",
+        "level": 1,
+        "text": "Sub",
+        "line": 9,
+        "slug": "sub",
+        "parent_heading_id": null,
+        "start_char": 106,
+        "end_char": 110
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 30,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./clean_05.md#sec0",
+        "line": 30,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 30,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail5",
+        "url": "mailto:user5@example.com",
+        "line": 30,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      },
+      {
+        "text": "bad7",
+        "url": "ht!tp://broken%5E7",
+        "line": 30,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross8",
+        "url": "./clean_05.md#sec2",
+        "line": 30,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": {
+      "title": "Refactored clean 04",
+      "id": "ref_clean_04",
+      "note": "clean-case"
+    },
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "code",
+      "18": "code",
+      "19": "code",
+      "20": "code",
+      "21": "code",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "prose",
+      "29": "prose",
+      "30": "prose",
+      "31": "prose"
+    },
+    "line_to_section": {
+      "5": "section_refactored-clean-04",
+      "6": "section_title",
+      "7": "section_title",
+      "8": "section_title",
+      "9": "section_sub",
+      "10": "section_sub",
+      "11": "section_sub",
+      "12": "section_sub",
+      "13": "section_sub",
+      "14": "section_sub",
+      "15": "section_sub",
+      "16": "section_sub",
+      "17": "section_sub",
+      "18": "section_sub",
+      "19": "section_sub",
+      "20": "section_sub",
+      "21": "section_sub",
+      "22": "section_sub",
+      "23": "section_sub",
+      "24": "section_sub",
+      "25": "section_sub",
+      "26": "section_sub",
+      "27": "section_sub",
+      "28": "section_sub",
+      "29": "section_sub",
+      "30": "section_sub",
+      "31": "section_sub"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "code_lines": [
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "code_blocks": [
+      {
+        "start_line": 17,
+        "end_line": 21,
+        "language": ""
+      }
+    ]
+  }
 }

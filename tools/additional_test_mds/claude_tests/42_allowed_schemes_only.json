@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "total_lines": 7,
+    "total_chars": 144,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 5,
+      "paragraph": 1,
+      "link": 4,
+      "softbreak": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_link_schemes",
+          "schemes": [
+            "http",
+            "mailto",
+            "tel"
+          ],
+          "message": "Links with disallowed schemes detected: http, mailto, tel"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "https"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "https": 1,
+          "http": 1,
+          "mailto": 1,
+          "tel": 1
+        },
+        "disallowed_link_schemes": {
+          "http": 1,
+          "mailto": 1,
+          "tel": 1
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "strict"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Document contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes",
+      "dropped_3_unsafe_links"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/additional_test_mds/claude_tests/42_allowed_schemes_only.md"
+  },
+  "content": {
+    "raw": "# Test: 42_allowed_schemes_only\n\n[HTTPS](https://example.com)\n[HTTP](http://test.com)\n[Email](mailto:test@example.com)\n[Phone](tel:+1234567890)\n",
+    "lines": [
+      "# Test: 42_allowed_schemes_only",
+      "",
+      "[HTTPS](https://example.com)",
+      "[HTTP](http://test.com)",
+      "[Email](mailto:test@example.com)",
+      "[Phone](tel:+1234567890)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-42_allowed_schemes_only",
+        "level": 1,
+        "title": "Test: 42_allowed_schemes_only",
+        "slug": "test-42_allowed_schemes_only",
+        "start_line": 0,
+        "end_line": 6,
+        "start_char": 0,
+        "end_char": 144,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 42_allowed_schemes_only\n\n[HTTPS](https://example.com)\n[HTTP](http://test.com)\n[Email](mailto:test@example.com)\n[Phone](tel:+1234567890)\n",
+        "text_content": "Test: 42_allowed_schemes_only\n\nHTTPS\nHTTP\nEmail\nPhone"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "HTTPS\nHTTP\nEmail\nPhone",
+        "start_line": 2,
+        "end_line": 6,
+        "section_id": "section_test-42_allowed_schemes_only",
+        "word_count": 4,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-42_allowed_schemes_only",
+        "level": 1,
+        "text": "Test: 42_allowed_schemes_only",
+        "line": 0,
+        "slug": "test-42_allowed_schemes_only",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 32
+      }
+    ],
+    "links": [
+      {
+        "text": "HTTPS",
+        "url": "https://example.com",
+        "line": 2,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-42_allowed_schemes_only",
+      "1": "section_test-42_allowed_schemes_only",
+      "2": "section_test-42_allowed_schemes_only",
+      "3": "section_test-42_allowed_schemes_only",
+      "4": "section_test-42_allowed_schemes_only",
+      "5": "section_test-42_allowed_schemes_only",
+      "6": "section_test-42_allowed_schemes_only"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
+}

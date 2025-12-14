@@ -1,13 +1,56 @@
-# DOXSTRUX_NEXT_STEPS.md - Parser/Warehouse/Collector/Registry Refactor Execution
+# DOXSTRUX_NEXT_STEPS_1
 
-**Status**: Phase 0.0 - 📋 PLANNED  
-**Version**: 0.1  
-**Last Updated**: 2025-12-12 04:00 UTC  
-**Last Verified**: -  
+Parser/Warehouse/Collector/Registry Refactor Execution
 
-**Related Documents**:
-- DOXSTRUX_SPEC.md — Single source of truth for parser/warehouse/collector/registry wiring and contracts
-- DOXSTRUX_SOLID_ANALYSIS.md — Pre-refactor diagnosis (archived, context only)
+**Status:** Phase -1.0 – 📋 PLANNED  
+**Version:** 0.3 (grounded to current repo layout, extractor-count neutral)  
+**Last Updated:** 2025-12-13 04:30 UTC  
+
+**Related Documents:**
+- `DOXSTRUX_SPEC.md` – Target architecture (scaffolding)
+- `DOXSTRUX_SOLID_ANALYSIS.md` – Pre-refactor diagnosis (archived)
+
+---
+
+## 0. Reality vs Spec – Alignment
+
+### Current Codebase Layout (authoritative)
+
+```
+doxstrux/
+├── markdown_parser_core.py        # ~2000 lines, monolithic parser
+└── markdown/
+    ├── extractors/                # N modules (currently 11)
+    │   ├── sections.py
+    │   ├── tables.py
+    │   └── ...
+    ├── security/
+    ├── utils/
+    ├── budgets.py
+    ├── config.py
+    └── ir.py
+```
+
+### Target Architecture (from DOXSTRUX_SPEC)
+
+```
+Parser:       doxstrux/markdown_parser_core.py::MarkdownParserCore
+Registry:     doxstrux/markdown/collector_registry.py      (NEW)
+Warehouse:    doxstrux/markdown/utils/token_warehouse.py   (NEW)
+Collectors:   doxstrux/markdown/collectors_phase8/*.py     (NEW)
+Interfaces:   doxstrux/markdown/interfaces.py              (NEW)
+```
+
+### Terminology Mapping
+
+| Spec Term | Current Code | This Plan Introduces |
+|-----------|--------------|----------------------|
+| Parser | `markdown_parser_core.MarkdownParserCore` | Same class, refactored wiring |
+| Warehouse | (none) | NEW `markdown/utils/token_warehouse.py` |
+| Collector | `markdown/extractors/*.py` (N modules) | NEW `collectors_phase8/*.py` wrapping extractors |
+| Registry | (none) | NEW `markdown/collector_registry.py` |
+
+**This document is an execution checklist.** All normative behavior comes from `DOXSTRUX_SPEC.md`.
 
 ---
 
@@ -17,433 +60,487 @@
 
 | Phase | Status | Tests | Files Changed | Clean Table |
 |-------|--------|-------|---------------|-------------|
-| 0.0 - Baseline Golden Tests (SPEC §8 Step 0) | 📋 PLANNED | 0/N | 0 | - |
-| 1.0 - Infrastructure (interfaces, registry, warehouse) | 📋 PLANNED | 0/N | 0 | - |
-| 2.0 - Parser Wiring (SPEC §8 Step 2) | 📋 PLANNED | 0/N | 0 | - |
-| 3.0 - Collector Conformance (SPEC §8 Step 3) | 📋 PLANNED | 0/N | 0 | - |
-
-> This document is an execution checklist. All normative behaviour and contracts come from **DOXSTRUX_SPEC.md** (especially §§2–6, 8).  
+| -1.0 – Align Spec & Layout | 📋 PLANNED | 0/N | 0 | - |
+| 0.0 – Baseline Golden Tests (SPEC §8 Step 0) | 📋 PLANNED | 0/N | 0 | - |
+| 1.0 – Infrastructure (interfaces, registry, warehouse) | 📋 PLANNED | 0/N | 0 | - |
+| 2.0 – Parser Wiring (MarkdownParserCore) | 📋 PLANNED | 0/N | 0 | - |
+| 3.0 – Collector Conformance (wrappers) | 📋 PLANNED | 0/N | 0 | - |
 
 ---
 
 ## Prerequisites
 
-**ALL must be verified before starting Phase 0.0**:
+**ALL must be verified before starting Phase -1.0:**
 
-- [ ] **Working virtual environment + uv**: You can run tests via `uv`.
+- [ ] Working virtual environment + uv:
   ```bash
   uv run python -c "import sys; print(sys.version)"
- doxstrux importable: Current package is installable and importable.
+  ```
 
-bash
-Kopioi koodi
-uv run python -c "import doxstrux; print(getattr(doxstrux, '__version__', 'no-version'))"
- Existing test suite green: Before refactor, all tests must pass.
+- [ ] Package importable:
+  ```bash
+  uv run python -c "import doxstrux; print(getattr(doxstrux, '__version__', 'no-version'))"
+  ```
 
-bash
-Kopioi koodi
+- [ ] Existing tests pass:
+  ```bash
+  uv run pytest
+  ```
+
+**Quick Verification:**
+```bash
 uv run pytest
-# Expected: all existing tests pass
-Quick Verification:
+# Expected: all existing tests pass with zero failures/errors
+```
 
-bash
-Kopioi koodi
+---
+
+## Phase -1.0 – Align Spec & Layout
+
+**Goal:** Remove fantasy paths and names. Make DOXSTRUX_SPEC + this plan match actual `src/doxstrux` layout.  
+**Estimated Time:** 0.5–1.0 hours  
+**Clean Table Required:** Yes
+
+### Task -1.0.1 – Add explicit mapping to DOXSTRUX_SPEC
+
+- [ ] Add a "Terminology & Paths" subsection to DOXSTRUX_SPEC §2:
+  - State explicitly:
+    - Parser = `doxstrux/markdown_parser_core.py::MarkdownParserCore`
+    - Warehouse = `doxstrux/markdown/utils/token_warehouse.py::TokenWarehouse`
+    - Extractors (current) = `doxstrux/markdown/extractors/*.py`
+    - Collectors (target) = `doxstrux/markdown/collectors_phase8/*.py` (wrappers around extractors)
+  - Clarify that `collectors_phase8` is NEW and wraps existing extractors
+
+- [ ] Remove/adjust any claim that TokenWarehouse "already exists":
+  - Mark it as "to be created in `markdown/utils/token_warehouse.py`"
+
+**Clean Table Check:**
+- [ ] DOXSTRUX_SPEC has no misleading path assumptions about existing files
+- [ ] Collector ↔ Extractor mapping documented once (and only once)
+- [ ] No references to `doxstrux/markdown/parser.py` remain; all say `markdown_parser_core.py`
+
+### Task -1.0.2 – Update this document to match final mapping
+
+- [ ] Verify all paths match:
+  - `doxstrux/markdown_parser_core.py`
+  - `doxstrux/markdown/interfaces.py`
+  - `doxstrux/markdown/collector_registry.py`
+  - `doxstrux/markdown/collectors_phase8/*.py`
+  - `doxstrux/markdown/utils/token_warehouse.py`
+
+- [ ] Commit updated DOXSTRUX_NEXT_STEPS_1.md together with spec edits so docs are in sync
+
+**Clean Table Check:**
+- [ ] No reference in this file to non-existent legacy paths
+- [ ] This document and DOXSTRUX_SPEC use the same names and paths
+
+### Phase -1.0 Final Validation
+
+**Success Criteria:**
+- [ ] DOXSTRUX_SPEC explicitly documents Parser/Warehouse/Extractors/Collectors/Registry paths
+- [ ] This plan references only those documented paths
+- [ ] No contradictions between DOXSTRUX_SPEC and DOXSTRUX_NEXT_STEPS_1
+
+**Test:**
+```bash
+# No code changes yet; just re-run tests to ensure no accidental breakage
 uv run pytest
-# Expected: test run completes successfully with no failures before refactor work starts
-Phase 0.0 - Baseline Golden Tests (SPEC §8 Step 0)
-Goal: Lock in current observable behaviour so regressions are caught.
-Estimated Time: 2–4 hours
-Clean Table Required: Yes
-Spec Reference: DOXSTRUX_SPEC §8 “Execution Steps — Step 0”
+```
 
-Task 0.0.1: Per-Collector Golden Tests
- Design per-collector fixtures:
+**Clean Table Check for Phase -1.0:**
+- [ ] All success criteria met
+- [ ] No TODO markers left in spec or this plan regarding path/term mapping
 
-For each collector in collectors_phase8.* that will be returned by default_collectors() (per DOXSTRUX_SPEC §4), design at least one small markdown input that meaningfully exercises that collector’s behaviour (not just “non-empty” output).
+---
 
-Align with the examples / expectations described for collectors in DOXSTRUX_SPEC (e.g. headings include level, text, line).
+## Phase 0.0 – Baseline Golden Tests (SPEC §8 Step 0)
 
- Implement per-collector tests:
+**Goal:** Freeze current observable behavior of parser + extractors so regressions are caught.  
+**Estimated Time:** 2–4 hours  
+**Clean Table Required:** Yes  
+**Spec Reference:** DOXSTRUX_SPEC.md §8 "Execution Steps — Step 0"
 
-Create or extend tests that:
+### Task 0.0.1 – Per-extractor golden tests (future collectors)
 
-Parse the markdown fixture through the current MarkdownParserCore (pre-refactor wiring).
+- [ ] Enumerate current extractors:
+  - List all modules in `doxstrux/markdown/extractors/` that the parser uses (N modules, currently 11)
 
-Assert on structural properties of each collector’s output (e.g. for headings: exact levels/text/line triples for the sample input), in line with DOXSTRUX_SPEC §5–§7.
+- [ ] Design per-extractor fixtures:
+  - For each extractor module, create at least one small markdown document
+  - Must meaningfully exercise that extractor's behavior (structure, not just "non-empty")
 
-Keep these tests focused and deterministic.
+- [ ] Add tests (e.g. `tests/test_extractors_baseline.py` or per-extractor files):
+  - Use `MarkdownParserCore.parse()` from `markdown_parser_core.py` as it exists today
+  - Assert specific structure:
+    - Headings → exact (level, text, line) tuples
+    - Tables → row/column counts, header structure
+    - Lists → nesting structure
+    - etc.
 
-Test Immediately:
-
-bash
-Kopioi koodi
+**Test:**
+```bash
 uv run pytest -q
 # Expected:
-# - New golden tests run and pass against CURRENT implementation
+# - New tests pass under CURRENT implementation
 # - No existing tests regress
-Clean Table Check:
+```
 
- Every collector that will be registered via default_collectors() has at least one golden test with structural assertions (per DOXSTRUX_SPEC §8 Step 0 “Per-collector”).
+**Clean Table Check:**
+- [ ] Each extractor module has at least one anchored golden test with structural assertions
+- [ ] Tests are clearly labelled as "pre-refactor baseline"
+- [ ] No "TODO" or "fill later" assertions
+- [ ] Full suite green (`uv run pytest`)
 
- Tests clearly document which collector(s) they are anchoring.
+### Task 0.0.2 – Security golden test
 
- No TODOs or “placeholder assertion” comments remain in these golden tests.
+- [ ] Choose a security-sensitive markdown fixture:
+  - One input that triggers whatever security flags/metadata are currently produced
 
- Full test suite green (uv run pytest).
+- [ ] Add dedicated test (`tests/test_security_baseline.py`):
+  - Call `MarkdownParserCore.parse(content)` as implemented today
+  - Assert both:
+    - Keys present in security metadata
+    - Critical values (e.g. `blocked == True`, at least one issue code)
 
-Task 0.0.2: Security Golden Test
- Select a security-sensitive document:
+**Test:**
+```bash
+uv run pytest -q -k "security_baseline"
+# Expected: new security test passes with current behaviour
+```
 
-Choose a markdown input that triggers existing security flags in the current implementation (whatever the current security layer is doing today).
+**Clean Table Check:**
+- [ ] Security metadata keys and critical values pinned for at least one adversarial document
+- [ ] Test clearly documents it is a "baseline" against current implementation
+- [ ] Full test suite still green (`uv run pytest`)
 
- Add a dedicated security baseline test:
+### Phase 0.0 Final Validation
 
-Parse the document via MarkdownParserCore.parse() and capture the current security-related metadata output (keys and critical values).
+**Success Criteria:**
+- [ ] All extractor modules used by the parser have at least one golden test with structural assertions
+- [ ] One dedicated security baseline test exists and passes
+- [ ] Entire test suite passes in pre-refactor state
 
-Assert that, for this document, both keys and critical values (e.g. blocked=True, at least one issue code) match the current behaviour, as required by DOXSTRUX_SPEC §8 “Security” row.
-
-Test Immediately:
-
-bash
-Kopioi koodi
-uv run pytest -q -k "security"
-# Expected: the new security baseline test passes and uses CURRENT behaviour as ground truth
-Clean Table Check:
-
- At least one test exists that pins security metadata keys and critical values (as in DOXSTRUX_SPEC §8).
-
- The test name / comment clearly identifies it as a “pre-refactor baseline”.
-
- No test relies on internal details beyond what DOXSTRUX_SPEC considers observable metadata.
-
- uv run pytest still fully green.
-
-Phase 0.0 Final Validation
-0.0 Success Criteria:
-
- All collectors covered by at least one golden test with structural assertions (per DOXSTRUX_SPEC §8 Step 0).
-
- Security baseline test exists and passes.
-
- Entire test suite passes in the pre-refactor state.
-
-Test Commands:
-
-bash
-Kopioi koodi
+**Test:**
+```bash
 uv run pytest
-Clean Table Check for Phase 0.0:
+```
 
- No failing tests.
+**Clean Table Check for Phase 0.0:**
+- [ ] All success criteria met
+- [ ] No failing or flaky tests
+- [ ] No placeholder assertions
 
- No “TODO” / “fix later” markers left in new golden tests.
+---
 
- DOXSTRUX_SPEC §8 Step 0 requirements demonstrably satisfied.
+## Phase 1.0 – Infrastructure (interfaces, registry, warehouse)
 
- Code and tests are in a coherent, production-ready state before structural changes start.
+**Goal:** Introduce the new abstraction layer next to existing code, with zero behavior change.  
+**Estimated Time:** 3–6 hours  
+**Clean Table Required:** Yes  
+**Spec Reference:** DOXSTRUX_SPEC.md §§3–5, §8 Step 1
 
-Phase 1.0 - Infrastructure (interfaces, registry, warehouse)
-Goal: Add the new abstraction layer (interfaces, registry, warehouse wiring) with no behaviour change.
-Estimated Time: 3–6 hours
-Clean Table Required: Yes
-Spec References: DOXSTRUX_SPEC §§3–5, §8 Step 1
+### Task 1.0.1 – Create interfaces.py
 
-Task 1.0.1: Implement interfaces.py (DOXSTRUX_SPEC §3)
- Create doxstrux/markdown/interfaces.py:
+- [ ] Create `doxstrux/markdown/interfaces.py`:
+  - Implement `DispatchContext`, `CollectorInterest`, `Collector` as described in DOXSTRUX_SPEC
+  - No extra types or behavior
 
-Implement DispatchContext, CollectorInterest, and Collector protocol exactly as described in DOXSTRUX_SPEC §3 (fields, semantics, and intentional weakness of the protocol).
-
- Update imports where needed:
-
-Do not change behaviour; only introduce the new types and verify they import cleanly.
-
-Test Immediately:
-
-bash
-Kopioi koodi
+**Test:**
+```bash
 uv run python -c "from doxstrux.markdown.interfaces import DispatchContext, CollectorInterest, Collector; print('OK')"
-# Expected: prints 'OK' with no ImportError
-Clean Table Check:
+```
 
- interfaces.py contents match DOXSTRUX_SPEC §3.
+**Clean Table Check:**
+- [ ] File exists and matches type/field/method signatures from DOXSTRUX_SPEC
+- [ ] No additional responsibilities or ad hoc helpers
+- [ ] `uv run pytest` still fully green
 
- No additional responsibilities or types added beyond those described in DOXSTRUX_SPEC.
+### Task 1.0.2 – Create collector_registry.py
 
- Existing tests still pass (uv run pytest).
+- [ ] Create `doxstrux/markdown/collector_registry.py`:
+  - Import `Collector` protocol from `interfaces.py`
+  - Declare:
+    ```python
+    def default_collectors() -> tuple[Collector, ...]: ...
+    def register_default_collectors(warehouse) -> None: ...
+    ```
+  - May return empty tuple for now (real wiring in Phase 3.0)
 
- No TODOs or placeholders in interfaces.py.
+**Test:**
+```bash
+uv run python -c "from doxstrux.markdown.collector_registry import default_collectors, register_default_collectors; print('OK:', default_collectors())"
+# Expected: "OK: ()" or similar placeholder
+```
 
-Task 1.0.2: Implement collector_registry.py (DOXSTRUX_SPEC §4)
- Create doxstrux/markdown/collector_registry.py:
+**Clean Table Check:**
+- [ ] Functions exist with correct signatures
+- [ ] No parser or other code calls `register_default_collectors` yet
+- [ ] All tests still pass
 
-Implement default_collectors() and register_default_collectors(warehouse) as described in DOXSTRUX_SPEC §4.
+### Task 1.0.3 – Create token_warehouse.py
 
-Ensure imports of collector classes match the intended layout (per the spec) and only this module is tightly coupled to concrete collectors.
+- [ ] Create `doxstrux/markdown/utils/token_warehouse.py`:
+  - `TokenWarehouse` class per DOXSTRUX_SPEC
+  - Constructor accepting minimal data MarkdownParserCore will provide (tokens, content, etc.)
+  - Read-only methods (`tokens`, `get_token_text`, `text_between`, `section_of`, etc.) — adapt logic from `markdown_parser_core.py`
+  - Collector-related attributes and methods:
+    ```python
+    self._collectors: list[Collector] = []
+    self._routing: dict[str, list[Collector]] = defaultdict(list)
+    
+    def register_collector(self, collector: Collector) -> None: ...
+    def _get_collectors_for(self, token) -> list[Collector]: ...
+    def dispatch_all(self) -> None: ...
+    def finalize_all(self) -> dict[str, Any]: ...
+    ```
+  - This class is new; nothing in existing parser calls it yet
 
- Ensure no change in runtime behaviour yet:
+**Test:**
+```bash
+uv run python -c "from doxstrux.markdown.utils.token_warehouse import TokenWarehouse; print('OK')"
+```
 
-Do not yet call these functions from the parser — that is Phase 2.0.
+**Clean Table Check:**
+- [ ] TokenWarehouse is defined and imports cleanly
+- [ ] Signatures and attributes match DOXSTRUX_SPEC
+- [ ] No changes yet to `markdown_parser_core.py`
+- [ ] All tests still pass
 
-Test Immediately:
+### Phase 1.0 Final Validation
 
-bash
-Kopioi koodi
-uv run python - << 'PY'
-from doxstrux.markdown.collector_registry import default_collectors, register_default_collectors
-class DummyWarehouse:
-    def __init__(self):
-        self.calls = []
-    def register_collector(self, collector):
-        self.calls.append(collector.name)
+**Success Criteria:**
+- [ ] `interfaces.py`, `collector_registry.py`, and `utils/token_warehouse.py` exist and match DOXSTRUX_SPEC APIs
+- [ ] No existing code depends on these modules yet (pure addition)
+- [ ] Entire test suite passes
 
-# This will fail until TokenWarehouse additions exist; for now just ensure default_collectors() instantiates collectors.
-collectors = default_collectors()
-print([c.name for c in collectors])
-PY
-# Expected: script runs and prints a list of collector names without ImportError
-Clean Table Check:
-
- collector_registry.py matches DOXSTRUX_SPEC §4 (no extra responsibilities).
-
- No implicit behaviour changes: registry module exists but is not yet used by the parser.
-
- All tests still pass (uv run pytest).
-
-Task 1.0.3: Add TokenWarehouse additions (DOXSTRUX_SPEC §5)
- Extend existing TokenWarehouse (location per current repo; follow DOXSTRUX_SPEC §5.2–§5.3):
-
-Add _collectors and _routing attributes to __init__, as described in the spec (append-only additions; do not change constructor signature or existing fields).
-
-Implement register_collector, _get_collectors_for, dispatch_all, and finalize_all exactly as described in DOXSTRUX_SPEC §5.3, including duplicate-key behaviour.
-
- Keep existing methods and semantics untouched:
-
-Do not alter existing indexing/text/section helpers beyond what DOXSTRUX_SPEC explicitly allows.
-
-Test Immediately:
-
-bash
-Kopioi koodi
-uv run python - << 'PY'
-from doxstrux.markdown.token_warehouse import TokenWarehouse
-
-# Instantiate using existing constructor to ensure signature unchanged
-try:
-    tw = TokenWarehouse(...)  # replace with the current required args from existing code
-except TypeError as e:
-    raise SystemExit(f"Constructor signature changed unexpectedly: {e}")
-print("TokenWarehouse instantiation OK (args unchanged)")
-PY
-# Expected: Constructor still accepts the existing argument pattern.
-# (You may need to update the "..." to match the real signature in your codebase.)
-Adjust the instantiation call to match your actual current constructor; the important part is: no signature change.
-
-Clean Table Check:
-
- _collectors and _routing added exactly as an extension, not a rewrite, of __init__.
-
- New methods (register_collector, _get_collectors_for, dispatch_all, finalize_all) match DOXSTRUX_SPEC §5 in behaviour and signatures.
-
- All existing tests pass (no observable behaviour change yet).
-
- No new TODOs introduced in token_warehouse.py.
-
-Phase 1.0 Final Validation
-1.0 Success Criteria:
-
- interfaces.py and collector_registry.py exist and match DOXSTRUX_SPEC §§3–4.
-
- TokenWarehouse has new attributes and methods per DOXSTRUX_SPEC §5, with constructor signature unchanged.
-
- No code outside of TokenWarehouse/registry/interfaces yet depends on the new registry wiring (parser still uses old wiring).
-
- Full test suite passes.
-
-Test Commands:
-
-bash
-Kopioi koodi
+**Test:**
+```bash
 uv run pytest
-Clean Table Check for Phase 1.0:
+```
 
- All success criteria met.
+**Clean Table Check for Phase 1.0:**
+- [ ] All success criteria met
+- [ ] No TODOs in new modules
+- [ ] No partial wiring in `markdown_parser_core.py`
 
- No failing tests or new warnings.
+---
 
- No half-migrated wiring in the parser (either old wiring or the new registry-based wiring, not a mix).
+## Phase 2.0 – Parser Wiring (markdown_parser_core.py)
 
- DOXSTRUX_SPEC §§3–5 are faithfully implemented without extra scope.
+**Goal:** Make MarkdownParserCore orchestrate via TokenWarehouse + collector_registry, leaving security/caching/metadata logic intact.  
+**Estimated Time:** 2–4 hours  
+**Clean Table Required:** Yes  
+**Spec Reference:** DOXSTRUX_SPEC.md §2, §5–§6, §8 Step 2
 
-Phase 2.0 - Parser Wiring (SPEC §6, §8 Step 2)
-Goal: Switch MarkdownParserCore to use collector_registry + TokenWarehouse.dispatch_all() without touching security/caching/metadata logic.
-Estimated Time: 2–4 hours
-Clean Table Required: Yes
-Spec References: DOXSTRUX_SPEC §6, §8 Step 2
+### Task 2.0.1 – Integrate TokenWarehouse into MarkdownParserCore
 
-Task 2.0.1: Replace manual wiring with registry calls
- Update parser imports:
+- [ ] Locate in `doxstrux/markdown_parser_core.py`:
+  - Where markdown-it is invoked
+  - Where extractors are called directly
+  - Where metadata is assembled and returned
 
-Import register_default_collectors from doxstrux.markdown.collector_registry as per DOXSTRUX_SPEC §6.
+- [ ] Introduce TokenWarehouse:
+  - Instantiate with same tokens/content used today
+  - Keep old extractor calls in place temporarily
 
- Replace manual collector construction with:
+**Clean Table Check:**
+- [ ] New TokenWarehouse instantiation exists, but old behavior still active
+- [ ] Tests still pass
 
-python
-Kopioi koodi
-register_default_collectors(self.warehouse)
-self.warehouse.dispatch_all()
-metadata = self.warehouse.finalize_all()
-exactly where DOXSTRUX_SPEC §6 indicates, preserving all surrounding logic.
+### Task 2.0.2 – Switch from direct extractor calls to registry + warehouse
 
- Do not touch:
+- [ ] Replace the block that imports/calls extractors directly with:
+  ```python
+  from doxstrux.markdown.collector_registry import register_default_collectors
+  
+  register_default_collectors(self._warehouse)  # or local var
+  self._warehouse.dispatch_all()
+  metadata_from_collectors = self._warehouse.finalize_all()
+  ```
 
-Security prechecks,
+- [ ] Integrate `metadata_from_collectors` into existing metadata structure without changing:
+  - Security checks
+  - Config handling
+  - Top-level return schema
 
-Tokenization,
+- [ ] Remove direct extractor imports from `markdown_parser_core.py` (they move behind registry)
 
-Security policy application,
-
-Metadata assembly beyond swapping in metadata from finalize_all().
-
-Test Immediately:
-
-bash
-Kopioi koodi
+**Test:**
+```bash
 uv run pytest
 # Expected:
-# - All tests, including the golden tests from Phase 0.0, still pass.
-Clean Table Check:
+# - All tests pass
+# - Golden tests from Phase 0.0 show consistent structures
+# - Security baseline still matches
+```
 
- Parser no longer imports concrete collectors directly (only collector_registry per DOXSTRUX_SPEC §6).
+**Clean Table Check:**
+- [ ] No direct imports of extractor modules remain in `markdown_parser_core.py`
+- [ ] All collector outputs flow via TokenWarehouse and collector_registry
+- [ ] Golden tests and security baseline tests from Phase 0.0 still pass unmodified
 
- Only the wiring lines are changed; security, caching, and metadata logic untouched.
+### Phase 2.0 Final Validation
 
- Golden collector tests from Phase 0.0 still pass, confirming collector outputs remain structurally identical.
+**Success Criteria:**
+- [ ] MarkdownParserCore uses TokenWarehouse + `register_default_collectors` as orchestration path
+- [ ] Direct extractor wiring fully removed from `markdown_parser_core.py`
+- [ ] All tests (including golden and security) pass
 
- Security baseline test from Phase 0.0 still passes.
-
-Phase 2.0 Final Validation
-2.0 Success Criteria:
-
- Parser wiring matches DOXSTRUX_SPEC §6 (registry-based).
-
- All tests (including golden and security baselines) pass.
-
- No new imports of concrete collectors exist outside collector_registry.py.
-
-Test Commands:
-
-bash
-Kopioi koodi
+**Test:**
+```bash
 uv run pytest
-Clean Table Check for Phase 2.0:
+```
 
- All success criteria met.
+**Clean Table Check for Phase 2.0:**
+- [ ] All success criteria met
+- [ ] No TODOs in `markdown_parser_core.py` related to wiring
 
- Code is stable and production-ready with new wiring.
+---
 
- No TODO comments left in parser around collector wiring.
+## Phase 3.0 – Collector Conformance (collectors_phase8 wrappers)
 
-Phase 3.0 - Collector Conformance (SPEC §7, §8 Step 3)
-Goal: Update each collector to implement Collector protocol (surface) without changing algorithms.
-Estimated Time: 4–8 hours (depending on number/complexity of collectors)
-Clean Table Required: Yes
-Spec References: DOXSTRUX_SPEC collector expectations (e.g. §§5–7), §8 Step 3
+**Goal:** Implement Collector protocol for all feature areas by adding wrapper classes in `collectors_phase8/` that delegate to existing `extractors/`.  
+**Estimated Time:** 4–8 hours  
+**Clean Table Required:** Yes  
+**Spec Reference:** DOXSTRUX_SPEC.md §§3–5, §8 Step 3
 
-Task 3.0.1: Update collectors to implement Collector protocol
- For each collector in collectors_phase8.* that will participate in default_collectors():
+### Task 3.0.1 – Define Collector ↔ Extractor mapping
 
-Add or confirm .name and .interest attributes per DOXSTRUX_SPEC (types/tags as appropriate).
+Before writing any wrappers, explicitly document the mapping between intended Collector classes and current extractor modules/entry points.
 
-Implement should_process, on_token, and finalize signatures matching Collector in interfaces.py.
+**This mapping MUST be completed and agreed before coding Phase 3.0.**  
+Once filled, it becomes the ground truth for registry wiring and golden test coverage.
 
-Ensure that finalize() returns a dict whose keys do not collide with other collectors (as enforced by finalize_all() in DOXSTRUX_SPEC §5).
+#### Collector–Extractor Mapping Table (to be filled based on actual code)
 
- No algorithmic changes:
+| Collector Class | Extractor Module | Entry Point / Notes |
+|-----------------|------------------|---------------------|
+| SectionsCollector | `markdown/extractors/sections.py` | e.g. `extract_sections(...)` |
+| HeadingsCollector | `markdown/extractors/sections.py` | e.g. headings part of sections; confirm actual func |
+| ParagraphsCollector | `markdown/extractors/sections.py` or other | Confirm module + function |
+| ListsCollector | `markdown/extractors/lists.py` (if exists) | e.g. `extract_lists(...)` |
+| TasklistsCollector | `markdown/extractors/lists.py` (if exists) | e.g. task-list subset; confirm |
+| CodeblocksCollector | `markdown/extractors/codeblocks.py` (?) | Confirm module + function |
+| TablesCollector | `markdown/extractors/tables.py` | e.g. `extract_tables(...)` |
+| LinksCollector | `markdown/extractors/links.py` (?) | Confirm module + function |
+| ImagesCollector | `markdown/extractors/media.py` (?) | Confirm module + function |
+| FootnotesCollector | `markdown/extractors/footnotes.py` (?) | Confirm module + function |
+| HtmlCollector | `markdown/extractors/html.py` (?) | Confirm module + function |
+| MathCollector | `markdown/extractors/math.py` (?) | Confirm module + function |
 
-Logic for what is collected and how is preserved; only the wiring and protocol surface are updated.
+**Notes:**
+- Replace `?` and "Confirm..." with real module paths and function names from actual codebase
+- Multiple Collectors may delegate to same module (e.g., sections/headings share `sections.py`)
+- If a Collector in the spec has no corresponding extractor, document explicitly
 
-Test Immediately:
+**Clean Table Check (for mapping table):**
+- [ ] Every Collector listed in DOXSTRUX_SPEC has a corresponding row
+- [ ] Each row has concrete module path and entry point (no `?`, no "confirm")
+- [ ] Number of Collectors matches what `default_collectors()` will return
 
-bash
-Kopioi koodi
+### Task 3.0.2 – Create collectors_phase8 package
+
+- [ ] Create directory `doxstrux/markdown/collectors_phase8/` with `__init__.py`
+
+- [ ] For each mapping row, create a Collector class that:
+  - Implements `Collector` interface from `interfaces.py`
+  - Delegates to existing extractor logic from mapping table
+
+- [ ] Export Collector classes at package level from `collectors_phase8/__init__.py`
+
+**Test:**
+```bash
+uv run python -c "from doxstrux.markdown.collector_registry import default_collectors; print([c.name for c in default_collectors()])"
+# Expected: prints names of all Collector instances defined for current feature set
+```
+
+**Clean Table Check:**
+- [ ] `collectors_phase8` package exists and is importable
+- [ ] For each row in mapping table, a corresponding Collector class exists and is exported
+- [ ] `default_collectors()` returns the Collector instances documented in mapping table
+
+### Task 3.0.3 – Verify per-collector behavior against golden tests
+
+- [ ] Run all golden tests from Phase 0.0:
+  - They should pass with new Collector-based wiring
+
+- [ ] If any golden test breaks:
+  - Fix ONLY the adapter/wiring, not core extractor algorithms
+
+**Test:**
+```bash
 uv run pytest -q
-# Expected:
-# - All tests pass, including per-collector golden tests.
-Clean Table Check:
+# Expected: all golden tests pass unchanged
+```
 
- Each collector used by the registry conforms to the Collector protocol surface (name, interest, should_process, on_token, finalize).
+**Clean Table Check:**
+- [ ] Each feature's golden test passes with new Collector wrappers
+- [ ] No algorithmic changes in extractors themselves (only adapters/wiring changed)
 
- Phase 0.0 golden tests for each collector still pass without modification (or with purely mechanical updates to adapt to new interfaces).
+### Phase 3.0 Final Validation
 
- No collector introduces duplicate keys in finalize() that would break finalize_all().
+**Success Criteria:**
+- [ ] `collectors_phase8` package contains Collector implementations for all mapped features
+- [ ] `collector_registry` imports from `collectors_phase8` only
+- [ ] Collector–Extractor mapping table fully resolved (no placeholders) and matches actual code
+- [ ] All tests (golden, security, existing) pass
 
-Phase 3.0 Final Validation
-3.0 Success Criteria:
-
- All registry-registered collectors conform to Collector as defined in DOXSTRUX_SPEC §3.
-
- All tests (including golden and security) green.
-
- No direct parser–collector coupling remains; all wiring flows through collector_registry and TokenWarehouse.
-
-Test Commands:
-
-bash
-Kopioi koodi
+**Test:**
+```bash
 uv run pytest
-Clean Table Check for Phase 3.0:
+```
 
- Success criteria met.
+**Clean Table Check for Phase 3.0:**
+- [ ] All success criteria met
+- [ ] No TODOs or "temporary" notes left in wrappers, registry, or mapping table
 
- No TODOs or placeholder comments in collectors.
+---
 
- Code is production-ready with the new architecture.
+## File Changes Summary
 
-File Changes Summary
-File	Action	Phase
-doxstrux/markdown/interfaces.py	CREATE	1.0
-doxstrux/markdown/collector_registry.py	CREATE	1.0
-doxstrux/markdown/token_warehouse.py	UPDATE (add attributes + methods per SPEC §5)	1.0
-doxstrux/markdown/parser.py	UPDATE (wiring only, per SPEC §6)	2.0
-doxstrux/markdown/collectors_phase8/*.py	UPDATE (protocol conformance only)	3.0
-tests/...	UPDATE/CREATE (golden tests + security baseline per SPEC §8)	0.0–3.0
+| File / Directory | Action | Phase |
+|------------------|--------|-------|
+| `doxstrux/markdown/interfaces.py` | CREATE | 1.0 |
+| `doxstrux/markdown/collector_registry.py` | CREATE | 1.0 |
+| `doxstrux/markdown/utils/token_warehouse.py` | CREATE | 1.0 |
+| `doxstrux/markdown_parser_core.py` | UPDATE | 2.0 |
+| `doxstrux/markdown/collectors_phase8/` | CREATE | 3.0 |
+| `doxstrux/markdown/collectors_phase8/__init__.py` | CREATE | 3.0 |
+| `doxstrux/markdown/collectors_phase8/*.py` | CREATE | 3.0 |
+| `tests/test_extractors_baseline*.py` | CREATE/UPDATE | 0.0 |
+| `tests/test_security_baseline.py` | CREATE | 0.0 |
 
-Exact test file paths are left to the implementation; this table captures which areas must change, not new specifications.
+---
 
-Success Criteria (Overall)
- DOXSTRUX_SPEC §§3–6 are fully implemented in code (interfaces, registry, warehouse additions, parser wiring).
+## Overall Success Criteria
 
- Execution Steps in DOXSTRUX_SPEC §8 (Steps 0–3) are satisfied: baselines, infrastructure, wiring, collector conformance.
+- [ ] DOXSTRUX_SPEC §§2–6 and §8 implemented in code (interfaces, registry, warehouse, parser wiring, collectors)
+- [ ] All pre-refactor golden tests and security tests still passing
+- [ ] Public API of MarkdownParserCore unchanged:
+  ```python
+  MarkdownParserCore(content: str, *, config: dict | None = None, security_profile: str | None = None)
+  parse(self) -> dict
+  ```
+- [ ] All tests pass:
+  ```bash
+  uv run pytest
+  ```
+- [ ] Clean Table achieved: no TODOs, no speculative half-measures, no failing tests
 
- Public API of MarkdownParserCore remains compatible (DOXSTRUX_SPEC §9).
+---
 
- All tests pass:
+## Clean Table Principle
 
-bash
-Kopioi koodi
-uv run pytest
- Clean Table achieved after Phase 3.0.
+A phase is **CLEAN** only if:
 
-Clean Table Principle
-A final answer is considered CLEAN only if ALL of the following are true:
+- ✅ No unresolved errors, warnings, or TODOs
+- ✅ No unverified assumptions
+- ✅ No duplicated or conflicting logic
+- ✅ Code and tests are production-ready
+- ✅ Documentation and plans match actual code structure
 
-✅ No unresolved errors, warnings, TODOs, placeholders
+**Do not start the next phase until the current phase passes its Clean Table check.**
 
-✅ No unverified assumptions
+---
 
-✅ No duplicated or conflicting logic
-
-✅ Solution is canonical and production-ready
-
-✅ No workarounds masking symptoms
-
-Each checkbox must be fully complete before proceeding to next phase.
-
-What's Next
-After this document is complete (Phases 0.0–3.0 done and Clean Table achieved):
-
-Consider whether any small SPEKSI-style spec is needed for long-term governance of this architecture (separate document, derived from DOXSTRUX_SPEC, not a replacement).
-
-Revisit RAG-focused guards and integration (e.g. doxstrux_rag_guard.py) as a separate, higher-level concern — not part of the parser/warehouse/collector/registry refactor governed here.
-
-End of DOXSTRUX_NEXT_STEPS.md
+*End of DOXSTRUX_NEXT_STEPS_1.md*

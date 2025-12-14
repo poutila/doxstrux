@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "security": {
+      "embedding_blocked": true,
+      "warnings": [
+        {
+          "type": "security_error",
+          "message": "Content size 150034 bytes exceeds limit"
+        }
+      ],
+      "statistics": {}
+    }
+  },
+  "content": {
+    "raw": "",
+    "lines": []
+  },
+  "structure": {},
+  "mappings": {},
+  "exception_was_raised": true,
+  "error_message": "Content size 150034 bytes exceeds limit"
+}

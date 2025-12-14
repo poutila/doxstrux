@@ -1,8 +1,186 @@
 {
-  "id": "duplicate_titles_different_sections",
-  "category": "toc_invariants",
-  "expected": {
-    "duplicate_titles": 3,
-    "dedup_suffixes_applied": true
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 23,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 3,
+      "inline": 3,
+      "text": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/32_toc_invariants/duplicate_titles_different_sections.md"
+  },
+  "content": {
+    "raw": "# Same\n## Same\n## Same\n",
+    "lines": [
+      "# Same",
+      "## Same",
+      "## Same",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_same",
+        "level": 1,
+        "title": "Same",
+        "slug": "same",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 23,
+        "parent_id": null,
+        "child_ids": [
+          "section_same-2",
+          "section_same-3"
+        ],
+        "raw_content": "# Same\n## Same\n## Same\n",
+        "text_content": "Same Same Same"
+      },
+      {
+        "id": "section_same-2",
+        "level": 2,
+        "title": "Same",
+        "slug": "same-2",
+        "start_line": 1,
+        "end_line": 1,
+        "start_char": 7,
+        "end_char": 15,
+        "parent_id": "section_same",
+        "child_ids": [],
+        "raw_content": "## Same",
+        "text_content": "Same"
+      },
+      {
+        "id": "section_same-3",
+        "level": 2,
+        "title": "Same",
+        "slug": "same-3",
+        "start_line": 2,
+        "end_line": 3,
+        "start_char": 15,
+        "end_char": 23,
+        "parent_id": "section_same",
+        "child_ids": [],
+        "raw_content": "## Same\n",
+        "text_content": "Same"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_same",
+        "level": 1,
+        "text": "Same",
+        "line": 0,
+        "slug": "same",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 7
+      },
+      {
+        "id": "heading_same-2",
+        "level": 2,
+        "text": "Same",
+        "line": 1,
+        "slug": "same-2",
+        "parent_heading_id": "heading_same",
+        "start_char": 7,
+        "end_char": 15
+      },
+      {
+        "id": "heading_same-3",
+        "level": 2,
+        "text": "Same",
+        "line": 2,
+        "slug": "same-3",
+        "parent_heading_id": "heading_same",
+        "start_char": 15,
+        "end_char": 23
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_same",
+      "1": "section_same-2",
+      "2": "section_same-3",
+      "3": "section_same-3"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

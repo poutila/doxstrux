@@ -1,10 +1,202 @@
 {
-  "id": "missing_refs_and_alt",
-  "category": "images_references",
-  "expected": {
-    "missing_reference_count": 2,
-    "empty_image_href": 1,
-    "alt_text_required": true,
-    "image_with_title": 1
+  "metadata": {
+    "total_lines": 7,
+    "total_chars": 103,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 3,
+      "inline": 3,
+      "text": 3,
+      "image": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 1
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/24_images_references/missing_refs_and_alt.md"
+  },
+  "content": {
+    "raw": "Broken [ref][missing] and ![][noalt]\n\n![Alt only]()\n\n![Alt with title](https://example.com/a.png \"T\")\n\n",
+    "lines": [
+      "Broken [ref][missing] and ![][noalt]",
+      "",
+      "![Alt only]()",
+      "",
+      "![Alt with title](https://example.com/a.png \"T\")",
+      "",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Broken [ref][missing] and ![][noalt]",
+        "start_line": 0,
+        "end_line": 1,
+        "section_id": null,
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Alt onlyAlt only",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": null,
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "Alt with titleAlt with title",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": null,
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [
+      {
+        "image_id": "7cfc9bcc6bbbe6c6",
+        "text": "Alt only",
+        "url": "",
+        "src": "",
+        "alt": "Alt only",
+        "title": "",
+        "line": 2,
+        "type": "image",
+        "image_kind": "local",
+        "format": "unknown"
+      },
+      {
+        "image_id": "0d171e79f65c9bf7",
+        "text": "Alt with title",
+        "url": "https://example.com/a.png",
+        "src": "https://example.com/a.png",
+        "alt": "Alt with title",
+        "title": "T",
+        "line": 4,
+        "type": "image",
+        "image_kind": "external",
+        "format": "png"
+      }
+    ],
+    "images": [
+      {
+        "image_id": "7cfc9bcc6bbbe6c6",
+        "src": "",
+        "alt": "Alt only",
+        "title": "",
+        "line": 2,
+        "image_kind": "local",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": false,
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "image_id": "0d171e79f65c9bf7",
+        "src": "https://example.com/a.png",
+        "alt": "Alt with title",
+        "title": "T",
+        "line": 4,
+        "image_kind": "external",
+        "format": "png",
+        "has_alt": true,
+        "has_title": true,
+        "scheme": "https",
+        "allowed": true
+      }
+    ],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

@@ -1,11 +1,225 @@
 {
-  "id": "ordered_custom_start",
-  "category": "lists",
-  "expected": {
-    "uses_markers": [],
-    "nested_levels": 1,
-    "explicit_start_num": 5,
-    "has_tight_list": false,
-    "has_loose_list": false
+  "metadata": {
+    "total_lines": 13,
+    "total_chars": 168,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 9,
+      "ordered_list": 1,
+      "list_item": 8,
+      "paragraph": 8
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/18_lists/ordered_custom_start.md"
+  },
+  "content": {
+    "raw": "# Ordered list with custom start\n\n5. First item (starts at 5)\n6. Second item\n7. Third item\n\n1. New list starting at 1\n2. Second\n3. Third\n\n99. Start at 99\n100. Continue\n",
+    "lines": [
+      "# Ordered list with custom start",
+      "",
+      "5. First item (starts at 5)",
+      "6. Second item",
+      "7. Third item",
+      "",
+      "1. New list starting at 1",
+      "2. Second",
+      "3. Third",
+      "",
+      "99. Start at 99",
+      "100. Continue",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_ordered-list-with-custom-start",
+        "level": 1,
+        "title": "Ordered list with custom start",
+        "slug": "ordered-list-with-custom-start",
+        "start_line": 0,
+        "end_line": 12,
+        "start_char": 0,
+        "end_char": 168,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Ordered list with custom start\n\n5. First item (starts at 5)\n6. Second item\n7. Third item\n\n1. New list starting at 1\n2. Second\n3. Third\n\n99. Start at 99\n100. Continue\n",
+        "text_content": "Ordered list with custom start\n\nFirst item (starts at 5) Second item Third item\n\nNew list starting at 1 Second Third\n\nStart at 99 Continue"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "ordered",
+        "start_line": 2,
+        "end_line": 12,
+        "section_id": "section_ordered-list-with-custom-start",
+        "items": [
+          {
+            "text": "First item (starts at 5)",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Second item",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Third item",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "New list starting at 1",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Second",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Third",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Start at 99",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Continue",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 8
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_ordered-list-with-custom-start",
+        "level": 1,
+        "text": "Ordered list with custom start",
+        "line": 0,
+        "slug": "ordered-list-with-custom-start",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 33
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "line_to_section": {
+      "0": "section_ordered-list-with-custom-start",
+      "1": "section_ordered-list-with-custom-start",
+      "2": "section_ordered-list-with-custom-start",
+      "3": "section_ordered-list-with-custom-start",
+      "4": "section_ordered-list-with-custom-start",
+      "5": "section_ordered-list-with-custom-start",
+      "6": "section_ordered-list-with-custom-start",
+      "7": "section_ordered-list-with-custom-start",
+      "8": "section_ordered-list-with-custom-start",
+      "9": "section_ordered-list-with-custom-start",
+      "10": "section_ordered-list-with-custom-start",
+      "11": "section_ordered-list-with-custom-start",
+      "12": "section_ordered-list-with-custom-start"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

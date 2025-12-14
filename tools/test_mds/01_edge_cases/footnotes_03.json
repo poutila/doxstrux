@@ -1,23 +1,361 @@
 {
-  "id": "footnotes_03",
-  "kind": "footnotes",
-  "features": {
-    "headings": 4,
-    "lists": 0,
-    "tables": 0,
-    "fences": 0,
-    "indented_code_lines": 0,
-    "images": 0,
-    "links": 4,
-    "math_blocks": 0,
-    "html_blocks": 0,
-    "footnote_refs": 2,
-    "footnote_defs": 2,
-    "admonitions": 0,
-    "definition_list": 0
+  "metadata": {
+    "total_lines": 20,
+    "total_chars": 315,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "front_matter": 1,
+      "heading": 3,
+      "inline": 6,
+      "text": 13,
+      "paragraph": 3,
+      "footnote_ref": 2,
+      "link": 3,
+      "footnote_block": 1,
+      "footnote": 1,
+      "footnote_anchor": 2
+    },
+    "frontmatter": {
+      "title": "Refactored footnotes 03",
+      "id": "ref_footnotes_03",
+      "note": "footnotes-case"
+    },
+    "has_frontmatter": true,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": true,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 2,
+          "https": 1
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/footnotes_03.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links"
-  ]
+  "content": {
+    "raw": "---\ntitle: \"Refactored footnotes 03\"\nid: ref_footnotes_03\nnote: footnotes-case\n---\n# Refactored footnotes 03\nTitle\n=====\n\nSub\n----\n\n\nRefs[^d] and again[^d].\n\n[^d]: First.\n[^d]: Second duplicate.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_04.md#sec0) [ext4](https://example.com/4)\n",
+    "lines": [
+      "---",
+      "title: \"Refactored footnotes 03\"",
+      "id: ref_footnotes_03",
+      "note: footnotes-case",
+      "---",
+      "# Refactored footnotes 03",
+      "Title",
+      "=====",
+      "",
+      "Sub",
+      "----",
+      "",
+      "",
+      "Refs[^d] and again[^d].",
+      "",
+      "[^d]: First.",
+      "[^d]: Second duplicate.",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_04.md#sec0) [ext4](https://example.com/4)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-footnotes-03",
+        "level": 1,
+        "title": "Refactored footnotes 03",
+        "slug": "refactored-footnotes-03",
+        "start_line": 5,
+        "end_line": 5,
+        "start_char": 83,
+        "end_char": 109,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored footnotes 03",
+        "text_content": "Refactored footnotes 03"
+      },
+      {
+        "id": "section_title",
+        "level": 1,
+        "title": "Title",
+        "slug": "title",
+        "start_line": 6,
+        "end_line": 8,
+        "start_char": 109,
+        "end_char": 122,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "Title\n=====\n",
+        "text_content": "Title"
+      },
+      {
+        "id": "section_sub",
+        "level": 1,
+        "title": "Sub",
+        "slug": "sub",
+        "start_line": 9,
+        "end_line": 19,
+        "start_char": 122,
+        "end_char": 315,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "Sub\n----\n\n\nRefs[^d] and again[^d].\n\n[^d]: First.\n[^d]: Second duplicate.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_04.md#sec0) [ext4](https://example.com/4)\n",
+        "text_content": "Sub\n\nRefs and again.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4Second duplicate."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Refs and again.",
+        "start_line": 13,
+        "end_line": 14,
+        "section_id": "section_sub",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
+        "start_line": 18,
+        "end_line": 19,
+        "section_id": "section_sub",
+        "word_count": 4,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "Second duplicate.",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_sub",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_refactored-footnotes-03",
+        "level": 1,
+        "text": "Refactored footnotes 03",
+        "line": 5,
+        "slug": "refactored-footnotes-03",
+        "parent_heading_id": null,
+        "start_char": 83,
+        "end_char": 109
+      },
+      {
+        "id": "heading_title",
+        "level": 1,
+        "text": "Title",
+        "line": 6,
+        "slug": "title",
+        "parent_heading_id": null,
+        "start_char": 109,
+        "end_char": 115
+      },
+      {
+        "id": "heading_sub",
+        "level": 1,
+        "text": "Sub",
+        "line": 9,
+        "slug": "sub",
+        "parent_heading_id": null,
+        "start_char": 122,
+        "end_char": 126
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 18,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./footnotes_04.md#sec0",
+        "line": 18,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 18,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": {
+      "title": "Refactored footnotes 03",
+      "id": "ref_footnotes_03",
+      "note": "footnotes-case"
+    },
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [
+        {
+          "label": "d",
+          "id": "d",
+          "start_line": null,
+          "end_line": null,
+          "content": "Second duplicate.",
+          "byte_length": 17,
+          "nested_structures": [],
+          "section_id": null
+        }
+      ],
+      "references": [
+        {
+          "label": "d",
+          "id": "d",
+          "line": null,
+          "section_id": null
+        },
+        {
+          "label": "d",
+          "id": "d",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose"
+    },
+    "line_to_section": {
+      "5": "section_refactored-footnotes-03",
+      "6": "section_title",
+      "7": "section_title",
+      "8": "section_title",
+      "9": "section_sub",
+      "10": "section_sub",
+      "11": "section_sub",
+      "12": "section_sub",
+      "13": "section_sub",
+      "14": "section_sub",
+      "15": "section_sub",
+      "16": "section_sub",
+      "17": "section_sub",
+      "18": "section_sub",
+      "19": "section_sub"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

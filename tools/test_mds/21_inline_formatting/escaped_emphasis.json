@@ -1,14 +1,283 @@
 {
-  "id": "escaped_emphasis",
-  "category": "inline_formatting",
-  "expected": {
-    "italic_variants": 12,
-    "bold_variants": 1,
-    "bolditalic_variants": 0,
-    "nested_ok": false,
-    "escapes_ok": true,
-    "code_spans_ok": true,
-    "no_intraword_underscore_emphasis": true,
-    "handles_adjacent_punctuation": false
+  "metadata": {
+    "total_lines": 18,
+    "total_chars": 239,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 11,
+      "paragraph": 8,
+      "strong": 1,
+      "code_inline": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/21_inline_formatting/escaped_emphasis.md"
+  },
+  "content": {
+    "raw": "# Escaped emphasis characters\n\n\\*not italic\\*\n\n\\_not italic\\_\n\n\\*\\*not bold\\*\\*\n\n\\_\\_not bold\\_\\_\n\n\\*\\*\\*not bold italic\\*\\*\\*\n\nPartial escape: *italic\\* but broken\n\nMixed: **bold** and \\*\\*not bold\\*\\*\n\nEscaped in code: `\\*still shows\\*`\n",
+    "lines": [
+      "# Escaped emphasis characters",
+      "",
+      "\\*not italic\\*",
+      "",
+      "\\_not italic\\_",
+      "",
+      "\\*\\*not bold\\*\\*",
+      "",
+      "\\_\\_not bold\\_\\_",
+      "",
+      "\\*\\*\\*not bold italic\\*\\*\\*",
+      "",
+      "Partial escape: *italic\\* but broken",
+      "",
+      "Mixed: **bold** and \\*\\*not bold\\*\\*",
+      "",
+      "Escaped in code: `\\*still shows\\*`",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_escaped-emphasis-characters",
+        "level": 1,
+        "title": "Escaped emphasis characters",
+        "slug": "escaped-emphasis-characters",
+        "start_line": 0,
+        "end_line": 17,
+        "start_char": 0,
+        "end_char": 239,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Escaped emphasis characters\n\n\\*not italic\\*\n\n\\_not italic\\_\n\n\\*\\*not bold\\*\\*\n\n\\_\\_not bold\\_\\_\n\n\\*\\*\\*not bold italic\\*\\*\\*\n\nPartial escape: *italic\\* but broken\n\nMixed: **bold** and \\*\\*not bold\\*\\*\n\nEscaped in code: `\\*still shows\\*`\n",
+        "text_content": "Escaped emphasis characters\n\n*not italic*\n\n_not italic_\n\n**not bold**\n\n__not bold__\n\n***not bold italic***\n\nPartial escape: *italic* but broken\n\nMixed: bold and **not bold**\n\nEscaped in code: \\*still shows\\*"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "*not italic*",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "_not italic_",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "**not bold**",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "__not bold__",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "***not bold italic***",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_5",
+        "text": "Partial escape: *italic* but broken",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_6",
+        "text": "Mixed: bold and **not bold**",
+        "start_line": 14,
+        "end_line": 15,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_7",
+        "text": "Escaped in code: \\*still shows\\*",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_escaped-emphasis-characters",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": true
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_escaped-emphasis-characters",
+        "level": 1,
+        "text": "Escaped emphasis characters",
+        "line": 0,
+        "slug": "escaped-emphasis-characters",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 30
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "line_to_section": {
+      "0": "section_escaped-emphasis-characters",
+      "1": "section_escaped-emphasis-characters",
+      "2": "section_escaped-emphasis-characters",
+      "3": "section_escaped-emphasis-characters",
+      "4": "section_escaped-emphasis-characters",
+      "5": "section_escaped-emphasis-characters",
+      "6": "section_escaped-emphasis-characters",
+      "7": "section_escaped-emphasis-characters",
+      "8": "section_escaped-emphasis-characters",
+      "9": "section_escaped-emphasis-characters",
+      "10": "section_escaped-emphasis-characters",
+      "11": "section_escaped-emphasis-characters",
+      "12": "section_escaped-emphasis-characters",
+      "13": "section_escaped-emphasis-characters",
+      "14": "section_escaped-emphasis-characters",
+      "15": "section_escaped-emphasis-characters",
+      "16": "section_escaped-emphasis-characters",
+      "17": "section_escaped-emphasis-characters"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

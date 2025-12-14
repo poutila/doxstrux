@@ -22,6 +22,7 @@
       "em": 2,
       "code_inline": 2,
       "link": 2,
+      "html_inline": 2,
       "table": 1,
       "thead": 1,
       "tr": 2,
@@ -34,17 +35,6 @@
     "has_frontmatter": false,
     "security": {
       "warnings": [
-        {
-          "type": "script_tag",
-          "line": null,
-          "message": "Document contains <script> tags"
-        },
-        {
-          "type": "path_traversal",
-          "line": 212,
-          "message": "Link contains path traversal pattern",
-          "url": "http://test.com"
-        },
         {
           "type": "confusable_characters",
           "line": null,
@@ -60,22 +50,22 @@
         "frontmatter_at_bof": false,
         "ragged_tables_count": 0,
         "allowed_schemes": [
-          "tel",
-          "mailto",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "table_align_mismatches": 0,
         "nested_headings_blocked": 0,
-        "has_html_block": true,
-        "has_html_inline": false,
-        "has_script": true,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
         "has_event_handlers": false,
         "has_data_uri_images": false,
         "confusables_present": true,
         "nbsp_present": false,
         "zwsp_present": false,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "link_schemes": {
           "http": 1,
           "relative": 1
@@ -86,45 +76,45 @@
       },
       "summary": {
         "ragged_tables_count": 0,
-        "total_warnings": 4,
+        "total_warnings": 2,
         "has_dangerous_content": true,
         "unicode_risk_score": 2
       },
       "profile_used": "moderate"
     },
-    "embedding_blocked": true,
-    "embedding_block_reason": "Document contains script tags",
-    "security_policies_applied": [
-      "embedding_blocked_script"
-    ]
+    "encoding": {
+      "detected": "utf_8",
+      "confidence": 0.7144
+    },
+    "source_path": "tools/test_mds/15_integration/test_edge_cases.md"
   },
   "content": {
-    "raw": "# Edge Cases Test Document\n\n## Unicode and Special Characters\n\n### Emoji in Requirements \nThe system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis.\n\n### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: ∑ ∏ ∫ ∂ ∇\n- Currency: $100, €50, £75, ¥1000\n- Arrows: → ← ↑ ↓ ⇒ ⇐\n  - Nested with more: α β γ δ ε\n  - Chemical: H₂O, CO₂, Ca²⁺\n\n### Code with Unicode\n```python\ndef café():\n    return \"Zürich → München\"\n    \n# Japanese comment: これはテストです\n名前 = \"田中\"\n```\n\n## Malformed Markdown (Parser Resilience)\n\n### Unclosed Code Block\n```python\ndef broken():\n    # This code block is never closed\n    return None\n\n### Mixed List Markers\n- Bullet item\n* Different bullet marker\n+ Yet another marker\n- Back to dash\n  * Nested with star\n  - Nested with dash\n\n### Broken Table\n| Col1 | Col2 | Col3\n|------|------\n| Data | Missing | Separator |\n| Row2 \n| Row3 | Has | Too | Many | Columns |\n\n## Extreme Nesting Test\n\n- Level 1\n  - Level 2\n    - Level 3 (our limit)\n      - Level 4 (should be treated as text)\n        - Level 5 (definitely text)\n          - Level 6 (way too deep)\n            - Level 7 (parser should not crash)\n\n## Empty Elements Test\n\n### Empty List Items\n- \n- Item with content\n- \n  - \n  - Nested with content\n  - \n\n### Empty Code Block\n```\n```\n\n### Empty Table\n| | |\n|-|-|\n| | |\n\n## Inline Code Stress Test\n\nHere's `inline code` followed by more `inline code` and even more `inline code` all in one line with `special <> chars` and `quotes \"inside\"` plus `backslashes \\\\ too`.\n\n### List with Inline Code\n- Item with `code`\n- Another `with` multiple `code` spans\n  - Nested `code` with special chars: `<>&\"`\n  - More `inline` code `everywhere`\n\n## Links and References Test\n\n### Various Link Formats\n- [Basic link](http://example.com)\n- [Link with title](http://example.com \"Title here\")\n- [Relative link](../docs/README.md)\n- [Anchor link](#section-name)\n- [Reference link][ref1]\n- <http://direct-link.com>\n- Plain URL: http://should-not-be-parsed.com\n\n[ref1]: http://reference.com \"Reference Title\"\n\n### Links in Lists\n1. [Link in numbered](http://test.com)\n   - [Nested link](../file.md)\n     - [Deep nested](#anchor)\n2. Multiple [link 1](url1) and [link 2](url2) same item\n\n## Escaping Test\n\n### Escaped Special Characters\n- Escaped \\* asterisk\n- Escaped \\# hash\n- Escaped \\[not a link\\](not a url)\n- Escaped \\`not code\\`\n\n### Backslashes\n- Single backslash: \\\n- Double backslash: \\\\\n- Triple: \\\\\\\n- In code: `\\n\\t\\r`\n\n## HTML Entities and Raw HTML\n\n### HTML Entities\n- Less than: &lt;\n- Greater than: &gt;\n- Ampersand: &amp;\n- Quote: &quot;\n- Apos: &apos;\n- Non-breaking space: &nbsp;\n- Copyright: &copy;\n\n### Raw HTML (if supported)\n<div>\nThis is raw HTML that SHOULD be handled gracefully.\n</div>\n\n<script>\n// This MUST NOT execute\nalert(\"This should not run\");\n</script>\n\n## Long Lines Test\n\nThis is an extremely long line that contains a requirement: The system MUST handle very long lines without breaking or causing performance issues even when the line goes on and on and on with multiple requirements like SHOULD support streaming and MAY optimize memory usage and MUST NOT crash on extremely long content that keeps going and going with more text and more requirements and potentially causing buffer or memory issues in poorly implemented parsers but our parser MUST handle this gracefully without any problems whatsoever even if the line is thousands of characters long.\n\n## Repeated Pattern Test\n\nMUST MUST MUST MUST MUST - multiple MUSTs in a row\nSHOULD NOT SHOULD NOT SHOULD NOT - repeated SHOULD NOTs\nMAY MAY MAY MAY - multiple MAYs\n\n## Case Sensitivity Test\n\n### Mixed Case Requirements\n- The system must handle lowercase\n- The system MUST handle uppercase\n- The system Must handle mixed case\n- The system MuSt handle weird case\n- The system should HANDLE various cases\n- The system SHOULD handle normal case\n- The system SHOulD handle odd case\n\n## Numbers and Requirements\n\n### Requirements with Numbers\n1. MUST support 100% uptime\n2. SHOULD handle 1,000,000 requests\n3. MAY cache for 3.14159 seconds\n4. MUST NOT exceed 2^32 bytes\n5. SHOULD process in <100ms\n\n## Comments in Code Blocks\n\n```python\n# This comment has a requirement: MUST parse comments\ndef function():\n    \"\"\"\n    Docstring with requirement: SHOULD document well\n    \"\"\"\n    # TODO: MUST fix this later\n    pass  # MUST NOT remove this\n```\n\n```javascript\n// JavaScript comment: MUST support JS\n/* \n   Multi-line comment\n   SHOULD handle this too\n*/\nconst x = 42; // Inline comment: MAY be useful\n```\n\n## Nested Blockquotes\n\n> Level 1 quote\n> > Level 2 quote with requirement: MUST nest\n> > > Level 3 quote that SHOULD work\n> > > > Level 4 quote MAY be too deep\n> > > > > Level 5 definitely too deep but MUST NOT crash\n\n## Mixed Indentation (Tabs vs Spaces)\n\n\t- Tab indented item\n  - Space indented item\n\t  - Tab nested\n    - Space nested\n\t\t- More tabs\n      - More spaces\n\n## Finally: Kitchen Sink\n\nThis final section has everything: **bold**, *italic*, ***both***, `code`, [links](http://test.com), requirements that MUST work, lists below:\n\n- [ ] Task one\n- [x] Task two with `code` and [link](url)\n  > Quote in list\n  ```python\n  # Code in list after quote\n  print(\"Complex MUST work\")\n  ```\n  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |\n  \n  1. Numbered in bullet\n     - Bullet in numbered\n       - Deep nesting MAY confuse\n  2. But MUST NOT fail\n\n---\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
+    "raw": "# Edge Cases Test Document\n\n## Unicode and Special Characters\n\n### Emoji in Requirements \nThe system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\n### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: \u2211 \u220f \u222b \u2202 \u2207\n- Currency: $100, \u20ac50, \u00a375, \u00a51000\n- Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0\n  - Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5\n  - Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\n### Code with Unicode\n```python\ndef caf\u00e9():\n    return \"Z\u00fcrich \u2192 M\u00fcnchen\"\n    \n# Japanese comment: \u3053\u308c\u306f\u30c6\u30b9\u30c8\u3067\u3059\n\u540d\u524d = \"\u7530\u4e2d\"\n```\n\n## Malformed Markdown (Parser Resilience)\n\n### Unclosed Code Block\n```python\ndef broken():\n    # This code block is never closed\n    return None\n\n### Mixed List Markers\n- Bullet item\n* Different bullet marker\n+ Yet another marker\n- Back to dash\n  * Nested with star\n  - Nested with dash\n\n### Broken Table\n| Col1 | Col2 | Col3\n|------|------\n| Data | Missing | Separator |\n| Row2 \n| Row3 | Has | Too | Many | Columns |\n\n## Extreme Nesting Test\n\n- Level 1\n  - Level 2\n    - Level 3 (our limit)\n      - Level 4 (should be treated as text)\n        - Level 5 (definitely text)\n          - Level 6 (way too deep)\n            - Level 7 (parser should not crash)\n\n## Empty Elements Test\n\n### Empty List Items\n- \n- Item with content\n- \n  - \n  - Nested with content\n  - \n\n### Empty Code Block\n```\n```\n\n### Empty Table\n| | |\n|-|-|\n| | |\n\n## Inline Code Stress Test\n\nHere's `inline code` followed by more `inline code` and even more `inline code` all in one line with `special <> chars` and `quotes \"inside\"` plus `backslashes \\\\ too`.\n\n### List with Inline Code\n- Item with `code`\n- Another `with` multiple `code` spans\n  - Nested `code` with special chars: `<>&\"`\n  - More `inline` code `everywhere`\n\n## Links and References Test\n\n### Various Link Formats\n- [Basic link](http://example.com)\n- [Link with title](http://example.com \"Title here\")\n- [Relative link](../docs/README.md)\n- [Anchor link](#section-name)\n- [Reference link][ref1]\n- <http://direct-link.com>\n- Plain URL: http://should-not-be-parsed.com\n\n[ref1]: http://reference.com \"Reference Title\"\n\n### Links in Lists\n1. [Link in numbered](http://test.com)\n   - [Nested link](../file.md)\n     - [Deep nested](#anchor)\n2. Multiple [link 1](url1) and [link 2](url2) same item\n\n## Escaping Test\n\n### Escaped Special Characters\n- Escaped \\* asterisk\n- Escaped \\# hash\n- Escaped \\[not a link\\](not a url)\n- Escaped \\`not code\\`\n\n### Backslashes\n- Single backslash: \\\n- Double backslash: \\\\\n- Triple: \\\\\\\n- In code: `\\n\\t\\r`\n\n## HTML Entities and Raw HTML\n\n### HTML Entities\n- Less than: &lt;\n- Greater than: &gt;\n- Ampersand: &amp;\n- Quote: &quot;\n- Apos: &apos;\n- Non-breaking space: &nbsp;\n- Copyright: &copy;\n\n### Raw HTML (if supported)\n<div>\nThis is raw HTML that SHOULD be handled gracefully.\n</div>\n\n<script>\n// This MUST NOT execute\nalert(\"This should not run\");\n</script>\n\n## Long Lines Test\n\nThis is an extremely long line that contains a requirement: The system MUST handle very long lines without breaking or causing performance issues even when the line goes on and on and on with multiple requirements like SHOULD support streaming and MAY optimize memory usage and MUST NOT crash on extremely long content that keeps going and going with more text and more requirements and potentially causing buffer or memory issues in poorly implemented parsers but our parser MUST handle this gracefully without any problems whatsoever even if the line is thousands of characters long.\n\n## Repeated Pattern Test\n\nMUST MUST MUST MUST MUST - multiple MUSTs in a row\nSHOULD NOT SHOULD NOT SHOULD NOT - repeated SHOULD NOTs\nMAY MAY MAY MAY - multiple MAYs\n\n## Case Sensitivity Test\n\n### Mixed Case Requirements\n- The system must handle lowercase\n- The system MUST handle uppercase\n- The system Must handle mixed case\n- The system MuSt handle weird case\n- The system should HANDLE various cases\n- The system SHOULD handle normal case\n- The system SHOulD handle odd case\n\n## Numbers and Requirements\n\n### Requirements with Numbers\n1. MUST support 100% uptime\n2. SHOULD handle 1,000,000 requests\n3. MAY cache for 3.14159 seconds\n4. MUST NOT exceed 2^32 bytes\n5. SHOULD process in <100ms\n\n## Comments in Code Blocks\n\n```python\n# This comment has a requirement: MUST parse comments\ndef function():\n    \"\"\"\n    Docstring with requirement: SHOULD document well\n    \"\"\"\n    # TODO: MUST fix this later\n    pass  # MUST NOT remove this\n```\n\n```javascript\n// JavaScript comment: MUST support JS\n/* \n   Multi-line comment\n   SHOULD handle this too\n*/\nconst x = 42; // Inline comment: MAY be useful\n```\n\n## Nested Blockquotes\n\n> Level 1 quote\n> > Level 2 quote with requirement: MUST nest\n> > > Level 3 quote that SHOULD work\n> > > > Level 4 quote MAY be too deep\n> > > > > Level 5 definitely too deep but MUST NOT crash\n\n## Mixed Indentation (Tabs vs Spaces)\n\n\t- Tab indented item\n  - Space indented item\n\t  - Tab nested\n    - Space nested\n\t\t- More tabs\n      - More spaces\n\n## Finally: Kitchen Sink\n\nThis final section has everything: **bold**, *italic*, ***both***, `code`, [links](http://test.com), requirements that MUST work, lists below:\n\n- [ ] Task one\n- [x] Task two with `code` and [link](url)\n  > Quote in list\n  ```python\n  # Code in list after quote\n  print(\"Complex MUST work\")\n  ```\n  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |\n  \n  1. Numbered in bullet\n     - Bullet in numbered\n       - Deep nesting MAY confuse\n  2. But MUST NOT fail\n\n---\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
     "lines": [
       "# Edge Cases Test Document",
       "",
       "## Unicode and Special Characters",
       "",
       "### Emoji in Requirements ",
-      "The system MUST support emoji 🚀 in text.",
-      "Users SHOULD be able to use 😊 emoticons.",
-      "The parser MAY handle 🎨🎭🎪 multiple emojis.",
+      "The system MUST support emoji \ud83d\ude80 in text.",
+      "Users SHOULD be able to use \ud83d\ude0a emoticons.",
+      "The parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.",
       "",
       "### Special Characters in Lists",
       "- Item with special chars: <>&\"'",
-      "- Math symbols: ∑ ∏ ∫ ∂ ∇",
-      "- Currency: $100, €50, £75, ¥1000",
-      "- Arrows: → ← ↑ ↓ ⇒ ⇐",
-      "  - Nested with more: α β γ δ ε",
-      "  - Chemical: H₂O, CO₂, Ca²⁺",
+      "- Math symbols: \u2211 \u220f \u222b \u2202 \u2207",
+      "- Currency: $100, \u20ac50, \u00a375, \u00a51000",
+      "- Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0",
+      "  - Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5",
+      "  - Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a",
       "",
       "### Code with Unicode",
       "```python",
-      "def café():",
-      "    return \"Zürich → München\"",
+      "def caf\u00e9():",
+      "    return \"Z\u00fcrich \u2192 M\u00fcnchen\"",
       "    ",
-      "# Japanese comment: これはテストです",
-      "名前 = \"田中\"",
+      "# Japanese comment: \u3053\u308c\u306f\u30c6\u30b9\u30c8\u3067\u3059",
+      "\u540d\u524d = \"\u7530\u4e2d\"",
       "```",
       "",
       "## Malformed Markdown (Parser Resilience)",
@@ -355,8 +345,8 @@
           "section_mixed-indentation-tabs-vs-spaces",
           "section_finally-kitchen-sink"
         ],
-        "raw_content": "# Edge Cases Test Document\n\n## Unicode and Special Characters\n\n### Emoji in Requirements \nThe system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis.\n\n### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: ∑ ∏ ∫ ∂ ∇\n- Currency: $100, €50, £75, ¥1000\n- Arrows: → ← ↑ ↓ ⇒ ⇐\n  - Nested with more: α β γ δ ε\n  - Chemical: H₂O, CO₂, Ca²⁺\n\n### Code with Unicode\n```python\ndef café():\n    return \"Zürich → München\"\n    \n# Japanese comment: これはテストです\n名前 = \"田中\"\n```\n\n## Malformed Markdown (Parser Resilience)\n\n### Unclosed Code Block\n```python\ndef broken():\n    # This code block is never closed\n    return None\n\n### Mixed List Markers\n- Bullet item\n* Different bullet marker\n+ Yet another marker\n- Back to dash\n  * Nested with star\n  - Nested with dash\n\n### Broken Table\n| Col1 | Col2 | Col3\n|------|------\n| Data | Missing | Separator |\n| Row2 \n| Row3 | Has | Too | Many | Columns |\n\n## Extreme Nesting Test\n\n- Level 1\n  - Level 2\n    - Level 3 (our limit)\n      - Level 4 (should be treated as text)\n        - Level 5 (definitely text)\n          - Level 6 (way too deep)\n            - Level 7 (parser should not crash)\n\n## Empty Elements Test\n\n### Empty List Items\n- \n- Item with content\n- \n  - \n  - Nested with content\n  - \n\n### Empty Code Block\n```\n```\n\n### Empty Table\n| | |\n|-|-|\n| | |\n\n## Inline Code Stress Test\n\nHere's `inline code` followed by more `inline code` and even more `inline code` all in one line with `special <> chars` and `quotes \"inside\"` plus `backslashes \\\\ too`.\n\n### List with Inline Code\n- Item with `code`\n- Another `with` multiple `code` spans\n  - Nested `code` with special chars: `<>&\"`\n  - More `inline` code `everywhere`\n\n## Links and References Test\n\n### Various Link Formats\n- [Basic link](http://example.com)\n- [Link with title](http://example.com \"Title here\")\n- [Relative link](../docs/README.md)\n- [Anchor link](#section-name)\n- [Reference link][ref1]\n- <http://direct-link.com>\n- Plain URL: http://should-not-be-parsed.com\n\n[ref1]: http://reference.com \"Reference Title\"\n\n### Links in Lists\n1. [Link in numbered](http://test.com)\n   - [Nested link](../file.md)\n     - [Deep nested](#anchor)\n2. Multiple [link 1](url1) and [link 2](url2) same item\n\n## Escaping Test\n\n### Escaped Special Characters\n- Escaped \\* asterisk\n- Escaped \\# hash\n- Escaped \\[not a link\\](not a url)\n- Escaped \\`not code\\`\n\n### Backslashes\n- Single backslash: \\\n- Double backslash: \\\\\n- Triple: \\\\\\\n- In code: `\\n\\t\\r`\n\n## HTML Entities and Raw HTML\n\n### HTML Entities\n- Less than: &lt;\n- Greater than: &gt;\n- Ampersand: &amp;\n- Quote: &quot;\n- Apos: &apos;\n- Non-breaking space: &nbsp;\n- Copyright: &copy;\n\n### Raw HTML (if supported)\n<div>\nThis is raw HTML that SHOULD be handled gracefully.\n</div>\n\n<script>\n// This MUST NOT execute\nalert(\"This should not run\");\n</script>\n\n## Long Lines Test\n\nThis is an extremely long line that contains a requirement: The system MUST handle very long lines without breaking or causing performance issues even when the line goes on and on and on with multiple requirements like SHOULD support streaming and MAY optimize memory usage and MUST NOT crash on extremely long content that keeps going and going with more text and more requirements and potentially causing buffer or memory issues in poorly implemented parsers but our parser MUST handle this gracefully without any problems whatsoever even if the line is thousands of characters long.\n\n## Repeated Pattern Test\n\nMUST MUST MUST MUST MUST - multiple MUSTs in a row\nSHOULD NOT SHOULD NOT SHOULD NOT - repeated SHOULD NOTs\nMAY MAY MAY MAY - multiple MAYs\n\n## Case Sensitivity Test\n\n### Mixed Case Requirements\n- The system must handle lowercase\n- The system MUST handle uppercase\n- The system Must handle mixed case\n- The system MuSt handle weird case\n- The system should HANDLE various cases\n- The system SHOULD handle normal case\n- The system SHOulD handle odd case\n\n## Numbers and Requirements\n\n### Requirements with Numbers\n1. MUST support 100% uptime\n2. SHOULD handle 1,000,000 requests\n3. MAY cache for 3.14159 seconds\n4. MUST NOT exceed 2^32 bytes\n5. SHOULD process in <100ms\n\n## Comments in Code Blocks\n\n```python\n# This comment has a requirement: MUST parse comments\ndef function():\n    \"\"\"\n    Docstring with requirement: SHOULD document well\n    \"\"\"\n    # TODO: MUST fix this later\n    pass  # MUST NOT remove this\n```\n\n```javascript\n// JavaScript comment: MUST support JS\n/* \n   Multi-line comment\n   SHOULD handle this too\n*/\nconst x = 42; // Inline comment: MAY be useful\n```\n\n## Nested Blockquotes\n\n> Level 1 quote\n> > Level 2 quote with requirement: MUST nest\n> > > Level 3 quote that SHOULD work\n> > > > Level 4 quote MAY be too deep\n> > > > > Level 5 definitely too deep but MUST NOT crash\n\n## Mixed Indentation (Tabs vs Spaces)\n\n\t- Tab indented item\n  - Space indented item\n\t  - Tab nested\n    - Space nested\n\t\t- More tabs\n      - More spaces\n\n## Finally: Kitchen Sink\n\nThis final section has everything: **bold**, *italic*, ***both***, `code`, [links](http://test.com), requirements that MUST work, lists below:\n\n- [ ] Task one\n- [x] Task two with `code` and [link](url)\n  > Quote in list\n  ```python\n  # Code in list after quote\n  print(\"Complex MUST work\")\n  ```\n  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |\n  \n  1. Numbered in bullet\n     - Bullet in numbered\n       - Deep nesting MAY confuse\n  2. But MUST NOT fail\n\n---\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
-        "text_content": "Edge Cases Test Document\n\nUnicode and Special Characters\n\nEmoji in Requirements The system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis.\n\nSpecial Characters in Lists Item with special chars: <>&\"' Math symbols: ∑ ∏ ∫ ∂ ∇ Currency: $100, €50, £75, ¥1000 Arrows: → ← ↑ ↓ ⇒ ⇐ Nested with more: α β γ δ ε Chemical: H₂O, CO₂, Ca²⁺\n\nCode with Unicode\n\nMalformed Markdown (Parser Resilience)\n\nUnclosed Code Block\n\nNested Blockquotes\n\nLevel 1 quote Level 2 quote with requirement: MUST nest Level 3 quote that SHOULD work Level 4 quote MAY be too deep Level 5 definitely too deep but MUST NOT crash\n\nMixed Indentation (Tabs vs Spaces)\n\nSpace indented item Tab nested Space nested More tabs More spaces\n\nFinally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n[ ] Task one [x] Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!"
+        "raw_content": "# Edge Cases Test Document\n\n## Unicode and Special Characters\n\n### Emoji in Requirements \nThe system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\n### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: \u2211 \u220f \u222b \u2202 \u2207\n- Currency: $100, \u20ac50, \u00a375, \u00a51000\n- Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0\n  - Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5\n  - Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\n### Code with Unicode\n```python\ndef caf\u00e9():\n    return \"Z\u00fcrich \u2192 M\u00fcnchen\"\n    \n# Japanese comment: \u3053\u308c\u306f\u30c6\u30b9\u30c8\u3067\u3059\n\u540d\u524d = \"\u7530\u4e2d\"\n```\n\n## Malformed Markdown (Parser Resilience)\n\n### Unclosed Code Block\n```python\ndef broken():\n    # This code block is never closed\n    return None\n\n### Mixed List Markers\n- Bullet item\n* Different bullet marker\n+ Yet another marker\n- Back to dash\n  * Nested with star\n  - Nested with dash\n\n### Broken Table\n| Col1 | Col2 | Col3\n|------|------\n| Data | Missing | Separator |\n| Row2 \n| Row3 | Has | Too | Many | Columns |\n\n## Extreme Nesting Test\n\n- Level 1\n  - Level 2\n    - Level 3 (our limit)\n      - Level 4 (should be treated as text)\n        - Level 5 (definitely text)\n          - Level 6 (way too deep)\n            - Level 7 (parser should not crash)\n\n## Empty Elements Test\n\n### Empty List Items\n- \n- Item with content\n- \n  - \n  - Nested with content\n  - \n\n### Empty Code Block\n```\n```\n\n### Empty Table\n| | |\n|-|-|\n| | |\n\n## Inline Code Stress Test\n\nHere's `inline code` followed by more `inline code` and even more `inline code` all in one line with `special <> chars` and `quotes \"inside\"` plus `backslashes \\\\ too`.\n\n### List with Inline Code\n- Item with `code`\n- Another `with` multiple `code` spans\n  - Nested `code` with special chars: `<>&\"`\n  - More `inline` code `everywhere`\n\n## Links and References Test\n\n### Various Link Formats\n- [Basic link](http://example.com)\n- [Link with title](http://example.com \"Title here\")\n- [Relative link](../docs/README.md)\n- [Anchor link](#section-name)\n- [Reference link][ref1]\n- <http://direct-link.com>\n- Plain URL: http://should-not-be-parsed.com\n\n[ref1]: http://reference.com \"Reference Title\"\n\n### Links in Lists\n1. [Link in numbered](http://test.com)\n   - [Nested link](../file.md)\n     - [Deep nested](#anchor)\n2. Multiple [link 1](url1) and [link 2](url2) same item\n\n## Escaping Test\n\n### Escaped Special Characters\n- Escaped \\* asterisk\n- Escaped \\# hash\n- Escaped \\[not a link\\](not a url)\n- Escaped \\`not code\\`\n\n### Backslashes\n- Single backslash: \\\n- Double backslash: \\\\\n- Triple: \\\\\\\n- In code: `\\n\\t\\r`\n\n## HTML Entities and Raw HTML\n\n### HTML Entities\n- Less than: &lt;\n- Greater than: &gt;\n- Ampersand: &amp;\n- Quote: &quot;\n- Apos: &apos;\n- Non-breaking space: &nbsp;\n- Copyright: &copy;\n\n### Raw HTML (if supported)\n<div>\nThis is raw HTML that SHOULD be handled gracefully.\n</div>\n\n<script>\n// This MUST NOT execute\nalert(\"This should not run\");\n</script>\n\n## Long Lines Test\n\nThis is an extremely long line that contains a requirement: The system MUST handle very long lines without breaking or causing performance issues even when the line goes on and on and on with multiple requirements like SHOULD support streaming and MAY optimize memory usage and MUST NOT crash on extremely long content that keeps going and going with more text and more requirements and potentially causing buffer or memory issues in poorly implemented parsers but our parser MUST handle this gracefully without any problems whatsoever even if the line is thousands of characters long.\n\n## Repeated Pattern Test\n\nMUST MUST MUST MUST MUST - multiple MUSTs in a row\nSHOULD NOT SHOULD NOT SHOULD NOT - repeated SHOULD NOTs\nMAY MAY MAY MAY - multiple MAYs\n\n## Case Sensitivity Test\n\n### Mixed Case Requirements\n- The system must handle lowercase\n- The system MUST handle uppercase\n- The system Must handle mixed case\n- The system MuSt handle weird case\n- The system should HANDLE various cases\n- The system SHOULD handle normal case\n- The system SHOulD handle odd case\n\n## Numbers and Requirements\n\n### Requirements with Numbers\n1. MUST support 100% uptime\n2. SHOULD handle 1,000,000 requests\n3. MAY cache for 3.14159 seconds\n4. MUST NOT exceed 2^32 bytes\n5. SHOULD process in <100ms\n\n## Comments in Code Blocks\n\n```python\n# This comment has a requirement: MUST parse comments\ndef function():\n    \"\"\"\n    Docstring with requirement: SHOULD document well\n    \"\"\"\n    # TODO: MUST fix this later\n    pass  # MUST NOT remove this\n```\n\n```javascript\n// JavaScript comment: MUST support JS\n/* \n   Multi-line comment\n   SHOULD handle this too\n*/\nconst x = 42; // Inline comment: MAY be useful\n```\n\n## Nested Blockquotes\n\n> Level 1 quote\n> > Level 2 quote with requirement: MUST nest\n> > > Level 3 quote that SHOULD work\n> > > > Level 4 quote MAY be too deep\n> > > > > Level 5 definitely too deep but MUST NOT crash\n\n## Mixed Indentation (Tabs vs Spaces)\n\n\t- Tab indented item\n  - Space indented item\n\t  - Tab nested\n    - Space nested\n\t\t- More tabs\n      - More spaces\n\n## Finally: Kitchen Sink\n\nThis final section has everything: **bold**, *italic*, ***both***, `code`, [links](http://test.com), requirements that MUST work, lists below:\n\n- [ ] Task one\n- [x] Task two with `code` and [link](url)\n  > Quote in list\n  ```python\n  # Code in list after quote\n  print(\"Complex MUST work\")\n  ```\n  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |\n  \n  1. Numbered in bullet\n     - Bullet in numbered\n       - Deep nesting MAY confuse\n  2. But MUST NOT fail\n\n---\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
+        "text_content": "Edge Cases Test Document\n\nUnicode and Special Characters\n\nEmoji in Requirements The system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\nSpecial Characters in Lists Item with special chars: <>&\"' Math symbols: \u2211 \u220f \u222b \u2202 \u2207 Currency: $100, \u20ac50, \u00a375, \u00a51000 Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0 Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5 Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\nCode with Unicode\n\nMalformed Markdown (Parser Resilience)\n\nUnclosed Code Block\n\nNested Blockquotes\n\nLevel 1 quote Level 2 quote with requirement: MUST nest Level 3 quote that SHOULD work Level 4 quote MAY be too deep Level 5 definitely too deep but MUST NOT crash\n\nMixed Indentation (Tabs vs Spaces)\n\nSpace indented item Tab nested Space nested More tabs More spaces\n\nFinally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n Task one  Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!"
       },
       {
         "id": "section_unicode-and-special-characters",
@@ -373,8 +363,8 @@
           "section_special-characters-in-lists",
           "section_code-with-unicode"
         ],
-        "raw_content": "## Unicode and Special Characters\n\n### Emoji in Requirements \nThe system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis.\n\n### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: ∑ ∏ ∫ ∂ ∇\n- Currency: $100, €50, £75, ¥1000\n- Arrows: → ← ↑ ↓ ⇒ ⇐\n  - Nested with more: α β γ δ ε\n  - Chemical: H₂O, CO₂, Ca²⁺\n\n### Code with Unicode\n```python\ndef café():\n    return \"Zürich → München\"\n    \n# Japanese comment: これはテストです\n名前 = \"田中\"\n```\n",
-        "text_content": "Unicode and Special Characters\n\nEmoji in Requirements The system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis.\n\nSpecial Characters in Lists Item with special chars: <>&\"' Math symbols: ∑ ∏ ∫ ∂ ∇ Currency: $100, €50, £75, ¥1000 Arrows: → ← ↑ ↓ ⇒ ⇐ Nested with more: α β γ δ ε Chemical: H₂O, CO₂, Ca²⁺\n\nCode with Unicode"
+        "raw_content": "## Unicode and Special Characters\n\n### Emoji in Requirements \nThe system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\n### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: \u2211 \u220f \u222b \u2202 \u2207\n- Currency: $100, \u20ac50, \u00a375, \u00a51000\n- Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0\n  - Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5\n  - Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\n### Code with Unicode\n```python\ndef caf\u00e9():\n    return \"Z\u00fcrich \u2192 M\u00fcnchen\"\n    \n# Japanese comment: \u3053\u308c\u306f\u30c6\u30b9\u30c8\u3067\u3059\n\u540d\u524d = \"\u7530\u4e2d\"\n```\n",
+        "text_content": "Unicode and Special Characters\n\nEmoji in Requirements The system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n\nSpecial Characters in Lists Item with special chars: <>&\"' Math symbols: \u2211 \u220f \u222b \u2202 \u2207 Currency: $100, \u20ac50, \u00a375, \u00a51000 Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0 Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5 Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n\nCode with Unicode"
       },
       {
         "id": "section_emoji-in-requirements",
@@ -387,8 +377,8 @@
         "end_char": 216,
         "parent_id": "section_unicode-and-special-characters",
         "child_ids": [],
-        "raw_content": "### Emoji in Requirements \nThe system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis.\n",
-        "text_content": "Emoji in Requirements The system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis."
+        "raw_content": "### Emoji in Requirements \nThe system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.\n",
+        "text_content": "Emoji in Requirements The system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis."
       },
       {
         "id": "section_special-characters-in-lists",
@@ -401,8 +391,8 @@
         "end_char": 425,
         "parent_id": "section_unicode-and-special-characters",
         "child_ids": [],
-        "raw_content": "### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: ∑ ∏ ∫ ∂ ∇\n- Currency: $100, €50, £75, ¥1000\n- Arrows: → ← ↑ ↓ ⇒ ⇐\n  - Nested with more: α β γ δ ε\n  - Chemical: H₂O, CO₂, Ca²⁺\n",
-        "text_content": "Special Characters in Lists Item with special chars: <>&\"' Math symbols: ∑ ∏ ∫ ∂ ∇ Currency: $100, €50, £75, ¥1000 Arrows: → ← ↑ ↓ ⇒ ⇐ Nested with more: α β γ δ ε Chemical: H₂O, CO₂, Ca²⁺"
+        "raw_content": "### Special Characters in Lists\n- Item with special chars: <>&\"'\n- Math symbols: \u2211 \u220f \u222b \u2202 \u2207\n- Currency: $100, \u20ac50, \u00a375, \u00a51000\n- Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0\n  - Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5\n  - Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a\n",
+        "text_content": "Special Characters in Lists Item with special chars: <>&\"' Math symbols: \u2211 \u220f \u222b \u2202 \u2207 Currency: $100, \u20ac50, \u00a375, \u00a51000 Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0 Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5 Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a"
       },
       {
         "id": "section_code-with-unicode",
@@ -415,7 +405,7 @@
         "end_char": 548,
         "parent_id": "section_unicode-and-special-characters",
         "child_ids": [],
-        "raw_content": "### Code with Unicode\n```python\ndef café():\n    return \"Zürich → München\"\n    \n# Japanese comment: これはテストです\n名前 = \"田中\"\n```\n",
+        "raw_content": "### Code with Unicode\n```python\ndef caf\u00e9():\n    return \"Z\u00fcrich \u2192 M\u00fcnchen\"\n    \n# Japanese comment: \u3053\u308c\u306f\u30c6\u30b9\u30c8\u3067\u3059\n\u540d\u524d = \"\u7530\u4e2d\"\n```\n",
         "text_content": "Code with Unicode"
       },
       {
@@ -488,13 +478,13 @@
         "parent_id": "section_edge-cases-test-document",
         "child_ids": [],
         "raw_content": "## Finally: Kitchen Sink\n\nThis final section has everything: **bold**, *italic*, ***both***, `code`, [links](http://test.com), requirements that MUST work, lists below:\n\n- [ ] Task one\n- [x] Task two with `code` and [link](url)\n  > Quote in list\n  ```python\n  # Code in list after quote\n  print(\"Complex MUST work\")\n  ```\n  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |\n  \n  1. Numbered in bullet\n     - Bullet in numbered\n       - Deep nesting MAY confuse\n  2. But MUST NOT fail\n\n---\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!",
-        "text_content": "Finally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n[ ] Task one [x] Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!"
+        "text_content": "Finally: Kitchen Sink\n\nThis final section has everything: bold, italic, both, code, links, requirements that MUST work, lists below:\n\n Task one  Task two with code and link Quote in list\n\nTableInList\n\nWithDataSHOULD parse\n\nNumbered in bullet Bullet in numbered Deep nesting MAY confuse But MUST NOT fail\n\nThe document ends with a horizontal rule and a final requirement: The parser MUST successfully process this entire edge cases document without errors!"
       }
     ],
     "paragraphs": [
       {
         "id": "para_0",
-        "text": "The system MUST support emoji 🚀 in text.\nUsers SHOULD be able to use 😊 emoticons.\nThe parser MAY handle 🎨🎭🎪 multiple emojis.",
+        "text": "The system MUST support emoji \ud83d\ude80 in text.\nUsers SHOULD be able to use \ud83d\ude0a emoticons.\nThe parser MAY handle \ud83c\udfa8\ud83c\udfad\ud83c\udfaa multiple emojis.",
         "start_line": 5,
         "end_line": 8,
         "section_id": "section_edge-cases-test-document",
@@ -536,35 +526,29 @@
         "items": [
           {
             "text": "Item with special chars: <>&\"'",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
-            "text": "Math symbols: ∑ ∏ ∫ ∂ ∇",
-            "checked": null,
+            "text": "Math symbols: \u2211 \u220f \u222b \u2202 \u2207",
             "children": [],
             "blocks": []
           },
           {
-            "text": "Currency: $100, €50, £75, ¥1000",
-            "checked": null,
+            "text": "Currency: $100, \u20ac50, \u00a375, \u00a51000",
             "children": [],
             "blocks": []
           },
           {
-            "text": "Arrows: → ← ↑ ↓ ⇒ ⇐",
-            "checked": null,
+            "text": "Arrows: \u2192 \u2190 \u2191 \u2193 \u21d2 \u21d0",
             "children": [
               {
-                "text": "Nested with more: α β γ δ ε",
-                "checked": null,
+                "text": "Nested with more: \u03b1 \u03b2 \u03b3 \u03b4 \u03b5",
                 "children": [],
                 "blocks": []
               },
               {
-                "text": "Chemical: H₂O, CO₂, Ca²⁺",
-                "checked": null,
+                "text": "Chemical: H\u2082O, CO\u2082, Ca\u00b2\u207a",
                 "children": [],
                 "blocks": []
               }
@@ -572,9 +556,7 @@
             "blocks": []
           }
         ],
-        "items_count": 4,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 4
       },
       {
         "id": "list_1",
@@ -585,27 +567,22 @@
         "items": [
           {
             "text": "Space indented item",
-            "checked": null,
             "children": [
               {
                 "text": "Tab nested",
-                "checked": null,
                 "children": [],
                 "blocks": []
               },
               {
                 "text": "Space nested",
-                "checked": null,
                 "children": [
                   {
                     "text": "More tabs",
-                    "checked": null,
                     "children": [],
                     "blocks": []
                   },
                   {
                     "text": "More spaces",
-                    "checked": null,
                     "children": [],
                     "blocks": []
                   }
@@ -616,81 +593,45 @@
             "blocks": []
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_2",
-        "type": "bullet",
-        "start_line": 214,
+        "type": "ordered",
+        "start_line": 225,
         "end_line": 230,
         "section_id": "section_edge-cases-test-document",
         "items": [
           {
-            "text": "Task one",
-            "checked": false,
-            "children": [],
-            "blocks": []
-          },
-          {
-            "text": "Task two with code and link",
-            "checked": true,
+            "text": "Numbered in bullet",
             "children": [
               {
-                "text": "Numbered in bullet",
-                "checked": null,
+                "text": "Bullet in numbered",
                 "children": [
                   {
-                    "text": "Bullet in numbered",
-                    "checked": null,
-                    "children": [
-                      {
-                        "text": "Deep nesting MAY confuse",
-                        "checked": null,
-                        "children": [],
-                        "blocks": []
-                      }
-                    ],
+                    "text": "Deep nesting MAY confuse",
+                    "children": [],
                     "blocks": []
                   }
                 ],
                 "blocks": []
-              },
-              {
-                "text": "But MUST NOT fail",
-                "checked": null,
-                "children": [],
-                "blocks": []
               }
             ],
-            "blocks": [
-              {
-                "type": "blockquote",
-                "start_line": 216,
-                "end_line": 217
-              },
-              {
-                "type": "fence",
-                "start_line": 217,
-                "end_line": 221
-              },
-              {
-                "type": "table",
-                "start_line": 221,
-                "end_line": 224
-              }
-            ]
+            "blocks": []
+          },
+          {
+            "text": "But MUST NOT fail",
+            "children": [],
+            "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 2,
-        "has_mixed_task_items": false
+        "items_count": 2
       }
     ],
     "tables": [
       {
         "id": "table_0",
+        "raw_content": "  | Table | In | List |\n  |-------|----|----|\n  | With  | Data | SHOULD parse |",
         "headers": [
           "Table",
           "In",
@@ -713,6 +654,9 @@
         "section_id": "section_edge-cases-test-document",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
         "column_count": 3,
         "row_count": 1,
         "align_meta": {
@@ -725,7 +669,7 @@
         "id": "code_0",
         "type": "fenced",
         "language": "python",
-        "content": "def café():\n    return \"Zürich → München\"\n    \n# Japanese comment: これはテストです\n名前 = \"田中\"\n",
+        "content": "def caf\u00e9():\n    return \"Z\u00fcrich \u2192 M\u00fcnchen\"\n    \n# Japanese comment: \u3053\u308c\u306f\u30c6\u30b9\u30c8\u3067\u3059\n\u540d\u524d = \"\u7530\u4e2d\"\n",
         "start_line": 18,
         "end_line": 25,
         "section_id": "section_edge-cases-test-document"
@@ -901,7 +845,7 @@
         "text": "links",
         "url": "http://test.com",
         "line": 212,
-        "type": "external",
+        "type": "absolute",
         "scheme": "http",
         "allowed": true
       },
@@ -909,7 +853,7 @@
         "text": "link",
         "url": "url",
         "line": 215,
-        "type": "internal",
+        "type": "relative",
         "scheme": null,
         "allowed": true
       }
@@ -941,8 +885,104 @@
         "children_blocks": []
       }
     ],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 214,
+        "end_line": 230,
+        "section_id": "section_edge-cases-test-document",
+        "items": [
+          {
+            "text": "Task one",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task two with code and link",
+            "checked": true,
+            "children": [
+              {
+                "text": "Numbered in bullet",
+                "children": [
+                  {
+                    "text": "Bullet in numbered",
+                    "children": [
+                      {
+                        "text": "Deep nesting MAY confuse",
+                        "children": [],
+                        "blocks": []
+                      }
+                    ],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              },
+              {
+                "text": "But MUST NOT fail",
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": [
+              {
+                "type": "blockquote",
+                "start_line": 216,
+                "end_line": 217
+              },
+              {
+                "type": "fence",
+                "start_line": 217,
+                "end_line": 221
+              },
+              {
+                "type": "table",
+                "start_line": 221,
+                "end_line": 224
+              }
+            ]
+          }
+        ],
+        "items_count": 2,
+        "checked_count": 1,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "html_blocks": [],
-    "html_inline": []
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 214,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_edge-cases-test-document",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 215,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_edge-cases-test-document",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
   },
   "mappings": {
     "line_to_type": {
@@ -971,7 +1011,7 @@
       "22": "code",
       "23": "code",
       "24": "code",
-      "25": "code",
+      "25": "prose",
       "26": "prose",
       "27": "prose",
       "28": "prose",
@@ -1129,7 +1169,7 @@
       "180": "code",
       "181": "code",
       "182": "code",
-      "183": "code",
+      "183": "prose",
       "184": "code",
       "185": "code",
       "186": "code",
@@ -1138,7 +1178,7 @@
       "189": "code",
       "190": "code",
       "191": "code",
-      "192": "code",
+      "192": "prose",
       "193": "prose",
       "194": "prose",
       "195": "prose",
@@ -1150,12 +1190,12 @@
       "201": "prose",
       "202": "prose",
       "203": "code",
-      "204": "code",
+      "204": "prose",
       "205": "code",
       "206": "code",
       "207": "code",
       "208": "code",
-      "209": "code",
+      "209": "prose",
       "210": "prose",
       "211": "prose",
       "212": "prose",
@@ -1167,13 +1207,13 @@
       "218": "code",
       "219": "code",
       "220": "code",
-      "221": "code",
+      "221": "prose",
       "222": "prose",
       "223": "prose",
       "224": "prose",
       "225": "prose",
       "226": "code",
-      "227": "code",
+      "227": "prose",
       "228": "prose",
       "229": "prose",
       "230": "prose",
@@ -1434,9 +1474,12 @@
       15,
       16,
       17,
+      25,
       26,
       27,
       28,
+      183,
+      192,
       193,
       194,
       195,
@@ -1447,6 +1490,8 @@
       200,
       201,
       202,
+      204,
+      209,
       210,
       211,
       212,
@@ -1454,10 +1499,12 @@
       214,
       215,
       216,
+      221,
       222,
       223,
       224,
       225,
+      227,
       228,
       229,
       230,
@@ -1472,7 +1519,6 @@
       22,
       23,
       24,
-      25,
       29,
       30,
       31,
@@ -1627,7 +1673,6 @@
       180,
       181,
       182,
-      183,
       184,
       185,
       186,
@@ -1636,22 +1681,58 @@
       189,
       190,
       191,
-      192,
       203,
-      204,
       217,
       218,
       219,
       220,
-      221,
       205,
       206,
       207,
       208,
-      209,
-      226,
-      227
+      226
     ],
-    "code_blocks": []
+    "code_blocks": [
+      {
+        "start_line": 18,
+        "end_line": 24,
+        "language": "python"
+      },
+      {
+        "start_line": 29,
+        "end_line": 70,
+        "language": "python"
+      },
+      {
+        "start_line": 71,
+        "end_line": 182,
+        "language": ""
+      },
+      {
+        "start_line": 184,
+        "end_line": 191,
+        "language": "javascript"
+      },
+      {
+        "start_line": 203,
+        "end_line": 203,
+        "language": ""
+      },
+      {
+        "start_line": 217,
+        "end_line": 220,
+        "language": "python"
+      },
+      {
+        "start_line": 205,
+        "end_line": 208,
+        "language": ""
+      },
+      {
+        "start_line": 226,
+        "end_line": 226,
+        "language": ""
+      }
+    ]
   }
 }

@@ -1,30 +1,30 @@
 #!/usr/bin/env python3
-"""Debug baseline differences."""
+"""Debug baseline differences.
+
+Compare current parser output against a stored baseline JSON file.
+
+Usage:
+    python tools/debug_baseline_diff.py path/to/file.md path/to/baseline.json
+
+Example:
+    python tools/debug_baseline_diff.py \\
+        tools/test_mds/01_edge_cases/tasks_01.md \\
+        tools/baseline_outputs/01_edge_cases/tasks_01.baseline.json
+"""
+import argparse
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 # Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-test_file = "tools/test_mds/01_edge_cases/tasks_01.md"
-baseline_file = "tools/baseline_outputs/01_edge_cases/tasks_01.baseline.json"
+from doxstrux.markdown_parser_core import MarkdownParserCore
 
-# Read content
-with open(test_file, "r") as f:
-    content = f.read()
 
-# Parse with current parser
-from src.doxstrux.markdown_parser_core import MarkdownParserCore
-parser = MarkdownParserCore(content)
-result = parser.parse()
-
-# Read baseline
-with open(baseline_file, "r") as f:
-    baseline = json.load(f)
-
-# Compare structure deeply
-def compare_dicts(d1, d2, path=""):
+def compare_dicts(d1: dict, d2: dict, path: str = "") -> list[str]:
+    """Deep compare two dicts and return list of differences."""
     diffs = []
     all_keys = set(d1.keys()) | set(d2.keys())
     for key in sorted(all_keys):
@@ -34,7 +34,7 @@ def compare_dicts(d1, d2, path=""):
         elif key not in d2:
             diffs.append(f"Missing in baseline: {new_path}")
         elif type(d1[key]) != type(d2[key]):
-            diffs.append(f"Type mismatch at {new_path}: {type(d1[key])} vs {type(d2[key])}")
+            diffs.append(f"Type mismatch at {new_path}: {type(d1[key]).__name__} vs {type(d2[key]).__name__}")
         elif isinstance(d1[key], dict):
             diffs.extend(compare_dicts(d1[key], d2[key], new_path))
         elif isinstance(d1[key], list):
@@ -47,54 +47,106 @@ def compare_dicts(d1, d2, path=""):
             diffs.append(f"Value mismatch at {new_path}: {repr(d1[key])[:100]} vs {repr(d2[key])[:100]}")
     return diffs
 
-print("=== Comparing structure ===")
-diffs = compare_dicts(result["structure"], baseline["structure"])
-for diff in diffs[:30]:
-    print(diff)
 
-if not diffs:
-    print("No differences found in structure!")
+def debug_structure_details(result: dict, baseline: dict, structure_key: str) -> None:
+    """Print detailed comparison for a specific structure key (lists, tasklists)."""
+    print(f"\n=== Checking {structure_key} ===")
+    if structure_key not in result["structure"] or structure_key not in baseline["structure"]:
+        print(f"  Missing '{structure_key}' in one or both outputs")
+        return
 
-    # Check lists specifically
-    print("\n=== Checking lists ===")
-    if "lists" in result["structure"] and "lists" in baseline["structure"]:
-        result_lists = result["structure"]["lists"]
-        baseline_lists = baseline["structure"]["lists"]
+    result_items = result["structure"][structure_key]
+    baseline_items = baseline["structure"][structure_key]
 
-        print(f"Result lists: {len(result_lists)}")
-        print(f"Baseline lists: {len(baseline_lists)}")
+    print(f"Result {structure_key}: {len(result_items)}")
+    print(f"Baseline {structure_key}: {len(baseline_items)}")
 
-        if result_lists and baseline_lists:
-            print("\nResult list[0] keys:", list(result_lists[0].keys()))
-            print("Baseline list[0] keys:", list(baseline_lists[0].keys()))
+    if result_items and baseline_items:
+        print(f"\nResult {structure_key}[0] keys:", list(result_items[0].keys()))
+        print(f"Baseline {structure_key}[0] keys:", list(baseline_items[0].keys()))
 
-            if result_lists[0].get("items") and baseline_lists[0].get("items"):
-                print("\nResult list[0] item[0] keys:", list(result_lists[0]["items"][0].keys()))
-                print("Baseline list[0] item[0] keys:", list(baseline_lists[0]["items"][0].keys()))
+        if result_items[0].get("items") and baseline_items[0].get("items"):
+            print(f"\nResult {structure_key}[0] item[0] keys:", list(result_items[0]["items"][0].keys()))
+            print(f"Baseline {structure_key}[0] item[0] keys:", list(baseline_items[0]["items"][0].keys()))
 
-                print("\nResult list[0] item[0]:")
-                print(json.dumps(result_lists[0]["items"][0], indent=2)[:500])
-                print("\nBaseline list[0] item[0]:")
-                print(json.dumps(baseline_lists[0]["items"][0], indent=2)[:500])
+            print(f"\nResult {structure_key}[0] item[0]:")
+            print(json.dumps(result_items[0]["items"][0], indent=2)[:500])
+            print(f"\nBaseline {structure_key}[0] item[0]:")
+            print(json.dumps(baseline_items[0]["items"][0], indent=2)[:500])
 
-    # Check tasklists specifically
-    print("\n=== Checking tasklists ===")
-    if "tasklists" in result["structure"] and "tasklists" in baseline["structure"]:
-        result_tasklists = result["structure"]["tasklists"]
-        baseline_tasklists = baseline["structure"]["tasklists"]
 
-        print(f"Result tasklists: {len(result_tasklists)}")
-        print(f"Baseline tasklists: {len(baseline_tasklists)}")
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Debug baseline differences between current parser and stored JSON",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python tools/debug_baseline_diff.py file.md baseline.json
+  python tools/debug_baseline_diff.py tools/test_mds/example.md tools/baseline_outputs/example.baseline.json
+"""
+    )
+    parser.add_argument("test_file", type=Path, help="Path to .md file to parse")
+    parser.add_argument("baseline_file", type=Path, help="Path to baseline .json file")
+    parser.add_argument("--max-diffs", type=int, default=30, help="Maximum differences to show (default: 30)")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Show detailed structure comparison")
 
-        if result_tasklists and baseline_tasklists:
-            print("\nResult tasklist[0] keys:", list(result_tasklists[0].keys()))
-            print("Baseline tasklist[0] keys:", list(baseline_tasklists[0].keys()))
+    args = parser.parse_args()
 
-            if result_tasklists[0].get("items") and baseline_tasklists[0].get("items"):
-                print("\nResult tasklist[0] item[0] keys:", list(result_tasklists[0]["items"][0].keys()))
-                print("Baseline tasklist[0] item[0] keys:", list(baseline_tasklists[0]["items"][0].keys()))
+    # Validate inputs
+    if not args.test_file.exists():
+        print(f"❌ Error: Test file not found: {args.test_file}", file=sys.stderr)
+        return 1
 
-                print("\nResult tasklist[0] item[0]:")
-                print(json.dumps(result_tasklists[0]["items"][0], indent=2)[:500])
-                print("\nBaseline tasklist[0] item[0]:")
-                print(json.dumps(baseline_tasklists[0]["items"][0], indent=2)[:500])
+    if not args.baseline_file.exists():
+        print(f"❌ Error: Baseline file not found: {args.baseline_file}", file=sys.stderr)
+        return 1
+
+    # Read content
+    try:
+        content = args.test_file.read_text(encoding="utf-8")
+    except OSError as e:
+        print(f"❌ Error reading test file: {e}", file=sys.stderr)
+        return 1
+
+    # Parse with current parser
+    try:
+        parser_instance = MarkdownParserCore(content)
+        result = parser_instance.parse()
+    except Exception as e:
+        print(f"❌ Error parsing markdown: {e}", file=sys.stderr)
+        return 1
+
+    # Read baseline
+    try:
+        baseline = json.loads(args.baseline_file.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        print(f"❌ Error parsing baseline JSON: {e}", file=sys.stderr)
+        return 1
+    except OSError as e:
+        print(f"❌ Error reading baseline file: {e}", file=sys.stderr)
+        return 1
+
+    # Compare structure
+    print("=== Comparing structure ===")
+    diffs = compare_dicts(result["structure"], baseline["structure"])
+
+    for diff in diffs[:args.max_diffs]:
+        print(diff)
+
+    if len(diffs) > args.max_diffs:
+        print(f"\n... and {len(diffs) - args.max_diffs} more differences")
+
+    if not diffs:
+        print("✅ No differences found in structure!")
+
+        if args.verbose:
+            debug_structure_details(result, baseline, "lists")
+            debug_structure_details(result, baseline, "tasklists")
+
+        return 0
+
+    return 1 if diffs else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "total_lines": 10,
-    "total_chars": 212,
+    "total_lines": 11,
+    "total_chars": 185,
     "has_sections": true,
     "has_code": false,
     "has_tables": true,
@@ -9,98 +9,230 @@
     "node_counts": {
       "root": 1,
       "heading": 1,
-      "inline": 10,
-      "text": 10,
-      "paragraph": 2,
+      "inline": 9,
+      "text": 9,
       "blockquote": 1,
       "table": 1,
       "thead": 1,
-      "tbody": 1,
       "tr": 3,
       "th": 2,
-      "td": 4
+      "tbody": 1,
+      "td": 4,
+      "paragraph": 2
     },
     "has_frontmatter": false,
     "security": {
-      "flags": [],
+      "warnings": [],
       "statistics": {
-        "has_html": false,
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
         "has_script": false,
-        "has_style": false,
-        "has_iframe": false,
-        "has_script_event_handlers": false,
-        "has_data_uri": false,
-        "link_count": 0,
-        "image_count": 0
-      }
-    }
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/17_blockquotes/blockquote_with_table.md"
+  },
+  "content": {
+    "raw": "# Blockquote containing table\n\n> | Column A | Column B |\n> |----------|----------|\n> | Cell 1   | Cell 2   |\n> | Cell 3   | Cell 4   |\n>\n> Paragraph after table in quote.\n\nNormal text.\n",
+    "lines": [
+      "# Blockquote containing table",
+      "",
+      "> | Column A | Column B |",
+      "> |----------|----------|",
+      "> | Cell 1   | Cell 2   |",
+      "> | Cell 3   | Cell 4   |",
+      ">",
+      "> Paragraph after table in quote.",
+      "",
+      "Normal text.",
+      ""
+    ]
   },
   "structure": {
     "sections": [
       {
-        "id": "section_0",
+        "id": "section_blockquote-containing-table",
         "level": 1,
         "title": "Blockquote containing table",
+        "slug": "blockquote-containing-table",
         "start_line": 0,
-        "end_line": 9,
-        "content": "Normal text."
+        "end_line": 10,
+        "start_char": 0,
+        "end_char": 185,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Blockquote containing table\n\n> | Column A | Column B |\n> |----------|----------|\n> | Cell 1   | Cell 2   |\n> | Cell 3   | Cell 4   |\n>\n> Paragraph after table in quote.\n\nNormal text.\n",
+        "text_content": "Blockquote containing table\n\nColumn AColumn B\n\nCell 1Cell 2 Cell 3Cell 4\n\nParagraph after table in quote.\n\nNormal text."
       }
     ],
     "paragraphs": [
       {
-        "id": "paragraph_0",
-        "start_line": 7,
-        "end_line": 7,
-        "content": "Paragraph after table in quote."
-      },
-      {
-        "id": "paragraph_1",
+        "id": "para_0",
+        "text": "Normal text.",
         "start_line": 9,
-        "end_line": 9,
-        "content": "Normal text."
+        "end_line": 10,
+        "section_id": "section_blockquote-containing-table",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
       }
     ],
     "lists": [],
     "tables": [
       {
         "id": "table_0",
+        "raw_content": "> | Column A | Column B |\n> |----------|----------|\n> | Cell 1   | Cell 2   |\n> | Cell 3   | Cell 4   |",
+        "headers": [
+          "Column A",
+          "Column B"
+        ],
+        "rows": [
+          [
+            "Cell 1",
+            "Cell 2"
+          ],
+          [
+            "Cell 3",
+            "Cell 4"
+          ]
+        ],
+        "align": [
+          "left",
+          "left"
+        ],
         "start_line": 2,
-        "end_line": 5,
-        "rows": 3,
-        "columns": 2,
-        "headers": ["Column A", "Column B"],
-        "has_header": true
+        "end_line": 6,
+        "section_id": "section_blockquote-containing-table",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 2,
+        "row_count": 2,
+        "align_meta": {
+          "heuristic": true
+        }
       }
     ],
     "code_blocks": [],
     "headings": [
       {
-        "id": "heading_0",
+        "id": "heading_blockquote-containing-table",
         "level": 1,
         "text": "Blockquote containing table",
+        "line": 0,
         "slug": "blockquote-containing-table",
-        "line": 0
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 30
       }
     ],
     "links": [],
     "images": [],
     "blockquotes": [
       {
-        "id": "blockquote_0",
+        "content": "Column AColumn BCell 1Cell 2Cell 3Cell 4Paragraph after table in quote.",
         "start_line": 2,
-        "end_line": 7,
-        "content": "| Column A | Column B |\n|----------|----------|\n| Cell 1   | Cell 2   |\n| Cell 3   | Cell 4   |\n\nParagraph after table in quote.",
-        "nesting_level": 1,
-        "contains_table": true
+        "end_line": 8,
+        "section_id": "section_blockquote-containing-table",
+        "children_summary": {
+          "lists": 0,
+          "tables": 1,
+          "code": 0
+        },
+        "children_blocks": [
+          {
+            "type": "table",
+            "start_line": 2,
+            "end_line": 6
+          }
+        ]
       }
     ],
-    "footnotes": {
-      "references": [],
-      "definitions": []
-    },
-    "html": {
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
       "blocks": [],
       "inline": []
-    }
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose"
+    },
+    "line_to_section": {
+      "0": "section_blockquote-containing-table",
+      "1": "section_blockquote-containing-table",
+      "2": "section_blockquote-containing-table",
+      "3": "section_blockquote-containing-table",
+      "4": "section_blockquote-containing-table",
+      "5": "section_blockquote-containing-table",
+      "6": "section_blockquote-containing-table",
+      "7": "section_blockquote-containing-table",
+      "8": "section_blockquote-containing-table",
+      "9": "section_blockquote-containing-table",
+      "10": "section_blockquote-containing-table"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

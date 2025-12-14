@@ -1,23 +1,284 @@
 {
-  "id": "math_04",
-  "kind": "math",
-  "features": {
-    "headings": 1,
-    "lists": 0,
-    "tables": 0,
-    "fences": 0,
-    "indented_code_lines": 0,
-    "images": 0,
-    "links": 6,
-    "math_blocks": 1,
-    "html_blocks": 0,
-    "footnote_refs": 0,
-    "footnote_defs": 0,
-    "admonitions": 0,
-    "definition_list": 0
+  "metadata": {
+    "total_lines": 17,
+    "total_chars": 367,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 4,
+      "inline": 5,
+      "text": 19,
+      "softbreak": 6,
+      "heading": 1,
+      "link": 4
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 2,
+          "https": 1,
+          "mailto": 1
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/math_04.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links"
-  ]
+  "content": {
+    "raw": "+++\ntitle = \"Refactored math 04\"\nid = \"ref_math_04\"\nnote = \"math-case\"\n+++\n# Refactored math 04\n\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
+    "lines": [
+      "+++",
+      "title = \"Refactored math 04\"",
+      "id = \"ref_math_04\"",
+      "note = \"math-case\"",
+      "+++",
+      "# Refactored math 04",
+      "",
+      "",
+      "Inline math $E=mc^2$ and block:",
+      "",
+      "$$",
+      "\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}",
+      "$$",
+      "",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-math-04",
+        "level": 1,
+        "title": "Refactored math 04",
+        "slug": "refactored-math-04",
+        "start_line": 5,
+        "end_line": 16,
+        "start_char": 75,
+        "end_char": 367,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored math 04\n\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./math_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
+        "text_content": "Refactored math 04\n\nInline math $E=mc^2$ and block:\n\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "+++\ntitle = \"Refactored math 04\"\nid = \"ref_math_04\"\nnote = \"math-case\"\n+++",
+        "start_line": 0,
+        "end_line": 5,
+        "section_id": null,
+        "word_count": 13,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Inline math $E=mc^2$ and block:",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_refactored-math-04",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$",
+        "start_line": 10,
+        "end_line": 13,
+        "section_id": "section_refactored-math-04",
+        "word_count": 7,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "start_line": 15,
+        "end_line": 16,
+        "section_id": "section_refactored-math-04",
+        "word_count": 6,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_refactored-math-04",
+        "level": 1,
+        "text": "Refactored math 04",
+        "line": 5,
+        "slug": "refactored-math-04",
+        "parent_heading_id": null,
+        "start_char": 75,
+        "end_char": 96
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 15,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./math_05.md#sec0",
+        "line": 15,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 15,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail5",
+        "url": "mailto:user5@example.com",
+        "line": 15,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose"
+    },
+    "line_to_section": {
+      "5": "section_refactored-math-04",
+      "6": "section_refactored-math-04",
+      "7": "section_refactored-math-04",
+      "8": "section_refactored-math-04",
+      "9": "section_refactored-math-04",
+      "10": "section_refactored-math-04",
+      "11": "section_refactored-math-04",
+      "12": "section_refactored-math-04",
+      "13": "section_refactored-math-04",
+      "14": "section_refactored-math-04",
+      "15": "section_refactored-math-04",
+      "16": "section_refactored-math-04"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

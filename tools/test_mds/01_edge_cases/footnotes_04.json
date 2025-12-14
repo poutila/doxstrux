@@ -1,23 +1,279 @@
 {
-  "id": "footnotes_04",
-  "kind": "footnotes",
-  "features": {
-    "headings": 2,
-    "lists": 0,
-    "tables": 0,
-    "fences": 0,
-    "indented_code_lines": 0,
-    "images": 0,
-    "links": 4,
-    "math_blocks": 0,
-    "html_blocks": 0,
-    "footnote_refs": 1,
-    "footnote_defs": 1,
-    "admonitions": 0,
-    "definition_list": 0
+  "metadata": {
+    "total_lines": 13,
+    "total_chars": 279,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "front_matter": 1,
+      "heading": 1,
+      "inline": 4,
+      "text": 10,
+      "paragraph": 3,
+      "footnote_ref": 1,
+      "link": 3,
+      "footnote_block": 1,
+      "footnote": 1,
+      "footnote_anchor": 1
+    },
+    "frontmatter": {
+      "title": "Refactored footnotes 04",
+      "id": "ref_footnotes_04",
+      "note": "footnotes-case"
+    },
+    "has_frontmatter": true,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": true,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 2,
+          "https": 1
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/footnotes_04.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links"
-  ]
+  "content": {
+    "raw": "---\ntitle: \"Refactored footnotes 04\"\nid: ref_footnotes_04\nnote: footnotes-case\n---\n# Refactored footnotes 04\n\nFootnote ref here[^a].\n\n[^a]: A proper footnote.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_05.md#sec0) [ext4](https://example.com/4)\n",
+    "lines": [
+      "---",
+      "title: \"Refactored footnotes 04\"",
+      "id: ref_footnotes_04",
+      "note: footnotes-case",
+      "---",
+      "# Refactored footnotes 04",
+      "",
+      "Footnote ref here[^a].",
+      "",
+      "[^a]: A proper footnote.",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_05.md#sec0) [ext4](https://example.com/4)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-footnotes-04",
+        "level": 1,
+        "title": "Refactored footnotes 04",
+        "slug": "refactored-footnotes-04",
+        "start_line": 5,
+        "end_line": 12,
+        "start_char": 83,
+        "end_char": 279,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored footnotes 04\n\nFootnote ref here[^a].\n\n[^a]: A proper footnote.\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./footnotes_05.md#sec0) [ext4](https://example.com/4)\n",
+        "text_content": "Refactored footnotes 04\n\nFootnote ref here.\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4A proper footnote."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Footnote ref here.",
+        "start_line": 7,
+        "end_line": 8,
+        "section_id": "section_refactored-footnotes-04",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4",
+        "start_line": 11,
+        "end_line": 12,
+        "section_id": "section_refactored-footnotes-04",
+        "word_count": 4,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "A proper footnote.",
+        "start_line": 9,
+        "end_line": 10,
+        "section_id": "section_refactored-footnotes-04",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_refactored-footnotes-04",
+        "level": 1,
+        "text": "Refactored footnotes 04",
+        "line": 5,
+        "slug": "refactored-footnotes-04",
+        "parent_heading_id": null,
+        "start_char": 83,
+        "end_char": 109
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 11,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./footnotes_05.md#sec0",
+        "line": 11,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 11,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": {
+      "title": "Refactored footnotes 04",
+      "id": "ref_footnotes_04",
+      "note": "footnotes-case"
+    },
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [
+        {
+          "label": "a",
+          "id": "a",
+          "start_line": null,
+          "end_line": null,
+          "content": "A proper footnote.",
+          "byte_length": 18,
+          "nested_structures": [],
+          "section_id": null
+        }
+      ],
+      "references": [
+        {
+          "label": "a",
+          "id": "a",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "line_to_section": {
+      "5": "section_refactored-footnotes-04",
+      "6": "section_refactored-footnotes-04",
+      "7": "section_refactored-footnotes-04",
+      "8": "section_refactored-footnotes-04",
+      "9": "section_refactored-footnotes-04",
+      "10": "section_refactored-footnotes-04",
+      "11": "section_refactored-footnotes-04",
+      "12": "section_refactored-footnotes-04"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

@@ -1,9 +1,153 @@
 {
-  "id": "22_html_h1_not_markdown",
-  "note": "HTML-level heading shouldn't be counted as markdown heading.",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 5,
+    "total_chars": 66,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 1,
+      "text": 1,
+      "html_block": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": true,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/22_html_h1_not_markdown.md"
+  },
+  "content": {
+    "raw": "# Test: 22_html_h1_not_markdown\n\n<h1>HTML Heading</h1>\nParagraph.\n",
+    "lines": [
+      "# Test: 22_html_h1_not_markdown",
+      "",
+      "<h1>HTML Heading</h1>",
+      "Paragraph.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-22_html_h1_not_markdown",
+        "level": 1,
+        "title": "Test: 22_html_h1_not_markdown",
+        "slug": "test-22_html_h1_not_markdown",
+        "start_line": 0,
+        "end_line": 4,
+        "start_char": 0,
+        "end_char": 66,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 22_html_h1_not_markdown\n\n<h1>HTML Heading</h1>\nParagraph.\n",
+        "text_content": "Test: 22_html_h1_not_markdown"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-22_html_h1_not_markdown",
+        "level": 1,
+        "text": "Test: 22_html_h1_not_markdown",
+        "line": 0,
+        "slug": "test-22_html_h1_not_markdown",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 32
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [
+      {
+        "content": "<h1>HTML Heading</h1>\nParagraph.\n",
+        "raw_content": "<h1>HTML Heading</h1>\nParagraph.",
+        "start_line": 2,
+        "end_line": 4,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_test-22_html_h1_not_markdown",
+        "tag_hints": [
+          "h1"
+        ]
+      }
+    ],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-22_html_h1_not_markdown",
+      "1": "section_test-22_html_h1_not_markdown",
+      "2": "section_test-22_html_h1_not_markdown",
+      "3": "section_test-22_html_h1_not_markdown",
+      "4": "section_test-22_html_h1_not_markdown"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

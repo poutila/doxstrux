@@ -24,10 +24,10 @@
         "frontmatter_at_bof": false,
         "ragged_tables_count": 0,
         "allowed_schemes": [
-          "tel",
-          "mailto",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "table_align_mismatches": 0,
         "nested_headings_blocked": 0,
@@ -50,7 +50,12 @@
         "unicode_risk_score": 0
       },
       "profile_used": "moderate"
-    }
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/16_performance/test_requirements.md"
   },
   "content": {
     "raw": "# Test Requirements Document\n\n## Section 1: Basic Requirements\n\nThe system MUST support user authentication.\nUsers SHOULD be able to reset their passwords.\nThe API MAY support webhooks for real-time updates.\nThe system MUST NOT store passwords in plain text.\n\n## Section 2: Requirements in Lists\n\n- The application MUST load within 3 seconds\n- The database SHOULD support horizontal scaling\n- The UI MAY include dark mode support\n- Logs MUST NOT contain sensitive user data\n\n## Section 3: Mixed Content\n\nThis paragraph contains a requirement: The system MUST validate all user inputs.\n\n### Nested requirements\n\nIn nested sections, we still find requirements. The cache SHOULD expire after 1 hour.\n\n> Even in blockquotes: The API MUST return proper HTTP status codes.\n\n## Section 4: Complex Requirements\n\nThe authentication system MUST:\n- Support multi-factor authentication\n- Allow session management\n- Integrate with OAuth providers\n\nThe logging system SHOULD NOT expose internal system details in production.",
@@ -252,32 +257,26 @@
         "items": [
           {
             "text": "The application MUST load within 3 seconds",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "The database SHOULD support horizontal scaling",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "The UI MAY include dark mode support",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Logs MUST NOT contain sensitive user data",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 4,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 4
       },
       {
         "id": "list_1",
@@ -288,26 +287,21 @@
         "items": [
           {
             "text": "Support multi-factor authentication",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Allow session management",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Integrate with OAuth providers",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 3,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 3
       }
     ],
     "tables": [],
@@ -390,6 +384,16 @@
         "children_blocks": []
       }
     ],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "html_blocks": [],
     "html_inline": []
   },

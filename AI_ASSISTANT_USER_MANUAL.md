@@ -45,11 +45,11 @@ These directories must NEVER be edited without explicit human approval:
 
 | Directory | Contents | Why Protected |
 |-----------|----------|---------------|
-| `tools/baseline_outputs/` | 542 frozen baseline JSON files | Ground truth for regression testing |
-| `tools/test_mds/` | 542 test markdown files | Test corpus - changes invalidate all baselines |
+| `tools/baseline_outputs/` | 591 frozen baseline JSON files | Ground truth for regression testing |
+| `tools/test_mds/` | 591 test markdown files + specs | Test corpus - changes invalidate all baselines |
 | `tools/mds.zip` | Compressed backup | Archive integrity |
 
-**To modify**: Stop. Ask for human approval. Explain the change and its impact on all 542 baseline tests.
+**To modify**: Stop. Ask for human approval. Explain the change and its impact on all 591 baseline tests.
 
 ### 1.3 Clean Table Principle
 
@@ -104,7 +104,7 @@ def test_parser_extracts_headings():
 | Python | 3.12+ (strict requirement) |
 | License | MIT |
 | Test Coverage | 80% minimum enforced |
-| Baseline Tests | 542 (100% must pass) |
+| Baseline Tests | 591 (100% must pass) |
 
 ### Core Philosophy
 
@@ -123,7 +123,8 @@ doxstrux/
 ├── src/doxstrux/
 │   ├── __init__.py              # Public exports
 │   ├── api.py                   # parse_markdown_file() - MAIN ENTRY POINT
-│   ├── markdown_parser_core.py  # Core parser (1973 lines)
+│   ├── rag_guard.py             # RAG policy wrapper
+│   ├── markdown_parser_core.py  # Core parser (2075 lines)
 │   └── markdown/
 │       ├── config.py            # Security profiles (SSOT)
 │       ├── budgets.py           # Resource limits
@@ -146,14 +147,15 @@ doxstrux/
 │       └── utils/
 │           ├── encoding.py      # Robust encoding detection
 │           ├── line_utils.py
+│           ├── section_utils.py
 │           ├── text_utils.py
 │           └── token_utils.py
 ├── tests/                       # pytest tests (80% coverage required)
 ├── tools/
 │   ├── baseline_test_runner.py  # Parity testing
 │   ├── test_feature_counts.py   # Feature validation
-│   ├── baseline_outputs/        # 542 frozen baselines (READ-ONLY)
-│   └── test_mds/                # 542 test files (READ-ONLY)
+│   ├── baseline_outputs/        # 591 frozen baselines (READ-ONLY)
+│   └── test_mds/                # 591 test markdown files + specs (READ-ONLY)
 ├── pyproject.toml
 ├── CLAUDE.md                    # Development guide
 └── SECURITY.md                  # Security documentation
@@ -185,41 +187,63 @@ result = parse_markdown_file(
 ```python
 {
     "metadata": {
-        "source_path": str,
-        "encoding": {"detected": str, "confidence": float},
+        "total_lines": int,
+        "total_chars": int,
+        "has_sections": bool,
+        "has_code": bool,
+        "has_tables": bool,
+        "has_lists": bool,
+        "node_counts": dict,
+        "has_frontmatter": bool,
+        "frontmatter": dict | None,
         "security": {
             "profile_used": str,
             "warnings": list,
-            "prompt_injection_in_content": bool,
-            "embedding_blocked": bool,
-            "quarantined": bool
-        }
+            "statistics": dict,
+            "summary": dict,
+        },
+        "source_path": str,
+        "encoding": {"detected": str, "confidence": float},
+        "embedding_blocked": bool,
+        "embedding_block_reason": str | None,
+        "quarantined": bool,
+        "quarantine_reasons": list[str]
     },
     "content": {
         "raw": str,
         "lines": list[str]
     },
     "structure": {
-        "sections": list[dict],
-        "headings": list[dict],
         "paragraphs": list[dict],
         "lists": list[dict],
         "tasklists": list[dict],
         "tables": list[dict],
         "code_blocks": list[dict],
-        "links": list[dict],
-        "images": list[dict],
+        "sections": list[dict],
+        "headings": list[dict],
+        "links": list[dict],         # scheme + allowed metadata
+        "images": list[dict],        # scheme + data URI sizing
         "blockquotes": list[dict],
-        "footnotes": dict,
-        "html_blocks": list[dict],
-        "html_inline": list[dict],
-        "math": dict
+        "frontmatter": dict | None,
+        "math": dict,
+        "footnotes": dict,           # only when footnotes plugin is enabled
+        "html_blocks": list[dict],   # always extracted; stripped when allows_html=False
+        "html_inline": list[dict]
     },
     "mappings": {
-        "line_to_type": dict  # Line number -> "prose" or "code"
+        "line_to_type": dict,      # Line number -> "prose" or "code"
+        "line_to_section": dict,   # Line number -> section id
+        "prose_lines": list[int],
+        "code_lines": list[int],
+        "code_blocks": list[dict], # Inclusive line ranges + language
     }
 }
 ```
+
+- `parse_markdown_file()` adds `encoding` and `source_path`.
+- `embedding_blocked`/`quarantined` live at the top of `metadata`; `security.statistics` contains the detection signals (scripts, disallowed schemes, Unicode risk, prompt injection, etc.).
+- HTML is always parsed for security scanning; when `allows_html=False` the content is extracted then stripped by policy.
+- Footnotes appear only when the footnotes plugin is allowed for the selected profile.
 
 ### 4.3 Public Exports
 
@@ -230,7 +254,10 @@ from doxstrux import (
     DocNode,                 # Document tree node
     ChunkPolicy,             # Chunking configuration
     Chunk,                   # Output chunk
-    PromptInjectionCheck     # Security check result
+    PromptInjectionCheck,    # Security check result
+    DecisionSeverity,        # RAG guard severity levels
+    GuardDecision,           # RAG guard decision dataclass
+    guard_doxstrux_for_rag,  # RAG policy wrapper
 )
 ```
 
@@ -288,36 +315,29 @@ All validations are **fail-closed** - suspicious content is blocked, not logged:
 
 ### 5.3 Embedding Blocking
 
-The `embedding_blocked` flag is set when content is too risky for RAG:
+The `embedding_blocked` flag lives at `result["metadata"]["embedding_blocked"]` and is set when content is too risky for RAG:
 
 ```python
-result["metadata"]["security"]["embedding_blocked"]  # True = don't embed
+result["metadata"]["embedding_blocked"]  # True = don't embed
 ```
 
 Triggers:
-- Script tags detected
-- Disallowed link schemes
-- Style-based JavaScript injection
-- Prompt injection (strict profile only via quarantine)
+- Script tags detected in HTML tokens
+- Disallowed link schemes (tokens) or raw scan of dangerous schemes
+- Style-based JavaScript injection in attributes
+- Meta refresh redirects
+- Frame-like HTML elements (iframe/object/embed)
+- Oversized data URIs raise MarkdownSizeError (fail-closed)
+
+`quarantined` is separate and only set when the profile's `quarantine_on_injection` is true (strict) and the parser flags prompt injection in content/footnotes, ragged tables, or long footnotes.
 
 ### 5.4 Prompt Injection Detection
 
-```python
-from doxstrux.markdown.security.validators import check_prompt_injection
+`security_validators.check_prompt_injection` scans truncated content according to `max_injection_scan_chars` for the active profile. The parser applies it to:
+- Raw content, link text/title, image alt/title, code blocks, table cells, and footnotes
+- Security profile controls scan length (strict scans 4096 chars, moderate 2048, permissive 1024)
 
-result = check_prompt_injection(text, profile="strict")
-# result.suspected: bool (True if injection OR error)
-# result.reason: "pattern_match", "validator_error", "no_match"
-# result.pattern: Optional[str] (matched pattern)
-```
-
-**Detected patterns include**:
-- "ignore previous instructions"
-- "disregard previous instructions"
-- "system: you are a"
-- "pretend you are"
-- "act as if"
-- "bypass your instructions"
+Patterns include "ignore previous instructions", "disregard previous instructions", "system: you are", "pretend you are", "act as if", "bypass your instructions", etc. Failures are fail-closed and treated as suspected injection.
 
 ---
 
@@ -358,8 +378,8 @@ config = {
 | Type | Command | Purpose |
 |------|---------|---------|
 | Unit Tests | `pytest` | 80% coverage required |
-| Parity Tests | `python tools/baseline_test_runner.py` | 542/542 must pass |
-| Feature Tests | `python tools/test_feature_counts.py` | ~94.5% expected |
+| Parity Tests | `python tools/baseline_test_runner.py` | 591/591 must pass |
+| Feature Tests | `python tools/test_feature_counts.py` | Validates feature counts; tolerates known tricky features |
 
 ### 7.2 Baseline Testing System
 
@@ -367,19 +387,19 @@ config = {
 
 **Components**:
 
-1. **SSOT Test Pairs** (`tools/test_mds/`):
-   - 542 markdown files with 542 JSON specifications
-   - Organized in 32 categories (edge_cases, security, encoding, etc.)
+1. **SSOT Test Corpus** (`tools/test_mds/`):
+   - 591 markdown files across 32 categories (edge_cases, security, encoding, etc.)
+   - 590 have paired JSON specifications for feature-count tests (one README helper file does not)
 
 2. **Frozen Baselines** (`tools/baseline_outputs/`):
-   - 542 verified parser outputs
+   - 591 verified `.baseline.json` parser outputs
    - Read-only (chmod a-w)
    - Ground truth for comparison
 
 3. **Parity Test**:
    - Compares current output to frozen baselines
    - Byte-by-byte JSON comparison
-   - 100% pass rate required (542/542)
+   - 100% pass rate required (591/591)
 
 ### 7.3 Running Tests
 
@@ -390,7 +410,7 @@ config = {
 # With coverage
 .venv/bin/python -m pytest --cov=src/doxstrux --cov-report=html
 
-# Parity tests (542 baselines)
+# Parity tests (591 baselines)
 .venv/bin/python tools/baseline_test_runner.py \
     --test-dir tools/test_mds \
     --baseline-dir tools/baseline_outputs
@@ -407,8 +427,8 @@ bash tools/run_tests_fast.sh 01_edge_cases
 | Test | Expected | Notes |
 |------|----------|-------|
 | pytest | All pass | 80% coverage required |
-| Parity | 542/542 (100%) | Zero tolerance |
-| Feature counts | ~512/542 (94.5%) | 30 Pandoc failures OK |
+| Parity | 591/591 (100%) | Zero tolerance |
+| Feature counts | Majority pass | Known tolerances on inline_code/ref_links/hrules; investigate critical mismatches |
 
 ---
 
@@ -433,7 +453,7 @@ Before committing any changes:
 3. **Run type checking**: `mypy src/doxstrux` (must pass)
 4. **Run linting**: `ruff check --fix src/ tests/`
 5. **If parser changed**:
-   - Run parity: `python tools/baseline_test_runner.py` (must be 542/542)
+   - Run parity: `python tools/baseline_test_runner.py` (must be 591/591)
    - Run features: `python tools/test_feature_counts.py`
 6. **Update CHANGELOG.md**
 
@@ -613,7 +633,7 @@ except Exception as e:
 # Run with coverage
 .venv/bin/python -m pytest --cov=src/doxstrux
 
-# Parity tests (542 baselines)
+# Parity tests (591 baselines)
 .venv/bin/python tools/baseline_test_runner.py --test-dir tools/test_mds --baseline-dir tools/baseline_outputs
 
 # Type checking
@@ -628,6 +648,7 @@ ruff check --fix src/ tests/
 | File | Purpose |
 |------|---------|
 | `src/doxstrux/api.py` | Public entry point |
+| `src/doxstrux/rag_guard.py` | RAG-facing security policy wrapper |
 | `src/doxstrux/markdown_parser_core.py` | Core parser |
 | `src/doxstrux/markdown/config.py` | Security profiles (SSOT) |
 | `src/doxstrux/markdown/security/validators.py` | Security validation |
@@ -654,8 +675,8 @@ ruff check --fix src/ tests/
 | Version | 0.2.1 |
 | Python | 3.12+ |
 | Test Coverage | 80%+ |
-| Baseline Tests | 542/542 passing |
-| Core Parser Lines | 1,973 |
+| Baseline Tests | 591/591 passing |
+| Core Parser Lines | 2,075 |
 | Regex in Parser | 0 (10 in security only) |
 | Extractors | 11 modules |
 
@@ -669,6 +690,6 @@ This manual is written by an AI assistant who will use it. Every detail is here 
 2. **Never edit baselines** - Ask human approval first
 3. **No silent exceptions** - All errors must raise
 4. **No regex in parser** - Token-based only
-5. **Test everything** - 80% coverage, 542/542 parity
+5. **Test everything** - 80% coverage, 591/591 parity
 
 When in doubt, read `CLAUDE.md`. When still in doubt, ask.

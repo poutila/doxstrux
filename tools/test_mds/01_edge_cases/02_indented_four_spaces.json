@@ -1,9 +1,181 @@
 {
-  "id": "02_indented_four_spaces",
-  "note": "ATX markers indented ≥4 are code blocks.",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 5,
+    "total_chars": 69,
+    "has_sections": true,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 2,
+      "inline": 2,
+      "text": 2,
+      "code_block": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/02_indented_four_spaces.md"
+  },
+  "content": {
+    "raw": "# Test: 02_indented_four_spaces\n\n# indented by four\n    ## also code\n",
+    "lines": [
+      "# Test: 02_indented_four_spaces",
+      "",
+      "# indented by four",
+      "    ## also code",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-02_indented_four_spaces",
+        "level": 1,
+        "title": "Test: 02_indented_four_spaces",
+        "slug": "test-02_indented_four_spaces",
+        "start_line": 0,
+        "end_line": 1,
+        "start_char": 0,
+        "end_char": 33,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 02_indented_four_spaces\n",
+        "text_content": "Test: 02_indented_four_spaces"
+      },
+      {
+        "id": "section_indented-by-four",
+        "level": 1,
+        "title": "indented by four",
+        "slug": "indented-by-four",
+        "start_line": 2,
+        "end_line": 4,
+        "start_char": 33,
+        "end_char": 69,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# indented by four\n    ## also code\n",
+        "text_content": "indented by four"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "indented",
+        "language": "",
+        "content": "## also code\n",
+        "start_line": 3,
+        "end_line": 4,
+        "section_id": "section_indented-by-four"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_test-02_indented_four_spaces",
+        "level": 1,
+        "text": "Test: 02_indented_four_spaces",
+        "line": 0,
+        "slug": "test-02_indented_four_spaces",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 32
+      },
+      {
+        "id": "heading_indented-by-four",
+        "level": 1,
+        "text": "indented by four",
+        "line": 2,
+        "slug": "indented-by-four",
+        "parent_heading_id": null,
+        "start_char": 33,
+        "end_char": 52
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "code",
+      "4": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-02_indented_four_spaces",
+      "1": "section_test-02_indented_four_spaces",
+      "2": "section_indented-by-four",
+      "3": "section_indented-by-four",
+      "4": "section_indented-by-four"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "code_lines": [
+      3
+    ],
+    "code_blocks": [
+      {
+        "start_line": 3,
+        "end_line": 3,
+        "language": ""
+      }
+    ]
+  }
 }

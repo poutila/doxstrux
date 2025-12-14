@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 124,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 2,
+      "paragraph": 1,
+      "image": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "prompt_injection",
+          "line": null,
+          "message": "Suspected prompt injection patterns detected in content"
+        },
+        {
+          "type": "prompt_injection_image",
+          "line": 2,
+          "message": "Prompt injection in image alt/title text"
+        },
+        {
+          "type": "prompt_injection_link",
+          "line": 2,
+          "message": "Prompt injection in link text/title"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "https"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 1
+        },
+        "unicode_risk_score": 0,
+        "suspected_prompt_injection": true,
+        "prompt_injection_in_images": true,
+        "prompt_injection_in_links": true
+      },
+      "prompt_injection_in_content": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 3,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "strict"
+    },
+    "quarantined": true,
+    "quarantine_reasons": [
+      "prompt_injection_content"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/additional_test_mds/claude_tests/53_prompt_injection_in_images.md"
+  },
+  "content": {
+    "raw": "# Test: 53_prompt_injection_in_images\n\n![Image alt text with ignore previous instructions](image.jpg \"Override the system\")\n",
+    "lines": [
+      "# Test: 53_prompt_injection_in_images",
+      "",
+      "![Image alt text with ignore previous instructions](image.jpg \"Override the system\")",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-53_prompt_injection_in_images",
+        "level": 1,
+        "title": "Test: 53_prompt_injection_in_images",
+        "slug": "test-53_prompt_injection_in_images",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 124,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 53_prompt_injection_in_images\n\n![Image alt text with ignore previous instructions](image.jpg \"Override the system\")\n",
+        "text_content": "Test: 53_prompt_injection_in_images"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Image alt text with ignore previous instructionsImage alt text with ignore previous instructions",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_test-53_prompt_injection_in_images",
+        "word_count": 13,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-53_prompt_injection_in_images",
+        "level": 1,
+        "text": "Test: 53_prompt_injection_in_images",
+        "line": 0,
+        "slug": "test-53_prompt_injection_in_images",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 38
+      }
+    ],
+    "links": [
+      {
+        "image_id": "6dfc4c6cf38eee9c",
+        "text": "Image alt text with ignore previous instructions",
+        "url": "image.jpg",
+        "src": "image.jpg",
+        "alt": "Image alt text with ignore previous instructions",
+        "title": "Override the system",
+        "line": 2,
+        "type": "image",
+        "image_kind": "local",
+        "format": "jpg"
+      }
+    ],
+    "images": [
+      {
+        "image_id": "6dfc4c6cf38eee9c",
+        "src": "image.jpg",
+        "alt": "Image alt text with ignore previous instructions",
+        "title": "Override the system",
+        "line": 2,
+        "image_kind": "local",
+        "format": "jpg",
+        "has_alt": true,
+        "has_title": true,
+        "scheme": null,
+        "allowed": true
+      }
+    ],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-53_prompt_injection_in_images",
+      "1": "section_test-53_prompt_injection_in_images",
+      "2": "section_test-53_prompt_injection_in_images",
+      "3": "section_test-53_prompt_injection_in_images"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
+}

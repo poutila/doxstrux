@@ -1,9 +1,238 @@
 {
-  "id": "basic_tasklist_states",
-  "category": "tasklists",
-  "expected": {
-    "unchecked": 2,
-    "checked": 2,
-    "allows_inline_formatting": true
+  "metadata": {
+    "total_lines": 7,
+    "total_chars": 100,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 5,
+      "text": 7,
+      "bullet_list": 1,
+      "list_item": 4,
+      "paragraph": 4,
+      "html_inline": 4,
+      "strong": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "mixed_scripts",
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "mixed_scripts": true,
+        "unicode_risk_score": 1
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 1
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf_8",
+      "confidence": 0.4444
+    },
+    "source_path": "tools/test_mds/19_tasklists/basic_tasklist_states.md"
+  },
+  "content": {
+    "raw": "# Task list \u2014 basic\n\n- [ ] Unchecked\n- [x] Checked\n- [X] Checked uppercase\n- [ ] With **bold** text\n",
+    "lines": [
+      "# Task list \u2014 basic",
+      "",
+      "- [ ] Unchecked",
+      "- [x] Checked",
+      "- [X] Checked uppercase",
+      "- [ ] With **bold** text",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_task-list-basic",
+        "level": 1,
+        "title": "Task list \u2014 basic",
+        "slug": "task-list-basic",
+        "start_line": 0,
+        "end_line": 6,
+        "start_char": 0,
+        "end_char": 100,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Task list \u2014 basic\n\n- [ ] Unchecked\n- [x] Checked\n- [X] Checked uppercase\n- [ ] With **bold** text\n",
+        "text_content": "Task list \u2014 basic\n\n Unchecked  Checked  Checked uppercase  With bold text"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_task-list-basic",
+        "level": 1,
+        "text": "Task list \u2014 basic",
+        "line": 0,
+        "slug": "task-list-basic",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 20
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 6,
+        "section_id": "section_task-list-basic",
+        "items": [
+          {
+            "text": "Unchecked",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Checked",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Checked uppercase",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "With bold text",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 4,
+        "checked_count": 2,
+        "unchecked_count": 2,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_task-list-basic",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 3,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_task-list-basic",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 4,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_task-list-basic",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 5,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_task-list-basic",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose"
+    },
+    "line_to_section": {
+      "0": "section_task-list-basic",
+      "1": "section_task-list-basic",
+      "2": "section_task-list-basic",
+      "3": "section_task-list-basic",
+      "4": "section_task-list-basic",
+      "5": "section_task-list-basic",
+      "6": "section_task-list-basic"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

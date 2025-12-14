@@ -1,23 +1,464 @@
 {
-  "id": "tasks_02",
-  "kind": "tasks",
-  "features": {
-    "headings": 2,
-    "lists": 6,
-    "tables": 0,
-    "fences": 0,
-    "indented_code_lines": 1,
-    "images": 1,
-    "links": 7,
-    "math_blocks": 0,
-    "html_blocks": 0,
-    "footnote_refs": 0,
-    "footnote_defs": 0,
-    "admonitions": 0,
-    "definition_list": 0
+  "metadata": {
+    "total_lines": 20,
+    "total_chars": 516,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "front_matter": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 19,
+      "bullet_list": 6,
+      "list_item": 6,
+      "paragraph": 8,
+      "html_inline": 4,
+      "softbreak": 2,
+      "link": 4,
+      "image": 1
+    },
+    "frontmatter": {
+      "title": "Refactored tasks 02",
+      "id": "ref_tasks_02",
+      "note": "tasks-case"
+    },
+    "has_frontmatter": true,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": true,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 3,
+          "https": 1,
+          "mailto": 1
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/tasks_02.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links"
-  ]
+  "content": {
+    "raw": "---\ntitle: \"Refactored tasks 02\"\nid: ref_tasks_02\nnote: tasks-case\n---\n# Refactored tasks 02\n\n- list level 1\n  - [x] task level 2\n    - [ ] task level 3\n      - [x] task level 4\n        - list level 5\n          - [x] task level 6\n                code in list\n            \tindented with tab\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tasks_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n",
+    "lines": [
+      "---",
+      "title: \"Refactored tasks 02\"",
+      "id: ref_tasks_02",
+      "note: tasks-case",
+      "---",
+      "# Refactored tasks 02",
+      "",
+      "- list level 1",
+      "  - [x] task level 2",
+      "    - [ ] task level 3",
+      "      - [x] task level 4",
+      "        - list level 5",
+      "          - [x] task level 6",
+      "                code in list",
+      "            \tindented with tab",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tasks_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
+      "",
+      "![ok0](https://via.placeholder.com/64 \"t0\")",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-tasks-02",
+        "level": 1,
+        "title": "Refactored tasks 02",
+        "slug": "refactored-tasks-02",
+        "start_line": 5,
+        "end_line": 19,
+        "start_char": 71,
+        "end_char": 516,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored tasks 02\n\n- list level 1\n  - [x] task level 2\n    - [ ] task level 3\n      - [x] task level 4\n        - list level 5\n          - [x] task level 6\n                code in list\n            \tindented with tab\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tasks_03.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n\n![ok0](https://via.placeholder.com/64 \"t0\")\n",
+        "text_content": "Refactored tasks 02\n\nlist level 1  task level 2  task level 3  task level 4 list level 5  task level 6\ncode in list\nindented with tab\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_refactored-tasks-02",
+        "word_count": 6,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "ok0ok0",
+        "start_line": 18,
+        "end_line": 19,
+        "section_id": "section_refactored-tasks-02",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 7,
+        "end_line": 16,
+        "section_id": "section_refactored-tasks-02",
+        "items": [
+          {
+            "text": "list level 1",
+            "children": [
+              {
+                "text": " task level 2",
+                "children": [
+                  {
+                    "text": " task level 3",
+                    "children": [
+                      {
+                        "text": " task level 4",
+                        "children": [
+                          {
+                            "text": "list level 5",
+                            "children": [
+                              {
+                                "text": " task level 6\ncode in list\nindented with tab",
+                                "children": [],
+                                "blocks": []
+                              }
+                            ],
+                            "blocks": []
+                          }
+                        ],
+                        "blocks": []
+                      }
+                    ],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 1
+      }
+    ],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "indented",
+        "language": "",
+        "content": "- [ ] task level 3\n  - [x] task level 4\n    - list level 5\n      - [x] task level 6\n            code in list\n        \tindented with tab\n",
+        "start_line": 9,
+        "end_line": 15,
+        "section_id": "section_refactored-tasks-02"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_refactored-tasks-02",
+        "level": 1,
+        "text": "Refactored tasks 02",
+        "line": 5,
+        "slug": "refactored-tasks-02",
+        "parent_heading_id": null,
+        "start_char": 71,
+        "end_char": 93
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 16,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./tasks_03.md#sec0",
+        "line": 16,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 16,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail5",
+        "url": "mailto:user5@example.com",
+        "line": 16,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      },
+      {
+        "image_id": "6127a0b18849bb60",
+        "text": "ok0",
+        "url": "https://via.placeholder.com/64",
+        "src": "https://via.placeholder.com/64",
+        "alt": "ok0",
+        "title": "t0",
+        "line": 18,
+        "type": "image",
+        "image_kind": "external",
+        "format": "unknown"
+      }
+    ],
+    "images": [
+      {
+        "image_id": "6127a0b18849bb60",
+        "src": "https://via.placeholder.com/64",
+        "alt": "ok0",
+        "title": "t0",
+        "line": 18,
+        "image_kind": "external",
+        "format": "unknown",
+        "has_alt": true,
+        "has_title": true,
+        "scheme": "https",
+        "allowed": true
+      }
+    ],
+    "blockquotes": [],
+    "frontmatter": {
+      "title": "Refactored tasks 02",
+      "id": "ref_tasks_02",
+      "note": "tasks-case"
+    },
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 8,
+        "end_line": 16,
+        "section_id": "section_refactored-tasks-02",
+        "items": [
+          {
+            "text": "task level 2",
+            "checked": true,
+            "children": [
+              {
+                "text": "task level 3",
+                "checked": false,
+                "children": [
+                  {
+                    "text": "task level 4",
+                    "checked": true,
+                    "children": [
+                      {
+                        "text": "list level 5",
+                        "children": [
+                          {
+                            "text": " task level 6\ncode in list\nindented with tab",
+                            "children": [],
+                            "blocks": []
+                          }
+                        ],
+                        "blocks": []
+                      }
+                    ],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 1,
+        "checked_count": 1,
+        "unchecked_count": 0,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 8,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_refactored-tasks-02",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 9,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_refactored-tasks-02",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 10,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_refactored-tasks-02",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 12,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_refactored-tasks-02",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "code",
+      "10": "code",
+      "11": "code",
+      "12": "code",
+      "13": "code",
+      "14": "code",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose"
+    },
+    "line_to_section": {
+      "5": "section_refactored-tasks-02",
+      "6": "section_refactored-tasks-02",
+      "7": "section_refactored-tasks-02",
+      "8": "section_refactored-tasks-02",
+      "9": "section_refactored-tasks-02",
+      "10": "section_refactored-tasks-02",
+      "11": "section_refactored-tasks-02",
+      "12": "section_refactored-tasks-02",
+      "13": "section_refactored-tasks-02",
+      "14": "section_refactored-tasks-02",
+      "15": "section_refactored-tasks-02",
+      "16": "section_refactored-tasks-02",
+      "17": "section_refactored-tasks-02",
+      "18": "section_refactored-tasks-02",
+      "19": "section_refactored-tasks-02"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "code_lines": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "code_blocks": [
+      {
+        "start_line": 9,
+        "end_line": 14,
+        "language": ""
+      }
+    ]
+  }
 }

@@ -1,11 +1,371 @@
 {
-  "id": "deep_nested_tasks",
-  "category": "tasklists",
-  "expected": {
-    "checked": 5,
-    "unchecked": 5,
-    "nested_tasks_present": true,
-    "ordered_steps_under_task": false,
-    "allows_inline_formatting": false
+  "metadata": {
+    "total_lines": 13,
+    "total_chars": 259,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 11,
+      "text": 11,
+      "bullet_list": 5,
+      "list_item": 10,
+      "paragraph": 10,
+      "html_inline": 10
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/19_tasklists/deep_nested_tasks.md"
+  },
+  "content": {
+    "raw": "# Deep nested task lists\n\n- [ ] Level 1 task\n  - [ ] Level 2 task\n    - [x] Level 3 done\n      - [ ] Level 4 task\n        - [x] Level 5 done\n        - [ ] Level 5 pending\n      - [x] Level 4 done\n    - [ ] Level 3 task\n  - [x] Level 2 done\n- [x] Level 1 done\n",
+    "lines": [
+      "# Deep nested task lists",
+      "",
+      "- [ ] Level 1 task",
+      "  - [ ] Level 2 task",
+      "    - [x] Level 3 done",
+      "      - [ ] Level 4 task",
+      "        - [x] Level 5 done",
+      "        - [ ] Level 5 pending",
+      "      - [x] Level 4 done",
+      "    - [ ] Level 3 task",
+      "  - [x] Level 2 done",
+      "- [x] Level 1 done",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_deep-nested-task-lists",
+        "level": 1,
+        "title": "Deep nested task lists",
+        "slug": "deep-nested-task-lists",
+        "start_line": 0,
+        "end_line": 12,
+        "start_char": 0,
+        "end_char": 259,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Deep nested task lists\n\n- [ ] Level 1 task\n  - [ ] Level 2 task\n    - [x] Level 3 done\n      - [ ] Level 4 task\n        - [x] Level 5 done\n        - [ ] Level 5 pending\n      - [x] Level 4 done\n    - [ ] Level 3 task\n  - [x] Level 2 done\n- [x] Level 1 done\n",
+        "text_content": "Deep nested task lists\n\n Level 1 task  Level 2 task  Level 3 done  Level 4 task  Level 5 done  Level 5 pending  Level 4 done  Level 3 task  Level 2 done  Level 1 done"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "indented",
+        "language": "",
+        "content": "- [x] Level 3 done\n  - [ ] Level 4 task\n    - [x] Level 5 done\n    - [ ] Level 5 pending\n  - [x] Level 4 done\n- [ ] Level 3 task",
+        "start_line": 4,
+        "end_line": 9,
+        "section_id": "section_deep-nested-task-lists"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_deep-nested-task-lists",
+        "level": 1,
+        "text": "Deep nested task lists",
+        "line": 0,
+        "slug": "deep-nested-task-lists",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 25
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 12,
+        "section_id": "section_deep-nested-task-lists",
+        "items": [
+          {
+            "text": "Level 1 task",
+            "checked": false,
+            "children": [
+              {
+                "text": "Level 2 task",
+                "checked": false,
+                "children": [
+                  {
+                    "text": "Level 3 done",
+                    "checked": true,
+                    "children": [
+                      {
+                        "text": "Level 4 task",
+                        "checked": false,
+                        "children": [
+                          {
+                            "text": "Level 5 done",
+                            "checked": true,
+                            "children": [],
+                            "blocks": []
+                          },
+                          {
+                            "text": "Level 5 pending",
+                            "checked": false,
+                            "children": [],
+                            "blocks": []
+                          }
+                        ],
+                        "blocks": []
+                      },
+                      {
+                        "text": "Level 4 done",
+                        "checked": true,
+                        "children": [],
+                        "blocks": []
+                      }
+                    ],
+                    "blocks": []
+                  },
+                  {
+                    "text": "Level 3 task",
+                    "checked": false,
+                    "children": [],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              },
+              {
+                "text": "Level 2 done",
+                "checked": true,
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          },
+          {
+            "text": "Level 1 done",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 2,
+        "checked_count": 1,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 3,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 4,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 5,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 6,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 7,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 8,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 9,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 10,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 11,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_deep-nested-task-lists",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "code",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "line_to_section": {
+      "0": "section_deep-nested-task-lists",
+      "1": "section_deep-nested-task-lists",
+      "2": "section_deep-nested-task-lists",
+      "3": "section_deep-nested-task-lists",
+      "4": "section_deep-nested-task-lists",
+      "5": "section_deep-nested-task-lists",
+      "6": "section_deep-nested-task-lists",
+      "7": "section_deep-nested-task-lists",
+      "8": "section_deep-nested-task-lists",
+      "9": "section_deep-nested-task-lists",
+      "10": "section_deep-nested-task-lists",
+      "11": "section_deep-nested-task-lists",
+      "12": "section_deep-nested-task-lists"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      9,
+      10,
+      11,
+      12
+    ],
+    "code_lines": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "code_blocks": [
+      {
+        "start_line": 4,
+        "end_line": 8,
+        "language": ""
+      }
+    ]
   }
 }

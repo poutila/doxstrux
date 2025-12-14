@@ -1,24 +1,443 @@
 {
-  "id": "tables_04",
-  "kind": "tables",
-  "features": {
-    "headings": 1,
-    "lists": 0,
-    "tables": 15,
-    "fences": 0,
-    "indented_code_lines": 0,
-    "images": 0,
-    "links": 5,
-    "math_blocks": 0,
-    "html_blocks": 0,
-    "footnote_refs": 0,
-    "footnote_defs": 0,
-    "admonitions": 0,
-    "definition_list": 0
+  "metadata": {
+    "total_lines": 22,
+    "total_chars": 1279,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 2,
+      "inline": 60,
+      "text": 63,
+      "heading": 1,
+      "table": 2,
+      "thead": 2,
+      "tr": 13,
+      "th": 9,
+      "tbody": 2,
+      "td": 48,
+      "link": 4
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "ragged_table",
+          "line": 3,
+          "message": "Table has inconsistent column counts"
+        },
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 1,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 2,
+          "https": 1,
+          "mailto": 1
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 1,
+        "total_warnings": 3,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "quarantined": true,
+    "quarantine_reasons": [
+      "ragged_tables:1"
+    ],
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/tables_04.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links",
-    "ragged-table"
-  ]
+  "content": {
+    "raw": "{\"title\":\"Refactored tables 04\",\"id\":\"ref_tables_04\",\"note\":\"tables-case\"}\n# Refactored tables 04\n\n| H1 | H2 | H3 | H4 |\n|:--:|:--:|---:|---:|\n| 1\\\\:1 zulu | 1:2 papa kilo zulu | 1\\\\:3 bravo | 1:4 november |\n| 2\\\\:1 uniform | 2:2 alpha quebec yankee | 2\\\\:3 uniform | 2:4 yankee lima xray | 2\\\\:5 uniform |\n| 3\\\\:1 oscar november whiskey | 3:2 alpha victor | 3\\\\:3 golf | 3:4 hotel kilo | 3\\\\:5 tango yankee alpha |\n| 4\\\\:1 hotel | 4:2 charlie echo | 4\\\\:3 echo november | 4:4 november papa | 4\\\\:5 alpha charlie |\n| 5\\\\:1 alpha | 5:2 mike | 5\\\\:3 hotel |\n| 6\\\\:1 india romeo foxtrot | 6:2 hotel india zulu | 6\\\\:3 golf romeo |\n| 7\\\\:1 kilo papa | 7:2 victor papa alpha |\n\n| H1 | H2 | H3 | H4 | H5 |\n|----|----|---:|:---|---:|\n| 1:1 uniform charlie | 1:2 juliet | 1:3 oscar india uniform | 1:4 uniform bravo | 1:5 golf quebec |\n| 2:1 golf | 2:2 bravo whiskey delta | 2:3 uniform | 2:4 india india india | 2:5 foxtrot whiskey |\n| 3:1 zulu golf oscar | 3:2 papa echo charlie | 3:3 delta | 3:4 november | 3:5 bravo romeo |\n| 4:1 charlie zulu | 4:2 quebec alpha | 4:3 bravo mike | 4:4 bravo mike hotel | 4:5 november kilo uniform |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tables_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n",
+    "lines": [
+      "{\"title\":\"Refactored tables 04\",\"id\":\"ref_tables_04\",\"note\":\"tables-case\"}",
+      "# Refactored tables 04",
+      "",
+      "| H1 | H2 | H3 | H4 |",
+      "|:--:|:--:|---:|---:|",
+      "| 1\\\\:1 zulu | 1:2 papa kilo zulu | 1\\\\:3 bravo | 1:4 november |",
+      "| 2\\\\:1 uniform | 2:2 alpha quebec yankee | 2\\\\:3 uniform | 2:4 yankee lima xray | 2\\\\:5 uniform |",
+      "| 3\\\\:1 oscar november whiskey | 3:2 alpha victor | 3\\\\:3 golf | 3:4 hotel kilo | 3\\\\:5 tango yankee alpha |",
+      "| 4\\\\:1 hotel | 4:2 charlie echo | 4\\\\:3 echo november | 4:4 november papa | 4\\\\:5 alpha charlie |",
+      "| 5\\\\:1 alpha | 5:2 mike | 5\\\\:3 hotel |",
+      "| 6\\\\:1 india romeo foxtrot | 6:2 hotel india zulu | 6\\\\:3 golf romeo |",
+      "| 7\\\\:1 kilo papa | 7:2 victor papa alpha |",
+      "",
+      "| H1 | H2 | H3 | H4 | H5 |",
+      "|----|----|---:|:---|---:|",
+      "| 1:1 uniform charlie | 1:2 juliet | 1:3 oscar india uniform | 1:4 uniform bravo | 1:5 golf quebec |",
+      "| 2:1 golf | 2:2 bravo whiskey delta | 2:3 uniform | 2:4 india india india | 2:5 foxtrot whiskey |",
+      "| 3:1 zulu golf oscar | 3:2 papa echo charlie | 3:3 delta | 3:4 november | 3:5 bravo romeo |",
+      "| 4:1 charlie zulu | 4:2 quebec alpha | 4:3 bravo mike | 4:4 bravo mike hotel | 4:5 november kilo uniform |",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tables_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-tables-04",
+        "level": 1,
+        "title": "Refactored tables 04",
+        "slug": "refactored-tables-04",
+        "start_line": 1,
+        "end_line": 21,
+        "start_char": 75,
+        "end_char": 1279,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored tables 04\n\n| H1 | H2 | H3 | H4 |\n|:--:|:--:|---:|---:|\n| 1\\\\:1 zulu | 1:2 papa kilo zulu | 1\\\\:3 bravo | 1:4 november |\n| 2\\\\:1 uniform | 2:2 alpha quebec yankee | 2\\\\:3 uniform | 2:4 yankee lima xray | 2\\\\:5 uniform |\n| 3\\\\:1 oscar november whiskey | 3:2 alpha victor | 3\\\\:3 golf | 3:4 hotel kilo | 3\\\\:5 tango yankee alpha |\n| 4\\\\:1 hotel | 4:2 charlie echo | 4\\\\:3 echo november | 4:4 november papa | 4\\\\:5 alpha charlie |\n| 5\\\\:1 alpha | 5:2 mike | 5\\\\:3 hotel |\n| 6\\\\:1 india romeo foxtrot | 6:2 hotel india zulu | 6\\\\:3 golf romeo |\n| 7\\\\:1 kilo papa | 7:2 victor papa alpha |\n\n| H1 | H2 | H3 | H4 | H5 |\n|----|----|---:|:---|---:|\n| 1:1 uniform charlie | 1:2 juliet | 1:3 oscar india uniform | 1:4 uniform bravo | 1:5 golf quebec |\n| 2:1 golf | 2:2 bravo whiskey delta | 2:3 uniform | 2:4 india india india | 2:5 foxtrot whiskey |\n| 3:1 zulu golf oscar | 3:2 papa echo charlie | 3:3 delta | 3:4 november | 3:5 bravo romeo |\n| 4:1 charlie zulu | 4:2 quebec alpha | 4:3 bravo mike | 4:4 bravo mike hotel | 4:5 november kilo uniform |\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./tables_05.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com)\n",
+        "text_content": "Refactored tables 04\n\nH1H2H3H4\n\n1\\:1 zulu1:2 papa kilo zulu1\\:3 bravo1:4 november 2\\:1 uniform2:2 alpha quebec yankee2\\:3 uniform2:4 yankee lima xray 3\\:1 oscar november whiskey3:2 alpha victor3\\:3 golf3:4 hotel kilo 4\\:1 hotel4:2 charlie echo4\\:3 echo november4:4 november papa 5\\:1 alpha5:2 mike5\\:3 hotel 6\\:1 india romeo foxtrot6:2 hotel india zulu6\\:3 golf romeo 7\\:1 kilo papa7:2 victor papa alpha\n\nH1H2H3H4H5\n\n1:1 uniform charlie1:2 juliet1:3 oscar india uniform1:4 uniform bravo1:5 golf quebec 2:1 golf2:2 bravo whiskey delta2:3 uniform2:4 india india india2:5 foxtrot whiskey 3:1 zulu golf oscar3:2 papa echo charlie3:3 delta3:4 november3:5 bravo romeo 4:1 charlie zulu4:2 quebec alpha4:3 bravo mike4:4 bravo mike hotel4:5 november kilo uniform\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "{\"title\":\"Refactored tables 04\",\"id\":\"ref_tables_04\",\"note\":\"tables-case\"}",
+        "start_line": 0,
+        "end_line": 1,
+        "section_id": null,
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5",
+        "start_line": 20,
+        "end_line": 21,
+        "section_id": "section_refactored-tables-04",
+        "word_count": 5,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| H1 | H2 | H3 | H4 |\n|:--:|:--:|---:|---:|\n| 1\\\\:1 zulu | 1:2 papa kilo zulu | 1\\\\:3 bravo | 1:4 november |\n| 2\\\\:1 uniform | 2:2 alpha quebec yankee | 2\\\\:3 uniform | 2:4 yankee lima xray | 2\\\\:5 uniform |\n| 3\\\\:1 oscar november whiskey | 3:2 alpha victor | 3\\\\:3 golf | 3:4 hotel kilo | 3\\\\:5 tango yankee alpha |\n| 4\\\\:1 hotel | 4:2 charlie echo | 4\\\\:3 echo november | 4:4 november papa | 4\\\\:5 alpha charlie |\n| 5\\\\:1 alpha | 5:2 mike | 5\\\\:3 hotel |\n| 6\\\\:1 india romeo foxtrot | 6:2 hotel india zulu | 6\\\\:3 golf romeo |\n| 7\\\\:1 kilo papa | 7:2 victor papa alpha |",
+        "headers": [
+          "H1",
+          "H2",
+          "H3",
+          "H4"
+        ],
+        "rows": [
+          [
+            "1\\\\:1 zulu",
+            "1:2 papa kilo zulu",
+            "1\\\\:3 bravo",
+            "1:4 november"
+          ],
+          [
+            "2\\\\:1 uniform",
+            "2:2 alpha quebec yankee",
+            "2\\\\:3 uniform",
+            "2:4 yankee lima xray"
+          ],
+          [
+            "3\\\\:1 oscar november whiskey",
+            "3:2 alpha victor",
+            "3\\\\:3 golf",
+            "3:4 hotel kilo"
+          ],
+          [
+            "4\\\\:1 hotel",
+            "4:2 charlie echo",
+            "4\\\\:3 echo november",
+            "4:4 november papa"
+          ],
+          [
+            "5\\\\:1 alpha",
+            "5:2 mike",
+            "5\\\\:3 hotel",
+            ""
+          ],
+          [
+            "6\\\\:1 india romeo foxtrot",
+            "6:2 hotel india zulu",
+            "6\\\\:3 golf romeo",
+            ""
+          ],
+          [
+            "7\\\\:1 kilo papa",
+            "7:2 victor papa alpha",
+            "",
+            ""
+          ]
+        ],
+        "align": [
+          "center",
+          "center",
+          "right",
+          "right"
+        ],
+        "start_line": 3,
+        "end_line": 12,
+        "section_id": "section_refactored-tables-04",
+        "is_ragged": true,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": false,
+        "table_valid_md": false,
+        "column_count": 4,
+        "row_count": 7,
+        "align_meta": {
+          "heuristic": true
+        },
+        "is_ragged_meta": {
+          "source_col_counts": [
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      },
+      {
+        "id": "table_1",
+        "raw_content": "| H1 | H2 | H3 | H4 | H5 |\n|----|----|---:|:---|---:|\n| 1:1 uniform charlie | 1:2 juliet | 1:3 oscar india uniform | 1:4 uniform bravo | 1:5 golf quebec |\n| 2:1 golf | 2:2 bravo whiskey delta | 2:3 uniform | 2:4 india india india | 2:5 foxtrot whiskey |\n| 3:1 zulu golf oscar | 3:2 papa echo charlie | 3:3 delta | 3:4 november | 3:5 bravo romeo |\n| 4:1 charlie zulu | 4:2 quebec alpha | 4:3 bravo mike | 4:4 bravo mike hotel | 4:5 november kilo uniform |",
+        "headers": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5"
+        ],
+        "rows": [
+          [
+            "1:1 uniform charlie",
+            "1:2 juliet",
+            "1:3 oscar india uniform",
+            "1:4 uniform bravo",
+            "1:5 golf quebec"
+          ],
+          [
+            "2:1 golf",
+            "2:2 bravo whiskey delta",
+            "2:3 uniform",
+            "2:4 india india india",
+            "2:5 foxtrot whiskey"
+          ],
+          [
+            "3:1 zulu golf oscar",
+            "3:2 papa echo charlie",
+            "3:3 delta",
+            "3:4 november",
+            "3:5 bravo romeo"
+          ],
+          [
+            "4:1 charlie zulu",
+            "4:2 quebec alpha",
+            "4:3 bravo mike",
+            "4:4 bravo mike hotel",
+            "4:5 november kilo uniform"
+          ]
+        ],
+        "align": [
+          "left",
+          "left",
+          "right",
+          "left",
+          "right"
+        ],
+        "start_line": 13,
+        "end_line": 19,
+        "section_id": "section_refactored-tables-04",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 5,
+        "row_count": 4,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_refactored-tables-04",
+        "level": 1,
+        "text": "Refactored tables 04",
+        "line": 1,
+        "slug": "refactored-tables-04",
+        "parent_heading_id": null,
+        "start_char": 75,
+        "end_char": 98
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 20,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./tables_05.md#sec0",
+        "line": 20,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 20,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail5",
+        "url": "mailto:user5@example.com",
+        "line": 20,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose"
+    },
+    "line_to_section": {
+      "1": "section_refactored-tables-04",
+      "2": "section_refactored-tables-04",
+      "3": "section_refactored-tables-04",
+      "4": "section_refactored-tables-04",
+      "5": "section_refactored-tables-04",
+      "6": "section_refactored-tables-04",
+      "7": "section_refactored-tables-04",
+      "8": "section_refactored-tables-04",
+      "9": "section_refactored-tables-04",
+      "10": "section_refactored-tables-04",
+      "11": "section_refactored-tables-04",
+      "12": "section_refactored-tables-04",
+      "13": "section_refactored-tables-04",
+      "14": "section_refactored-tables-04",
+      "15": "section_refactored-tables-04",
+      "16": "section_refactored-tables-04",
+      "17": "section_refactored-tables-04",
+      "18": "section_refactored-tables-04",
+      "19": "section_refactored-tables-04",
+      "20": "section_refactored-tables-04",
+      "21": "section_refactored-tables-04"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

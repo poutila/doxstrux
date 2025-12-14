@@ -1,25 +1,354 @@
 {
-  "id": "admonitions_03",
-  "kind": "admonitions",
-  "features": {
-    "headings": 1,
-    "lists": 0,
-    "tables": 0,
-    "fences": 2,
-    "indented_code_lines": 0,
-    "images": 0,
-    "links": 6,
-    "math_blocks": 0,
-    "html_blocks": 0,
-    "footnote_refs": 0,
-    "footnote_defs": 0,
-    "admonitions": 2,
-    "definition_list": 2
+  "metadata": {
+    "total_lines": 26,
+    "total_chars": 467,
+    "has_sections": true,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 5,
+      "inline": 6,
+      "text": 19,
+      "heading": 1,
+      "softbreak": 4,
+      "em": 1,
+      "fence": 1,
+      "link": 4
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 2,
+          "https": 1,
+          "mailto": 1
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/admonitions_03.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links",
-    "admonition-block",
-    "definition-list"
-  ]
+  "content": {
+    "raw": "{\"title\":\"Refactored admonitions 03\",\"id\":\"ref_admonitions_03\",\"note\":\"admonitions-case\"}\n# Refactored admonitions 03\n\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\n\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with *emphasis*\n\n\n\n```{mermaid}\ngraph TD\n  A --> B\n```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
+    "lines": [
+      "{\"title\":\"Refactored admonitions 03\",\"id\":\"ref_admonitions_03\",\"note\":\"admonitions-case\"}",
+      "# Refactored admonitions 03",
+      "",
+      "",
+      ":::note",
+      "This is a callout that some parsers ignore.",
+      ":::",
+      "",
+      "",
+      "",
+      "Term 1",
+      ": Definition 1",
+      "",
+      "Term 2",
+      ": Definition 2 with *emphasis*",
+      "",
+      "",
+      "",
+      "```{mermaid}",
+      "graph TD",
+      "  A --> B",
+      "```",
+      "",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-admonitions-03",
+        "level": 1,
+        "title": "Refactored admonitions 03",
+        "slug": "refactored-admonitions-03",
+        "start_line": 1,
+        "end_line": 25,
+        "start_char": 90,
+        "end_char": 467,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored admonitions 03\n\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\n\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with *emphasis*\n\n\n\n```{mermaid}\ngraph TD\n  A --> B\n```\n\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./admonitions_04.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt)\n",
+        "text_content": "Refactored admonitions 03\n\n:::note\nThis is a callout that some parsers ignore.\n:::\n\nTerm 1\n: Definition 1\n\nTerm 2\n: Definition 2 with emphasis\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "{\"title\":\"Refactored admonitions 03\",\"id\":\"ref_admonitions_03\",\"note\":\"admonitions-case\"}",
+        "start_line": 0,
+        "end_line": 1,
+        "section_id": null,
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": ":::note\nThis is a callout that some parsers ignore.\n:::",
+        "start_line": 4,
+        "end_line": 7,
+        "section_id": "section_refactored-admonitions-03",
+        "word_count": 10,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "Term 1\n: Definition 1",
+        "start_line": 10,
+        "end_line": 12,
+        "section_id": "section_refactored-admonitions-03",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "Term 2\n: Definition 2 with emphasis",
+        "start_line": 13,
+        "end_line": 15,
+        "section_id": "section_refactored-admonitions-03",
+        "word_count": 7,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt)",
+        "start_line": 24,
+        "end_line": 25,
+        "section_id": "section_refactored-admonitions-03",
+        "word_count": 6,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "{mermaid}",
+        "content": "graph TD\n  A --> B\n",
+        "start_line": 18,
+        "end_line": 22,
+        "section_id": "section_refactored-admonitions-03"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_refactored-admonitions-03",
+        "level": 1,
+        "text": "Refactored admonitions 03",
+        "line": 1,
+        "slug": "refactored-admonitions-03",
+        "parent_heading_id": null,
+        "start_char": 90,
+        "end_char": 118
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 24,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./admonitions_04.md#sec0",
+        "line": 24,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 24,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail5",
+        "url": "mailto:user5@example.com",
+        "line": 24,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "code",
+      "19": "code",
+      "20": "code",
+      "21": "code",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose"
+    },
+    "line_to_section": {
+      "1": "section_refactored-admonitions-03",
+      "2": "section_refactored-admonitions-03",
+      "3": "section_refactored-admonitions-03",
+      "4": "section_refactored-admonitions-03",
+      "5": "section_refactored-admonitions-03",
+      "6": "section_refactored-admonitions-03",
+      "7": "section_refactored-admonitions-03",
+      "8": "section_refactored-admonitions-03",
+      "9": "section_refactored-admonitions-03",
+      "10": "section_refactored-admonitions-03",
+      "11": "section_refactored-admonitions-03",
+      "12": "section_refactored-admonitions-03",
+      "13": "section_refactored-admonitions-03",
+      "14": "section_refactored-admonitions-03",
+      "15": "section_refactored-admonitions-03",
+      "16": "section_refactored-admonitions-03",
+      "17": "section_refactored-admonitions-03",
+      "18": "section_refactored-admonitions-03",
+      "19": "section_refactored-admonitions-03",
+      "20": "section_refactored-admonitions-03",
+      "21": "section_refactored-admonitions-03",
+      "22": "section_refactored-admonitions-03",
+      "23": "section_refactored-admonitions-03",
+      "24": "section_refactored-admonitions-03",
+      "25": "section_refactored-admonitions-03"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      22,
+      23,
+      24,
+      25
+    ],
+    "code_lines": [
+      18,
+      19,
+      20,
+      21
+    ],
+    "code_blocks": [
+      {
+        "start_line": 18,
+        "end_line": 21,
+        "language": "{mermaid}"
+      }
+    ]
+  }
 }

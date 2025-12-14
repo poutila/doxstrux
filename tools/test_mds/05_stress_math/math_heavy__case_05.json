@@ -1,29 +1,127 @@
 {
-  "id": "math_heavy_05",
-  "title": "Math Heavy 05",
-  "md_file": "case_05.md",
-  "md_flavor": "math",
-  "allows_html": false,
-  "scenario_note": "latex-mix",
-  "feature_counts": {
-    "headings": 0,
-    "blockquotes": 0,
-    "unordered_list_items": 0,
-    "ordered_list_items": 0,
-    "task_items": 0,
-    "tables": 0,
-    "code_fences": 0,
-    "indented_code": 0,
-    "inline_code": 0,
-    "links": 0,
-    "ref_links": 0,
-    "images": 0,
-    "html_blocks": 0,
-    "footnotes": 0,
-    "autolinks": 0,
-    "hrules": 2
+  "metadata": {
+    "total_lines": 8,
+    "total_chars": 100,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "front_matter": 1
+    },
+    "frontmatter": {
+      "title": "Math Heavy 05",
+      "id": "math_heavy_05",
+      "md_flavor": "math",
+      "allows_html": false,
+      "note": "latex-mix"
+    },
+    "has_frontmatter": true,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": true,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/05_stress_math/math_heavy__case_05.md"
   },
-  "intended_errors": [
-    "front-matter-only"
-  ]
+  "content": {
+    "raw": "---\ntitle: \"Math Heavy 05\"\nid: math_heavy_05\nmd_flavor: math\nallows_html: false\nnote: latex-mix\n---\n",
+    "lines": [
+      "---",
+      "title: \"Math Heavy 05\"",
+      "id: math_heavy_05",
+      "md_flavor: math",
+      "allows_html: false",
+      "note: latex-mix",
+      "---",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": {
+      "title": "Math Heavy 05",
+      "id": "math_heavy_05",
+      "md_flavor": "math",
+      "allows_html": false,
+      "note": "latex-mix"
+    },
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

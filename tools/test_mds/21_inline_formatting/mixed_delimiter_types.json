@@ -1,14 +1,283 @@
 {
-  "id": "mixed_delimiter_types",
-  "category": "inline_formatting",
-  "expected": {
-    "italic_variants": 7,
-    "bold_variants": 9,
-    "bolditalic_variants": 2,
-    "nested_ok": true,
-    "escapes_ok": false,
-    "code_spans_ok": false,
-    "no_intraword_underscore_emphasis": true,
-    "handles_adjacent_punctuation": false
+  "metadata": {
+    "total_lines": 18,
+    "total_chars": 314,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 33,
+      "paragraph": 8,
+      "em": 8,
+      "strong": 9
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/21_inline_formatting/mixed_delimiter_types.md"
+  },
+  "content": {
+    "raw": "# Mixed emphasis delimiter types\n\n*asterisk italic* and _underscore italic_\n\n**asterisk bold** and __underscore bold__\n\n***asterisk combo*** and ___underscore combo___\n\n*italic with **bold inside***\n\n_italic with __bold inside___\n\n**bold with *italic inside***\n\n__bold with _italic inside___\n\n*mix **both** types_\n",
+    "lines": [
+      "# Mixed emphasis delimiter types",
+      "",
+      "*asterisk italic* and _underscore italic_",
+      "",
+      "**asterisk bold** and __underscore bold__",
+      "",
+      "***asterisk combo*** and ___underscore combo___",
+      "",
+      "*italic with **bold inside***",
+      "",
+      "_italic with __bold inside___",
+      "",
+      "**bold with *italic inside***",
+      "",
+      "__bold with _italic inside___",
+      "",
+      "*mix **both** types_",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_mixed-emphasis-delimiter-types",
+        "level": 1,
+        "title": "Mixed emphasis delimiter types",
+        "slug": "mixed-emphasis-delimiter-types",
+        "start_line": 0,
+        "end_line": 17,
+        "start_char": 0,
+        "end_char": 314,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Mixed emphasis delimiter types\n\n*asterisk italic* and _underscore italic_\n\n**asterisk bold** and __underscore bold__\n\n***asterisk combo*** and ___underscore combo___\n\n*italic with **bold inside***\n\n_italic with __bold inside___\n\n**bold with *italic inside***\n\n__bold with _italic inside___\n\n*mix **both** types_\n",
+        "text_content": "Mixed emphasis delimiter types\n\nasterisk italic and underscore italic\n\nasterisk bold and underscore bold\n\nasterisk combo and underscore combo\n\nitalic with bold inside\n\nitalic with bold inside\n\nbold with italic inside\n\nbold with italic inside\n\n*mix both types_"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "asterisk italic and underscore italic",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "asterisk bold and underscore bold",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "asterisk combo and underscore combo",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "italic with bold inside",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "italic with bold inside",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_5",
+        "text": "bold with italic inside",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_6",
+        "text": "bold with italic inside",
+        "start_line": 14,
+        "end_line": 15,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_7",
+        "text": "*mix both types_",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_mixed-emphasis-delimiter-types",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_mixed-emphasis-delimiter-types",
+        "level": 1,
+        "text": "Mixed emphasis delimiter types",
+        "line": 0,
+        "slug": "mixed-emphasis-delimiter-types",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 33
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "line_to_section": {
+      "0": "section_mixed-emphasis-delimiter-types",
+      "1": "section_mixed-emphasis-delimiter-types",
+      "2": "section_mixed-emphasis-delimiter-types",
+      "3": "section_mixed-emphasis-delimiter-types",
+      "4": "section_mixed-emphasis-delimiter-types",
+      "5": "section_mixed-emphasis-delimiter-types",
+      "6": "section_mixed-emphasis-delimiter-types",
+      "7": "section_mixed-emphasis-delimiter-types",
+      "8": "section_mixed-emphasis-delimiter-types",
+      "9": "section_mixed-emphasis-delimiter-types",
+      "10": "section_mixed-emphasis-delimiter-types",
+      "11": "section_mixed-emphasis-delimiter-types",
+      "12": "section_mixed-emphasis-delimiter-types",
+      "13": "section_mixed-emphasis-delimiter-types",
+      "14": "section_mixed-emphasis-delimiter-types",
+      "15": "section_mixed-emphasis-delimiter-types",
+      "16": "section_mixed-emphasis-delimiter-types",
+      "17": "section_mixed-emphasis-delimiter-types"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

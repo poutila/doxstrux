@@ -1,11 +1,260 @@
 {
-  "id": "basic_and_nested_blockquotes",
-  "category": "blockquotes",
-  "expected": {
-    "min_quote_depth": 1,
-    "max_quote_depth": 3,
-    "contains_lazy_continuation": true,
-    "contains_list_in_quote": true,
-    "non_quoted_paragraphs_after": true
+  "metadata": {
+    "total_lines": 15,
+    "total_chars": 176,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 9,
+      "blockquote": 4,
+      "paragraph": 8,
+      "bullet_list": 2,
+      "list_item": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "mixed_scripts",
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "mixed_scripts": true,
+        "unicode_risk_score": 1
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 1
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf_8",
+      "confidence": 0.7143
+    },
+    "source_path": "tools/test_mds/17_blockquotes/basic_and_nested_blockquotes.md"
+  },
+  "content": {
+    "raw": "# Blockquotes \u2014 basic & nested\n\n> Level 1\n>\n> Still level 1\n>> Level 2\n>>> Level 3\n>\n> Paragraph after nesting\n\n> * List inside quote\n>   - Nested list item\n\nNormal paragraph.\n",
+    "lines": [
+      "# Blockquotes \u2014 basic & nested",
+      "",
+      "> Level 1",
+      ">",
+      "> Still level 1",
+      ">> Level 2",
+      ">>> Level 3",
+      ">",
+      "> Paragraph after nesting",
+      "",
+      "> * List inside quote",
+      ">   - Nested list item",
+      "",
+      "Normal paragraph.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_blockquotes-basic-nested",
+        "level": 1,
+        "title": "Blockquotes \u2014 basic & nested",
+        "slug": "blockquotes-basic-nested",
+        "start_line": 0,
+        "end_line": 14,
+        "start_char": 0,
+        "end_char": 176,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Blockquotes \u2014 basic & nested\n\n> Level 1\n>\n> Still level 1\n>> Level 2\n>>> Level 3\n>\n> Paragraph after nesting\n\n> * List inside quote\n>   - Nested list item\n\nNormal paragraph.\n",
+        "text_content": "Blockquotes \u2014 basic & nested\n\nLevel 1\n\nStill level 1 Level 2 Level 3\n\nParagraph after nesting\n\nList inside quote Nested list item\n\nNormal paragraph."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Normal paragraph.",
+        "start_line": 13,
+        "end_line": 14,
+        "section_id": "section_blockquotes-basic-nested",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 10,
+        "end_line": 12,
+        "section_id": "section_blockquotes-basic-nested",
+        "items": [
+          {
+            "text": "List inside quote",
+            "children": [
+              {
+                "text": "Nested list item",
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 1
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_blockquotes-basic-nested",
+        "level": 1,
+        "text": "Blockquotes \u2014 basic & nested",
+        "line": 0,
+        "slug": "blockquotes-basic-nested",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 31
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "content": "Level 1Still level 1Level 2Level 3Paragraph after nesting",
+        "start_line": 2,
+        "end_line": 9,
+        "section_id": "section_blockquotes-basic-nested",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": []
+      },
+      {
+        "content": "List inside quoteNested list item",
+        "start_line": 10,
+        "end_line": 12,
+        "section_id": "section_blockquotes-basic-nested",
+        "children_summary": {
+          "lists": 2,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": [
+          {
+            "type": "bullet_list",
+            "start_line": 10,
+            "end_line": 12
+          },
+          {
+            "type": "bullet_list",
+            "start_line": 11,
+            "end_line": 12
+          }
+        ]
+      }
+    ],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose"
+    },
+    "line_to_section": {
+      "0": "section_blockquotes-basic-nested",
+      "1": "section_blockquotes-basic-nested",
+      "2": "section_blockquotes-basic-nested",
+      "3": "section_blockquotes-basic-nested",
+      "4": "section_blockquotes-basic-nested",
+      "5": "section_blockquotes-basic-nested",
+      "6": "section_blockquotes-basic-nested",
+      "7": "section_blockquotes-basic-nested",
+      "8": "section_blockquotes-basic-nested",
+      "9": "section_blockquotes-basic-nested",
+      "10": "section_blockquotes-basic-nested",
+      "11": "section_blockquotes-basic-nested",
+      "12": "section_blockquotes-basic-nested",
+      "13": "section_blockquotes-basic-nested",
+      "14": "section_blockquotes-basic-nested"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

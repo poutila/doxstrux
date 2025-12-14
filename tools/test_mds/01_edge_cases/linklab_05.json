@@ -1,24 +1,369 @@
 {
-  "id": "linklab_05",
-  "kind": "linklab",
-  "features": {
-    "headings": 1,
-    "lists": 0,
-    "tables": 5,
-    "fences": 0,
-    "indented_code_lines": 0,
-    "images": 0,
-    "links": 16,
-    "math_blocks": 0,
-    "html_blocks": 0,
-    "footnote_refs": 0,
-    "footnote_defs": 0,
-    "admonitions": 0,
-    "definition_list": 0
+  "metadata": {
+    "total_lines": 15,
+    "total_chars": 791,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 2,
+      "inline": 15,
+      "text": 43,
+      "softbreak": 4,
+      "heading": 1,
+      "link": 12,
+      "table": 1,
+      "thead": 1,
+      "tr": 4,
+      "th": 3,
+      "tbody": 1,
+      "td": 9
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "disallowed_schemes_raw",
+          "message": "Raw content contains potentially dangerous scheme: file:"
+        },
+        {
+          "type": "raw_dangerous_scheme",
+          "scheme": "file",
+          "message": "Dangerous scheme \"file:\" found in raw content"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 6,
+          "https": 3,
+          "mailto": 3
+        },
+        "unicode_risk_score": 0,
+        "raw_dangerous_schemes": true
+      },
+      "link_disallowed_schemes_raw": true,
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "embedding_blocked": true,
+    "embedding_block_reason": "Raw content contains disallowed link schemes",
+    "security_policies_applied": [
+      "embedding_blocked_schemes_raw"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/linklab_05.md"
   },
-  "intended_flags": [
-    "broken-links",
-    "file-links",
-    "ragged-table"
-  ]
+  "content": {
+    "raw": "+++\ntitle = \"Refactored linklab 05\"\nid = \"ref_linklab_05\"\nnote = \"linklab-case\"\n+++\n# Refactored linklab 05\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./linklab_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./linklab_01.md#sec2) [ext9](https://example.com/9) [mail10](mailto:user10@example.com) [file11](file:///C:/Temp/11.txt) [bad12](ht!tp://broken^12) [cross13](./linklab_01.md#sec1) [ext14](https://example.com/14) [mail15](mailto:user15@example.com) [file16](file:///C:/Temp/16.txt)\n\n| H1 | H2 | H3 |\n|:--:|----|:--:|\n| 1:1 juliet india romeo | 1:2 foxtrot | 1:3 yankee |\n| 2:1 juliet bravo | 2:2 hotel mike uniform | 2:3 oscar |\n| 3:1 lima | 3:2 victor | 3:3 oscar |\n",
+    "lines": [
+      "+++",
+      "title = \"Refactored linklab 05\"",
+      "id = \"ref_linklab_05\"",
+      "note = \"linklab-case\"",
+      "+++",
+      "# Refactored linklab 05",
+      "",
+      "[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./linklab_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./linklab_01.md#sec2) [ext9](https://example.com/9) [mail10](mailto:user10@example.com) [file11](file:///C:/Temp/11.txt) [bad12](ht!tp://broken^12) [cross13](./linklab_01.md#sec1) [ext14](https://example.com/14) [mail15](mailto:user15@example.com) [file16](file:///C:/Temp/16.txt)",
+      "",
+      "| H1 | H2 | H3 |",
+      "|:--:|----|:--:|",
+      "| 1:1 juliet india romeo | 1:2 foxtrot | 1:3 yankee |",
+      "| 2:1 juliet bravo | 2:2 hotel mike uniform | 2:3 oscar |",
+      "| 3:1 lima | 3:2 victor | 3:3 oscar |",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_refactored-linklab-05",
+        "level": 1,
+        "title": "Refactored linklab 05",
+        "slug": "refactored-linklab-05",
+        "start_line": 5,
+        "end_line": 14,
+        "start_char": 84,
+        "end_char": 791,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Refactored linklab 05\n\n[file1](file:///C:/Temp/1.txt) [bad2](ht!tp://broken^2) [cross3](./linklab_01.md#sec0) [ext4](https://example.com/4) [mail5](mailto:user5@example.com) [file6](file:///C:/Temp/6.txt) [bad7](ht!tp://broken^7) [cross8](./linklab_01.md#sec2) [ext9](https://example.com/9) [mail10](mailto:user10@example.com) [file11](file:///C:/Temp/11.txt) [bad12](ht!tp://broken^12) [cross13](./linklab_01.md#sec1) [ext14](https://example.com/14) [mail15](mailto:user15@example.com) [file16](file:///C:/Temp/16.txt)\n\n| H1 | H2 | H3 |\n|:--:|----|:--:|\n| 1:1 juliet india romeo | 1:2 foxtrot | 1:3 yankee |\n| 2:1 juliet bravo | 2:2 hotel mike uniform | 2:3 oscar |\n| 3:1 lima | 3:2 victor | 3:3 oscar |\n",
+        "text_content": "Refactored linklab 05\n\n[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt) bad7 cross8 ext9 mail10 [file11](file:///C:/Temp/11.txt) bad12 cross13 ext14 mail15 [file16](file:///C:/Temp/16.txt)\n\nH1H2H3\n\n1:1 juliet india romeo1:2 foxtrot1:3 yankee 2:1 juliet bravo2:2 hotel mike uniform2:3 oscar 3:1 lima3:2 victor3:3 oscar"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "+++\ntitle = \"Refactored linklab 05\"\nid = \"ref_linklab_05\"\nnote = \"linklab-case\"\n+++",
+        "start_line": 0,
+        "end_line": 5,
+        "section_id": null,
+        "word_count": 13,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "[file1](file:///C:/Temp/1.txt) bad2 cross3 ext4 mail5 [file6](file:///C:/Temp/6.txt) bad7 cross8 ext9 mail10 [file11](file:///C:/Temp/11.txt) bad12 cross13 ext14 mail15 [file16](file:///C:/Temp/16.txt)",
+        "start_line": 7,
+        "end_line": 8,
+        "section_id": "section_refactored-linklab-05",
+        "word_count": 16,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| H1 | H2 | H3 |\n|:--:|----|:--:|\n| 1:1 juliet india romeo | 1:2 foxtrot | 1:3 yankee |\n| 2:1 juliet bravo | 2:2 hotel mike uniform | 2:3 oscar |\n| 3:1 lima | 3:2 victor | 3:3 oscar |",
+        "headers": [
+          "H1",
+          "H2",
+          "H3"
+        ],
+        "rows": [
+          [
+            "1:1 juliet india romeo",
+            "1:2 foxtrot",
+            "1:3 yankee"
+          ],
+          [
+            "2:1 juliet bravo",
+            "2:2 hotel mike uniform",
+            "2:3 oscar"
+          ],
+          [
+            "3:1 lima",
+            "3:2 victor",
+            "3:3 oscar"
+          ]
+        ],
+        "align": [
+          "center",
+          "left",
+          "center"
+        ],
+        "start_line": 9,
+        "end_line": 14,
+        "section_id": "section_refactored-linklab-05",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 3,
+        "row_count": 3,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_refactored-linklab-05",
+        "level": 1,
+        "text": "Refactored linklab 05",
+        "line": 5,
+        "slug": "refactored-linklab-05",
+        "parent_heading_id": null,
+        "start_char": 84,
+        "end_char": 108
+      }
+    ],
+    "links": [
+      {
+        "text": "bad2",
+        "url": "ht!tp://broken%5E2",
+        "line": 7,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross3",
+        "url": "./linklab_01.md#sec0",
+        "line": 7,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext4",
+        "url": "https://example.com/4",
+        "line": 7,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail5",
+        "url": "mailto:user5@example.com",
+        "line": 7,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      },
+      {
+        "text": "bad7",
+        "url": "ht!tp://broken%5E7",
+        "line": 7,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross8",
+        "url": "./linklab_01.md#sec2",
+        "line": 7,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext9",
+        "url": "https://example.com/9",
+        "line": 7,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail10",
+        "url": "mailto:user10@example.com",
+        "line": 7,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      },
+      {
+        "text": "bad12",
+        "url": "ht!tp://broken%5E12",
+        "line": 7,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "cross13",
+        "url": "./linklab_01.md#sec1",
+        "line": 7,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "ext14",
+        "url": "https://example.com/14",
+        "line": 7,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      },
+      {
+        "text": "mail15",
+        "url": "mailto:user15@example.com",
+        "line": 7,
+        "type": "absolute",
+        "scheme": "mailto",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose"
+    },
+    "line_to_section": {
+      "5": "section_refactored-linklab-05",
+      "6": "section_refactored-linklab-05",
+      "7": "section_refactored-linklab-05",
+      "8": "section_refactored-linklab-05",
+      "9": "section_refactored-linklab-05",
+      "10": "section_refactored-linklab-05",
+      "11": "section_refactored-linklab-05",
+      "12": "section_refactored-linklab-05",
+      "13": "section_refactored-linklab-05",
+      "14": "section_refactored-linklab-05"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

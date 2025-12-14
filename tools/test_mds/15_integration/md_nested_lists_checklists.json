@@ -16,7 +16,8 @@
       "hr": 6,
       "bullet_list": 12,
       "list_item": 38,
-      "ordered_list": 8
+      "ordered_list": 8,
+      "html_inline": 16
     },
     "has_frontmatter": false,
     "security": {
@@ -25,15 +26,15 @@
         "frontmatter_at_bof": false,
         "ragged_tables_count": 0,
         "allowed_schemes": [
-          "tel",
-          "mailto",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "table_align_mismatches": 0,
         "nested_headings_blocked": 0,
         "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_inline": true,
         "has_script": false,
         "has_event_handlers": false,
         "has_data_uri_images": false,
@@ -51,7 +52,12 @@
         "unicode_risk_score": 0
       },
       "profile_used": "moderate"
-    }
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/15_integration/md_nested_lists_checklists.md"
   },
   "content": {
     "raw": "# Markdown Nested Lists and Checklists Test\n\nThis file is for testing **nested unordered lists, ordered lists, and checklists** in various combinations.\n\n---\n\n## 1. Nested Unordered Lists\n\n- Level 1 - Item 1\n  - Level 2 - Item 1.1\n    - Level 3 - Item 1.1.1\n    - Level 3 - Item 1.1.2\n  - Level 2 - Item 1.2\n- Level 1 - Item 2\n  - Level 2 - Item 2.1\n\n---\n\n## 2. Nested Ordered Lists\n\n1. Step 1\n   1. Step 1.1\n      1. Step 1.1.1\n      2. Step 1.1.2\n   2. Step 1.2\n2. Step 2\n   1. Step 2.1\n\n---\n\n## 3. Mixed Unordered and Ordered Lists\n\n- Phase 1\n  1. Task 1.1\n  2. Task 1.2\n    - Subtask 1.2.1\n    - Subtask 1.2.2\n- Phase 2\n  1. Task 2.1\n  2. Task 2.2\n\n---\n\n## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n\n## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n",
@@ -147,7 +153,7 @@
           "section_5-complex-mixed-lists-with-checklists"
         ],
         "raw_content": "# Markdown Nested Lists and Checklists Test\n\nThis file is for testing **nested unordered lists, ordered lists, and checklists** in various combinations.\n\n---\n\n## 1. Nested Unordered Lists\n\n- Level 1 - Item 1\n  - Level 2 - Item 1.1\n    - Level 3 - Item 1.1.1\n    - Level 3 - Item 1.1.2\n  - Level 2 - Item 1.2\n- Level 1 - Item 2\n  - Level 2 - Item 2.1\n\n---\n\n## 2. Nested Ordered Lists\n\n1. Step 1\n   1. Step 1.1\n      1. Step 1.1.1\n      2. Step 1.1.2\n   2. Step 1.2\n2. Step 2\n   1. Step 2.1\n\n---\n\n## 3. Mixed Unordered and Ordered Lists\n\n- Phase 1\n  1. Task 1.1\n  2. Task 1.2\n    - Subtask 1.2.1\n    - Subtask 1.2.2\n- Phase 2\n  1. Task 2.1\n  2. Task 2.2\n\n---\n\n## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n\n## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n",
-        "text_content": "Markdown Nested Lists and Checklists Test\n\nThis file is for testing nested unordered lists, ordered lists, and checklists in various combinations.\n\n1. Nested Unordered Lists\n\nLevel 1 - Item 1 Level 2 - Item 1.1 Level 3 - Item 1.1.1 Level 3 - Item 1.1.2 Level 2 - Item 1.2 Level 1 - Item 2 Level 2 - Item 2.1\n\n2. Nested Ordered Lists\n\nStep 1 Step 1.1 Step 1.1.1 Step 1.1.2 Step 1.2 Step 2 Step 2.1\n\n3. Mixed Unordered and Ordered Lists\n\nPhase 1 Task 1.1 Task 1.2 Subtask 1.2.1 Subtask 1.2.2 Phase 2 Task 2.1 Task 2.2\n\n4. Checklists with Nesting\n\n[ ] Main Task 1 [x] Subtask 1.1 (completed) [ ] Subtask 1.2 (incomplete) [ ] Sub-subtask 1.2.1 [x] Sub-subtask 1.2.2 [x] Main Task 2 [x] Subtask 2.1 [ ] Subtask 2.2\n\n5. Complex Mixed Lists with Checklists\n\n[x] Completed Step [ ] Still pending subtask [x] Done subtask [ ] Inner numbered checklist item [x] Completed inner numbered checklist item [ ] Incomplete Step [ ] Needs review [ ] Needs implementation"
+        "text_content": "Markdown Nested Lists and Checklists Test\n\nThis file is for testing nested unordered lists, ordered lists, and checklists in various combinations.\n\n1. Nested Unordered Lists\n\nLevel 1 - Item 1 Level 2 - Item 1.1 Level 3 - Item 1.1.1 Level 3 - Item 1.1.2 Level 2 - Item 1.2 Level 1 - Item 2 Level 2 - Item 2.1\n\n2. Nested Ordered Lists\n\nStep 1 Step 1.1 Step 1.1.1 Step 1.1.2 Step 1.2 Step 2 Step 2.1\n\n3. Mixed Unordered and Ordered Lists\n\nPhase 1 Task 1.1 Task 1.2 Subtask 1.2.1 Subtask 1.2.2 Phase 2 Task 2.1 Task 2.2\n\n4. Checklists with Nesting\n\n Main Task 1  Subtask 1.1 (completed)  Subtask 1.2 (incomplete)  Sub-subtask 1.2.1  Sub-subtask 1.2.2  Main Task 2  Subtask 2.1  Subtask 2.2\n\n5. Complex Mixed Lists with Checklists\n\n Completed Step  Still pending subtask  Done subtask  Inner numbered checklist item  Completed inner numbered checklist item  Incomplete Step  Needs review  Needs implementation"
       },
       {
         "id": "section_1-nested-unordered-lists",
@@ -203,7 +209,7 @@
         "parent_id": "section_markdown-nested-lists-and-checklists-test",
         "child_ids": [],
         "raw_content": "## 4. Checklists with Nesting\n\n- [ ] Main Task 1\n  - [x] Subtask 1.1 (completed)\n  - [ ] Subtask 1.2 (incomplete)\n    - [ ] Sub-subtask 1.2.1\n    - [x] Sub-subtask 1.2.2\n- [x] Main Task 2\n  - [x] Subtask 2.1\n  - [ ] Subtask 2.2\n\n---\n",
-        "text_content": "4. Checklists with Nesting\n\n[ ] Main Task 1 [x] Subtask 1.1 (completed) [ ] Subtask 1.2 (incomplete) [ ] Sub-subtask 1.2.1 [x] Sub-subtask 1.2.2 [x] Main Task 2 [x] Subtask 2.1 [ ] Subtask 2.2"
+        "text_content": "4. Checklists with Nesting\n\n Main Task 1  Subtask 1.1 (completed)  Subtask 1.2 (incomplete)  Sub-subtask 1.2.1  Sub-subtask 1.2.2  Main Task 2  Subtask 2.1  Subtask 2.2"
       },
       {
         "id": "section_5-complex-mixed-lists-with-checklists",
@@ -217,7 +223,7 @@
         "parent_id": "section_markdown-nested-lists-and-checklists-test",
         "child_ids": [],
         "raw_content": "## 5. Complex Mixed Lists with Checklists\n\n1. [x] Completed Step\n   - [ ] Still pending subtask\n   - [x] Done subtask\n     1. [ ] Inner numbered checklist item\n     2. [x] Completed inner numbered checklist item\n2. [ ] Incomplete Step\n   - [ ] Needs review\n   - [ ] Needs implementation\n\n---\n",
-        "text_content": "5. Complex Mixed Lists with Checklists\n\n[x] Completed Step [ ] Still pending subtask [x] Done subtask [ ] Inner numbered checklist item [x] Completed inner numbered checklist item [ ] Incomplete Step [ ] Needs review [ ] Needs implementation"
+        "text_content": "5. Complex Mixed Lists with Checklists\n\n Completed Step  Still pending subtask  Done subtask  Inner numbered checklist item  Completed inner numbered checklist item  Incomplete Step  Needs review  Needs implementation"
       }
     ],
     "paragraphs": [
@@ -243,21 +249,17 @@
         "items": [
           {
             "text": "Level 1 - Item 1",
-            "checked": null,
             "children": [
               {
                 "text": "Level 2 - Item 1.1",
-                "checked": null,
                 "children": [
                   {
                     "text": "Level 3 - Item 1.1.1",
-                    "checked": null,
                     "children": [],
                     "blocks": []
                   },
                   {
                     "text": "Level 3 - Item 1.1.2",
-                    "checked": null,
                     "children": [],
                     "blocks": []
                   }
@@ -266,7 +268,6 @@
               },
               {
                 "text": "Level 2 - Item 1.2",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -275,11 +276,9 @@
           },
           {
             "text": "Level 1 - Item 2",
-            "checked": null,
             "children": [
               {
                 "text": "Level 2 - Item 2.1",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -287,9 +286,7 @@
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 2
       },
       {
         "id": "list_1",
@@ -300,21 +297,17 @@
         "items": [
           {
             "text": "Step 1",
-            "checked": null,
             "children": [
               {
                 "text": "Step 1.1",
-                "checked": null,
                 "children": [
                   {
                     "text": "Step 1.1.1",
-                    "checked": null,
                     "children": [],
                     "blocks": []
                   },
                   {
                     "text": "Step 1.1.2",
-                    "checked": null,
                     "children": [],
                     "blocks": []
                   }
@@ -323,7 +316,6 @@
               },
               {
                 "text": "Step 1.2",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -332,11 +324,9 @@
           },
           {
             "text": "Step 2",
-            "checked": null,
             "children": [
               {
                 "text": "Step 2.1",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -344,9 +334,7 @@
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 2
       },
       {
         "id": "list_2",
@@ -357,17 +345,14 @@
         "items": [
           {
             "text": "Phase 1",
-            "checked": null,
             "children": [
               {
                 "text": "Subtask 1.2.1",
-                "checked": null,
                 "children": [],
                 "blocks": []
               },
               {
                 "text": "Subtask 1.2.2",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -376,17 +361,14 @@
           },
           {
             "text": "Phase 2",
-            "checked": null,
             "children": [
               {
                 "text": "Task 2.1",
-                "checked": null,
                 "children": [],
                 "blocks": []
               },
               {
                 "text": "Task 2.2",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -394,135 +376,7 @@
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
-      },
-      {
-        "id": "list_3",
-        "type": "bullet",
-        "start_line": 45,
-        "end_line": 54,
-        "section_id": "section_markdown-nested-lists-and-checklists-test",
-        "items": [
-          {
-            "text": "Main Task 1",
-            "checked": false,
-            "children": [
-              {
-                "text": "Subtask 1.1 (completed)",
-                "checked": true,
-                "children": [],
-                "blocks": []
-              },
-              {
-                "text": "Subtask 1.2 (incomplete)",
-                "checked": false,
-                "children": [
-                  {
-                    "text": "Sub-subtask 1.2.1",
-                    "checked": false,
-                    "children": [],
-                    "blocks": []
-                  },
-                  {
-                    "text": "Sub-subtask 1.2.2",
-                    "checked": true,
-                    "children": [],
-                    "blocks": []
-                  }
-                ],
-                "blocks": []
-              }
-            ],
-            "blocks": []
-          },
-          {
-            "text": "Main Task 2",
-            "checked": true,
-            "children": [
-              {
-                "text": "Subtask 2.1",
-                "checked": true,
-                "children": [],
-                "blocks": []
-              },
-              {
-                "text": "Subtask 2.2",
-                "checked": false,
-                "children": [],
-                "blocks": []
-              }
-            ],
-            "blocks": []
-          }
-        ],
-        "items_count": 2,
-        "task_items_count": 2,
-        "has_mixed_task_items": false
-      },
-      {
-        "id": "list_4",
-        "type": "ordered",
-        "start_line": 58,
-        "end_line": 67,
-        "section_id": "section_markdown-nested-lists-and-checklists-test",
-        "items": [
-          {
-            "text": "Completed Step",
-            "checked": true,
-            "children": [
-              {
-                "text": "Still pending subtask",
-                "checked": false,
-                "children": [],
-                "blocks": []
-              },
-              {
-                "text": "Done subtask",
-                "checked": true,
-                "children": [
-                  {
-                    "text": "Inner numbered checklist item",
-                    "checked": false,
-                    "children": [],
-                    "blocks": []
-                  },
-                  {
-                    "text": "Completed inner numbered checklist item",
-                    "checked": true,
-                    "children": [],
-                    "blocks": []
-                  }
-                ],
-                "blocks": []
-              }
-            ],
-            "blocks": []
-          },
-          {
-            "text": "Incomplete Step",
-            "checked": false,
-            "children": [
-              {
-                "text": "Needs review",
-                "checked": false,
-                "children": [],
-                "blocks": []
-              },
-              {
-                "text": "Needs implementation",
-                "checked": false,
-                "children": [],
-                "blocks": []
-              }
-            ],
-            "blocks": []
-          }
-        ],
-        "items_count": 2,
-        "task_items_count": 2,
-        "has_mixed_task_items": false
+        "items_count": 2
       }
     ],
     "tables": [],
@@ -638,8 +492,308 @@
     "links": [],
     "images": [],
     "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 45,
+        "end_line": 54,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "items": [
+          {
+            "text": "Main Task 1",
+            "checked": false,
+            "children": [
+              {
+                "text": "Subtask 1.1 (completed)",
+                "checked": true,
+                "children": [],
+                "blocks": []
+              },
+              {
+                "text": "Subtask 1.2 (incomplete)",
+                "checked": false,
+                "children": [
+                  {
+                    "text": "Sub-subtask 1.2.1",
+                    "checked": false,
+                    "children": [],
+                    "blocks": []
+                  },
+                  {
+                    "text": "Sub-subtask 1.2.2",
+                    "checked": true,
+                    "children": [],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          },
+          {
+            "text": "Main Task 2",
+            "checked": true,
+            "children": [
+              {
+                "text": "Subtask 2.1",
+                "checked": true,
+                "children": [],
+                "blocks": []
+              },
+              {
+                "text": "Subtask 2.2",
+                "checked": false,
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 2,
+        "checked_count": 1,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      },
+      {
+        "id": "tasklist_1",
+        "type": "ordered",
+        "start_line": 58,
+        "end_line": 67,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "items": [
+          {
+            "text": "Completed Step",
+            "checked": true,
+            "children": [
+              {
+                "text": "Still pending subtask",
+                "checked": false,
+                "children": [],
+                "blocks": []
+              },
+              {
+                "text": "Done subtask",
+                "checked": true,
+                "children": [
+                  {
+                    "text": "Inner numbered checklist item",
+                    "checked": false,
+                    "children": [],
+                    "blocks": []
+                  },
+                  {
+                    "text": "Completed inner numbered checklist item",
+                    "checked": true,
+                    "children": [],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          },
+          {
+            "text": "Incomplete Step",
+            "checked": false,
+            "children": [
+              {
+                "text": "Needs review",
+                "checked": false,
+                "children": [],
+                "blocks": []
+              },
+              {
+                "text": "Needs implementation",
+                "checked": false,
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 2,
+        "checked_count": 1,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
     "html_blocks": [],
-    "html_inline": []
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 45,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 46,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 47,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 48,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 49,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 50,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 51,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 52,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 58,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 59,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 60,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 61,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 62,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 63,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 64,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 65,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_markdown-nested-lists-and-checklists-test",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
   },
   "mappings": {
     "line_to_type": {
@@ -654,7 +808,7 @@
       "8": "prose",
       "9": "prose",
       "10": "code",
-      "11": "code",
+      "11": "prose",
       "12": "prose",
       "13": "prose",
       "14": "prose",
@@ -666,7 +820,7 @@
       "20": "prose",
       "21": "prose",
       "22": "code",
-      "23": "code",
+      "23": "prose",
       "24": "prose",
       "25": "prose",
       "26": "prose",
@@ -679,7 +833,7 @@
       "33": "prose",
       "34": "prose",
       "35": "code",
-      "36": "code",
+      "36": "prose",
       "37": "prose",
       "38": "prose",
       "39": "prose",
@@ -692,7 +846,7 @@
       "46": "prose",
       "47": "prose",
       "48": "code",
-      "49": "code",
+      "49": "prose",
       "50": "prose",
       "51": "prose",
       "52": "prose",
@@ -705,7 +859,7 @@
       "59": "prose",
       "60": "prose",
       "61": "code",
-      "62": "code",
+      "62": "prose",
       "63": "prose",
       "64": "prose",
       "65": "prose",
@@ -795,6 +949,7 @@
       7,
       8,
       9,
+      11,
       12,
       13,
       14,
@@ -805,6 +960,7 @@
       19,
       20,
       21,
+      23,
       24,
       25,
       26,
@@ -816,6 +972,7 @@
       32,
       33,
       34,
+      36,
       37,
       38,
       39,
@@ -827,6 +984,7 @@
       45,
       46,
       47,
+      49,
       50,
       51,
       52,
@@ -838,6 +996,7 @@
       58,
       59,
       60,
+      62,
       63,
       64,
       65,
@@ -847,16 +1006,37 @@
     ],
     "code_lines": [
       10,
-      11,
       22,
-      23,
       35,
-      36,
       48,
-      49,
-      61,
-      62
+      61
     ],
-    "code_blocks": []
+    "code_blocks": [
+      {
+        "start_line": 10,
+        "end_line": 10,
+        "language": ""
+      },
+      {
+        "start_line": 22,
+        "end_line": 22,
+        "language": ""
+      },
+      {
+        "start_line": 35,
+        "end_line": 35,
+        "language": ""
+      },
+      {
+        "start_line": 48,
+        "end_line": 48,
+        "language": ""
+      },
+      {
+        "start_line": 61,
+        "end_line": 61,
+        "language": ""
+      }
+    ]
   }
 }

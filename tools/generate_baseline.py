@@ -6,11 +6,15 @@ This tool captures the CURRENT parser output before any refactoring,
 establishing a baseline for byte-identical parity validation.
 
 Usage:
+    # Generate single aggregated baseline (for performance/regression)
     python tools/generate_baseline.py \\
-        --profile=moderate \\
-        --seed=1729 \\
         --corpus=src/docpipe/test_files/test_mds/ \\
         --emit-baseline=baseline/v0_current.json
+
+    # Generate individual golden files (for detailed diffing)
+    python tools/generate_baseline.py \\
+        --corpus=src/docpipe/test_files/test_mds/ \\
+        --emit-individual=tools/baseline_outputs/
 """
 
 import argparse
@@ -20,7 +24,7 @@ import sys
 import time
 import traceback
 import tracemalloc
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +33,14 @@ sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
 from doxstrux import parse_markdown_file
 from doxstrux.markdown.utils.encoding import read_file_robust
+
+
+class DateTimeEncoder(json.JSONEncoder):
+    """JSON encoder that handles datetime and date objects."""
+    def default(self, obj):
+        if isinstance(obj, (date, datetime)):
+            return obj.isoformat()
+        return super().default(obj)
 
 
 def hash_content(content: str) -> str:
@@ -86,7 +98,8 @@ def generate_baseline(
     seed: int = 1729,
     runs_cold: int = 3,
     runs_warm: int = 5,
-    config: dict | None = None
+    config: dict | None = None,
+    emit_individual: Path | None = None
 ) -> dict[str, Any]:
     """Generate baseline output for all files in corpus.
 
@@ -97,17 +110,21 @@ def generate_baseline(
         runs_cold: Number of cold runs for timing
         runs_warm: Number of warm runs for timing
         config: Optional parser configuration
+        emit_individual: Optional directory to emit individual JSON files
 
     Returns:
         Baseline dictionary with metadata, performance, and outputs
     """
     corpus = Path(corpus_path)
     md_files = find_markdown_files(corpus)
+    emit_individual_path = Path(emit_individual) if emit_individual else None
 
     if not md_files:
         raise ValueError(f"No .md files found in {corpus_path}")
 
     print(f"📁 Found {len(md_files)} markdown files")
+    if emit_individual_path:
+        print(f"📂 Emitting individual files to: {emit_individual_path}")
 
     # Default config if not provided
     if config is None:
@@ -142,14 +159,19 @@ def generate_baseline(
         import subprocess
         result = subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True, text=True, check=True)
         baseline['metadata']['git_commit'] = result.stdout.strip()[:8]
-    except Exception:
+    except subprocess.CalledProcessError:
+        print("  ⚠️  Warning: git rev-parse failed (not a git repo?)")
+        baseline['metadata']['git_commit'] = 'unknown'
+    except FileNotFoundError:
+        print("  ⚠️  Warning: git not found in PATH")
         baseline['metadata']['git_commit'] = 'unknown'
 
     # Try to get markdown-it-py version
     try:
         import markdown_it
         baseline['metadata']['markdown_it_py_version'] = markdown_it.__version__
-    except Exception:
+    except ImportError:
+        print("  ⚠️  Warning: markdown-it-py not installed")
         baseline['metadata']['markdown_it_py_version'] = 'unknown'
 
     # Parse each file
@@ -202,6 +224,13 @@ def generate_baseline(
             'encoding_confidence': output["metadata"]["encoding"]["confidence"],
         }
 
+        # Emit individual file if requested
+        if emit_individual_path:
+            out_file = emit_individual_path / rel_path.with_suffix('.baseline.json')
+            out_file.parent.mkdir(parents=True, exist_ok=True)
+            with out_file.open('w', encoding='utf-8') as f:
+                json.dump(output, f, indent=2, ensure_ascii=False, cls=DateTimeEncoder)
+
         # Aggregate performance metrics
         baseline['performance']['timings_ms'].extend(timings)
         baseline['performance']['memory_peak_mb'].extend([p / (1024 * 1024) for p in memory_peaks])
@@ -227,11 +256,15 @@ def main():
                         help='Security profile')
     parser.add_argument('--seed', type=int, default=1729, help='Random seed')
     parser.add_argument('--corpus', required=True, help='Path to corpus directory or .md file')
-    parser.add_argument('--emit-baseline', required=True, help='Output path for baseline JSON')
+    parser.add_argument('--emit-baseline', help='Output path for baseline JSON')
+    parser.add_argument('--emit-individual', help='Directory to emit individual JSON files')
     parser.add_argument('--runs-cold', type=int, default=3, help='Number of cold runs')
     parser.add_argument('--runs-warm', type=int, default=5, help='Number of warm runs')
 
     args = parser.parse_args()
+
+    if not args.emit_baseline and not args.emit_individual:
+        parser.error("At least one of --emit-baseline or --emit-individual must be specified")
 
     print(f"🧪 Generating baseline...")
     print(f"  Profile: {args.profile}")
@@ -244,17 +277,23 @@ def main():
             profile=args.profile,
             seed=args.seed,
             runs_cold=args.runs_cold,
-            runs_warm=args.runs_warm
+            runs_warm=args.runs_warm,
+            emit_individual=args.emit_individual
         )
 
-        # Write baseline
-        output_path = Path(args.emit_baseline)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
+        # Write aggregated baseline if requested
+        if args.emit_baseline:
+            output_path = Path(args.emit_baseline)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with output_path.open('w', encoding='utf-8') as f:
-            json.dump(baseline, f, indent=2, ensure_ascii=False)
+            with output_path.open('w', encoding='utf-8') as f:
+                json.dump(baseline, f, indent=2, ensure_ascii=False, cls=DateTimeEncoder)
 
-        print(f"\n✅ Baseline saved to: {output_path}")
+            print(f"\n✅ Aggregated baseline saved to: {output_path}")
+
+        if args.emit_individual:
+            print(f"✅ Individual files saved to: {args.emit_individual}")
+
         print(f"  Files processed: {baseline['metadata']['corpus_file_count']}")
         print(f"  Median time: {baseline['performance'].get('median_ms', 0):.2f}ms")
         print(f"  P95 time: {baseline['performance'].get('p95_ms', 0):.2f}ms")

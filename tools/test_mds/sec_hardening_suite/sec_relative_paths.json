@@ -1,9 +1,167 @@
 {
-  "category": "security",
-  "expected": {
-    "link_schemes": {
-      "internal": 1
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 57,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 2,
+      "paragraph": 1,
+      "link": 1
     },
-    "path_traversal_pattern": true
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "path_traversal",
+          "line": 2,
+          "message": "Link contains path traversal pattern",
+          "url": "../../secret"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": true,
+        "link_schemes": {
+          "relative": 1
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/sec_hardening_suite/sec_relative_paths.md"
+  },
+  "content": {
+    "raw": "# Test: sec_relative_paths\n\n[../../secret](../../secret)\n",
+    "lines": [
+      "# Test: sec_relative_paths",
+      "",
+      "[../../secret](../../secret)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-sec_relative_paths",
+        "level": 1,
+        "title": "Test: sec_relative_paths",
+        "slug": "test-sec_relative_paths",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 57,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: sec_relative_paths\n\n[../../secret](../../secret)\n",
+        "text_content": "Test: sec_relative_paths\n\n../../secret"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "../../secret",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_test-sec_relative_paths",
+        "word_count": 1,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-sec_relative_paths",
+        "level": 1,
+        "text": "Test: sec_relative_paths",
+        "line": 0,
+        "slug": "test-sec_relative_paths",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 27
+      }
+    ],
+    "links": [
+      {
+        "text": "../../secret",
+        "url": "../../secret",
+        "line": 2,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-sec_relative_paths",
+      "1": "section_test-sec_relative_paths",
+      "2": "section_test-sec_relative_paths",
+      "3": "section_test-sec_relative_paths"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

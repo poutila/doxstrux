@@ -1,14 +1,283 @@
 {
-  "id": "emphasis_at_word_boundaries",
-  "category": "inline_formatting",
-  "expected": {
-    "italic_variants": 6,
-    "bold_variants": 3,
-    "bolditalic_variants": 0,
-    "nested_ok": false,
-    "escapes_ok": false,
-    "code_spans_ok": false,
-    "no_intraword_underscore_emphasis": true,
-    "handles_adjacent_punctuation": true
+  "metadata": {
+    "total_lines": 18,
+    "total_chars": 255,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 27,
+      "paragraph": 8,
+      "em": 6,
+      "strong": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/21_inline_formatting/emphasis_at_word_boundaries.md"
+  },
+  "content": {
+    "raw": "# Emphasis at word boundaries\n\nWord *italic* word\n\nWord**bold**word (no spaces)\n\n(parentheses *italic* inside)\n\n[brackets **bold** inside]\n\n\"Quotes *italic* inside\"\n\nPunctuation,**bold**,here\n\nEnd of sentence.*italic*.\n\nStart-*italic*-middle-*italic*-end\n",
+    "lines": [
+      "# Emphasis at word boundaries",
+      "",
+      "Word *italic* word",
+      "",
+      "Word**bold**word (no spaces)",
+      "",
+      "(parentheses *italic* inside)",
+      "",
+      "[brackets **bold** inside]",
+      "",
+      "\"Quotes *italic* inside\"",
+      "",
+      "Punctuation,**bold**,here",
+      "",
+      "End of sentence.*italic*.",
+      "",
+      "Start-*italic*-middle-*italic*-end",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_emphasis-at-word-boundaries",
+        "level": 1,
+        "title": "Emphasis at word boundaries",
+        "slug": "emphasis-at-word-boundaries",
+        "start_line": 0,
+        "end_line": 17,
+        "start_char": 0,
+        "end_char": 255,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Emphasis at word boundaries\n\nWord *italic* word\n\nWord**bold**word (no spaces)\n\n(parentheses *italic* inside)\n\n[brackets **bold** inside]\n\n\"Quotes *italic* inside\"\n\nPunctuation,**bold**,here\n\nEnd of sentence.*italic*.\n\nStart-*italic*-middle-*italic*-end\n",
+        "text_content": "Emphasis at word boundaries\n\nWord italic word\n\nWordboldword (no spaces)\n\n(parentheses italic inside)\n\n[brackets bold inside]\n\n\"Quotes italic inside\"\n\nPunctuation,bold,here\n\nEnd of sentence.italic.\n\nStart-italic-middle-italic-end"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Word italic word",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Wordboldword (no spaces)",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "(parentheses italic inside)",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "[brackets bold inside]",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "\"Quotes italic inside\"",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_5",
+        "text": "Punctuation,bold,here",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_6",
+        "text": "End of sentence.italic.",
+        "start_line": 14,
+        "end_line": 15,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_7",
+        "text": "Start-italic-middle-italic-end",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_emphasis-at-word-boundaries",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_emphasis-at-word-boundaries",
+        "level": 1,
+        "text": "Emphasis at word boundaries",
+        "line": 0,
+        "slug": "emphasis-at-word-boundaries",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 30
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "line_to_section": {
+      "0": "section_emphasis-at-word-boundaries",
+      "1": "section_emphasis-at-word-boundaries",
+      "2": "section_emphasis-at-word-boundaries",
+      "3": "section_emphasis-at-word-boundaries",
+      "4": "section_emphasis-at-word-boundaries",
+      "5": "section_emphasis-at-word-boundaries",
+      "6": "section_emphasis-at-word-boundaries",
+      "7": "section_emphasis-at-word-boundaries",
+      "8": "section_emphasis-at-word-boundaries",
+      "9": "section_emphasis-at-word-boundaries",
+      "10": "section_emphasis-at-word-boundaries",
+      "11": "section_emphasis-at-word-boundaries",
+      "12": "section_emphasis-at-word-boundaries",
+      "13": "section_emphasis-at-word-boundaries",
+      "14": "section_emphasis-at-word-boundaries",
+      "15": "section_emphasis-at-word-boundaries",
+      "16": "section_emphasis-at-word-boundaries",
+      "17": "section_emphasis-at-word-boundaries"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

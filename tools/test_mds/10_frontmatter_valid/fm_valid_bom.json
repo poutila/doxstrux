@@ -1,10 +1,128 @@
 {
-  "category": "frontmatter",
-  "expected": {
-    "accepted": true,
-    "reason": "bom_then_yaml",
-    "expect_keys": [
-      "title"
+  "metadata": {
+    "total_lines": 6,
+    "total_chars": 26,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "front_matter": 1,
+      "paragraph": 1,
+      "inline": 1,
+      "text": 1
+    },
+    "frontmatter": {
+      "title": "BOM"
+    },
+    "has_frontmatter": true,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": true,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8-sig",
+      "confidence": 1.0
+    },
+    "source_path": "tools/test_mds/10_frontmatter_valid/fm_valid_bom.md"
+  },
+  "content": {
+    "raw": "---\ntitle: BOM\n---\n\nText.\n",
+    "lines": [
+      "---",
+      "title: BOM",
+      "---",
+      "",
+      "Text.",
+      ""
     ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Text.",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": null,
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": {
+      "title": "BOM"
+    },
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

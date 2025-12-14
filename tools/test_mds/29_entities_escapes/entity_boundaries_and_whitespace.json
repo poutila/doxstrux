@@ -1,8 +1,110 @@
 {
-  "id": "entity_boundaries_and_whitespace",
-  "category": "entities_escapes",
-  "expected": {
-    "nbsp_collapses_to_space": true,
-    "entity_at_end_of_word": true
+  "metadata": {
+    "total_lines": 2,
+    "total_chars": 31,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 1,
+      "inline": 1,
+      "text": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/29_entities_escapes/entity_boundaries_and_whitespace.md"
+  },
+  "content": {
+    "raw": "&nbsp;is space; and ends&nbsp;\n",
+    "lines": [
+      "&nbsp;is space; and ends&nbsp;",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "\u00a0is space; and ends\u00a0",
+        "start_line": 0,
+        "end_line": 1,
+        "section_id": null,
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

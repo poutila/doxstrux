@@ -1,11 +1,210 @@
 {
-  "id": "checkbox_not_at_start",
-  "category": "tasklists",
-  "expected": {
-    "checked": 0,
-    "unchecked": 1,
-    "nested_tasks_present": false,
-    "ordered_steps_under_task": false,
-    "allows_inline_formatting": false
+  "metadata": {
+    "total_lines": 8,
+    "total_chars": 217,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 6,
+      "text": 6,
+      "bullet_list": 1,
+      "list_item": 5,
+      "paragraph": 5,
+      "html_inline": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/19_tasklists/checkbox_not_at_start.md"
+  },
+  "content": {
+    "raw": "# Checkbox not at line start\n\n- This is a task [ ] with checkbox in middle\n- Another line [x] with checked box\n- [ ] Normal task at start\n- End of line has checkbox [ ]\n- Normal text [x] inline checkbox [  ] multiple\n",
+    "lines": [
+      "# Checkbox not at line start",
+      "",
+      "- This is a task [ ] with checkbox in middle",
+      "- Another line [x] with checked box",
+      "- [ ] Normal task at start",
+      "- End of line has checkbox [ ]",
+      "- Normal text [x] inline checkbox [  ] multiple",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_checkbox-not-at-line-start",
+        "level": 1,
+        "title": "Checkbox not at line start",
+        "slug": "checkbox-not-at-line-start",
+        "start_line": 0,
+        "end_line": 7,
+        "start_char": 0,
+        "end_char": 217,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Checkbox not at line start\n\n- This is a task [ ] with checkbox in middle\n- Another line [x] with checked box\n- [ ] Normal task at start\n- End of line has checkbox [ ]\n- Normal text [x] inline checkbox [  ] multiple\n",
+        "text_content": "Checkbox not at line start\n\nThis is a task [ ] with checkbox in middle Another line [x] with checked box  Normal task at start End of line has checkbox [ ] Normal text [x] inline checkbox [  ] multiple"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_checkbox-not-at-line-start",
+        "level": 1,
+        "text": "Checkbox not at line start",
+        "line": 0,
+        "slug": "checkbox-not-at-line-start",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 29
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 7,
+        "section_id": "section_checkbox-not-at-line-start",
+        "items": [
+          {
+            "text": "This is a task [ ] with checkbox in middle",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Another line [x] with checked box",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Normal task at start",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "End of line has checkbox [ ]",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Normal text [x] inline checkbox [  ] multiple",
+            "checked": null,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 5,
+        "checked_count": 0,
+        "unchecked_count": 1,
+        "has_mixed_task_items": true
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 4,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_checkbox-not-at-line-start",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "line_to_section": {
+      "0": "section_checkbox-not-at-line-start",
+      "1": "section_checkbox-not-at-line-start",
+      "2": "section_checkbox-not-at-line-start",
+      "3": "section_checkbox-not-at-line-start",
+      "4": "section_checkbox-not-at-line-start",
+      "5": "section_checkbox-not-at-line-start",
+      "6": "section_checkbox-not-at-line-start",
+      "7": "section_checkbox-not-at-line-start"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

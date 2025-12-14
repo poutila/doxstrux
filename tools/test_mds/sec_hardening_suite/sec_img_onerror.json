@@ -1,9 +1,155 @@
 {
-  "category": "security",
-  "expected": {
-    "has_html_block": true,
-    "has_script": false,
-    "event_handler_attrs": true,
-    "suspected_prompt_injection": false
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 67,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 1,
+      "text": 1,
+      "html_block": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "event_handlers",
+          "line": 2,
+          "message": "Document contains HTML event handler attributes"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": true,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": true,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/sec_hardening_suite/sec_img_onerror.md"
+  },
+  "content": {
+    "raw": "# Test: sec_img_onerror\n\n<img src=\"x\" onerror=\"fetch('/steal')\" />\n",
+    "lines": [
+      "# Test: sec_img_onerror",
+      "",
+      "<img src=\"x\" onerror=\"fetch('/steal')\" />",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-sec_img_onerror",
+        "level": 1,
+        "title": "Test: sec_img_onerror",
+        "slug": "test-sec_img_onerror",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 67,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: sec_img_onerror\n\n<img src=\"x\" onerror=\"fetch('/steal')\" />\n",
+        "text_content": "Test: sec_img_onerror"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-sec_img_onerror",
+        "level": 1,
+        "text": "Test: sec_img_onerror",
+        "line": 0,
+        "slug": "test-sec_img_onerror",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 24
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [
+      {
+        "content": "<img src=\"x\" onerror=\"fetch('/steal')\" />\n",
+        "raw_content": "<img src=\"x\" onerror=\"fetch('/steal')\" />",
+        "start_line": 2,
+        "end_line": 3,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_test-sec_img_onerror",
+        "tag_hints": [
+          "img"
+        ]
+      }
+    ],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-sec_img_onerror",
+      "1": "section_test-sec_img_onerror",
+      "2": "section_test-sec_img_onerror",
+      "3": "section_test-sec_img_onerror"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

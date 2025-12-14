@@ -1,13 +1,247 @@
 {
-  "id": "list_with_blockquotes",
-  "category": "lists",
-  "expected": {
-    "uses_markers": [
-      "-"
+  "metadata": {
+    "total_lines": 15,
+    "total_chars": 173,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 7,
+      "text": 8,
+      "bullet_list": 1,
+      "list_item": 3,
+      "paragraph": 6,
+      "blockquote": 2,
+      "softbreak": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/18_lists/list_with_blockquotes.md"
+  },
+  "content": {
+    "raw": "# List containing blockquotes\n\n- First item\n\n  > Quote inside first item\n  > Continues\n\n- Second item\n\n  > Another quote\n  >\n  > Multi-paragraph quote in list\n\n- Third item\n",
+    "lines": [
+      "# List containing blockquotes",
+      "",
+      "- First item",
+      "",
+      "  > Quote inside first item",
+      "  > Continues",
+      "",
+      "- Second item",
+      "",
+      "  > Another quote",
+      "  >",
+      "  > Multi-paragraph quote in list",
+      "",
+      "- Third item",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_list-containing-blockquotes",
+        "level": 1,
+        "title": "List containing blockquotes",
+        "slug": "list-containing-blockquotes",
+        "start_line": 0,
+        "end_line": 14,
+        "start_char": 0,
+        "end_char": 173,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# List containing blockquotes\n\n- First item\n\n  > Quote inside first item\n  > Continues\n\n- Second item\n\n  > Another quote\n  >\n  > Multi-paragraph quote in list\n\n- Third item\n",
+        "text_content": "List containing blockquotes\n\nFirst item\n\nQuote inside first item\nContinues\n\nSecond item\n\nAnother quote\n\nMulti-paragraph quote in list\n\nThird item"
+      }
     ],
-    "nested_levels": 1,
-    "explicit_start_num": null,
-    "has_tight_list": false,
-    "has_loose_list": true
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 14,
+        "section_id": "section_list-containing-blockquotes",
+        "items": [
+          {
+            "text": "First item",
+            "children": [],
+            "blocks": [
+              {
+                "type": "blockquote",
+                "start_line": 4,
+                "end_line": 6
+              }
+            ]
+          },
+          {
+            "text": "Second item",
+            "children": [],
+            "blocks": [
+              {
+                "type": "blockquote",
+                "start_line": 9,
+                "end_line": 12
+              }
+            ]
+          },
+          {
+            "text": "Third item",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 3
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_list-containing-blockquotes",
+        "level": 1,
+        "text": "List containing blockquotes",
+        "line": 0,
+        "slug": "list-containing-blockquotes",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 30
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "content": "Quote inside first item\nContinues",
+        "start_line": 4,
+        "end_line": 6,
+        "section_id": "section_list-containing-blockquotes",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": []
+      },
+      {
+        "content": "Another quoteMulti-paragraph quote in list",
+        "start_line": 9,
+        "end_line": 12,
+        "section_id": "section_list-containing-blockquotes",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": []
+      }
+    ],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose"
+    },
+    "line_to_section": {
+      "0": "section_list-containing-blockquotes",
+      "1": "section_list-containing-blockquotes",
+      "2": "section_list-containing-blockquotes",
+      "3": "section_list-containing-blockquotes",
+      "4": "section_list-containing-blockquotes",
+      "5": "section_list-containing-blockquotes",
+      "6": "section_list-containing-blockquotes",
+      "7": "section_list-containing-blockquotes",
+      "8": "section_list-containing-blockquotes",
+      "9": "section_list-containing-blockquotes",
+      "10": "section_list-containing-blockquotes",
+      "11": "section_list-containing-blockquotes",
+      "12": "section_list-containing-blockquotes",
+      "13": "section_list-containing-blockquotes",
+      "14": "section_list-containing-blockquotes"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

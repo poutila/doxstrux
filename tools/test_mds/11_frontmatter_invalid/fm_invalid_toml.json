@@ -1,7 +1,134 @@
 {
-  "category": "frontmatter",
-  "expected": {
-    "accepted": false,
-    "reason": "toml_frontmatter"
+  "metadata": {
+    "total_lines": 6,
+    "total_chars": 30,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 2,
+      "inline": 2,
+      "text": 4,
+      "softbreak": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/11_frontmatter_invalid/fm_invalid_toml.md"
+  },
+  "content": {
+    "raw": "+++\ntitle = \"TOML\"\n+++\n\nBody.\n",
+    "lines": [
+      "+++",
+      "title = \"TOML\"",
+      "+++",
+      "",
+      "Body.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "+++\ntitle = \"TOML\"\n+++",
+        "start_line": 0,
+        "end_line": 3,
+        "section_id": null,
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Body.",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": null,
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

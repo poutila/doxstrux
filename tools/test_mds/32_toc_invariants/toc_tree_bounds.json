@@ -1,35 +1,338 @@
 {
-  "id": "toc_tree_bounds",
-  "category": "toc_invariants",
-  "expected": {
+  "metadata": {
+    "total_lines": 15,
+    "total_chars": 125,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 5,
+      "inline": 10,
+      "text": 10,
+      "paragraph": 5
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/32_toc_invariants/toc_tree_bounds.md"
+  },
+  "content": {
+    "raw": "# A\nText A\n\n## A.1\nText A1\n\n### A.1.a\nText A1a\n\n## B.1 (duplicate id check)\nText B1\n\n## B.1 (duplicate id check)\nText B1 dup\n",
+    "lines": [
+      "# A",
+      "Text A",
+      "",
+      "## A.1",
+      "Text A1",
+      "",
+      "### A.1.a",
+      "Text A1a",
+      "",
+      "## B.1 (duplicate id check)",
+      "Text B1",
+      "",
+      "## B.1 (duplicate id check)",
+      "Text B1 dup",
+      ""
+    ]
+  },
+  "structure": {
     "sections": [
       {
+        "id": "section_a",
+        "level": 1,
         "title": "A",
-        "level": 1
+        "slug": "a",
+        "start_line": 0,
+        "end_line": 14,
+        "start_char": 0,
+        "end_char": 125,
+        "parent_id": null,
+        "child_ids": [
+          "section_a1",
+          "section_b1-duplicate-id-check",
+          "section_b1-duplicate-id-check-2"
+        ],
+        "raw_content": "# A\nText A\n\n## A.1\nText A1\n\n### A.1.a\nText A1a\n\n## B.1 (duplicate id check)\nText B1\n\n## B.1 (duplicate id check)\nText B1 dup\n",
+        "text_content": "A Text A\n\nA.1 Text A1\n\nA.1.a Text A1a\n\nB.1 (duplicate id check) Text B1\n\nB.1 (duplicate id check) Text B1 dup"
       },
       {
-        "title": "A.1",
-        "level": 2
-      },
-      {
-        "title": "A.1.a",
-        "level": 3
-      },
-      {
-        "title": "B.1 (duplicate id check)",
-        "level": 2
-      },
-      {
-        "title": "B.1 (duplicate id check)",
+        "id": "section_a1",
         "level": 2,
-        "deduped": true
+        "title": "A.1",
+        "slug": "a1",
+        "start_line": 3,
+        "end_line": 8,
+        "start_char": 12,
+        "end_char": 48,
+        "parent_id": "section_a",
+        "child_ids": [
+          "section_a1a"
+        ],
+        "raw_content": "## A.1\nText A1\n\n### A.1.a\nText A1a\n",
+        "text_content": "A.1 Text A1\n\nA.1.a Text A1a"
+      },
+      {
+        "id": "section_a1a",
+        "level": 3,
+        "title": "A.1.a",
+        "slug": "a1a",
+        "start_line": 6,
+        "end_line": 8,
+        "start_char": 28,
+        "end_char": 48,
+        "parent_id": "section_a1",
+        "child_ids": [],
+        "raw_content": "### A.1.a\nText A1a\n",
+        "text_content": "A.1.a Text A1a"
+      },
+      {
+        "id": "section_b1-duplicate-id-check",
+        "level": 2,
+        "title": "B.1 (duplicate id check)",
+        "slug": "b1-duplicate-id-check",
+        "start_line": 9,
+        "end_line": 11,
+        "start_char": 48,
+        "end_char": 85,
+        "parent_id": "section_a",
+        "child_ids": [],
+        "raw_content": "## B.1 (duplicate id check)\nText B1\n",
+        "text_content": "B.1 (duplicate id check) Text B1"
+      },
+      {
+        "id": "section_b1-duplicate-id-check-2",
+        "level": 2,
+        "title": "B.1 (duplicate id check)",
+        "slug": "b1-duplicate-id-check-2",
+        "start_line": 12,
+        "end_line": 14,
+        "start_char": 85,
+        "end_char": 125,
+        "parent_id": "section_a",
+        "child_ids": [],
+        "raw_content": "## B.1 (duplicate id check)\nText B1 dup\n",
+        "text_content": "B.1 (duplicate id check) Text B1 dup"
       }
     ],
-    "bounds_present": [
-      "start_line",
-      "end_line",
-      "start_char",
-      "end_char"
-    ]
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Text A",
+        "start_line": 1,
+        "end_line": 2,
+        "section_id": "section_a",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Text A1",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_a",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "Text A1a",
+        "start_line": 7,
+        "end_line": 8,
+        "section_id": "section_a",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "Text B1",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_a",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "Text B1 dup",
+        "start_line": 13,
+        "end_line": 14,
+        "section_id": "section_a",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_a",
+        "level": 1,
+        "text": "A",
+        "line": 0,
+        "slug": "a",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 4
+      },
+      {
+        "id": "heading_a1",
+        "level": 2,
+        "text": "A.1",
+        "line": 3,
+        "slug": "a1",
+        "parent_heading_id": "heading_a",
+        "start_char": 12,
+        "end_char": 19
+      },
+      {
+        "id": "heading_a1a",
+        "level": 3,
+        "text": "A.1.a",
+        "line": 6,
+        "slug": "a1a",
+        "parent_heading_id": "heading_a1",
+        "start_char": 28,
+        "end_char": 38
+      },
+      {
+        "id": "heading_b1-duplicate-id-check",
+        "level": 2,
+        "text": "B.1 (duplicate id check)",
+        "line": 9,
+        "slug": "b1-duplicate-id-check",
+        "parent_heading_id": "heading_a",
+        "start_char": 48,
+        "end_char": 76
+      },
+      {
+        "id": "heading_b1-duplicate-id-check-2",
+        "level": 2,
+        "text": "B.1 (duplicate id check)",
+        "line": 12,
+        "slug": "b1-duplicate-id-check-2",
+        "parent_heading_id": "heading_a",
+        "start_char": 85,
+        "end_char": 113
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose"
+    },
+    "line_to_section": {
+      "0": "section_a",
+      "1": "section_a",
+      "2": "section_a",
+      "3": "section_a1",
+      "4": "section_a1",
+      "5": "section_a1",
+      "6": "section_a1a",
+      "7": "section_a1a",
+      "8": "section_a1a",
+      "9": "section_b1-duplicate-id-check",
+      "10": "section_b1-duplicate-id-check",
+      "11": "section_b1-duplicate-id-check",
+      "12": "section_b1-duplicate-id-check-2",
+      "13": "section_b1-duplicate-id-check-2",
+      "14": "section_b1-duplicate-id-check-2"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

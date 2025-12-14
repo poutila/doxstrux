@@ -1,10 +1,312 @@
 {
-  "id": "almost_hr_edge_cases",
-  "category": "strikethrough_hr",
-  "expected": {
-    "has_del_inline": false,
-    "del_count": 0,
-    "hr_count": 0,
-    "hr_styles": []
+  "metadata": {
+    "total_lines": 18,
+    "total_chars": 211,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 12,
+      "paragraph": 8,
+      "bullet_list": 5,
+      "list_item": 5,
+      "em": 1,
+      "strong": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/20_strikethrough_hr/almost_hr_edge_cases.md"
+  },
+  "content": {
+    "raw": "# Almost-HR but not quite\n\n--\n\n-- (two dashes only)\n\n---- but text after\n\n* * (spaces between stars)\n\n- - - (spaces between dashes)\n\n***text (no space after)\n\n___text___ (looks like emphasis)\n\nNormal paragraph.\n",
+    "lines": [
+      "# Almost-HR but not quite",
+      "",
+      "--",
+      "",
+      "-- (two dashes only)",
+      "",
+      "---- but text after",
+      "",
+      "* * (spaces between stars)",
+      "",
+      "- - - (spaces between dashes)",
+      "",
+      "***text (no space after)",
+      "",
+      "___text___ (looks like emphasis)",
+      "",
+      "Normal paragraph.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_almost-hr-but-not-quite",
+        "level": 1,
+        "title": "Almost-HR but not quite",
+        "slug": "almost-hr-but-not-quite",
+        "start_line": 0,
+        "end_line": 17,
+        "start_char": 0,
+        "end_char": 211,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Almost-HR but not quite\n\n--\n\n-- (two dashes only)\n\n---- but text after\n\n* * (spaces between stars)\n\n- - - (spaces between dashes)\n\n***text (no space after)\n\n___text___ (looks like emphasis)\n\nNormal paragraph.\n",
+        "text_content": "Almost-HR but not quite\n\n--\n\n-- (two dashes only)\n\n---- but text after\n\n(spaces between stars)\n\n(spaces between dashes)\n\n***text (no space after)\n\ntext (looks like emphasis)\n\nNormal paragraph."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "--",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_almost-hr-but-not-quite",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "-- (two dashes only)",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_almost-hr-but-not-quite",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "---- but text after",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_almost-hr-but-not-quite",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "***text (no space after)",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_almost-hr-but-not-quite",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "text (looks like emphasis)",
+        "start_line": 14,
+        "end_line": 15,
+        "section_id": "section_almost-hr-but-not-quite",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_5",
+        "text": "Normal paragraph.",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_almost-hr-but-not-quite",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 8,
+        "end_line": 10,
+        "section_id": "section_almost-hr-but-not-quite",
+        "items": [
+          {
+            "text": "",
+            "children": [
+              {
+                "text": "(spaces between stars)",
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 1
+      },
+      {
+        "id": "list_1",
+        "type": "bullet",
+        "start_line": 10,
+        "end_line": 12,
+        "section_id": "section_almost-hr-but-not-quite",
+        "items": [
+          {
+            "text": "",
+            "children": [
+              {
+                "text": "",
+                "children": [
+                  {
+                    "text": "(spaces between dashes)",
+                    "children": [],
+                    "blocks": []
+                  }
+                ],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 1
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_almost-hr-but-not-quite",
+        "level": 1,
+        "text": "Almost-HR but not quite",
+        "line": 0,
+        "slug": "almost-hr-but-not-quite",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 26
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "line_to_section": {
+      "0": "section_almost-hr-but-not-quite",
+      "1": "section_almost-hr-but-not-quite",
+      "2": "section_almost-hr-but-not-quite",
+      "3": "section_almost-hr-but-not-quite",
+      "4": "section_almost-hr-but-not-quite",
+      "5": "section_almost-hr-but-not-quite",
+      "6": "section_almost-hr-but-not-quite",
+      "7": "section_almost-hr-but-not-quite",
+      "8": "section_almost-hr-but-not-quite",
+      "9": "section_almost-hr-but-not-quite",
+      "10": "section_almost-hr-but-not-quite",
+      "11": "section_almost-hr-but-not-quite",
+      "12": "section_almost-hr-but-not-quite",
+      "13": "section_almost-hr-but-not-quite",
+      "14": "section_almost-hr-but-not-quite",
+      "15": "section_almost-hr-but-not-quite",
+      "16": "section_almost-hr-but-not-quite",
+      "17": "section_almost-hr-but-not-quite"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

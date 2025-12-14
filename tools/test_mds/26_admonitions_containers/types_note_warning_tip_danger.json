@@ -1,16 +1,186 @@
 {
-  "id": "types_note_warning_tip_danger",
-  "category": "admonitions_containers",
-  "plugin_required": true,
-  "expected": {
-    "types": [
-      "note",
-      "tip",
-      "warning",
-      "danger"
-    ],
-    "titles_present": [
-      "Note title"
+  "metadata": {
+    "total_lines": 16,
+    "total_chars": 117,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 4,
+      "inline": 4,
+      "text": 12,
+      "softbreak": 8
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/26_admonitions_containers/types_note_warning_tip_danger.md"
+  },
+  "content": {
+    "raw": "::: note Note title\nNote body\n:::\n\n::: tip\nQuick tip\n:::\n\n::: warning\nHeads up\n:::\n\n::: danger\nThis is dangerous\n:::\n",
+    "lines": [
+      "::: note Note title",
+      "Note body",
+      ":::",
+      "",
+      "::: tip",
+      "Quick tip",
+      ":::",
+      "",
+      "::: warning",
+      "Heads up",
+      ":::",
+      "",
+      "::: danger",
+      "This is dangerous",
+      ":::",
+      ""
     ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "::: note Note title\nNote body\n:::",
+        "start_line": 0,
+        "end_line": 3,
+        "section_id": null,
+        "word_count": 7,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "::: tip\nQuick tip\n:::",
+        "start_line": 4,
+        "end_line": 7,
+        "section_id": null,
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "::: warning\nHeads up\n:::",
+        "start_line": 8,
+        "end_line": 11,
+        "section_id": null,
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "::: danger\nThis is dangerous\n:::",
+        "start_line": 12,
+        "end_line": 15,
+        "section_id": null,
+        "word_count": 6,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

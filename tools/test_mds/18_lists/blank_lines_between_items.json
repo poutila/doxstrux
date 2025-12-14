@@ -1,13 +1,240 @@
 {
-  "id": "blank_lines_between_items",
-  "category": "lists",
-  "expected": {
-    "uses_markers": [
-      "-"
+  "metadata": {
+    "total_lines": 15,
+    "total_chars": 160,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 7,
+      "text": 7,
+      "bullet_list": 2,
+      "list_item": 5,
+      "paragraph": 6
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/18_lists/blank_lines_between_items.md"
+  },
+  "content": {
+    "raw": "# Lists with blank lines\n\n- Item 1\n\n- Item 2 (blank line above)\n\n- Item 3\n\n\n- Item 4 (multiple blank lines above)\n\nNormal paragraph\n\n- New list after paragraph\n",
+    "lines": [
+      "# Lists with blank lines",
+      "",
+      "- Item 1",
+      "",
+      "- Item 2 (blank line above)",
+      "",
+      "- Item 3",
+      "",
+      "",
+      "- Item 4 (multiple blank lines above)",
+      "",
+      "Normal paragraph",
+      "",
+      "- New list after paragraph",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_lists-with-blank-lines",
+        "level": 1,
+        "title": "Lists with blank lines",
+        "slug": "lists-with-blank-lines",
+        "start_line": 0,
+        "end_line": 14,
+        "start_char": 0,
+        "end_char": 160,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Lists with blank lines\n\n- Item 1\n\n- Item 2 (blank line above)\n\n- Item 3\n\n\n- Item 4 (multiple blank lines above)\n\nNormal paragraph\n\n- New list after paragraph\n",
+        "text_content": "Lists with blank lines\n\nItem 1\n\nItem 2 (blank line above)\n\nItem 3\n\nItem 4 (multiple blank lines above)\n\nNormal paragraph\n\nNew list after paragraph"
+      }
     ],
-    "nested_levels": 1,
-    "explicit_start_num": null,
-    "has_tight_list": false,
-    "has_loose_list": true
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Normal paragraph",
+        "start_line": 11,
+        "end_line": 12,
+        "section_id": "section_lists-with-blank-lines",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 11,
+        "section_id": "section_lists-with-blank-lines",
+        "items": [
+          {
+            "text": "Item 1",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Item 2 (blank line above)",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Item 3",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Item 4 (multiple blank lines above)",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 4
+      },
+      {
+        "id": "list_1",
+        "type": "bullet",
+        "start_line": 13,
+        "end_line": 14,
+        "section_id": "section_lists-with-blank-lines",
+        "items": [
+          {
+            "text": "New list after paragraph",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 1
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_lists-with-blank-lines",
+        "level": 1,
+        "text": "Lists with blank lines",
+        "line": 0,
+        "slug": "lists-with-blank-lines",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 25
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose"
+    },
+    "line_to_section": {
+      "0": "section_lists-with-blank-lines",
+      "1": "section_lists-with-blank-lines",
+      "2": "section_lists-with-blank-lines",
+      "3": "section_lists-with-blank-lines",
+      "4": "section_lists-with-blank-lines",
+      "5": "section_lists-with-blank-lines",
+      "6": "section_lists-with-blank-lines",
+      "7": "section_lists-with-blank-lines",
+      "8": "section_lists-with-blank-lines",
+      "9": "section_lists-with-blank-lines",
+      "10": "section_lists-with-blank-lines",
+      "11": "section_lists-with-blank-lines",
+      "12": "section_lists-with-blank-lines",
+      "13": "section_lists-with-blank-lines",
+      "14": "section_lists-with-blank-lines"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

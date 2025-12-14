@@ -1,12 +1,199 @@
 {
-  "id": "lazy_continuation",
-  "category": "blockquotes",
-  "expected": {
-    "min_quote_depth": 1,
-    "max_quote_depth": 1,
-    "contains_lazy_continuation": true,
-    "contains_list_in_quote": false,
-    "fenced_code_in_quote": false,
-    "hr_in_quote": false
+  "metadata": {
+    "total_lines": 10,
+    "total_chars": 151,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 4,
+      "text": 6,
+      "blockquote": 2,
+      "paragraph": 3,
+      "softbreak": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/17_blockquotes/lazy_continuation.md"
+  },
+  "content": {
+    "raw": "# Lazy blockquote continuation\n\n> First line with marker\nSecond line without marker (lazy)\nThird line also lazy\n\n> New quote after break\n\nNormal text.\n",
+    "lines": [
+      "# Lazy blockquote continuation",
+      "",
+      "> First line with marker",
+      "Second line without marker (lazy)",
+      "Third line also lazy",
+      "",
+      "> New quote after break",
+      "",
+      "Normal text.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_lazy-blockquote-continuation",
+        "level": 1,
+        "title": "Lazy blockquote continuation",
+        "slug": "lazy-blockquote-continuation",
+        "start_line": 0,
+        "end_line": 9,
+        "start_char": 0,
+        "end_char": 151,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Lazy blockquote continuation\n\n> First line with marker\nSecond line without marker (lazy)\nThird line also lazy\n\n> New quote after break\n\nNormal text.\n",
+        "text_content": "Lazy blockquote continuation\n\nFirst line with marker\nSecond line without marker (lazy)\nThird line also lazy\n\nNew quote after break\n\nNormal text."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Normal text.",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_lazy-blockquote-continuation",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_lazy-blockquote-continuation",
+        "level": 1,
+        "text": "Lazy blockquote continuation",
+        "line": 0,
+        "slug": "lazy-blockquote-continuation",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 31
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "content": "First line with marker\nSecond line without marker (lazy)\nThird line also lazy",
+        "start_line": 2,
+        "end_line": 5,
+        "section_id": "section_lazy-blockquote-continuation",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": []
+      },
+      {
+        "content": "New quote after break",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_lazy-blockquote-continuation",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": []
+      }
+    ],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
+    },
+    "line_to_section": {
+      "0": "section_lazy-blockquote-continuation",
+      "1": "section_lazy-blockquote-continuation",
+      "2": "section_lazy-blockquote-continuation",
+      "3": "section_lazy-blockquote-continuation",
+      "4": "section_lazy-blockquote-continuation",
+      "5": "section_lazy-blockquote-continuation",
+      "6": "section_lazy-blockquote-continuation",
+      "7": "section_lazy-blockquote-continuation",
+      "8": "section_lazy-blockquote-continuation",
+      "9": "section_lazy-blockquote-continuation"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

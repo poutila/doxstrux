@@ -1,9 +1,174 @@
 {
-  "category": "security",
-  "expected": {
-    "has_data_uri_images": true,
-    "has_html_block": false,
-    "event_handler_attrs": false,
-    "suspected_prompt_injection": false
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 69,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 2,
+      "paragraph": 1,
+      "image": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "data_uri_image",
+          "line": 2,
+          "message": "Image uses data: URI scheme",
+          "size": 34
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": true,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 1
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "security_policies_applied": [
+      "dropped_1_unsafe_images"
+    ],
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/sec_hardening_suite/sec_data_uri_image.md"
+  },
+  "content": {
+    "raw": "# Test: sec_data_uri_image\n\n![d](data:image/png;base64,iVBORw0KGgo=)\n",
+    "lines": [
+      "# Test: sec_data_uri_image",
+      "",
+      "![d](data:image/png;base64,iVBORw0KGgo=)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-sec_data_uri_image",
+        "level": 1,
+        "title": "Test: sec_data_uri_image",
+        "slug": "test-sec_data_uri_image",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 69,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: sec_data_uri_image\n\n![d](data:image/png;base64,iVBORw0KGgo=)\n",
+        "text_content": "Test: sec_data_uri_image"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "dd",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_test-sec_data_uri_image",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-sec_data_uri_image",
+        "level": 1,
+        "text": "Test: sec_data_uri_image",
+        "line": 0,
+        "slug": "test-sec_data_uri_image",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 27
+      }
+    ],
+    "links": [
+      {
+        "image_id": "2ca75ef2c3b7e5f8",
+        "text": "d",
+        "url": "data:image/png;base64,iVBORw0KGgo=",
+        "src": "data:image/png;base64,iVBORw0KGgo=",
+        "alt": "d",
+        "title": "",
+        "line": 2,
+        "type": "image",
+        "image_kind": "data",
+        "format": "png"
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-sec_data_uri_image",
+      "1": "section_test-sec_data_uri_image",
+      "2": "section_test-sec_data_uri_image",
+      "3": "section_test-sec_data_uri_image"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

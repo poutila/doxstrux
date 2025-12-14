@@ -1,11 +1,181 @@
 {
-  "id": "29_list_text_hash_at_start_of_item",
-  "note": "List item line that starts with '# ' should still create a heading (valid); this catches parsers that miss it.",
-  "expected_has_headings": true,
-  "expected_heading_count": 1,
-  "expected_heading_lines_0based": [
-    2
-  ],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 6,
+    "total_chars": 76,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 2,
+      "inline": 4,
+      "text": 4,
+      "bullet_list": 1,
+      "list_item": 2,
+      "paragraph": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/29_list_text_hash_at_start_of_item.md"
+  },
+  "content": {
+    "raw": "# Test: 29_list_text_hash_at_start_of_item\n\n- # Legit in list\n  text\n- item\n",
+    "lines": [
+      "# Test: 29_list_text_hash_at_start_of_item",
+      "",
+      "- # Legit in list",
+      "  text",
+      "- item",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-29_list_text_hash_at_start_of_item",
+        "level": 1,
+        "title": "Test: 29_list_text_hash_at_start_of_item",
+        "slug": "test-29_list_text_hash_at_start_of_item",
+        "start_line": 0,
+        "end_line": 1,
+        "start_char": 0,
+        "end_char": 44,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 29_list_text_hash_at_start_of_item\n",
+        "text_content": "Test: 29_list_text_hash_at_start_of_item"
+      },
+      {
+        "id": "section_legit-in-list",
+        "level": 1,
+        "title": "Legit in list",
+        "slug": "legit-in-list",
+        "start_line": 2,
+        "end_line": 5,
+        "start_char": 44,
+        "end_char": 76,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "- # Legit in list\n  text\n- item\n",
+        "text_content": "Legit in list text item"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 5,
+        "section_id": "section_legit-in-list",
+        "items": [
+          {
+            "text": "text",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "item",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 2
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-29_list_text_hash_at_start_of_item",
+        "level": 1,
+        "text": "Test: 29_list_text_hash_at_start_of_item",
+        "line": 0,
+        "slug": "test-29_list_text_hash_at_start_of_item",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 43
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-29_list_text_hash_at_start_of_item",
+      "1": "section_test-29_list_text_hash_at_start_of_item",
+      "2": "section_legit-in-list",
+      "3": "section_legit-in-list",
+      "4": "section_legit-in-list",
+      "5": "section_legit-in-list"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

@@ -1,9 +1,207 @@
 {
-  "id": "blockquote_with_code_and_hr",
-  "category": "blockquotes",
-  "expected": {
-    "fenced_code_in_quote": true,
-    "hr_in_quote": true,
-    "language_hint": "python"
+  "metadata": {
+    "total_lines": 12,
+    "total_chars": 102,
+    "has_sections": true,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 3,
+      "text": 3,
+      "blockquote": 1,
+      "paragraph": 2,
+      "fence": 1,
+      "hr": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/17_blockquotes/blockquote_with_code_and_hr.md"
+  },
+  "content": {
+    "raw": "# Blockquote with code and hr\n\n> Intro line\n>\n> ```python\n> print(\"hello\")\n> ```\n>\n> ---\n>\n> After hr\n",
+    "lines": [
+      "# Blockquote with code and hr",
+      "",
+      "> Intro line",
+      ">",
+      "> ```python",
+      "> print(\"hello\")",
+      "> ```",
+      ">",
+      "> ---",
+      ">",
+      "> After hr",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_blockquote-with-code-and-hr",
+        "level": 1,
+        "title": "Blockquote with code and hr",
+        "slug": "blockquote-with-code-and-hr",
+        "start_line": 0,
+        "end_line": 11,
+        "start_char": 0,
+        "end_char": 102,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Blockquote with code and hr\n\n> Intro line\n>\n> ```python\n> print(\"hello\")\n> ```\n>\n> ---\n>\n> After hr\n",
+        "text_content": "Blockquote with code and hr\n\nIntro line\n\nAfter hr"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "python",
+        "content": "print(\"hello\")\n",
+        "start_line": 4,
+        "end_line": 7,
+        "section_id": "section_blockquote-with-code-and-hr"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_blockquote-with-code-and-hr",
+        "level": 1,
+        "text": "Blockquote with code and hr",
+        "line": 0,
+        "slug": "blockquote-with-code-and-hr",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 30
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "content": "Intro lineAfter hr",
+        "start_line": 2,
+        "end_line": 11,
+        "section_id": "section_blockquote-with-code-and-hr",
+        "children_summary": {
+          "lists": 0,
+          "tables": 0,
+          "code": 1
+        },
+        "children_blocks": [
+          {
+            "type": "fence",
+            "start_line": 4,
+            "end_line": 7
+          }
+        ]
+      }
+    ],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose"
+    },
+    "line_to_section": {
+      "0": "section_blockquote-with-code-and-hr",
+      "1": "section_blockquote-with-code-and-hr",
+      "2": "section_blockquote-with-code-and-hr",
+      "3": "section_blockquote-with-code-and-hr",
+      "4": "section_blockquote-with-code-and-hr",
+      "5": "section_blockquote-with-code-and-hr",
+      "6": "section_blockquote-with-code-and-hr",
+      "7": "section_blockquote-with-code-and-hr",
+      "8": "section_blockquote-with-code-and-hr",
+      "9": "section_blockquote-with-code-and-hr",
+      "10": "section_blockquote-with-code-and-hr",
+      "11": "section_blockquote-with-code-and-hr"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "code_lines": [
+      4,
+      5,
+      6
+    ],
+    "code_blocks": [
+      {
+        "start_line": 4,
+        "end_line": 6,
+        "language": "python"
+      }
+    ]
   }
 }

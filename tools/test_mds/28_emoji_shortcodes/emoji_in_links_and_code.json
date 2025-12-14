@@ -1,10 +1,170 @@
 {
-  "id": "emoji_in_links_and_code",
-  "category": "emoji_shortcodes",
-  "plugin_required": true,
-  "expected": {
-    "emoji_in_link_text": 1,
-    "emoji_in_codespan": 0,
-    "emoji_in_codeblock": 0
+  "metadata": {
+    "total_lines": 8,
+    "total_chars": 91,
+    "has_sections": false,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 2,
+      "inline": 2,
+      "text": 4,
+      "link": 1,
+      "code_inline": 1,
+      "fence": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "https": 1
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/28_emoji_shortcodes/emoji_in_links_and_code.md"
+  },
+  "content": {
+    "raw": "Link text with :tada: [click :tada:](https://e.x)\n\nCode: `:tada:` and\n\n```\n:not_emoji:\n```\n",
+    "lines": [
+      "Link text with :tada: [click :tada:](https://e.x)",
+      "",
+      "Code: `:tada:` and",
+      "",
+      "```",
+      ":not_emoji:",
+      "```",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Link text with :tada: click :tada:",
+        "start_line": 0,
+        "end_line": 1,
+        "section_id": null,
+        "word_count": 6,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Code: :tada: and",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": null,
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": true
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "",
+        "content": ":not_emoji:\n",
+        "start_line": 4,
+        "end_line": 7,
+        "section_id": null
+      }
+    ],
+    "headings": [],
+    "links": [
+      {
+        "text": "click :tada:",
+        "url": "https://e.x",
+        "line": 0,
+        "type": "absolute",
+        "scheme": "https",
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      7
+    ],
+    "code_lines": [
+      4,
+      5,
+      6
+    ],
+    "code_blocks": [
+      {
+        "start_line": 4,
+        "end_line": 6,
+        "language": ""
+      }
+    ]
   }
 }

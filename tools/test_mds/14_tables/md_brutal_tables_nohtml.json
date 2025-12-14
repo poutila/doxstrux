@@ -10,7 +10,7 @@
       "root": 1,
       "heading": 13,
       "inline": 166,
-      "text": 208,
+      "text": 209,
       "paragraph": 22,
       "strong": 34,
       "softbreak": 13,
@@ -27,7 +27,11 @@
       "tbody": 9,
       "td": 112,
       "code_inline": 5,
-      "em": 2
+      "em": 2,
+      "footnote_ref": 1,
+      "footnote_block": 1,
+      "footnote": 1,
+      "footnote_anchor": 1
     },
     "has_frontmatter": false,
     "security": {
@@ -44,54 +48,23 @@
         },
         {
           "type": "ragged_table",
-          "line": 186,
+          "line": 158,
           "message": "Table has inconsistent column counts"
         },
         {
-          "type": "path_traversal",
-          "line": 8,
-          "message": "Link contains path traversal pattern",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "type": "path_traversal",
-          "line": 8,
-          "message": "Link contains path traversal pattern",
-          "url": "https://github.github.com/gfm/"
-        },
-        {
-          "type": "path_traversal",
-          "line": 8,
-          "message": "Link contains path traversal pattern",
-          "url": "https://via.placeholder.com/60x20?text=MD"
-        },
-        {
-          "type": "path_traversal",
-          "line": 133,
-          "message": "Link contains path traversal pattern",
-          "url": "https://spec.commonmark.org/"
-        },
-        {
-          "type": "path_traversal",
-          "line": 133,
-          "message": "Link contains path traversal pattern",
-          "url": "https://github.github.com/gfm/"
-        },
-        {
-          "type": "path_traversal",
-          "line": 134,
-          "message": "Link contains path traversal pattern",
-          "url": "https://via.placeholder.com/60x20?text=MD"
+          "type": "mixed_scripts",
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)"
         }
       ],
       "statistics": {
         "frontmatter_at_bof": false,
         "ragged_tables_count": 3,
         "allowed_schemes": [
-          "tel",
-          "mailto",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "table_align_mismatches": 0,
         "nested_headings_blocked": 0,
@@ -103,38 +76,44 @@
         "confusables_present": false,
         "nbsp_present": false,
         "zwsp_present": false,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "link_schemes": {
           "https": 4,
           "relative": 2
         },
-        "unicode_risk_score": 0
+        "mixed_scripts": true,
+        "unicode_risk_score": 1
       },
       "summary": {
         "ragged_tables_count": 3,
-        "total_warnings": 9,
+        "total_warnings": 4,
         "has_dangerous_content": true,
-        "unicode_risk_score": 0
+        "unicode_risk_score": 1
       },
       "profile_used": "moderate"
     },
     "quarantined": true,
     "quarantine_reasons": [
       "ragged_tables:3"
-    ]
+    ],
+    "encoding": {
+      "detected": "utf_8",
+      "confidence": 0.5786
+    },
+    "source_path": "tools/test_mds/14_tables/md_brutal_tables_nohtml.md"
   },
   "content": {
-    "raw": "# 🧪 BRUTAL Markdown Test — Nested Tables Edition\n\nThis file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks — up to **depth 4**. \nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n---\n\n## 0) Reference Links & Assets\nWe’ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n\n## 1) Depth‑4: Quote → List → Quote → **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested‑2 ANested‑2 B\n> > \n> > \n> > Nested‑3 XNested‑3 Y\n> > \n> > \n> > Inline code at nested‑2 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n\n## 2) Depth‑4: **Markdown Table** → Cell contains **List → Quote → Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n\n## 3) Depth‑4: **Markdown Table** → Cell contains **HTML table** → Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML‑L2\n| | \n| | MD‑L3 AMD‑L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n\n## 4) Depth‑4: Quote → **Markdown table** → Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n\n## 5) Depth‑4: **List → Markdown Table → HTML table → Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n\n## 6) Depth‑4: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n\n## 7) Depth‑4: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n\n## 8) Depth‑4: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n\n## 9) Depth‑4: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n\n## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown → HTML stage should add sanitization.\n\n---\n\n## Final HRs\n\n---\n***\n___\n\n_EOF_",
+    "raw": "# \ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition\n\nThis file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks \u2014 up to **depth 4**. \nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n---\n\n## 0) Reference Links & Assets\nWe\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n\n## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested\u20112 ANested\u20112 B\n> > \n> > \n> > Nested\u20113 XNested\u20113 Y\n> > \n> > \n> > Inline code at nested\u20112 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n\n## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n\n## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n\n## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n\n## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n\n## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n\n## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n\n## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n\n## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n\n## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\n---\n\n## Final HRs\n\n---\n***\n___\n\n_EOF_",
     "lines": [
-      "# 🧪 BRUTAL Markdown Test — Nested Tables Edition",
+      "# \ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition",
       "",
-      "This file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks — up to **depth 4**. ",
+      "This file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks \u2014 up to **depth 4**. ",
       "If your renderer sanitizes HTML, many nested tables will be flattened or removed.",
       "",
       "---",
       "",
       "## 0) Reference Links & Assets",
-      "We’ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]",
+      "We\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]",
       "",
       "[cm]: https://spec.commonmark.org/",
       "[gfm]: https://github.github.com/gfm/",
@@ -142,7 +121,7 @@
       "",
       "---",
       "",
-      "## 1) Depth‑4: Quote → List → Quote → **Markdown Table** w/ **HTML nested table**",
+      "## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**",
       "",
       "> **L1** Quote",
       "> - **L2** List item leading to inner quote",
@@ -158,13 +137,13 @@
       "> > L4 Cell 1L4 Cell 2",
       "> > ",
       "> > ",
-      "> > Nested‑2 ANested‑2 B",
+      "> > Nested\u20112 ANested\u20112 B",
       "> > ",
       "> > ",
-      "> > Nested‑3 XNested‑3 Y",
+      "> > Nested\u20113 XNested\u20113 Y",
       "> > ",
       "> > ",
-      "> > Inline code at nested‑2 depth",
+      "> > Inline code at nested\u20112 depth",
       "> > ",
       "> > ",
       "> > ",
@@ -177,7 +156,7 @@
       "",
       "---",
       "",
-      "## 2) Depth‑4: **Markdown Table** → Cell contains **List → Quote → Code**",
+      "## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**",
       "",
       "| Col A | Col B |",
       "|------:|:------|",
@@ -192,15 +171,15 @@
       "",
       "---",
       "",
-      "## 3) Depth‑4: **Markdown Table** → Cell contains **HTML table** → Cell contains **Markdown table**",
+      "## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**",
       "",
       "| Level | Content |",
       "|:-----:|:--------|",
       "| L1 | ",
       "| | ",
-      "| | HTML‑L2",
+      "| | HTML\u2011L2",
       "| | ",
-      "| | MD‑L3 AMD‑L3 B",
+      "| | MD\u2011L3 AMD\u2011L3 B",
       "| | ",
       "| | ",
       "| | | L4 key | L4 val |",
@@ -218,7 +197,7 @@
       "",
       "---",
       "",
-      "## 4) Depth‑4: Quote → **Markdown table** → Cell contains **Checklist** w/ continuation",
+      "## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation",
       "",
       "> Outer context",
       ">",
@@ -235,7 +214,7 @@
       "",
       "---",
       "",
-      "## 5) Depth‑4: **List → Markdown Table → HTML table → Fenced Code**",
+      "## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**",
       "",
       "- **Phase 1 (L1)** intro paragraph.",
       " - **Phase 2 (L2)** we drop a table:",
@@ -254,7 +233,7 @@
       "",
       "---",
       "",
-      "## 6) Depth‑4: **Markdown Table** with **footnotes, links, images** inside cells",
+      "## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells",
       "",
       "| Feature | Demo |",
       "|:-------:|:-----|",
@@ -270,7 +249,7 @@
       "",
       "---",
       "",
-      "## 7) Depth‑4: **Code fence with pipes** embedded to test table parsing edge cases",
+      "## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases",
       "",
       "| Pipe | Value |",
       "|------|-------|",
@@ -282,7 +261,7 @@
       "",
       "---",
       "",
-      "## 8) Depth‑4: **Table alignment, inline pipes, escapes** with nested quotes",
+      "## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes",
       "",
       "| Left | Center | Right |",
       "|:------------|:------------:|------:|",
@@ -296,7 +275,7 @@
       "",
       "---",
       "",
-      "## 9) Depth‑4: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)",
+      "## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)",
       "",
       "> Root quote (L1)",
       "> - List level (L2)",
@@ -318,7 +297,7 @@
       "| style | table{border:2px solid red} |",
       "| iframe | |",
       "",
-      "> If your pipeline strips the above, good. If not, your Markdown → HTML stage should add sanitization.",
+      "> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.",
       "",
       "---",
       "",
@@ -336,7 +315,7 @@
       {
         "id": "section_brutal-markdown-test-nested-tables-edition",
         "level": 1,
-        "title": "🧪 BRUTAL Markdown Test — Nested Tables Edition",
+        "title": "\ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition",
         "slug": "brutal-markdown-test-nested-tables-edition",
         "start_line": 0,
         "end_line": 202,
@@ -357,8 +336,8 @@
           "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
           "section_final-hrs"
         ],
-        "raw_content": "# 🧪 BRUTAL Markdown Test — Nested Tables Edition\n\nThis file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks — up to **depth 4**. \nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n---\n\n## 0) Reference Links & Assets\nWe’ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n\n## 1) Depth‑4: Quote → List → Quote → **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested‑2 ANested‑2 B\n> > \n> > \n> > Nested‑3 XNested‑3 Y\n> > \n> > \n> > Inline code at nested‑2 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n\n## 2) Depth‑4: **Markdown Table** → Cell contains **List → Quote → Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n\n## 3) Depth‑4: **Markdown Table** → Cell contains **HTML table** → Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML‑L2\n| | \n| | MD‑L3 AMD‑L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n\n## 4) Depth‑4: Quote → **Markdown table** → Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n\n## 5) Depth‑4: **List → Markdown Table → HTML table → Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n\n## 6) Depth‑4: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n\n## 7) Depth‑4: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n\n## 8) Depth‑4: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n\n## 9) Depth‑4: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n\n## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown → HTML stage should add sanitization.\n\n---\n\n## Final HRs\n\n---\n***\n___\n\n_EOF_",
-        "text_content": "🧪 BRUTAL Markdown Test — Nested Tables Edition\n\nThis file is designed to break Markdown table renderers by abusing HTML tables inside Markdown tables, nested blockquotes, lists, and code blocks — up to depth 4.\nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n0) Reference Links & Assets We’ll reuse refs: CommonMark, GFM, logo: \n\n1) Depth‑4: Quote → List → Quote → Markdown Table w/ HTML nested table\n\nL1 Quote L2 List item leading to inner quote L3 Quote wrapping an outer Markdown table:\n\nOuter AOuter B\n\nplain\n\nNested A1Nested A2\n\nL4 Cell 1L4 Cell 2\n\nNested‑2 ANested‑2 B\n\nNested‑3 XNested‑3 Y\n\nInline code at nested‑2 depth\n\n|\n\nRow below nested table:\n| code | bold |\n\n2) Depth‑4: Markdown Table → Cell contains List → Quote → Code\n\nCol ACol B\n\n12345- L1 bullet in table cell > L2 quote in table cell > - L3 list within quote > ```js > // L4 fenced code inside the quoted list > export const deep = 4; > ```\n\n3) Depth‑4: Markdown Table → Cell contains HTML table → Cell contains Markdown table\n\nLevelContent\n\nL1\n\nHTML‑L2\n\nMD‑L3 AMD‑L3 B\n\nNested paragraph with bold, italic, and code.\n\n4) Depth‑4: Quote → Markdown table → Cell contains Checklist w/ continuation\n\nOuter context\n\nTaskStatus\n\nSubtasks- [ ] L1 todo - [x] L2 done - [ ] L2 todo - [ ] L3 deeper - [x] L4 deepest (done)\n\nEnd of quote.\n\n5) Depth‑4: List → Markdown Table → HTML table → Fenced Code\n\nPhase 1 (L1) intro paragraph. Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |\n\n6) Depth‑4: Markdown Table with footnotes, links, images inside cells\n\nFeatureDemo\n\nFootnoteHere is a note[^t1] inside a table cell (L1). LinksCommonMark spec and GFM referenced within table (L1). Image Deep- L1 bullet > L2 quote inside table > 1. L3 number > - L4 bullet\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n7) Depth‑4: Code fence with pipes embedded to test table parsing edge cases\n\nPipeValue\n\nshow```bash echo \"a printf \"1 ```\n\n8) Depth‑4: Table alignment, inline pipes, escapes with nested quotes\n\nLeftCenterRight\n\n``| text | morebold-10 > L1 quote> L1 quote> L1 quote > - L2 li> - L2 li> - L2 li > > L3> > L3> > L3 > > 1. L4 ordered> > - L4 bullet> > L4 code\n\n9) Depth‑4: GFM table inside blockquote inside list inside blockquote (max stress)\n\nRoot quote (L1) List level (L2) Inner quote (L3)\n\nHead AHead B\n\nL4 boldL4 code subsup\n\n10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\nFieldValue\n\nscriptconsole.log(\"XSS?\") styletable{border:2px solid red} iframe\n\nIf your pipeline strips the above, good. If not, your Markdown → HTML stage should add sanitization.\n\nFinal HRs\n\nEOF"
+        "raw_content": "# \ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition\n\nThis file is designed to **break** Markdown table renderers by abusing **HTML tables inside Markdown tables**, nested blockquotes, lists, and code blocks \u2014 up to **depth 4**. \nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n---\n\n## 0) Reference Links & Assets\nWe\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n\n## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested\u20112 ANested\u20112 B\n> > \n> > \n> > Nested\u20113 XNested\u20113 Y\n> > \n> > \n> > Inline code at nested\u20112 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n\n## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n\n## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n\n## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n\n## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n\n## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n\n## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n\n## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n\n## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n\n## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\n---\n\n## Final HRs\n\n---\n***\n___\n\n_EOF_",
+        "text_content": "\ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition\n\nThis file is designed to break Markdown table renderers by abusing HTML tables inside Markdown tables, nested blockquotes, lists, and code blocks \u2014 up to depth 4.\nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.\n\n0) Reference Links & Assets We\u2019ll reuse refs: CommonMark, GFM, logo: \n\n1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table\n\nL1 Quote L2 List item leading to inner quote L3 Quote wrapping an outer Markdown table:\n\nOuter AOuter B\n\nplain\n\nNested A1Nested A2\n\nL4 Cell 1L4 Cell 2\n\nNested\u20112 ANested\u20112 B\n\nNested\u20113 XNested\u20113 Y\n\nInline code at nested\u20112 depth\n\n|\n\nRow below nested table:\n| code | bold |\n\n2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code\n\nCol ACol B\n\n12345- L1 bullet in table cell > L2 quote in table cell > - L3 list within quote > ```js > // L4 fenced code inside the quoted list > export const deep = 4; > ```\n\n3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table\n\nLevelContent\n\nL1\n\nHTML\u2011L2\n\nMD\u2011L3 AMD\u2011L3 B\n\nNested paragraph with bold, italic, and code.\n\n4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation\n\nOuter context\n\nTaskStatus\n\nSubtasks- [ ] L1 todo - [x] L2 done - [ ] L2 todo - [ ] L3 deeper - [x] L4 deepest (done)\n\nEnd of quote.\n\n5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code\n\nPhase 1 (L1) intro paragraph. Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |\n\n6) Depth\u20114: Markdown Table with footnotes, links, images inside cells\n\nFeatureDemo\n\nFootnoteHere is a note inside a table cell (L1). LinksCommonMark spec and GFM referenced within table (L1). Image Deep- L1 bullet > L2 quote inside table > 1. L3 number > - L4 bullet\n\n7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases\n\nPipeValue\n\nshow```bash echo \"a printf \"1 ```\n\n8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes\n\nLeftCenterRight\n\n``| text | morebold-10 > L1 quote> L1 quote> L1 quote > - L2 li> - L2 li> - L2 li > > L3> > L3> > L3 > > 1. L4 ordered> > - L4 bullet> > L4 code\n\n9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)\n\nRoot quote (L1) List level (L2) Inner quote (L3)\n\nHead AHead B\n\nL4 boldL4 code subsup\n\n10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\nFieldValue\n\nscriptconsole.log(\"XSS?\") styletable{border:2px solid red} iframe\n\nIf your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\nFinal HRs\n\nEOFFootnote defined outside the table but referenced inside."
       },
       {
         "id": "section_0-reference-links-assets",
@@ -371,13 +350,13 @@
         "end_char": 543,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 0) Reference Links & Assets\nWe’ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n",
-        "text_content": "0) Reference Links & Assets We’ll reuse refs: CommonMark, GFM, logo:"
+        "raw_content": "## 0) Reference Links & Assets\nWe\u2019ll reuse refs: [CommonMark][cm], [GFM][gfm], logo: ![logo][logo]\n\n[cm]: https://spec.commonmark.org/\n[gfm]: https://github.github.com/gfm/\n[logo]: https://via.placeholder.com/60x20?text=MD\n\n---\n",
+        "text_content": "0) Reference Links & Assets We\u2019ll reuse refs: CommonMark, GFM, logo:"
       },
       {
         "id": "section_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
         "level": 2,
-        "title": "1) Depth‑4: Quote → List → Quote → Markdown Table w/ HTML nested table",
+        "title": "1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table",
         "slug": "1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
         "start_line": 16,
         "end_line": 50,
@@ -385,13 +364,13 @@
         "end_char": 1073,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 1) Depth‑4: Quote → List → Quote → **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested‑2 ANested‑2 B\n> > \n> > \n> > Nested‑3 XNested‑3 Y\n> > \n> > \n> > Inline code at nested‑2 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n",
-        "text_content": "1) Depth‑4: Quote → List → Quote → Markdown Table w/ HTML nested table\n\nL1 Quote L2 List item leading to inner quote L3 Quote wrapping an outer Markdown table:\n\nOuter AOuter B\n\nplain\n\nNested A1Nested A2\n\nL4 Cell 1L4 Cell 2\n\nNested‑2 ANested‑2 B\n\nNested‑3 XNested‑3 Y\n\nInline code at nested‑2 depth\n\n|\n\nRow below nested table:\n| code | bold |"
+        "raw_content": "## 1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 **Markdown Table** w/ **HTML nested table**\n\n> **L1** Quote\n> - **L2** List item leading to inner quote\n> > **L3** Quote wrapping an outer Markdown table:\n> >\n> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | \n> > \n> > Nested A1Nested A2\n> > \n> > \n> > L4 Cell 1L4 Cell 2\n> > \n> > \n> > Nested\u20112 ANested\u20112 B\n> > \n> > \n> > Nested\u20113 XNested\u20113 Y\n> > \n> > \n> > Inline code at nested\u20112 depth\n> > \n> > \n> > \n> > \n> > |\n> >\n> > Row below nested table:\n> > | `code` | **bold** |\n\n\n---\n",
+        "text_content": "1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table\n\nL1 Quote L2 List item leading to inner quote L3 Quote wrapping an outer Markdown table:\n\nOuter AOuter B\n\nplain\n\nNested A1Nested A2\n\nL4 Cell 1L4 Cell 2\n\nNested\u20112 ANested\u20112 B\n\nNested\u20113 XNested\u20113 Y\n\nInline code at nested\u20112 depth\n\n|\n\nRow below nested table:\n| code | bold |"
       },
       {
         "id": "section_2-depth4-markdown-table-cell-contains-list-quote-code",
         "level": 2,
-        "title": "2) Depth‑4: Markdown Table → Cell contains List → Quote → Code",
+        "title": "2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code",
         "slug": "2-depth4-markdown-table-cell-contains-list-quote-code",
         "start_line": 51,
         "end_line": 65,
@@ -399,13 +378,13 @@
         "end_char": 1400,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 2) Depth‑4: **Markdown Table** → Cell contains **List → Quote → Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n",
-        "text_content": "2) Depth‑4: Markdown Table → Cell contains List → Quote → Code\n\nCol ACol B\n\n12345- L1 bullet in table cell > L2 quote in table cell > - L3 list within quote > ```js > // L4 fenced code inside the quoted list > export const deep = 4; > ```"
+        "raw_content": "## 2) Depth\u20114: **Markdown Table** \u2192 Cell contains **List \u2192 Quote \u2192 Code**\n\n| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |\n\n\n---\n",
+        "text_content": "2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code\n\nCol ACol B\n\n12345- L1 bullet in table cell > L2 quote in table cell > - L3 list within quote > ```js > // L4 fenced code inside the quoted list > export const deep = 4; > ```"
       },
       {
         "id": "section_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
         "level": 2,
-        "title": "3) Depth‑4: Markdown Table → Cell contains HTML table → Cell contains Markdown table",
+        "title": "3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table",
         "slug": "3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
         "start_line": 66,
         "end_line": 91,
@@ -413,13 +392,13 @@
         "end_char": 1763,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 3) Depth‑4: **Markdown Table** → Cell contains **HTML table** → Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML‑L2\n| | \n| | MD‑L3 AMD‑L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n",
-        "text_content": "3) Depth‑4: Markdown Table → Cell contains HTML table → Cell contains Markdown table\n\nLevelContent\n\nL1\n\nHTML‑L2\n\nMD‑L3 AMD‑L3 B\n\nNested paragraph with bold, italic, and code."
+        "raw_content": "## 3) Depth\u20114: **Markdown Table** \u2192 Cell contains **HTML table** \u2192 Cell contains **Markdown table**\n\n| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |\n\n\n---\n",
+        "text_content": "3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table\n\nLevelContent\n\nL1\n\nHTML\u2011L2\n\nMD\u2011L3 AMD\u2011L3 B\n\nNested paragraph with bold, italic, and code."
       },
       {
         "id": "section_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
         "level": 2,
-        "title": "4) Depth‑4: Quote → Markdown table → Cell contains Checklist w/ continuation",
+        "title": "4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation",
         "slug": "4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
         "start_line": 92,
         "end_line": 108,
@@ -427,13 +406,13 @@
         "end_char": 2074,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 4) Depth‑4: Quote → **Markdown table** → Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n",
-        "text_content": "4) Depth‑4: Quote → Markdown table → Cell contains Checklist w/ continuation\n\nOuter context\n\nTaskStatus\n\nSubtasks- [ ] L1 todo - [x] L2 done - [ ] L2 todo - [ ] L3 deeper - [x] L4 deepest (done)\n\nEnd of quote."
+        "raw_content": "## 4) Depth\u20114: Quote \u2192 **Markdown table** \u2192 Cell contains **Checklist** w/ continuation\n\n> Outer context\n>\n> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |\n>\n> End of quote.\n\n\n---\n",
+        "text_content": "4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation\n\nOuter context\n\nTaskStatus\n\nSubtasks- [ ] L1 todo - [x] L2 done - [ ] L2 todo - [ ] L3 deeper - [x] L4 deepest (done)\n\nEnd of quote."
       },
       {
         "id": "section_5-depth4-list-markdown-table-html-table-fenced-code",
         "level": 2,
-        "title": "5) Depth‑4: List → Markdown Table → HTML table → Fenced Code",
+        "title": "5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code",
         "slug": "5-depth4-list-markdown-table-html-table-fenced-code",
         "start_line": 109,
         "end_line": 127,
@@ -441,13 +420,13 @@
         "end_char": 2371,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 5) Depth‑4: **List → Markdown Table → HTML table → Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n",
-        "text_content": "5) Depth‑4: List → Markdown Table → HTML table → Fenced Code\n\nPhase 1 (L1) intro paragraph. Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |"
+        "raw_content": "## 5) Depth\u20114: **List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code**\n\n- **Phase 1 (L1)** intro paragraph.\n - **Phase 2 (L2)** we drop a table:\n | K | V |\n |---|---|\n | A | \n | | HTML L3: value A\n | | \n | | # L4 fenced block (inside HTML table)\n | | echo nested\n | | \n | | \n | | |\n | B | 2 |\n\n\n---\n",
+        "text_content": "5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code\n\nPhase 1 (L1) intro paragraph. Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |"
       },
       {
         "id": "section_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
         "level": 2,
-        "title": "6) Depth‑4: Markdown Table with footnotes, links, images inside cells",
+        "title": "6) Depth\u20114: Markdown Table with footnotes, links, images inside cells",
         "slug": "6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
         "start_line": 128,
         "end_line": 143,
@@ -455,13 +434,13 @@
         "end_char": 2820,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 6) Depth‑4: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n",
-        "text_content": "6) Depth‑4: Markdown Table with footnotes, links, images inside cells\n\nFeatureDemo\n\nFootnoteHere is a note[^t1] inside a table cell (L1). LinksCommonMark spec and GFM referenced within table (L1). Image Deep- L1 bullet > L2 quote inside table > 1. L3 number > - L4 bullet\n\n[^t1]: Footnote defined outside the table but referenced inside."
+        "raw_content": "## 6) Depth\u20114: **Markdown Table** with **footnotes, links, images** inside cells\n\n| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |\n\n[^t1]: Footnote defined outside the table but referenced inside.\n\n---\n",
+        "text_content": "6) Depth\u20114: Markdown Table with footnotes, links, images inside cells\n\nFeatureDemo\n\nFootnoteHere is a note inside a table cell (L1). LinksCommonMark spec and GFM referenced within table (L1). Image Deep- L1 bullet > L2 quote inside table > 1. L3 number > - L4 bullet\n\nFootnote defined outside the table but referenced inside."
       },
       {
         "id": "section_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
         "level": 2,
-        "title": "7) Depth‑4: Code fence with pipes embedded to test table parsing edge cases",
+        "title": "7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases",
         "slug": "7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
         "start_line": 144,
         "end_line": 155,
@@ -469,13 +448,13 @@
         "end_char": 3010,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 7) Depth‑4: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n",
-        "text_content": "7) Depth‑4: Code fence with pipes embedded to test table parsing edge cases\n\nPipeValue\n\nshow```bash echo \"a printf \"1 ```"
+        "raw_content": "## 7) Depth\u20114: **Code fence with pipes** embedded to test table parsing edge cases\n\n| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |\n\n\n---\n",
+        "text_content": "7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases\n\nPipeValue\n\nshow```bash echo \"a printf \"1 ```"
       },
       {
         "id": "section_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
         "level": 2,
-        "title": "8) Depth‑4: Table alignment, inline pipes, escapes with nested quotes",
+        "title": "8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes",
         "slug": "8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
         "start_line": 156,
         "end_line": 169,
@@ -483,13 +462,13 @@
         "end_char": 3380,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 8) Depth‑4: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n",
-        "text_content": "8) Depth‑4: Table alignment, inline pipes, escapes with nested quotes\n\nLeftCenterRight\n\n``| text | morebold-10 > L1 quote> L1 quote> L1 quote > - L2 li> - L2 li> - L2 li > > L3> > L3> > L3 > > 1. L4 ordered> > - L4 bullet> > L4 code"
+        "raw_content": "## 8) Depth\u20114: **Table alignment, inline pipes, escapes** with nested quotes\n\n| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |\n\n\n---\n",
+        "text_content": "8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes\n\nLeftCenterRight\n\n``| text | morebold-10 > L1 quote> L1 quote> L1 quote > - L2 li> - L2 li> - L2 li > > L3> > L3> > L3 > > 1. L4 ordered> > - L4 bullet> > L4 code"
       },
       {
         "id": "section_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
         "level": 2,
-        "title": "9) Depth‑4: GFM table inside blockquote inside list inside blockquote (max stress)",
+        "title": "9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)",
         "slug": "9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
         "start_line": 170,
         "end_line": 183,
@@ -497,8 +476,8 @@
         "end_char": 3651,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 9) Depth‑4: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n",
-        "text_content": "9) Depth‑4: GFM table inside blockquote inside list inside blockquote (max stress)\n\nRoot quote (L1) List level (L2) Inner quote (L3)\n\nHead AHead B\n\nL4 boldL4 code subsup"
+        "raw_content": "## 9) Depth\u20114: **GFM table** inside **blockquote** inside **list** inside **blockquote** (max stress)\n\n> Root quote (L1)\n> - List level (L2)\n> > Inner quote (L3)\n> >\n> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |\n\n\n---\n",
+        "text_content": "9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)\n\nRoot quote (L1) List level (L2) Inner quote (L3)\n\nHead AHead B\n\nL4 boldL4 code subsup"
       },
       {
         "id": "section_10-sanitization-probe-raw-tags-inside-cells-expect-to-be-stripped-by-safe-renderers",
@@ -511,8 +490,8 @@
         "end_char": 3975,
         "parent_id": "section_brutal-markdown-test-nested-tables-edition",
         "child_ids": [],
-        "raw_content": "## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown → HTML stage should add sanitization.\n\n---\n",
-        "text_content": "10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\nFieldValue\n\nscriptconsole.log(\"XSS?\") styletable{border:2px solid red} iframe\n\nIf your pipeline strips the above, good. If not, your Markdown → HTML stage should add sanitization."
+        "raw_content": "## 10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\n| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |\n\n> If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.\n\n---\n",
+        "text_content": "10) Sanitization probe: raw tags inside cells (expect to be stripped by safe renderers)\n\nFieldValue\n\nscriptconsole.log(\"XSS?\") styletable{border:2px solid red} iframe\n\nIf your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization."
       },
       {
         "id": "section_final-hrs",
@@ -532,7 +511,7 @@
     "paragraphs": [
       {
         "id": "para_0",
-        "text": "This file is designed to break Markdown table renderers by abusing HTML tables inside Markdown tables, nested blockquotes, lists, and code blocks — up to depth 4.\nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.",
+        "text": "This file is designed to break Markdown table renderers by abusing HTML tables inside Markdown tables, nested blockquotes, lists, and code blocks \u2014 up to depth 4.\nIf your renderer sanitizes HTML, many nested tables will be flattened or removed.",
         "start_line": 2,
         "end_line": 4,
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
@@ -543,7 +522,7 @@
       },
       {
         "id": "para_1",
-        "text": "We’ll reuse refs: CommonMark, GFM, logo: logologo",
+        "text": "We\u2019ll reuse refs: CommonMark, GFM, logo: logologo",
         "start_line": 8,
         "end_line": 9,
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
@@ -554,17 +533,6 @@
       },
       {
         "id": "para_2",
-        "text": "[^t1]: Footnote defined outside the table but referenced inside.",
-        "start_line": 140,
-        "end_line": 141,
-        "section_id": "section_brutal-markdown-test-nested-tables-edition",
-        "word_count": 9,
-        "has_links": false,
-        "has_emphasis": false,
-        "has_code": false
-      },
-      {
-        "id": "para_3",
         "text": "EOF",
         "start_line": 202,
         "end_line": 203,
@@ -572,6 +540,17 @@
         "word_count": 1,
         "has_links": false,
         "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "Footnote defined outside the table but referenced inside.",
+        "start_line": 140,
+        "end_line": 141,
+        "section_id": "section_brutal-markdown-test-nested-tables-edition",
+        "word_count": 8,
+        "has_links": false,
+        "has_emphasis": false,
         "has_code": false
       }
     ],
@@ -585,14 +564,11 @@
         "items": [
           {
             "text": "L2 List item leading to inner quote",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       },
       {
         "id": "list_1",
@@ -603,20 +579,16 @@
         "items": [
           {
             "text": "Phase 1 (L1) intro paragraph.",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Phase 2 (L2) we drop a table:\n| K | V |\n|---|---|\n| A |\n| | HTML L3: value A\n| |\n| | # L4 fenced block (inside HTML table)\n| | echo nested\n| |\n| |\n| | |\n| B | 2 |",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 2
       },
       {
         "id": "list_2",
@@ -627,19 +599,17 @@
         "items": [
           {
             "text": "List level (L2)",
-            "checked": null,
             "children": [],
             "blocks": []
           }
         ],
-        "items_count": 1,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 1
       }
     ],
     "tables": [
       {
         "id": "table_0",
+        "raw_content": "> > | Outer A | Outer B |\n> > |:-------:|:-------:|\n> > | plain | ",
         "headers": [
           "Outer A",
           "Outer B"
@@ -651,7 +621,7 @@
           ]
         ],
         "align": [
-          "left",
+          "center",
           "center"
         ],
         "start_line": 22,
@@ -659,17 +629,24 @@
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "is_ragged": true,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 2,
         "row_count": 1,
         "align_meta": {
           "heuristic": true
         },
         "is_ragged_meta": {
-          "heuristic": true
+          "source_col_counts": [
+            1,
+            2
+          ]
         }
       },
       {
         "id": "table_1",
+        "raw_content": "| Col A | Col B |\n|------:|:------|\n| 12345 | - **L1** bullet in table cell \n| | > **L2** quote in table cell \n| | > - **L3** list within quote \n| | > ```js\n| | > // L4 fenced code inside the quoted list\n| | > export const deep = 4;\n| | > ``` |",
         "headers": [
           "Col A",
           "Col B"
@@ -677,15 +654,15 @@
         "rows": [
           [
             "12345",
-            "- L1 bullet in table cell"
+            "- **L1** bullet in table cell"
           ],
           [
             "",
-            "> L2 quote in table cell"
+            "> **L2** quote in table cell"
           ],
           [
             "",
-            "> - L3 list within quote"
+            "> - **L3** list within quote"
           ],
           [
             "",
@@ -713,6 +690,16 @@
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [
+          55,
+          56,
+          57,
+          58,
+          59,
+          60
+        ],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 2,
         "row_count": 7,
         "align_meta": {
@@ -721,6 +708,7 @@
       },
       {
         "id": "table_2",
+        "raw_content": "| Level | Content |\n|:-----:|:--------|\n| L1 | \n| | \n| | HTML\u2011L2\n| | \n| | MD\u2011L3 AMD\u2011L3 B\n| | \n| | \n| | | L4 key | L4 val |\n| | |:------:|:------:|\n| | | a | 1 |\n| | \n| | \n| | Nested paragraph with **bold**, *italic*, and `code`.\n| | \n| | \n| | \n| | \n| | |",
         "headers": [
           "Level",
           "Content"
@@ -736,7 +724,7 @@
           ],
           [
             "",
-            "HTML‑L2"
+            "HTML\u2011L2"
           ],
           [
             "",
@@ -744,15 +732,7 @@
           ],
           [
             "",
-            "MD‑L3 AMD‑L3 B"
-          ],
-          [
-            "",
-            ""
-          ],
-          [
-            "",
-            ""
+            "MD\u2011L3 AMD\u2011L3 B"
           ],
           [
             "",
@@ -776,7 +756,15 @@
           ],
           [
             "",
-            "Nested paragraph with bold, italic, and code."
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            "Nested paragraph with **bold**, *italic*, and `code`."
           ],
           [
             "",
@@ -808,17 +796,29 @@
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "is_ragged": true,
         "align_mismatch": false,
+        "malformed_lines": [
+          72,
+          74,
+          82
+        ],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 2,
         "row_count": 18,
         "align_meta": {
           "heuristic": true
         },
         "is_ragged_meta": {
-          "heuristic": true
+          "source_col_counts": [
+            1,
+            2,
+            4
+          ]
         }
       },
       {
         "id": "table_3",
+        "raw_content": "> | Task | Status |\n> |--------------|--------|\n> | Subtasks | - [ ] L1 todo \n> | | - [x] L2 done \n> | | - [ ] L2 todo \n> | | - [ ] L3 deeper \n> | | - [x] **L4 deepest** (done) |",
         "headers": [
           "Task",
           "Status"
@@ -842,7 +842,7 @@
           ],
           [
             "",
-            "- [x] L4 deepest (done)"
+            "- [x] **L4 deepest** (done)"
           ]
         ],
         "align": [
@@ -854,6 +854,14 @@
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [
+          98,
+          99,
+          100,
+          101
+        ],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 2,
         "row_count": 5,
         "align_meta": {
@@ -862,6 +870,7 @@
       },
       {
         "id": "table_4",
+        "raw_content": "| Feature | Demo |\n|:-------:|:-----|\n| Footnote | Here is a note[^t1] inside a table cell (L1). |\n| Links | [CommonMark spec][cm] and [GFM][gfm] referenced within table (L1). |\n| Image | ![logo][logo] |\n| Deep | - L1 bullet \n| | > L2 quote inside table \n| | > 1. L3 number \n| | > - L4 bullet |",
         "headers": [
           "Feature",
           "Demo"
@@ -873,11 +882,11 @@
           ],
           [
             "Links",
-            "CommonMark spec and GFM referenced within table (L1)."
+            "[CommonMark spec][cm] and [GFM][gfm] referenced within table (L1)."
           ],
           [
             "Image",
-            "logologo"
+            "![logo][logo]"
           ],
           [
             "Deep",
@@ -905,6 +914,13 @@
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [
+          135,
+          136,
+          137
+        ],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 2,
         "row_count": 7,
         "align_meta": {
@@ -913,6 +929,7 @@
       },
       {
         "id": "table_5",
+        "raw_content": "| Pipe | Value |\n|------|-------|\n| show | ```bash\n| | echo \"a|b|c\"\n| | printf \"1|2|3\\n\"\n| | ``` |",
         "headers": [
           "Pipe",
           "Value"
@@ -944,6 +961,13 @@
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [
+          148,
+          149,
+          150
+        ],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 2,
         "row_count": 4,
         "align_meta": {
@@ -952,6 +976,7 @@
       },
       {
         "id": "table_6",
+        "raw_content": "| Left | Center | Right |\n|:------------|:------------:|------:|\n| `|` | `\\|` | 1000 |\n| text \\| more | **bold** | -10 |\n| > L1 quote | > L1 quote | > L1 quote |\n| > - L2 li | > - L2 li | > - L2 li |\n| > > L3 | > > L3 | > > L3 |\n| > > 1. L4 ordered | > > - L4 bullet | > > `L4 code` |",
         "headers": [
           "Left",
           "Center",
@@ -961,11 +986,11 @@
           [
             "`",
             "`",
-            "|"
+            "`|`"
           ],
           [
             "text | more",
-            "bold",
+            "**bold**",
             "-10"
           ],
           [
@@ -986,7 +1011,7 @@
           [
             "> > 1. L4 ordered",
             "> > - L4 bullet",
-            "> > L4 code"
+            "> > `L4 code`"
           ]
         ],
         "align": [
@@ -997,24 +1022,34 @@
         "start_line": 158,
         "end_line": 166,
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
-        "is_ragged": false,
+        "is_ragged": true,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": false,
+        "table_valid_md": false,
         "column_count": 3,
         "row_count": 6,
         "align_meta": {
           "heuristic": true
+        },
+        "is_ragged_meta": {
+          "source_col_counts": [
+            3,
+            4
+          ]
         }
       },
       {
         "id": "table_7",
+        "raw_content": "> > | Head A | Head B |\n> > |:------:|:------:|\n> > | **L4** bold | `L4` code |\n> > | sub | sup |",
         "headers": [
           "Head A",
           "Head B"
         ],
         "rows": [
           [
-            "L4 bold",
-            "L4 code"
+            "**L4** bold",
+            "`L4` code"
           ],
           [
             "sub",
@@ -1022,7 +1057,7 @@
           ]
         ],
         "align": [
-          "left",
+          "center",
           "center"
         ],
         "start_line": 176,
@@ -1030,6 +1065,9 @@
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
         "column_count": 2,
         "row_count": 2,
         "align_meta": {
@@ -1038,6 +1076,7 @@
       },
       {
         "id": "table_8",
+        "raw_content": "| Field | Value |\n|------:|:------|\n| script | console.log(\"XSS?\") |\n| style | table{border:2px solid red} |\n| iframe | |",
         "headers": [
           "Field",
           "Value"
@@ -1063,14 +1102,14 @@
         "start_line": 186,
         "end_line": 191,
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
-        "is_ragged": true,
+        "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
         "column_count": 2,
         "row_count": 3,
         "align_meta": {
-          "heuristic": true
-        },
-        "is_ragged_meta": {
           "heuristic": true
         }
       }
@@ -1080,7 +1119,7 @@
       {
         "id": "heading_brutal-markdown-test-nested-tables-edition",
         "level": 1,
-        "text": "🧪 BRUTAL Markdown Test — Nested Tables Edition",
+        "text": "\ud83e\uddea BRUTAL Markdown Test \u2014 Nested Tables Edition",
         "line": 0,
         "slug": "brutal-markdown-test-nested-tables-edition",
         "parent_heading_id": null,
@@ -1100,7 +1139,7 @@
       {
         "id": "heading_1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
         "level": 2,
-        "text": "1) Depth‑4: Quote → List → Quote → Markdown Table w/ HTML nested table",
+        "text": "1) Depth\u20114: Quote \u2192 List \u2192 Quote \u2192 Markdown Table w/ HTML nested table",
         "line": 16,
         "slug": "1-depth4-quote-list-quote-markdown-table-w-html-nested-table",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1110,7 +1149,7 @@
       {
         "id": "heading_2-depth4-markdown-table-cell-contains-list-quote-code",
         "level": 2,
-        "text": "2) Depth‑4: Markdown Table → Cell contains List → Quote → Code",
+        "text": "2) Depth\u20114: Markdown Table \u2192 Cell contains List \u2192 Quote \u2192 Code",
         "line": 51,
         "slug": "2-depth4-markdown-table-cell-contains-list-quote-code",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1120,7 +1159,7 @@
       {
         "id": "heading_3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
         "level": 2,
-        "text": "3) Depth‑4: Markdown Table → Cell contains HTML table → Cell contains Markdown table",
+        "text": "3) Depth\u20114: Markdown Table \u2192 Cell contains HTML table \u2192 Cell contains Markdown table",
         "line": 66,
         "slug": "3-depth4-markdown-table-cell-contains-html-table-cell-contains-markdown-table",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1130,7 +1169,7 @@
       {
         "id": "heading_4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
         "level": 2,
-        "text": "4) Depth‑4: Quote → Markdown table → Cell contains Checklist w/ continuation",
+        "text": "4) Depth\u20114: Quote \u2192 Markdown table \u2192 Cell contains Checklist w/ continuation",
         "line": 92,
         "slug": "4-depth4-quote-markdown-table-cell-contains-checklist-w-continuation",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1140,7 +1179,7 @@
       {
         "id": "heading_5-depth4-list-markdown-table-html-table-fenced-code",
         "level": 2,
-        "text": "5) Depth‑4: List → Markdown Table → HTML table → Fenced Code",
+        "text": "5) Depth\u20114: List \u2192 Markdown Table \u2192 HTML table \u2192 Fenced Code",
         "line": 109,
         "slug": "5-depth4-list-markdown-table-html-table-fenced-code",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1150,7 +1189,7 @@
       {
         "id": "heading_6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
         "level": 2,
-        "text": "6) Depth‑4: Markdown Table with footnotes, links, images inside cells",
+        "text": "6) Depth\u20114: Markdown Table with footnotes, links, images inside cells",
         "line": 128,
         "slug": "6-depth4-markdown-table-with-footnotes-links-images-inside-cells",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1160,7 +1199,7 @@
       {
         "id": "heading_7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
         "level": 2,
-        "text": "7) Depth‑4: Code fence with pipes embedded to test table parsing edge cases",
+        "text": "7) Depth\u20114: Code fence with pipes embedded to test table parsing edge cases",
         "line": 144,
         "slug": "7-depth4-code-fence-with-pipes-embedded-to-test-table-parsing-edge-cases",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1170,7 +1209,7 @@
       {
         "id": "heading_8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
         "level": 2,
-        "text": "8) Depth‑4: Table alignment, inline pipes, escapes with nested quotes",
+        "text": "8) Depth\u20114: Table alignment, inline pipes, escapes with nested quotes",
         "line": 156,
         "slug": "8-depth4-table-alignment-inline-pipes-escapes-with-nested-quotes",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1180,7 +1219,7 @@
       {
         "id": "heading_9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
         "level": 2,
-        "text": "9) Depth‑4: GFM table inside blockquote inside list inside blockquote (max stress)",
+        "text": "9) Depth\u20114: GFM table inside blockquote inside list inside blockquote (max stress)",
         "line": 170,
         "slug": "9-depth4-gfm-table-inside-blockquote-inside-list-inside-blockquote-max-stress",
         "parent_heading_id": "heading_brutal-markdown-test-nested-tables-edition",
@@ -1213,7 +1252,7 @@
         "text": "CommonMark",
         "url": "https://spec.commonmark.org/",
         "line": 8,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1221,7 +1260,7 @@
         "text": "GFM",
         "url": "https://github.github.com/gfm/",
         "line": 8,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1241,7 +1280,7 @@
         "text": "CommonMark spec",
         "url": "https://spec.commonmark.org/",
         "line": 133,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1249,7 +1288,7 @@
         "text": "GFM",
         "url": "https://github.github.com/gfm/",
         "line": 133,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1296,7 +1335,7 @@
     ],
     "blockquotes": [
       {
-        "content": "L1 QuoteL2 List item leading to inner quoteL3 Quote wrapping an outer Markdown table:Outer AOuter BplainNested A1Nested A2L4 Cell 1L4 Cell 2Nested‑2 ANested‑2 BNested‑3 XNested‑3 YInline code at nested‑2 depth|Row below nested table:\n| code | bold |",
+        "content": "L1 QuoteL2 List item leading to inner quoteL3 Quote wrapping an outer Markdown table:Outer AOuter BplainNested A1Nested A2L4 Cell 1L4 Cell 2Nested\u20112 ANested\u20112 BNested\u20113 XNested\u20113 YInline code at nested\u20112 depth|Row below nested table:\n| code | bold |",
         "start_line": 18,
         "end_line": 47,
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
@@ -1360,7 +1399,7 @@
         ]
       },
       {
-        "content": "If your pipeline strips the above, good. If not, your Markdown → HTML stage should add sanitization.",
+        "content": "If your pipeline strips the above, good. If not, your Markdown \u2192 HTML stage should add sanitization.",
         "start_line": 192,
         "end_line": 193,
         "section_id": "section_brutal-markdown-test-nested-tables-edition",
@@ -1372,6 +1411,34 @@
         "children_blocks": []
       }
     ],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [
+        {
+          "label": "t1",
+          "id": "t1",
+          "start_line": null,
+          "end_line": null,
+          "content": "Footnote defined outside the table but referenced inside.",
+          "byte_length": 57,
+          "nested_structures": [],
+          "section_id": null
+        }
+      ],
+      "references": [
+        {
+          "label": "t1",
+          "id": "t1",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
     "html_blocks": [],
     "html_inline": []
   },

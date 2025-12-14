@@ -1,14 +1,229 @@
 {
-  "id": "hr_variants_with_spaces",
-  "category": "strikethrough_hr",
-  "expected": {
-    "has_del_inline": false,
-    "del_count": 0,
-    "hr_count": 3,
-    "hr_styles": [
+  "metadata": {
+    "total_lines": 24,
+    "total_chars": 99,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 2,
+      "hr": 10,
+      "paragraph": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/20_strikethrough_hr/hr_variants_with_spaces.md"
+  },
+  "content": {
+    "raw": "# Horizontal rule variants\n\n---\n\n---\n\n ---\n\n  ---\n\n***\n\n***\n\n ***\n\n___\n\n___\n\n ___\n\nText after HRs.\n",
+    "lines": [
+      "# Horizontal rule variants",
+      "",
       "---",
+      "",
+      "---",
+      "",
+      " ---",
+      "",
+      "  ---",
+      "",
       "***",
-      "___"
+      "",
+      "***",
+      "",
+      " ***",
+      "",
+      "___",
+      "",
+      "___",
+      "",
+      " ___",
+      "",
+      "Text after HRs.",
+      ""
     ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_horizontal-rule-variants",
+        "level": 1,
+        "title": "Horizontal rule variants",
+        "slug": "horizontal-rule-variants",
+        "start_line": 0,
+        "end_line": 23,
+        "start_char": 0,
+        "end_char": 99,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Horizontal rule variants\n\n---\n\n---\n\n ---\n\n  ---\n\n***\n\n***\n\n ***\n\n___\n\n___\n\n ___\n\nText after HRs.\n",
+        "text_content": "Horizontal rule variants\n\nText after HRs."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Text after HRs.",
+        "start_line": 22,
+        "end_line": 23,
+        "section_id": "section_horizontal-rule-variants",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_horizontal-rule-variants",
+        "level": 1,
+        "text": "Horizontal rule variants",
+        "line": 0,
+        "slug": "horizontal-rule-variants",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 27
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose"
+    },
+    "line_to_section": {
+      "0": "section_horizontal-rule-variants",
+      "1": "section_horizontal-rule-variants",
+      "2": "section_horizontal-rule-variants",
+      "3": "section_horizontal-rule-variants",
+      "4": "section_horizontal-rule-variants",
+      "5": "section_horizontal-rule-variants",
+      "6": "section_horizontal-rule-variants",
+      "7": "section_horizontal-rule-variants",
+      "8": "section_horizontal-rule-variants",
+      "9": "section_horizontal-rule-variants",
+      "10": "section_horizontal-rule-variants",
+      "11": "section_horizontal-rule-variants",
+      "12": "section_horizontal-rule-variants",
+      "13": "section_horizontal-rule-variants",
+      "14": "section_horizontal-rule-variants",
+      "15": "section_horizontal-rule-variants",
+      "16": "section_horizontal-rule-variants",
+      "17": "section_horizontal-rule-variants",
+      "18": "section_horizontal-rule-variants",
+      "19": "section_horizontal-rule-variants",
+      "20": "section_horizontal-rule-variants",
+      "21": "section_horizontal-rule-variants",
+      "22": "section_horizontal-rule-variants",
+      "23": "section_horizontal-rule-variants"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

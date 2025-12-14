@@ -1,11 +1,2150 @@
 {
-  "id": "stress_100_tasks",
-  "category": "tasklists",
-  "expected": {
-    "checked": 30,
-    "unchecked": 70,
-    "nested_tasks_present": true,
-    "ordered_steps_under_task": false,
-    "allows_inline_formatting": false
+  "metadata": {
+    "total_lines": 103,
+    "total_chars": 1422,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 101,
+      "text": 101,
+      "bullet_list": 1,
+      "list_item": 100,
+      "paragraph": 100,
+      "html_inline": 100
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/19_tasklists/stress_100_tasks.md"
+  },
+  "content": {
+    "raw": "# Stress test with 100 tasks\n\n- [ ] Task 1\n- [x] Task 2\n- [ ] Task 3\n- [ ] Task 4\n- [x] Task 5\n- [ ] Task 6\n- [ ] Task 7\n- [x] Task 8\n- [ ] Task 9\n- [ ] Task 10\n- [ ] Task 11\n- [x] Task 12\n- [ ] Task 13\n- [ ] Task 14\n- [x] Task 15\n- [ ] Task 16\n- [ ] Task 17\n- [x] Task 18\n- [ ] Task 19\n- [ ] Task 20\n- [ ] Task 21\n- [x] Task 22\n- [ ] Task 23\n- [ ] Task 24\n- [x] Task 25\n- [ ] Task 26\n- [ ] Task 27\n- [x] Task 28\n- [ ] Task 29\n- [ ] Task 30\n- [ ] Task 31\n- [x] Task 32\n- [ ] Task 33\n- [ ] Task 34\n- [x] Task 35\n- [ ] Task 36\n- [ ] Task 37\n- [x] Task 38\n- [ ] Task 39\n- [ ] Task 40\n- [ ] Task 41\n- [x] Task 42\n- [ ] Task 43\n- [ ] Task 44\n- [x] Task 45\n- [ ] Task 46\n- [ ] Task 47\n- [x] Task 48\n- [ ] Task 49\n- [ ] Task 50\n- [ ] Task 51\n- [x] Task 52\n- [ ] Task 53\n- [ ] Task 54\n- [x] Task 55\n- [ ] Task 56\n- [ ] Task 57\n- [x] Task 58\n- [ ] Task 59\n- [ ] Task 60\n- [ ] Task 61\n- [x] Task 62\n- [ ] Task 63\n- [ ] Task 64\n- [x] Task 65\n- [ ] Task 66\n- [ ] Task 67\n- [x] Task 68\n- [ ] Task 69\n- [ ] Task 70\n- [ ] Task 71\n- [x] Task 72\n- [ ] Task 73\n- [ ] Task 74\n- [x] Task 75\n- [ ] Task 76\n- [ ] Task 77\n- [x] Task 78\n- [ ] Task 79\n- [ ] Task 80\n- [ ] Task 81\n- [x] Task 82\n- [ ] Task 83\n- [ ] Task 84\n- [x] Task 85\n- [ ] Task 86\n- [ ] Task 87\n- [x] Task 88\n- [ ] Task 89\n- [ ] Task 90\n- [ ] Task 91\n- [x] Task 92\n- [ ] Task 93\n- [ ] Task 94\n- [x] Task 95\n- [ ] Task 96\n- [ ] Task 97\n- [x] Task 98\n- [ ] Task 99\n- [ ] Task 100\n",
+    "lines": [
+      "# Stress test with 100 tasks",
+      "",
+      "- [ ] Task 1",
+      "- [x] Task 2",
+      "- [ ] Task 3",
+      "- [ ] Task 4",
+      "- [x] Task 5",
+      "- [ ] Task 6",
+      "- [ ] Task 7",
+      "- [x] Task 8",
+      "- [ ] Task 9",
+      "- [ ] Task 10",
+      "- [ ] Task 11",
+      "- [x] Task 12",
+      "- [ ] Task 13",
+      "- [ ] Task 14",
+      "- [x] Task 15",
+      "- [ ] Task 16",
+      "- [ ] Task 17",
+      "- [x] Task 18",
+      "- [ ] Task 19",
+      "- [ ] Task 20",
+      "- [ ] Task 21",
+      "- [x] Task 22",
+      "- [ ] Task 23",
+      "- [ ] Task 24",
+      "- [x] Task 25",
+      "- [ ] Task 26",
+      "- [ ] Task 27",
+      "- [x] Task 28",
+      "- [ ] Task 29",
+      "- [ ] Task 30",
+      "- [ ] Task 31",
+      "- [x] Task 32",
+      "- [ ] Task 33",
+      "- [ ] Task 34",
+      "- [x] Task 35",
+      "- [ ] Task 36",
+      "- [ ] Task 37",
+      "- [x] Task 38",
+      "- [ ] Task 39",
+      "- [ ] Task 40",
+      "- [ ] Task 41",
+      "- [x] Task 42",
+      "- [ ] Task 43",
+      "- [ ] Task 44",
+      "- [x] Task 45",
+      "- [ ] Task 46",
+      "- [ ] Task 47",
+      "- [x] Task 48",
+      "- [ ] Task 49",
+      "- [ ] Task 50",
+      "- [ ] Task 51",
+      "- [x] Task 52",
+      "- [ ] Task 53",
+      "- [ ] Task 54",
+      "- [x] Task 55",
+      "- [ ] Task 56",
+      "- [ ] Task 57",
+      "- [x] Task 58",
+      "- [ ] Task 59",
+      "- [ ] Task 60",
+      "- [ ] Task 61",
+      "- [x] Task 62",
+      "- [ ] Task 63",
+      "- [ ] Task 64",
+      "- [x] Task 65",
+      "- [ ] Task 66",
+      "- [ ] Task 67",
+      "- [x] Task 68",
+      "- [ ] Task 69",
+      "- [ ] Task 70",
+      "- [ ] Task 71",
+      "- [x] Task 72",
+      "- [ ] Task 73",
+      "- [ ] Task 74",
+      "- [x] Task 75",
+      "- [ ] Task 76",
+      "- [ ] Task 77",
+      "- [x] Task 78",
+      "- [ ] Task 79",
+      "- [ ] Task 80",
+      "- [ ] Task 81",
+      "- [x] Task 82",
+      "- [ ] Task 83",
+      "- [ ] Task 84",
+      "- [x] Task 85",
+      "- [ ] Task 86",
+      "- [ ] Task 87",
+      "- [x] Task 88",
+      "- [ ] Task 89",
+      "- [ ] Task 90",
+      "- [ ] Task 91",
+      "- [x] Task 92",
+      "- [ ] Task 93",
+      "- [ ] Task 94",
+      "- [x] Task 95",
+      "- [ ] Task 96",
+      "- [ ] Task 97",
+      "- [x] Task 98",
+      "- [ ] Task 99",
+      "- [ ] Task 100",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_stress-test-with-100-tasks",
+        "level": 1,
+        "title": "Stress test with 100 tasks",
+        "slug": "stress-test-with-100-tasks",
+        "start_line": 0,
+        "end_line": 102,
+        "start_char": 0,
+        "end_char": 1422,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Stress test with 100 tasks\n\n- [ ] Task 1\n- [x] Task 2\n- [ ] Task 3\n- [ ] Task 4\n- [x] Task 5\n- [ ] Task 6\n- [ ] Task 7\n- [x] Task 8\n- [ ] Task 9\n- [ ] Task 10\n- [ ] Task 11\n- [x] Task 12\n- [ ] Task 13\n- [ ] Task 14\n- [x] Task 15\n- [ ] Task 16\n- [ ] Task 17\n- [x] Task 18\n- [ ] Task 19\n- [ ] Task 20\n- [ ] Task 21\n- [x] Task 22\n- [ ] Task 23\n- [ ] Task 24\n- [x] Task 25\n- [ ] Task 26\n- [ ] Task 27\n- [x] Task 28\n- [ ] Task 29\n- [ ] Task 30\n- [ ] Task 31\n- [x] Task 32\n- [ ] Task 33\n- [ ] Task 34\n- [x] Task 35\n- [ ] Task 36\n- [ ] Task 37\n- [x] Task 38\n- [ ] Task 39\n- [ ] Task 40\n- [ ] Task 41\n- [x] Task 42\n- [ ] Task 43\n- [ ] Task 44\n- [x] Task 45\n- [ ] Task 46\n- [ ] Task 47\n- [x] Task 48\n- [ ] Task 49\n- [ ] Task 50\n- [ ] Task 51\n- [x] Task 52\n- [ ] Task 53\n- [ ] Task 54\n- [x] Task 55\n- [ ] Task 56\n- [ ] Task 57\n- [x] Task 58\n- [ ] Task 59\n- [ ] Task 60\n- [ ] Task 61\n- [x] Task 62\n- [ ] Task 63\n- [ ] Task 64\n- [x] Task 65\n- [ ] Task 66\n- [ ] Task 67\n- [x] Task 68\n- [ ] Task 69\n- [ ] Task 70\n- [ ] Task 71\n- [x] Task 72\n- [ ] Task 73\n- [ ] Task 74\n- [x] Task 75\n- [ ] Task 76\n- [ ] Task 77\n- [x] Task 78\n- [ ] Task 79\n- [ ] Task 80\n- [ ] Task 81\n- [x] Task 82\n- [ ] Task 83\n- [ ] Task 84\n- [x] Task 85\n- [ ] Task 86\n- [ ] Task 87\n- [x] Task 88\n- [ ] Task 89\n- [ ] Task 90\n- [ ] Task 91\n- [x] Task 92\n- [ ] Task 93\n- [ ] Task 94\n- [x] Task 95\n- [ ] Task 96\n- [ ] Task 97\n- [x] Task 98\n- [ ] Task 99\n- [ ] Task 100\n",
+        "text_content": "Stress test with 100 tasks\n\n Task 1  Task 2  Task 3  Task 4  Task 5  Task 6  Task 7  Task 8  Task 9  Task 10  Task 11  Task 12  Task 13  Task 14  Task 15  Task 16  Task 17  Task 18  Task 19  Task 20  Task 21  Task 22  Task 23  Task 24  Task 25  Task 26  Task 27  Task 28  Task 29  Task 30  Task 31  Task 32  Task 33  Task 34  Task 35  Task 36  Task 37  Task 38  Task 39  Task 40  Task 41  Task 42  Task 43  Task 44  Task 45  Task 46  Task 47  Task 48  Task 49  Task 50  Task 51  Task 52  Task 53  Task 54  Task 55  Task 56  Task 57  Task 58  Task 59  Task 60  Task 61  Task 62  Task 63  Task 64  Task 65  Task 66  Task 67  Task 68  Task 69  Task 70  Task 71  Task 72  Task 73  Task 74  Task 75  Task 76  Task 77  Task 78  Task 79  Task 80  Task 81  Task 82  Task 83  Task 84  Task 85  Task 86  Task 87  Task 88  Task 89  Task 90  Task 91  Task 92  Task 93  Task 94  Task 95  Task 96  Task 97  Task 98  Task 99  Task 100"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_stress-test-with-100-tasks",
+        "level": 1,
+        "text": "Stress test with 100 tasks",
+        "line": 0,
+        "slug": "stress-test-with-100-tasks",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 29
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 102,
+        "section_id": "section_stress-test-with-100-tasks",
+        "items": [
+          {
+            "text": "Task 1",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 2",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 3",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 4",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 5",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 6",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 7",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 8",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 9",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 10",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 11",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 12",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 13",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 14",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 15",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 16",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 17",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 18",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 19",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 20",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 21",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 22",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 23",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 24",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 25",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 26",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 27",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 28",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 29",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 30",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 31",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 32",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 33",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 34",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 35",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 36",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 37",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 38",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 39",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 40",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 41",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 42",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 43",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 44",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 45",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 46",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 47",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 48",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 49",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 50",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 51",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 52",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 53",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 54",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 55",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 56",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 57",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 58",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 59",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 60",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 61",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 62",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 63",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 64",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 65",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 66",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 67",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 68",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 69",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 70",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 71",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 72",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 73",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 74",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 75",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 76",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 77",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 78",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 79",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 80",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 81",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 82",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 83",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 84",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 85",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 86",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 87",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 88",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 89",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 90",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 91",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 92",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 93",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 94",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 95",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 96",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 97",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 98",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 99",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Task 100",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 100,
+        "checked_count": 30,
+        "unchecked_count": 70,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 3,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 4,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 5,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 6,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 7,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 8,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 9,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 10,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 11,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 12,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 13,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 14,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 15,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 16,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 17,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 18,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 19,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 20,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 21,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 22,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 23,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 24,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 25,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 26,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 27,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 28,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 29,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 30,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 31,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 32,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 33,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 34,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 35,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 36,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 37,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 38,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 39,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 40,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 41,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 42,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 43,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 44,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 45,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 46,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 47,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 48,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 49,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 50,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 51,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 52,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 53,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 54,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 55,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 56,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 57,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 58,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 59,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 60,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 61,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 62,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 63,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 64,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 65,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 66,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 67,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 68,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 69,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 70,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 71,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 72,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 73,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 74,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 75,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 76,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 77,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 78,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 79,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 80,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 81,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 82,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 83,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 84,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 85,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 86,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 87,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 88,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 89,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 90,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 91,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 92,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 93,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 94,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 95,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 96,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 97,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 98,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 99,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 100,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 101,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_stress-test-with-100-tasks",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose",
+      "18": "prose",
+      "19": "prose",
+      "20": "prose",
+      "21": "prose",
+      "22": "prose",
+      "23": "prose",
+      "24": "prose",
+      "25": "prose",
+      "26": "prose",
+      "27": "prose",
+      "28": "prose",
+      "29": "prose",
+      "30": "prose",
+      "31": "prose",
+      "32": "prose",
+      "33": "prose",
+      "34": "prose",
+      "35": "prose",
+      "36": "prose",
+      "37": "prose",
+      "38": "prose",
+      "39": "prose",
+      "40": "prose",
+      "41": "prose",
+      "42": "prose",
+      "43": "prose",
+      "44": "prose",
+      "45": "prose",
+      "46": "prose",
+      "47": "prose",
+      "48": "prose",
+      "49": "prose",
+      "50": "prose",
+      "51": "prose",
+      "52": "prose",
+      "53": "prose",
+      "54": "prose",
+      "55": "prose",
+      "56": "prose",
+      "57": "prose",
+      "58": "prose",
+      "59": "prose",
+      "60": "prose",
+      "61": "prose",
+      "62": "prose",
+      "63": "prose",
+      "64": "prose",
+      "65": "prose",
+      "66": "prose",
+      "67": "prose",
+      "68": "prose",
+      "69": "prose",
+      "70": "prose",
+      "71": "prose",
+      "72": "prose",
+      "73": "prose",
+      "74": "prose",
+      "75": "prose",
+      "76": "prose",
+      "77": "prose",
+      "78": "prose",
+      "79": "prose",
+      "80": "prose",
+      "81": "prose",
+      "82": "prose",
+      "83": "prose",
+      "84": "prose",
+      "85": "prose",
+      "86": "prose",
+      "87": "prose",
+      "88": "prose",
+      "89": "prose",
+      "90": "prose",
+      "91": "prose",
+      "92": "prose",
+      "93": "prose",
+      "94": "prose",
+      "95": "prose",
+      "96": "prose",
+      "97": "prose",
+      "98": "prose",
+      "99": "prose",
+      "100": "prose",
+      "101": "prose",
+      "102": "prose"
+    },
+    "line_to_section": {
+      "0": "section_stress-test-with-100-tasks",
+      "1": "section_stress-test-with-100-tasks",
+      "2": "section_stress-test-with-100-tasks",
+      "3": "section_stress-test-with-100-tasks",
+      "4": "section_stress-test-with-100-tasks",
+      "5": "section_stress-test-with-100-tasks",
+      "6": "section_stress-test-with-100-tasks",
+      "7": "section_stress-test-with-100-tasks",
+      "8": "section_stress-test-with-100-tasks",
+      "9": "section_stress-test-with-100-tasks",
+      "10": "section_stress-test-with-100-tasks",
+      "11": "section_stress-test-with-100-tasks",
+      "12": "section_stress-test-with-100-tasks",
+      "13": "section_stress-test-with-100-tasks",
+      "14": "section_stress-test-with-100-tasks",
+      "15": "section_stress-test-with-100-tasks",
+      "16": "section_stress-test-with-100-tasks",
+      "17": "section_stress-test-with-100-tasks",
+      "18": "section_stress-test-with-100-tasks",
+      "19": "section_stress-test-with-100-tasks",
+      "20": "section_stress-test-with-100-tasks",
+      "21": "section_stress-test-with-100-tasks",
+      "22": "section_stress-test-with-100-tasks",
+      "23": "section_stress-test-with-100-tasks",
+      "24": "section_stress-test-with-100-tasks",
+      "25": "section_stress-test-with-100-tasks",
+      "26": "section_stress-test-with-100-tasks",
+      "27": "section_stress-test-with-100-tasks",
+      "28": "section_stress-test-with-100-tasks",
+      "29": "section_stress-test-with-100-tasks",
+      "30": "section_stress-test-with-100-tasks",
+      "31": "section_stress-test-with-100-tasks",
+      "32": "section_stress-test-with-100-tasks",
+      "33": "section_stress-test-with-100-tasks",
+      "34": "section_stress-test-with-100-tasks",
+      "35": "section_stress-test-with-100-tasks",
+      "36": "section_stress-test-with-100-tasks",
+      "37": "section_stress-test-with-100-tasks",
+      "38": "section_stress-test-with-100-tasks",
+      "39": "section_stress-test-with-100-tasks",
+      "40": "section_stress-test-with-100-tasks",
+      "41": "section_stress-test-with-100-tasks",
+      "42": "section_stress-test-with-100-tasks",
+      "43": "section_stress-test-with-100-tasks",
+      "44": "section_stress-test-with-100-tasks",
+      "45": "section_stress-test-with-100-tasks",
+      "46": "section_stress-test-with-100-tasks",
+      "47": "section_stress-test-with-100-tasks",
+      "48": "section_stress-test-with-100-tasks",
+      "49": "section_stress-test-with-100-tasks",
+      "50": "section_stress-test-with-100-tasks",
+      "51": "section_stress-test-with-100-tasks",
+      "52": "section_stress-test-with-100-tasks",
+      "53": "section_stress-test-with-100-tasks",
+      "54": "section_stress-test-with-100-tasks",
+      "55": "section_stress-test-with-100-tasks",
+      "56": "section_stress-test-with-100-tasks",
+      "57": "section_stress-test-with-100-tasks",
+      "58": "section_stress-test-with-100-tasks",
+      "59": "section_stress-test-with-100-tasks",
+      "60": "section_stress-test-with-100-tasks",
+      "61": "section_stress-test-with-100-tasks",
+      "62": "section_stress-test-with-100-tasks",
+      "63": "section_stress-test-with-100-tasks",
+      "64": "section_stress-test-with-100-tasks",
+      "65": "section_stress-test-with-100-tasks",
+      "66": "section_stress-test-with-100-tasks",
+      "67": "section_stress-test-with-100-tasks",
+      "68": "section_stress-test-with-100-tasks",
+      "69": "section_stress-test-with-100-tasks",
+      "70": "section_stress-test-with-100-tasks",
+      "71": "section_stress-test-with-100-tasks",
+      "72": "section_stress-test-with-100-tasks",
+      "73": "section_stress-test-with-100-tasks",
+      "74": "section_stress-test-with-100-tasks",
+      "75": "section_stress-test-with-100-tasks",
+      "76": "section_stress-test-with-100-tasks",
+      "77": "section_stress-test-with-100-tasks",
+      "78": "section_stress-test-with-100-tasks",
+      "79": "section_stress-test-with-100-tasks",
+      "80": "section_stress-test-with-100-tasks",
+      "81": "section_stress-test-with-100-tasks",
+      "82": "section_stress-test-with-100-tasks",
+      "83": "section_stress-test-with-100-tasks",
+      "84": "section_stress-test-with-100-tasks",
+      "85": "section_stress-test-with-100-tasks",
+      "86": "section_stress-test-with-100-tasks",
+      "87": "section_stress-test-with-100-tasks",
+      "88": "section_stress-test-with-100-tasks",
+      "89": "section_stress-test-with-100-tasks",
+      "90": "section_stress-test-with-100-tasks",
+      "91": "section_stress-test-with-100-tasks",
+      "92": "section_stress-test-with-100-tasks",
+      "93": "section_stress-test-with-100-tasks",
+      "94": "section_stress-test-with-100-tasks",
+      "95": "section_stress-test-with-100-tasks",
+      "96": "section_stress-test-with-100-tasks",
+      "97": "section_stress-test-with-100-tasks",
+      "98": "section_stress-test-with-100-tasks",
+      "99": "section_stress-test-with-100-tasks",
+      "100": "section_stress-test-with-100-tasks",
+      "101": "section_stress-test-with-100-tasks",
+      "102": "section_stress-test-with-100-tasks"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

@@ -1,9 +1,148 @@
 {
-  "id": "25_mixed_nbsp_and_spaces",
-  "note": "NBSP followed by spaces after # should still be invalid (no immediate space).",
-  "expected_has_headings": false,
-  "expected_heading_count": 0,
-  "expected_heading_lines_0based": [],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 44,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 2,
+      "paragraph": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": true,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/25_mixed_nbsp_and_spaces.md"
+  },
+  "content": {
+    "raw": "# Test: 25_mixed_nbsp_and_spaces\n\n#\u00a0  Mixed\n",
+    "lines": [
+      "# Test: 25_mixed_nbsp_and_spaces",
+      "",
+      "#\u00a0  Mixed",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-25_mixed_nbsp_and_spaces",
+        "level": 1,
+        "title": "Test: 25_mixed_nbsp_and_spaces",
+        "slug": "test-25_mixed_nbsp_and_spaces",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 44,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 25_mixed_nbsp_and_spaces\n\n#\u00a0  Mixed\n",
+        "text_content": "Test: 25_mixed_nbsp_and_spaces\n\n#\u00a0  Mixed"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "#\u00a0  Mixed",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_test-25_mixed_nbsp_and_spaces",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-25_mixed_nbsp_and_spaces",
+        "level": 1,
+        "text": "Test: 25_mixed_nbsp_and_spaces",
+        "line": 0,
+        "slug": "test-25_mixed_nbsp_and_spaces",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 33
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-25_mixed_nbsp_and_spaces",
+      "1": "section_test-25_mixed_nbsp_and_spaces",
+      "2": "section_test-25_mixed_nbsp_and_spaces",
+      "3": "section_test-25_mixed_nbsp_and_spaces"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
 }

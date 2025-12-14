@@ -1,12 +1,301 @@
 {
-  "id": "11_mixed_legit_and_traps",
-  "note": "Has real headings plus traps nearby.",
-  "expected_has_headings": true,
-  "expected_heading_count": 2,
-  "expected_heading_lines_0based": [
-    2,
-    8
-  ],
-  "prefix_lines": 2,
-  "explanation": "Lines are 0-based within the full file, including the two-line header prefix."
+  "metadata": {
+    "total_lines": 16,
+    "total_chars": 163,
+    "has_sections": true,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 3,
+      "inline": 6,
+      "text": 6,
+      "paragraph": 3,
+      "fence": 1,
+      "code_block": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/01_edge_cases/11_mixed_legit_and_traps.md"
+  },
+  "content": {
+    "raw": "# Test: 11_mixed_legit_and_traps\n\n# Real H1\nText.\n\n```\n## code fence not heading\n```\n\n## Real H2\nSome paragraph.\n\n    ### indented code, not heading\n\nNormal text.\n",
+    "lines": [
+      "# Test: 11_mixed_legit_and_traps",
+      "",
+      "# Real H1",
+      "Text.",
+      "",
+      "```",
+      "## code fence not heading",
+      "```",
+      "",
+      "## Real H2",
+      "Some paragraph.",
+      "",
+      "    ### indented code, not heading",
+      "",
+      "Normal text.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-11_mixed_legit_and_traps",
+        "level": 1,
+        "title": "Test: 11_mixed_legit_and_traps",
+        "slug": "test-11_mixed_legit_and_traps",
+        "start_line": 0,
+        "end_line": 1,
+        "start_char": 0,
+        "end_char": 34,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 11_mixed_legit_and_traps\n",
+        "text_content": "Test: 11_mixed_legit_and_traps"
+      },
+      {
+        "id": "section_real-h1",
+        "level": 1,
+        "title": "Real H1",
+        "slug": "real-h1",
+        "start_line": 2,
+        "end_line": 15,
+        "start_char": 34,
+        "end_char": 163,
+        "parent_id": null,
+        "child_ids": [
+          "section_real-h2"
+        ],
+        "raw_content": "# Real H1\nText.\n\n```\n## code fence not heading\n```\n\n## Real H2\nSome paragraph.\n\n    ### indented code, not heading\n\nNormal text.\n",
+        "text_content": "Real H1 Text.\n\nReal H2 Some paragraph.\n\nNormal text."
+      },
+      {
+        "id": "section_real-h2",
+        "level": 2,
+        "title": "Real H2",
+        "slug": "real-h2",
+        "start_line": 9,
+        "end_line": 15,
+        "start_char": 86,
+        "end_char": 163,
+        "parent_id": "section_real-h1",
+        "child_ids": [],
+        "raw_content": "## Real H2\nSome paragraph.\n\n    ### indented code, not heading\n\nNormal text.\n",
+        "text_content": "Real H2 Some paragraph.\n\nNormal text."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Text.",
+        "start_line": 3,
+        "end_line": 4,
+        "section_id": "section_real-h1",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Some paragraph.",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_real-h1",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "Normal text.",
+        "start_line": 14,
+        "end_line": 15,
+        "section_id": "section_real-h1",
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "",
+        "content": "## code fence not heading\n",
+        "start_line": 5,
+        "end_line": 8,
+        "section_id": "section_real-h1"
+      },
+      {
+        "id": "code_1",
+        "type": "indented",
+        "language": "",
+        "content": "### indented code, not heading\n",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_real-h1"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_test-11_mixed_legit_and_traps",
+        "level": 1,
+        "text": "Test: 11_mixed_legit_and_traps",
+        "line": 0,
+        "slug": "test-11_mixed_legit_and_traps",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 33
+      },
+      {
+        "id": "heading_real-h1",
+        "level": 1,
+        "text": "Real H1",
+        "line": 2,
+        "slug": "real-h1",
+        "parent_heading_id": null,
+        "start_char": 34,
+        "end_char": 44
+      },
+      {
+        "id": "heading_real-h2",
+        "level": 2,
+        "text": "Real H2",
+        "line": 9,
+        "slug": "real-h2",
+        "parent_heading_id": "heading_real-h1",
+        "start_char": 86,
+        "end_char": 97
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "code",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-11_mixed_legit_and_traps",
+      "1": "section_test-11_mixed_legit_and_traps",
+      "2": "section_real-h1",
+      "3": "section_real-h1",
+      "4": "section_real-h1",
+      "5": "section_real-h1",
+      "6": "section_real-h1",
+      "7": "section_real-h1",
+      "8": "section_real-h1",
+      "9": "section_real-h2",
+      "10": "section_real-h2",
+      "11": "section_real-h2",
+      "12": "section_real-h2",
+      "13": "section_real-h2",
+      "14": "section_real-h2",
+      "15": "section_real-h2"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15
+    ],
+    "code_lines": [
+      5,
+      6,
+      7,
+      12
+    ],
+    "code_blocks": [
+      {
+        "start_line": 5,
+        "end_line": 7,
+        "language": ""
+      },
+      {
+        "start_line": 12,
+        "end_line": 12,
+        "language": ""
+      }
+    ]
+  }
 }

@@ -1,8 +1,145 @@
 {
-  "id": "no_link_in_code",
-  "category": "autolink_linkify",
-  "expected": {
-    "links_in_codespan": 0,
-    "links_in_codeblock": 0
+  "metadata": {
+    "total_lines": 7,
+    "total_chars": 111,
+    "has_sections": false,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 1,
+      "inline": 1,
+      "code_inline": 1,
+      "text": 2,
+      "softbreak": 1,
+      "fence": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/23_autolink_linkify/no_link_in_code.md"
+  },
+  "content": {
+    "raw": "`https://example.com` should not be linkified\nand inside code block:\n\n```\nvisit http://not.linkified.local\n```\n",
+    "lines": [
+      "`https://example.com` should not be linkified",
+      "and inside code block:",
+      "",
+      "```",
+      "visit http://not.linkified.local",
+      "```",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "https://example.com should not be linkified\nand inside code block:",
+        "start_line": 0,
+        "end_line": 2,
+        "section_id": null,
+        "word_count": 9,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": true
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "",
+        "content": "visit http://not.linkified.local\n",
+        "start_line": 3,
+        "end_line": 6,
+        "section_id": null
+      }
+    ],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "code",
+      "4": "code",
+      "5": "code",
+      "6": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      6
+    ],
+    "code_lines": [
+      3,
+      4,
+      5
+    ],
+    "code_blocks": [
+      {
+        "start_line": 3,
+        "end_line": 5,
+        "language": ""
+      }
+    ]
   }
 }

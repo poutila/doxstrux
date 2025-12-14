@@ -1,13 +1,211 @@
 {
-  "id": "continuation_paragraphs",
-  "category": "lists",
-  "expected": {
-    "uses_markers": [
-      "-"
+  "metadata": {
+    "total_lines": 14,
+    "total_chars": 197,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 7,
+      "text": 7,
+      "bullet_list": 1,
+      "list_item": 2,
+      "paragraph": 6
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/18_lists/continuation_paragraphs.md"
+  },
+  "content": {
+    "raw": "# List with continuation paragraphs\n\n- First item\n\n  Continuation paragraph for first item.\n\n  Another paragraph still in first item.\n\n- Second item\n\n  Its continuation.\n\nNormal text outside list.\n",
+    "lines": [
+      "# List with continuation paragraphs",
+      "",
+      "- First item",
+      "",
+      "  Continuation paragraph for first item.",
+      "",
+      "  Another paragraph still in first item.",
+      "",
+      "- Second item",
+      "",
+      "  Its continuation.",
+      "",
+      "Normal text outside list.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_list-with-continuation-paragraphs",
+        "level": 1,
+        "title": "List with continuation paragraphs",
+        "slug": "list-with-continuation-paragraphs",
+        "start_line": 0,
+        "end_line": 13,
+        "start_char": 0,
+        "end_char": 197,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# List with continuation paragraphs\n\n- First item\n\n  Continuation paragraph for first item.\n\n  Another paragraph still in first item.\n\n- Second item\n\n  Its continuation.\n\nNormal text outside list.\n",
+        "text_content": "List with continuation paragraphs\n\nFirst item\n\nContinuation paragraph for first item.\n\nAnother paragraph still in first item.\n\nSecond item\n\nIts continuation.\n\nNormal text outside list."
+      }
     ],
-    "nested_levels": 1,
-    "explicit_start_num": null,
-    "has_tight_list": false,
-    "has_loose_list": true
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Normal text outside list.",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_list-with-continuation-paragraphs",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 12,
+        "section_id": "section_list-with-continuation-paragraphs",
+        "items": [
+          {
+            "text": "Another paragraph still in first item.",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Its continuation.",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 2
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_list-with-continuation-paragraphs",
+        "level": 1,
+        "text": "List with continuation paragraphs",
+        "line": 0,
+        "slug": "list-with-continuation-paragraphs",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 36
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose"
+    },
+    "line_to_section": {
+      "0": "section_list-with-continuation-paragraphs",
+      "1": "section_list-with-continuation-paragraphs",
+      "2": "section_list-with-continuation-paragraphs",
+      "3": "section_list-with-continuation-paragraphs",
+      "4": "section_list-with-continuation-paragraphs",
+      "5": "section_list-with-continuation-paragraphs",
+      "6": "section_list-with-continuation-paragraphs",
+      "7": "section_list-with-continuation-paragraphs",
+      "8": "section_list-with-continuation-paragraphs",
+      "9": "section_list-with-continuation-paragraphs",
+      "10": "section_list-with-continuation-paragraphs",
+      "11": "section_list-with-continuation-paragraphs",
+      "12": "section_list-with-continuation-paragraphs",
+      "13": "section_list-with-continuation-paragraphs"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

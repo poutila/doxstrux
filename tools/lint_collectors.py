@@ -62,8 +62,8 @@ class BlockingCallDetector(ast.NodeVisitor):
         call_str = ""
         try:
             call_str = ast.unparse(node.func)
-        except Exception:
-            # Fallback for older Python or complex nodes
+        except AttributeError:
+            # Python < 3.9 doesn't have ast.unparse - use fallback
             if hasattr(node.func, 'id'):
                 call_str = node.func.id
             elif hasattr(node.func, 'attr'):

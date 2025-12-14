@@ -1,12 +1,197 @@
 {
-  "id": "details_with_markdown_content",
-  "category": "details_summary_html",
-  "expected": {
-    "details_count": 2,
-    "summary_texts": [
-      "Click me",
-      "Nested"
+  "metadata": {
+    "total_lines": 12,
+    "total_chars": 173,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "html_block": 2,
+      "bullet_list": 1,
+      "list_item": 2,
+      "paragraph": 2,
+      "inline": 2,
+      "text": 4,
+      "strong": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": true,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/31_details_summary_html/details_with_markdown_content.md"
+  },
+  "content": {
+    "raw": "<details>\n  <summary>Click me</summary>\n\n  - List item inside details\n  - **Bold** works here\n\n  <details>\n    <summary>Nested</summary>\n    Content\n  </details>\n</details>\n",
+    "lines": [
+      "<details>",
+      "  <summary>Click me</summary>",
+      "",
+      "  - List item inside details",
+      "  - **Bold** works here",
+      "",
+      "  <details>",
+      "    <summary>Nested</summary>",
+      "    Content",
+      "  </details>",
+      "</details>",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 3,
+        "end_line": 6,
+        "section_id": null,
+        "items": [
+          {
+            "text": "List item inside details",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Bold works here",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 2
+      }
     ],
-    "markdown_inside_details": true
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "indented",
+        "language": "",
+        "content": "<summary>Nested</summary>\nContent",
+        "start_line": 7,
+        "end_line": 8,
+        "section_id": null
+      }
+    ],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [
+      {
+        "content": "<details>\n  <summary>Click me</summary>\n",
+        "raw_content": "<details>\n  <summary>Click me</summary>",
+        "start_line": 0,
+        "end_line": 2,
+        "inline": false,
+        "allowed": true,
+        "section_id": null,
+        "tag_hints": [
+          "details",
+          "summary"
+        ]
+      },
+      {
+        "content": "  <details>\n    <summary>Nested</summary>\n    Content\n  </details>\n</details>\n",
+        "raw_content": "  <details>\n    <summary>Nested</summary>\n    Content\n  </details>\n</details>",
+        "start_line": 6,
+        "end_line": 11,
+        "inline": false,
+        "allowed": true,
+        "section_id": null,
+        "tag_hints": [
+          "details",
+          "summary"
+        ]
+      }
+    ],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "code",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      10,
+      11
+    ],
+    "code_lines": [
+      7
+    ],
+    "code_blocks": [
+      {
+        "start_line": 7,
+        "end_line": 7,
+        "language": ""
+      }
+    ]
   }
 }

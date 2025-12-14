@@ -1,11 +1,212 @@
 {
-  "id": "multiple_paragraphs_per_item",
-  "category": "lists",
-  "expected": {
-    "uses_markers": [],
-    "nested_levels": 1,
-    "explicit_start_num": 2,
-    "has_tight_list": false,
-    "has_loose_list": true
+  "metadata": {
+    "total_lines": 16,
+    "total_chars": 243,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 8,
+      "text": 8,
+      "ordered_list": 1,
+      "list_item": 3,
+      "paragraph": 7
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/18_lists/multiple_paragraphs_per_item.md"
+  },
+  "content": {
+    "raw": "# List items with multiple paragraphs\n\n1. First item starts here\n\n   First continuation paragraph\n\n   Second continuation paragraph\n\n   Third continuation paragraph\n\n2. Second item\n\n   Only one continuation\n\n3. Third item with no continuation\n",
+    "lines": [
+      "# List items with multiple paragraphs",
+      "",
+      "1. First item starts here",
+      "",
+      "   First continuation paragraph",
+      "",
+      "   Second continuation paragraph",
+      "",
+      "   Third continuation paragraph",
+      "",
+      "2. Second item",
+      "",
+      "   Only one continuation",
+      "",
+      "3. Third item with no continuation",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_list-items-with-multiple-paragraphs",
+        "level": 1,
+        "title": "List items with multiple paragraphs",
+        "slug": "list-items-with-multiple-paragraphs",
+        "start_line": 0,
+        "end_line": 15,
+        "start_char": 0,
+        "end_char": 243,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# List items with multiple paragraphs\n\n1. First item starts here\n\n   First continuation paragraph\n\n   Second continuation paragraph\n\n   Third continuation paragraph\n\n2. Second item\n\n   Only one continuation\n\n3. Third item with no continuation\n",
+        "text_content": "List items with multiple paragraphs\n\nFirst item starts here\n\nFirst continuation paragraph\n\nSecond continuation paragraph\n\nThird continuation paragraph\n\nSecond item\n\nOnly one continuation\n\nThird item with no continuation"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "ordered",
+        "start_line": 2,
+        "end_line": 15,
+        "section_id": "section_list-items-with-multiple-paragraphs",
+        "items": [
+          {
+            "text": "Third continuation paragraph",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Only one continuation",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Third item with no continuation",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 3
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_list-items-with-multiple-paragraphs",
+        "level": 1,
+        "text": "List items with multiple paragraphs",
+        "line": 0,
+        "slug": "list-items-with-multiple-paragraphs",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 38
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "line_to_section": {
+      "0": "section_list-items-with-multiple-paragraphs",
+      "1": "section_list-items-with-multiple-paragraphs",
+      "2": "section_list-items-with-multiple-paragraphs",
+      "3": "section_list-items-with-multiple-paragraphs",
+      "4": "section_list-items-with-multiple-paragraphs",
+      "5": "section_list-items-with-multiple-paragraphs",
+      "6": "section_list-items-with-multiple-paragraphs",
+      "7": "section_list-items-with-multiple-paragraphs",
+      "8": "section_list-items-with-multiple-paragraphs",
+      "9": "section_list-items-with-multiple-paragraphs",
+      "10": "section_list-items-with-multiple-paragraphs",
+      "11": "section_list-items-with-multiple-paragraphs",
+      "12": "section_list-items-with-multiple-paragraphs",
+      "13": "section_list-items-with-multiple-paragraphs",
+      "14": "section_list-items-with-multiple-paragraphs",
+      "15": "section_list-items-with-multiple-paragraphs"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

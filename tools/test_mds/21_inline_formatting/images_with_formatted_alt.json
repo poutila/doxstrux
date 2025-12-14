@@ -1,14 +1,357 @@
 {
-  "id": "images_with_formatted_alt",
-  "category": "inline_formatting",
-  "expected": {
-    "italic_variants": 1,
-    "bold_variants": 3,
-    "bolditalic_variants": 1,
-    "nested_ok": true,
-    "escapes_ok": false,
-    "code_spans_ok": true,
-    "no_intraword_underscore_emphasis": true,
-    "handles_adjacent_punctuation": false
+  "metadata": {
+    "total_lines": 12,
+    "total_chars": 202,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 6,
+      "text": 11,
+      "paragraph": 5,
+      "image": 5,
+      "strong": 3,
+      "em": 2,
+      "code_inline": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {
+          "relative": 5
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/21_inline_formatting/images_with_formatted_alt.md"
+  },
+  "content": {
+    "raw": "# Images with formatted alt text\n\n![**Bold alt text**](image.png)\n\n![*Italic alt*](image.png)\n\n![`Code alt`](image.png)\n\n![Normal text with **bold** inside](image.png)\n\n![***All emphasis***](image.png)\n",
+    "lines": [
+      "# Images with formatted alt text",
+      "",
+      "![**Bold alt text**](image.png)",
+      "",
+      "![*Italic alt*](image.png)",
+      "",
+      "![`Code alt`](image.png)",
+      "",
+      "![Normal text with **bold** inside](image.png)",
+      "",
+      "![***All emphasis***](image.png)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_images-with-formatted-alt-text",
+        "level": 1,
+        "title": "Images with formatted alt text",
+        "slug": "images-with-formatted-alt-text",
+        "start_line": 0,
+        "end_line": 11,
+        "start_char": 0,
+        "end_char": 202,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Images with formatted alt text\n\n![**Bold alt text**](image.png)\n\n![*Italic alt*](image.png)\n\n![`Code alt`](image.png)\n\n![Normal text with **bold** inside](image.png)\n\n![***All emphasis***](image.png)\n",
+        "text_content": "Images with formatted alt text"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "**Bold alt text**Bold alt text",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_images-with-formatted-alt-text",
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "*Italic alt*Italic alt",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_images-with-formatted-alt-text",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "`Code alt`Code alt",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_images-with-formatted-alt-text",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": true
+      },
+      {
+        "id": "para_3",
+        "text": "Normal text with **bold** insideNormal text with bold inside",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_images-with-formatted-alt-text",
+        "word_count": 9,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "***All emphasis***All emphasis",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_images-with-formatted-alt-text",
+        "word_count": 3,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_images-with-formatted-alt-text",
+        "level": 1,
+        "text": "Images with formatted alt text",
+        "line": 0,
+        "slug": "images-with-formatted-alt-text",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 33
+      }
+    ],
+    "links": [
+      {
+        "image_id": "b9b6ad48788d124f",
+        "text": "**Bold alt text**",
+        "url": "image.png",
+        "src": "image.png",
+        "alt": "**Bold alt text**",
+        "title": "",
+        "line": 2,
+        "type": "image",
+        "image_kind": "local",
+        "format": "png"
+      },
+      {
+        "image_id": "73945ee58d326e24",
+        "text": "*Italic alt*",
+        "url": "image.png",
+        "src": "image.png",
+        "alt": "*Italic alt*",
+        "title": "",
+        "line": 4,
+        "type": "image",
+        "image_kind": "local",
+        "format": "png"
+      },
+      {
+        "image_id": "65106344510d660c",
+        "text": "`Code alt`",
+        "url": "image.png",
+        "src": "image.png",
+        "alt": "`Code alt`",
+        "title": "",
+        "line": 6,
+        "type": "image",
+        "image_kind": "local",
+        "format": "png"
+      },
+      {
+        "image_id": "ded88812719ab103",
+        "text": "Normal text with **bold** inside",
+        "url": "image.png",
+        "src": "image.png",
+        "alt": "Normal text with **bold** inside",
+        "title": "",
+        "line": 8,
+        "type": "image",
+        "image_kind": "local",
+        "format": "png"
+      },
+      {
+        "image_id": "65783261bdfe8561",
+        "text": "***All emphasis***",
+        "url": "image.png",
+        "src": "image.png",
+        "alt": "***All emphasis***",
+        "title": "",
+        "line": 10,
+        "type": "image",
+        "image_kind": "local",
+        "format": "png"
+      }
+    ],
+    "images": [
+      {
+        "image_id": "b9b6ad48788d124f",
+        "src": "image.png",
+        "alt": "**Bold alt text**",
+        "title": "",
+        "line": 2,
+        "image_kind": "local",
+        "format": "png",
+        "has_alt": true,
+        "has_title": false,
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "image_id": "73945ee58d326e24",
+        "src": "image.png",
+        "alt": "*Italic alt*",
+        "title": "",
+        "line": 4,
+        "image_kind": "local",
+        "format": "png",
+        "has_alt": true,
+        "has_title": false,
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "image_id": "65106344510d660c",
+        "src": "image.png",
+        "alt": "`Code alt`",
+        "title": "",
+        "line": 6,
+        "image_kind": "local",
+        "format": "png",
+        "has_alt": true,
+        "has_title": false,
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "image_id": "ded88812719ab103",
+        "src": "image.png",
+        "alt": "Normal text with **bold** inside",
+        "title": "",
+        "line": 8,
+        "image_kind": "local",
+        "format": "png",
+        "has_alt": true,
+        "has_title": false,
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "image_id": "65783261bdfe8561",
+        "src": "image.png",
+        "alt": "***All emphasis***",
+        "title": "",
+        "line": 10,
+        "image_kind": "local",
+        "format": "png",
+        "has_alt": true,
+        "has_title": false,
+        "scheme": null,
+        "allowed": true
+      }
+    ],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose"
+    },
+    "line_to_section": {
+      "0": "section_images-with-formatted-alt-text",
+      "1": "section_images-with-formatted-alt-text",
+      "2": "section_images-with-formatted-alt-text",
+      "3": "section_images-with-formatted-alt-text",
+      "4": "section_images-with-formatted-alt-text",
+      "5": "section_images-with-formatted-alt-text",
+      "6": "section_images-with-formatted-alt-text",
+      "7": "section_images-with-formatted-alt-text",
+      "8": "section_images-with-formatted-alt-text",
+      "9": "section_images-with-formatted-alt-text",
+      "10": "section_images-with-formatted-alt-text",
+      "11": "section_images-with-formatted-alt-text"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

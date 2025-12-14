@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "total_lines": 4,
+    "total_chars": 96,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 2,
+      "paragraph": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "confusable_characters",
+          "line": null,
+          "message": "Document contains confusable Unicode characters (potential homograph attack)"
+        },
+        {
+          "type": "mixed_scripts",
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "https"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": true,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "has_confusables": true,
+        "mixed_scripts": true,
+        "unicode_risk_score": 2
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 2
+      },
+      "profile_used": "strict"
+    },
+    "encoding": {
+      "detected": "utf_8",
+      "confidence": 0.5789
+    },
+    "source_path": "tools/additional_test_mds/claude_tests/46_confusable_chars.md"
+  },
+  "content": {
+    "raw": "# Test: 46_confusable_chars\n\nThis looks normal but uses \u0430\u0440\u0440l\u0435 instead of apple (Cyrillic chars)\n",
+    "lines": [
+      "# Test: 46_confusable_chars",
+      "",
+      "This looks normal but uses \u0430\u0440\u0440l\u0435 instead of apple (Cyrillic chars)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-46_confusable_chars",
+        "level": 1,
+        "title": "Test: 46_confusable_chars",
+        "slug": "test-46_confusable_chars",
+        "start_line": 0,
+        "end_line": 3,
+        "start_char": 0,
+        "end_char": 96,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 46_confusable_chars\n\nThis looks normal but uses \u0430\u0440\u0440l\u0435 instead of apple (Cyrillic chars)\n",
+        "text_content": "Test: 46_confusable_chars\n\nThis looks normal but uses \u0430\u0440\u0440l\u0435 instead of apple (Cyrillic chars)"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "This looks normal but uses \u0430\u0440\u0440l\u0435 instead of apple (Cyrillic chars)",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_test-46_confusable_chars",
+        "word_count": 11,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-46_confusable_chars",
+        "level": 1,
+        "text": "Test: 46_confusable_chars",
+        "line": 0,
+        "slug": "test-46_confusable_chars",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 28
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-46_confusable_chars",
+      "1": "section_test-46_confusable_chars",
+      "2": "section_test-46_confusable_chars",
+      "3": "section_test-46_confusable_chars"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
+}

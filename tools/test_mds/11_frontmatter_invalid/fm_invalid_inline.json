@@ -1,7 +1,167 @@
 {
-  "category": "frontmatter",
-  "expected": {
-    "accepted": false,
-    "reason": "inline_triple_dash"
+  "metadata": {
+    "total_lines": 6,
+    "total_chars": 62,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 3,
+      "text": 3,
+      "paragraph": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/11_frontmatter_invalid/fm_invalid_inline.md"
+  },
+  "content": {
+    "raw": "# Test: fm_invalid_inline\n\n--- this is not yaml ---\n\nContent.\n",
+    "lines": [
+      "# Test: fm_invalid_inline",
+      "",
+      "--- this is not yaml ---",
+      "",
+      "Content.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-fm_invalid_inline",
+        "level": 1,
+        "title": "Test: fm_invalid_inline",
+        "slug": "test-fm_invalid_inline",
+        "start_line": 0,
+        "end_line": 5,
+        "start_char": 0,
+        "end_char": 62,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: fm_invalid_inline\n\n--- this is not yaml ---\n\nContent.\n",
+        "text_content": "Test: fm_invalid_inline\n\n--- this is not yaml ---\n\nContent."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "--- this is not yaml ---",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_test-fm_invalid_inline",
+        "word_count": 6,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Content.",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_test-fm_invalid_inline",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-fm_invalid_inline",
+        "level": 1,
+        "text": "Test: fm_invalid_inline",
+        "line": 0,
+        "slug": "test-fm_invalid_inline",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 26
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-fm_invalid_inline",
+      "1": "section_test-fm_invalid_inline",
+      "2": "section_test-fm_invalid_inline",
+      "3": "section_test-fm_invalid_inline",
+      "4": "section_test-fm_invalid_inline",
+      "5": "section_test-fm_invalid_inline"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

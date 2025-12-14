@@ -19,6 +19,7 @@
       "bullet_list": 3,
       "list_item": 10,
       "ordered_list": 2,
+      "html_inline": 2,
       "blockquote": 1,
       "code_inline": 1,
       "fence": 1,
@@ -31,68 +32,54 @@
       "th": 3,
       "tbody": 1,
       "td": 6,
-      "html_block": 1
+      "html_block": 1,
+      "footnote_ref": 1,
+      "footnote_block": 1,
+      "footnote": 1,
+      "footnote_anchor": 1
     },
     "has_frontmatter": false,
     "security": {
-      "warnings": [
-        {
-          "type": "path_traversal",
-          "line": 65,
-          "message": "Link contains path traversal pattern",
-          "url": "https://openai.com"
-        },
-        {
-          "type": "path_traversal",
-          "line": 67,
-          "message": "Link contains path traversal pattern",
-          "url": "https://via.placeholder.com/150"
-        },
-        {
-          "type": "html_disallowed",
-          "blocks": 1,
-          "inline": 0,
-          "message": "HTML present but not allowed by configuration"
-        }
-      ],
+      "warnings": [],
       "statistics": {
         "frontmatter_at_bof": false,
         "ragged_tables_count": 0,
         "allowed_schemes": [
-          "tel",
-          "mailto",
+          "http",
           "https",
-          "http"
+          "mailto",
+          "tel"
         ],
         "table_align_mismatches": 0,
         "nested_headings_blocked": 0,
-        "has_html_block": false,
-        "has_html_inline": false,
+        "has_html_block": true,
+        "has_html_inline": true,
         "has_script": false,
         "has_event_handlers": false,
         "has_data_uri_images": false,
         "confusables_present": false,
         "nbsp_present": false,
         "zwsp_present": false,
-        "path_traversal_pattern": true,
+        "path_traversal_pattern": false,
         "link_schemes": {
           "https": 1,
           "relative": 1
         },
-        "unicode_risk_score": 0,
-        "html_disallowed": true
+        "unicode_risk_score": 0
       },
       "summary": {
         "ragged_tables_count": 0,
-        "total_warnings": 3,
-        "has_dangerous_content": true,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
         "unicode_risk_score": 0
       },
       "profile_used": "moderate"
     },
-    "security_policies_applied": [
-      "stripped_1_html_blocks"
-    ]
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/15_integration/md_test_document.md"
   },
   "content": {
     "raw": "# Markdown Test Document\n\nThis file contains **all common Markdown block types** in 10 sections.\n\n---\n\n## 1. Headings\n# Heading 1\n## Heading 2\n### Heading 3\n#### Heading 4\n##### Heading 5\n###### Heading 6\n\n---\n\n## 2. Paragraphs and Line Breaks\nThis is a normal paragraph with *italic*, **bold**, and ***bold italic*** text.  \nThis is the next line in the same paragraph with a manual line break.\n\n---\n\n## 3. Lists\n### Unordered List\n- Item 1\n- Item 2\n  - Subitem 2.1\n  - Subitem 2.2\n\n### Ordered List\n1. First\n2. Second\n   1. Second - subitem 1\n   2. Second - subitem 2\n\n### Task List\n- [ ] Incomplete task\n- [x] Completed task\n\n---\n\n## 4. Blockquotes\n> This is a blockquote.\n> \n> It can span multiple lines and paragraphs.\n\n---\n\n## 5. Code Blocks and Inline Code\nInline code: `print(\"Hello World\")`\n\n### Fenced Code Block\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\ngreet(\"World\")\n```\n\n### Indented Code Block\n    for i in range(3):\n        print(i)\n\n---\n\n## 6. Links and Images\n[OpenAI](https://openai.com)\n\n![Sample Image](https://via.placeholder.com/150 \"Placeholder Image\")\n\n---\n\n## 7. Tables\n| Column 1 | Column 2 | Column 3 |\n|----------|----------|----------|\n| Row 1    | Data     | More Data|\n| Row 2    | Data     | More Data|\n\n---\n\n## 8. Horizontal Rules\n---\n***\n___\n\n---\n\n## 9. HTML in Markdown\n<p style=\"color: red;\">This is a paragraph with inline HTML styling.</p>\n\n---\n\n## 10. Footnotes\nHere is a statement with a footnote.[^1]\n\n[^1]: This is the footnote text.\n\n",
@@ -251,7 +238,7 @@
           "section_10-footnotes"
         ],
         "raw_content": "# Heading 1\n## Heading 2\n### Heading 3\n#### Heading 4\n##### Heading 5\n###### Heading 6\n\n---\n\n## 2. Paragraphs and Line Breaks\nThis is a normal paragraph with *italic*, **bold**, and ***bold italic*** text.  \nThis is the next line in the same paragraph with a manual line break.\n\n---\n\n## 3. Lists\n### Unordered List\n- Item 1\n- Item 2\n  - Subitem 2.1\n  - Subitem 2.2\n\n### Ordered List\n1. First\n2. Second\n   1. Second - subitem 1\n   2. Second - subitem 2\n\n### Task List\n- [ ] Incomplete task\n- [x] Completed task\n\n---\n\n## 4. Blockquotes\n> This is a blockquote.\n> \n> It can span multiple lines and paragraphs.\n\n---\n\n## 5. Code Blocks and Inline Code\nInline code: `print(\"Hello World\")`\n\n### Fenced Code Block\n```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\ngreet(\"World\")\n```\n\n### Indented Code Block\n    for i in range(3):\n        print(i)\n\n---\n\n## 6. Links and Images\n[OpenAI](https://openai.com)\n\n![Sample Image](https://via.placeholder.com/150 \"Placeholder Image\")\n\n---\n\n## 7. Tables\n| Column 1 | Column 2 | Column 3 |\n|----------|----------|----------|\n| Row 1    | Data     | More Data|\n| Row 2    | Data     | More Data|\n\n---\n\n## 8. Horizontal Rules\n---\n***\n___\n\n---\n\n## 9. HTML in Markdown\n<p style=\"color: red;\">This is a paragraph with inline HTML styling.</p>\n\n---\n\n## 10. Footnotes\nHere is a statement with a footnote.[^1]\n\n[^1]: This is the footnote text.\n\n",
-        "text_content": "Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6\n\n2. Paragraphs and Line Breaks This is a normal paragraph with italic, bold, and bold italic text.\nThis is the next line in the same paragraph with a manual line break.\n\n3. Lists Unordered List Item 1 Item 2 Subitem 2.1 Subitem 2.2\n\nOrdered List First Second Second - subitem 1 Second - subitem 2\n\nTask List [ ] Incomplete task [x] Completed task\n\n4. Blockquotes This is a blockquote.\n\nIt can span multiple lines and paragraphs.\n\n5. Code Blocks and Inline Code Inline code: print(\"Hello World\")\n\nFenced Code Block\n\nIndented Code Block\n\n6. Links and Images OpenAI\n\n7. Tables Column 1Column 2Column 3\n\nRow 1DataMore Data Row 2DataMore Data\n\n8. Horizontal Rules\n\n9. HTML in Markdown\n\n10. Footnotes Here is a statement with a footnote.[^1]\n\n[^1]: This is the footnote text."
+        "text_content": "Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6\n\n2. Paragraphs and Line Breaks This is a normal paragraph with italic, bold, and bold italic text.\nThis is the next line in the same paragraph with a manual line break.\n\n3. Lists Unordered List Item 1 Item 2 Subitem 2.1 Subitem 2.2\n\nOrdered List First Second Second - subitem 1 Second - subitem 2\n\nTask List  Incomplete task  Completed task\n\n4. Blockquotes This is a blockquote.\n\nIt can span multiple lines and paragraphs.\n\n5. Code Blocks and Inline Code Inline code: print(\"Hello World\")\n\nFenced Code Block\n\nIndented Code Block\n\n6. Links and Images OpenAI\n\n7. Tables Column 1Column 2Column 3\n\nRow 1DataMore Data Row 2DataMore Data\n\n8. Horizontal Rules\n\n9. HTML in Markdown\n\n10. Footnotes Here is a statement with a footnote.\n\nThis is the footnote text."
       },
       {
         "id": "section_heading-2",
@@ -361,7 +348,7 @@
           "section_task-list"
         ],
         "raw_content": "## 3. Lists\n### Unordered List\n- Item 1\n- Item 2\n  - Subitem 2.1\n  - Subitem 2.2\n\n### Ordered List\n1. First\n2. Second\n   1. Second - subitem 1\n   2. Second - subitem 2\n\n### Task List\n- [ ] Incomplete task\n- [x] Completed task\n\n---\n",
-        "text_content": "3. Lists Unordered List Item 1 Item 2 Subitem 2.1 Subitem 2.2\n\nOrdered List First Second Second - subitem 1 Second - subitem 2\n\nTask List [ ] Incomplete task [x] Completed task"
+        "text_content": "3. Lists Unordered List Item 1 Item 2 Subitem 2.1 Subitem 2.2\n\nOrdered List First Second Second - subitem 1 Second - subitem 2\n\nTask List  Incomplete task  Completed task"
       },
       {
         "id": "section_unordered-list",
@@ -403,7 +390,7 @@
         "parent_id": "section_3-lists",
         "child_ids": [],
         "raw_content": "### Task List\n- [ ] Incomplete task\n- [x] Completed task\n\n---\n",
-        "text_content": "Task List [ ] Incomplete task [x] Completed task"
+        "text_content": "Task List  Incomplete task  Completed task"
       },
       {
         "id": "section_4-blockquotes",
@@ -532,7 +519,7 @@
         "parent_id": "section_heading-1",
         "child_ids": [],
         "raw_content": "## 10. Footnotes\nHere is a statement with a footnote.[^1]\n\n[^1]: This is the footnote text.\n\n",
-        "text_content": "10. Footnotes Here is a statement with a footnote.[^1]\n\n[^1]: This is the footnote text."
+        "text_content": "10. Footnotes Here is a statement with a footnote.\n\nThis is the footnote text."
       }
     ],
     "paragraphs": [
@@ -593,7 +580,7 @@
       },
       {
         "id": "para_5",
-        "text": "Here is a statement with a footnote.[^1]",
+        "text": "Here is a statement with a footnote.",
         "start_line": 92,
         "end_line": 93,
         "section_id": "section_heading-1",
@@ -604,11 +591,11 @@
       },
       {
         "id": "para_6",
-        "text": "[^1]: This is the footnote text.",
+        "text": "This is the footnote text.",
         "start_line": 94,
         "end_line": 95,
         "section_id": "section_heading-1",
-        "word_count": 6,
+        "word_count": 5,
         "has_links": false,
         "has_emphasis": false,
         "has_code": false
@@ -624,23 +611,19 @@
         "items": [
           {
             "text": "Item 1",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Item 2",
-            "checked": null,
             "children": [
               {
                 "text": "Subitem 2.1",
-                "checked": null,
                 "children": [],
                 "blocks": []
               },
               {
                 "text": "Subitem 2.2",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -648,9 +631,7 @@
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
+        "items_count": 2
       },
       {
         "id": "list_1",
@@ -661,23 +642,19 @@
         "items": [
           {
             "text": "First",
-            "checked": null,
             "children": [],
             "blocks": []
           },
           {
             "text": "Second",
-            "checked": null,
             "children": [
               {
                 "text": "Second - subitem 1",
-                "checked": null,
                 "children": [],
                 "blocks": []
               },
               {
                 "text": "Second - subitem 2",
-                "checked": null,
                 "children": [],
                 "blocks": []
               }
@@ -685,38 +662,13 @@
             "blocks": []
           }
         ],
-        "items_count": 2,
-        "task_items_count": 0,
-        "has_mixed_task_items": false
-      },
-      {
-        "id": "list_2",
-        "type": "bullet",
-        "start_line": 36,
-        "end_line": 39,
-        "section_id": "section_heading-1",
-        "items": [
-          {
-            "text": "Incomplete task",
-            "checked": false,
-            "children": [],
-            "blocks": []
-          },
-          {
-            "text": "Completed task",
-            "checked": true,
-            "children": [],
-            "blocks": []
-          }
-        ],
-        "items_count": 2,
-        "task_items_count": 2,
-        "has_mixed_task_items": false
+        "items_count": 2
       }
     ],
     "tables": [
       {
         "id": "table_0",
+        "raw_content": "| Column 1 | Column 2 | Column 3 |\n|----------|----------|----------|\n| Row 1    | Data     | More Data|\n| Row 2    | Data     | More Data|",
         "headers": [
           "Column 1",
           "Column 2",
@@ -744,6 +696,9 @@
         "section_id": "section_heading-1",
         "is_ragged": false,
         "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
         "column_count": 3,
         "row_count": 2,
         "align_meta": {
@@ -998,7 +953,7 @@
         "text": "OpenAI",
         "url": "https://openai.com",
         "line": 65,
-        "type": "external",
+        "type": "absolute",
         "scheme": "https",
         "allowed": true
       },
@@ -1044,8 +999,96 @@
         "children_blocks": []
       }
     ],
-    "html_blocks": [],
-    "html_inline": []
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 36,
+        "end_line": 39,
+        "section_id": "section_heading-1",
+        "items": [
+          {
+            "text": "Incomplete task",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Completed task",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 2,
+        "checked_count": 1,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [
+        {
+          "label": "1",
+          "id": "1",
+          "start_line": null,
+          "end_line": null,
+          "content": "This is the footnote text.",
+          "byte_length": 26,
+          "nested_structures": [],
+          "section_id": null
+        }
+      ],
+      "references": [
+        {
+          "label": "1",
+          "id": "1",
+          "line": null,
+          "section_id": null
+        }
+      ]
+    },
+    "html_blocks": [
+      {
+        "content": "<p style=\"color: red;\">This is a paragraph with inline HTML styling.</p>\n",
+        "raw_content": "<p style=\"color: red;\">This is a paragraph with inline HTML styling.</p>",
+        "start_line": 87,
+        "end_line": 88,
+        "inline": false,
+        "allowed": true,
+        "section_id": "section_heading-1",
+        "tag_hints": [
+          "p"
+        ]
+      }
+    ],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 36,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_heading-1",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 37,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_heading-1",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
   },
   "mappings": {
     "line_to_type": {
@@ -1106,11 +1149,11 @@
       "54": "code",
       "55": "code",
       "56": "code",
-      "57": "code",
+      "57": "prose",
       "58": "prose",
       "59": "code",
       "60": "code",
-      "61": "code",
+      "61": "prose",
       "62": "prose",
       "63": "prose",
       "64": "prose",
@@ -1299,7 +1342,9 @@
       49,
       50,
       51,
+      57,
       58,
+      61,
       62,
       63,
       64,
@@ -1342,11 +1387,20 @@
       54,
       55,
       56,
-      57,
       59,
-      60,
-      61
+      60
     ],
-    "code_blocks": []
+    "code_blocks": [
+      {
+        "start_line": 52,
+        "end_line": 56,
+        "language": "python"
+      },
+      {
+        "start_line": 59,
+        "end_line": 60,
+        "language": ""
+      }
+    ]
   }
 }

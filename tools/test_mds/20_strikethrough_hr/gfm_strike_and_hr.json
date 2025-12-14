@@ -1,13 +1,198 @@
 {
-  "id": "gfm_strike_and_hr",
-  "category": "strikethrough_hr",
-  "expected": {
-    "has_del_inline": true,
-    "hr_count": 3,
-    "hr_styles": [
+  "metadata": {
+    "total_lines": 13,
+    "total_chars": 144,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 3,
+      "text": 8,
+      "paragraph": 2,
+      "s": 2,
+      "softbreak": 1,
+      "hr": 3
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/20_strikethrough_hr/gfm_strike_and_hr.md"
+  },
+  "content": {
+    "raw": "# GFM strikethrough + horizontal rules\n\nThis ~~word~~ should be struck. This is ~~multi\nline~~ text.\n\n---\n\n***\n\n___\n\nParagraph after three HRs.\n",
+    "lines": [
+      "# GFM strikethrough + horizontal rules",
+      "",
+      "This ~~word~~ should be struck. This is ~~multi",
+      "line~~ text.",
+      "",
       "---",
+      "",
       "***",
-      "___"
+      "",
+      "___",
+      "",
+      "Paragraph after three HRs.",
+      ""
     ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_gfm-strikethrough-horizontal-rules",
+        "level": 1,
+        "title": "GFM strikethrough + horizontal rules",
+        "slug": "gfm-strikethrough-horizontal-rules",
+        "start_line": 0,
+        "end_line": 12,
+        "start_char": 0,
+        "end_char": 144,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# GFM strikethrough + horizontal rules\n\nThis ~~word~~ should be struck. This is ~~multi\nline~~ text.\n\n---\n\n***\n\n___\n\nParagraph after three HRs.\n",
+        "text_content": "GFM strikethrough + horizontal rules\n\nThis word should be struck. This is multi\nline text.\n\nParagraph after three HRs."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "This word should be struck. This is multi\nline text.",
+        "start_line": 2,
+        "end_line": 4,
+        "section_id": "section_gfm-strikethrough-horizontal-rules",
+        "word_count": 10,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Paragraph after three HRs.",
+        "start_line": 11,
+        "end_line": 12,
+        "section_id": "section_gfm-strikethrough-horizontal-rules",
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_gfm-strikethrough-horizontal-rules",
+        "level": 1,
+        "text": "GFM strikethrough + horizontal rules",
+        "line": 0,
+        "slug": "gfm-strikethrough-horizontal-rules",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 39
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "line_to_section": {
+      "0": "section_gfm-strikethrough-horizontal-rules",
+      "1": "section_gfm-strikethrough-horizontal-rules",
+      "2": "section_gfm-strikethrough-horizontal-rules",
+      "3": "section_gfm-strikethrough-horizontal-rules",
+      "4": "section_gfm-strikethrough-horizontal-rules",
+      "5": "section_gfm-strikethrough-horizontal-rules",
+      "6": "section_gfm-strikethrough-horizontal-rules",
+      "7": "section_gfm-strikethrough-horizontal-rules",
+      "8": "section_gfm-strikethrough-horizontal-rules",
+      "9": "section_gfm-strikethrough-horizontal-rules",
+      "10": "section_gfm-strikethrough-horizontal-rules",
+      "11": "section_gfm-strikethrough-horizontal-rules",
+      "12": "section_gfm-strikethrough-horizontal-rules"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

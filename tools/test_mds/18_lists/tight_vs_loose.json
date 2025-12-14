@@ -1,8 +1,205 @@
 {
-  "id": "tight_vs_loose",
-  "category": "lists",
-  "expected": {
-    "has_tight_list": true,
-    "has_loose_list": true
+  "metadata": {
+    "total_lines": 13,
+    "total_chars": 108,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 7,
+      "text": 7,
+      "bullet_list": 1,
+      "list_item": 4,
+      "paragraph": 6
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/18_lists/tight_vs_loose.md"
+  },
+  "content": {
+    "raw": "# Tight vs loose lists\n\n- Tight A\n- Tight B\n\n- Loose A\n\n  Paragraph under A\n\n- Loose B\n\n  Another paragraph\n",
+    "lines": [
+      "# Tight vs loose lists",
+      "",
+      "- Tight A",
+      "- Tight B",
+      "",
+      "- Loose A",
+      "",
+      "  Paragraph under A",
+      "",
+      "- Loose B",
+      "",
+      "  Another paragraph",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_tight-vs-loose-lists",
+        "level": 1,
+        "title": "Tight vs loose lists",
+        "slug": "tight-vs-loose-lists",
+        "start_line": 0,
+        "end_line": 12,
+        "start_char": 0,
+        "end_char": 108,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Tight vs loose lists\n\n- Tight A\n- Tight B\n\n- Loose A\n\n  Paragraph under A\n\n- Loose B\n\n  Another paragraph\n",
+        "text_content": "Tight vs loose lists\n\nTight A Tight B\n\nLoose A\n\nParagraph under A\n\nLoose B\n\nAnother paragraph"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 12,
+        "section_id": "section_tight-vs-loose-lists",
+        "items": [
+          {
+            "text": "Tight A",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Tight B",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Paragraph under A",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Another paragraph",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 4
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_tight-vs-loose-lists",
+        "level": 1,
+        "text": "Tight vs loose lists",
+        "line": 0,
+        "slug": "tight-vs-loose-lists",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 23
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "line_to_section": {
+      "0": "section_tight-vs-loose-lists",
+      "1": "section_tight-vs-loose-lists",
+      "2": "section_tight-vs-loose-lists",
+      "3": "section_tight-vs-loose-lists",
+      "4": "section_tight-vs-loose-lists",
+      "5": "section_tight-vs-loose-lists",
+      "6": "section_tight-vs-loose-lists",
+      "7": "section_tight-vs-loose-lists",
+      "8": "section_tight-vs-loose-lists",
+      "9": "section_tight-vs-loose-lists",
+      "10": "section_tight-vs-loose-lists",
+      "11": "section_tight-vs-loose-lists",
+      "12": "section_tight-vs-loose-lists"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

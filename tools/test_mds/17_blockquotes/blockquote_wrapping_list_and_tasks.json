@@ -1,11 +1,215 @@
 {
-  "id": "blockquote_wrapping_list_and_tasks",
-  "category": "blockquotes",
-  "expected": {
-    "tasklist_in_quote": {
-      "checked": 1,
-      "unchecked": 1
+  "metadata": {
+    "total_lines": 5,
+    "total_chars": 54,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "blockquote": 1,
+      "bullet_list": 1,
+      "list_item": 4,
+      "paragraph": 4,
+      "inline": 4,
+      "html_inline": 2,
+      "text": 4,
+      "ordered_list": 1
     },
-    "ordered_list_in_quote": true
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/17_blockquotes/blockquote_wrapping_list_and_tasks.md"
+  },
+  "content": {
+    "raw": "> - [x] Done\n> - [ ] Todo\n>   1. Step A\n>   2. Step B\n",
+    "lines": [
+      "> - [x] Done",
+      "> - [ ] Todo",
+      ">   1. Step A",
+      ">   2. Step B",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "ordered",
+        "start_line": 2,
+        "end_line": 4,
+        "section_id": null,
+        "items": [
+          {
+            "text": "Step A",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Step B",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 2
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [
+      {
+        "content": " Done TodoStep AStep B",
+        "start_line": 0,
+        "end_line": 4,
+        "section_id": null,
+        "children_summary": {
+          "lists": 2,
+          "tables": 0,
+          "code": 0
+        },
+        "children_blocks": [
+          {
+            "type": "bullet_list",
+            "start_line": 0,
+            "end_line": 4
+          },
+          {
+            "type": "ordered_list",
+            "start_line": 2,
+            "end_line": 4
+          }
+        ]
+      }
+    ],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 0,
+        "end_line": 4,
+        "section_id": null,
+        "items": [
+          {
+            "text": "Done",
+            "checked": true,
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Todo",
+            "checked": false,
+            "children": [
+              {
+                "text": "Step A",
+                "children": [],
+                "blocks": []
+              },
+              {
+                "text": "Step B",
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 2,
+        "checked_count": 1,
+        "unchecked_count": 1,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 0,
+        "inline": true,
+        "allowed": true,
+        "section_id": null,
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 1,
+        "inline": true,
+        "allowed": true,
+        "section_id": null,
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

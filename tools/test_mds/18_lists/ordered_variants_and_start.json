@@ -1,12 +1,211 @@
 {
-  "id": "ordered_variants_and_start",
-  "category": "lists",
-  "expected": {
-    "ordered_markers": [
-      ".",
-      ")"
+  "metadata": {
+    "total_lines": 10,
+    "total_chars": 124,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 7,
+      "text": 7,
+      "ordered_list": 2,
+      "list_item": 6,
+      "paragraph": 6
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "mixed_scripts",
+          "line": null,
+          "message": "Document mixes multiple scripts with Latin (potential spoofing)"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "mixed_scripts": true,
+        "unicode_risk_score": 1
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 1,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 1
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf_8",
+      "confidence": 0.6316
+    },
+    "source_path": "tools/test_mds/18_lists/ordered_variants_and_start.md"
+  },
+  "content": {
+    "raw": "# Ordered lists \u2014 variants & start attribute\n\n1. One\n2. Two\n   1) Two.one\n   2) Two.two\n\n7. Seven (explicit start)\n8. Eight\n",
+    "lines": [
+      "# Ordered lists \u2014 variants & start attribute",
+      "",
+      "1. One",
+      "2. Two",
+      "   1) Two.one",
+      "   2) Two.two",
+      "",
+      "7. Seven (explicit start)",
+      "8. Eight",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_ordered-lists-variants-start-attribute",
+        "level": 1,
+        "title": "Ordered lists \u2014 variants & start attribute",
+        "slug": "ordered-lists-variants-start-attribute",
+        "start_line": 0,
+        "end_line": 9,
+        "start_char": 0,
+        "end_char": 124,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Ordered lists \u2014 variants & start attribute\n\n1. One\n2. Two\n   1) Two.one\n   2) Two.two\n\n7. Seven (explicit start)\n8. Eight\n",
+        "text_content": "Ordered lists \u2014 variants & start attribute\n\nOne Two Two.one Two.two\n\nSeven (explicit start) Eight"
+      }
     ],
-    "has_nested_ordered": true,
-    "explicit_start_num": 7
+    "paragraphs": [],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "ordered",
+        "start_line": 2,
+        "end_line": 9,
+        "section_id": "section_ordered-lists-variants-start-attribute",
+        "items": [
+          {
+            "text": "One",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Two",
+            "children": [
+              {
+                "text": "Two.one",
+                "children": [],
+                "blocks": []
+              },
+              {
+                "text": "Two.two",
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          },
+          {
+            "text": "Seven (explicit start)",
+            "children": [],
+            "blocks": []
+          },
+          {
+            "text": "Eight",
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 4
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_ordered-lists-variants-start-attribute",
+        "level": 1,
+        "text": "Ordered lists \u2014 variants & start attribute",
+        "line": 0,
+        "slug": "ordered-lists-variants-start-attribute",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 45
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose"
+    },
+    "line_to_section": {
+      "0": "section_ordered-lists-variants-start-attribute",
+      "1": "section_ordered-lists-variants-start-attribute",
+      "2": "section_ordered-lists-variants-start-attribute",
+      "3": "section_ordered-lists-variants-start-attribute",
+      "4": "section_ordered-lists-variants-start-attribute",
+      "5": "section_ordered-lists-variants-start-attribute",
+      "6": "section_ordered-lists-variants-start-attribute",
+      "7": "section_ordered-lists-variants-start-attribute",
+      "8": "section_ordered-lists-variants-start-attribute",
+      "9": "section_ordered-lists-variants-start-attribute"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

@@ -1,0 +1,191 @@
+{
+  "metadata": {
+    "total_lines": 6,
+    "total_chars": 142,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 4,
+      "paragraph": 1,
+      "link": 3,
+      "softbreak": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [
+        {
+          "type": "path_traversal",
+          "line": 2,
+          "message": "Link contains path traversal pattern",
+          "url": "../../../etc/passwd"
+        },
+        {
+          "type": "path_traversal",
+          "line": 4,
+          "message": "Link contains path traversal pattern",
+          "url": "..%2F..%2F..%2Fetc%2Fpasswd"
+        }
+      ],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "https"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": true,
+        "link_schemes": {
+          "relative": 3
+        },
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 2,
+        "has_dangerous_content": true,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "strict"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/additional_test_mds/claude_tests/43_path_traversal.md"
+  },
+  "content": {
+    "raw": "# Test: 43_path_traversal\n\n[Traversal 1](../../../etc/passwd)\n[Traversal 2](..\\..\\..\\windows\\system32)\n[Encoded](..%2F..%2F..%2Fetc%2Fpasswd)\n",
+    "lines": [
+      "# Test: 43_path_traversal",
+      "",
+      "[Traversal 1](../../../etc/passwd)",
+      "[Traversal 2](..\\..\\..\\windows\\system32)",
+      "[Encoded](..%2F..%2F..%2Fetc%2Fpasswd)",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-43_path_traversal",
+        "level": 1,
+        "title": "Test: 43_path_traversal",
+        "slug": "test-43_path_traversal",
+        "start_line": 0,
+        "end_line": 5,
+        "start_char": 0,
+        "end_char": 142,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: 43_path_traversal\n\n[Traversal 1](../../../etc/passwd)\n[Traversal 2](..\\..\\..\\windows\\system32)\n[Encoded](..%2F..%2F..%2Fetc%2Fpasswd)\n",
+        "text_content": "Test: 43_path_traversal\n\nTraversal 1\nTraversal 2\nEncoded"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Traversal 1\nTraversal 2\nEncoded",
+        "start_line": 2,
+        "end_line": 5,
+        "section_id": "section_test-43_path_traversal",
+        "word_count": 5,
+        "has_links": true,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-43_path_traversal",
+        "level": 1,
+        "text": "Test: 43_path_traversal",
+        "line": 0,
+        "slug": "test-43_path_traversal",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 26
+      }
+    ],
+    "links": [
+      {
+        "text": "Traversal 1",
+        "url": "../../../etc/passwd",
+        "line": 2,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "Traversal 2",
+        "url": "......%5Cwindows%5Csystem32",
+        "line": 3,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      },
+      {
+        "text": "Encoded",
+        "url": "..%2F..%2F..%2Fetc%2Fpasswd",
+        "line": 4,
+        "type": "relative",
+        "scheme": null,
+        "allowed": true
+      }
+    ],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-43_path_traversal",
+      "1": "section_test-43_path_traversal",
+      "2": "section_test-43_path_traversal",
+      "3": "section_test-43_path_traversal",
+      "4": "section_test-43_path_traversal",
+      "5": "section_test-43_path_traversal"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "code_lines": [],
+    "code_blocks": []
+  }
+}

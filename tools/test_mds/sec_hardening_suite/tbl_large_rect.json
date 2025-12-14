@@ -1,9 +1,305 @@
 {
-  "category": "table",
-  "expected": {
-    "is_rectangular": true,
-    "ragged": false,
-    "align_mismatch": false,
-    "note": "6x10 rectangle"
+  "metadata": {
+    "total_lines": 16,
+    "total_chars": 393,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 73,
+      "text": 68,
+      "table": 1,
+      "thead": 1,
+      "tr": 12,
+      "th": 6,
+      "tbody": 1,
+      "td": 66
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/sec_hardening_suite/tbl_large_rect.md"
+  },
+  "content": {
+    "raw": "# Test: tbl_large_rect\n\n| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 2 | 3 | 4 | 5 | 6 |\n| 2 | 4 | 6 | 8 | 10 | 12 |\n| 3 | 6 | 9 | 12 | 15 | 18 |\n| 4 | 8 | 12 | 16 | 20 | 24 |\n| 5 | 10 | 15 | 20 | 25 | 30 |\n| 6 | 12 | 18 | 24 | 30 | 36 |\n| 7 | 14 | 21 | 28 | 35 | 42 |\n| 8 | 16 | 24 | 32 | 40 | 48 |\n| 9 | 18 | 27 | 36 | 45 | 54 |\n| 10 | 20 | 30 | 40 | 50 | 60 |\nParagraph.\n",
+    "lines": [
+      "# Test: tbl_large_rect",
+      "",
+      "| H1 | H2 | H3 | H4 | H5 | H6 |",
+      "|:--|:--|:--|:--|:--|:--|",
+      "| 1 | 2 | 3 | 4 | 5 | 6 |",
+      "| 2 | 4 | 6 | 8 | 10 | 12 |",
+      "| 3 | 6 | 9 | 12 | 15 | 18 |",
+      "| 4 | 8 | 12 | 16 | 20 | 24 |",
+      "| 5 | 10 | 15 | 20 | 25 | 30 |",
+      "| 6 | 12 | 18 | 24 | 30 | 36 |",
+      "| 7 | 14 | 21 | 28 | 35 | 42 |",
+      "| 8 | 16 | 24 | 32 | 40 | 48 |",
+      "| 9 | 18 | 27 | 36 | 45 | 54 |",
+      "| 10 | 20 | 30 | 40 | 50 | 60 |",
+      "Paragraph.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-tbl_large_rect",
+        "level": 1,
+        "title": "Test: tbl_large_rect",
+        "slug": "test-tbl_large_rect",
+        "start_line": 0,
+        "end_line": 15,
+        "start_char": 0,
+        "end_char": 393,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: tbl_large_rect\n\n| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 2 | 3 | 4 | 5 | 6 |\n| 2 | 4 | 6 | 8 | 10 | 12 |\n| 3 | 6 | 9 | 12 | 15 | 18 |\n| 4 | 8 | 12 | 16 | 20 | 24 |\n| 5 | 10 | 15 | 20 | 25 | 30 |\n| 6 | 12 | 18 | 24 | 30 | 36 |\n| 7 | 14 | 21 | 28 | 35 | 42 |\n| 8 | 16 | 24 | 32 | 40 | 48 |\n| 9 | 18 | 27 | 36 | 45 | 54 |\n| 10 | 20 | 30 | 40 | 50 | 60 |\nParagraph.\n",
+        "text_content": "Test: tbl_large_rect\n\nH1H2H3H4H5H6\n\n123456 24681012 369121518 4812162024 51015202530 61218243036 71421283542 81624324048 91827364554 102030405060 Paragraph."
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| H1 | H2 | H3 | H4 | H5 | H6 |\n|:--|:--|:--|:--|:--|:--|\n| 1 | 2 | 3 | 4 | 5 | 6 |\n| 2 | 4 | 6 | 8 | 10 | 12 |\n| 3 | 6 | 9 | 12 | 15 | 18 |\n| 4 | 8 | 12 | 16 | 20 | 24 |\n| 5 | 10 | 15 | 20 | 25 | 30 |\n| 6 | 12 | 18 | 24 | 30 | 36 |\n| 7 | 14 | 21 | 28 | 35 | 42 |\n| 8 | 16 | 24 | 32 | 40 | 48 |\n| 9 | 18 | 27 | 36 | 45 | 54 |\n| 10 | 20 | 30 | 40 | 50 | 60 |",
+        "headers": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6"
+        ],
+        "rows": [
+          [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          [
+            "2",
+            "4",
+            "6",
+            "8",
+            "10",
+            "12"
+          ],
+          [
+            "3",
+            "6",
+            "9",
+            "12",
+            "15",
+            "18"
+          ],
+          [
+            "4",
+            "8",
+            "12",
+            "16",
+            "20",
+            "24"
+          ],
+          [
+            "5",
+            "10",
+            "15",
+            "20",
+            "25",
+            "30"
+          ],
+          [
+            "6",
+            "12",
+            "18",
+            "24",
+            "30",
+            "36"
+          ],
+          [
+            "7",
+            "14",
+            "21",
+            "28",
+            "35",
+            "42"
+          ],
+          [
+            "8",
+            "16",
+            "24",
+            "32",
+            "40",
+            "48"
+          ],
+          [
+            "9",
+            "18",
+            "27",
+            "36",
+            "45",
+            "54"
+          ],
+          [
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60"
+          ]
+        ],
+        "align": [
+          "left",
+          "left",
+          "left",
+          "left",
+          "left",
+          "left"
+        ],
+        "start_line": 2,
+        "end_line": 14,
+        "section_id": "section_test-tbl_large_rect",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 6,
+        "row_count": 10,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-tbl_large_rect",
+        "level": 1,
+        "text": "Test: tbl_large_rect",
+        "line": 0,
+        "slug": "test-tbl_large_rect",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 23
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-tbl_large_rect",
+      "1": "section_test-tbl_large_rect",
+      "2": "section_test-tbl_large_rect",
+      "3": "section_test-tbl_large_rect",
+      "4": "section_test-tbl_large_rect",
+      "5": "section_test-tbl_large_rect",
+      "6": "section_test-tbl_large_rect",
+      "7": "section_test-tbl_large_rect",
+      "8": "section_test-tbl_large_rect",
+      "9": "section_test-tbl_large_rect",
+      "10": "section_test-tbl_large_rect",
+      "11": "section_test-tbl_large_rect",
+      "12": "section_test-tbl_large_rect",
+      "13": "section_test-tbl_large_rect",
+      "14": "section_test-tbl_large_rect",
+      "15": "section_test-tbl_large_rect"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

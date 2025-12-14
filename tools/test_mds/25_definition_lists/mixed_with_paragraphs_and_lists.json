@@ -1,10 +1,184 @@
 {
-  "id": "mixed_with_paragraphs_and_lists",
-  "category": "definition_lists",
-  "plugin_required": true,
-  "expected": {
-    "terms": 2,
-    "list_between_def_terms": true,
-    "paragraph_before_list": true
+  "metadata": {
+    "total_lines": 11,
+    "total_chars": 101,
+    "has_sections": false,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 5,
+      "inline": 5,
+      "text": 7,
+      "softbreak": 2,
+      "bullet_list": 2,
+      "list_item": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/25_definition_lists/mixed_with_paragraphs_and_lists.md"
+  },
+  "content": {
+    "raw": "Intro paragraph\n\nTerm A\n: Definition A paragraph\n\n- List after def\n  - Nested\n\nTerm B\n: Definition B\n",
+    "lines": [
+      "Intro paragraph",
+      "",
+      "Term A",
+      ": Definition A paragraph",
+      "",
+      "- List after def",
+      "  - Nested",
+      "",
+      "Term B",
+      ": Definition B",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "Intro paragraph",
+        "start_line": 0,
+        "end_line": 1,
+        "section_id": null,
+        "word_count": 2,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "Term A\n: Definition A paragraph",
+        "start_line": 2,
+        "end_line": 4,
+        "section_id": null,
+        "word_count": 6,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "Term B\n: Definition B",
+        "start_line": 8,
+        "end_line": 10,
+        "section_id": null,
+        "word_count": 5,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [
+      {
+        "id": "list_0",
+        "type": "bullet",
+        "start_line": 5,
+        "end_line": 8,
+        "section_id": null,
+        "items": [
+          {
+            "text": "List after def",
+            "children": [
+              {
+                "text": "Nested",
+                "children": [],
+                "blocks": []
+              }
+            ],
+            "blocks": []
+          }
+        ],
+        "items_count": 1
+      }
+    ],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

@@ -1,14 +1,283 @@
 {
-  "id": "intraword_emphasis",
-  "category": "inline_formatting",
-  "expected": {
-    "italic_variants": 5,
-    "bold_variants": 3,
-    "bolditalic_variants": 0,
-    "nested_ok": false,
-    "escapes_ok": false,
-    "code_spans_ok": false,
-    "no_intraword_underscore_emphasis": false,
-    "handles_adjacent_punctuation": false
+  "metadata": {
+    "total_lines": 18,
+    "total_chars": 182,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 9,
+      "text": 21,
+      "paragraph": 8,
+      "em": 4,
+      "strong": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/21_inline_formatting/intraword_emphasis.md"
+  },
+  "content": {
+    "raw": "# Intraword emphasis\n\nun*frigging*believable\n\nfan*freakin*tastic\n\nabso**lutely**amazing\n\nin**cred**ible\n\nsuper*cali*fragilistic\n\nun__der__score\n\nThis*might*work\n\nThis_might_not_work\n",
+    "lines": [
+      "# Intraword emphasis",
+      "",
+      "un*frigging*believable",
+      "",
+      "fan*freakin*tastic",
+      "",
+      "abso**lutely**amazing",
+      "",
+      "in**cred**ible",
+      "",
+      "super*cali*fragilistic",
+      "",
+      "un__der__score",
+      "",
+      "This*might*work",
+      "",
+      "This_might_not_work",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_intraword-emphasis",
+        "level": 1,
+        "title": "Intraword emphasis",
+        "slug": "intraword-emphasis",
+        "start_line": 0,
+        "end_line": 17,
+        "start_char": 0,
+        "end_char": 182,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Intraword emphasis\n\nun*frigging*believable\n\nfan*freakin*tastic\n\nabso**lutely**amazing\n\nin**cred**ible\n\nsuper*cali*fragilistic\n\nun__der__score\n\nThis*might*work\n\nThis_might_not_work\n",
+        "text_content": "Intraword emphasis\n\nunfriggingbelievable\n\nfanfreakintastic\n\nabsolutelyamazing\n\nincredible\n\nsupercalifragilistic\n\nun__der__score\n\nThismightwork\n\nThis_might_not_work"
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "unfriggingbelievable",
+        "start_line": 2,
+        "end_line": 3,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_1",
+        "text": "fanfreakintastic",
+        "start_line": 4,
+        "end_line": 5,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_2",
+        "text": "absolutelyamazing",
+        "start_line": 6,
+        "end_line": 7,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_3",
+        "text": "incredible",
+        "start_line": 8,
+        "end_line": 9,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_4",
+        "text": "supercalifragilistic",
+        "start_line": 10,
+        "end_line": 11,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_5",
+        "text": "un__der__score",
+        "start_line": 12,
+        "end_line": 13,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      },
+      {
+        "id": "para_6",
+        "text": "Thismightwork",
+        "start_line": 14,
+        "end_line": 15,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": true,
+        "has_code": false
+      },
+      {
+        "id": "para_7",
+        "text": "This_might_not_work",
+        "start_line": 16,
+        "end_line": 17,
+        "section_id": "section_intraword-emphasis",
+        "word_count": 1,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_intraword-emphasis",
+        "level": 1,
+        "text": "Intraword emphasis",
+        "line": 0,
+        "slug": "intraword-emphasis",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 21
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose",
+      "13": "prose",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose",
+      "17": "prose"
+    },
+    "line_to_section": {
+      "0": "section_intraword-emphasis",
+      "1": "section_intraword-emphasis",
+      "2": "section_intraword-emphasis",
+      "3": "section_intraword-emphasis",
+      "4": "section_intraword-emphasis",
+      "5": "section_intraword-emphasis",
+      "6": "section_intraword-emphasis",
+      "7": "section_intraword-emphasis",
+      "8": "section_intraword-emphasis",
+      "9": "section_intraword-emphasis",
+      "10": "section_intraword-emphasis",
+      "11": "section_intraword-emphasis",
+      "12": "section_intraword-emphasis",
+      "13": "section_intraword-emphasis",
+      "14": "section_intraword-emphasis",
+      "15": "section_intraword-emphasis",
+      "16": "section_intraword-emphasis",
+      "17": "section_intraword-emphasis"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

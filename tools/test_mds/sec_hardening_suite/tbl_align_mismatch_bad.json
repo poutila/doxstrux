@@ -1,9 +1,165 @@
 {
-  "category": "table",
-  "expected": {
-    "is_rectangular": true,
-    "ragged": false,
-    "align_mismatch": true,
-    "note": "Align row has 3 markers but 2 headers"
+  "metadata": {
+    "total_lines": 8,
+    "total_chars": 88,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": false,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 2,
+      "text": 6,
+      "paragraph": 1,
+      "softbreak": 4
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/sec_hardening_suite/tbl_align_mismatch_bad.md"
+  },
+  "content": {
+    "raw": "# Test: tbl_align_mismatch_bad\n\n| A | B |\n|:--|--:|:--:|\n| 1 | 2 |\n| 3 | 4 |\nParagraph.\n",
+    "lines": [
+      "# Test: tbl_align_mismatch_bad",
+      "",
+      "| A | B |",
+      "|:--|--:|:--:|",
+      "| 1 | 2 |",
+      "| 3 | 4 |",
+      "Paragraph.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-tbl_align_mismatch_bad",
+        "level": 1,
+        "title": "Test: tbl_align_mismatch_bad",
+        "slug": "test-tbl_align_mismatch_bad",
+        "start_line": 0,
+        "end_line": 7,
+        "start_char": 0,
+        "end_char": 88,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: tbl_align_mismatch_bad\n\n| A | B |\n|:--|--:|:--:|\n| 1 | 2 |\n| 3 | 4 |\nParagraph.\n",
+        "text_content": "Test: tbl_align_mismatch_bad\n\n| A | B |\n|:--|--:|:--:|\n| 1 | 2 |\n| 3 | 4 |\nParagraph."
+      }
+    ],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "| A | B |\n|:--|--:|:--:|\n| 1 | 2 |\n| 3 | 4 |\nParagraph.",
+        "start_line": 2,
+        "end_line": 7,
+        "section_id": "section_test-tbl_align_mismatch_bad",
+        "word_count": 17,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-tbl_align_mismatch_bad",
+        "level": 1,
+        "text": "Test: tbl_align_mismatch_bad",
+        "line": 0,
+        "slug": "test-tbl_align_mismatch_bad",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 31
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-tbl_align_mismatch_bad",
+      "1": "section_test-tbl_align_mismatch_bad",
+      "2": "section_test-tbl_align_mismatch_bad",
+      "3": "section_test-tbl_align_mismatch_bad",
+      "4": "section_test-tbl_align_mismatch_bad",
+      "5": "section_test-tbl_align_mismatch_bad",
+      "6": "section_test-tbl_align_mismatch_bad",
+      "7": "section_test-tbl_align_mismatch_bad"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

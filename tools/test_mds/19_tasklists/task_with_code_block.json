@@ -1,11 +1,298 @@
 {
-  "id": "task_with_code_block",
-  "category": "tasklists",
-  "expected": {
-    "checked": 1,
-    "unchecked": 2,
-    "nested_tasks_present": true,
-    "ordered_steps_under_task": false,
-    "allows_inline_formatting": false
+  "metadata": {
+    "total_lines": 17,
+    "total_chars": 210,
+    "has_sections": true,
+    "has_code": true,
+    "has_tables": false,
+    "has_lists": true,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 4,
+      "text": 4,
+      "bullet_list": 1,
+      "list_item": 3,
+      "paragraph": 3,
+      "html_inline": 3,
+      "fence": 2
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": true,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/19_tasklists/task_with_code_block.md"
+  },
+  "content": {
+    "raw": "# Task containing code block\n\n- [ ] Implement function\n\n  ```python\n  def task_function():\n      return \"done\"\n  ```\n\n- [x] Test the function\n\n  ```python\n  assert task_function() == \"done\"\n  ```\n\n- [ ] Deploy\n",
+    "lines": [
+      "# Task containing code block",
+      "",
+      "- [ ] Implement function",
+      "",
+      "  ```python",
+      "  def task_function():",
+      "      return \"done\"",
+      "  ```",
+      "",
+      "- [x] Test the function",
+      "",
+      "  ```python",
+      "  assert task_function() == \"done\"",
+      "  ```",
+      "",
+      "- [ ] Deploy",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_task-containing-code-block",
+        "level": 1,
+        "title": "Task containing code block",
+        "slug": "task-containing-code-block",
+        "start_line": 0,
+        "end_line": 16,
+        "start_char": 0,
+        "end_char": 210,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Task containing code block\n\n- [ ] Implement function\n\n  ```python\n  def task_function():\n      return \"done\"\n  ```\n\n- [x] Test the function\n\n  ```python\n  assert task_function() == \"done\"\n  ```\n\n- [ ] Deploy\n",
+        "text_content": "Task containing code block\n\n Implement function\n\n Test the function\n\n Deploy"
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "python",
+        "content": "def task_function():\n    return \"done\"\n",
+        "start_line": 4,
+        "end_line": 8,
+        "section_id": "section_task-containing-code-block"
+      },
+      {
+        "id": "code_1",
+        "type": "fenced",
+        "language": "python",
+        "content": "assert task_function() == \"done\"\n",
+        "start_line": 11,
+        "end_line": 14,
+        "section_id": "section_task-containing-code-block"
+      }
+    ],
+    "headings": [
+      {
+        "id": "heading_task-containing-code-block",
+        "level": 1,
+        "text": "Task containing code block",
+        "line": 0,
+        "slug": "task-containing-code-block",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 29
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [
+      {
+        "id": "tasklist_0",
+        "type": "bullet",
+        "start_line": 2,
+        "end_line": 16,
+        "section_id": "section_task-containing-code-block",
+        "items": [
+          {
+            "text": "Implement function",
+            "checked": false,
+            "children": [],
+            "blocks": [
+              {
+                "type": "fence",
+                "start_line": 4,
+                "end_line": 8
+              }
+            ]
+          },
+          {
+            "text": "Test the function",
+            "checked": true,
+            "children": [],
+            "blocks": [
+              {
+                "type": "fence",
+                "start_line": 11,
+                "end_line": 14
+              }
+            ]
+          },
+          {
+            "text": "Deploy",
+            "checked": false,
+            "children": [],
+            "blocks": []
+          }
+        ],
+        "items_count": 3,
+        "checked_count": 1,
+        "unchecked_count": 2,
+        "has_mixed_task_items": false
+      }
+    ],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": [
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 2,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_task-containing-code-block",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 9,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_task-containing-code-block",
+        "tag_hints": [
+          "input"
+        ]
+      },
+      {
+        "content": "<input class=\"task-list-item-checkbox\" disabled=\"disabled\" type=\"checkbox\">",
+        "line": 15,
+        "inline": true,
+        "allowed": true,
+        "section_id": "section_task-containing-code-block",
+        "tag_hints": [
+          "input"
+        ]
+      }
+    ]
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "code",
+      "5": "code",
+      "6": "code",
+      "7": "code",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "code",
+      "12": "code",
+      "13": "code",
+      "14": "prose",
+      "15": "prose",
+      "16": "prose"
+    },
+    "line_to_section": {
+      "0": "section_task-containing-code-block",
+      "1": "section_task-containing-code-block",
+      "2": "section_task-containing-code-block",
+      "3": "section_task-containing-code-block",
+      "4": "section_task-containing-code-block",
+      "5": "section_task-containing-code-block",
+      "6": "section_task-containing-code-block",
+      "7": "section_task-containing-code-block",
+      "8": "section_task-containing-code-block",
+      "9": "section_task-containing-code-block",
+      "10": "section_task-containing-code-block",
+      "11": "section_task-containing-code-block",
+      "12": "section_task-containing-code-block",
+      "13": "section_task-containing-code-block",
+      "14": "section_task-containing-code-block",
+      "15": "section_task-containing-code-block",
+      "16": "section_task-containing-code-block"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      14,
+      15,
+      16
+    ],
+    "code_lines": [
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      13
+    ],
+    "code_blocks": [
+      {
+        "start_line": 4,
+        "end_line": 7,
+        "language": "python"
+      },
+      {
+        "start_line": 11,
+        "end_line": 13,
+        "language": "python"
+      }
+    ]
   }
 }

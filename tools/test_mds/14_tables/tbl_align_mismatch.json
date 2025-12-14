@@ -1,9 +1,197 @@
 {
-  "category": "table",
-  "expected": {
-    "is_rectangular": true,
-    "ragged": false,
-    "align_mismatch": false,
-    "note": "Align matches cols (control)"
+  "metadata": {
+    "total_lines": 8,
+    "total_chars": 96,
+    "has_sections": true,
+    "has_code": false,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "heading": 1,
+      "inline": 13,
+      "text": 11,
+      "table": 1,
+      "thead": 1,
+      "tr": 4,
+      "th": 3,
+      "tbody": 1,
+      "td": 9
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/14_tables/tbl_align_mismatch.md"
+  },
+  "content": {
+    "raw": "# Test: tbl_align_mismatch\n\n| A | B | C |\n|:--|--:|:--:|\n| 1 | 2 | 3 |\n| 4 | 5 | 6 |\nParagraph.\n",
+    "lines": [
+      "# Test: tbl_align_mismatch",
+      "",
+      "| A | B | C |",
+      "|:--|--:|:--:|",
+      "| 1 | 2 | 3 |",
+      "| 4 | 5 | 6 |",
+      "Paragraph.",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "section_test-tbl_align_mismatch",
+        "level": 1,
+        "title": "Test: tbl_align_mismatch",
+        "slug": "test-tbl_align_mismatch",
+        "start_line": 0,
+        "end_line": 7,
+        "start_char": 0,
+        "end_char": 96,
+        "parent_id": null,
+        "child_ids": [],
+        "raw_content": "# Test: tbl_align_mismatch\n\n| A | B | C |\n|:--|--:|:--:|\n| 1 | 2 | 3 |\n| 4 | 5 | 6 |\nParagraph.\n",
+        "text_content": "Test: tbl_align_mismatch\n\nABC\n\n123 456 Paragraph."
+      }
+    ],
+    "paragraphs": [],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| A | B | C |\n|:--|--:|:--:|\n| 1 | 2 | 3 |\n| 4 | 5 | 6 |",
+        "headers": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            "1",
+            "2",
+            "3"
+          ],
+          [
+            "4",
+            "5",
+            "6"
+          ]
+        ],
+        "align": [
+          "left",
+          "right",
+          "center"
+        ],
+        "start_line": 2,
+        "end_line": 6,
+        "section_id": "section_test-tbl_align_mismatch",
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 3,
+        "row_count": 2,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [],
+    "headings": [
+      {
+        "id": "heading_test-tbl_align_mismatch",
+        "level": 1,
+        "text": "Test: tbl_align_mismatch",
+        "line": 0,
+        "slug": "test-tbl_align_mismatch",
+        "parent_heading_id": null,
+        "start_char": 0,
+        "end_char": 27
+      }
+    ],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "prose",
+      "3": "prose",
+      "4": "prose",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose"
+    },
+    "line_to_section": {
+      "0": "section_test-tbl_align_mismatch",
+      "1": "section_test-tbl_align_mismatch",
+      "2": "section_test-tbl_align_mismatch",
+      "3": "section_test-tbl_align_mismatch",
+      "4": "section_test-tbl_align_mismatch",
+      "5": "section_test-tbl_align_mismatch",
+      "6": "section_test-tbl_align_mismatch",
+      "7": "section_test-tbl_align_mismatch"
+    },
+    "prose_lines": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "code_lines": [],
+    "code_blocks": []
   }
 }

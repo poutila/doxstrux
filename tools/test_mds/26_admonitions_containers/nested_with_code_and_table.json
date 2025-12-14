@@ -1,10 +1,201 @@
 {
-  "id": "nested_with_code_and_table",
-  "category": "admonitions_containers",
-  "plugin_required": true,
-  "expected": {
-    "nesting_depth": 2,
-    "contains_fenced_code": true,
-    "contains_table": true
+  "metadata": {
+    "total_lines": 13,
+    "total_chars": 110,
+    "has_sections": false,
+    "has_code": true,
+    "has_tables": true,
+    "has_lists": false,
+    "node_counts": {
+      "root": 1,
+      "paragraph": 1,
+      "inline": 13,
+      "text": 12,
+      "softbreak": 1,
+      "fence": 1,
+      "table": 1,
+      "thead": 1,
+      "tr": 6,
+      "th": 2,
+      "tbody": 1,
+      "td": 10,
+      "strong": 1
+    },
+    "has_frontmatter": false,
+    "security": {
+      "warnings": [],
+      "statistics": {
+        "frontmatter_at_bof": false,
+        "ragged_tables_count": 0,
+        "allowed_schemes": [
+          "http",
+          "https",
+          "mailto",
+          "tel"
+        ],
+        "table_align_mismatches": 0,
+        "nested_headings_blocked": 0,
+        "has_html_block": false,
+        "has_html_inline": false,
+        "has_script": false,
+        "has_event_handlers": false,
+        "has_data_uri_images": false,
+        "confusables_present": false,
+        "nbsp_present": false,
+        "zwsp_present": false,
+        "path_traversal_pattern": false,
+        "link_schemes": {},
+        "unicode_risk_score": 0
+      },
+      "summary": {
+        "ragged_tables_count": 0,
+        "total_warnings": 0,
+        "has_dangerous_content": false,
+        "unicode_risk_score": 0
+      },
+      "profile_used": "moderate"
+    },
+    "encoding": {
+      "detected": "utf-8",
+      "confidence": 0.9
+    },
+    "source_path": "tools/test_mds/26_admonitions_containers/nested_with_code_and_table.md"
+  },
+  "content": {
+    "raw": "::: note Outer\nCode:\n```python\nx=1\n```\n| A | B |\n| - | - |\n| 1 | 2 |\n::: warning Inner\n**Be careful**\n:::\n:::\n",
+    "lines": [
+      "::: note Outer",
+      "Code:",
+      "```python",
+      "x=1",
+      "```",
+      "| A | B |",
+      "| - | - |",
+      "| 1 | 2 |",
+      "::: warning Inner",
+      "**Be careful**",
+      ":::",
+      ":::",
+      ""
+    ]
+  },
+  "structure": {
+    "sections": [],
+    "paragraphs": [
+      {
+        "id": "para_0",
+        "text": "::: note Outer\nCode:",
+        "start_line": 0,
+        "end_line": 2,
+        "section_id": null,
+        "word_count": 4,
+        "has_links": false,
+        "has_emphasis": false,
+        "has_code": false
+      }
+    ],
+    "lists": [],
+    "tables": [
+      {
+        "id": "table_0",
+        "raw_content": "| A | B |\n| - | - |\n| 1 | 2 |",
+        "headers": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "1",
+            "2"
+          ]
+        ],
+        "align": [
+          "left",
+          "left"
+        ],
+        "start_line": 5,
+        "end_line": 8,
+        "section_id": null,
+        "is_ragged": false,
+        "align_mismatch": false,
+        "malformed_lines": [],
+        "is_pure": true,
+        "table_valid_md": true,
+        "column_count": 2,
+        "row_count": 1,
+        "align_meta": {
+          "heuristic": true
+        }
+      }
+    ],
+    "code_blocks": [
+      {
+        "id": "code_0",
+        "type": "fenced",
+        "language": "python",
+        "content": "x=1\n",
+        "start_line": 2,
+        "end_line": 5,
+        "section_id": null
+      }
+    ],
+    "headings": [],
+    "links": [],
+    "images": [],
+    "blockquotes": [],
+    "frontmatter": null,
+    "tasklists": [],
+    "math": {
+      "blocks": [],
+      "inline": []
+    },
+    "footnotes": {
+      "definitions": [],
+      "references": []
+    },
+    "html_blocks": [],
+    "html_inline": []
+  },
+  "mappings": {
+    "line_to_type": {
+      "0": "prose",
+      "1": "prose",
+      "2": "code",
+      "3": "code",
+      "4": "code",
+      "5": "prose",
+      "6": "prose",
+      "7": "prose",
+      "8": "prose",
+      "9": "prose",
+      "10": "prose",
+      "11": "prose",
+      "12": "prose"
+    },
+    "line_to_section": {},
+    "prose_lines": [
+      0,
+      1,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "code_lines": [
+      2,
+      3,
+      4
+    ],
+    "code_blocks": [
+      {
+        "start_line": 2,
+        "end_line": 4,
+        "language": "python"
+      }
+    ]
   }
 }
