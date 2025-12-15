@@ -10,7 +10,6 @@ Guides and manuals:
 - `USER_MANUAL.md` — Framework user manual (spec/template/linter usage, workflows, checklists).
 - `AI_ASSISTANT USER_MANUAL.md` — AI-oriented manual for converting prose to task lists (template vs instantiated, gates, coverage).
 - `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` — Runtime prompt for prose → AI task list generation (plan-mode output).
-- `DESCRIPTION.md` — Overview of the framework purpose and goals.
 - `INDEX.md` — This file (index of framework artifacts).
 
 Workspace:

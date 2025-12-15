@@ -34,9 +34,9 @@
 - AI_TASK_LIST_TEMPLATE_v6.md: pass (exit 0)
 - canonical_examples/example_plan.md: pass (exit 0)
 - canonical_examples/example_instantiated.md: pass (exit 0) with `--require-captured-evidence`
-- Negative: Plan missing Prose Coverage Mapping → exit 1 (R-ATL-PROSE).
-- Negative: Template with missing Clean Table placeholder → exit 1 (R-ATL-060).
-- Negative: Plan with Preconditions placeholder (fixture `/tmp/minimal_plan_bad_precond.md`) → exit 1 (R-ATL-D2) with no crash.
+- Negative: Plan missing Prose Coverage Mapping (`canonical_examples/negatives/plan_missing_coverage_mapping.md`) → exit 1 (R-ATL-PROSE).
+- Negative: Template with missing Clean Table placeholder (`canonical_examples/negatives/template_missing_clean_table_placeholder.md`) → exit 1 (R-ATL-060).
+- Negative: Plan with Preconditions placeholder (`canonical_examples/negatives/plan_preconditions_placeholder.md`) → exit 1 (R-ATL-D2) with no crash.
 
 ## Performance/Regression Checks
 - Target: <10% overhead vs prior run (manual observation).
