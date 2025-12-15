@@ -74,11 +74,13 @@ Goal: Eliminate cross-doc drift (versions, modes, SSOT, runner/import/gate/place
 - Footer: note that COMMON.md is the single source for the above; other docs reference it.
 
 ## Execution order (1 day target, with rollback)
-- Hour 1: Draft COMMON.md with the 9 high-overlap items.
+- Hour 1: Re-read COMMON.md spec and confirm version metadata; draft/adjust COMMON.md with the 9 high-overlap items.
 - Hour 2: Add references to spec/template/orchestrator/manuals/README/INDEX/DESCRIPTION.
 - Hour 3: Update migration/validation/changelog with COMMON.md version reference.
 - Hour 4: Run doc-sync checks (grep versions/modes) to confirm single-source; quick manual scan for SSOT/mode consistency.
-- Hour 5-8: Fix residual wording conflicts; commit.
+- Hour 5: Run `VALIDATION_SUITE.md` positives (template/plan/instantiated) and fix fast blockers.
+- Hour 6: Run `VALIDATION_SUITE.md` negatives (regression fixtures) and fix any surprises.
+- Hour 7-8: Re-run full `VALIDATION_SUITE.md`; fix residual wording conflicts; commit.
 - Rollback plan: work on a branch; if validation fails, revert the branch; keep backups of pre-COMMON.md docs until validation passes.
 
 ## Acceptance Criteria
