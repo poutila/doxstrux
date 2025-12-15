@@ -19,13 +19,13 @@ This framework pairs a strict specification, a template, and a deterministic lin
 - Mode decision: stay in `mode: template` while designing; switch to `mode: instantiated` only when placeholders are gone and evidence will be real.
 
 ## 1.5) How to start a new task list (prose → task list)
-1) Select the prose source (e.g., PYDANTIC_SCHEMA.md, DOXSTRUX_SPEC.md, sprint design doc).
+1) Select the prose source (e.g., a design/spec doc for the current project).
 2) Start a fresh AI session.
 3) Paste the entire `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md`.
 4) Paste the full prose document.
 5) Let the AI generate a task list in `mode: "template"`:
    - Includes required headings/sections, TASK_N_M_PATHS arrays, Prose Coverage Mapping, STOP/Global/Drift structure.
-6) Save the output in the repo (e.g., `ai_tasks/<label>_TASKS_v1_template.md`).
+6) Save the output in the repo (e.g., `work_folder/<label>_TASKS_v1_template.md`).
 7) Run the linter (via runner) and fix structural issues; keep this pass structure-only (no fabricated evidence).
 8) Review Prose Coverage Mapping: ensure each major requirement is mapped or explicitly out-of-scope.
 9) Later human+CI pass will move to `mode: "instantiated"` once evidence is real. Do not fabricate evidence to satisfy instantiated mode.

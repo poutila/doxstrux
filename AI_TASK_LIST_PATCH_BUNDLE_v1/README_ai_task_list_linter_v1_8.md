@@ -16,7 +16,7 @@ Deterministic linter for AI Task Lists (Spec v1.6).
 | Checklist completion status | Status not validated | **Single status required; COMPLETE needs checked boxes** |
 | UV commands | Prose mention sufficed | **$ uv sync / $ uv run required in code blocks** |
 | Baseline tests evidence | Not enforced | **Baseline tests block must have $ commands + output** |
-| Gate patterns | Could succeed even on matches | **Use `! rg …` or `if rg …; then exit 1; fi` for gates (recommended authoring; not lint-enforced)** |
+| Gate patterns | Could succeed even on matches | **Use `! rg …` or `if rg …; then exit 1; fi` for gates** |
 
 ## Key Changes
 
@@ -97,7 +97,7 @@ ai_task_list:
 ✅ Valid v1.6 document passes
 ✅ Comment compliance REJECTED (import hygiene patterns in comments)
 ✅ Comment compliance REJECTED (Phase Unlock scan in comments)
-✅ Old schema versions rejected (e.g., 1.5 rejected; requires 1.6)
+✅ Schema version 1.5 rejected (requires 1.6)
 ✅ Spec search_tool consistency (MUST include, not MAY)
 ```
 

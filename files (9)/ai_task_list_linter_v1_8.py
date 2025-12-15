@@ -47,6 +47,7 @@ REQ_TDD_2 = "### TDD Step 2 — Implement (minimal)"
 REQ_TDD_3 = "### TDD Step 3 — Verify (GREEN)"
 REQ_STOP = "### STOP — Clean Table"
 
+# R-ATL-010: Required headings (includes Phase Gate per R-ATL-051)
 REQUIRED_HEADINGS = [
     "## Non-negotiable Invariants",
     "## Placeholder Protocol",
@@ -180,10 +181,16 @@ def _parse_front_matter(lines: List[str]) -> Tuple[Dict[str, str], Optional[Lint
             val = val[1:-1]
         meta[key] = val
 
+    # R-ATL-001: Front matter required; R-ATL-070: Runner metadata required
     required = ["schema_version", "mode", "runner", "runner_prefix", "search_tool"]
-    missing = [k for k in required if k not in meta or meta[k] == ""]
+    missing = [k for k in required if k not in meta]
     if missing:
-        return meta, LintError(1, "R-ATL-001", f"ai_task_list missing required keys or empty values: {', '.join(missing)}"), end_idx + 1
+        return meta, LintError(1, "R-ATL-001", f"ai_task_list missing required keys: {', '.join(missing)}"), end_idx + 1
+
+    # Allow runner_prefix to be empty by design (e.g., go/cargo); other fields must be non-empty
+    empties = [k for k in ["schema_version", "mode", "runner", "search_tool"] if meta.get(k, "") == ""]
+    if empties:
+        return meta, LintError(1, "R-ATL-001", f"ai_task_list missing required values: {', '.join(empties)}"), end_idx + 1
 
     # Fix B: Enforce schema_version == "1.6" exactly
     if meta["schema_version"] != "1.6":

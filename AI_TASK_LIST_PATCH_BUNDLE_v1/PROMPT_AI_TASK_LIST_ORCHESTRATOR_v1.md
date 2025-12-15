@@ -2,7 +2,7 @@
 > Spec: AI_TASK_LIST_SPEC_v1.md (Spec v1.6)  
 > Template: AI_TASK_LIST_TEMPLATE_v6.md  
 > Linter: ai_task_list_linter_v1_8.py  
-> Manual: AI_ASSISTANT_USER_MANUAL.md  
+> Manual: AI_ASSISTANT USER_MANUAL.md  
 
 # PROMPT: AI_TASK_LIST_ORCHESTRATOR_v1
 
@@ -22,13 +22,11 @@ Sources & SSOT hierarchy
 ========================
 You will be given:
 
-1. **Prose design / requirements**: `[[PH:PROSE_DOC_LABEL]]` (content pasted into this chat; e.g., [Target file](./path_to/[[PH:PROSE_DOC_FILENAME]].md)).
-2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — Spec v1.6 contract for valid task lists.
-3. **Template**: [AI_TASK_LIST_TEMPLATE_v6.md](./AI_TASK_LIST_TEMPLATE_v6.md) — starting point for new task lists.
-4. **Linter**: [ai_task_list_linter_v1_8.py](./ai_task_list_linter_v1_8.py) — implementation of the spec (assume it will be run after your output).
-5. **AI Assistant Manual**: [AI_ASSISTANT USER_MANUAL.md](./AI_ASSISTANT USER_MANUAL.md).
-
-If any of the files above are missing or not accessible, STOP and ask for the correct path before proceeding.
+1. **Prose design / requirements**: `[[PH:PROSE_DOC_LABEL]]` (content pasted into this chat).
+2. **Spec**: `AI_TASK_LIST_SPEC_v1.md` — defines the contract for valid task lists.
+3. **Template**: `AI_TASK_LIST_TEMPLATE_v6.md` — starting point for new task lists.
+4. **Linter**: `ai_task_list_linter_v1_8.py` — implementation of the spec (assume it will be run after your output).
+5. **AI Assistant Manual**: `AI_ASSISTANT USER_MANUAL.md`.
 
 Apply this **SSOT hierarchy**:
 
@@ -199,6 +197,6 @@ Before returning the Markdown:
      - Real runtime versions.
    - Keep these as placeholders in template mode.
 
-Once you’ve passed your self-check, output the task list Markdown. Save it to the working folder (e.g., [Generated task list](./work_folder/[[PH:PROSE_DOC_LABEL]]_tasks_template.md)).
+Once you’ve passed your self-check, output the task list Markdown.
 
 If any sweep fails, do not answer yet. Instead, revise the task list to satisfy the failing checks, re-run all sweeps on the revised version, and only output the final Markdown once all sweeps pass. Do not show intermediate drafts or partial outputs.

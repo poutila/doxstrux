@@ -33,10 +33,7 @@ ai_task_list:
 
 **Pre-flight** (must return zero — fails if placeholders found):
 ```bash
-$ if rg '\[\[PH:[A-Z0-9_]+\]\]' PROJECT_TASKS.md; then
->   echo "ERROR: Placeholders found"
->   exit 1
-> fi
+$ if rg '\[\[PH:[A-Z0-9_]+\]\]' PROJECT_TASKS.md; then echo "ERROR: Placeholders found"; false; fi
 ```
 
 ---

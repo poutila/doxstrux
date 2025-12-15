@@ -12,7 +12,7 @@
 5. Non-empty evidence in instantiated mode (v1.1)
 6. Verifiable evidence provenance via captured headers (v1.3, opt-in)
 7. Closed-loop enforcement (no bypass via formatting) (v1.4)
-8. All governance rules baked in (import hygiene, Clean Table checklist) (v1.5)
+8. All governance rules baked in (import hygiene, Clean Table checklist)
 9. **NEW v1.6**: No comment compliance — $ command lines required, not prose/comments
 
 ---
@@ -281,7 +281,7 @@ No slash-separated menu; a single selection is required.
 
 If a task's status is `✅ COMPLETE` and `mode: instantiated`, all No Weak Tests and Clean Table checklist items in its STOP block MUST be checked (`[x]`).
 
-### R-ATL-042: Clean Table checklist enforcement — NEW in v1.5
+### R-ATL-042: Clean Table checklist enforcement
 
 The linter MUST verify that the STOP section contains all five Clean Table checklist items (semantic match, whitespace-insensitive):
 
@@ -364,10 +364,16 @@ When `runner: "uv"` (Python project) and `mode: instantiated`, the linter MUST v
 1. Multi-dot relative import check: `$ rg 'from \.\.'` command line
 2. Wildcard import check: `$ rg 'import \*'` command line
 
-**Required patterns for Python (runner=uv)**:
+**Required patterns for Python (runner=uv)** (gates must fail on matches):
 ```bash
-$ rg 'from \.\.' src/ && exit 1 || true      # No multi-dot relative imports
-$ rg 'import \*' src/ && exit 1 || true      # No wildcard imports
+$ if rg 'from \.\.' src/; then
+>   echo "ERROR: multi-dot relative import found"
+>   exit 1
+> fi
+$ if rg 'import \*' src/; then
+>   echo "ERROR: wildcard import found"
+>   exit 1
+> fi
 ```
 
 **v1.6 change**: Comments containing these patterns do NOT satisfy the requirement. The linter checks only lines starting with `$` inside fenced code blocks.

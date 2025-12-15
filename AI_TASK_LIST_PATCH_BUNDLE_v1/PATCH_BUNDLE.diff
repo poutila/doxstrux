@@ -1,0 +1,30 @@
+--- a/PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md+++ b/PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md@@ -2,7 +2,7 @@ > Spec: AI_TASK_LIST_SPEC_v1.md (Spec v1.6)  
+ > Template: AI_TASK_LIST_TEMPLATE_v6.md  
+ > Linter: ai_task_list_linter_v1_8.py  
+-> Manual: AI_ASSISTANT_USER_MANUAL.md  
++> Manual: AI_ASSISTANT USER_MANUAL.md  
+ 
+ # PROMPT: AI_TASK_LIST_ORCHESTRATOR_v1
+ 
+@@ -23,10 +23,10 @@ You will be given:
+ 
+ 1. **Prose design / requirements**: `[[PH:PROSE_DOC_LABEL]]` (content pasted into this chat).
+-2. **Spec**: `AI_TASK_LIST_SPEC_v1.6` — defines the contract for valid task lists.
++2. **Spec**: `AI_TASK_LIST_SPEC_v1.md` — defines the contract for valid task lists.
+ 3. **Template**: `AI_TASK_LIST_TEMPLATE_v6.md` — starting point for new task lists.
+ 4. **Linter**: `ai_task_list_linter_v1_8.py` — implementation of the spec (assume it will be run after your output).
+-5. **AI Assistant Manual**: `AI_ASSISTANT_USER_MANUAL.md`.
++5. **AI Assistant Manual**: `AI_ASSISTANT USER_MANUAL.md`.
+ 
+ Apply this **SSOT hierarchy**:
+ 
+
+--- a/AI_TASK_LIST_TEMPLATE_v6.md+++ b/AI_TASK_LIST_TEMPLATE_v6.md@@ -33,7 +33,7 @@ 
+ **Pre-flight** (must return zero — fails if placeholders found):
+ ```bash
+-$ rg '\[\[PH:[A-Z0-9_]+\]\]' PROJECT_TASKS.md && { echo "ERROR: Placeholders found"; exit 1; } || exit 0
++$ if rg '\[\[PH:[A-Z0-9_]+\]\]' PROJECT_TASKS.md; then echo "ERROR: Placeholders found"; false; fi
+ ```
+ 
+ ---
+

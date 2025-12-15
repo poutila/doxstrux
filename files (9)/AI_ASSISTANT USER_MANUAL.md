@@ -2,10 +2,10 @@
 
 Mental model: “I am making a manual for myself. I need to use this opportunity 100%.” Do not assume; verify. Use the spec, template, and linter as your guardrails.
 
-**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.6`) and linter (`ai_task_list_linter_v1_8.py`) win. Copy patterns from spec/template; only adapt paths/commands.
+**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.6) and linter (`ai_task_list_linter_v1_8.py`) win. Copy patterns from spec/template; only adapt paths/commands.
 
 ## 1) Inputs and Prep
-- Source: the prose/design file you’re converting (e.g., `PYDANTIC_SCHEMA.md`).
+- Source: the prose/design file you’re converting (e.g., the current project’s design/spec doc).
 - Framework: spec `AI_TASK_LIST_SPEC_v1.md`, template `AI_TASK_LIST_TEMPLATE_v6.md`, linter `ai_task_list_linter_v1_8.py`.
 - Run env: use the declared runner (e.g., `uv run`) for lint/test commands.
 - Goal reminder: produce an instantiated task list that passes the linter and anchors to reality with real commands/evidence.
@@ -41,13 +41,13 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - For each feature/task from the prose:
   - Create `### Task N.M — <name>` with `TASK_N_M_PATHS` array (quoted paths).
   - Preconditions: add `$ rg`/`$ grep` symbol checks relevant to the task (required by search_tool).
-  - TDD steps: commands for RED/GREEN aligned to the real test entrypoints. RED should be a failing behavior test; if you can’t craft one, label the steps Precondition/Implement/Verify instead.
+  - TDD steps: commands for RED/GREEN aligned to the real test entrypoints. Keep the three TDD headings. If true RED (failing behavior test) isn’t possible, use Step 1 to add a characterization/contract test (or explicit rationale) under the RED heading rather than dropping the headings.
   - STOP: include No Weak Tests + Clean Table checklists; plan to paste evidence.
 - Scope: in/out bullets if needed for clarity.
 
-## 1.5) Prose Coverage Mapping
-- For each major requirement in the source prose, map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope.
-- Suggested table (keep brief):
+## 1.5) Prose Coverage Mapping (recommended, not linted)
+- For each major requirement in the source prose, map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope. This is recommended for drift control; it is not enforced by Spec v1.6/Linter v1.8.
+- Suggested table (keep brief, optional):
 
 | Prose requirement (label) | Location (file/section) | Implemented by task(s) |
 |---------------------------|--------------------------|------------------------|
@@ -83,7 +83,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   >   exit 1
   > fi
   ```
-- TDD semantics: RED should be a real failing behavior test, not just file/existence checks. If you can’t craft a failing test, drop “RED/GREEN” labels and describe “Precondition / Implement / Verify” instead.
+- TDD semantics: RED should be a real failing behavior test, not just file/existence checks. Keep the TDD headings; if a failing test isn’t possible, use RED to add a characterization/contract test or explicit rationale under that heading.
 - No Weak Tests: don’t claim non-weak tests if you only check existence/imports; strengthen tests or adjust the STOP checklist expectations for wiring-only tasks. For behavior-changing tasks, include at least one behavior-level test (beyond import/existence) in TDD/STOP and reference a concrete test name + behavior.
 - Runner/search_tool rules:
   - `search_tool: "rg"`: use `rg` in code blocks; grep forbidden in code blocks (prose mention OK).
@@ -126,7 +126,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   - [ ] Required headings present (unchanged from template).
   - [ ] Baseline/STOP/Global sections structurally present (may carry placeholders).
   - [ ] Tasks have paths arrays, Preconditions `$ {search_tool} …`, TDD/STOP sections.
-  - [ ] Prose Coverage Mapping table present; all major requirements mapped or explicitly out-of-scope.
+  - [ ] Prose Coverage Mapping table present (recommended; not linted) with major requirements mapped or explicitly out-of-scope.
   - [ ] Drift ledger started if any mismatches are known.
 - For executed/human+CI artifact (real evidence):
   - [ ] YAML front matter filled; mode = instantiated.
