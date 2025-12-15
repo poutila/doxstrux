@@ -29,6 +29,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 7) Run the linter (via runner) and fix structural issues.
 8) Review Prose Coverage Mapping: ensure each major requirement is mapped or explicitly out-of-scope.
 9) Later human+CI pass will move to `mode: "instantiated"` once evidence is real. Do not fabricate evidence to satisfy instantiated mode.
+10) Run `VALIDATION_SUITE.md` (positives + negatives) to catch regressions early; use `canonical_examples/` and `canonical_examples/negatives/` as references.
 
 ## 2) Quickstart (New Project)
 1. Copy `AI_TASK_LIST_TEMPLATE_v6.md` to your repo as `PROJECT_TASKS.md`.
@@ -38,7 +39,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 5. Run baseline commands (git branch/commit, runner/runtime versions, baseline tests); paste outputs with `# cmd/# exit`.
 6. For each task: set status, fill paths, add Preconditions commands (use `{search_tool}`), TDD/STOP sections, and evidence when executed.
 7. Generate phase unlock artifact with `$ cat > .phase-N.complete.json` and `$ rg` placeholder scan.
-8. Run the linter via runner (see below) until it passes.
+8. Run the linter via runner (see below) until it passes; then run the validation suite (positives + negatives).
 
 ## 2.5) Migration (template → plan → instantiated)
 - Decision tree:
