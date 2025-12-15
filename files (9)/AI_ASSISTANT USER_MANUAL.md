@@ -2,7 +2,7 @@
 
 Mental model: “I am making a manual for myself. I need to use this opportunity 100%.” Do not assume; verify. Use the spec, template, and linter as your guardrails.
 
-**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.7) wins; the linter implements the spec (fix linter if they diverge). Copy patterns from spec/template; only adapt paths/commands.
+**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.7) wins; the linter implements the spec (fix linter if they diverge). Copy patterns from spec/template; only adapt paths/commands. <!-- See COMMON.md §SSOT Hierarchy -->
 
 ## 1) Inputs and Prep
 - Source: the prose/design file you’re converting (e.g., the current project’s design/spec doc).

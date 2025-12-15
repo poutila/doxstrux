@@ -2,7 +2,7 @@
 """
 ai_task_list_linter_v1_8.py
 
-Deterministic linter for AI Task Lists (Spec v1.6).
+Deterministic linter for AI Task Lists (Spec v1.7; schema_version 1.6).
 
 Version 1.8 changes (closes comment compliance loophole):
 - FIX: Import hygiene (R-ATL-063) now requires actual $ command lines, not comments
@@ -899,6 +899,7 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                 else:
                     f0, f1 = fenced
                     code_lines = block[f0:f1 + 1]
+                    search_tool = meta.get("search_tool", "")
                     # template mode: require placeholder for symbol check
                     if meta["mode"] == "template":
                         if not any("[[PH:SYMBOL_CHECK_COMMAND]]" in ln for ln in code_lines):
@@ -906,10 +907,10 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                     else:
                         # plan/instantiated: require rg or grep pattern in Preconditions commands; no placeholders
                         if meta["mode"] == "plan" and any("[[PH:SYMBOL_CHECK_COMMAND]]" in ln for ln in code_lines):
-                            errors.append(LintError(start_line + f0, "R-ATL-D2", f"Task {tid} Preconditions must not use [[PH:SYMBOL_CHECK_COMMAND]] in plan mode. Use a real {search_tool} command."))
+                            tool_hint = search_tool or "rg/grep"
+                            errors.append(LintError(start_line + f0, "R-ATL-D2", f"Task {tid} Preconditions must not use [[PH:SYMBOL_CHECK_COMMAND]] in plan mode. Use a real {tool_hint} command."))
                         # Skip comment lines (starting with #)
                         cmd_lines = [ln for ln in code_lines if not ln.strip().startswith("#")]
-                        search_tool = meta.get("search_tool", "")
                         if search_tool == "rg":
                             # Strict mode: only rg allowed
                             if not any(RE_SYMBOL_CMD_RG_ONLY.search(ln) for ln in cmd_lines):

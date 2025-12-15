@@ -2,7 +2,7 @@
 > Spec: AI_TASK_LIST_SPEC_v1.md (Spec v1.7; schema_version stays 1.6; plan mode)  
 > Template: AI_TASK_LIST_TEMPLATE_v6.md  
 > Linter: ai_task_list_linter_v1_8.py  
-> Manual: AI_ASSISTANT_USER_MANUAL.md  
+> Manual: AI_ASSISTANT USER_MANUAL.md  
 
 # PROMPT: AI_TASK_LIST_ORCHESTRATOR_v1
 
@@ -32,7 +32,7 @@ If any of the files above are missing or not accessible, STOP and ask for the co
 
 Apply this **SSOT hierarchy**:
 
-1. Spec (highest) — linter must implement the spec; if they diverge, fix the linter
+1. Spec (highest) — linter must implement the spec; if they diverge, fix the linter <!-- See COMMON.md §SSOT Hierarchy -->
 2. Template structure and rules
 3. AI Assistant Manual (process)
 4. This orchestrator prompt
@@ -44,7 +44,7 @@ Task
 ====
 Given the prose document and the framework artifacts above, produce a single Markdown AI task list file (e.g., `PROJECT_TASKS.md`) that:
 
-- Is **valid against Spec v1.6** (as far as you can check from text alone).
+- Is **valid against Spec v1.7** (as far as you can check from text alone).
 - Is **ready to be linted** by `ai_task_list_linter_v1_8.py --require-captured-evidence` once a human fills in real evidence.
 - Encodes a realistic, implementable plan for the changes described in the prose.
 - Bakes in:
@@ -75,7 +75,7 @@ High-level workflow
      - Constraints (tooling, runner, packages, env).
      - Risks / ambiguous areas.
 
-2. **Prose Coverage Mapping (recommended; not linted)**
+2. **Prose Coverage Mapping (required in plan/instantiated)**
    - Build a short table that maps major requirements in the prose to task IDs. If something is intentionally out-of-scope, mark it explicitly.
    - Use the pattern (optional):
      | Prose requirement | Source (file/section) | Implemented by task(s) |
@@ -188,11 +188,11 @@ Before returning the Markdown:
      - Gates use failing patterns (no `rg … && exit 1 || true/echo`).
 
 3. **Prose coverage sweep**
-   - If you included Prose Coverage Mapping:
+   - Prose Coverage Mapping is **required** in plan/instantiated:
      - Every major requirement in the prose either:
        - Has at least one task in the mapping, or
        - Is explicitly labeled out-of-scope.
-   - If you did not include it, note that coverage mapping is recommended but not enforced by Spec/Linter; ensure you didn’t silently drop requirements.
+   - Ensure the table has a header row and at least one data row.
 
 4. **No synthetic reality**
    - Confirm you did not invent:

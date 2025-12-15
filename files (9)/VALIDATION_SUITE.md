@@ -17,16 +17,13 @@
 - Command: `uv run python ai_task_list_linter_v1_8.py --require-captured-evidence canonical_examples/example_instantiated.md`
 - Expected: exit 0 (no placeholders; real evidence; captured headers present)
 
-### 4) Negative cases
-- Plan with command placeholders:
-  - Mutate a plan file to include `[[PH:SYMBOL_CHECK_COMMAND]]` in Preconditions.
-  - Expected: exit 1, R-ATL-D2 (plan forbids command placeholders).
-- Template with bad gates:
-  - Insert `rg ... && exit 1 || echo` into Global Clean Table.
-  - Expected: exit 1 (missing placeholder / pattern per template rules).
-- Coverage mapping missing (plan):
-  - Remove `## Prose Coverage Mapping` from a plan file.
-  - Expected: exit 1, R-ATL-PROSE.
+### 4) Negative cases (persistent fixtures)
+- Plan with command placeholder: `canonical_examples/negatives/plan_preconditions_placeholder.md`
+  - Expected: exit 1, R-ATL-D2 (plan forbids `[[PH:SYMBOL_CHECK_COMMAND]]`; requires real rg).
+- Plan missing coverage mapping: `canonical_examples/negatives/plan_missing_coverage_mapping.md`
+  - Expected: exit 1, R-ATL-PROSE (coverage section missing).
+- Template missing Clean Table placeholder: `canonical_examples/negatives/template_missing_clean_table_placeholder.md`
+  - Expected: exit 1, R-ATL-060 (placeholder absent in template mode).
 
 ### 5) Doc-sync spot check
 - Ensure mode references are consistent:
@@ -37,6 +34,9 @@
 - AI_TASK_LIST_TEMPLATE_v6.md: pass (exit 0)
 - canonical_examples/example_plan.md: pass (exit 0)
 - canonical_examples/example_instantiated.md: pass (exit 0) with `--require-captured-evidence`
+- Negative: Plan missing Prose Coverage Mapping → exit 1 (R-ATL-PROSE).
+- Negative: Template with missing Clean Table placeholder → exit 1 (R-ATL-060).
+- Negative: Plan with Preconditions placeholder (fixture `/tmp/minimal_plan_bad_precond.md`) → exit 1 (R-ATL-D2) with no crash.
 
 ## Performance/Regression Checks
 - Target: <10% overhead vs prior run (manual observation).

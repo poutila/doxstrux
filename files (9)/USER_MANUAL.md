@@ -9,7 +9,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
   - `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` — runtime prompt for converting prose → AI task list (plan mode output).
 
 ## 1) Core Concepts
-- SSOT: spec is authoritative; the linter implements the spec. If spec and linter diverge, fix the linter. If this manual/template ever disagree with them, the spec wins.
+- SSOT: spec is authoritative; the linter implements the spec. If spec and linter diverge, fix the linter. If this manual/template ever disagree with them, the spec wins. <!-- See COMMON.md §SSOT Hierarchy -->
 - Modes: `template` allows placeholders; `plan` uses real commands and evidence placeholders; `instantiated` forbids placeholders.
 - Runner metadata: `runner` and `runner_prefix` declared in YAML front matter.
 - Search tool: `search_tool` must be `rg` or `grep` (required).

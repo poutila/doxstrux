@@ -284,7 +284,7 @@ fi
 Run before each phase gate (commands must use $ prefix when instantiated):
 
 ```bash
-# [[PH:CLEAN_TABLE_GLOBAL_CHECK_COMMAND]]
+# MISSING_CLEAN_TABLE_PLACEHOLDER
 # 
 # Standard patterns (recommended for all projects; gates must fail on matches):
 # $ ! rg 'TODO|FIXME|XXX' src/                           # No unfinished markers
@@ -294,7 +294,7 @@ Run before each phase gate (commands must use $ prefix when instantiated):
 # $ if rg 'from \.\.' src/; then exit 1; fi              # No multi-dot relative imports
 # $ if rg 'import \*' src/; then exit 1; fi              # No wildcard imports
 
-$ [[PH:CLEAN_TABLE_GLOBAL_CHECK_COMMAND]]
+$ 
 
 # Import hygiene (required for Python/uv projects):
 if rg 'from \.\.' [[PH:SOURCE_DIR]]; then

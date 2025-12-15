@@ -1,4 +1,5 @@
 # AI Task List Spec v1.7 (plan mode introduction)
+<!-- See COMMON.md §Version Metadata -->
 
 **Spec ID**: `AI_TASK_LIST_SPEC_V1_7`  
 **Schema version**: `1.6`  
@@ -16,13 +17,17 @@
 8. All governance rules baked in (import hygiene, Clean Table checklist)
 9. **NEW v1.6**: No comment compliance — $ command lines required, not prose/comments
 
+> This document is the normative contract for task lists. It is **not** a task
+> list and is **not** intended to be linted by `ai_task_list_linter_v1_8.py`.
+> If this spec and the linter diverge, fix the linter to match the spec.
+
 ---
 
 ## 0. Definitions
 
 | Term | Definition |
 |------|------------|
-| **Mode** | Controls placeholder tolerance: `template` (placeholders allowed), `plan` (real commands, evidence placeholders), or `instantiated` (placeholders forbidden) |
+| **Mode** | Controls placeholder tolerance: `template` (placeholders allowed), `plan` (real commands, evidence placeholders), or `instantiated` (placeholders forbidden) | <!-- See COMMON.md §Mode Definitions -->
 | **Task ID** | Format `N.M` where N = phase number, M = task number |
 | **Canonical path array** | Bash array `TASK_N_M_PATHS=(...)` associated with Task N.M |
 | **Runner** | Declared tool for command execution (e.g., `uv`), with `runner_prefix` (e.g., `uv run`) |
@@ -66,6 +71,7 @@ ai_task_list:
 | Mode | Placeholder behavior |
 |------|---------------------|
 | `template` | `[[PH:...]]` placeholders MAY appear |
+| `plan` | Commands MUST be real; evidence/output placeholders MAY appear; runner/search_tool/import-hygiene rules apply |
 | `instantiated` | `[[PH:...]]` placeholders MUST NOT appear anywhere |
 
 ### R-ATL-003: Placeholder syntax
@@ -563,7 +569,7 @@ path:line:rule_id:message
 
 ## Minimal Compliance Summary
 
-A document is **Spec v1.6 compliant** if:
+A document is **Spec v1.7 compliant** if:
 
 1. ✅ schema_version must be exactly "1.6" (R-ATL-001)
 2. ✅ search_tool is required (not optional) (R-ATL-001, R-ATL-D4)
@@ -602,15 +608,3 @@ A document is **Spec v1.6 compliant** if:
 26. ✅ runner=uv requires `$ uv sync` and `$ uv run ...` command lines in code blocks (R-ATL-072)
 
 **v1.6 key change**: Comments containing required patterns do NOT satisfy requirements. Actual `$` command lines are required.
-
----
-
-## Appendix A — Spec History (NON-NORMATIVE)
-
-Everything below this heading is historical reference only.
-It MUST NOT be used as the validation contract.
-The ONLY normative contract is the Spec v1.7 content above (schema_version: "1.6").
-
----
-
-# AI Task List Spec v1.0

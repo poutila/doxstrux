@@ -1,6 +1,6 @@
 # AI Task List Linter v1.9 (code file name unchanged)
 
-Deterministic linter for AI Task Lists (Spec v1.7; schema_version remains "1.6", adds `mode: plan`). Code filename unchanged (`ai_task_list_linter_v1_8.py`).
+Deterministic linter for AI Task Lists (Spec v1.7; schema_version remains "1.6", adds `mode: plan`). Code filename unchanged (`ai_task_list_linter_v1_8.py`). <!-- See COMMON.md §Version Metadata -->
 
 ## What's Fixed in v1.9
 
