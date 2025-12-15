@@ -284,9 +284,9 @@ Run before each phase gate (commands must use $ prefix when instantiated):
 ```bash
 # [[PH:CLEAN_TABLE_GLOBAL_CHECK_COMMAND]]
 # 
-# Standard patterns (recommended for all projects):
-# $ rg 'TODO|FIXME|XXX' src/ || exit 1                   # No unfinished markers
-# $ rg '\[\[PH:' . || exit 1                             # No placeholders
+# Standard patterns (recommended for all projects; gates must fail on matches):
+# $ ! rg 'TODO|FIXME|XXX' src/                           # No unfinished markers
+# $ ! rg '\[\[PH:' .                                     # No placeholders
 #
 # Python import hygiene (REQUIRED when runner=uv):
 # $ rg 'from \.\.' src/ || exit 1                        # No multi-dot relative imports
