@@ -43,3 +43,7 @@
 - Required sections: Baseline Evidence, Baseline tests, STOP evidence, Global Clean Table evidence (template/plan: placeholders allowed; instantiated: real output).
 - Evidence blocks must be fenced; command lines start with `$` (instantiated).
 - Non-empty output required after `$` commands; captured headers optional via `--require-captured-evidence` (# cmd/# exit).
+
+## §Prose Coverage Mapping
+- Required in `plan` and `instantiated` modes: include a `## Prose Coverage Mapping` section with a markdown table (header + at least one data row) mapping prose requirements to tasks or marking them out-of-scope.
+- `template` mode: recommended only.

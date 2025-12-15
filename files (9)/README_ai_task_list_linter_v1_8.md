@@ -2,6 +2,13 @@
 
 Deterministic linter for AI Task Lists (Spec v1.7; schema_version remains "1.6", adds `mode: plan`). Code filename unchanged (`ai_task_list_linter_v1_8.py`). <!-- See COMMON.md §Version Metadata -->
 
+## What this framework is for
+- **Specification**: `AI_TASK_LIST_SPEC_v1.md` (v1.7; schema_version 1.6; plan mode) — contract for headings, evidence, runner/import hygiene, Clean Table, TDD/STOP gates.
+- **Template**: `AI_TASK_LIST_TEMPLATE_v6.md` — starting point with required sections/placeholders.
+- **Linter**: `ai_task_list_linter_v1_8.py` (v1.9 code) — stdlib-only, deterministic enforcement (no network/mutation).
+- **Manuals/Docs**: `USER_MANUAL.md`, `AI_ASSISTANT USER_MANUAL.md`, `COMMON.md` for shared rules, plus `DESCRIPTION.md`/`INDEX.md` for orientation.
+- **Goal**: produce task lists that (1) don’t drift, (2) stay close to reality, (3) are lintable, (4) bake in governance (TDD, No Weak Tests, Clean Table, runner/import/search rules), and (5) reduce iteration loops.
+
 ## What's Fixed in v1.9
 
 **Plan mode added (Spec v1.7; schema_version 1.6 unchanged):**

@@ -6,7 +6,9 @@ This folder contains a small, deterministic framework for writing and validating
 - **Template**: `AI_TASK_LIST_TEMPLATE_v6.md` is the starting point for new task lists, with placeholders and required sections laid out.
 - **Linter**: `ai_task_list_linter_v1_8.py` (v1.9 code) enforces the spec deterministically (no network, no mutation). It catches placeholder leaks, missing gates, runner/uv violations, weak evidence, and format bypasses.
 - **Release Notes**: `README_ai_task_list_linter_v1_8.md` summarizes changes and usage.
-- **User Manual**: `USER_MANUAL.md` explains how to author, lint, and operate with minimal iteration.
+- **Manuals**: `USER_MANUAL.md` and `AI_ASSISTANT USER_MANUAL.md` explain how to author, lint, and operate with minimal iteration.
+- **COMMON.md**: shared SSOT for versions, modes, runner/import/gate/placeholder/evidence rules.
+- **Examples**: `canonical_examples/` (template/plan/instantiated) plus `canonical_examples/negatives/` expected-fail fixtures.
 
 The goal is to produce AI task lists that:
 1. **Don’t drift**: Required anchors, path arrays, and drift ledger rules keep structure honest.

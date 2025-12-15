@@ -1065,13 +1065,13 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
     if meta.get("mode") in ("plan", "instantiated"):
         pcm_bounds = _section_bounds(content, "## Prose Coverage Mapping")
         if not pcm_bounds:
-            errors.append(LintError(1, "R-ATL-PROSE", "Prose Coverage Mapping section recommended for plan/instantiated modes (missing)."))
+            errors.append(LintError(1, "R-ATL-PROSE", "Prose Coverage Mapping section required for plan/instantiated modes (missing)."))
         else:
             pcm_start, pcm_end = pcm_bounds
             pcm_sec = content[pcm_start:pcm_end]
             table_rows = [ln for ln in pcm_sec if ln.strip().startswith("|")]
             if len(table_rows) < 2:  # header + at least one data row
-                errors.append(LintError(content_start + 1 + pcm_start, "R-ATL-PROSE", "Prose Coverage Mapping table is empty or malformed."))
+                errors.append(LintError(content_start + 1 + pcm_start, "R-ATL-PROSE", "Prose Coverage Mapping table is empty or malformed (required in plan/instantiated)."))
 
     return meta, errors
 
