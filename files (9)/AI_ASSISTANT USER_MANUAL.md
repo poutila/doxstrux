@@ -3,6 +3,7 @@
 Mental model: “I am making a manual for myself. I need to use this opportunity 100%.” Do not assume; verify. Use the spec, template, and linter as your guardrails.
 
 **SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.7) wins; the linter implements the spec (fix linter if they diverge). Copy patterns from spec/template; only adapt paths/commands. <!-- See COMMON.md §SSOT Hierarchy -->
+**Shared definitions**: `COMMON.md` holds canonical version metadata, modes, runner/import/gate/placeholder/evidence rules. Always match it.
 
 ## 1) Inputs and Prep
 - Source: the prose/design file you’re converting (e.g., the current project’s design/spec doc).
@@ -45,6 +46,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   - TDD steps: commands for RED/GREEN aligned to the real test entrypoints. Keep the three TDD headings. If true RED (failing behavior test) isn’t possible, use Step 1 to add a characterization/contract test (or explicit rationale) under the RED heading rather than dropping the headings.
   - STOP: include No Weak Tests + Clean Table checklists; plan to paste evidence.
 - Scope: in/out bullets if needed for clarity.
+- Canonical examples: use `canonical_examples/example_plan.md` (plan) and `canonical_examples/example_template.md` (template) as structural guides; see `canonical_examples/negatives/` for expected-fail patterns.
 
 ## 1.5) Prose Coverage Mapping (required in plan/instantiated)
 - For each major requirement in the source prose, map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope. Plan/instantiated modes error on missing/empty coverage tables.
@@ -89,6 +91,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Runner/search_tool rules:
   - `search_tool: "rg"`: use `rg` in code blocks; grep forbidden in code blocks (prose mention OK).
   - `runner: "uv"` with `runner_prefix: "uv run"`: include `$ uv sync` and `$ uv run …`; use `$ uv run pytest/python/...` for managed tools; never emit `$ .venv/bin/python`, `$ python -m`, or `$ pip install` in `$` lines.
+- Validation suite: after writing the task list, run positives/negatives from `VALIDATION_SUITE.md` (canonical_examples plus negatives in `canonical_examples/negatives/`) to catch regressions early.
 
 ## 7) Evidence Blocks (Captured and Non-Empty)
 - Baseline, STOP, and Global Clean Table evidence blocks must have:
@@ -127,7 +130,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   - [ ] Required headings present (unchanged from template).
   - [ ] Baseline/STOP/Global sections structurally present (evidence placeholders allowed).
   - [ ] Tasks have paths arrays, Preconditions with real `$ {search_tool} …` commands, TDD/STOP sections.
-- [ ] Prose Coverage Mapping table present (required in plan/instantiated) with major requirements mapped or explicitly out-of-scope.
+  - [ ] Prose Coverage Mapping table present (required in plan/instantiated) with major requirements mapped or explicitly out-of-scope.
   - [ ] Drift ledger started if any mismatches are known.
 - For executed/human+CI artifact (real evidence):
   - [ ] YAML front matter filled; mode = instantiated.
