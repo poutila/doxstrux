@@ -41,7 +41,7 @@
 
 ## §Evidence Requirements
 - Required sections: Baseline Evidence, Baseline tests, STOP evidence, Global Clean Table evidence (template/plan: placeholders allowed; instantiated: real output).
-- Evidence blocks must be fenced; command lines start with `$` (instantiated).
+- Evidence blocks must be fenced; command lines start with `$` (plan and instantiated).
 - Non-empty output required after `$` commands; captured headers optional via `--require-captured-evidence` (# cmd/# exit).
 
 ## §Prose Coverage Mapping

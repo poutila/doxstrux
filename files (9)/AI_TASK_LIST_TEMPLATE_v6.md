@@ -9,7 +9,7 @@ ai_task_list:
 
 # AI_TASK_LIST_TEMPLATE.md
 
-**Version**: 6.0 (v1.6 spec — no comment compliance)  
+**Version**: 6.0 (Spec v1.7; schema_version 1.6; no comment compliance)  
 **Scope**: General-only — no project names, no repo paths, no project-specific env vars.
 **Modes**: Template mode (placeholders allowed) → Plan mode (real commands, evidence placeholders) → Instantiated mode (placeholders forbidden)
 

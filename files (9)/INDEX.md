@@ -1,6 +1,7 @@
 # AI Task List Framework — File Index
 
 Core artifacts:
+- `COMMON.md` — Shared framework definitions (versions, modes, SSOT, runner/import/gate/placeholder/evidence rules).
 - `AI_TASK_LIST_SPEC_v1.md` — Specification v1.7 for AI task lists (rules, headings, governance; adds plan mode; schema_version stays 1.6). <!-- See COMMON.md §Version Metadata -->
 - `AI_TASK_LIST_TEMPLATE_v6.md` — Template v6 for new task lists.
 - `ai_task_list_linter_v1_8.py` — Stdlib linter implementing Spec v1.7 (code filename unchanged; `--require-captured-evidence` support).

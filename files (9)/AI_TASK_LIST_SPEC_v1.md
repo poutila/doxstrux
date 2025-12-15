@@ -471,7 +471,7 @@ $ uv run ...
 
 ### R-ATL-075: $ prefix mandatory for commands — NEW in v1.4
 
-If `mode: instantiated`, command lines in key sections MUST start with `$` prefix.
+If `mode: plan` or `mode: instantiated`, command lines in key sections MUST start with `$` prefix.
 
 **Sections requiring $ prefix**:
 - Baseline Snapshot (including Baseline tests)
