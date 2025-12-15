@@ -5,10 +5,11 @@
 **Owner/Deadline:** Unassigned (must be set before work starts; plan blocked until assigned)
 
 - **A1. Spec ↔ Linter drift (R-ATL-022/075)**  
-  Purpose: show current linter incorrectly rejects plan-mode evidence placeholders.  
-  Command (pre-fix, current linter v1_8): `uv run python ai_task_list_linter_v1_8.py canonical_examples/positives/plan_with_evidence_ph.md`  
-  Baseline expected: linter raises R-ATL-022 (non-zero exit). Actual: baseline not yet captured (do before coding).  
-  Post-fix expected (after v1_9 cutover): `uv run python ai_task_list_linter_v1_9.py ...` exits 0 (plan allows placeholders).
+  Purpose: confirm current linter (v1_9) accepts plan-mode evidence placeholders (no code change intended for R-ATL-022).  
+  Command (pre-fix baseline with current linter v1_9):  
+  `uv run python ai_task_list_linter_v1_9.py canonical_examples/positives/plan_with_evidence_ph.md`  
+  Baseline expected: exit 0 (plan allows placeholders); actual baseline not yet captured (do before coding).  
+  Post-fix expected: unchanged (still exit 0 for plan with placeholders). No R-ATL-022 behavior change planned.
 
 - **A2. Coverage phantom references**  
   Status: pending fixture creation in Step 1.  
@@ -16,15 +17,15 @@
   Post-Step-1: `uv run python ai_task_list_linter_v1_9.py canonical_examples/negatives/coverage_phantom_refs.md` → Expect R-ATL-NEW-02.
 
 - **A3. Pre-fix validation baseline**  
-  Command (pre-fix, current linter v1_8): run all commands in `VALIDATION_SUITE.md`; save summary as `validation/baseline_failures_YYYY-MM-DD.txt` (X/Y positives pass; A/B negatives pass).  
+  Command (pre-fix, current linter v1_9): run all commands in `VALIDATION_SUITE.md`; save summary as `validation/baseline_failures_YYYY-MM-DD.txt` (X/Y positives pass; A/B negatives pass).  
   Actual: baseline not yet captured (do before coding)
 
 ## Rule Definitions (for this change)
 | Rule | Current Enforcement | Proposed Change | Scope / Grammar |
 |------|---------------------|-----------------|-----------------|
-| R-ATL-001 | Enforces YAML frontmatter (mode required/valid) | No change; fail fast on missing/invalid mode | Mode must be `plan` or `instantiated` (case-sensitive) |
+| R-ATL-001 | Enforces YAML frontmatter (mode required/valid) | No change; fail fast on missing/invalid mode | Mode must be `template`, `plan`, or `instantiated` (case-sensitive) |
 | R-ATL-022 | Rejects `[[PH:*]]` in evidence blocks (plan + instantiated) | Allow in plan; reject in instantiated | Evidence blocks = task-level Evidence, STOP evidence, Global Clean Table evidence |
-| R-ATL-075 | Enforces `$` prefix in plan/instantiated | No change | Scope = current linter implementation (no reinterpretation in this plan) |
+| R-ATL-075 | Enforces `$` prefix in plan/instantiated | No change | Scope = current linter implementation in `ai_task_list_linter_v1_9.py` (quote behavior verbatim if documenting) |
 | R-ATL-NEW-01 | (new) Not enforced | Enforce unique task IDs (no duplicates) | Task headers matching regex `^###\s+Task\s+(\d+\.\d+)` (MULTILINE); capital “Task”; exactly two numeric components; three hashes only (3-level IDs not allowed; use numbered Steps inside a 2-level task instead) |
 | R-ATL-NEW-02 | (new) Not enforced | Coverage references must resolve to existing, unique tasks with no gaps | Coverage grammar: single (`1.1`), list (`3.1, 3.4`), range (`2.3-2.5`). Each referenced task ID must exist exactly once; ranges must not skip missing IDs and must not go backward or cross prefixes. |
 | R-ATL-NEW-03 | (new) Not enforced | Global Clean Table section required in plan/instantiated modes | Heading must exist: `## Global Clean Table`; missing → error. |
@@ -37,9 +38,9 @@
 5) (Stretch) Requirement anchors: prepare to map MUST/REQUIRED items from source prose to stable IDs.
 
 ## Version semantics
-- Spec version: bump to v1.9 (rule changes + lifecycle update).
-- schema_version: bump to 1.7 (template mode removed; schema change) — applies to all plan/instantiated documents under this framework.
-- Linter versioning: create `ai_task_list_linter_v1_9.py` with `LINTER_VERSION = "1.9.0"` (or later) constant exported via `--version`; update all references to use v1_9.
+- Spec version: bump to v1.9 (three-mode lifecycle: template/plan/instantiated).
+- schema_version: 1.7 (three modes supported; applies to all documents under this framework).
+- Linter versioning: create `ai_task_list_linter_v1_9.py` with `LINTER_VERSION = "1.9.0"` (or later) constant exported via `--version`; update all references to use v1_9. Legacy v1_8 is kept in `task_list_archive/` for baselines.
 
 ## Evidence block definition (R-ATL-022 scope)
 - Evidence headers (regex on line.strip()):
@@ -51,6 +52,7 @@
   - Global Clean Table evidence: section identified by heading exactly `## Global Clean Table` (case-sensitive); collect all bash blocks in that section until the next `##` or `#` heading (prose between is allowed). If heading missing in plan/instantiated, emit missing-section error (R-ATL-NEW-03). Applies to all plan/instantiated documents under this framework (legacy/template artifacts may fail under the new rules).
 - Heading detection for “next heading”: lines matching `^#{1,6}\s+` outside fenced code blocks; ignore heading-like text inside fences.
 - Mode behavior:
+  - template: placeholders allowed (commands and evidence).
   - plan: placeholders allowed in evidence blocks.
   - instantiated: placeholders forbidden; real output required. Each evidence bash block must contain at least one `$` command line and at least one non-placeholder line. Commands that produce no output are allowed if the block contains an explicit marker such as `# no output (command silent)`.
 
@@ -63,21 +65,21 @@
 
 ## Mode detection (R-ATL-022 dependency)
 - Source: YAML frontmatter `ai_task_list.mode` (required; case-sensitive).
-- Valid: `plan` or `instantiated` (template mode removed).
+- Valid: `template`, `plan`, or `instantiated` (case-sensitive).
 - Errors: missing frontmatter/mode/invalid → R-ATL-001 (fail fast).
 
 ## Scope
 - Linter: plan-mode evidence allowance; plan/instantiated $-prefix (aligned to current linter heuristic, not narrowed to arrays only); internal consistency checks (unique task IDs; coverage references resolve + unique). No new runtime dependencies; keep linter stdlib-only plus existing uv/rg usage in fixtures.
 - Spec/COMMON: mirror linter (plan allows evidence placeholders; coverage must reference existing tasks and uniqueness).
-- Docs/Template/README/Manuals/INDEX: reflect rules; ensure COMMON.md is discoverable.
+- Docs/Template/README/Manuals/INDEX: reflect rules; ensure COMMON.md is discoverable; update template-mode references to match three-mode, schema_version 1.7. Legacy artifacts in `work_folder/` that still reference v1_8/schema 1.6 are out of scope for this plan; either migrate them to schema 1.7 before linting or ignore them for this change set.
 - Validation: keep examples/negatives aligned with enforcement (add missing coverage-negative and enforce suite format); keep test fixture names consistent with repo (use existing `example_plan.md` / `example_instantiated.md` or explicitly create the new ones listed below).
 - Canary safety net: pre/post canary run with manifest to enable rollback.
 - External dependencies: no new linter deps (stdlib-only). Required tools for fixtures/DoD: Python ≥3.10, uv ≥0.1.0, ripgrep ≥13.0, bash ≥4.0. Execution convention: run all python scripts via `uv run python ...`; do not invoke system `python` or `pip` directly.
-- Lifecycle: support two modes — `plan` and `instantiated`. plan: real commands, evidence placeholders allowed. instantiated: real evidence, placeholders forbidden. schema_version bumps to 1.7 (template mode removed).
+- Lifecycle: support three modes — `template`, `plan`, and `instantiated`. template: placeholders allowed. plan: real commands, evidence placeholders allowed. instantiated: real evidence, placeholders forbidden. schema_version is 1.7.
 
 ## Change Impact / Order
-1) Linter (SSOT for behavior)
-2) Spec (sync to linter)
+1) Spec (SSOT for contract)
+2) Linter (implements spec changes)
 3) COMMON (imports spec/linter behavior)
 4) Docs/Template/README/Manuals/INDEX (sync to COMMON/spec)
 5) Validation fixtures/suite (positives/negatives)
@@ -85,7 +87,7 @@
 ## Steps
 ### 1) Linter
 - R-ATL-022: allow evidence placeholders in plan (all evidence blocks); instantiated forbids placeholders and requires real output.
-- R-ATL-075: NO CODE CHANGES. Scope = current linter implementation; do not reinterpret. If documenting, quote linter behavior verbatim; otherwise leave unchanged.
+- R-ATL-075: NO CODE CHANGES. Scope = current linter implementation in `ai_task_list_linter_v1_9.py`; do not reinterpret. Current behavior (quote verbatim if needed): scan fenced code blocks in Task Preconditions (non–Phase 0), TDD Step 3 — Verify (GREEN), Phase Unlock Artifact, and Global Clean Table Scan. In those blocks, any command-like line (e.g., contains `rg`, `pytest`, `uv run`, `python`, etc.) must start with `$`; otherwise emit R-ATL-075. Do not change this logic.
 - Internal consistency: enforce unique task IDs; coverage references must resolve to existing, unique tasks (single/list/range, no gaps; each referenced task header appears exactly once). Parsing rules: split on comma, trim empties; range must be two parts, same prefix, forward only, dotted numbers only; expand ranges to validate gaps; error on malformed/backward/cross-prefix.
   - Task ID regex (R-ATL-NEW-01): `^###\s+Task\s+(\d+\.\d+)` (MULTILINE); match only three hashes, capital “Task”, two numeric components; do NOT match lower-case, no-space, extra hashes, or three-level IDs. Apply only outside fenced code blocks (same fence-stripping logic as heading detection) to avoid false matches inside fences.
 - Coverage parsing (R-ATL-NEW-02): split on commas; item is single or range (exactly one dash). Range validation: both ends match `\d+\.\d+`, same prefix, start <= end, no cross-prefix; expand ranges to detect gaps/backwards; errors on malformed/backward/cross-prefix/invalid formats.
@@ -100,7 +102,7 @@
   - Table definition: contiguous block where line 1 starts with `|` and has ≥3 `|`; line 2 is a separator row starting with `|` and containing `---` per column (alignment with optional colons `:---`, `---:`, `:---:` allowed); subsequent lines start with `|`; stop at blank line or next heading.
 - Add/update fixtures to match repo naming: required positives = `canonical_examples/positives/plan_with_evidence_ph.md` and `canonical_examples/positives/example_instantiated.md` (no alternates); required negatives = instantiated_with_placeholders, duplicate_task_ids, coverage_phantom_refs — each with explicit violation placement.
 - Validation suite schema: document required structure in `VALIDATION_SUITE.md` (categories: plan positives, instantiated positives, negatives; each test has File/Command/Expected/Status/Last run; summary totals). The task-list linter does not enforce this; execution is via the listed commands.
-- Clarify mode detection: fail if mode missing/invalid in frontmatter; valid values = plan|instantiated (case-sensitive).
+- Clarify mode detection: fail if mode missing/invalid in frontmatter; valid values = template|plan|instantiated (case-sensitive).
 
 ### 2) Spec/COMMON
 - Clarify plan vs instantiated evidence rules.
@@ -301,10 +303,7 @@
   - Positives: 100% must pass (exit 0)
   - Negatives: 100% must fail correctly (expected error present)
   ```
-- Canary process (repo-first): find candidate task lists under this repo; select 10 (or min 8 with 4/4 mode split); copy to `validation/canaries/`; run baseline `uv run python ai_task_list_linter_v1_9.py <file>` for each to `baseline.txt` (expect 0 fails); create `validation/canaries/MANIFEST.md` with file/mode/source/status; post-fix rerun to `post_fix.txt`; rollback if >2 new failures (or >1 if only 8 canaries). Document if any canary is external; prefer repo-local for reproducibility.
-  - Candidate search (repo-local, intended to remain valid): use `find canonical_examples/positives -name "*.md" -type f`; optionally add other known-good positives only if needed.
-  - Deterministic selection rule: sort candidate list lexicographically; choose the first 5 plan-mode files and first 5 instantiated-mode files (or 4/4 if only 8 total). If fewer, note in MANIFEST.md.
-  - Do not include known-invalid examples.
+- Canary process (closed set): use all `.md` files under `canonical_examples/positives/` that declare `schema_version: "1.7"` and `mode: template|plan|instantiated`. Copy to `validation/canaries/`; run baseline `uv run python ai_task_list_linter_v1_9.py <file>` for each to `baseline.txt` (expect 0 fails); create `validation/canaries/MANIFEST.md` with file/mode/source/status; post-fix rerun to `post_fix.txt`; rollback if >2 new failures (or >1 if only 8 canaries). Do not add files from other folders; do not include known-invalid examples.
 
 ## Definition of Done (testable)
 - Automated (all must pass):
@@ -317,7 +316,7 @@
   - Full suite: run all commands in `VALIDATION_SUITE.md` (positives must all pass; negatives must all fail with expected errors).
 - Manual:
   - Current State Audit completed (A1–A3 filled).
-- Spec version bumped if rules change; schema_version set to 1.7 (template removed).
+- Spec version bumped to v1.9 (rules changed: R-ATL-NEW-01/02/03 added; R-ATL-022 modified); schema_version set to 1.7 (template/plan/instantiated).
   - Rule definitions present in spec/COMMON for changed/added rules.
   - Peer review of spec/COMMON/doc wording (plan vs instantiated evidence).
   - VALIDATION_SUITE.md follows required schema (categories + File/Command/Expected/Status/Last run; summary present).

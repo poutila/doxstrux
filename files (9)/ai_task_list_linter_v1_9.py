@@ -3,6 +3,7 @@
 ai_task_list_linter_v1_9.py
 
 Deterministic linter for AI Task Lists (Spec v1.9; schema_version 1.7).
+Spec is SSOT; this linter implements the spec. If linter and spec diverge, fix the linter.
 
 Version 1.9 changes:
 - FIX: Import hygiene (R-ATL-063) now requires actual $ command lines, not comments
@@ -10,7 +11,7 @@ Version 1.9 changes:
 - FIX: Spec search_tool inconsistency resolved (R-ATL-D4 updated)
 - Spec version bump to 1.9; schema_version bump to 1.7
 
-Version 1.8 features retained:
+Prior features retained:
 - R-ATL-001: schema_version == "1.7", search_tool required
 - R-ATL-042: Clean Table checklist enforcement
 - R-ATL-063: Import hygiene enforcement (Python/uv)

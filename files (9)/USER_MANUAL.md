@@ -4,7 +4,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 - `AI_TASK_LIST_SPEC_v1.md` — the contract (Spec v1.9; schema_version 1.7; template/plan/instantiated).
 - `AI_TASK_LIST_TEMPLATE_v6.md` — starting point for new task lists.
 - `ai_task_list_linter_v1_9.py` — the linter implementing the spec.
-- `README_ai_task_list_linter_v1_8.md` — release notes and highlights (v1.9 content; filename legacy).
+- `README_ai_task_list_linter_v1_9.md` — release notes and highlights.
 - Orchestrator prompts:
   - `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` — runtime prompt for converting prose → AI task list (plan mode output).
 
