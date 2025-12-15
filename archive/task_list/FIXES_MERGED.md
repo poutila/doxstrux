@@ -23,8 +23,8 @@ Goal: Eliminate iteration drivers by aligning spec/linter/template/manuals, enab
 - Remove interim relaxation: implement plan mode directly to avoid template ambiguity and rework.
 
 ### Prose Coverage Mapping enforcement
-- Spec: define canonical table: Prose requirement | Source (file/section) | Implemented by task(s).
-- Linter: warning in plan/instantiated modes—check header (aliases allowed), Source is anchored (.md or strict section ID), tasks referenced exist.
+- Spec: define canonical table: Prose requirement | Source (file/section) | Implemented by task(s); required in plan/instantiated.
+- Linter: loud enforcement in plan/instantiated—require section + table with at least header + data row (missing/empty = error); (anchors/task existence can be tightened later).
 - Orchestrator/manuals: instruct anchored sources and full task IDs.
 
 ### Spec as SSOT
@@ -70,7 +70,7 @@ Goal: Eliminate iteration drivers by aligning spec/linter/template/manuals, enab
 - Real-project validation: migration guide tested on 2–3 real task lists; fresh task list generated from real prose; instantiated mode validated on real data; performance impact checked (<10% overhead target); backward-compat tests on v1.5/v1.6 lists.
 - Edge cases: documented stances on mixed-mode (reject), reverse migration (plan→template manual steps), plan-in-CI guidance, schema_version vs spec version distinction.
 - SSOT decision: Spec is SSOT; linter implements spec. If spec/linter disagree, fix linter. Document this in spec/README.
-- Coverage enforcement: in plan/instantiated modes, missing/empty coverage section ⇒ warning; malformed table/invalid anchors/nonexistent tasks ⇒ error (start as warnings if phased).
+- Coverage enforcement: in plan/instantiated modes, missing/empty coverage section ⇒ error (loud); malformed table/invalid anchors/nonexistent tasks can be tightened later.
 - Deprecation timeline: v1.6.1 add plan mode and relax template (warn); v1.7.0 enforce strict template (fail on concrete commands) after ~8-week grace period; schema_version stays 1.6; linter bumps (e.g., v1.9).
 - Baseline enforcement: template mode must have Evidence fenced block with [[PH:OUTPUT]] (or canonical placeholder) and Baseline tests fenced block; instantiated mode must enforce $-prefix on Baseline commands/tests and maintain existing non-empty/output checks.
 - Phase Gate content: enforce required checklist items in ## STOP — Phase Gate (.phase-N.complete.json exists, Global Clean Table passes, Phase tests pass, Drift ledger current).

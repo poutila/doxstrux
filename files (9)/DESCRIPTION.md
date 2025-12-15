@@ -2,9 +2,9 @@
 
 This folder contains a small, deterministic framework for writing and validating AI task lists so they are strict, repeatable, and runnable:
 
-- **Specification**: `AI_TASK_LIST_SPEC_v1.md` defines the contract (v1.6) for task lists, including required headings, evidence rules, runner/import hygiene, Clean Table, and TDD/STOP gates.
+- **Specification**: `AI_TASK_LIST_SPEC_v1.md` defines the contract (v1.7; schema_version 1.6; adds plan mode) for task lists, including required headings, evidence rules, runner/import hygiene, Clean Table, and TDD/STOP gates.
 - **Template**: `AI_TASK_LIST_TEMPLATE_v6.md` is the starting point for new task lists, with placeholders and required sections laid out.
-- **Linter**: `ai_task_list_linter_v1_8.py` enforces the spec deterministically (no network, no mutation). It catches placeholder leaks, missing gates, runner/uv violations, weak evidence, and format bypasses.
+- **Linter**: `ai_task_list_linter_v1_8.py` (v1.9 code) enforces the spec deterministically (no network, no mutation). It catches placeholder leaks, missing gates, runner/uv violations, weak evidence, and format bypasses.
 - **Release Notes**: `README_ai_task_list_linter_v1_8.md` summarizes changes and usage.
 - **User Manual**: `USER_MANUAL.md` explains how to author, lint, and operate with minimal iteration.
 

@@ -1,5 +1,5 @@
 > This prompt is the *runtime orchestrator* for converting prose → AI task lists.  
-> Spec: AI_TASK_LIST_SPEC_v1.md (Spec v1.6)  
+> Spec: AI_TASK_LIST_SPEC_v1.md (Spec v1.7; schema_version stays 1.6; plan mode)  
 > Template: AI_TASK_LIST_TEMPLATE_v6.md  
 > Linter: ai_task_list_linter_v1_8.py  
 > Manual: AI_ASSISTANT_USER_MANUAL.md  
@@ -23,7 +23,7 @@ Sources & SSOT hierarchy
 You will be given:
 
 1. **Prose design / requirements**: `[[PH:PROSE_DOC_LABEL]]` (content pasted into this chat; e.g., [Target file](./path_to/[[PH:PROSE_DOC_FILENAME]].md)).
-2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — Spec v1.6 contract for valid task lists.
+2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — Spec v1.7 contract for valid task lists (schema_version: "1.6", adds plan mode).
 3. **Template**: [AI_TASK_LIST_TEMPLATE_v6.md](./AI_TASK_LIST_TEMPLATE_v6.md) — starting point for new task lists.
 4. **Linter**: [ai_task_list_linter_v1_8.py](./ai_task_list_linter_v1_8.py) — implementation of the spec (assume it will be run after your output).
 5. **AI Assistant Manual**: [AI_ASSISTANT USER_MANUAL.md](./AI_ASSISTANT USER_MANUAL.md).
@@ -32,13 +32,13 @@ If any of the files above are missing or not accessible, STOP and ask for the co
 
 Apply this **SSOT hierarchy**:
 
-1. Spec + linter (highest – must be satisfied)
+1. Spec (highest) — linter must implement the spec; if they diverge, fix the linter
 2. Template structure and rules
 3. AI Assistant Manual (process)
 4. This orchestrator prompt
 5. The prose design document (as long as it doesn’t contradict 1–4)
 
-If any of these disagree, **spec + linter win**, then template, then manual, then this prompt, then prose.
+If any of these disagree, **spec wins**, then linter, then template, then manual, then this prompt, then prose.
 
 Task
 ====
@@ -57,11 +57,13 @@ Given the prose document and the framework artifacts above, produce a single Mar
 
 Operating mode
 ==============
-- You are producing a **design-time task list** → use `mode: "template"` in YAML.
-- Placeholders (`[[PH:...]]`) are allowed, but:
-  - They **must follow** the placeholder syntax and names from the template/spec.
-  - Do **not** introduce your own placeholder format.
+- Default: You are producing a **plan-mode task list** → use `mode: "plan"` in YAML.
+- Commands must be real; placeholders (`[[PH:...]]`) are allowed for evidence/output only.
+  - Follow placeholder syntax/names from template/spec; do **not** invent new formats.
 - Do **not** fabricate real command outputs, timestamps, git hashes, or test results.
+- Optional flags (if instructed):
+  - Template scaffold: emit `mode: "template"` with command placeholders (generic scaffold).
+  - Instantiated helper: only fill evidence into an existing plan; do not regenerate structure.
 
 High-level workflow
 ===================
@@ -91,9 +93,9 @@ High-level workflow
 
 4. **Instantiate the template structure**
    - Start from `AI_TASK_LIST_TEMPLATE_v6.md` structure:
-     - YAML front matter with `schema_version: "1.6"`, `mode: "template"`, `runner`, `runner_prefix`, `search_tool`.
+     - YAML front matter with `schema_version: "1.6"`, `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
      - Required headings (Non-negotiable Invariants, Placeholder Protocol, Source of Truth, Baseline Snapshot, Phase 0, Drift Ledger, Phase Unlock Artifact, Global Clean Table Scan, STOP — Phase Gate).
-   - Preserve:
+  - Preserve:
      - The naming rule (“Task ID N.M → TASK_N_M_PATHS”).
      - Canonical `TASK_N_M_PATHS=(...)` arrays for each task.
      - STOP section structure and checklists.

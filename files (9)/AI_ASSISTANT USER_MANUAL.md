@@ -2,7 +2,7 @@
 
 Mental model: “I am making a manual for myself. I need to use this opportunity 100%.” Do not assume; verify. Use the spec, template, and linter as your guardrails.
 
-**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.6) and linter (`ai_task_list_linter_v1_8.py`) win. Copy patterns from spec/template; only adapt paths/commands.
+**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.7) wins; the linter implements the spec (fix linter if they diverge). Copy patterns from spec/template; only adapt paths/commands.
 
 ## 1) Inputs and Prep
 - Source: the prose/design file you’re converting (e.g., the current project’s design/spec doc).
@@ -10,8 +10,9 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Run env: use the declared runner (e.g., `uv run`) for lint/test commands.
 - Goal reminder: produce an instantiated task list that passes the linter and anchors to reality with real commands/evidence.
 - Mode decision:
-  - If still designing and lacking real evidence, start `mode: "template"` with placeholders.
-  - Switch to `mode: "instantiated"` only when placeholders are gone and required evidence blocks will carry real output.
+  - `mode: "template"`: scaffold with command/evidence placeholders for generic reuse.
+  - `mode: "plan"`: project-specific planning; commands must be real; evidence/output placeholders allowed.
+  - `mode: "instantiated"`: no placeholders; required evidence carries real output.
 - Prose coverage: list each major requirement from the prose and map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope.
 
 ## 2) Read and Extract Work Items
@@ -22,7 +23,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 
 ## 3) Instantiate the Template (Structure First)
 - Copy `AI_TASK_LIST_TEMPLATE_v6.md` to a new file (e.g., `PROJECT_TASKS.md`).
-- Fill YAML front matter: `schema_version: "1.6"`, `mode: "template"` while designing; flip to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
+- Fill YAML front matter: `schema_version: "1.6"`, `mode: "plan"` for project planning; flip to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
 - Keep required headings intact (per spec anchors).
 - Set status for each task (one of: 📋 PLANNED, ⏳ IN PROGRESS, ✅ COMPLETE, ❌ BLOCKED).
 
@@ -45,8 +46,8 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   - STOP: include No Weak Tests + Clean Table checklists; plan to paste evidence.
 - Scope: in/out bullets if needed for clarity.
 
-## 1.5) Prose Coverage Mapping (recommended, not linted)
-- For each major requirement in the source prose, map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope. This is recommended for drift control; it is not enforced by Spec v1.6/Linter v1.8.
+## 1.5) Prose Coverage Mapping (required in plan/instantiated)
+- For each major requirement in the source prose, map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope. Plan/instantiated modes error on missing/empty coverage tables.
 - Suggested table (keep brief, optional):
 
 | Prose requirement (label) | Location (file/section) | Implemented by task(s) |
@@ -59,12 +60,12 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   1. Start a fresh AI session.
   2. Paste the entire orchestrator prompt.
   3. Paste the full prose document.
-  4. Expect a `mode: "template"` task list with required headings, TASK_N_M_PATHS arrays, Prose Coverage Mapping, STOP/Global/Drift structure.
-- Role split:
-  - Orchestrator: the runtime prompt used in chat to generate the task list.
-  - Manual/spec/template/linter: background rules that must be respected.
-  - Design-time output: template mode; no fabricated evidence.
-  - Execution/human+CI: later pass switches to instantiated mode with real evidence.
+  4. Expect a `mode: "plan"` task list with required headings, TASK_N_M_PATHS arrays, Prose Coverage Mapping, STOP/Global/Drift structure, real commands and evidence placeholders.
+  - Role split:
+    - Orchestrator: the runtime prompt used in chat to generate the task list.
+    - Manual/spec/template/linter: background rules that must be respected.
+    - Design-time output: plan mode; commands real, evidence placeholders allowed; no fabricated evidence.
+    - Execution/human+CI: later pass switches to instantiated mode with real evidence.
 
 ## 6) Evidence and Commands (No Comment Compliance)
 - All executable lines in required sections must start with `$`.
@@ -121,17 +122,17 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Keep outputs truthful; do not fabricate.
 
 ## 11) Quick Checklist Before Delivering
-- For design/AI output (no real evidence yet):
-  - [ ] YAML front matter filled; mode = template.
+- For design/AI output (plan, no real evidence yet):
+  - [ ] YAML front matter filled; mode = plan.
   - [ ] Required headings present (unchanged from template).
-  - [ ] Baseline/STOP/Global sections structurally present (may carry placeholders).
-  - [ ] Tasks have paths arrays, Preconditions `$ {search_tool} …`, TDD/STOP sections.
-  - [ ] Prose Coverage Mapping table present (recommended; not linted) with major requirements mapped or explicitly out-of-scope.
+  - [ ] Baseline/STOP/Global sections structurally present (evidence placeholders allowed).
+  - [ ] Tasks have paths arrays, Preconditions with real `$ {search_tool} …` commands, TDD/STOP sections.
+- [ ] Prose Coverage Mapping table present (required in plan/instantiated) with major requirements mapped or explicitly out-of-scope.
   - [ ] Drift ledger started if any mismatches are known.
 - For executed/human+CI artifact (real evidence):
   - [ ] YAML front matter filled; mode = instantiated.
   - [ ] Required headings present; naming rule stated once (per spec).
-  - [ ] Baseline snapshot + tests have real outputs with headers.
+  - [ ] Baseline snapshot + tests have real outputs with headers and $-prefixed commands.
   - [ ] Tasks have paths arrays, Preconditions `$ {search_tool} …`, TDD/STOP sections.
   - [ ] At least one behavior-level test (with test name + behavior) referenced for each behavior-changing task.
   - [ ] STOP evidence blocks present with labeled sections, `# cmd/# exit`, real output; checkboxes set if status is COMPLETE.

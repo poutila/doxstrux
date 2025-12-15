@@ -1,7 +1,7 @@
 ---
 ai_task_list:
   schema_version: "1.6"
-  mode: "template"  # "template" = placeholders allowed, "instantiated" = placeholders forbidden
+  mode: "template"  # Modes: template (placeholders), plan (real commands, evidence placeholders), instantiated (no placeholders)
   runner: "[[PH:RUNNER]]"  # e.g., "uv", "poetry", "npm", "cargo", "go"
   runner_prefix: "[[PH:RUNNER_PREFIX]]"  # e.g., "uv run", "poetry run", "" (empty for go/cargo)
   search_tool: "rg"  # "rg" (ripgrep) or "grep" — REQUIRED
@@ -11,7 +11,9 @@ ai_task_list:
 
 **Version**: 6.0 (v1.6 spec — no comment compliance)  
 **Scope**: General-only — no project names, no repo paths, no project-specific env vars.
-**Modes**: Template mode (placeholders allowed) → Instantiated mode (placeholders forbidden)
+**Modes**: Template mode (placeholders allowed) → Plan mode (real commands, evidence placeholders) → Instantiated mode (placeholders forbidden)
+
+> Modes note: This file is a template scaffold (placeholders). Plan-mode outputs should use real commands and keep evidence placeholders; instantiated must replace all placeholders with real evidence.
 
 ---
 
@@ -289,8 +291,8 @@ Run before each phase gate (commands must use $ prefix when instantiated):
 # $ ! rg '\[\[PH:' .                                     # No placeholders
 #
 # Python import hygiene (REQUIRED when runner=uv):
-# $ rg 'from \.\.' src/ || exit 1                        # No multi-dot relative imports
-# $ rg 'import \*' src/ || exit 1                        # No wildcard imports
+# $ if rg 'from \.\.' src/; then exit 1; fi              # No multi-dot relative imports
+# $ if rg 'import \*' src/; then exit 1; fi              # No wildcard imports
 
 $ [[PH:CLEAN_TABLE_GLOBAL_CHECK_COMMAND]]
 

@@ -200,8 +200,8 @@ def _parse_front_matter(lines: List[str]) -> Tuple[Dict[str, str], Optional[Lint
     if meta["search_tool"] not in ("rg", "grep"):
         return meta, LintError(1, "R-ATL-001", "search_tool must be 'rg' or 'grep'."), end_idx + 1
 
-    if meta["mode"] not in ("template", "instantiated"):
-        return meta, LintError(1, "R-ATL-002", "mode must be 'template' or 'instantiated'."), end_idx + 1
+    if meta["mode"] not in ("template", "plan", "instantiated"):
+        return meta, LintError(1, "R-ATL-002", "mode must be 'template', 'plan', or 'instantiated'."), end_idx + 1
 
     return meta, None, end_idx + 1
 
@@ -487,44 +487,48 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
         if not any("Evidence" in ln for ln in sec):
             errors.append(LintError(content_start + 1 + b_start, "R-ATL-021", "Baseline Snapshot missing 'Evidence' marker."))
         
-        # R-ATL-023: In instantiated mode, evidence must be non-empty
-        if meta["mode"] == "instantiated":
-            # Find Evidence fenced block
-            ev_marker_idx = next((i for i, ln in enumerate(sec) if "Evidence" in ln), None)
-            if ev_marker_idx is not None:
-                fenced = _extract_fenced_code_block(sec, ev_marker_idx)
-                if fenced:
-                    f0, f1 = fenced
-                    ev_block = sec[f0:f1 + 1]
-                    # Check for $ command output pairs
+        ev_marker_idx = next((i for i, ln in enumerate(sec) if "Evidence" in ln), None)
+        if meta["mode"] in ("template", "plan", "instantiated") and ev_marker_idx is not None:
+            fenced = _extract_fenced_code_block(sec, ev_marker_idx)
+            if not fenced:
+                errors.append(LintError(content_start + 1 + b_start + ev_marker_idx, "R-ATL-021", "Baseline Snapshot Evidence missing fenced code block."))
+            else:
+                f0, f1 = fenced
+                ev_block = sec[f0:f1 + 1]
+                if meta["mode"] == "template":
+                    if not any("[[PH:OUTPUT]]" in ln for ln in ev_block):
+                        errors.append(LintError(content_start + 1 + b_start + f0, "R-ATL-021", "Baseline Snapshot Evidence in template mode must include [[PH:OUTPUT]]."))
+                if meta["mode"] == "instantiated":
                     missing_outputs = _check_command_output_pairs(ev_block)
                     if missing_outputs:
                         errors.append(LintError(content_start + 1 + b_start + f0, "R-ATL-023", 
                             "Baseline Snapshot evidence: command(s) missing output. Each $ command must have non-empty output."))
-                    # Also check that there's at least some content
                     if not _check_evidence_non_empty(ev_block):
                         errors.append(LintError(content_start + 1 + b_start + f0, "R-ATL-023",
                             "Baseline Snapshot evidence block is empty in instantiated mode."))
-                    # R-ATL-024: Captured evidence headers (optional, enabled by flag)
                     if require_captured_evidence:
                         header_err = _check_captured_header(ev_block, require_exit_zero=False)
                         if header_err:
                             errors.append(LintError(content_start + 1 + b_start + f0, "R-ATL-024",
                                 f"Baseline Snapshot evidence {header_err}."))
-            # R-ATL-021B: In instantiated mode, Baseline tests fenced block must include output
-            # (Template v6 places this immediately under Baseline Snapshot.)
-            baseline_tests_idx = next((i for i, ln in enumerate(sec) if "Baseline tests" in ln), None)
-            if baseline_tests_idx is None:
-                errors.append(LintError(content_start + 1 + b_start, "R-ATL-021B",
-                    "Baseline Snapshot missing **Baseline tests** fenced block in instantiated mode."))
+        # Baseline tests block required in all modes; stricter in plan/instantiated
+        baseline_tests_idx = next((i for i, ln in enumerate(sec) if "Baseline tests" in ln), None)
+        if baseline_tests_idx is None:
+            errors.append(LintError(content_start + 1 + b_start, "R-ATL-021B",
+                "Baseline Snapshot missing **Baseline tests** fenced block."))
+        else:
+            bt_fenced = _extract_fenced_code_block(sec, baseline_tests_idx)
+            if not bt_fenced:
+                errors.append(LintError(content_start + 1 + b_start + baseline_tests_idx, "R-ATL-021B",
+                    "Baseline tests missing fenced code block."))
             else:
-                bt_fenced = _extract_fenced_code_block(sec, baseline_tests_idx)
-                if not bt_fenced:
-                    errors.append(LintError(content_start + 1 + b_start + baseline_tests_idx, "R-ATL-021B",
-                        "Baseline tests missing fenced code block."))
+                bf0, bf1 = bt_fenced
+                bt_block = sec[bf0:bf1 + 1]
+                if meta["mode"] == "template":
+                    if not any("[[PH:OUTPUT]]" in ln for ln in bt_block):
+                        errors.append(LintError(content_start + 1 + b_start + bf0, "R-ATL-021B",
+                            "Baseline tests in template mode must include [[PH:OUTPUT]] placeholder."))
                 else:
-                    bf0, bf1 = bt_fenced
-                    bt_block = sec[bf0:bf1 + 1]
                     if not any(ln.strip().startswith("$") for ln in bt_block):
                         errors.append(LintError(content_start + 1 + b_start + bf0, "R-ATL-021B",
                             "Baseline tests must include at least one $ command line."))
@@ -535,6 +539,22 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                     if not _check_evidence_non_empty(bt_block):
                         errors.append(LintError(content_start + 1 + b_start + bf0, "R-ATL-021B",
                             "Baseline tests evidence block is empty in instantiated mode."))
+
+    # Phase Gate content enforcement (checklist items)
+    stop_bounds = _section_bounds(content, "## STOP — Phase Gate")
+    if stop_bounds:
+        s_start, s_end = stop_bounds
+        stop_sec = content[s_start:s_end]
+        required_checks = [
+            (".phase-N.complete.json", ".phase-N.complete.json exists"),
+            ("Global Clean Table scan passes", "Global Clean Table scan passes"),
+            ("Phase N tests pass", "Phase N tests pass"),
+            ("Drift ledger current", "Drift ledger current"),
+        ]
+        for token, desc in required_checks:
+            if not any(token in ln for ln in stop_sec):
+                errors.append(LintError(content_start + 1 + s_start, "R-ATL-051",
+                    f"STOP — Phase Gate missing checklist item: {desc}."))
 
     # Drift Ledger table columns + D3 evidence witness format for non-empty rows (instantiated)
     drift_heading = "## Drift Ledger (append-only)"
@@ -638,7 +658,7 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
             if not any("[[PH:PASTE_CLEAN_TABLE_OUTPUT]]" in ln for ln in sec):
                 errors.append(LintError(content_start + 1 + g_start, "R-ATL-060", "Missing [[PH:PASTE_CLEAN_TABLE_OUTPUT]] in template mode."))
         else:
-            if any("[[PH:PASTE_CLEAN_TABLE_OUTPUT]]" in ln for ln in sec):
+            if meta["mode"] == "instantiated" and any("[[PH:PASTE_CLEAN_TABLE_OUTPUT]]" in ln for ln in sec):
                 errors.append(LintError(content_start + 1 + g_start, "R-ATL-061", "Global Clean Table Scan output placeholder remains in instantiated mode."))
             
             # R-ATL-063: Import hygiene enforcement for Python projects (runner=uv)
@@ -884,7 +904,9 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                         if not any("[[PH:SYMBOL_CHECK_COMMAND]]" in ln for ln in code_lines):
                             errors.append(LintError(start_line + f0, "R-ATL-D2", f"Task {tid} Preconditions must include [[PH:SYMBOL_CHECK_COMMAND]] in template mode."))
                     else:
-                        # instantiated: require rg or grep pattern in Preconditions commands
+                        # plan/instantiated: require rg or grep pattern in Preconditions commands; no placeholders
+                        if meta["mode"] == "plan" and any("[[PH:SYMBOL_CHECK_COMMAND]]" in ln for ln in code_lines):
+                            errors.append(LintError(start_line + f0, "R-ATL-D2", f"Task {tid} Preconditions must not use [[PH:SYMBOL_CHECK_COMMAND]] in plan mode. Use a real {search_tool} command."))
                         # Skip comment lines (starting with #)
                         cmd_lines = [ln for ln in code_lines if not ln.strip().startswith("#")]
                         search_tool = meta.get("search_tool", "")
@@ -898,7 +920,7 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                                 errors.append(LintError(start_line + f0, "R-ATL-D2", f"Task {tid} Preconditions must include a symbol-check command (rg/grep)."))
 
     # Runner enforcement
-    if meta["mode"] == "instantiated":
+    if meta["mode"] in ("plan", "instantiated"):
         prefix = meta.get("runner_prefix", "")
         runner = meta.get("runner", "")
         
@@ -960,6 +982,12 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
             p_start, p_end = p_bounds
             _check_dollar_prefix_in_section(content[p_start:p_end], "Phase Unlock Artifact", content_start + p_start)
         
+        # Check Baseline Snapshot commands
+        b_bounds_inst = _section_bounds(content, "## Baseline Snapshot (capture before any work)")
+        if b_bounds_inst:
+            b_start_inst, b_end_inst = b_bounds_inst
+            _check_dollar_prefix_in_section(content[b_start_inst:b_end_inst], "Baseline Snapshot", content_start + b_start_inst)
+
         # Check Global Clean Table Scan
         g_bounds = _section_bounds(content, "## Global Clean Table Scan")
         if g_bounds:
@@ -1031,6 +1059,18 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                     if "ripgrep" not in ln.lower():
                         errors.append(LintError(content_start + 1 + idx, "R-ATL-D4", 
                             f"grep is forbidden when search_tool=rg. Use ripgrep (rg) instead."))
+
+    # Prose Coverage Mapping (presence/structure check; warning intent but enforced here)
+    if meta.get("mode") in ("plan", "instantiated"):
+        pcm_bounds = _section_bounds(content, "## Prose Coverage Mapping")
+        if not pcm_bounds:
+            errors.append(LintError(1, "R-ATL-PROSE", "Prose Coverage Mapping section recommended for plan/instantiated modes (missing)."))
+        else:
+            pcm_start, pcm_end = pcm_bounds
+            pcm_sec = content[pcm_start:pcm_end]
+            table_rows = [ln for ln in pcm_sec if ln.strip().startswith("|")]
+            if len(table_rows) < 2:  # header + at least one data row
+                errors.append(LintError(content_start + 1 + pcm_start, "R-ATL-PROSE", "Prose Coverage Mapping table is empty or malformed."))
 
     return meta, errors
 

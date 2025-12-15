@@ -1,8 +1,9 @@
-# AI Task List Spec v1.6
+# AI Task List Spec v1.7 (plan mode introduction)
 
-**Spec ID**: `AI_TASK_LIST_SPEC_V1_6`  
+**Spec ID**: `AI_TASK_LIST_SPEC_V1_7`  
 **Schema version**: `1.6`  
 **Applies to**: A single Markdown file (the instantiated task list or the template)
+**SSOT**: The spec is the authoritative contract; the linter implements the spec. If spec and linter diverge, fix the linter.
 
 **Primary goals**:
 1. No drift
@@ -21,12 +22,25 @@
 
 | Term | Definition |
 |------|------------|
-| **Mode** | Controls placeholder tolerance: `template` (placeholders allowed) or `instantiated` (placeholders forbidden) |
+| **Mode** | Controls placeholder tolerance: `template` (placeholders allowed), `plan` (real commands, evidence placeholders), or `instantiated` (placeholders forbidden) |
 | **Task ID** | Format `N.M` where N = phase number, M = task number |
 | **Canonical path array** | Bash array `TASK_N_M_PATHS=(...)` associated with Task N.M |
 | **Runner** | Declared tool for command execution (e.g., `uv`), with `runner_prefix` (e.g., `uv run`) |
 
 ---
+
+## Plan mode (additive)
+
+This spec supports an intermediate `mode: "plan"`:
+- Preconditions/Global/Phase unlock MUST use real `$ {search_tool} …` commands (no command placeholders). Runner/search_tool/import-hygiene rules apply.
+- Evidence/output placeholders are allowed; placeholders are forbidden in YAML/paths/status/naming rule.
+- Template mode continues to allow command/evidence placeholders; instantiated forbids placeholders entirely.
+- Intended lifecycle: template → plan → instantiated.
+
+### R-ATL-PROSE: Prose Coverage Mapping (plan/instantiated)
+- If `mode: plan` or `mode: instantiated`, the document MUST include a `## Prose Coverage Mapping` section containing a markdown table with at least a header row and one data row.
+- Purpose: tie prose requirements to tasks to reduce omission drift.
+- Template mode: Coverage Mapping recommended, not required.
 
 ## 1. Required Document Header
 
@@ -37,7 +51,7 @@ The document MUST start with YAML front matter containing:
 ```yaml
 ai_task_list:
   schema_version: "1.6"  # Must be exactly "1.6"
-  mode: "template" | "instantiated"
+  mode: "template" | "plan" | "instantiated"
   runner: "<string>"
   runner_prefix: "<string>"
   search_tool: "rg" | "grep"  # Required (not optional)
@@ -105,16 +119,27 @@ Under `## Baseline Snapshot (capture before any work)`, a Markdown table MUST co
 
 Values may be placeholders only in `template` mode.
 
+### Plan mode (v1.7)
+
+`mode: "plan"` is allowed as an intermediate state:
+- Commands in Preconditions/Global/Phase unlock MUST be real (no command placeholders); runner/search_tool/import-hygiene rules apply.
+- Evidence/output placeholders are allowed; placeholders are forbidden in YAML/paths/status/naming rule.
+- Template mode continues to allow command/evidence placeholders; instantiated forbids placeholders entirely.
+- Lifecycle: template → plan → instantiated.
+
 ### R-ATL-021: Baseline Evidence blocks required
 
-The Baseline Snapshot section MUST include an "Evidence" block with commands and `[[PH:OUTPUT]]` placeholders (template mode) or real pasted output (instantiated mode).
+The Baseline Snapshot section MUST include an "Evidence" block with commands and `[[PH:OUTPUT]]` placeholders (template/plan mode) or real pasted output (instantiated mode). In template/plan, the Evidence block must be fenced and contain the canonical placeholder.
 
 ### R-ATL-021B: Baseline tests evidence required (instantiated mode)
 
-The Baseline Snapshot section MUST include a **Baseline tests** fenced code block. In instantiated mode:
+The Baseline Snapshot section MUST include a **Baseline tests** fenced code block in all modes. In instantiated mode:
 - It MUST contain at least one `$` command.
 - Each `$` command MUST have non-empty output lines (captured headers alone do not count).
 - The block must be non-empty overall.
+In template/plan mode, the Baseline tests block may contain placeholders, but it must exist and be fenced.
+
+**$ discipline**: In instantiated mode, command lines in Baseline evidence/tests MUST start with `$`.
 
 ### R-ATL-022: Instantiated mode forbids placeholders
 
@@ -331,6 +356,8 @@ The `## STOP — Phase Gate` section MUST include checklist items requiring:
 - [ ] Global Clean Table scan passes
 - [ ] Phase tests pass
 - [ ] Drift ledger current
+
+Linter note: checklist presence is enforced; shell exit semantics of referenced gates are process-level (linter enforces command presence, not control flow).
 
 ---
 
@@ -578,4 +605,12 @@ A document is **Spec v1.6 compliant** if:
 
 ---
 
-**End of Spec**
+## Appendix A — Spec History (NON-NORMATIVE)
+
+Everything below this heading is historical reference only.
+It MUST NOT be used as the validation contract.
+The ONLY normative contract is the Spec v1.7 content above (schema_version: "1.6").
+
+---
+
+# AI Task List Spec v1.0

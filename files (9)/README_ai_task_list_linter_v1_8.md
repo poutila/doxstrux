@@ -1,22 +1,22 @@
-# AI Task List Linter v1.8
+# AI Task List Linter v1.9 (code file name unchanged)
 
-Deterministic linter for AI Task Lists (Spec v1.6).
+Deterministic linter for AI Task Lists (Spec v1.7; schema_version remains "1.6", adds `mode: plan`). Code filename unchanged (`ai_task_list_linter_v1_8.py`).
 
-## What's Fixed in v1.8
+## What's Fixed in v1.9
 
-**Comment compliance loophole CLOSED:**
+**Plan mode added (Spec v1.7; schema_version 1.6 unchanged):**
+- Accepts `mode: plan` (real commands, evidence placeholders).
+- Template/plan Baseline: fenced Evidence with `[[PH:OUTPUT]]`, Baseline tests fenced block required.
+- Instantiated Baseline: $-prefix enforced; existing non-empty/output checks retained.
+- STOP — Phase Gate: required checklist items enforced.
+- Prose Coverage Mapping: presence/structure check in plan/instantiated modes (loud errors when missing/malformed).
 
-| Issue | Before v1.8 | After v1.8 |
-|-------|-------------|------------|
-| Import hygiene (R-ATL-063) | Comment with pattern passed | **$ command line required** |
-| Phase Unlock scan (R-ATL-050) | Comment with `rg` passed | **$ rg command line required** |
-| Spec search_tool (R-ATL-D4) | Said "MAY include" | **Fixed: MUST include** |
-| STOP evidence marker deletion | Marker removal bypassed evidence checks | **Fenced evidence block required even if marker removed** |
-| Phase unlock artifact suffix | `.phase-N.complete` accepted | **Requires `.phase-N.complete.json`** |
-| Checklist completion status | Status not validated | **Single status required; COMPLETE needs checked boxes** |
-| UV commands | Prose mention sufficed | **$ uv sync / $ uv run required in code blocks** |
-| Baseline tests evidence | Not enforced | **Baseline tests block must have $ commands + output** |
-| Gate patterns | Could succeed even on matches | **Use `! rg …` or `if rg …; then exit 1; fi` for gates (recommended authoring; not lint-enforced)** |
+**UV/import hygiene/comment compliance (carried forward):**
+- Import hygiene (R-ATL-063): **$ command line required** (no comments).
+- Phase Unlock scan (R-ATL-050): **$ rg command line required**; `.phase-N.complete.json` suffix enforced.
+- Runner/search_tool: **$ uv sync / $ uv run** required in code blocks; grep forbidden when `search_tool=rg`.
+- Checklist/status tightening: single status required; COMPLETE needs checked boxes.
+- Gate patterns: recommended fail-on-match (`! rg …` or `if rg …; then exit 1; fi`); linter enforces presence, not shell flow.
 
 ## Key Changes
 
@@ -36,7 +36,19 @@ $ if rg '\[\[PH:' .phase-0.complete.json; then
 
 Comments like `# rg '\[\[PH:' ...` do NOT satisfy the requirement.
 
-**Status + completion tightening**
+**Migration**
+- If you have a project-specific task list with real commands and `mode: "template"`, flip to `mode: "plan"` and keep evidence placeholders.
+- Keep `mode: "template"` only for generic scaffolds (command placeholders intact).
+- Executed lists use `mode: "instantiated"` with real evidence and no placeholders.
+
+**Validation suite (examples)**
+- `canonical_examples/example_template.md` (template) — lint passes.
+- `canonical_examples/example_plan.md` (plan) — lint passes.
+- `canonical_examples/example_instantiated.md` (instantiated) — lint passes with `--require-captured-evidence`.
+
+See `VALIDATION_SUITE.md` for full test list (including negatives, doc-sync check, perf/backcompat notes).
+
+**Status + completion tightening (plan mode accepted)**
 
 - Each task must use a single status value (`📋 PLANNED`, `⏳ IN PROGRESS`, `✅ COMPLETE`, `❌ BLOCKED`).
 - If status is `✅ COMPLETE` in instantiated mode, all No Weak Tests + Clean Table checkboxes must be checked.
@@ -84,28 +96,31 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/internal error
 ```yaml
 ai_task_list:
   schema_version: "1.6"    # Must be exactly "1.6"
-  mode: "instantiated"     # or "template"
+  mode: "plan"             # or "template" / "instantiated"
   runner: "uv"
-  runner_prefix: "uv run"
-  search_tool: "rg"        # REQUIRED (not optional)
+  runner_prefix: "uv run"  # REQUIRED; used for runner enforcement
+  search_tool: "rg"        # REQUIRED; rg vs grep enforcement
 ```
 
 ## Test Results
 
 ```
-✅ Template v6 passes
-✅ Valid v1.6 document passes
+✅ Template v6 passes (template mode)
+✅ Plan example passes
+✅ Instantiated example passes (--require-captured-evidence)
 ✅ Comment compliance REJECTED (import hygiene patterns in comments)
 ✅ Comment compliance REJECTED (Phase Unlock scan in comments)
 ✅ Old schema versions rejected (e.g., 1.5 rejected; requires 1.6)
 ✅ Spec search_tool consistency (MUST include, not MAY)
 ```
 
-## Migration from v1.7
+## Migration to v1.9 (plan mode)
 
-1. Update `schema_version` to `"1.6"`
-2. Ensure import hygiene patterns are actual `$` command lines (not comments)
-3. Ensure Phase Unlock placeholder scan is actual `$ rg` command line (not comment)
+1. For project-specific task lists with real commands: set `mode: "plan"`; keep evidence placeholders.
+2. For generic scaffolds: keep `mode: "template"` with command placeholders.
+3. For executed lists: use `mode: "instantiated"` with real evidence; no placeholders.
+4. Ensure import hygiene and Phase Unlock scans are actual `$` command lines (not comments).
+5. Add `## Prose Coverage Mapping` (plan/instantiated): missing/empty table is an error.
 
 ## Design Philosophy
 
