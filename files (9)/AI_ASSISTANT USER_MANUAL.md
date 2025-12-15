@@ -2,12 +2,12 @@
 
 Mental model: “I am making a manual for myself. I need to use this opportunity 100%.” Do not assume; verify. Use the spec, template, and linter as your guardrails.
 
-**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.7) wins; the linter implements the spec (fix linter if they diverge). Copy patterns from spec/template; only adapt paths/commands. <!-- See COMMON.md §SSOT Hierarchy -->
+**SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md` — Spec v1.9, schema_version 1.7) wins; the linter implements the spec (fix linter if they diverge). Copy patterns from spec/template; only adapt paths/commands. <!-- See COMMON.md §SSOT Hierarchy -->
 **Shared definitions**: `COMMON.md` holds canonical version metadata, modes, runner/import/gate/placeholder/evidence rules. Always match it.
 
 ## 1) Inputs and Prep
 - Source: the prose/design file you’re converting (e.g., the current project’s design/spec doc).
-- Framework: spec `AI_TASK_LIST_SPEC_v1.md`, template `AI_TASK_LIST_TEMPLATE_v6.md`, linter `ai_task_list_linter_v1_8.py`.
+- Framework: spec `AI_TASK_LIST_SPEC_v1.md`, template `AI_TASK_LIST_TEMPLATE_v6.md`, linter `ai_task_list_linter_v1_9.py`.
 - Run env: use the declared runner (e.g., `uv run`) for lint/test commands.
 - Goal reminder: produce an instantiated task list that passes the linter and anchors to reality with real commands/evidence.
 - Mode decision:
@@ -35,7 +35,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   - `git rev-parse HEAD`
   - Runner/runtime versions (e.g., `uv --version`, `uv run python --version`).
 - Run baseline tests (e.g., `uv run pytest -q`); paste full output.
-- Run lint/tests via the declared runner (e.g., `uv run python ai_task_list_linter_v1_8.py …`), not system python.
+- Run lint/tests via the declared runner (e.g., `uv run python ai_task_list_linter_v1_9.py …`), not system python.
 - Instantiated mode means no pseudo-placeholders either (e.g., no `XX-XX`, `(capture at start)`, or `# OUTPUT HERE`); use real values or leave the field blank and mark status ≠ COMPLETE.
 
 ## 5) Define Phases and Tasks
@@ -109,7 +109,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Clean Table: write commands so they fail on matches (e.g., `! rg 'TODO|FIXME|XXX' src/...`) instead of “always succeed” patterns.
 
 ## 9) Validate with the Linter
-- Run via runner: `uv run python ai_task_list_linter_v1_8.py PROJECT_TASKS.md --require-captured-evidence`.
+- Run via runner: `uv run python ai_task_list_linter_v1_9.py PROJECT_TASKS.md --require-captured-evidence`.
 - Fix reported violations; rerun until exit code 0.
 
 ### Common linter failures to avoid

@@ -1,17 +1,17 @@
-# AI Task List Linter v1.9 (code file name unchanged)
+# AI Task List Linter v1.9
 
-Deterministic linter for AI Task Lists (Spec v1.7; schema_version remains "1.6", adds `mode: plan`). Code filename unchanged (`ai_task_list_linter_v1_8.py`). <!-- See COMMON.md §Version Metadata -->
+Deterministic linter for AI Task Lists (Spec v1.9; schema_version "1.7", three modes including plan). Code filename: `ai_task_list_linter_v1_9.py`. <!-- See COMMON.md §Version Metadata -->
 
 ## What this framework is for
-- **Specification**: `AI_TASK_LIST_SPEC_v1.md` (v1.7; schema_version 1.6; plan mode) — contract for headings, evidence, runner/import hygiene, Clean Table, TDD/STOP gates.
+- **Specification**: `AI_TASK_LIST_SPEC_v1.md` (v1.9; schema_version 1.7; three modes) — contract for headings, evidence, runner/import hygiene, Clean Table, TDD/STOP gates.
 - **Template**: `AI_TASK_LIST_TEMPLATE_v6.md` — starting point with required sections/placeholders.
-- **Linter**: `ai_task_list_linter_v1_8.py` (v1.9 code) — stdlib-only, deterministic enforcement (no network/mutation).
+- **Linter**: `ai_task_list_linter_v1_9.py` — stdlib-only, deterministic enforcement (no network/mutation).
 - **Manuals/Docs**: `USER_MANUAL.md`, `AI_ASSISTANT USER_MANUAL.md`, `COMMON.md` for shared rules, plus `INDEX.md` for orientation (planning docs in `task_list_archive/`).
 - **Goal**: produce task lists that (1) don’t drift, (2) stay close to reality, (3) are lintable, (4) bake in governance (TDD, No Weak Tests, Clean Table, runner/import/search rules), and (5) reduce iteration loops.
 
 ## What's Fixed in v1.9
 
-**Plan mode added (Spec v1.7; schema_version 1.6 unchanged):**
+**Plan mode supported (Spec v1.9; schema_version 1.7):**
 - Accepts `mode: plan` (real commands, evidence placeholders).
 - Template/plan Baseline: fenced Evidence with `[[PH:OUTPUT]]`, Baseline tests fenced block required.
 - Instantiated Baseline: $-prefix enforced; existing non-empty/output checks retained.
@@ -87,13 +87,13 @@ Spec now consistently says `search_tool` is REQUIRED (removed "MAY include" lang
 
 ```bash
 # Standard lint
-uv run python ai_task_list_linter_v1_8.py PROJECT_TASKS.md
+uv run python ai_task_list_linter_v1_9.py PROJECT_TASKS.md
 
 # With captured evidence header enforcement
-uv run python ai_task_list_linter_v1_8.py --require-captured-evidence PROJECT_TASKS.md
+uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
 
 # Recommended for CI (instantiated lists)
-uv run python ai_task_list_linter_v1_8.py --require-captured-evidence PROJECT_TASKS.md
+uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
 ```
 
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/internal error
@@ -102,7 +102,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/internal error
 
 ```yaml
 ai_task_list:
-  schema_version: "1.6"    # Must be exactly "1.6"
+  schema_version: "1.7"    # Must be exactly "1.7"
   mode: "plan"             # or "template" / "instantiated"
   runner: "uv"
   runner_prefix: "uv run"  # REQUIRED; used for runner enforcement
@@ -117,7 +117,7 @@ ai_task_list:
 ✅ Instantiated example passes (--require-captured-evidence)
 ✅ Comment compliance REJECTED (import hygiene patterns in comments)
 ✅ Comment compliance REJECTED (Phase Unlock scan in comments)
-✅ Old schema versions rejected (e.g., 1.5 rejected; requires 1.6)
+✅ Old schema versions rejected (e.g., 1.5 rejected; requires 1.7)
 ✅ Spec search_tool consistency (MUST include, not MAY)
 ```
 

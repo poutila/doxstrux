@@ -1,8 +1,8 @@
 # COMMON.md — Shared Framework Definitions
 
 ## §Version Metadata
-- Spec: v1.7 (schema_version: "1.6")
-- Linter: v1.9 (code filename unchanged: `ai_task_list_linter_v1_8.py`)
+- Spec: v1.9 (schema_version: "1.7")
+- Linter: v1.9 (`ai_task_list_linter_v1_9.py`)
 - Template: v6.0
 
 ## §SSOT Hierarchy

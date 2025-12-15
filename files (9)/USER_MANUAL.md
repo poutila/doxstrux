@@ -1,10 +1,10 @@
 # AI Task List Framework — User Manual
 
 This framework pairs a strict specification, a template, and a deterministic linter to produce AI task lists that are lintable, drift-resistant, and runnable. Files:
-- `AI_TASK_LIST_SPEC_v1.md` — the contract (Spec v1.7; schema_version 1.6; includes plan mode).
+- `AI_TASK_LIST_SPEC_v1.md` — the contract (Spec v1.9; schema_version 1.7; template/plan/instantiated).
 - `AI_TASK_LIST_TEMPLATE_v6.md` — starting point for new task lists.
-- `ai_task_list_linter_v1_8.py` — the linter implementing the spec (v1.9 code; filename unchanged).
-- `README_ai_task_list_linter_v1_8.md` — release notes and highlights.
+- `ai_task_list_linter_v1_9.py` — the linter implementing the spec.
+- `README_ai_task_list_linter_v1_8.md` — release notes and highlights (v1.9 content; filename legacy).
 - Orchestrator prompts:
   - `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` — runtime prompt for converting prose → AI task list (plan mode output).
 
@@ -56,13 +56,13 @@ This framework pairs a strict specification, a template, and a deterministic lin
 ## 3) Running the Linter
 ```bash
 # Standard lint
-uv run python ai_task_list_linter_v1_8.py PROJECT_TASKS.md
+uv run python ai_task_list_linter_v1_9.py PROJECT_TASKS.md
 
 # Enforce captured headers in evidence blocks
-uv run python ai_task_list_linter_v1_8.py --require-captured-evidence PROJECT_TASKS.md
+uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
 
 # JSON output
-uv run python ai_task_list_linter_v1_8.py --json PROJECT_TASKS.md
+uv run python ai_task_list_linter_v1_9.py --json PROJECT_TASKS.md
 ```
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 
@@ -98,7 +98,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 - Prose Coverage Mapping: include a short table mapping prose requirements to tasks or mark them out-of-scope. Missing or empty coverage is an error in plan/instantiated modes.
 
 ## 6) Typical Linter Failures and Fixes
-- `schema_version must be '1.6'`: fix YAML front matter.
+- `schema_version must be '1.7'`: fix YAML front matter.
 - `Placeholders are forbidden in instantiated mode`: remove remaining `[[PH:...]]`.
 - `command lines must start with '$'`: add `$` to commands in required sections.
 - `runner=uv requires '$ uv sync' command line`: add `$ uv sync` in a fenced block.
@@ -108,7 +108,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 - `runner=uv requires '$ uv sync' command line`: add `$ uv sync` in a fenced block.
 
 ## 7) Recommended CI Usage
-- Run `uv run python ai_task_list_linter_v1_8.py --require-captured-evidence PROJECT_TASKS.md` in CI for instantiated lists (recommended as mandatory).
+- Run `uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md` in CI for instantiated lists (recommended as mandatory).
 - Fail CI on any lint error; keep the task list updated alongside code changes to avoid drift.
 
 ## 8) Known Limitations

@@ -139,7 +139,7 @@ Headers, output, non-empty rules
 
 ```markdown
 <!-- Version: See COMMON.md §Version Metadata -->
-# AI Task List Spec v1.7
+# AI Task List Spec v1.9
 
 <!-- Modes: See COMMON.md §Mode Definitions -->
 This framework supports three modes...
@@ -201,7 +201,7 @@ Comments are invisible to end users but help maintainers know where canonical de
 ```bash
 # Manual updates needed in 11 files:
 1. AI_TASK_LIST_SPEC_v1.md (line 1)
-2. ai_task_list_linter_v1_8.py (docstring)
+2. ai_task_list_linter_v1_9.py (docstring)
 3. README_ai_task_list_linter_v1_8.md (line 1)
 4. PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md (line 2)
 5. USER_MANUAL.md (line 5)

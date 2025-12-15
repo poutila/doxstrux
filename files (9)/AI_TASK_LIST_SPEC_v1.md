@@ -1,8 +1,8 @@
-# AI Task List Spec v1.7 (plan mode introduction)
+# AI Task List Spec v1.9 (three-mode; schema_version 1.7)
 <!-- See COMMON.md §Version Metadata -->
 
-**Spec ID**: `AI_TASK_LIST_SPEC_V1_7`  
-**Schema version**: `1.6`  
+**Spec ID**: `AI_TASK_LIST_SPEC_V1_9`  
+**Schema version**: `1.7`  
 **Applies to**: A single Markdown file (the instantiated task list or the template)
 **SSOT**: The spec is the authoritative contract; the linter implements the spec. If spec and linter diverge, fix the linter.
 
@@ -15,10 +15,10 @@
 6. Verifiable evidence provenance via captured headers (v1.3, opt-in)
 7. Closed-loop enforcement (no bypass via formatting) (v1.4)
 8. All governance rules baked in (import hygiene, Clean Table checklist)
-9. **NEW v1.6**: No comment compliance — $ command lines required, not prose/comments
+9. **UPDATED v1.7**: No comment compliance — $ command lines required, not prose/comments
 
 > This document is the normative contract for task lists. It is **not** a task
-> list and is **not** intended to be linted by `ai_task_list_linter_v1_8.py`.
+> list and is **not** intended to be linted by `ai_task_list_linter_v1_9.py`.
 > If this spec and the linter diverge, fix the linter to match the spec.
 
 ---
@@ -49,21 +49,21 @@ This spec supports an intermediate `mode: "plan"`:
 
 ## 1. Required Document Header
 
-### R-ATL-001: Front matter required — UPDATED in v1.6
+### R-ATL-001: Front matter required — UPDATED in v1.7
 
 The document MUST start with YAML front matter containing:
 
 ```yaml
 ai_task_list:
-  schema_version: "1.6"  # Must be exactly "1.6"
+  schema_version: "1.7"  # Must be exactly "1.7"
   mode: "template" | "plan" | "instantiated"
   runner: "<string>"
   runner_prefix: "<string>"
   search_tool: "rg" | "grep"  # Required (not optional)
 ```
 
-**v1.6 changes**:
-- `schema_version` must be exactly `"1.6"` (linter enforces this)
+**v1.7 changes**:
+- `schema_version` must be exactly `"1.7"` (linter enforces this)
 - Comment compliance loophole closed — $ command lines required
 
 ### R-ATL-002: Mode semantics
@@ -337,7 +337,7 @@ Non-Phase-0 tasks MUST include a **Preconditions** block with a fenced code bloc
 
 ## 6. Phase Unlock Artifacts and Phase Gate
 
-### R-ATL-050: Phase unlock artifact section required — UPDATED in v1.6
+### R-ATL-050: Phase unlock artifact section required — UPDATED in v1.7
 
 The document MUST include a `## Phase Unlock Artifact` section that:
 
@@ -350,7 +350,7 @@ The document MUST include a `## Phase Unlock Artifact` section that:
   - Section MUST have `$ cat > .phase-N.complete.json` as an actual command line (not comment; `.json` suffix required)
   - Section MUST have `$ rg` command for placeholder rejection scan (not comment)
   - Trivial commands like `echo .phase-0.complete.json` do NOT satisfy this requirement
-  - **v1.6**: Comments containing these patterns do NOT satisfy the requirement
+  - **v1.7**: Comments containing these patterns do NOT satisfy the requirement
 
 **Rationale**: The Phase Unlock Artifact is the gate between phases. Without explicit `$ cat >` artifact creation and `$ rg` placeholder verification as command lines, the phase gating contract becomes ceremonial and unenforceable.
 
@@ -390,7 +390,7 @@ $ rg 'TODO|FIXME|XXX' src/                    # No unfinished work markers
 $ rg '\[\[PH:' .                              # No placeholders in any file
 ```
 
-### R-ATL-063: Import hygiene enforcement (Python projects) — UPDATED in v1.6
+### R-ATL-063: Import hygiene enforcement (Python projects) — UPDATED in v1.7
 
 When `runner: "uv"` (Python project) and `mode: instantiated`, the linter MUST verify that the Global Clean Table Scan section contains **actual `$` command lines** (not comments):
 
@@ -409,7 +409,7 @@ $ if rg 'import \*' src/; then
 > fi
 ```
 
-**v1.6 change**: Comments containing these patterns do NOT satisfy the requirement. The linter checks only lines starting with `$` inside fenced code blocks.
+**v1.7 change**: Comments containing these patterns do NOT satisfy the requirement. The linter checks only lines starting with `$` inside fenced code blocks.
 
 **Rationale**: Import hygiene rules (absolute imports preferred, no multi-dot relative, no wildcards) are critical for Python projects. Comment compliance (putting patterns in comments to pass lint) undermines the enforcement.
 
@@ -508,7 +508,7 @@ Fully empty rows are allowed (for template structure preservation).
 
 **Rationale**: Prevents prose-only drift resolution ("looks good") by requiring a concrete code reference.
 
-### R-ATL-D4: search_tool enforcement — UPDATED in v1.6
+### R-ATL-D4: search_tool enforcement — UPDATED in v1.7
 
 The YAML front matter MUST include the `search_tool` field (required since v1.4):
 
@@ -561,7 +561,7 @@ path:line:rule_id:message
   ],
   "mode": "instantiated",
   "runner": "uv",
-  "schema_version": "1.6"
+  "schema_version": "1.7"
 }
 ```
 
@@ -569,9 +569,9 @@ path:line:rule_id:message
 
 ## Minimal Compliance Summary
 
-A document is **Spec v1.7 compliant** if:
+A document is **Spec v1.9 compliant** if:
 
-1. ✅ schema_version must be exactly "1.6" (R-ATL-001)
+1. ✅ schema_version must be exactly "1.7" (R-ATL-001)
 2. ✅ search_tool is required (not optional) (R-ATL-001, R-ATL-D4)
 3. ✅ Has required YAML metadata and required headings (9 total)
 4. ✅ Naming rule stated exactly once (R-ATL-033)
@@ -607,4 +607,4 @@ A document is **Spec v1.7 compliant** if:
 25. ✅ Completed tasks must have checked No Weak Tests + Clean Table boxes (instantiated) (R-ATL-091)
 26. ✅ runner=uv requires `$ uv sync` and `$ uv run ...` command lines in code blocks (R-ATL-072)
 
-**v1.6 key change**: Comments containing required patterns do NOT satisfy requirements. Actual `$` command lines are required.
+**v1.7 key change**: Comments containing required patterns do NOT satisfy requirements. Actual `$` command lines are required.
