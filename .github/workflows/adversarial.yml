@@ -103,7 +103,7 @@ jobs:
           PYTHONUNBUFFERED: 1
 
       - name: Upload adversarial reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: adversarial-reports
@@ -152,7 +152,7 @@ jobs:
           echo "PASS: No obvious unsafe template rendering found"
 
       - name: Upload security reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: security-reports
