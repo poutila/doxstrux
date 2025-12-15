@@ -17,3 +17,4 @@ Workspace:
 - `work_folder/` — Place to store generated task lists (e.g., `<label>_TASKS_v1_template.md`); contains `.gitkeep` (tracked).
 - `canonical_examples/` — Lint-clean examples for template/plan/instantiated.
 - `canonical_examples/negatives/` — Expected-fail fixtures for regression (coverage missing, plan placeholder, template Clean Table placeholder).
+- `task_list_archive/` — Planning/support docs kept for reference (IMPLEMENTING_COMMON.md, COMMON_MD_QUICK_GUIDE.md, FIXES_STATUS.md, MIGRATION_GUIDE.md).
