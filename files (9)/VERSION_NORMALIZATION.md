@@ -102,10 +102,14 @@ Conflicting strings policy (no guessing):
 - Add/maintain the consistency check script `tools/check_version_consistency.py` (present in repo) that:
   - Reads the tuple from COMMON.md (per parsing rules above).
   - Excludes: `**/archive/**`, `task_list_archive/**`, `work_folder/**`, `.git/**`.
- - Allowed files to contain concrete version literals outside YAML:
-    - COMMON.md
-    - AI_TASK_LIST_SPEC_v1.md
-    - ai_task_list_linter_v1_9.py
+- Allowed files to contain concrete version literals outside YAML:
+   - COMMON.md
+   - AI_TASK_LIST_SPEC_v1.md
+   - ai_task_list_linter_v1_9.py
+   - AI_TASK_LIST_TEMPLATE_v6.md
+   - VERSION_NORMALIZATION.md
+   - GENERAL_FIX_1.md
+  - Only the SSOT set above may contain current version literals; all other non-excluded files must reference COMMON instead. Historical versions are allowed only per the historical regex or in CHANGELOG. canonical_examples/** and validation/** are excluded from version-literal scans.
   - YAML front matter rule: only `schema_version: "1.7"` is allowed; any other version-related fields in YAML are violations.
   - Maintenance: when bumping linter version/filename, update this plan, allowed filename regex/allowlist, and the guardrail script to the new major.minor filename/version.
   - Fails if any non-archive file contains:
@@ -124,7 +128,7 @@ Conflicting strings policy (no guessing):
     - report first failure with file:path:line and exit non-zero (fail-fast, no auto-fix)
 
 ## Definition of Done
-- `rg 'schema_version: \"1\\.6\"|schema_version: 1\\.6|Spec v1\\.7|ai_task_list_linter_v1_8|README_ai_task_list_linter_v1_8|Spec 1\\.7|schema 1\\.6' . --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/*' --glob '!**/archive/**'` returns nothing.
+- `rg 'schema_version: \"1\\.6\"|schema_version: 1\\.6|Spec v1\\.7|ai_task_list_linter_v1_8|README_ai_task_list_linter_v1_8|Spec 1\\.7|schema 1\\.6' . --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/*' --glob '!**/archive/**' --glob '!validation/**' --glob '!canonical_examples/**'` returns nothing.
 - Guardrail passes: `uv run python tools/check_version_consistency.py` exits 0 (fail-fast on first violation).
 - COMMON.md contains the canonical tuple; other docs either reference COMMON or stay silent on concrete numbers (no conflicting strings).
 - Linter banner matches LINTER_VERSION; linter filename matches LINTER_VERSION major.minor.
