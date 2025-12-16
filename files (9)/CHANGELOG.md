@@ -1,3 +1,10 @@
+
+## [v1.9] - Alignment and new enforcement
+- Spec v1.9 (schema_version 1.7), three modes (template/plan/instantiated) now aligned across spec/COMMON/manuals/README/orchestrator/template.
+- Linter v1.9 adds NEW-01 (unique Task IDs), NEW-02 (Prose Coverage Mapping references must resolve to existing unique tasks; Implemented-by column required; ranges forward/same prefix), NEW-03 (Global Clean Table required in plan/instantiated).
+- Updated canonical examples (plan/instantiated) and negatives; validation suite references NEW-02; canary baseline recorded.
+- Deprecated schema_version 1.6 / Spec v1.7 references removed from framework docs/examples.
+
 # Changelog
 
 ## [1.9] - 2025-xx-xx
