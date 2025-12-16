@@ -25,13 +25,16 @@ All tools read the framework version from VERSION.yaml. To bump version, edit th
 | File | Purpose |
 |------|---------|
 | `VERSION.yaml` | Single source of truth for framework version |
-| `AI_TASK_LIST_SPEC.md` | Specification (authoritative contract) |
+| `GOAL.md` | Framework goal definition (authoritative for "what") |
+| `AI_TASK_LIST_SPEC.md` | Specification (authoritative contract for output format) |
 | `AI_TASK_LIST_TEMPLATE.md` | Template for new task lists |
-| `tools/ai_task_list_linter.py` | Linter implementing the spec |
+| `tools/ai_task_list_linter.py` | Output Phase 1: Deterministic validation |
+| `PROMPT_AI_TASK_LIST_REVIEW.md` | Output Phase 2: AI semantic review |
 | `PROMPT_AI_TASK_LIST_ORCHESTRATOR.md` | Runtime prompt for prose → task list |
 | `MANUAL.md` | Framework manual |
+| `PROSE_INPUT_SPEC.md` | Specification (authoritative contract for input format) |
 | `PROSE_INPUT_TEMPLATE.md` | Input template for specs |
+| `tools/prose_input_linter.py` | Input Phase 1: Deterministic validation |
 | `PROMPT_PROSE_INPUT_DISCOVERY.md` | Discovery prompt for gathering project facts |
-| `PROMPT_PROSE_INPUT_REVIEW.md` | AI review prompt for semantic validation |
-| `tools/prose_input_linter.py` | Input template linter |
+| `PROMPT_PROSE_INPUT_REVIEW.md` | Input Phase 2: AI semantic review |
 | `COMPLETE_VALIDATION.md` | Complete validation pipeline documentation |
