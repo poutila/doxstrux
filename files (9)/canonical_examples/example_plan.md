@@ -18,6 +18,99 @@ Task ID N.M → TASK_N_M_PATHS
 ## Source of Truth Hierarchy
 
 ## Phase 0 — Baseline Reality
+### Task 1.1 — Initial wiring
+
+TASK_1_1_PATHS=(
+  "src/example_module.py"
+)
+
+**Status**: 📋 PLANNED
+
+**Preconditions (symbol check)**:
+```bash
+$ rg -n example src/example_module.py
+```
+
+### TDD Step 1 — Write test (RED)
+```bash
+$ uv run pytest -q tests/test_example_module.py::test_initial_wiring && exit 1 || true
+```
+
+### TDD Step 2 — Implement (minimal)
+```bash
+$ uv run python -c "print('implement wiring')"
+```
+
+### TDD Step 3 — Verify (GREEN)
+```bash
+$ uv run pytest -q tests/test_example_module.py::test_initial_wiring
+```
+
+### STOP — Clean Table
+- [ ] Stub/no-op would FAIL this test?
+- [ ] Asserts semantics, not just presence?
+- [ ] Has negative case for critical behavior?
+- [ ] Is NOT import-only/smoke/existence-only/exit-code-only?
+- [ ] Tests pass (not skipped)
+- [ ] Full suite passes
+- [ ] No placeholders remain
+- [ ] Paths exist
+- [ ] Drift ledger updated
+**Evidence (paste output)**:
+```bash
+# Test run output:
+$ uv run pytest -q tests/test_example_module.py::test_initial_wiring
+[[PH:OUTPUT]]
+# Symbol/precondition check output:
+[[PH:PRECONDITION_OUTPUT]]
+```
+
+### Task 1.2 — Baseline capture
+
+TASK_1_2_PATHS=(
+  "tests/test_baseline.py"
+)
+
+**Status**: 📋 PLANNED
+
+**Preconditions (symbol check)**:
+```bash
+$ rg -n baseline tests/test_baseline.py
+```
+
+### TDD Step 1 — Write test (RED)
+```bash
+$ uv run pytest -q tests/test_baseline.py::test_baseline && exit 1 || true
+```
+
+### TDD Step 2 — Implement (minimal)
+```bash
+$ uv run python -c "print('collect baseline')"
+```
+
+### TDD Step 3 — Verify (GREEN)
+```bash
+$ uv run pytest -q tests/test_baseline.py::test_baseline
+```
+
+### STOP — Clean Table
+- [ ] Stub/no-op would FAIL this test?
+- [ ] Asserts semantics, not just presence?
+- [ ] Has negative case for critical behavior?
+- [ ] Is NOT import-only/smoke/existence-only/exit-code-only?
+- [ ] Tests pass (not skipped)
+- [ ] Full suite passes
+- [ ] No placeholders remain
+- [ ] Paths exist
+- [ ] Drift ledger updated
+**Evidence (paste output)**:
+```bash
+# Test run output:
+$ uv run pytest -q tests/test_baseline.py::test_baseline
+[[PH:OUTPUT]]
+# Symbol/precondition check output:
+[[PH:PRECONDITION_OUTPUT]]
+```
 
 ## Baseline Snapshot (capture before any work)
 
@@ -80,6 +173,7 @@ $ if rg '\[\[PH:' .phase-1.complete.json; then exit 1; fi
 ```
 
 ## Prose Coverage Mapping
-| Prose requirement | Source (file/section) | Implemented by task(s) |
+| Prose requirement | Source (file/section) | Implemented by Task(s) |
 |-------------------|-----------------------|------------------------|
-| [[PH:REQ_LABEL]] | [[PH:REQ_SRC]] | [[PH:TASK_IDS]] |
+| Initial wiring | SPEC §0 | 1.1 |
+| Baseline capture | SPEC §0 | 1.2 |

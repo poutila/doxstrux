@@ -263,6 +263,9 @@ def _is_inside_code_block(line_idx: int, code_blocks: List[Tuple[int, int]]) -> 
             return True
     return False
 
+def _is_inside_any_block(idx: int, blocks: List[Tuple[int, int]]) -> bool:
+    return any(start <= idx <= end for start, end in blocks)
+
 
 def _is_captured_header_line(stripped: str) -> bool:
     """Check if a line is a captured evidence header metadata line."""
@@ -278,6 +281,37 @@ def _is_captured_header_line(stripped: str) -> bool:
 def _is_stop_label_line(stripped: str) -> bool:
     """Check if a line is a STOP evidence section label."""
     return stripped in ("# Test run output:", "# Symbol/precondition check output:")
+
+
+def _parse_coverage_entry(entry: str) -> List[str]:
+    """
+    Parse a coverage entry string into a list of task IDs.
+    Allowed forms: single 'N.M', list 'N.M, X.Y', range 'N.M-P.Q' (same prefix).
+    """
+    refs: List[str] = []
+    items = [itm.strip() for itm in entry.split(",") if itm.strip()]
+    for itm in items:
+        if "-" in itm:
+            parts = itm.split("-")
+            if len(parts) != 2:
+                raise ValueError(f"invalid range '{itm}'")
+            start, end = parts
+            m1 = re.match(r"^(\d+)\.(\d+)$", start)
+            m2 = re.match(r"^(\d+)\.(\d+)$", end)
+            if not (m1 and m2):
+                raise ValueError(f"invalid range endpoints in '{itm}'")
+            p1, s1 = m1.group(1), int(m1.group(2))
+            p2, s2 = m2.group(1), int(m2.group(2))
+            if p1 != p2:
+                raise ValueError(f"range '{itm}' crosses prefixes")
+            if s1 > s2:
+                raise ValueError(f"range '{itm}' is backward")
+            refs.extend([f"{p1}.{k}" for k in range(s1, s2 + 1)])
+        else:
+            if not re.match(r"^\d+\.\d+$", itm):
+                raise ValueError(f"invalid task id '{itm}'")
+            refs.append(itm)
+    return refs
 
 
 def _check_evidence_non_empty(block_lines: List[str], label: Optional[str] = None) -> bool:
@@ -715,13 +749,20 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                         if header_err:
                             errors.append(LintError(content_start + 1 + g_start + f0, "R-ATL-024",
                                 f"Global Clean Table evidence {header_err}."))
+    else:
+        if meta.get("mode") in ("plan", "instantiated"):
+            errors.append(LintError(1, "R-ATL-NEW-03", "Global Clean Table Scan section missing (required for plan/instantiated modes)."))
 
     # Phase/Task parse
     phases: Dict[str, int] = {}
     tasks: Dict[str, int] = {}
     task_indices: List[Tuple[str, int]] = []
 
+    code_blocks_all = _get_all_fenced_blocks(content)
+
     for i, ln in enumerate(content):
+        if _is_inside_any_block(i, code_blocks_all):
+            continue
         mp = RE_PHASE.match(ln)
         if mp:
             phases[mp.group(1)] = content_start + 1 + i
@@ -729,7 +770,7 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
         if mt:
             tid = f"{int(mt.group(1))}.{int(mt.group(2))}"
             if tid in tasks:
-                errors.append(LintError(content_start + 1 + i, "R-ATL-031", f"Duplicate Task ID {tid} (previous line {tasks[tid]})."))
+                errors.append(LintError(content_start + 1 + i, "R-ATL-NEW-01", f"Duplicate Task ID {tid} (previous line {tasks[tid]})."))
             tasks[tid] = content_start + 1 + i
             task_indices.append((tid, i))
 
@@ -913,7 +954,14 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                             tool_hint = search_tool or "rg/grep"
                             errors.append(LintError(start_line + f0, "R-ATL-D2", f"Task {tid} Preconditions must not use [[PH:SYMBOL_CHECK_COMMAND]] in plan mode. Use a real {tool_hint} command."))
                         # Skip comment lines (starting with #)
-                        cmd_lines = [ln for ln in code_lines if not ln.strip().startswith("#")]
+                        cmd_lines = []
+                        for ln in code_lines:
+                            stripped = ln.strip()
+                            if stripped.startswith("#") or stripped.startswith("```"):
+                                continue
+                            if stripped.startswith("$"):
+                                stripped = stripped[1:].strip()
+                            cmd_lines.append(stripped)
                         if search_tool == "rg":
                             # Strict mode: only rg allowed
                             if not any(RE_SYMBOL_CMD_RG_ONLY.search(ln) for ln in cmd_lines):
@@ -1064,17 +1112,78 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
                         errors.append(LintError(content_start + 1 + idx, "R-ATL-D4", 
                             f"grep is forbidden when search_tool=rg. Use ripgrep (rg) instead."))
 
-    # Prose Coverage Mapping (presence/structure check; warning intent but enforced here)
+    # Coverage Mapping integrity (R-ATL-NEW-02)
     if meta.get("mode") in ("plan", "instantiated"):
         pcm_bounds = _section_bounds(content, "## Prose Coverage Mapping")
         if not pcm_bounds:
-            errors.append(LintError(1, "R-ATL-PROSE", "Prose Coverage Mapping section required for plan/instantiated modes (missing)."))
+            errors.append(LintError(1, "R-ATL-NEW-02", "Prose Coverage Mapping section required for plan/instantiated modes (missing)."))
         else:
             pcm_start, pcm_end = pcm_bounds
             pcm_sec = content[pcm_start:pcm_end]
-            table_rows = [ln for ln in pcm_sec if ln.strip().startswith("|")]
-            if len(table_rows) < 2:  # header + at least one data row
-                errors.append(LintError(content_start + 1 + pcm_start, "R-ATL-PROSE", "Prose Coverage Mapping table is empty or malformed (required in plan/instantiated)."))
+            # Find first markdown table after the heading
+            table_start = None
+            pcm_body = pcm_sec[1:]  # skip heading line
+            for idx, ln in enumerate(pcm_body):
+                if ln.strip().startswith("|"):
+                    table_start = idx
+                    break
+                # stop if we hit another heading
+                if ln.startswith("#"):
+                    break
+            if table_start is None:
+                errors.append(LintError(content_start + 1 + pcm_start, "R-ATL-NEW-02", "Prose Coverage Mapping table is empty or malformed (required in plan/instantiated)."))
+            else:
+                # Collect contiguous table lines
+                table_lines: List[str] = []
+                for j in range(table_start, len(pcm_body)):
+                    ln = pcm_body[j]
+                    if not ln.strip():
+                        break
+                    if ln.startswith("#"):
+                        break
+                    if ln.strip().startswith("|"):
+                        table_lines.append(ln)
+                    else:
+                        break
+                if len(table_lines) < 2:
+                    errors.append(LintError(content_start + 1 + pcm_start + 1 + table_start, "R-ATL-NEW-02", "Prose Coverage Mapping table requires header and at least one data row."))
+                else:
+                    header = table_lines[0].strip().strip("|")
+                    headers = [h.strip() for h in header.split("|")]
+                    accepted = ["Implemented by Task(s)", "Implemented by Tasks", "Tasks", "Task IDs"]
+                    col_idx = None
+                    for idx, name in enumerate(headers):
+                        if name in accepted:
+                            if name == "Implemented by Task(s)":
+                                col_idx = idx
+                                break
+                            if col_idx is None:
+                                col_idx = idx
+                    if col_idx is None:
+                        errors.append(LintError(content_start + 1 + pcm_start + 1 + table_start, "R-ATL-NEW-02", "Prose Coverage Mapping missing Implemented-by column."))
+                    else:
+                        # Parse data rows
+                        data_rows = table_lines[1:]
+                        # Drop separator row if present
+                        if data_rows and data_rows[0].strip().startswith("|-"):
+                            data_rows = data_rows[1:]
+                        for rel_row, row in enumerate(data_rows, start=1):
+                            cells = [c.strip() for c in row.strip().strip("|").split("|")]
+                            if col_idx >= len(cells):
+                                errors.append(LintError(content_start + 1 + pcm_start + 1 + table_start + rel_row, "R-ATL-NEW-02", "Coverage table row missing Implemented-by cell."))
+                                continue
+                            cell = cells[col_idx]
+                            try:
+                                refs = _parse_coverage_entry(cell)
+                            except ValueError as e:
+                                errors.append(LintError(content_start + 1 + pcm_start + 1 + table_start + rel_row, "R-ATL-NEW-02", f"Coverage parse error: {e}"))
+                                continue
+                            for ref in refs:
+                                count = list(tasks.keys()).count(ref)
+                                if count == 0:
+                                    errors.append(LintError(content_start + 1 + pcm_start + 1 + table_start + rel_row, "R-ATL-NEW-02", f"Coverage references task '{ref}' which does not exist."))
+                                elif count > 1:
+                                    errors.append(LintError(content_start + 1 + pcm_start + 1 + table_start + rel_row, "R-ATL-NEW-02", f"Task '{ref}' appears {count} times (ambiguous)."))
 
     return meta, errors
 

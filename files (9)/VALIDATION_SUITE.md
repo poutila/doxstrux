@@ -21,20 +21,20 @@
 - Plan with command placeholder: `canonical_examples/negatives/plan_preconditions_placeholder.md`
   - Expected: exit 1, R-ATL-D2 (plan forbids `[[PH:SYMBOL_CHECK_COMMAND]]`; requires real rg).
 - Plan missing coverage mapping: `canonical_examples/negatives/plan_missing_coverage_mapping.md`
-  - Expected: exit 1, R-ATL-PROSE (coverage section missing).
+  - Expected: exit 1, R-ATL-NEW-02 (coverage section missing).
 - Template missing Clean Table placeholder: `canonical_examples/negatives/template_missing_clean_table_placeholder.md`
   - Expected: exit 1, R-ATL-060 (placeholder absent in template mode).
 
 ### 5) Doc-sync spot check
 - Ensure mode references are consistent:
-  - Files: spec, template, orchestrator, manuals, README, DESCRIPTION, INDEX, MIGRATION_GUIDE.
+  - Files: spec, template, orchestrator, manuals, README, DESCRIPTION, INDEX, MIGRATION_GUIDE (or their v1.9 equivalents).
   - Quick grep: `rg "mode: \\\"plan\\\"|mode: \\\"template\\\"|mode: \\\"instantiated\\\"" (specify files as needed)`
 
 ## Test Results (as of this run)
 - AI_TASK_LIST_TEMPLATE_v6.md: pass (exit 0)
 - canonical_examples/example_plan.md: pass (exit 0)
 - canonical_examples/example_instantiated.md: pass (exit 0) with `--require-captured-evidence`
-- Negative: Plan missing Prose Coverage Mapping (`canonical_examples/negatives/plan_missing_coverage_mapping.md`) → exit 1 (R-ATL-PROSE).
+- Negative: Plan missing Prose Coverage Mapping (`canonical_examples/negatives/plan_missing_coverage_mapping.md`) → exit 1 (R-ATL-NEW-02).
 - Negative: Template with missing Clean Table placeholder (`canonical_examples/negatives/template_missing_clean_table_placeholder.md`) → exit 1 (R-ATL-060).
 - Negative: Plan with Preconditions placeholder (`canonical_examples/negatives/plan_preconditions_placeholder.md`) → exit 1 (R-ATL-D2) with no crash.
 
