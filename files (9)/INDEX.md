@@ -2,9 +2,9 @@
 
 Core artifacts:
 - `COMMON.md` — Shared framework definitions (versions, modes, SSOT, runner/import/gate/placeholder/evidence rules).
-- `AI_TASK_LIST_SPEC_v1.md` — Specification v1.9 for AI task lists (rules, headings, governance; template/plan/instantiated; schema_version 1.7). <!-- See COMMON.md §Version Metadata -->
+- `AI_TASK_LIST_SPEC_v1.md` — Specification for AI task lists (rules, headings, governance; template/plan/instantiated; see COMMON.md §Version Metadata for versions/schema). <!-- See COMMON.md §Version Metadata -->
 - `AI_TASK_LIST_TEMPLATE_v6.md` — Template v6 for new task lists.
-- `ai_task_list_linter_v1_9.py` — Stdlib linter implementing Spec v1.9 (three modes; `--require-captured-evidence` support).
+- `ai_task_list_linter_v1_9.py` — Stdlib linter implementing the spec (three modes; `--require-captured-evidence` support). See COMMON.md §Version Metadata for versions/schema.
 - `README_ai_task_list_linter_v1_9.md` — Linter release notes and usage.
 
 Guides and manuals:

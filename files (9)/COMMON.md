@@ -18,8 +18,8 @@
 - Lifecycle: template → plan → instantiated.
 
 ## §Runner Rules (uv)
-- Required: `$ uv sync` and `$ uv run ...` as command lines in code blocks.
-- Forbidden on `$` lines: `.venv/bin/python`, `python -m ...`, `pip install ...`.
+- Required: `$ uv sync` and `$ uv run <command>` as command lines in code blocks.
+- Forbidden on `$` lines: `.venv/bin/python`, `python -m <module>`, `pip install <package>` (no pip installs).
 - Runner prefix: enforce `runner_prefix` on runner-managed tools (`pytest`, `python`, `mypy`, `ruff`, `black`, `isort`).
 
 ## §Import Hygiene (Python/uv)
@@ -28,8 +28,8 @@
   - `$ if rg 'import \*' src/; then exit 1; fi` (no wildcard imports)
 
 ## §Gate Patterns
-- Recommended: fail on match (`! rg 'pattern' ...` or `if rg 'pattern' ...; then exit 1; fi`).
-- Anti-patterns: `rg ... && exit 1 || echo/true` (always passes).
+- Recommended: fail on match (`! rg 'pattern' path/` or `if rg 'pattern' path/; then exit 1; fi`).
+- Anti-patterns: `rg 'pattern' path/ && exit 1 || echo/true` (always passes).
 
 ## §Placeholder Protocol
 - Format: `[[PH:NAME]]`, NAME = `[A-Z0-9_]+`.

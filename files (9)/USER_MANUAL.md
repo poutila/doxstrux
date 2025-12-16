@@ -1,7 +1,7 @@
 # AI Task List Framework — User Manual
 
 This framework pairs a strict specification, a template, and a deterministic linter to produce AI task lists that are lintable, drift-resistant, and runnable. Files:
-- `AI_TASK_LIST_SPEC_v1.md` — the contract (Spec v1.9; schema_version 1.7; template/plan/instantiated).
+- `AI_TASK_LIST_SPEC_v1.md` — the contract (modes: template/plan/instantiated; see COMMON.md §Version Metadata for versions/schema).
 - `AI_TASK_LIST_TEMPLATE_v6.md` — starting point for new task lists.
 - `ai_task_list_linter_v1_9.py` — the linter implementing the spec.
 - `README_ai_task_list_linter_v1_9.md` — release notes and highlights.
@@ -18,7 +18,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 - Baseline tests: Baseline Snapshot must include a Baseline tests fenced block with `$` commands and real output in instantiated mode.
 - Mode decision: use `mode: template` for generic scaffolds with placeholders; use `mode: plan` for project-specific plans (real commands, evidence placeholders); switch to `mode: instantiated` only when evidence will be real.
 
-## 1.5) How to start a new task list (prose → task list)
+## How to start a new task list (prose → task list)
 1) Select the prose source (e.g., a design/spec doc for the current project).
 2) Start a fresh AI session.
 3) Paste the entire `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md`.
@@ -33,7 +33,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 
 ## 2) Quickstart (New Project)
 1. Copy `AI_TASK_LIST_TEMPLATE_v6.md` to your repo as `PROJECT_TASKS.md`.
-2. Fill YAML front matter: `schema_version: "1.7"`, `mode: "template"` for generic scaffolds or `mode: "plan"` for project plans (real commands, evidence placeholders); switch to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
+2. Fill YAML front matter: `schema_version: "<see COMMON.md §Version Metadata>"`, `mode: "template"` for generic scaffolds or `mode: "plan"` for project plans (real commands, evidence placeholders); switch to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
 3. Map prose to tasks: list each major requirement from the source prose and map to task(s); mark out-of-scope items explicitly.
 4. Replace placeholders and flip to `mode: "instantiated"` only when evidence will be real.
 5. Run baseline commands (git branch/commit, runner/runtime versions, baseline tests); paste outputs with `# cmd/# exit`.
@@ -41,7 +41,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 7. Generate phase unlock artifact with `$ cat > .phase-N.complete.json` and `$ rg` placeholder scan.
 8. Run the linter via runner (see below) until it passes; then run the validation suite (positives + negatives).
 
-## 2.5) Migration (template → plan → instantiated)
+## Migration (template → plan → instantiated)
 - Decision tree:
   - `template`: generic scaffold with command/evidence placeholders.
   - `plan`: project-specific planning; commands real; evidence/output placeholders allowed.
@@ -67,7 +67,7 @@ uv run python ai_task_list_linter_v1_9.py --json PROJECT_TASKS.md
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 
 ## 4) Enforcement Highlights (what will fail lint)
-- Front matter must have exact `schema_version: "1.7"`, `mode`, `runner`, `runner_prefix`, `search_tool`.
+- Front matter must have exact `schema_version` from COMMON.md, plus `mode`, `runner`, `runner_prefix`, `search_tool`.
 - Required headings (9 anchors) must be present exactly.
 - No placeholders allowed anywhere in instantiated mode.
 - Task naming rule must appear exactly once.
@@ -98,7 +98,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 - Prose Coverage Mapping: include a table under `## Prose Coverage Mapping` with an Implemented-by column (accepted headers: Implemented by Task(s), Implemented by Tasks, Tasks, Task IDs). Map prose requirements to task IDs; references must point to existing unique tasks. Missing/empty table or missing column is an error in plan/instantiated modes.
 
 ## 6) Typical Linter Failures and Fixes
-- `schema_version must be '1.7'`: fix YAML front matter.
+- `schema_version must match COMMON.md`: fix YAML front matter to the value in COMMON.
 - `Placeholders are forbidden in instantiated mode`: remove remaining `[[PH:]]`.
 - `command lines must start with '$'`: add `$` to commands in required sections.
 - `runner=uv requires '$ uv sync' command line`: add `$ uv sync` in a fenced block.

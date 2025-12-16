@@ -1,4 +1,4 @@
-# Validation Suite — Plan Mode Rollout (Spec v1.9 / Linter v1.9)
+# Validation Suite — Plan Mode Rollout (versions: see COMMON.md §Version Metadata)
 
 ## Tests to Run
 
@@ -27,7 +27,7 @@
 
 ### 5) Doc-sync spot check
 - Ensure mode references are consistent:
-  - Files: spec, template, orchestrator, manuals, README, DESCRIPTION, INDEX, MIGRATION_GUIDE (or their v1.9 equivalents).
+- Files: spec, template, orchestrator, manuals, README, DESCRIPTION, INDEX, MIGRATION_GUIDE (use current versions per COMMON.md §Version Metadata).
   - Quick grep: `rg "mode: \\\"plan\\\"|mode: \\\"template\\\"|mode: \\\"instantiated\\\"" (specify files as needed)`
 
 ## Test Results (as of this run)
@@ -40,8 +40,8 @@
 
 ## Performance/Regression Checks
 - Target: <10% overhead vs prior run (manual observation).
-- Backward-compat: run linter on a known v1.5/v1.6 task list; expected behavior: errors for schema/spec mismatch.
+- Backward-compat: run linter on a known legacy task list (older schema/spec); expected behavior: errors for schema/spec mismatch.
 
 ## Release Artifacts
-- CHANGELOG: add entry for spec v1.7/linter v1.9 (plan mode, baseline/Phase Gate enforcement, coverage check).
+- CHANGELOG: add entry for current spec/linter (plan mode, baseline/Phase Gate enforcement, coverage check) per COMMON.md §Version Metadata.
 - Migration: ensure `MIGRATION_GUIDE.md` is up to date and linked from README.

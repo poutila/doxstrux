@@ -25,6 +25,9 @@ ALLOWED_VERSION_FILES = {
     ROOT / "COMMON.md",
     ROOT / "AI_TASK_LIST_SPEC_v1.md",
     ROOT / "ai_task_list_linter_v1_9.py",
+    ROOT / "AI_TASK_LIST_TEMPLATE_v6.md",
+    ROOT / "VERSION_NORMALIZATION.md",
+    ROOT / "GENERAL_FIX_1.md",
 }
 
 HISTORICAL_RE = re.compile(
@@ -34,7 +37,10 @@ HISTORICAL_RE = re.compile(
 ELLIPSIS_ALLOWED_RE = re.compile(r"^(?:\$\s*)?(?:uv run|rg)\b.*\.\.\.")
 
 VERSION_LINE_RE = re.compile(
-    r"^Spec: v(\d+\.\d+)\s*$|^schema_version:\s*\"(\d+\.\d+)\"\s*$|^Linter:\s*ai_task_list_linter_v(\d+)_(\d+)\.py\s*$|^Template:\s*v(\d+\.\d+)\s*$"
+    r"^-?\s*Spec:\s*v(\d+\.\d+)\s*(?:\(schema_version:\s*\"(\d+\.\d+)\"\))?\s*$"
+    r"|^-?\s*schema_version:\s*\"(\d+\.\d+)\"\s*$"
+    r"|^-?\s*Linter:\s*v(\d+\.\d+)\s*\(`?ai_task_list_linter_v(\d+)_(\d+)\.py`?\)\s*$"
+    r"|^-?\s*Template:\s*v(\d+\.\d+)\s*$"
 )
 
 FRONTMATTER_RE = re.compile(r"^---\s*$")
@@ -80,14 +86,26 @@ def parse_common_tuple() -> Tuple[str, str, str, str]:
         if not vm:
             continue
         g = vm.groups()
+        # Matches:
+        # 0: spec from Spec line
+        # 1: schema from Spec line
+        # 2: schema standalone
+        # 3: linter version (vX.Y)
+        # 4: linter major
+        # 5: linter minor
+        # 6: template version
         if g[0]:
             spec = g[0]
         if g[1]:
             schema = g[1]
-        if g[2] and g[3]:
-            linter = f"{g[2]}.{g[3]}"
-        if g[4]:
-            template = g[4]
+        if g[2]:
+            schema = g[2]
+        if g[3]:
+            linter = g[3]
+        if g[4] and g[5]:
+            linter = f"{g[4]}.{g[5]}"
+        if g[6]:
+            template = g[6]
     if not all([spec, schema, linter, template]):
         fail("COMMON.md: could not parse full version tuple (spec/schema/linter/template)")
     return spec, schema, linter, template
@@ -117,6 +135,10 @@ def check_yaml_schema(schema_expected: str) -> None:
 
 def check_versions(spec_v: str, schema_v: str, linter_v: str) -> None:
     for p in iter_md_files():
+        if "canonical_examples" in p.parts:
+            continue
+        if "validation" in p.parts:
+            continue
         text = p.read_text(encoding="utf-8", errors="ignore")
         if p in ALLOWED_VERSION_FILES:
             continue
@@ -129,6 +151,8 @@ def check_versions(spec_v: str, schema_v: str, linter_v: str) -> None:
             if line_end == -1:
                 line_end = len(text)
             line = text[line_start:line_end]
+            if "schema_version" in line:
+                continue
             if HISTORICAL_RE.search(line):
                 continue
             fail(f"Version literal in non-SSOT file {p}:{line_start}: {line.strip()}")

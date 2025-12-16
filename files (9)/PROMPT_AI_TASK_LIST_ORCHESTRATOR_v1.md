@@ -45,7 +45,7 @@ Task
 ====
 Given the prose document and the framework artifacts above, produce a single Markdown AI task list file (e.g., `PROJECT_TASKS.md`) that:
 
-- Is **valid against Spec v1.9** (as far as you can check from text alone).
+- Is **valid against the Spec (see COMMON.md §Version Metadata for versions/schema)** (as far as you can check from text alone).
 - Is **ready to be linted** by `ai_task_list_linter_v1_9.py --require-captured-evidence` once a human fills in real evidence.
 - Encodes a realistic, implementable plan for the changes described in the prose.
 - Bakes in:
@@ -95,7 +95,7 @@ High-level workflow
 
 4. **Instantiate the template structure**
    - Start from `AI_TASK_LIST_TEMPLATE_v6.md` structure:
-     - YAML front matter with `schema_version: "1.7"` (from COMMON.md), `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
+     - YAML front matter with `schema_version` from COMMON.md, `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
      - Required headings (Non-negotiable Invariants, Placeholder Protocol, Source of Truth, Baseline Snapshot, Phase 0, Drift Ledger, Phase Unlock Artifact, Global Clean Table Scan, STOP — Phase Gate).
   - Preserve:
      - The naming rule (“Task ID N.M → TASK_N_M_PATHS”).
@@ -179,7 +179,7 @@ Before returning the Markdown:
        - Has a `TASK_N_M_PATHS` array with at least one quoted path.
        - Has TDD headings and STOP section.
        - Has Preconditions with a symbol-check command matching `search_tool`.
-   - Ensure YAML front matter includes all required fields and uses `schema_version: "1.7"`.
+   - Ensure YAML front matter includes all required fields and uses `schema_version` from COMMON.md.
 
 2. **Governance sweep**
    - Confirm:

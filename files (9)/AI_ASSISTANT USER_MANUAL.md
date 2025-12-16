@@ -24,7 +24,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 
 ## 3) Instantiate the Template (Structure First)
 - Copy `AI_TASK_LIST_TEMPLATE_v6.md` to a new file (e.g., `PROJECT_TASKS.md`).
-- Fill YAML front matter: `schema_version: "1.7"`, `mode: "plan"` for project planning; flip to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
+- Fill YAML front matter: `schema_version: "<see COMMON.md §Version Metadata>"` (current schema_version is listed there), `mode: "plan"` for project planning; flip to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
 - Keep required headings intact (per spec anchors).
 - Set status for each task (one of: 📋 PLANNED, ⏳ IN PROGRESS, ✅ COMPLETE, ❌ BLOCKED).
 
@@ -48,7 +48,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Scope: in/out bullets if needed for clarity.
 - Canonical examples: use `canonical_examples/example_plan.md` (plan) and `canonical_examples/example_template.md` (template) as structural guides; see `canonical_examples/negatives/` for expected-fail patterns.
 
-## 1.5) Prose Coverage Mapping (required in plan/instantiated)
+## Prose Coverage Mapping (required in plan/instantiated)
 - Required in plan/instantiated: include a markdown table under `## Prose Coverage Mapping` with an Implemented-by column (accepted headers: Implemented by Task(s), Implemented by Tasks, Tasks, Task IDs). References must point to existing unique Task IDs; ranges must be forward and same prefix.
 - For each major requirement in the source prose, map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope. Plan/instantiated modes error on missing/empty coverage tables.
 - Suggested table:
@@ -57,7 +57,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 |---------------------------|--------------------------|------------------------|
 |                           |                          |                        |
 
-## 1.6) Orchestrator entry point (prose → task list)
+## Orchestrator entry point (prose → task list)
 - Runtime prompt: `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md`.
 - How to use:
   1. Start a fresh AI session.
@@ -107,7 +107,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Phase unlock artifact commands and scans must be `$`-prefixed.
 - Preconditions must contain at least one `$ rg …` line per task.
 - Drift Ledger: log real mismatches (e.g., known import hygiene violations vs. invariant); don’t leave it empty if you’ve observed drift. If you mention or detect a mismatch between the task list and prose/spec, or between invariants and repo state, add a ledger entry with higher/lower sources, short mismatch, and a path:line witness—do not silently correct without logging.
-- Prose Coverage Mapping: table present in plan/instantiated; Implemented-by column present (accepted headers in §1.5); entries reference real task IDs (no missing/duplicate IDs; ranges forward/same prefix).
+- Prose Coverage Mapping: table present in plan/instantiated; Implemented-by column present (accepted headers listed in Prose Coverage Mapping section); entries reference real task IDs (no missing/duplicate IDs; ranges forward/same prefix).
 - Clean Table: write commands so they fail on matches (e.g., `! rg 'TODO|FIXME|XXX' src/`) instead of “always succeed” patterns.
 
 ## 9) Validate with the Linter

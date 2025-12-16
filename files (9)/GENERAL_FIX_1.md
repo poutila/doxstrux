@@ -1,7 +1,7 @@
 # GENERAL_FIX_1.md — Framework Fix Plan (not file-specific)
 
 ## Purpose
-Validate and align the already-implemented linter v1.9 (Spec v1.9 / schema 1.7, three modes) with spec/COMMON/docs/examples; capture baselines/canaries; and ensure new rules (NEW-01/02/03) are reflected across artifacts. No new linter behavior changes are intended beyond the current v1_9 code.
+Validate and align the already-implemented linter (see COMMON.md for versions/schema; three modes) with spec/COMMON/docs/examples; capture baselines/canaries; and ensure new rules (NEW-01/02/03) are reflected across artifacts. No new linter behavior changes are intended beyond the current v1_9 code.
 
 ## Current State Audit (pre-flight; not blocking fixture creation)
 **Status:** 🟡 DRAFT — baseline evidence not yet captured; set ownership before execution  

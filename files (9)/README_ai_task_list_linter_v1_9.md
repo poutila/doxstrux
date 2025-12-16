@@ -1,17 +1,17 @@
-# AI Task List Linter v1.9
+# AI Task List Linter
 
-Deterministic linter for AI Task Lists (Spec v1.9; schema_version "1.7", three modes (template/plan/instantiated)). Code filename: `ai_task_list_linter_v1_9.py`. <!-- See COMMON.md §Version Metadata -->
+Deterministic linter for AI Task Lists (modes: template/plan/instantiated). Code filename: `ai_task_list_linter_v1_9.py`. Versions/schema: see COMMON.md §Version Metadata. <!-- See COMMON.md §Version Metadata -->
 
 ## What this framework is for
-- **Specification**: `AI_TASK_LIST_SPEC_v1.md` (v1.9; schema_version 1.7; three modes) — contract for headings, evidence, runner/import hygiene, Clean Table, TDD/STOP gates.
+- **Specification**: `AI_TASK_LIST_SPEC_v1.md` (see COMMON.md for versions/schema) — contract for headings, evidence, runner/import hygiene, Clean Table, TDD/STOP gates.
 - **Template**: `AI_TASK_LIST_TEMPLATE_v6.md` — starting point with required sections/placeholders.
 - **Linter**: `ai_task_list_linter_v1_9.py` — stdlib-only, deterministic enforcement (no network/mutation).
 - **Manuals/Docs**: `USER_MANUAL.md`, `AI_ASSISTANT USER_MANUAL.md`, `COMMON.md` for shared rules, plus `INDEX.md` for orientation (planning docs in `task_list_archive/`).
 - **Goal**: produce task lists that (1) don’t drift, (2) stay close to reality, (3) are lintable, (4) bake in governance (TDD, No Weak Tests, Clean Table, runner/import/search rules), and (5) reduce iteration loops.
 
-## What's Fixed in v1.9
+## What's Fixed
 
-**Plan mode supported (Spec v1.9; schema_version 1.7):**
+**Plan mode supported (see COMMON.md for versions/schema):**
 - Accepts `mode: plan` (real commands, evidence placeholders).
 - Template/plan Baseline: fenced Evidence with `[[PH:OUTPUT]]`, Baseline tests fenced block required.
 - Instantiated Baseline: $-prefix enforced; existing non-empty/output checks retained.
@@ -102,7 +102,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/internal error
 
 ```yaml
 ai_task_list:
-  schema_version: "1.7"    # Must be exactly "1.7"
+  schema_version: "<see COMMON.md §Version Metadata>"    # Do not hard-code; use the value from COMMON.md
   mode: "plan"             # or "template" / "instantiated"
   runner: "uv"
   runner_prefix: "uv run"  # REQUIRED; used for runner enforcement
@@ -117,11 +117,11 @@ ai_task_list:
 ✅ Instantiated example passes (--require-captured-evidence)
 ✅ Comment compliance REJECTED (import hygiene patterns in comments)
 ✅ Comment compliance REJECTED (Phase Unlock scan in comments)
-✅ Old schema versions rejected (e.g., 1.5 rejected; requires 1.7)
+✅ Old schema versions rejected (older schemas rejected; requires current schema per COMMON.md)
 ✅ Spec search_tool consistency (MUST include, not MAY)
 ```
 
-## Migration to v1.9 (plan mode)
+## Migration (plan mode)
 
 1. For project-specific task lists with real commands: set `mode: "plan"`; keep evidence placeholders.
 2. For generic scaffolds: keep `mode: "template"` with command placeholders.
@@ -131,7 +131,7 @@ ai_task_list:
 
 ## Design Philosophy
 
-v1.8 closes the "comment compliance" loophole identified by strict validation:
+Prior release closed the "comment compliance" loophole identified by strict validation:
 
 > "Some enforcement can be satisfied via comments/prose because the linter checks for string presence in section text rather than requiring them as $ command lines."
 
