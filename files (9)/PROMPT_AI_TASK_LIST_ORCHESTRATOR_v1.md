@@ -95,7 +95,7 @@ High-level workflow
 
 4. **Instantiate the template structure**
    - Start from `AI_TASK_LIST_TEMPLATE_v6.md` structure:
-     - YAML front matter with `schema_version: "1.7"`, `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
+     - YAML front matter with `schema_version: "1.7"` (from COMMON.md), `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
      - Required headings (Non-negotiable Invariants, Placeholder Protocol, Source of Truth, Baseline Snapshot, Phase 0, Drift Ledger, Phase Unlock Artifact, Global Clean Table Scan, STOP — Phase Gate).
   - Preserve:
      - The naming rule (“Task ID N.M → TASK_N_M_PATHS”).
@@ -119,7 +119,7 @@ High-level workflow
      - For behavior-changing tasks, reference at least one concrete test name and the behavior it asserts.
    - **STOP — Clean Table**
      - Include:
-       - Evidence block with placeholders (template mode).
+       - Evidence block (placeholders allowed in template/plan; real output required only in instantiated).
        - The four No Weak Tests checklist items.
        - The five Clean Table checklist items (tests pass, full suite passes, no placeholders, paths exist, drift ledger updated).
    - **Status**
@@ -189,6 +189,7 @@ Before returning the Markdown:
      - Import hygiene checks present for Python/uv (if applicable).
      - Global Clean Table section shows realistic recommended patterns.
      - Gates use failing patterns (no `rg … && exit 1 || true/echo`).
+     - Baseline/STOP/Global evidence blocks: `$`-prefixed commands; placeholders allowed in template/plan; real output required only in instantiated.
 
 3. **Prose coverage sweep**
    - Prose Coverage Mapping is **required** in plan/instantiated:
@@ -203,7 +204,8 @@ Before returning the Markdown:
      - Real commit hashes.
      - Real runtime versions.
    - Keep these as placeholders in template mode.
+   - Evidence must be truthful and cite sources/paths; do not fabricate outputs or headers.
 
-Once you’ve passed your self-check, output the task list Markdown. Save it to the working folder (e.g., `./work_folder/PROSE_DOC_LABEL_tasks_template.md` where PROSE_DOC_LABEL is a safe label derived from the prose file name). Do not invent a label if not provided; use the prose filename stem as the label.
+Once you’ve passed your self-check, output the task list Markdown. Save it to the working folder (e.g., `./work_folder/PROSE_DOC_LABEL_tasks_template.md`, where PROSE_DOC_LABEL = prose filename stem lowercased, spaces → underscores, extension removed, non-alphanumeric removed). If the normalized label is empty, fail and ask for a label. Do not invent a label beyond that normalization.
 
 If any sweep fails, do not answer yet. Instead, revise the task list to satisfy the failing checks, re-run all sweeps on the revised version, and only output the final Markdown once all sweeps pass. Do not show intermediate drafts or partial outputs.

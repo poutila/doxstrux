@@ -1,11 +1,14 @@
 # VERSION_NORMALIZATION.md — Plan to Normalize Version Metadata
 
 Goal: One consistent version story across all framework artifacts.
-SSOT policy (SSOT set):
+SSOT policy (SSOT set for versions):
 - COMMON.md carries the canonical human-readable version tuple.
 - AI_TASK_LIST_SPEC_v1.md header is an authoritative contract surface.
 - ai_task_list_linter_v1_9.py (LINTER_VERSION + required schema_version enforcement) is an authoritative enforcement surface.
 These three MUST match. All other docs MUST either reference COMMON.md (§Version Metadata) or stay silent on concrete numbers.
+
+SSOT docs (normative prose scope for ellipsis/placeholder checks):
+- COMMON.md, AI_TASK_LIST_SPEC_v1.md, USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, AI_TASK_LIST_TEMPLATE_v6.md.
 
 COMMON.md parsing (no guessing):
 - Find section with heading exactly `## §Version Metadata`.
