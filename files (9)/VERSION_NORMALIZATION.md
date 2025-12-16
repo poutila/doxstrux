@@ -9,6 +9,7 @@ These three MUST match. All other docs MUST either reference COMMON.md (§Versio
 
 COMMON.md parsing (no guessing):
 - Find section with heading exactly `## §Version Metadata`.
+- If heading not found: guardrail/script MUST fail (no fallback parsing).
 - Read lines until the next `##` heading.
 - Parse the tuple from lines matching:
   - `Spec: v(\d+\.\d+)`
@@ -54,6 +55,16 @@ Target tuple in COMMON.md:
   - `rg 'schema_version.*==.*['\\\"]1\\.\\d+' ai_task_list_linter_*.py`
 - Check cross-references that may embed versions:
   - `rg 'See.*Spec v|See.*schema_version' . --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/**'`
+  - Current version in non-SSOT files (should be absent): `rg '\\bv1\\.7\\b|schema.*1\\.7' . --glob '!COMMON.md' --glob '!AI_TASK_LIST_SPEC_v1.md' --glob '!ai_task_list_linter_v1_9.py' --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/**'`
+
+Conflicting strings policy (no guessing):
+- Allowed historical/version mentions:
+  - Anywhere in CHANGELOG.md (entire file is historical by nature), or
+  - Lines matching (case-insensitive):
+    - `\b(previously|formerly|originally)\b.*\bv?\d+\.\d+\b`
+    - `\bmigrated\s+from\b.*\bv?\d+\.\d+\b`
+    - `\bwas\s+(version|v|schema_version)\s+\d+\.\d+\b`
+- All other version literals outside the SSOT set/allowed files are violations.
 
 ## Edits to perform (content-level)
 1) Spec:
@@ -62,7 +73,7 @@ Target tuple in COMMON.md:
    - Ellipsis policy (deterministic):
      - Normative prose = any line outside fenced code blocks in SSOT docs (COMMON.md, AI_TASK_LIST_SPEC_v1.md, USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, AI_TASK_LIST_TEMPLATE_v6.md).
      - Forbidden: `...` anywhere in normative prose.
-     - Allowed inside fenced code blocks only (language {bash, sh}), and only on lines matching: `^(\\$\\s*)?(uv run|rg)\\b.*\\.\\.\\.` (example/command placeholders). Intentional: only `uv run`/`rg` placeholders are allowed; all other commands must be explicit.
+     - Allowed inside fenced code blocks only (language {bash, sh}), and only on lines matching: `^(\\$\\s*)?(uv run|rg)\\b.*\\.\\.\\.` (example/command placeholders). Intentional: only `uv run`/`rg` placeholders are allowed; all other commands/comments with `...` are violations. Unlabeled fences (no language) are treated as prose for `...` checks (i.e., `...` forbidden).
 2) COMMON:
    - Version block: Spec v1.9, schema 1.7, linter v1_9, template v6.0 (the SSOT tuple).
    - Mode table: template/plan/instantiated, placeholders spelled out.
@@ -70,6 +81,7 @@ Target tuple in COMMON.md:
    - Banner text: Spec v1.9; schema_version 1.7; three modes.
    - LINTER_VERSION = 1.9.0; ensure docstring reflects it.
    - Filename/version consistency: ai_task_list_linter_v<MAJOR>_<MINOR>.py MUST match LINTER_VERSION major.minor (e.g., 1.9.x → v1_9).
+   - Historical mentions: allowed in CHANGELOG.md and clearly marked historical prose (e.g., “previously v1.8”, “migrated from 1.6”); all other version literals outside SSOT set are violations.
 4) README_ai_task_list_linter_v1_9.md:
    - Replace concrete version strings with “See COMMON.md §Version Metadata”; keep file name references. “File name references” = literal filenames/links (e.g., `ai_task_list_linter_v1_9.py`). Update any older filenames (e.g., v1_8) to current.
 5) Manuals (USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, PROMPT_ORCHESTRATOR):
@@ -92,20 +104,22 @@ Target tuple in COMMON.md:
     - AI_TASK_LIST_SPEC_v1.md
     - ai_task_list_linter_v1_9.py
   - Fails if any non-archive file contains:
-    - schema_version not equal to "1.7" in YAML front matter of examples/template.
+    - schema_version not equal to "1.7" in YAML front matter of any markdown file outside exclusion paths (archives/work_folder/task_list_archive/.git).
     - Spec v other than v1.9 in SSOT set (spec header, linter banner).
-    - Linter filename references not equal to ai_task_list_linter_v1_9.py in SSOT docs.
+    - Linter filename references not equal to ai_task_list_linter_v1_9.py in SSOT docs (version-agnostic patterns like `ai_task_list_linter_v*.py` are allowed in code-block shell examples only; prose should use the exact current filename or reference COMMON).
     - LINTER_VERSION major.minor not matching the linter filename major.minor.
+    - Version literals in non-SSOT files that are not clearly historical (historical only allowed in CHANGELOG or lines matching the historical regex above).
   - Fails if `...` occurs in SSOT docs outside fenced code blocks.
   - Fails if `...` occurs inside fenced code blocks but does not match the allowed regex in Ellipsis policy.
   - Reference algorithm (no guessing):
     - parse COMMON.md “Target tuple” values
     - scan markdown files for YAML front matter; if present, enforce schema_version
-    - scan allowed-files list for version literals; scan all other files for forbidden literals
+    - scan allowed-files list for version literals; scan all other files for forbidden literals (historical mentions allowed only in CHANGELOG and lines matching the historical regex above)
     - apply ellipsis checks with fence awareness and allowed regex
+    - report first failure with file:path:line and exit non-zero (fail-fast, no auto-fix)
 
 ## Definition of Done
-- `rg 'schema_version: \"1\\.6\"|schema_version: 1\\.6|Spec v1\\.7|ai_task_list_linter_v1_8|README_ai_task_list_linter_v1_8|Spec 1\\.7|schema 1\\.6' . --glob '!*archive*' --glob '!work_folder/*'` returns nothing.
+- `rg 'schema_version: \"1\\.6\"|schema_version: 1\\.6|Spec v1\\.7|ai_task_list_linter_v1_8|README_ai_task_list_linter_v1_8|Spec 1\\.7|schema 1\\.6' . --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/*' --glob '!**/archive/**'` returns nothing.
 - Guardrail passes (tools/check_version_consistency.py exits 0).
 - COMMON.md contains the canonical tuple; other docs either reference COMMON or stay silent on concrete numbers (no conflicting strings).
 - Linter banner matches LINTER_VERSION; linter filename matches LINTER_VERSION major.minor.

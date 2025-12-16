@@ -1,5 +1,6 @@
 > This prompt is the *runtime orchestrator* for converting prose → AI task lists.  
-> Spec: AI_TASK_LIST_SPEC_v1.md (Spec v1.9; schema_version 1.7; template/plan/instantiated)  
+> Version metadata (Spec, schema_version, linter, template): see COMMON.md §Version Metadata.  
+> Spec: AI_TASK_LIST_SPEC_v1.md  
 > Template: AI_TASK_LIST_TEMPLATE_v6.md  
 > Linter: ai_task_list_linter_v1_9.py  
 > Manual: AI_ASSISTANT USER_MANUAL.md  
@@ -23,7 +24,7 @@ Sources & SSOT hierarchy
 You will be given:
 
 1. **Prose design / requirements**: `[[PH:PROSE_DOC_LABEL]]` (content pasted into this chat; e.g., [Target file](./path_to/[[PH:PROSE_DOC_FILENAME]].md)).
-2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — Spec v1.9 contract for valid task lists (schema_version: "1.7", template/plan/instantiated).
+2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — contract for valid task lists (schema_version: see COMMON.md; modes: template/plan/instantiated).
 3. **Template**: [AI_TASK_LIST_TEMPLATE_v6.md](./AI_TASK_LIST_TEMPLATE_v6.md) — starting point for new task lists.
 4. **Linter**: [ai_task_list_linter_v1_9.py](./ai_task_list_linter_v1_9.py) — implementation of the spec (assume it will be run after your output).
 5. **AI Assistant Manual**: [AI_ASSISTANT USER_MANUAL.md](./AI_ASSISTANT USER_MANUAL.md).
@@ -77,6 +78,7 @@ High-level workflow
 
 2. **Prose Coverage Mapping (required in plan/instantiated)**
    - Build a short table that maps major requirements in the prose to task IDs. If something is intentionally out-of-scope, mark it explicitly.
+   - Table must include an Implemented-by column (accepted headers: Implemented by Task(s), Implemented by Tasks, Tasks, Task IDs); referenced task IDs must exist and be unique.
    - Use the pattern (optional):
      | Prose requirement | Source (file/section) | Implemented by task(s) |
      |-------------------|-----------------------|------------------------|
@@ -130,18 +132,19 @@ High-level workflow
        - No `.venv/bin/python`, `python -m`, or `pip install` in `$` lines.
        - At least one `$ uv sync` and one `$ uv run ...` command in relevant blocks.
      - `search_tool`:
-       - If `rg`: use `rg` in code blocks; `grep` only allowed in prose, not commands.
+       - If `rg`: use `rg` in code blocks; `grep` only allowed in prose, not commands (linter forbids `grep` in code blocks when `search_tool=rg`).
    - In Global Clean Table Scan:
      - Include recommended scans:
        - TODO/FIXME/XXX
        - Placeholders
        - Import hygiene (for Python/uv: `from ..`, `import *`).
+     - Commands must start with `$` (linter enforces $-prefix in gated sections like Baseline/STOP/Global).
    - Gates must actually gate: for Clean Table/unlock, use failing patterns (`! rg ...` or `if rg ...; then exit 1; fi`), not `rg ... || true`.
 
 7. **Phase Unlock + Phase Gate**
    - In “Phase Unlock Artifact”:
      - Show `.phase-N.complete.json` generation using `$ cat > .phase-N.complete.json << EOF` pattern.
-     - Include a `$ rg` placeholder-rejection scan.
+     - Include a `$ rg` placeholder-rejection scan (must be `$`-prefixed).
    - In “STOP — Phase Gate”:
      - Ensure the checklist references:
        - `.phase-N.complete.json` existence.
@@ -201,6 +204,6 @@ Before returning the Markdown:
      - Real runtime versions.
    - Keep these as placeholders in template mode.
 
-Once you’ve passed your self-check, output the task list Markdown. Save it to the working folder (e.g., [Generated task list](./work_folder/[[PH:PROSE_DOC_LABEL]]_tasks_template.md)).
+Once you’ve passed your self-check, output the task list Markdown. Save it to the working folder (e.g., `./work_folder/PROSE_DOC_LABEL_tasks_template.md` where PROSE_DOC_LABEL is a safe label derived from the prose file name). Do not invent a label if not provided; use the prose filename stem as the label.
 
 If any sweep fails, do not answer yet. Instead, revise the task list to satisfy the failing checks, re-run all sweeps on the revised version, and only output the final Markdown once all sweeps pass. Do not show intermediate drafts or partial outputs.
