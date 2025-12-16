@@ -40,8 +40,6 @@
 
 ## Performance/Regression Checks
 - Target: <10% overhead vs prior run (manual observation).
-- Backward-compat: run linter on a known legacy task list (older schema/spec); expected behavior: errors for schema/spec mismatch.
 
 ## Release Artifacts
 - CHANGELOG: add entry for current spec/linter (plan mode, baseline/Phase Gate enforcement, coverage check) per COMMON.md §Version Metadata.
-- Migration: ensure `MIGRATION_GUIDE.md` is up to date and linked from README.

@@ -5,8 +5,6 @@
 **Target set:** Find **all** markdown documents (`**/*.md`) under:
 - `/home/lasse/Dropbox/python/omat/doxstrux/files (9)`
 - list **all** markdown documents you found
-- exclude this file `HISTORICAL_REMOVAL_REVIEW_PROMPT_correct.md` from that list
-- print the list
 
 **Input contract (no guessing):**
 - Confirm that you can read complete text of every markdown file you found in the **Target set**.

@@ -41,18 +41,6 @@ This framework pairs a strict specification, a template, and a deterministic lin
 7. Generate phase unlock artifact with `$ cat > .phase-N.complete.json` and `$ rg` placeholder scan.
 8. Run the linter via runner (see below) until it passes; then run the validation suite (positives + negatives).
 
-## Migration (template → plan → instantiated)
-- Decision tree:
-  - `template`: generic scaffold with command/evidence placeholders.
-  - `plan`: project-specific planning; commands real; evidence/output placeholders allowed.
-  - `instantiated`: execution/evidence; no placeholders.
-- How to migrate existing task lists:
-  1. Find files with real commands but `mode: "template"` (e.g., `rg 'mode:\"template\"' --files-with-matches | xargs rg '^\\$' -l`) and change to `mode: "plan"`.
-  2. Keep `mode: "template"` for reusable scaffolds; ensure command placeholders (`[[PH:SYMBOL_CHECK_COMMAND]]`, `[[PH:CLEAN_TABLE_GLOBAL_CHECK_COMMAND]]`) remain.
-  3. Use `mode: "instantiated"` only when evidence is real and placeholders are gone.
-  4. Add/keep `## Prose Coverage Mapping` in plan/instantiated (missing/empty is an error).
-  5. Run `VALIDATION_SUITE.md` (positives + negatives) after changes.
-
 ## 3) Running the Linter
 ```bash
 # Standard lint

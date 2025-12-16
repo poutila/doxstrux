@@ -11,11 +11,11 @@
 2. Reality-first
 3. Lintable against a spec
 4. TDD + No Weak Tests + runner enforcement (incl. uv) + Clean Table baked in
-5. Non-empty evidence in instantiated mode (v1.1)
-6. Verifiable evidence provenance via captured headers (v1.3, opt-in)
-7. Closed-loop enforcement (no bypass via formatting) (v1.4)
+5. Non-empty evidence in instantiated mode
+6. Verifiable evidence provenance via captured headers (opt-in)
+7. Closed-loop enforcement (no bypass via formatting)
 8. All governance rules baked in (import hygiene, Clean Table checklist)
-9. **UPDATED v1.7**: No comment compliance — $ command lines required, not prose/comments
+9. No comment compliance — $ command lines required, not prose/comments
 
 > This document is the normative contract for task lists. It is **not** a task
 > list and is **not** intended to be linted by `ai_task_list_linter_v1_9.py`.
@@ -49,7 +49,7 @@ This spec supports an intermediate `mode: "plan"`:
 
 ## 1. Required Document Header
 
-### R-ATL-001: Front matter required — UPDATED in v1.7
+### R-ATL-001: Front matter required
 
 The document MUST start with YAML front matter containing:
 
@@ -62,9 +62,6 @@ ai_task_list:
   search_tool: "rg" | "grep"  # Required (not optional)
 ```
 
-**v1.7 changes**:
-- `schema_version` must be exactly `"1.7"` (linter enforces this)
-- Comment compliance loophole closed — $ command lines required
 
 ### R-ATL-002: Mode semantics
 
