@@ -22,7 +22,7 @@ SSOT policy (SSOT set for versions):
 These three MUST match. All other docs MUST either reference COMMON.md (§Version Metadata) or stay silent on concrete numbers.
 
 SSOT docs (normative prose scope for ellipsis/placeholder checks):
-- COMMON.md, AI_TASK_LIST_SPEC_v1.md, USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, AI_TASK_LIST_TEMPLATE_v6.md.
+- COMMON.md, AI_TASK_LIST_SPEC_v1.md, AI_TASK_LIST_TEMPLATE_v6.md, MANUAL.md (after creation).
 
 COMMON.md parsing (no guessing):
 - Find section with heading exactly `## §Version Metadata`.
@@ -42,10 +42,10 @@ Target tuple in COMMON.md:
 
 ## Scope (what to fix)
 - AI_TASK_LIST_SPEC_v1.md: header/banner, placeholders spelled out (no truncation `...` in normative text; see ellipsis policy below).
-- COMMON.md: Version metadata (the SSOT tuple), mode definitions, runner/import/evidence rules.
+- COMMON.md: Version metadata (the SSOT tuple), SSOT hierarchy, mode definitions.
 - Linter: ai_task_list_linter_v1_9.py banner text; ensure version string matches LINTER_VERSION; rule IDs consistent with spec.
 - README_ai_task_list_linter_v1_9.md: Replace concrete version strings with “See COMMON.md §Version Metadata” (keep file name references).
-- Manuals: USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md — replace concrete version strings with “See COMMON.md §Version Metadata”.
+- Manuals: MANUAL.md (after creation), PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md — replace concrete version strings with "See COMMON.md §Version Metadata".
 - Template: AI_TASK_LIST_TEMPLATE_v6.md — keep schema_version: "1.7" in YAML; elsewhere refer to COMMON for versions.
 - Validation suite: VALIDATION_SUITE.md — refer to COMMON for versions; commands point to ai_task_list_linter_v1_9.py.
 - Index: INDEX.md — refer to COMMON for versions; keep paths accurate.
@@ -82,7 +82,7 @@ Conflicting strings policy (no guessing):
    - Header: Spec v1.9; schema_version "1.7".
    - Rule IDs: NO renames in this plan. Spec and linter must reference the same IDs. If rule ID renames are desired, do them in a separate plan (e.g., RULE_ID_STABILIZATION.md) as an explicit breaking contract migration.
    - Ellipsis policy (deterministic):
-     - Normative prose = any line outside fenced code blocks in SSOT docs (COMMON.md, AI_TASK_LIST_SPEC_v1.md, USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, AI_TASK_LIST_TEMPLATE_v6.md).
+     - Normative prose = any line outside fenced code blocks in SSOT docs (COMMON.md, AI_TASK_LIST_SPEC_v1.md, AI_TASK_LIST_TEMPLATE_v6.md, MANUAL.md).
      - Forbidden: `...` anywhere in normative prose.
      - Allowed inside fenced code blocks only (language {bash, sh}), and only on lines matching: `^(\\$\\s*)?(uv run|rg)\\b.*\\.\\.\\.` (example/command placeholders). Intentional: only `uv run`/`rg` placeholders are allowed; all other commands/comments with `...` are violations. Unlabeled fences (no language) are treated as prose for `...` checks (i.e., `...` forbidden).
 2) COMMON:
@@ -94,8 +94,8 @@ Conflicting strings policy (no guessing):
    - Filename/version consistency: ai_task_list_linter_v<MAJOR>_<MINOR>.py MUST match LINTER_VERSION major.minor (e.g., 1.9.x → v1_9).
 4) README_ai_task_list_linter_v1_9.md:
    - Replace concrete version strings with “See COMMON.md §Version Metadata”; keep file name references. “File name references” = literal filenames/links (e.g., `ai_task_list_linter_v1_9.py`). Update any older filenames (e.g., v1_8) to current.
-5) Manuals (USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, PROMPT_ORCHESTRATOR):
-   - Replace concrete version strings with “See COMMON.md §Version Metadata”; keep schema_version examples at "1.7".
+5) Manuals (MANUAL.md after creation, PROMPT_ORCHESTRATOR):
+   - Replace concrete version strings with "See COMMON.md §Version Metadata"; keep schema_version examples at "1.7".
 6) Template:
    - Keep schema_version: "1.7" in front matter; elsewhere, reference COMMON for versions.
 7) VALIDATION_SUITE.md:

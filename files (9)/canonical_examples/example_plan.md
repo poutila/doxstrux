@@ -1,3 +1,11 @@
+<!--
+  CANONICAL EXAMPLE: Plan Mode
+
+  Lint-passing example for plan mode (real commands, evidence placeholders allowed).
+
+  Purpose: Regression test for linter - this file MUST pass lint.
+  Run: uv run python ai_task_list_linter_v1_9.py canonical_examples/example_plan.md
+-->
 ---
 ai_task_list:
   schema_version: "1.7"

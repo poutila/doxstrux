@@ -3,7 +3,7 @@
 Mental model: “I am making a manual for myself. I need to use this opportunity 100%.” Do not assume; verify. Use the spec, template, and linter as your guardrails.
 
 **SSOT hierarchy**: If this manual, the template, and the spec/linter ever disagree, the spec (`AI_TASK_LIST_SPEC_v1.md`) wins; the linter implements the spec (fix linter if they diverge). Copy patterns from spec/template; only adapt paths/commands. Version metadata (Spec, schema_version, linter, template) lives in `COMMON.md` §Version Metadata. <!-- See COMMON.md §SSOT Hierarchy -->
-**Shared definitions**: `COMMON.md` holds canonical version metadata, modes, runner/import/gate/placeholder/evidence rules. Always match it.
+**Shared definitions**: `COMMON.md` holds canonical version metadata, modes, and SSOT hierarchy. For enforcement rules, see `AI_TASK_LIST_SPEC_v1.md`.
 
 ## 1) Inputs and Prep
 - Source: the prose/design file you’re converting (e.g., the current project’s design/spec doc).

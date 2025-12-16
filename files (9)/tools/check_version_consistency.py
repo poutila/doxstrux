@@ -26,8 +26,8 @@ ALLOWED_VERSION_FILES = {
     ROOT / "AI_TASK_LIST_SPEC_v1.md",
     ROOT / "ai_task_list_linter_v1_9.py",
     ROOT / "AI_TASK_LIST_TEMPLATE_v6.md",
-    ROOT / "VERSION_NORMALIZATION.md",
-    ROOT / "GENERAL_FIX_1.md",
+    ROOT / "CLEANING.md",
+    ROOT / "MANUAL.md",
 }
 
 HISTORICAL_RE = re.compile(
@@ -172,9 +172,8 @@ def check_ellipsis() -> None:
     ssot_docs = [
         ROOT / "COMMON.md",
         ROOT / "AI_TASK_LIST_SPEC_v1.md",
-        ROOT / "USER_MANUAL.md",
-        ROOT / "AI_ASSISTANT USER_MANUAL.md",
         ROOT / "AI_TASK_LIST_TEMPLATE_v6.md",
+        ROOT / "MANUAL.md",
     ]
     fence_re = re.compile(r"^```(?P<lang>\w+)?\s*$")
     for p in ssot_docs:

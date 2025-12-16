@@ -1,10 +1,20 @@
+<!--
+  NEGATIVE FIXTURE: Template Mode - Missing Clean Table Placeholder
+
+  This file is EXPECTED TO FAIL lint.
+  Template mode requires Clean Table placeholder structure.
+
+  Purpose: Regression test - linter MUST reject this file.
+  Run: uv run python ai_task_list_linter_v1_9.py canonical_examples/negatives/template_missing_clean_table_placeholder.md
+  Expected: Exit code 1
+-->
 ---
 ai_task_list:
-  schema_version: "1.7"  # See COMMON.md §Version Metadata
-  mode: "template"  # Modes: template (placeholders), plan (real commands, evidence placeholders), instantiated (no placeholders) — See COMMON.md §Mode Definitions
-  runner: "[[PH:RUNNER]]"  # e.g., "uv", "poetry", "npm", "cargo", "go"
-  runner_prefix: "[[PH:RUNNER_PREFIX]]"  # e.g., "uv run", "poetry run", "" (empty for go/cargo)
-  search_tool: "rg"  # "rg" (ripgrep) or "grep" — REQUIRED
+  schema_version: "1.7"
+  mode: "template"
+  runner: "[[PH:RUNNER]]"
+  runner_prefix: "[[PH:RUNNER_PREFIX]]"
+  search_tool: "rg"
 ---
 
 # AI_TASK_LIST_TEMPLATE.md

@@ -1,3 +1,11 @@
+<!--
+  CANONICAL EXAMPLE: Instantiated Mode
+
+  Lint-passing example for instantiated mode (real commands, real evidence).
+
+  Purpose: Regression test for linter - this file MUST pass lint with --require-captured-evidence.
+  Run: uv run python ai_task_list_linter_v1_9.py --require-captured-evidence canonical_examples/example_instantiated.md
+-->
 ---
 ai_task_list:
   schema_version: "1.7"

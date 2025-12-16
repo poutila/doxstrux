@@ -3,7 +3,7 @@
 > Spec: AI_TASK_LIST_SPEC_v1.md  
 > Template: AI_TASK_LIST_TEMPLATE_v6.md  
 > Linter: ai_task_list_linter_v1_9.py  
-> Manual: AI_ASSISTANT USER_MANUAL.md  
+> Manual: MANUAL.md  
 
 # PROMPT: AI_TASK_LIST_ORCHESTRATOR_v1
 
@@ -27,7 +27,7 @@ You will be given:
 2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — contract for valid task lists (schema_version: see COMMON.md; modes: template/plan/instantiated).
 3. **Template**: [AI_TASK_LIST_TEMPLATE_v6.md](./AI_TASK_LIST_TEMPLATE_v6.md) — starting point for new task lists.
 4. **Linter**: [ai_task_list_linter_v1_9.py](./ai_task_list_linter_v1_9.py) — implementation of the spec (assume it will be run after your output).
-5. **AI Assistant Manual**: [AI_ASSISTANT USER_MANUAL.md](./AI_ASSISTANT USER_MANUAL.md).
+5. **Manual**: [MANUAL.md](./MANUAL.md).
 
 If any of the files above are missing or not accessible, STOP and ask for the correct path before proceeding.
 

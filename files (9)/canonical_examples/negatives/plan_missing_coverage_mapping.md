@@ -1,3 +1,13 @@
+<!--
+  NEGATIVE FIXTURE: Plan Mode - Missing Prose Coverage Mapping
+
+  This file is EXPECTED TO FAIL lint (tests R-ATL-PROSE enforcement).
+  Missing/empty Prose Coverage Mapping table in plan mode is an error.
+
+  Purpose: Regression test - linter MUST reject this file.
+  Run: uv run python ai_task_list_linter_v1_9.py canonical_examples/negatives/plan_missing_coverage_mapping.md
+  Expected: Exit code 1
+-->
 ---
 ai_task_list:
   schema_version: "1.7"

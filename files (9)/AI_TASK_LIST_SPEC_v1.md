@@ -419,7 +419,7 @@ Runner enforcement is conditional and derived from metadata, keeping the spec ge
 
 Exception: Ecosystems where prefix is intentionally empty MUST declare `runner_prefix: ""` explicitly.
 
-### R-ATL-071: Runner consistency — STRENGTHENED in v1.1
+### R-ATL-071: Runner consistency
 
 If `mode: instantiated` and `runner_prefix` is non-empty, the linter MUST verify that all command lines **inside fenced code blocks** that invoke runner-managed tools include the `runner_prefix`.
 
