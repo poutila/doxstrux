@@ -1,6 +1,6 @@
 ---
 prose_input:
-  schema_version: "1.0"
+  schema_version: "0.0.8"
   project_name: "[[PROJECT_NAME]]"
   runner: "uv"                    # uv | npm | cargo | go | poetry
   runner_prefix: "uv run"         # Command prefix for runner (empty string allowed for go/cargo)
@@ -9,7 +9,7 @@ prose_input:
 ---
 
 <!--
-PROSE INPUT TEMPLATE v1.0
+PROSE INPUT TEMPLATE (see VERSION.yaml for framework version)
 
 This is a STRICT input format for the AI Task List Framework.
 The structure here maps 1:1 to task list output - conversion is deterministic.

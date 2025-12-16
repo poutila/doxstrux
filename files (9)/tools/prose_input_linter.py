@@ -2,7 +2,7 @@
 """
 prose_input_linter.py
 
-STRICT validator for Prose Input Template v1.0.
+STRICT validator for Prose Input Template.
 
 This linter validates that a prose input document conforms to the required
 structure for deterministic conversion to an AI Task List.
@@ -41,8 +41,16 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 import yaml
 
 
-LINTER_VERSION = "1.1.0"
-SCHEMA_VERSION = "1.0"
+def _load_framework_version() -> str:
+    """Load framework version from VERSION.yaml (SSOT)."""
+    version_file = Path(__file__).parent.parent / "VERSION.yaml"
+    if not version_file.exists():
+        raise RuntimeError(f"VERSION.yaml not found at {version_file}")
+    data = yaml.safe_load(version_file.read_text(encoding="utf-8"))
+    return data["version"]
+
+
+FRAMEWORK_VERSION = _load_framework_version()
 
 
 class Severity(Enum):
@@ -323,9 +331,9 @@ def validate_yaml_metadata(metadata: Dict[str, Any], errors: List[LintError]) ->
             flat_meta[field_name] = value
 
     # Validate specific fields
-    if "schema_version" in flat_meta and flat_meta["schema_version"] != SCHEMA_VERSION:
+    if "schema_version" in flat_meta and flat_meta["schema_version"] != FRAMEWORK_VERSION:
         errors.append(LintError("PIN-Y05", 1, Severity.ERROR,
-            f"schema_version must be '{SCHEMA_VERSION}' (found '{flat_meta['schema_version']}')."))
+            f"schema_version must be '{FRAMEWORK_VERSION}' (found '{flat_meta['schema_version']}')."))
 
     if "runner" in flat_meta and flat_meta["runner"] not in VALID_RUNNERS:
         errors.append(LintError("PIN-Y06", 1, Severity.ERROR,
@@ -785,7 +793,7 @@ Examples:
   uv run python tools/prose_input_linter.py --fix-hints SPEC.md
 """,
     )
-    parser.add_argument("--version", action="version", version=f"%(prog)s {LINTER_VERSION}")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {FRAMEWORK_VERSION}")
     parser.add_argument("path", help="Path to prose input document")
     parser.add_argument("--json", action="store_true", help="Output JSON")
     parser.add_argument("--fix-hints", action="store_true", help="Show fix hints for errors")

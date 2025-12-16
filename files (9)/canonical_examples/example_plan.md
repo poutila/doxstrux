@@ -4,11 +4,11 @@
   Lint-passing example for plan mode (real commands, evidence placeholders allowed).
 
   Purpose: Regression test for linter - this file MUST pass lint.
-  Run: uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/example_plan.md
+  Run: uv run python tools/ai_task_list_linter.py canonical_examples/example_plan.md
 -->
 ---
 ai_task_list:
-  schema_version: "1.7"
+  schema_version: "0.0.8"
   mode: "plan"
   runner: "uv"
   runner_prefix: "uv run"

@@ -5,12 +5,12 @@
   Template mode requires Clean Table placeholder structure.
 
   Purpose: Regression test - linter MUST reject this file.
-  Run: uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/negatives/template_missing_clean_table_placeholder.md
+  Run: uv run python tools/ai_task_list_linter.py canonical_examples/negatives/template_missing_clean_table_placeholder.md
   Expected: Exit code 1
 -->
 ---
 ai_task_list:
-  schema_version: "1.7"
+  schema_version: "0.0.8"
   mode: "template"
   runner: "[[PH:RUNNER]]"
   runner_prefix: "[[PH:RUNNER_PREFIX]]"

@@ -1,20 +1,20 @@
-# Validation Suite — Plan Mode Rollout (versions: see COMMON.md §Version Metadata)
+# Validation Suite — Plan Mode Rollout (version: see VERSION.yaml)
 
 ## Tests to Run
 
 ### 1) Template scaffold
-- Input: `AI_TASK_LIST_TEMPLATE_v6.md` (template mode)
-- Command: `uv run python tools/ai_task_list_linter_v1_9.py AI_TASK_LIST_TEMPLATE_v6.md`
+- Input: `AI_TASK_LIST_TEMPLATE.md` (template mode)
+- Command: `uv run python tools/ai_task_list_linter.py AI_TASK_LIST_TEMPLATE.md`
 - Expected: exit 0 (structure/placeholders allowed)
 
 ### 2) Plan artifact
 - Input: `canonical_examples/example_plan.md` (plan mode)
-- Command: `uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/example_plan.md`
+- Command: `uv run python tools/ai_task_list_linter.py canonical_examples/example_plan.md`
 - Expected: exit 0 (real commands, evidence placeholders)
 
 ### 3) Instantiated sample
 - Input: `canonical_examples/example_instantiated.md` (instantiated mode)
-- Command: `uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence canonical_examples/example_instantiated.md`
+- Command: `uv run python tools/ai_task_list_linter.py --require-captured-evidence canonical_examples/example_instantiated.md`
 - Expected: exit 0 (no placeholders; real evidence; captured headers present)
 
 ### 4) Negative cases (persistent fixtures)
@@ -31,7 +31,7 @@
   - Quick grep: `rg "mode: \\\"plan\\\"|mode: \\\"template\\\"|mode: \\\"instantiated\\\"" (specify files as needed)`
 
 ## Test Results (as of this run)
-- AI_TASK_LIST_TEMPLATE_v6.md: pass (exit 0)
+- AI_TASK_LIST_TEMPLATE.md: pass (exit 0)
 - canonical_examples/example_plan.md: pass (exit 0)
 - canonical_examples/example_instantiated.md: pass (exit 0) with `--require-captured-evidence`
 - Negative: Plan missing Prose Coverage Mapping (`canonical_examples/negatives/plan_missing_coverage_mapping.md`) → exit 1 (R-ATL-NEW-02).

@@ -1,4 +1,4 @@
-# PROSE INPUT REVIEW PROMPT v1.0
+# PROMPT: PROSE INPUT REVIEW (see VERSION.yaml for framework version)
 
 > **Role**: You are a senior technical reviewer validating a prose input specification before it is converted to an AI Task List.
 >

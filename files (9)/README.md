@@ -1,18 +1,19 @@
 # AI Task List Framework
 
-Deterministic framework for AI task lists (modes: template/plan/instantiated). Versions/schema: see COMMON.md §Version Metadata. <!-- See COMMON.md §Version Metadata -->
+Deterministic framework for AI task lists (modes: template/plan/instantiated). Version: see VERSION.yaml.
 
 ## File Index
 
 **Core artifacts:**
-- `COMMON.md` — Shared framework definitions (versions, modes, SSOT hierarchy)
-- `AI_TASK_LIST_SPEC_v1.md` — Specification (rules, headings, governance)
-- `AI_TASK_LIST_TEMPLATE_v6.md` — Template v6 for new task lists
-- `tools/ai_task_list_linter_v1_9.py` — Linter implementing the spec (pyyaml)
+- `VERSION.yaml` — Single source of truth for framework version
+- `COMMON.md` — Shared framework definitions (modes, SSOT hierarchy)
+- `AI_TASK_LIST_SPEC.md` — Specification (rules, headings, governance)
+- `AI_TASK_LIST_TEMPLATE.md` — Template for new task lists
+- `tools/ai_task_list_linter.py` — Linter implementing the spec (pyyaml)
 
 **Guides:**
 - `MANUAL.md` — Framework manual (workflows, checklists, prose conversion)
-- `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` — Runtime prompt for prose → task list
+- `PROMPT_AI_TASK_LIST_ORCHESTRATOR.md` — Runtime prompt for prose → task list
 
 **Workspace:**
 - `work_folder/` — Generated task lists
@@ -24,13 +25,13 @@ Deterministic framework for AI task lists (modes: template/plan/instantiated). V
 
 ```bash
 # Standard lint
-uv run python tools/ai_task_list_linter_v1_9.py PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter.py PROJECT_TASKS.md
 
 # With captured evidence header enforcement
-uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter.py --require-captured-evidence PROJECT_TASKS.md
 
 # Recommended for CI (instantiated lists)
-uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter.py --require-captured-evidence PROJECT_TASKS.md
 ```
 
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/internal error
@@ -39,7 +40,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/internal error
 
 ```yaml
 ai_task_list:
-  schema_version: "<see COMMON.md §Version Metadata>"    # Do not hard-code; use the value from COMMON.md
+  schema_version: "<see VERSION.yaml>"    # Must match VERSION.yaml
   mode: "plan"             # or "template" / "instantiated"
   runner: "uv"
   runner_prefix: "uv run"  # REQUIRED; used for runner enforcement

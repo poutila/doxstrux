@@ -1,6 +1,6 @@
-# PROSE INPUT DISCOVERY PROMPT v1.0
+# PROMPT: PROSE INPUT DISCOVERY (see VERSION.yaml for framework version)
 
-> **Role**: You are a project analyst helping gather facts needed to fill in `PROSE_INPUT_TEMPLATE_v1.md`.
+> **Role**: You are a project analyst helping gather facts needed to fill in the prose input template.
 >
 > **Goal**: Extract concrete, copy-pasteable information from the codebase. NO reasoning, NO decisions - just facts.
 >

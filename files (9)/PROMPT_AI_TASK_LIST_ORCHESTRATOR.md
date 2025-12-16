@@ -1,11 +1,11 @@
-> This prompt is the *runtime orchestrator* for converting prose → AI task lists.  
-> Version metadata (Spec, schema_version, linter, template): see COMMON.md §Version Metadata.  
-> Spec: AI_TASK_LIST_SPEC_v1.md  
-> Template: AI_TASK_LIST_TEMPLATE_v6.md  
-> Linter: tools/ai_task_list_linter_v1_9.py  
-> Manual: MANUAL.md  
+> This prompt is the *runtime orchestrator* for converting prose → AI task lists.
+> Version: see VERSION.yaml
+> Spec: AI_TASK_LIST_SPEC.md
+> Template: AI_TASK_LIST_TEMPLATE.md
+> Linter: tools/ai_task_list_linter.py
+> Manual: MANUAL.md
 
-# PROMPT: AI_TASK_LIST_ORCHESTRATOR_v1
+# PROMPT: AI_TASK_LIST_ORCHESTRATOR
 
 Role
 =====
@@ -24,9 +24,9 @@ Sources & SSOT hierarchy
 You will be given:
 
 1. **Prose design / requirements**: `[[PH:PROSE_DOC_LABEL]]` (content pasted into this chat; e.g., [Target file](./path_to/[[PH:PROSE_DOC_FILENAME]].md)).
-2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — contract for valid task lists (schema_version: see COMMON.md; modes: template/plan/instantiated).
-3. **Template**: [AI_TASK_LIST_TEMPLATE_v6.md](./AI_TASK_LIST_TEMPLATE_v6.md) — starting point for new task lists.
-4. **Linter**: [tools/ai_task_list_linter_v1_9.py](./tools/ai_task_list_linter_v1_9.py) — implementation of the spec (assume it will be run after your output).
+2. **Spec**: [AI_TASK_LIST_SPEC.md](./AI_TASK_LIST_SPEC.md) — contract for valid task lists (schema_version: see VERSION.yaml; modes: template/plan/instantiated).
+3. **Template**: [AI_TASK_LIST_TEMPLATE.md](./AI_TASK_LIST_TEMPLATE.md) — starting point for new task lists.
+4. **Linter**: [tools/ai_task_list_linter.py](./tools/ai_task_list_linter.py) — implementation of the spec (assume it will be run after your output).
 5. **Manual**: [MANUAL.md](./MANUAL.md).
 
 If any of the files above are missing or not accessible, STOP and ask for the correct path before proceeding.
@@ -45,8 +45,8 @@ Task
 ====
 Given the prose document and the framework artifacts above, produce a single Markdown AI task list file (e.g., `PROJECT_TASKS.md`) that:
 
-- Is **valid against the Spec (see COMMON.md §Version Metadata for versions/schema)** (as far as you can check from text alone).
-- Is **ready to be linted** by `tools/ai_task_list_linter_v1_9.py --require-captured-evidence` once a human fills in real evidence.
+- Is **valid against the Spec (see VERSION.yaml for version)** (as far as you can check from text alone).
+- Is **ready to be linted** by `tools/ai_task_list_linter.py --require-captured-evidence` once a human fills in real evidence.
 - Encodes a realistic, implementable plan for the changes described in the prose.
 - Bakes in:
   - TDD structure per task (RED / minimal implementation / GREEN).
@@ -94,8 +94,8 @@ High-level workflow
      - Touch specific paths (files / folders).
 
 4. **Instantiate the template structure**
-   - Start from `AI_TASK_LIST_TEMPLATE_v6.md` structure:
-     - YAML front matter with `schema_version` from COMMON.md, `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
+   - Start from `AI_TASK_LIST_TEMPLATE.md` structure:
+     - YAML front matter with `schema_version` from VERSION.yaml, `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
      - Required headings (Non-negotiable Invariants, Placeholder Protocol, Source of Truth, Baseline Snapshot, Phase 0, Drift Ledger, Phase Unlock Artifact, Global Clean Table Scan, STOP — Phase Gate).
   - Preserve:
      - The naming rule (“Task ID N.M → TASK_N_M_PATHS”).
@@ -179,7 +179,7 @@ Before returning the Markdown:
        - Has a `TASK_N_M_PATHS` array with at least one quoted path.
        - Has TDD headings and STOP section.
        - Has Preconditions with a symbol-check command matching `search_tool`.
-   - Ensure YAML front matter includes all required fields and uses `schema_version` from COMMON.md.
+   - Ensure YAML front matter includes all required fields and uses `schema_version` from VERSION.yaml.
 
 2. **Governance sweep**
    - Confirm:

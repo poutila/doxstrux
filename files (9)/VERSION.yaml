@@ -1,0 +1,3 @@
+# Single Source of Truth for framework version
+# All tools read from this file. To bump version, edit here only.
+version: "0.0.8"

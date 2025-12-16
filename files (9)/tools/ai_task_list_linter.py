@@ -1,23 +1,15 @@
 #!/usr/bin/env python3
 """
-ai_task_list_linter_v1_9.py
+ai_task_list_linter.py
 
-Deterministic linter for AI Task Lists (Spec v1.9; schema_version 1.7).
+Deterministic linter for AI Task Lists.
 Spec is SSOT; this linter implements the spec. If linter and spec diverge, fix the linter.
 
-Version 1.9 changes:
-- FIX: Import hygiene (R-ATL-063) now requires actual $ command lines, not comments
-- FIX: Phase Unlock placeholder scan (R-ATL-050) now requires $ rg command line
-- FIX: Spec search_tool inconsistency resolved (R-ATL-D4 updated)
-- Spec version bump to 1.9; schema_version bump to 1.7
-
-Prior features retained:
-- R-ATL-001: schema_version == "1.7", search_tool required
+Features:
+- R-ATL-001: schema_version validation (reads from VERSION.yaml)
 - R-ATL-042: Clean Table checklist enforcement
 - R-ATL-063: Import hygiene enforcement (Python/uv)
 - R-ATL-071/072/075: Runner/UV/$ enforcement
-
-Base features:
 - pyyaml for robust YAML parsing
 - deterministic (no network, no repo mutation)
 - exit codes: 0=pass, 1=fail, 2=usage/internal error
@@ -35,7 +27,17 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
-LINTER_VERSION = "1.9.0"
+
+def _load_framework_version() -> str:
+    """Load framework version from VERSION.yaml (SSOT)."""
+    version_file = Path(__file__).parent.parent / "VERSION.yaml"
+    if not version_file.exists():
+        raise RuntimeError(f"VERSION.yaml not found at {version_file}")
+    data = yaml.safe_load(version_file.read_text(encoding="utf-8"))
+    return data["version"]
+
+
+FRAMEWORK_VERSION = _load_framework_version()
 
 
 RE_FM = re.compile(r"^---\s*$")
@@ -210,9 +212,9 @@ def _parse_front_matter(lines: List[str]) -> Tuple[Dict[str, str], Optional[Lint
     if empties:
         return meta, LintError(1, "R-ATL-001", f"ai_task_list missing required values: {', '.join(empties)}"), end_idx + 1
 
-    # Fix B: Enforce schema_version == "1.7" exactly
-    if meta["schema_version"] != "1.7":
-        return meta, LintError(1, "R-ATL-001", f"schema_version must be '1.7' (found '{meta['schema_version']}')."), end_idx + 1
+    # Enforce schema_version matches VERSION.yaml
+    if meta["schema_version"] != FRAMEWORK_VERSION:
+        return meta, LintError(1, "R-ATL-001", f"schema_version must be '{FRAMEWORK_VERSION}' (found '{meta['schema_version']}')."), end_idx + 1
 
     # Fix F: Validate search_tool (now required)
     if meta["search_tool"] not in ("rg", "grep"):
@@ -1204,8 +1206,8 @@ def lint(path: Path, require_captured_evidence: bool = False) -> Tuple[Dict[str,
 
 
 def main(argv: List[str]) -> int:
-    parser = argparse.ArgumentParser(prog="ai_task_list_linter_v1_9.py")
-    parser.add_argument("--version", action="version", version=f"%(prog)s {LINTER_VERSION}")
+    parser = argparse.ArgumentParser(prog="ai_task_list_linter.py")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {FRAMEWORK_VERSION}")
     parser.add_argument("path", help="Path to task list markdown file")
     parser.add_argument("--json", action="store_true", help="Emit JSON report")
     parser.add_argument("--require-captured-evidence", action="store_true",

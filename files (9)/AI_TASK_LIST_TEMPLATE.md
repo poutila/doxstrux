@@ -1,6 +1,6 @@
 ---
 ai_task_list:
-  schema_version: "1.7"  # See COMMON.md §Version Metadata
+  schema_version: "0.0.8"  # See VERSION.yaml
   mode: "template"  # Modes: template (placeholders), plan (real commands, evidence placeholders), instantiated (no placeholders) — See COMMON.md §Mode Definitions
   runner: "[[PH:RUNNER]]"  # e.g., "uv", "poetry", "npm", "cargo", "go"
   runner_prefix: "[[PH:RUNNER_PREFIX]]"  # e.g., "uv run", "poetry run", "" (empty for go/cargo)
@@ -9,7 +9,7 @@ ai_task_list:
 
 # AI_TASK_LIST_TEMPLATE.md
 
-**Version**: 6.0 (Spec v1.9; schema_version 1.7; no comment compliance)  
+**Version**: See VERSION.yaml  
 **Scope**: General-only — no project names, no repo paths, no project-specific env vars.
 **Modes**: Template mode (placeholders allowed) → Plan mode (real commands, evidence placeholders) → Instantiated mode (placeholders forbidden)
 

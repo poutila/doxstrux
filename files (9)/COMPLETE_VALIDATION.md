@@ -23,7 +23,7 @@ The framework eliminates drift by:
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                     PHASE 0: DISCOVERY (OPTIONAL)                        │
 │                                                                         │
-│   Tool: PROSE_INPUT_DISCOVERY_PROMPT_v1.md                              │
+│   Tool: PROMPT_PROSE_INPUT_DISCOVERY.md                                 │
 │   Type: AI prompt (fact-gathering, no reasoning)                        │
 │                                                                         │
 │   Gathers from codebase:                                                │
@@ -43,7 +43,7 @@ The framework eliminates drift by:
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                              INPUT                                       │
 │                                                                         │
-│   Author writes spec using PROSE_INPUT_TEMPLATE_v1.md                   │
+│   Author writes spec using PROSE_INPUT_TEMPLATE.md                      │
 │   (Structured format that mirrors output structure)                      │
 │   Uses facts from Phase 0 to fill in Sample Artifacts section           │
 └─────────────────────────────────────────────────────────────────────────┘
@@ -90,7 +90,7 @@ The framework eliminates drift by:
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                     PHASE 2: SEMANTIC VALIDATION                         │
 │                                                                         │
-│   Tool: PROSE_INPUT_REVIEW_PROMPT_v1.md                                 │
+│   Tool: PROMPT_PROSE_INPUT_REVIEW.md                                    │
 │   Type: AI reasoning (requires judgment)                                │
 │   Deps: AI assistant capable of reasoning                               │
 │                                                                         │
@@ -111,7 +111,7 @@ The framework eliminates drift by:
 │     VERDICT: FAIL (fix issues, return to Phase 1)                       │
 │                                                                         │
 │   Usage:                                                                │
-│     1. Copy PROSE_INPUT_REVIEW_PROMPT_v1.md into AI context             │
+│     1. Copy PROMPT_PROSE_INPUT_REVIEW.md into AI context                │
 │     2. Provide the spec document that passed Phase 1                    │
 │     3. AI produces review with explicit VERDICT                         │
 │                                                                         │
@@ -122,7 +122,7 @@ The framework eliminates drift by:
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                         CONVERSION                                       │
 │                                                                         │
-│   Tool: PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md                          │
+│   Tool: PROMPT_AI_TASK_LIST_ORCHESTRATOR.md                             │
 │   Type: Deterministic reformat (structure already defined)              │
 │                                                                         │
 │   Because input structure mirrors output structure:                     │
@@ -138,7 +138,7 @@ The framework eliminates drift by:
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                     OUTPUT VALIDATION                                    │
 │                                                                         │
-│   Tool: tools/ai_task_list_linter_v1_9.py                               │
+│   Tool: tools/ai_task_list_linter.py                                    │
 │   Type: Script (deterministic)                                          │
 │   Deps: pyyaml                                                          │
 │                                                                         │
@@ -156,8 +156,8 @@ The framework eliminates drift by:
 │   ✓ Prose Coverage Mapping (plan/instantiated modes)                    │
 │                                                                         │
 │   Command:                                                              │
-│     uv run python tools/ai_task_list_linter_v1_9.py PROJECT_TASKS.md    │
-│     uv run python tools/ai_task_list_linter_v1_9.py --json [...]        │
+│     uv run python tools/ai_task_list_linter.py PROJECT_TASKS.md         │
+│     uv run python tools/ai_task_list_linter.py --json [...]             │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
                                     │
@@ -180,14 +180,14 @@ The framework eliminates drift by:
 
 | File | Type | Purpose |
 |------|------|---------|
-| `PROSE_INPUT_DISCOVERY_PROMPT_v1.md` | Prompt | Phase 0: Gather project facts before writing spec |
-| `PROSE_INPUT_TEMPLATE_v1.md` | Template | Mandatory input structure for new specs |
+| `PROMPT_PROSE_INPUT_DISCOVERY.md` | Prompt | Phase 0: Gather project facts before writing spec |
+| `PROSE_INPUT_TEMPLATE.md` | Template | Mandatory input structure for new specs |
 | `tools/prose_input_linter.py` | Script | Phase 1: Deterministic validation |
-| `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Prompt | Phase 2: AI semantic review |
-| `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` | Prompt | Conversion: Prose → Task List |
-| `tools/ai_task_list_linter_v1_9.py` | Script | Output validation (pyyaml) |
-| `AI_TASK_LIST_TEMPLATE_v6.md` | Template | Task list structure |
-| `AI_TASK_LIST_SPEC_v1.md` | Spec | Authoritative rules for task lists |
+| `PROMPT_PROSE_INPUT_REVIEW.md` | Prompt | Phase 2: AI semantic review |
+| `PROMPT_AI_TASK_LIST_ORCHESTRATOR.md` | Prompt | Conversion: Prose → Task List |
+| `tools/ai_task_list_linter.py` | Script | Output validation (pyyaml) |
+| `AI_TASK_LIST_TEMPLATE.md` | Template | Task list structure |
+| `AI_TASK_LIST_SPEC.md` | Spec | Authoritative rules for task lists |
 
 ---
 
@@ -202,19 +202,19 @@ The framework eliminates drift by:
 | Placeholder absent | `tools/prose_input_linter.py` | Regex match = objective |
 | TBD marker absent | `tools/prose_input_linter.py` | Regex match = objective |
 | Checkbox checked | `tools/prose_input_linter.py` | String match = objective |
-| Task ID format | `tools/ai_task_list_linter_v1_9.py` | Regex match = objective |
-| Evidence block present | `tools/ai_task_list_linter_v1_9.py` | Structure match = objective |
+| Task ID format | `tools/ai_task_list_linter.py` | Regex match = objective |
+| Evidence block present | `tools/ai_task_list_linter.py` | Structure match = objective |
 
 ### What AI Checks (Reasoning)
 
 | Check | Tool | Why AI |
 |-------|------|--------|
-| Objective is clear | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Requires understanding intent |
-| Success criteria measurable | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | "Clean" vs "ruff passes" |
-| Test covers behavior | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Requires understanding code |
-| Dependencies coherent | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Requires logical reasoning |
-| Scope bounded | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | "etc." detection in context |
-| Risks realistic | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Domain knowledge needed |
+| Objective is clear | `PROMPT_PROSE_INPUT_REVIEW.md` | Requires understanding intent |
+| Success criteria measurable | `PROMPT_PROSE_INPUT_REVIEW.md` | "Clean" vs "ruff passes" |
+| Test covers behavior | `PROMPT_PROSE_INPUT_REVIEW.md` | Requires understanding code |
+| Dependencies coherent | `PROMPT_PROSE_INPUT_REVIEW.md` | Requires logical reasoning |
+| Scope bounded | `PROMPT_PROSE_INPUT_REVIEW.md` | "etc." detection in context |
+| Risks realistic | `PROMPT_PROSE_INPUT_REVIEW.md` | Domain knowledge needed |
 
 ---
 
@@ -253,11 +253,11 @@ The framework eliminates drift by:
 
 ```bash
 # 0. (Optional) Run discovery to gather project facts
-# In AI chat: paste PROSE_INPUT_DISCOVERY_PROMPT_v1.md
+# In AI chat: paste PROMPT_PROSE_INPUT_DISCOVERY.md
 # AI gathers facts from codebase → produces discovery report
 
 # 1. Copy the input template
-cp PROSE_INPUT_TEMPLATE_v1.md my_spec.md
+cp PROSE_INPUT_TEMPLATE.md my_spec.md
 
 # 2. Fill in all sections (replace all [[PLACEHOLDER]] tokens)
 # Use discovery report to fill Sample Artifacts section
@@ -269,17 +269,17 @@ uv run python tools/prose_input_linter.py my_spec.md
 # 4. Fix any errors, repeat step 3 until exit 0
 
 # 5. Phase 2: AI review (in AI chat)
-# Paste PROSE_INPUT_REVIEW_PROMPT_v1.md
+# Paste PROMPT_PROSE_INPUT_REVIEW.md
 # Paste my_spec.md
 # Wait for VERDICT: PASS
 
 # 6. Convert to task list (in AI chat)
-# Paste PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md
+# Paste PROMPT_AI_TASK_LIST_ORCHESTRATOR.md
 # Paste my_spec.md
 # AI produces task list
 
 # 7. Validate output
-uv run python tools/ai_task_list_linter_v1_9.py my_tasks.md
+uv run python tools/ai_task_list_linter.py my_tasks.md
 
 # 8. Execute tasks
 ```
@@ -294,7 +294,7 @@ uv run python tools/prose_readiness_check.py legacy_doc.md
 # If NOT READY: Address blockers first
 
 # 3. Either:
-#    a. Rewrite using PROSE_INPUT_TEMPLATE_v1.md (recommended)
+#    a. Rewrite using PROSE_INPUT_TEMPLATE.md (recommended)
 #    b. Use orchestrator directly (less reliable, more iteration)
 ```
 
@@ -354,7 +354,7 @@ Blocking issues:
 ### Output Validation Failure
 
 ```
-$ uv run python tools/ai_task_list_linter_v1_9.py my_tasks.md
+$ uv run python tools/ai_task_list_linter.py my_tasks.md
 my_tasks.md:145:R-ATL-D2:Task 1.2 Preconditions must include rg command.
 ```
 
@@ -376,8 +376,8 @@ When a document passes the complete pipeline:
 | Tests cover behavior | AI review |
 | Dependencies valid | AI review |
 | Internally consistent | AI review |
-| Task list format valid | `tools/ai_task_list_linter_v1_9.py` |
-| Governance baked in | `tools/ai_task_list_linter_v1_9.py` |
+| Task list format valid | `tools/ai_task_list_linter.py` |
+| Governance baked in | `tools/ai_task_list_linter.py` |
 
 ---
 

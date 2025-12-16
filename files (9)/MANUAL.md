@@ -5,10 +5,10 @@ This framework pairs a strict specification, a template, and a deterministic lin
 **SSOT hierarchy**: Spec is authoritative; the linter implements the spec. If they diverge, fix the linter. This manual is derivative; the spec wins on conflicts. <!-- See COMMON.md §SSOT Hierarchy -->
 
 **Files**:
-- `AI_TASK_LIST_SPEC_v1.md` — the authoritative contract (see COMMON.md §Version Metadata for versions/schema)
-- `AI_TASK_LIST_TEMPLATE_v6.md` — starting point for new task lists
-- `tools/ai_task_list_linter_v1_9.py` — the linter implementing the spec
-- `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` — runtime prompt for prose → task list conversion
+- `AI_TASK_LIST_SPEC.md` — the authoritative contract (see VERSION.yaml for version)
+- `AI_TASK_LIST_TEMPLATE.md` — starting point for new task lists
+- `tools/ai_task_list_linter.py` — the linter implementing the spec
+- `PROMPT_AI_TASK_LIST_ORCHESTRATOR.md` — runtime prompt for prose → task list conversion
 
 ---
 
@@ -34,7 +34,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 
 1. Select the prose source (e.g., a design/spec doc for the current project)
 2. Start a fresh AI session
-3. Paste the entire `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md`
+3. Paste the entire `PROMPT_AI_TASK_LIST_ORCHESTRATOR.md`
 4. Paste the full prose document
 5. Let the AI generate a task list in `mode: "plan"`:
    - Includes required headings, TASK_N_M_PATHS arrays, Prose Coverage Mapping, STOP/Global/Drift structure
@@ -52,7 +52,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 
 ### 2.2 From Template (Manual)
 
-1. Copy `AI_TASK_LIST_TEMPLATE_v6.md` to your repo as `PROJECT_TASKS.md`
+1. Copy `AI_TASK_LIST_TEMPLATE.md` to your repo as `PROJECT_TASKS.md`
 2. Fill YAML front matter:
    - `schema_version`: see COMMON.md §Version Metadata
    - `mode`: "template" for scaffolds, "plan" for projects, "instantiated" when evidence is real
@@ -96,13 +96,13 @@ This framework pairs a strict specification, a template, and a deterministic lin
 
 ```bash
 # Standard lint
-uv run python tools/ai_task_list_linter_v1_9.py PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter.py PROJECT_TASKS.md
 
 # Enforce captured headers in evidence blocks
-uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter.py --require-captured-evidence PROJECT_TASKS.md
 
 # JSON output
-uv run python tools/ai_task_list_linter_v1_9.py --json PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter.py --json PROJECT_TASKS.md
 ```
 
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
@@ -111,7 +111,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 
 ## 5. Enforcement Rules (Reference)
 
-All enforcement rules are defined in `AI_TASK_LIST_SPEC_v1.md`. Key rule IDs:
+All enforcement rules are defined in `AI_TASK_LIST_SPEC.md`. Key rule IDs:
 
 | Rule ID | One-line Summary |
 |---------|-----------------|
@@ -229,7 +229,7 @@ $ if rg 'pattern' path/; then
 
 Run in CI for instantiated lists (recommended as mandatory):
 ```bash
-uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter.py --require-captured-evidence PROJECT_TASKS.md
 ```
 
 - Fail CI on any lint error

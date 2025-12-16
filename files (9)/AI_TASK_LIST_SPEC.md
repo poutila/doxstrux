@@ -1,8 +1,7 @@
-# AI Task List Spec v1.9 (three-mode; schema_version 1.7)
-<!-- See COMMON.md §Version Metadata -->
+# AI Task List Spec
+<!-- See VERSION.yaml for framework version -->
 
-**Spec ID**: `AI_TASK_LIST_SPEC_V1_9`  
-**Schema version**: `1.7`  
+**Schema version**: See `VERSION.yaml`
 **Applies to**: A single Markdown file (the instantiated task list or the template)
 **SSOT**: The spec is the authoritative contract; the linter implements the spec. If spec and linter diverge, fix the linter.
 
@@ -18,7 +17,7 @@
 9. No comment compliance — $ command lines required, not prose/comments
 
 > This document is the normative contract for task lists. It is **not** a task
-> list and is **not** intended to be linted by `tools/ai_task_list_linter_v1_9.py`.
+> list and is **not** intended to be linted by `tools/ai_task_list_linter.py`.
 > If this spec and the linter diverge, fix the linter to match the spec.
 
 ---
@@ -55,7 +54,7 @@ The document MUST start with YAML front matter containing:
 
 ```yaml
 ai_task_list:
-  schema_version: "1.7"  # Must be exactly "1.7"
+  schema_version: "<VERSION.yaml version>"  # Must match VERSION.yaml
   mode: "template" | "plan" | "instantiated"
   runner: "<string>"
   runner_prefix: "<string>"
@@ -563,7 +562,7 @@ path:line:rule_id:message
 
 A document is **Spec v1.9 compliant** if:
 
-1. ✅ schema_version must be exactly "1.7" (R-ATL-001)
+1. ✅ schema_version must match VERSION.yaml (R-ATL-001)
 2. ✅ search_tool is required (not optional) (R-ATL-001, R-ATL-D4)
 3. ✅ Has required YAML metadata and required headings (9 total)
 4. ✅ Naming rule stated exactly once (R-ATL-033)

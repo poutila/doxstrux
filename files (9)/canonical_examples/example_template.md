@@ -2,14 +2,14 @@
   CANONICAL EXAMPLE: Template Mode
 
   This is a MINIMAL lint-passing example for template mode.
-  Not the full AI_TASK_LIST_TEMPLATE_v6.md - see that for the complete template.
+  Not the full AI_TASK_LIST_TEMPLATE.md - see that for the complete template.
 
   Purpose: Regression test for linter - this file MUST pass lint.
-  Run: uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/example_template.md
+  Run: uv run python tools/ai_task_list_linter.py canonical_examples/example_template.md
 -->
 ---
 ai_task_list:
-  schema_version: "1.7"
+  schema_version: "0.0.8"
   mode: "template"
   runner: "uv"
   runner_prefix: "uv run"

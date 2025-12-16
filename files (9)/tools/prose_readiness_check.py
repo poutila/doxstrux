@@ -18,7 +18,7 @@ Usage:
     uv run python tools/prose_readiness_check.py --json PYDANTIC_SCHEMA.md
     uv run python tools/prose_readiness_check.py --strict PYDANTIC_SCHEMA.md  # warnings become blockers
 
-SSOT: This tool validates input prose; tools/ai_task_list_linter_v1_9.py validates output task lists.
+SSOT: This tool validates input prose; tools/ai_task_list_linter.py validates output task lists.
 """
 
 from __future__ import annotations
