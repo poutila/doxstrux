@@ -95,13 +95,12 @@ Conflicting strings policy (no guessing):
 - Add/maintain the consistency check script `tools/check_version_consistency.py` (present in repo) that:
   - Reads the tuple from COMMON.md (per parsing rules above).
   - Excludes: `**/archive/**`, `task_list_archive/**`, `work_folder/**`, `.git/**`.
-  - Allowed files to contain concrete version literals outside YAML:
+- Allowed files to contain concrete version literals outside YAML:
    - COMMON.md
    - AI_TASK_LIST_SPEC_v1.md
    - ai_task_list_linter_v1_9.py
    - AI_TASK_LIST_TEMPLATE_v6.md
    - VERSION_NORMALIZATION.md
-   - GENERAL_FIX_1.md
   - Only the SSOT set above may contain version literals; all other non-excluded files must reference COMMON instead. No historical/version literals allowed elsewhere. canonical_examples/** and validation/** are excluded from version-literal scans.
   - YAML front matter rule: only `schema_version: "1.7"` is allowed; any other version-related fields in YAML are violations.
   - Maintenance: when bumping linter version/filename, update this plan, allowed filename regex/allowlist, and the guardrail script to the new major.minor filename/version.
