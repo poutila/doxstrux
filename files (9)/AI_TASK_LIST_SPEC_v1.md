@@ -18,7 +18,7 @@
 9. No comment compliance — $ command lines required, not prose/comments
 
 > This document is the normative contract for task lists. It is **not** a task
-> list and is **not** intended to be linted by `ai_task_list_linter_v1_9.py`.
+> list and is **not** intended to be linted by `tools/ai_task_list_linter_v1_9.py`.
 > If this spec and the linter diverge, fix the linter to match the spec.
 
 ---

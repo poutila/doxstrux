@@ -7,7 +7,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 **Files**:
 - `AI_TASK_LIST_SPEC_v1.md` — the authoritative contract (see COMMON.md §Version Metadata for versions/schema)
 - `AI_TASK_LIST_TEMPLATE_v6.md` — starting point for new task lists
-- `ai_task_list_linter_v1_9.py` — the linter implementing the spec
+- `tools/ai_task_list_linter_v1_9.py` — the linter implementing the spec
 - `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` — runtime prompt for prose → task list conversion
 
 ---
@@ -96,13 +96,13 @@ This framework pairs a strict specification, a template, and a deterministic lin
 
 ```bash
 # Standard lint
-uv run python ai_task_list_linter_v1_9.py PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter_v1_9.py PROJECT_TASKS.md
 
 # Enforce captured headers in evidence blocks
-uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
 
 # JSON output
-uv run python ai_task_list_linter_v1_9.py --json PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter_v1_9.py --json PROJECT_TASKS.md
 ```
 
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
@@ -229,7 +229,7 @@ $ if rg 'pattern' path/; then
 
 Run in CI for instantiated lists (recommended as mandatory):
 ```bash
-uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
 ```
 
 - Fail CI on any lint error

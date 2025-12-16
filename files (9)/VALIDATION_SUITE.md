@@ -4,17 +4,17 @@
 
 ### 1) Template scaffold
 - Input: `AI_TASK_LIST_TEMPLATE_v6.md` (template mode)
-- Command: `uv run python ai_task_list_linter_v1_9.py AI_TASK_LIST_TEMPLATE_v6.md`
+- Command: `uv run python tools/ai_task_list_linter_v1_9.py AI_TASK_LIST_TEMPLATE_v6.md`
 - Expected: exit 0 (structure/placeholders allowed)
 
 ### 2) Plan artifact
 - Input: `canonical_examples/example_plan.md` (plan mode)
-- Command: `uv run python ai_task_list_linter_v1_9.py canonical_examples/example_plan.md`
+- Command: `uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/example_plan.md`
 - Expected: exit 0 (real commands, evidence placeholders)
 
 ### 3) Instantiated sample
 - Input: `canonical_examples/example_instantiated.md` (instantiated mode)
-- Command: `uv run python ai_task_list_linter_v1_9.py --require-captured-evidence canonical_examples/example_instantiated.md`
+- Command: `uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence canonical_examples/example_instantiated.md`
 - Expected: exit 0 (no placeholders; real evidence; captured headers present)
 
 ### 4) Negative cases (persistent fixtures)

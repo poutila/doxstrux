@@ -8,7 +8,7 @@ Deterministic framework for AI task lists (modes: template/plan/instantiated). V
 - `COMMON.md` — Shared framework definitions (versions, modes, SSOT hierarchy)
 - `AI_TASK_LIST_SPEC_v1.md` — Specification (rules, headings, governance)
 - `AI_TASK_LIST_TEMPLATE_v6.md` — Template v6 for new task lists
-- `ai_task_list_linter_v1_9.py` — Stdlib linter implementing the spec
+- `tools/ai_task_list_linter_v1_9.py` — Linter implementing the spec (pyyaml)
 
 **Guides:**
 - `MANUAL.md` — Framework manual (workflows, checklists, prose conversion)
@@ -24,13 +24,13 @@ Deterministic framework for AI task lists (modes: template/plan/instantiated). V
 
 ```bash
 # Standard lint
-uv run python ai_task_list_linter_v1_9.py PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter_v1_9.py PROJECT_TASKS.md
 
 # With captured evidence header enforcement
-uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
 
 # Recommended for CI (instantiated lists)
-uv run python ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
+uv run python tools/ai_task_list_linter_v1_9.py --require-captured-evidence PROJECT_TASKS.md
 ```
 
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/internal error

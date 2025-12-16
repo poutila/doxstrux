@@ -14,6 +14,8 @@ import sys
 from pathlib import Path
 from typing import Iterator, Tuple
 
+import yaml
+
 ROOT = Path(__file__).resolve().parent.parent
 EXCLUDES = [
     "archive",
@@ -24,10 +26,16 @@ EXCLUDES = [
 ALLOWED_VERSION_FILES = {
     ROOT / "COMMON.md",
     ROOT / "AI_TASK_LIST_SPEC_v1.md",
-    ROOT / "ai_task_list_linter_v1_9.py",
+    ROOT / "tools" / "ai_task_list_linter_v1_9.py",
     ROOT / "AI_TASK_LIST_TEMPLATE_v6.md",
     ROOT / "CLEANING.md",
     ROOT / "MANUAL.md",
+    # Input validation system files
+    ROOT / "PROSE_INPUT_TEMPLATE_v1.md",
+    ROOT / "PROSE_INPUT_DISCOVERY_PROMPT_v1.md",
+    ROOT / "tools" / "prose_input_linter.py",
+    ROOT / "PROSE_INPUT_REVIEW_PROMPT_v1.md",
+    ROOT / "COMPLETE_VALIDATION.md",
 }
 
 HISTORICAL_RE = re.compile(
@@ -39,12 +47,11 @@ ELLIPSIS_ALLOWED_RE = re.compile(r"^(?:\$\s*)?(?:uv run|rg)\b.*\.\.\.")
 VERSION_LINE_RE = re.compile(
     r"^-?\s*Spec:\s*v(\d+\.\d+)\s*(?:\(schema_version:\s*\"(\d+\.\d+)\"\))?\s*$"
     r"|^-?\s*schema_version:\s*\"(\d+\.\d+)\"\s*$"
-    r"|^-?\s*Linter:\s*v(\d+\.\d+)\s*\(`?ai_task_list_linter_v(\d+)_(\d+)\.py`?\)\s*$"
+    r"|^-?\s*Linter:\s*v(\d+\.\d+)\s*\(`?(?:tools/)?ai_task_list_linter_v(\d+)_(\d+)\.py`?\)\s*$"
     r"|^-?\s*Template:\s*v(\d+\.\d+)\s*$"
 )
 
 FRONTMATTER_RE = re.compile(r"^---\s*$")
-SCHEMA_VERSION_RE = re.compile(r"schema_version:\s*\"?(\d+\.\d+)\"?")
 
 LINTER_VERSION_RE = re.compile(r"LINTER_VERSION\s*=\s*['\"](\d+)\.(\d+)")
 
@@ -111,22 +118,50 @@ def parse_common_tuple() -> Tuple[str, str, str, str]:
     return spec, schema, linter, template
 
 
-def parse_frontmatter_schema(p: Path) -> str | None:
+def parse_frontmatter_metadata(p: Path) -> dict | None:
+    """Parse full YAML front matter metadata."""
     lines = p.read_text(encoding="utf-8", errors="ignore").splitlines()
     if not lines or not FRONTMATTER_RE.match(lines[0]):
         return None
+    end_idx = None
     for i in range(1, len(lines)):
         if FRONTMATTER_RE.match(lines[i]):
+            end_idx = i
             break
-        m = SCHEMA_VERSION_RE.search(lines[i])
-        if m:
-            return m.group(1)
+    if end_idx is None:
+        return None
+    yaml_content = "\n".join(lines[1:end_idx])
+    try:
+        metadata = yaml.safe_load(yaml_content)
+        return metadata if metadata else None
+    except yaml.YAMLError:
+        return None
+
+
+def parse_frontmatter_schema(p: Path) -> str | None:
+    """Parse schema_version from YAML front matter using pyyaml."""
+    metadata = parse_frontmatter_metadata(p)
+    if metadata is None:
+        return None
+    # schema_version can be at top level or nested
+    if "schema_version" in metadata:
+        return str(metadata["schema_version"])
+    # Check nested structures (e.g., prose_input.schema_version)
+    for key, value in metadata.items():
+        if isinstance(value, dict) and "schema_version" in value:
+            return str(value["schema_version"])
     return None
 
 
 def check_yaml_schema(schema_expected: str) -> None:
     for p in ROOT.rglob("*.md"):
         if is_excluded(p):
+            continue
+        metadata = parse_frontmatter_metadata(p)
+        if metadata is None:
+            continue
+        # Skip prose input templates (they have their own validation system)
+        if "prose_input" in metadata:
             continue
         schema = parse_frontmatter_schema(p)
         if schema and schema != schema_expected:
@@ -156,9 +191,9 @@ def check_versions(spec_v: str, schema_v: str, linter_v: str) -> None:
             if HISTORICAL_RE.search(line):
                 continue
             fail(f"Version literal in non-SSOT file {p}:{line_start}: {line.strip()}")
-    linter_path = ROOT / "ai_task_list_linter_v1_9.py"
+    linter_path = ROOT / "tools" / "ai_task_list_linter_v1_9.py"
     if not linter_path.exists():
-        fail("Linter file ai_task_list_linter_v1_9.py not found")
+        fail("Linter file tools/ai_task_list_linter_v1_9.py not found")
     linter_text = linter_path.read_text(encoding="utf-8", errors="ignore")
     mv = LINTER_VERSION_RE.search(linter_text)
     if not mv:

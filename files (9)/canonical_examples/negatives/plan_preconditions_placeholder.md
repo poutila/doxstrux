@@ -5,7 +5,7 @@
   Plan mode requires real commands in preconditions, not placeholders.
 
   Purpose: Regression test - linter MUST reject this file.
-  Run: uv run python ai_task_list_linter_v1_9.py canonical_examples/negatives/plan_preconditions_placeholder.md
+  Run: uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/negatives/plan_preconditions_placeholder.md
   Expected: Exit code 1
 -->
 ---

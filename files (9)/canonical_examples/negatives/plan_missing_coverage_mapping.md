@@ -5,7 +5,7 @@
   Missing/empty Prose Coverage Mapping table in plan mode is an error.
 
   Purpose: Regression test - linter MUST reject this file.
-  Run: uv run python ai_task_list_linter_v1_9.py canonical_examples/negatives/plan_missing_coverage_mapping.md
+  Run: uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/negatives/plan_missing_coverage_mapping.md
   Expected: Exit code 1
 -->
 ---

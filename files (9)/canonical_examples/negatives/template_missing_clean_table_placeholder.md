@@ -5,7 +5,7 @@
   Template mode requires Clean Table placeholder structure.
 
   Purpose: Regression test - linter MUST reject this file.
-  Run: uv run python ai_task_list_linter_v1_9.py canonical_examples/negatives/template_missing_clean_table_placeholder.md
+  Run: uv run python tools/ai_task_list_linter_v1_9.py canonical_examples/negatives/template_missing_clean_table_placeholder.md
   Expected: Exit code 1
 -->
 ---

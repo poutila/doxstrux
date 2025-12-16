@@ -18,7 +18,7 @@ Prior features retained:
 - R-ATL-071/072/075: Runner/UV/$ enforcement
 
 Base features:
-- stdlib only
+- pyyaml for robust YAML parsing
 - deterministic (no network, no repo mutation)
 - exit codes: 0=pass, 1=fail, 2=usage/internal error
 """
@@ -31,7 +31,9 @@ import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
+
+import yaml
 
 LINTER_VERSION = "1.9.0"
 
@@ -142,47 +144,60 @@ def _read_lines(path: Path) -> List[str]:
 
 
 def _parse_front_matter(lines: List[str]) -> Tuple[Dict[str, str], Optional[LintError], int]:
-    if not lines or not RE_FM.match(lines[0]):
-        return {}, LintError(1, "R-ATL-001", "Missing YAML front matter start '---' on line 1."), 0
+    """Parse YAML front matter using pyyaml for robustness.
+
+    Skips leading HTML comments (<!-- ... -->) before the YAML front matter.
+    """
+    if not lines:
+        return {}, LintError(1, "R-ATL-001", "Empty file."), 0
+
+    # Skip leading HTML comments
+    start_idx = 0
+    in_comment = False
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith("<!--") and "-->" in stripped:
+            # Single-line comment, skip it
+            continue
+        elif stripped.startswith("<!--"):
+            in_comment = True
+            continue
+        elif in_comment:
+            if "-->" in stripped:
+                in_comment = False
+            continue
+        else:
+            start_idx = i
+            break
+
+    if start_idx >= len(lines) or not RE_FM.match(lines[start_idx]):
+        return {}, LintError(start_idx + 1, "R-ATL-001", f"Missing YAML front matter start '---' (found at line {start_idx + 1})."), 0
 
     end_idx = None
-    for i in range(1, len(lines)):
+    for i in range(start_idx + 1, len(lines)):
         if RE_FM.match(lines[i]):
             end_idx = i
             break
     if end_idx is None:
-        return {}, LintError(1, "R-ATL-001", "Missing YAML front matter end '---'."), 0
+        return {}, LintError(start_idx + 1, "R-ATL-001", "Missing YAML front matter end '---'."), 0
 
-    fm = lines[1:end_idx]
-    meta: Dict[str, str] = {}
-
+    yaml_content = "\n".join(lines[start_idx + 1:end_idx])
     try:
-        root_i = next(i for i, ln in enumerate(fm) if ln.strip() == "ai_task_list:")
-    except StopIteration:
+        parsed = yaml.safe_load(yaml_content)
+        if parsed is None:
+            parsed = {}
+    except yaml.YAMLError as e:
+        return {}, LintError(1, "R-ATL-001", f"Invalid YAML in front matter: {e}"), end_idx + 1
+
+    if not isinstance(parsed, dict) or "ai_task_list" not in parsed:
         return {}, LintError(1, "R-ATL-001", "Front matter missing required 'ai_task_list:' block."), end_idx + 1
 
-    for j in range(root_i + 1, len(fm)):
-        ln = fm[j]
-        if not ln.startswith("  "):
-            break
-        m = re.match(r"^\s{2}([a-zA-Z_][a-zA-Z0-9_]*)\s*:\s*(.+?)\s*$", ln)
-        if not m:
-            continue
-        key = m.group(1)
-        val = m.group(2).strip()
-        # Strip inline comments (# ...) before processing quotes
-        if "#" in val:
-            if val.startswith('"') and '"' in val[1:]:
-                close_quote = val.index('"', 1)
-                val = val[:close_quote + 1]
-            elif val.startswith("'") and "'" in val[1:]:
-                close_quote = val.index("'", 1)
-                val = val[:close_quote + 1]
-            else:
-                val = val.split("#")[0].strip()
-        if (val.startswith('"') and val.endswith('"')) or (val.startswith("'") and val.endswith("'")):
-            val = val[1:-1]
-        meta[key] = val
+    ai_task_list = parsed.get("ai_task_list", {})
+    if not isinstance(ai_task_list, dict):
+        return {}, LintError(1, "R-ATL-001", "ai_task_list must be a mapping."), end_idx + 1
+
+    # Convert all values to strings for consistency
+    meta: Dict[str, str] = {k: str(v) if v is not None else "" for k, v in ai_task_list.items()}
 
     # R-ATL-001: Front matter required; R-ATL-070: Runner metadata required
     required = ["schema_version", "mode", "runner", "runner_prefix", "search_tool"]

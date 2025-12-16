@@ -2,7 +2,7 @@
 
 ## §Version Metadata
 - Spec: v1.9 (schema_version: "1.7")
-- Linter: v1.9 (`ai_task_list_linter_v1_9.py`)
+- Linter: v1.9 (`tools/ai_task_list_linter_v1_9.py`)
 - Template: v6.0
 
 ## §SSOT Hierarchy

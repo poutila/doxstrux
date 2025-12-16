@@ -1,0 +1,412 @@
+# COMPLETE_VALIDATION.md
+
+> **Version**: 1.0
+> **Purpose**: Define the complete input-to-output validation pipeline for the AI Task List Framework.
+
+---
+
+## Philosophy
+
+**Strict input → Deterministic conversion → Validated output**
+
+The framework eliminates drift by:
+1. Controlling input structure strictly (no ambiguous prose)
+2. Validating input in two phases (mechanical + semantic)
+3. Converting deterministically (reformat, not interpret)
+4. Validating output against spec (existing linter)
+
+---
+
+## Pipeline Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     PHASE 0: DISCOVERY (OPTIONAL)                        │
+│                                                                         │
+│   Tool: PROSE_INPUT_DISCOVERY_PROMPT_v1.md                              │
+│   Type: AI prompt (fact-gathering, no reasoning)                        │
+│                                                                         │
+│   Gathers from codebase:                                                │
+│   • Project metadata (name, runner, search tool)                        │
+│   • Directory structure                                                 │
+│   • Existing files in target area                                       │
+│   • Current dependencies                                                │
+│   • Sample outputs (for schema work)                                    │
+│   • CI/workflow configuration                                           │
+│   • Key symbols to depend on                                            │
+│                                                                         │
+│   Output: Discovery report with facts to paste into template            │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                              INPUT                                       │
+│                                                                         │
+│   Author writes spec using PROSE_INPUT_TEMPLATE_v1.md                   │
+│   (Structured format that mirrors output structure)                      │
+│   Uses facts from Phase 0 to fill in Sample Artifacts section           │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     PHASE 1: DETERMINISTIC VALIDATION                    │
+│                                                                         │
+│   Tool: tools/prose_input_linter.py                                     │
+│   Type: Script (deterministic, no AI)                                    │
+│   Deps: pyyaml                                                          │
+│                                                                         │
+│   Validates:                                                            │
+│   ✓ YAML front matter present and valid                                 │
+│   ✓ Schema version matches                                              │
+│   ✓ Required sections in correct order                                  │
+│   ✓ No [[PLACEHOLDER]] tokens remain                                    │
+│   ✓ No TBD/TODO/TBC/FIXME markers                                       │
+│   ✓ No unanswered questions (lines ending with ?)                       │
+│   ✓ No tentative language (maybe, might, could, consider)               │
+│   ✓ No conditional logic (if we... then)                                │
+│   ✓ No time estimates                                                   │
+│   ✓ No pending decisions                                                │
+│   ✓ Task structure complete (Objective, Paths, etc.)                    │
+│   ✓ Decisions table has required columns                                │
+│   ✓ File Manifest populated                                             │
+│   ✓ Submission checklist fully checked                                  │
+│                                                                         │
+│   Exit codes:                                                           │
+│     0 = PASS (proceed to Phase 2)                                       │
+│     1 = FAIL (fix errors, re-run)                                       │
+│     2 = Schema error                                                    │
+│     3 = File error                                                      │
+│                                                                         │
+│   Command:                                                              │
+│     uv run python tools/prose_input_linter.py SPEC.md                   │
+│     uv run python tools/prose_input_linter.py --fix-hints SPEC.md       │
+│     uv run python tools/prose_input_linter.py --json SPEC.md            │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ Exit 0
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     PHASE 2: SEMANTIC VALIDATION                         │
+│                                                                         │
+│   Tool: PROSE_INPUT_REVIEW_PROMPT_v1.md                                 │
+│   Type: AI reasoning (requires judgment)                                │
+│   Deps: AI assistant capable of reasoning                               │
+│                                                                         │
+│   Validates:                                                            │
+│   ✓ Objectives actually clear (not just present)                        │
+│   ✓ Paths actually complete (all files covered)                         │
+│   ✓ Preconditions actually valid (meaningful checks)                    │
+│   ✓ Success criteria actually measurable (not subjective)               │
+│   ✓ Test strategy actually tests behavior (not smoke tests)             │
+│   ✓ Dependencies actually coherent (no cycles, valid refs)              │
+│   ✓ Scope actually bounded (no "etc." or "as needed")                   │
+│   ✓ Decisions actually complete (no implicit choices)                   │
+│   ✓ Drift risks actually covered (realistic mitigations)                │
+│   ✓ Document internally consistent (no contradictions)                  │
+│                                                                         │
+│   Output:                                                               │
+│     VERDICT: PASS (proceed to conversion)                               │
+│     VERDICT: FAIL (fix issues, return to Phase 1)                       │
+│                                                                         │
+│   Usage:                                                                │
+│     1. Copy PROSE_INPUT_REVIEW_PROMPT_v1.md into AI context             │
+│     2. Provide the spec document that passed Phase 1                    │
+│     3. AI produces review with explicit VERDICT                         │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ VERDICT: PASS
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         CONVERSION                                       │
+│                                                                         │
+│   Tool: PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md                          │
+│   Type: Deterministic reformat (structure already defined)              │
+│                                                                         │
+│   Because input structure mirrors output structure:                     │
+│   - No interpretation needed                                            │
+│   - No guessing at requirements                                         │
+│   - Just reformatting from template to template                         │
+│                                                                         │
+│   Output: AI Task List in plan mode                                     │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     OUTPUT VALIDATION                                    │
+│                                                                         │
+│   Tool: tools/ai_task_list_linter_v1_9.py                               │
+│   Type: Script (deterministic)                                          │
+│   Deps: pyyaml                                                          │
+│                                                                         │
+│   Validates:                                                            │
+│   ✓ YAML front matter (schema_version, mode, runner, search_tool)       │
+│   ✓ Required sections present                                           │
+│   ✓ Phase structure valid                                               │
+│   ✓ Task structure valid (TDD steps, STOP blocks, checklists)           │
+│   ✓ Paths arrays valid                                                  │
+│   ✓ Preconditions have symbol checks                                    │
+│   ✓ Evidence blocks structured correctly                                │
+│   ✓ Runner/uv enforcement                                               │
+│   ✓ Search tool enforcement                                             │
+│   ✓ Import hygiene (Python projects)                                    │
+│   ✓ Prose Coverage Mapping (plan/instantiated modes)                    │
+│                                                                         │
+│   Command:                                                              │
+│     uv run python tools/ai_task_list_linter_v1_9.py PROJECT_TASKS.md    │
+│     uv run python tools/ai_task_list_linter_v1_9.py --json [...]        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ Exit 0
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         EXECUTION                                        │
+│                                                                         │
+│   Human implements tasks following the task list                        │
+│   Evidence captured and pasted                                          │
+│   Mode transitions: plan → instantiated                                 │
+│   Phase gates enforced                                                  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## File Reference
+
+| File | Type | Purpose |
+|------|------|---------|
+| `PROSE_INPUT_DISCOVERY_PROMPT_v1.md` | Prompt | Phase 0: Gather project facts before writing spec |
+| `PROSE_INPUT_TEMPLATE_v1.md` | Template | Mandatory input structure for new specs |
+| `tools/prose_input_linter.py` | Script | Phase 1: Deterministic validation |
+| `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Prompt | Phase 2: AI semantic review |
+| `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md` | Prompt | Conversion: Prose → Task List |
+| `tools/ai_task_list_linter_v1_9.py` | Script | Output validation (pyyaml) |
+| `AI_TASK_LIST_TEMPLATE_v6.md` | Template | Task list structure |
+| `AI_TASK_LIST_SPEC_v1.md` | Spec | Authoritative rules for task lists |
+
+---
+
+## Division of Labor
+
+### What Scripts Check (Deterministic)
+
+| Check | Tool | Why Script |
+|-------|------|------------|
+| YAML syntax valid | `tools/prose_input_linter.py` | Parse error = objective |
+| Section exists | `tools/prose_input_linter.py` | String match = objective |
+| Placeholder absent | `tools/prose_input_linter.py` | Regex match = objective |
+| TBD marker absent | `tools/prose_input_linter.py` | Regex match = objective |
+| Checkbox checked | `tools/prose_input_linter.py` | String match = objective |
+| Task ID format | `tools/ai_task_list_linter_v1_9.py` | Regex match = objective |
+| Evidence block present | `tools/ai_task_list_linter_v1_9.py` | Structure match = objective |
+
+### What AI Checks (Reasoning)
+
+| Check | Tool | Why AI |
+|-------|------|--------|
+| Objective is clear | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Requires understanding intent |
+| Success criteria measurable | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | "Clean" vs "ruff passes" |
+| Test covers behavior | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Requires understanding code |
+| Dependencies coherent | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Requires logical reasoning |
+| Scope bounded | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | "etc." detection in context |
+| Risks realistic | `PROSE_INPUT_REVIEW_PROMPT_v1.md` | Domain knowledge needed |
+
+---
+
+## Validation Outcomes
+
+### Phase 1 Outcomes
+
+| Exit Code | Meaning | Action |
+|-----------|---------|--------|
+| 0 | Structure valid | Proceed to Phase 2 |
+| 1 | Validation errors | Fix errors, re-run Phase 1 |
+| 2 | Schema/parse error | Fix YAML, re-run Phase 1 |
+| 3 | File not found | Check path |
+
+### Phase 2 Outcomes
+
+| Verdict | Meaning | Action |
+|---------|---------|--------|
+| PASS | Content valid | Proceed to conversion |
+| PASS + CONCERNS | Valid with notes | Proceed, author aware of concerns |
+| FAIL | Content invalid | Fix issues, return to Phase 1 |
+
+### Output Validation Outcomes
+
+| Exit Code | Meaning | Action |
+|-----------|---------|--------|
+| 0 | Task list valid | Ready for execution |
+| 1 | Lint violations | Fix violations, re-run |
+| 2 | Usage error | Check command |
+
+---
+
+## Quick Start
+
+### For New Specifications
+
+```bash
+# 0. (Optional) Run discovery to gather project facts
+# In AI chat: paste PROSE_INPUT_DISCOVERY_PROMPT_v1.md
+# AI gathers facts from codebase → produces discovery report
+
+# 1. Copy the input template
+cp PROSE_INPUT_TEMPLATE_v1.md my_spec.md
+
+# 2. Fill in all sections (replace all [[PLACEHOLDER]] tokens)
+# Use discovery report to fill Sample Artifacts section
+# Edit my_spec.md...
+
+# 3. Phase 1: Run deterministic linter
+uv run python tools/prose_input_linter.py my_spec.md
+
+# 4. Fix any errors, repeat step 3 until exit 0
+
+# 5. Phase 2: AI review (in AI chat)
+# Paste PROSE_INPUT_REVIEW_PROMPT_v1.md
+# Paste my_spec.md
+# Wait for VERDICT: PASS
+
+# 6. Convert to task list (in AI chat)
+# Paste PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md
+# Paste my_spec.md
+# AI produces task list
+
+# 7. Validate output
+uv run python tools/ai_task_list_linter_v1_9.py my_tasks.md
+
+# 8. Execute tasks
+```
+
+### For Legacy Prose Documents
+
+```bash
+# 1. Quick readiness check (soft validation)
+uv run python tools/prose_readiness_check.py legacy_doc.md
+
+# 2. If READY: Consider converting to template format
+# If NOT READY: Address blockers first
+
+# 3. Either:
+#    a. Rewrite using PROSE_INPUT_TEMPLATE_v1.md (recommended)
+#    b. Use orchestrator directly (less reliable, more iteration)
+```
+
+---
+
+## Why Two Phases?
+
+### Problem with Single-Phase Validation
+
+A script cannot check:
+- "Is this objective actually clear?" (requires understanding)
+- "Does this test actually test the behavior?" (requires reasoning)
+- "Are these dependencies logically coherent?" (requires inference)
+
+An AI alone cannot guarantee:
+- "Is this YAML syntactically valid?" (might miss edge cases)
+- "Does this match the required format exactly?" (pattern drift)
+- "Are all forbidden tokens absent?" (might overlook)
+
+### Solution: Complementary Validation
+
+| Phase | Strength | Weakness |
+|-------|----------|----------|
+| Script | Consistent, fast, no false negatives on format | Cannot reason about meaning |
+| AI | Understands context, catches semantic issues | May drift, slower, less consistent |
+
+Together: **Mechanical correctness AND semantic quality**.
+
+---
+
+## Error Recovery
+
+### Phase 1 Failure
+
+```
+$ uv run python tools/prose_input_linter.py my_spec.md
+Line 45: [PIN-F02] Unfilled placeholder '[[PATH]]' found.
+Line 89: [PIN-F01] Unresolved marker 'TBD' found.
+```
+
+**Action**: Edit `my_spec.md`, replace placeholders, resolve TBDs, re-run.
+
+### Phase 2 Failure
+
+```
+## Verdict
+**VERDICT: FAIL**
+
+Blocking issues:
+1. Task 1.2 Objective is vague: "Improve the handling"
+2. Task 2.1 Success Criteria uses subjective term "clean code"
+3. Circular dependency: Task 1.3 ↔ Task 1.4
+```
+
+**Action**: Edit spec to address issues, return to Phase 1 (re-validate structure after edits).
+
+### Output Validation Failure
+
+```
+$ uv run python tools/ai_task_list_linter_v1_9.py my_tasks.md
+my_tasks.md:145:R-ATL-D2:Task 1.2 Preconditions must include rg command.
+```
+
+**Action**: Fix task list, re-run linter.
+
+---
+
+## Guarantees
+
+When a document passes the complete pipeline:
+
+| Guarantee | Source |
+|-----------|--------|
+| Structure matches spec | `tools/prose_input_linter.py` |
+| No unresolved placeholders | `tools/prose_input_linter.py` |
+| No ambiguous markers | `tools/prose_input_linter.py` |
+| Objectives are clear | AI review |
+| Success criteria measurable | AI review |
+| Tests cover behavior | AI review |
+| Dependencies valid | AI review |
+| Internally consistent | AI review |
+| Task list format valid | `tools/ai_task_list_linter_v1_9.py` |
+| Governance baked in | `tools/ai_task_list_linter_v1_9.py` |
+
+---
+
+## Limitations
+
+### What This Cannot Guarantee
+
+1. **Technical correctness** - The spec might describe the wrong solution
+2. **Feasibility** - Tasks might be impossible to implement
+3. **Completeness** - Requirements might be missing from the source
+4. **Evidence authenticity** - Captured evidence can still be faked
+
+### Mitigations
+
+| Limitation | Mitigation |
+|------------|------------|
+| Wrong solution | Phase 0 discovery before committing |
+| Impossible tasks | Precondition checks catch missing APIs |
+| Missing requirements | Prose Coverage Mapping enforces tracing |
+| Fake evidence | `--require-captured-evidence` raises cost of faking |
+
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0 | 2025-12-16 | Initial complete validation pipeline |
+
+---
+
+**End of Document**

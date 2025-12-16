@@ -2,7 +2,7 @@
 > Version metadata (Spec, schema_version, linter, template): see COMMON.md §Version Metadata.  
 > Spec: AI_TASK_LIST_SPEC_v1.md  
 > Template: AI_TASK_LIST_TEMPLATE_v6.md  
-> Linter: ai_task_list_linter_v1_9.py  
+> Linter: tools/ai_task_list_linter_v1_9.py  
 > Manual: MANUAL.md  
 
 # PROMPT: AI_TASK_LIST_ORCHESTRATOR_v1
@@ -26,7 +26,7 @@ You will be given:
 1. **Prose design / requirements**: `[[PH:PROSE_DOC_LABEL]]` (content pasted into this chat; e.g., [Target file](./path_to/[[PH:PROSE_DOC_FILENAME]].md)).
 2. **Spec**: [AI_TASK_LIST_SPEC_v1.md](./AI_TASK_LIST_SPEC_v1.md) — contract for valid task lists (schema_version: see COMMON.md; modes: template/plan/instantiated).
 3. **Template**: [AI_TASK_LIST_TEMPLATE_v6.md](./AI_TASK_LIST_TEMPLATE_v6.md) — starting point for new task lists.
-4. **Linter**: [ai_task_list_linter_v1_9.py](./ai_task_list_linter_v1_9.py) — implementation of the spec (assume it will be run after your output).
+4. **Linter**: [tools/ai_task_list_linter_v1_9.py](./tools/ai_task_list_linter_v1_9.py) — implementation of the spec (assume it will be run after your output).
 5. **Manual**: [MANUAL.md](./MANUAL.md).
 
 If any of the files above are missing or not accessible, STOP and ask for the correct path before proceeding.
@@ -46,7 +46,7 @@ Task
 Given the prose document and the framework artifacts above, produce a single Markdown AI task list file (e.g., `PROJECT_TASKS.md`) that:
 
 - Is **valid against the Spec (see COMMON.md §Version Metadata for versions/schema)** (as far as you can check from text alone).
-- Is **ready to be linted** by `ai_task_list_linter_v1_9.py --require-captured-evidence` once a human fills in real evidence.
+- Is **ready to be linted** by `tools/ai_task_list_linter_v1_9.py --require-captured-evidence` once a human fills in real evidence.
 - Encodes a realistic, implementable plan for the changes described in the prose.
 - Bakes in:
   - TDD structure per task (RED / minimal implementation / GREEN).
