@@ -1,5 +1,8 @@
 # GENERAL_FIX_1.md — Framework Fix Plan (not file-specific)
 
+## Purpose
+Validate and align the already-implemented linter v1.9 (Spec v1.9 / schema 1.7, three modes) with spec/COMMON/docs/examples; capture baselines/canaries; and ensure new rules (NEW-01/02/03) are reflected across artifacts. No new linter behavior changes are intended beyond the current v1_9 code.
+
 ## Current State Audit (pre-flight; not blocking fixture creation)
 **Status:** 🟡 DRAFT — baseline evidence not yet captured; set ownership before execution  
 **Owner/Deadline:** Unassigned (must be set before work starts; plan blocked until assigned)
@@ -71,7 +74,7 @@
 ## Scope
 - Linter: plan-mode evidence allowance; plan/instantiated $-prefix (aligned to current linter heuristic, not narrowed to arrays only); internal consistency checks (unique task IDs; coverage references resolve + unique). No new runtime dependencies; keep linter stdlib-only plus existing uv/rg usage in fixtures.
 - Spec/COMMON: mirror linter (plan allows evidence placeholders; coverage must reference existing tasks and uniqueness).
-- Docs/Template/README/Manuals/INDEX: reflect rules; ensure COMMON.md is discoverable; update template-mode references to match three-mode, schema_version 1.7. Legacy artifacts in `work_folder/` that still reference v1_8/schema 1.6 are out of scope for this plan; either migrate them to schema 1.7 before linting or ignore them for this change set.
+- Docs/Template/README/Manuals/INDEX: reflect rules; ensure COMMON.md is discoverable; update references to reflect the three-mode lifecycle (template/plan/instantiated), schema_version 1.7. Legacy artifacts in `work_folder/` that still reference v1_8/schema 1.6 are out of scope for this plan; either migrate them to schema 1.7 before linting or ignore them for this change set.
 - Validation: keep examples/negatives aligned with enforcement (add missing coverage-negative and enforce suite format); keep test fixture names consistent with repo (use existing `example_plan.md` / `example_instantiated.md` or explicitly create the new ones listed below).
 - Canary safety net: pre/post canary run with manifest to enable rollback.
 - External dependencies: no new linter deps (stdlib-only). Required tools for fixtures/DoD: Python ≥3.10, uv ≥0.1.0, ripgrep ≥13.0, bash ≥4.0. Execution convention: run all python scripts via `uv run python ...`; do not invoke system `python` or `pip` directly.
@@ -100,7 +103,7 @@
   - Accepted headers (case-sensitive): {Implemented by Task(s), Implemented by Tasks, Tasks, Task IDs}.
   - If multiple accepted headers exist: use canonical if present, else leftmost accepted. If none: R-ATL-NEW-02 “missing Implemented-by column”.
   - Table definition: contiguous block where line 1 starts with `|` and has ≥3 `|`; line 2 is a separator row starting with `|` and containing `---` per column (alignment with optional colons `:---`, `---:`, `:---:` allowed); subsequent lines start with `|`; stop at blank line or next heading.
-- Add/update fixtures to match repo naming: required positives = `canonical_examples/positives/plan_with_evidence_ph.md` and `canonical_examples/positives/example_instantiated.md` (no alternates); required negatives = instantiated_with_placeholders, duplicate_task_ids, coverage_phantom_refs — each with explicit violation placement.
+- Add/update fixtures to match repo naming: required positives = `canonical_examples/positives/example_template.md`, `canonical_examples/positives/example_plan.md`, `canonical_examples/positives/example_instantiated.md` (no alternates); required negatives = `canonical_examples/negatives/plan_preconditions_placeholder.md`, `canonical_examples/negatives/plan_missing_coverage_mapping.md`, `canonical_examples/negatives/template_missing_clean_table_placeholder.md` — each with explicit violation placement.
 - Validation suite schema: document required structure in `VALIDATION_SUITE.md` (categories: plan positives, instantiated positives, negatives; each test has File/Command/Expected/Status/Last run; summary totals). The task-list linter does not enforce this; execution is via the listed commands.
 - Clarify mode detection: fail if mode missing/invalid in frontmatter; valid values = template|plan|instantiated (case-sensitive).
 
