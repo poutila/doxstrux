@@ -61,13 +61,7 @@ Target tuple in COMMON.md:
   - Current version in non-SSOT files (should be absent): `rg '\\bv1\\.7\\b|schema.*1\\.7' . --glob '!COMMON.md' --glob '!AI_TASK_LIST_SPEC_v1.md' --glob '!ai_task_list_linter_v1_9.py' --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/**'`
 
 Conflicting strings policy (no guessing):
-- Allowed historical/version mentions:
-  - Anywhere in CHANGELOG.md (entire file is historical by nature), or
-  - Lines matching (case-insensitive):
-    - `\b(previously|formerly|originally)\b.*\bv?\d+\.\d+\b`
-    - `\bmigrated\s+from\b.*\bv?\d+\.\d+\b`
-    - `\bwas\s+(version|v|schema_version)\s+\d+\.\d+\b` (allowed only when the version differs from the current tuple; current-version matches are violations)
-- All other version literals outside the SSOT set/allowed files are violations.
+- No historical or current version literals are allowed outside the SSOT set/allowed files. Any version literal in a non-SSOT file is a violation (no historical exceptions).
 
 ## Edits to perform (content-level)
 1) Spec:
@@ -84,7 +78,6 @@ Conflicting strings policy (no guessing):
    - Banner text: Spec v1.9; schema_version 1.7; three modes.
    - LINTER_VERSION = 1.9.0; ensure docstring reflects it.
    - Filename/version consistency: ai_task_list_linter_v<MAJOR>_<MINOR>.py MUST match LINTER_VERSION major.minor (e.g., 1.9.x → v1_9).
-   - Historical mentions: allowed in CHANGELOG.md and clearly marked historical prose (e.g., “previously v1.8”, “migrated from 1.6”); all other version literals outside SSOT set are violations.
 4) README_ai_task_list_linter_v1_9.md:
    - Replace concrete version strings with “See COMMON.md §Version Metadata”; keep file name references. “File name references” = literal filenames/links (e.g., `ai_task_list_linter_v1_9.py`). Update any older filenames (e.g., v1_8) to current.
 5) Manuals (USER_MANUAL.md, AI_ASSISTANT USER_MANUAL.md, PROMPT_ORCHESTRATOR):
@@ -102,14 +95,14 @@ Conflicting strings policy (no guessing):
 - Add/maintain the consistency check script `tools/check_version_consistency.py` (present in repo) that:
   - Reads the tuple from COMMON.md (per parsing rules above).
   - Excludes: `**/archive/**`, `task_list_archive/**`, `work_folder/**`, `.git/**`.
-- Allowed files to contain concrete version literals outside YAML:
+  - Allowed files to contain concrete version literals outside YAML:
    - COMMON.md
    - AI_TASK_LIST_SPEC_v1.md
    - ai_task_list_linter_v1_9.py
    - AI_TASK_LIST_TEMPLATE_v6.md
    - VERSION_NORMALIZATION.md
    - GENERAL_FIX_1.md
-  - Only the SSOT set above may contain current version literals; all other non-excluded files must reference COMMON instead. Historical versions are allowed only per the historical regex or in CHANGELOG. canonical_examples/** and validation/** are excluded from version-literal scans.
+  - Only the SSOT set above may contain version literals; all other non-excluded files must reference COMMON instead. No historical/version literals allowed elsewhere. canonical_examples/** and validation/** are excluded from version-literal scans.
   - YAML front matter rule: only `schema_version: "1.7"` is allowed; any other version-related fields in YAML are violations.
   - Maintenance: when bumping linter version/filename, update this plan, allowed filename regex/allowlist, and the guardrail script to the new major.minor filename/version.
   - Fails if any non-archive file contains:
@@ -117,13 +110,13 @@ Conflicting strings policy (no guessing):
     - Spec v other than v1.9 in SSOT set (spec header, linter banner).
     - Linter filename references not equal to ai_task_list_linter_v1_9.py in SSOT docs (version-agnostic patterns like `ai_task_list_linter_v*.py` are allowed in code-block shell examples only; prose should use the exact current filename or reference COMMON).
     - LINTER_VERSION major.minor not matching the linter filename major.minor.
-    - Version literals in non-SSOT files that are not clearly historical (historical only allowed in CHANGELOG or lines matching the historical regex above).
+    - Any version literals in non-SSOT files (no historical exceptions).
   - Fails if `...` occurs in SSOT docs outside fenced code blocks.
   - Fails if `...` occurs inside fenced code blocks but does not match the allowed regex in Ellipsis policy.
   - Reference algorithm (implemented in the script):
     - parse COMMON.md “Target tuple” values
     - scan markdown files for YAML front matter; if present, enforce schema_version
-    - scan allowed-files list for version literals; scan all other files for forbidden literals (historical mentions allowed only in CHANGELOG and lines matching the historical regex above)
+    - scan allowed-files list for version literals; scan all other files for forbidden literals (no historical exceptions)
     - apply ellipsis checks with fence awareness and allowed regex
     - report first failure with file:path:line and exit non-zero (fail-fast, no auto-fix)
 
