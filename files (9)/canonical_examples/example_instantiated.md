@@ -130,10 +130,12 @@ $ uv run pytest -q tests/test_example_module.py::test_initial_wiring
 **Evidence (paste output)**:
 ```bash
 # Test run output:
-$ uv run pytest -q tests/test_example_module.py::test_initial_wiring
+# cmd: uv run pytest -q tests/test_example_module.py::test_initial_wiring
+# exit: 0
 1 passed
 # Symbol/precondition check output:
-$ rg -n example src/example_module.py
+# cmd: rg -n example src/example_module.py
+# exit: 0
 1:example content
 ```
 
@@ -178,9 +180,11 @@ $ uv run pytest -q tests/test_baseline.py::test_baseline
 **Evidence (paste output)**:
 ```bash
 # Test run output:
-$ uv run pytest -q tests/test_baseline.py::test_baseline
+# cmd: uv run pytest -q tests/test_baseline.py::test_baseline
+# exit: 0
 1 passed
 # Symbol/precondition check output:
-$ rg -n baseline tests/test_baseline.py
+# cmd: rg -n baseline tests/test_baseline.py
+# exit: 0
 1:baseline content
 ```

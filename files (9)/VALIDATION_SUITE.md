@@ -19,7 +19,7 @@
 
 ### 4) Negative cases (persistent fixtures)
 - Plan with command placeholder: `canonical_examples/negatives/plan_preconditions_placeholder.md`
-  - Expected: exit 1, R-ATL-D2 (plan forbids `[[PH:SYMBOL_CHECK_COMMAND]]`; requires real rg).
+  - Expected: exit 1, R-ATL-D2 + R-ATL-NEW-02 (forbids `[[PH:SYMBOL_CHECK_COMMAND]]`; requires real rg; Prose Coverage Mapping column missing).
 - Plan missing coverage mapping: `canonical_examples/negatives/plan_missing_coverage_mapping.md`
   - Expected: exit 1, R-ATL-NEW-02 (coverage section missing).
 - Template missing Clean Table placeholder: `canonical_examples/negatives/template_missing_clean_table_placeholder.md`
