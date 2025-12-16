@@ -99,7 +99,7 @@ Conflicting strings policy (no guessing):
    - Ensure v1.9 entry matches tuple.
 
 ## Guardrail (prevent re-drift)
-- Add a simple consistency check (script or make target), e.g., `tools/check_version_consistency.py`, that:
+- Add/maintain the consistency check script `tools/check_version_consistency.py` (already added) that:
   - Reads the tuple from COMMON.md (per parsing rules above).
   - Excludes: `**/archive/**`, `task_list_archive/**`, `work_folder/**`, `.git/**`.
   - Allowed files to contain concrete version literals outside YAML:
@@ -114,7 +114,7 @@ Conflicting strings policy (no guessing):
     - Version literals in non-SSOT files that are not clearly historical (historical only allowed in CHANGELOG or lines matching the historical regex above).
   - Fails if `...` occurs in SSOT docs outside fenced code blocks.
   - Fails if `...` occurs inside fenced code blocks but does not match the allowed regex in Ellipsis policy.
-  - Reference algorithm (no guessing):
+  - Reference algorithm (implemented in the script):
     - parse COMMON.md “Target tuple” values
     - scan markdown files for YAML front matter; if present, enforce schema_version
     - scan allowed-files list for version literals; scan all other files for forbidden literals (historical mentions allowed only in CHANGELOG and lines matching the historical regex above)
@@ -123,7 +123,7 @@ Conflicting strings policy (no guessing):
 
 ## Definition of Done
 - `rg 'schema_version: \"1\\.6\"|schema_version: 1\\.6|Spec v1\\.7|ai_task_list_linter_v1_8|README_ai_task_list_linter_v1_8|Spec 1\\.7|schema 1\\.6' . --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/*' --glob '!**/archive/**'` returns nothing.
-- Guardrail passes (tools/check_version_consistency.py exits 0).
+- Guardrail passes: `uv run python tools/check_version_consistency.py` exits 0 (fail-fast on first violation).
 - COMMON.md contains the canonical tuple; other docs either reference COMMON or stay silent on concrete numbers (no conflicting strings).
 - Linter banner matches LINTER_VERSION; linter filename matches LINTER_VERSION major.minor.
 - Validation suite headers/commands refer to ai_task_list_linter_v1_9.py.
