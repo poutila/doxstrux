@@ -29,7 +29,7 @@
 |------|------------|
 | **Mode** | Controls placeholder tolerance: `template` (placeholders allowed), `plan` (real commands, evidence placeholders), or `instantiated` (placeholders forbidden) | <!-- See COMMON.md §Mode Definitions -->
 | **Task ID** | Format `N.M` where N = phase number, M = task number |
-| **Canonical path array** | Bash array `TASK_N_M_PATHS=(...)` associated with Task N.M |
+| **Canonical path array** | Bash array `TASK_N_M_PATHS=(<quoted paths>)` associated with Task N.M |
 | **Runner** | Declared tool for command execution (e.g., `uv`), with `runner_prefix` (e.g., `uv run`) |
 
 ---
