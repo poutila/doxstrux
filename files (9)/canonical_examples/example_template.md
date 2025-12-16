@@ -1,6 +1,6 @@
 ---
 ai_task_list:
-  schema_version: "1.6"
+  schema_version: "1.7"
   mode: "template"
   runner: "uv"
   runner_prefix: "uv run"

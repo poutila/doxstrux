@@ -24,7 +24,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 
 ## 3) Instantiate the Template (Structure First)
 - Copy `AI_TASK_LIST_TEMPLATE_v6.md` to a new file (e.g., `PROJECT_TASKS.md`).
-- Fill YAML front matter: `schema_version: "1.6"`, `mode: "plan"` for project planning; flip to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
+- Fill YAML front matter: `schema_version: "1.7"`, `mode: "plan"` for project planning; flip to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
 - Keep required headings intact (per spec anchors).
 - Set status for each task (one of: 📋 PLANNED, ⏳ IN PROGRESS, ✅ COMPLETE, ❌ BLOCKED).
 

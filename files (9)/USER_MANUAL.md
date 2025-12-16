@@ -33,7 +33,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 
 ## 2) Quickstart (New Project)
 1. Copy `AI_TASK_LIST_TEMPLATE_v6.md` to your repo as `PROJECT_TASKS.md`.
-2. Fill YAML front matter: `schema_version: "1.6"`, `mode: "template"` for generic scaffolds or `mode: "plan"` for project plans (real commands, evidence placeholders); switch to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
+2. Fill YAML front matter: `schema_version: "1.7"`, `mode: "template"` for generic scaffolds or `mode: "plan"` for project plans (real commands, evidence placeholders); switch to `mode: "instantiated"` only when evidence is real; set `runner`, `runner_prefix`, `search_tool`.
 3. Map prose to tasks: list each major requirement from the source prose and map to task(s); mark out-of-scope items explicitly.
 4. Replace placeholders and flip to `mode: "instantiated"` only when evidence will be real.
 5. Run baseline commands (git branch/commit, runner/runtime versions, baseline tests); paste outputs with `# cmd/# exit`.
@@ -67,7 +67,7 @@ uv run python ai_task_list_linter_v1_9.py --json PROJECT_TASKS.md
 Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 
 ## 4) Enforcement Highlights (what will fail lint)
-- Front matter must have exact `schema_version: "1.6"`, `mode`, `runner`, `runner_prefix`, `search_tool`.
+- Front matter must have exact `schema_version: "1.7"`, `mode`, `runner`, `runner_prefix`, `search_tool`.
 - Required headings (9 anchors) must be present exactly.
 - No placeholders allowed anywhere in instantiated mode.
 - Task naming rule must appear exactly once.

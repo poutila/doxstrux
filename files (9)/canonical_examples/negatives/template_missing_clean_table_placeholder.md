@@ -1,6 +1,6 @@
 ---
 ai_task_list:
-  schema_version: "1.6"  # See COMMON.md §Version Metadata
+  schema_version: "1.7"  # See COMMON.md §Version Metadata
   mode: "template"  # Modes: template (placeholders), plan (real commands, evidence placeholders), instantiated (no placeholders) — See COMMON.md §Mode Definitions
   runner: "[[PH:RUNNER]]"  # e.g., "uv", "poetry", "npm", "cargo", "go"
   runner_prefix: "[[PH:RUNNER_PREFIX]]"  # e.g., "uv run", "poetry run", "" (empty for go/cargo)

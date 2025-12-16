@@ -93,7 +93,7 @@ High-level workflow
 
 4. **Instantiate the template structure**
    - Start from `AI_TASK_LIST_TEMPLATE_v6.md` structure:
-     - YAML front matter with `schema_version: "1.6"`, `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
+     - YAML front matter with `schema_version: "1.7"`, `mode: "plan"` (default), `runner`, `runner_prefix`, `search_tool`.
      - Required headings (Non-negotiable Invariants, Placeholder Protocol, Source of Truth, Baseline Snapshot, Phase 0, Drift Ledger, Phase Unlock Artifact, Global Clean Table Scan, STOP — Phase Gate).
   - Preserve:
      - The naming rule (“Task ID N.M → TASK_N_M_PATHS”).
@@ -176,7 +176,7 @@ Before returning the Markdown:
        - Has a `TASK_N_M_PATHS` array with at least one quoted path.
        - Has TDD headings and STOP section.
        - Has Preconditions with a symbol-check command matching `search_tool`.
-   - Ensure YAML front matter includes all required fields and uses `schema_version: "1.6"`.
+   - Ensure YAML front matter includes all required fields and uses `schema_version: "1.7"`.
 
 2. **Governance sweep**
    - Confirm:
