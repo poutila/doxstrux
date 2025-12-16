@@ -258,14 +258,14 @@ $ [[PH:FULL_TEST_COMMAND]]
 
 ## Phase Unlock Artifact
 
-Generate with real values (no placeholders — commands must use $ prefix when instantiated):
+Generate with real values; commands must use $ prefix when instantiated/plan:
 ```bash
 $ cat > .phase-N.complete.json << EOF
 {
   "phase": N,
   "completed_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
   "commit": "$(git rev-parse HEAD)",
-  "test_command": "...",
+  "test_command": "$ uv run pytest -q",
   "result": "PASS"
 }
 EOF

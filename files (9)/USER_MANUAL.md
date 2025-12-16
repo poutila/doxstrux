@@ -71,12 +71,12 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 - Required headings (9 anchors) must be present exactly.
 - No placeholders allowed anywhere in instantiated mode.
 - Task naming rule must appear exactly once.
-- Paths array per task: `TASK_N_M_PATHS=(...)` with quoted paths and closing `)`.
+- Paths array per task: `TASK_N_M_PATHS=()` with quoted paths and closing `)`.
 - Status line required and must be one allowed value.
 - Preconditions (non-Phase-0) must include `$ rg`/`$ grep` per `search_tool`.
 - TDD Step 3/Phase Unlock/Global Scan command lines must start with `$`.
 - Runner prefix enforcement on `$ pytest/python/mypy/ruff/black/isort`.
-- Runner `uv`: forbids `.venv/bin/python`, `python -m`, `pip install` in `$` lines; requires `$ uv sync` and `$ uv run ...` as `$` commands in fenced blocks.
+- Runner `uv`: forbids `.venv/bin/python`, `python -m`, `pip install` in `$` lines; requires `$ uv sync` and `$ uv run ` as `$` commands in fenced blocks.
 - Import hygiene (runner=uv): `$ rg 'from \.\.'` and `$ rg 'import \*'` must appear as `$` commands in Global Clean Table.
 - Phase Unlock: must include `$ cat > .phase-N.complete.json` and `$ rg` placeholder scan as `$` commands (comments don’t count); `.json` suffix enforced.
 - STOP evidence: fenced block required even if labels are renamed; both labeled sections must contain real output (headers alone don’t count).
@@ -88,10 +88,10 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 ## 5) Authoring Guidance (reduce iteration loops)
 - Always add `$` before commands in fenced blocks; omit `$` for pasted output.
 - Paste real outputs immediately after each `$` command; avoid leaving headers-only evidence.
-- For uv projects, ensure all test/tool commands use the declared `runner_prefix` (e.g., `uv run pytest ...`).
+- For uv projects, ensure all test/tool commands use the declared `runner_prefix` (e.g., `uv run pytest `).
 - When marking a task `✅ COMPLETE`, check all No Weak Tests and Clean Table boxes.
-- Keep a consistent evidence pattern: `# cmd: ...`, `# exit: ...`, then raw output.
-- Gates must gate: for Clean Table/unlock, use failing patterns (`! rg ...` or `if rg ...; then exit 1; fi`), not `rg ... || true`.
+- Keep a consistent evidence pattern: `# cmd: `, `# exit: `, then raw output.
+- Gates must gate: for Clean Table/unlock, use failing patterns (`! rg ` or `if rg ; then exit 1; fi`), not `rg  || true`.
 - If you can’t craft a failing behavior test, label steps Precondition/Implement/Verify rather than pretending TDD.
 - For behavior-changing tasks, reference at least one behavior-level test (name + behavior) in TDD/STOP.
 - Drift Ledger: if you detect or mention mismatches (prose vs tasks, invariants vs repo), add a ledger row with path:line witness; don’t leave it empty when drift is known.
@@ -99,12 +99,12 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 
 ## 6) Typical Linter Failures and Fixes
 - `schema_version must be '1.7'`: fix YAML front matter.
-- `Placeholders are forbidden in instantiated mode`: remove remaining `[[PH:...]]`.
+- `Placeholders are forbidden in instantiated mode`: remove remaining `[[PH:]]`.
 - `command lines must start with '$'`: add `$` to commands in required sections.
 - `runner=uv requires '$ uv sync' command line`: add `$ uv sync` in a fenced block.
 - `Baseline Snapshot evidence: command(s) missing output`: paste real output after each baseline command (headers alone don’t count).
 - `STOP evidence missing fenced code block`: add the evidence fenced block under STOP with labeled sections and real output.
-- `Preconditions must include rg command`: ensure each non-Phase-0 task has at least one `$ {search_tool} ...` line.
+- `Preconditions must include rg command`: ensure each non-Phase-0 task has at least one `$ {search_tool} ` line.
 - `runner=uv requires '$ uv sync' command line`: add `$ uv sync` in a fenced block.
 
 ## 7) Recommended CI Usage

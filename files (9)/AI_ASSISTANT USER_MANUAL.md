@@ -79,7 +79,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Global Clean Table: include `$ rg` checks for TODO/FIXME/XXX and placeholders; include import hygiene checks when uv.
 - Preconditions: each non-Phase-0 task must include at least one `$ rg …` (or `$ grep …` if search_tool=grep) in its Preconditions block.
 - STOP evidence: each STOP block must have labeled sections (`# Test run output:`, `# Symbol/precondition check output:`) with `# cmd:`/`# exit:` headers and real output when COMPLETE.
-- Discovery-only checks (non-gating): can use `$ rg ... || true` when you only want to find references (not fail).
+- Discovery-only checks (non-gating): can use `$ rg  || true` when you only want to find references (not fail).
 - Gates must actually gate: do NOT use `rg … && exit 1 || true/echo` in gates. Use `! rg 'pattern' …` or:
   ```bash
   $ if rg 'pattern' path/; then
@@ -91,7 +91,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - No Weak Tests: don’t claim non-weak tests if you only check existence/imports; strengthen tests or adjust the STOP checklist expectations for wiring-only tasks. For behavior-changing tasks, include at least one behavior-level test (beyond import/existence) in TDD/STOP and reference a concrete test name + behavior. Ensure STOP checkboxes reflect this honestly.
 - Runner/search_tool rules:
   - `search_tool: "rg"`: use `rg` in code blocks; grep forbidden in code blocks (prose mention OK).
-  - `runner: "uv"` with `runner_prefix: "uv run"`: include `$ uv sync` and `$ uv run …`; use `$ uv run pytest/python/...` for managed tools; never emit `$ .venv/bin/python`, `$ python -m`, or `$ pip install` in `$` lines.
+  - `runner: "uv"` with `runner_prefix: "uv run"`: include `$ uv sync` and `$ uv run …`; use `$ uv run pytest/python/` for managed tools; never emit `$ .venv/bin/python`, `$ python -m`, or `$ pip install` in `$` lines.
 - Validation suite: after writing the task list, run positives/negatives from `VALIDATION_SUITE.md` (canonical_examples plus negatives in `canonical_examples/negatives/`) to catch regressions early.
 
 ## 7) Evidence Blocks (Captured and Non-Empty)
@@ -108,7 +108,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Preconditions must contain at least one `$ rg …` line per task.
 - Drift Ledger: log real mismatches (e.g., known import hygiene violations vs. invariant); don’t leave it empty if you’ve observed drift. If you mention or detect a mismatch between the task list and prose/spec, or between invariants and repo state, add a ledger entry with higher/lower sources, short mismatch, and a path:line witness—do not silently correct without logging.
 - Prose Coverage Mapping: table present in plan/instantiated; Implemented-by column present (accepted headers in §1.5); entries reference real task IDs (no missing/duplicate IDs; ranges forward/same prefix).
-- Clean Table: write commands so they fail on matches (e.g., `! rg 'TODO|FIXME|XXX' src/...`) instead of “always succeed” patterns.
+- Clean Table: write commands so they fail on matches (e.g., `! rg 'TODO|FIXME|XXX' src/`) instead of “always succeed” patterns.
 
 ## 9) Validate with the Linter
 - Run via runner: `uv run python ai_task_list_linter_v1_9.py PROJECT_TASKS.md --require-captured-evidence`.

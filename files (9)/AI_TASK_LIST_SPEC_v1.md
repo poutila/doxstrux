@@ -42,7 +42,7 @@ This spec supports an intermediate `mode: "plan"`:
 - Template mode continues to allow command/evidence placeholders; instantiated forbids placeholders entirely.
 - Intended lifecycle: template → plan → instantiated.
 
-### R-ATL-PROSE: Prose Coverage Mapping (plan/instantiated)
+### R-ATL-NEW-02: Prose Coverage Mapping (plan/instantiated)
 - If `mode: plan` or `mode: instantiated`, the document MUST include a `## Prose Coverage Mapping` section containing a markdown table with at least a header row and one data row.
 - Purpose: tie prose requirements to tasks to reduce omission drift.
 - Template mode: Coverage Mapping recommended, not required.
@@ -70,9 +70,9 @@ ai_task_list:
 
 | Mode | Placeholder behavior |
 |------|---------------------|
-| `template` | `[[PH:...]]` placeholders MAY appear |
+| `template` | `[[PH:PLACEHOLDER]]` placeholders MAY appear |
 | `plan` | Commands MUST be real; evidence/output placeholders MAY appear; runner/search_tool/import-hygiene rules apply |
-| `instantiated` | `[[PH:...]]` placeholders MUST NOT appear anywhere |
+| `instantiated` | `[[PH:PLACEHOLDER]]` placeholders MUST NOT appear anywhere |
 
 ### R-ATL-003: Placeholder syntax
 
@@ -221,7 +221,7 @@ Phase 0 MUST exist and match exactly:
 ## Phase 0 — Baseline Reality
 ```
 
-### R-ATL-031: Task heading format and uniqueness
+### R-ATL-NEW-01: Task heading format and uniqueness
 
 A task heading MUST match:
 
@@ -236,7 +236,7 @@ Task IDs MUST be unique across the document.
 Every task MUST contain a `**Paths**:` block with a bash array named:
 
 ```bash
-TASK_<N>_<M>_PATHS=(...)
+TASK_<N>_<M>_PATHS=(<quoted paths>)
 ```
 
 The array MUST include at least 1 quoted path string.
@@ -464,7 +464,7 @@ pip install
 
 ```
 $ uv sync
-$ uv run ...
+$ uv run <command>
 ```
 
 **Rationale**: Prevents environment bypass while allowing truthful evidence pasting.
@@ -557,7 +557,7 @@ path:line:rule_id:message
   "passed": true,
   "error_count": 0,
   "errors": [
-    {"line": 42, "rule_id": "R-ATL-031", "message": "..."}
+    {"line": 42, "rule_id": "R-ATL-NEW-01", "message": "Duplicate task ID"}
   ],
   "mode": "instantiated",
   "runner": "uv",
@@ -605,6 +605,6 @@ A document is **Spec v1.9 compliant** if:
 23. ✅ **UPDATED**: Import hygiene: `$ rg 'import \*'` command line required (R-ATL-063)
 24. ✅ Single status value required per task (R-ATL-090)
 25. ✅ Completed tasks must have checked No Weak Tests + Clean Table boxes (instantiated) (R-ATL-091)
-26. ✅ runner=uv requires `$ uv sync` and `$ uv run ...` command lines in code blocks (R-ATL-072)
+26. ✅ runner=uv requires `$ uv sync` and `$ uv run <command>` command lines in code blocks (R-ATL-072)
 
 **v1.7 key change**: Comments containing required patterns do NOT satisfy requirements. Actual `$` command lines are required.
