@@ -24,7 +24,7 @@ This framework pairs a strict specification, a template, and a deterministic lin
 3) Paste the entire `PROMPT_AI_TASK_LIST_ORCHESTRATOR_v1.md`.
 4) Paste the full prose document.
 5) Let the AI generate a task list in `mode: "plan"`:
-  - Includes required headings/sections, TASK_N_M_PATHS arrays, Prose Coverage Mapping, STOP/Global/Drift structure, real commands with evidence placeholders.
+  - Includes required headings/sections, TASK_N_M_PATHS arrays, Prose Coverage Mapping (with Implemented-by column), STOP/Global/Drift structure, real commands with evidence placeholders.
 6) Save the output in the repo (e.g., `work_folder/<label>_TASKS_v1_plan.md`).
 7) Run the linter (via runner) and fix structural issues.
 8) Review Prose Coverage Mapping: ensure each major requirement is mapped or explicitly out-of-scope.
@@ -95,7 +95,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
 - If you can’t craft a failing behavior test, label steps Precondition/Implement/Verify rather than pretending TDD.
 - For behavior-changing tasks, reference at least one behavior-level test (name + behavior) in TDD/STOP.
 - Drift Ledger: if you detect or mention mismatches (prose vs tasks, invariants vs repo), add a ledger row with path:line witness; don’t leave it empty when drift is known.
-- Prose Coverage Mapping: include a short table mapping prose requirements to tasks or mark them out-of-scope. Missing or empty coverage is an error in plan/instantiated modes.
+- Prose Coverage Mapping: include a table under `## Prose Coverage Mapping` with an Implemented-by column (accepted headers: Implemented by Task(s), Implemented by Tasks, Tasks, Task IDs). Map prose requirements to task IDs; references must point to existing unique tasks. Missing/empty table or missing column is an error in plan/instantiated modes.
 
 ## 6) Typical Linter Failures and Fixes
 - `schema_version must be '1.7'`: fix YAML front matter.
@@ -120,7 +120,7 @@ Exit codes: 0 = pass, 1 = lint violations, 2 = usage/error.
   - [ ] Required headings present (unchanged from template).
   - [ ] Baseline/STOP/Global sections structurally present (may carry placeholders).
   - [ ] Tasks have paths arrays, Preconditions `$ {search_tool} …`, TDD/STOP sections.
-  - [ ] Prose Coverage Mapping table present; all major requirements mapped or explicitly out-of-scope.
+  - [ ] Prose Coverage Mapping table present; Implemented-by column present; all major requirements mapped or explicitly out-of-scope; task IDs referenced exist and are unique.
   - [ ] Drift ledger started if any mismatches are known.
 - Executed/human+CI artifact (real evidence):
   - [ ] YAML front matter filled; mode = instantiated.

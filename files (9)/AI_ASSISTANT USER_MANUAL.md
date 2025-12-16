@@ -41,16 +41,17 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 ## 5) Define Phases and Tasks
 - Phase 0: bootstrap/instantiation and phase-0 unlock artifact.
 - For each feature/task from the prose:
-  - Create `### Task N.M — <name>` with `TASK_N_M_PATHS` array (quoted paths).
+  - Create `### Task N.M — <name>` with `TASK_N_M_PATHS` array (quoted paths). Task IDs must be unique (no duplicate `Task N.M` headings).
   - Preconditions: add `$ rg`/`$ grep` symbol checks relevant to the task (required by search_tool).
   - TDD steps: commands for RED/GREEN aligned to the real test entrypoints. Keep the three TDD headings. If true RED (failing behavior test) isn’t possible, use Step 1 to add a characterization/contract test (or explicit rationale) under the RED heading rather than dropping the headings.
-  - STOP: include No Weak Tests + Clean Table checklists; plan to paste evidence.
+  - STOP: include No Weak Tests + Clean Table checklists; plan to paste evidence labeled with `# Test run output:` and `# Symbol/precondition check output:`.
 - Scope: in/out bullets if needed for clarity.
 - Canonical examples: use `canonical_examples/example_plan.md` (plan) and `canonical_examples/example_template.md` (template) as structural guides; see `canonical_examples/negatives/` for expected-fail patterns.
 
 ## 1.5) Prose Coverage Mapping (required in plan/instantiated)
+- Required in plan/instantiated: include a markdown table under `## Prose Coverage Mapping` with an Implemented-by column (accepted headers: Implemented by Task(s), Implemented by Tasks, Tasks, Task IDs). References must point to existing unique Task IDs; ranges must be forward and same prefix.
 - For each major requirement in the source prose, map it to task(s). If a requirement has no mapped task, either add one or explicitly mark it out-of-scope. Plan/instantiated modes error on missing/empty coverage tables.
-- Suggested table (keep brief, optional):
+- Suggested table:
 
 | Prose requirement (label) | Location (file/section) | Implemented by task(s) |
 |---------------------------|--------------------------|------------------------|
@@ -87,7 +88,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   > fi
   ```
 - TDD semantics: RED should be a real failing behavior test, not just file/existence checks. Keep the TDD headings; if a failing test isn’t possible, use RED to add a characterization/contract test or explicit rationale under that heading.
-- No Weak Tests: don’t claim non-weak tests if you only check existence/imports; strengthen tests or adjust the STOP checklist expectations for wiring-only tasks. For behavior-changing tasks, include at least one behavior-level test (beyond import/existence) in TDD/STOP and reference a concrete test name + behavior.
+- No Weak Tests: don’t claim non-weak tests if you only check existence/imports; strengthen tests or adjust the STOP checklist expectations for wiring-only tasks. For behavior-changing tasks, include at least one behavior-level test (beyond import/existence) in TDD/STOP and reference a concrete test name + behavior. Ensure STOP checkboxes reflect this honestly.
 - Runner/search_tool rules:
   - `search_tool: "rg"`: use `rg` in code blocks; grep forbidden in code blocks (prose mention OK).
   - `runner: "uv"` with `runner_prefix: "uv run"`: include `$ uv sync` and `$ uv run …`; use `$ uv run pytest/python/...` for managed tools; never emit `$ .venv/bin/python`, `$ python -m`, or `$ pip install` in `$` lines.
@@ -106,6 +107,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
 - Phase unlock artifact commands and scans must be `$`-prefixed.
 - Preconditions must contain at least one `$ rg …` line per task.
 - Drift Ledger: log real mismatches (e.g., known import hygiene violations vs. invariant); don’t leave it empty if you’ve observed drift. If you mention or detect a mismatch between the task list and prose/spec, or between invariants and repo state, add a ledger entry with higher/lower sources, short mismatch, and a path:line witness—do not silently correct without logging.
+- Prose Coverage Mapping: table present in plan/instantiated; Implemented-by column present (accepted headers in §1.5); entries reference real task IDs (no missing/duplicate IDs; ranges forward/same prefix).
 - Clean Table: write commands so they fail on matches (e.g., `! rg 'TODO|FIXME|XXX' src/...`) instead of “always succeed” patterns.
 
 ## 9) Validate with the Linter
@@ -130,7 +132,7 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   - [ ] Required headings present (unchanged from template).
   - [ ] Baseline/STOP/Global sections structurally present (evidence placeholders allowed).
   - [ ] Tasks have paths arrays, Preconditions with real `$ {search_tool} …` commands, TDD/STOP sections.
-  - [ ] Prose Coverage Mapping table present (required in plan/instantiated) with major requirements mapped or explicitly out-of-scope.
+  - [ ] Prose Coverage Mapping table present (required in plan/instantiated) with major requirements mapped or explicitly out-of-scope; Implemented-by column present.
   - [ ] Drift ledger started if any mismatches are known.
 - For executed/human+CI artifact (real evidence):
   - [ ] YAML front matter filled; mode = instantiated.
@@ -142,5 +144,6 @@ Mental model: “I am making a manual for myself. I need to use this opportunity
   - [ ] Phase unlock artifact commands `$ cat …` + `$ rg` scan, `$`-prefixed.
   - [ ] Global scan commands present; uv import hygiene commands included.
   - [ ] No placeholders or pseudo-placeholders remain.
+  - [ ] Prose Coverage Mapping passes lint: Implemented-by column present; all referenced task IDs exist and are unique.
   - [ ] Drift ledger updated with any known mismatches.
   - [ ] Linter passes with `--require-captured-evidence`.

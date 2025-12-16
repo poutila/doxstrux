@@ -1,6 +1,6 @@
 # AI Task List Linter v1.9
 
-Deterministic linter for AI Task Lists (Spec v1.9; schema_version "1.7", three modes including plan). Code filename: `ai_task_list_linter_v1_9.py`. <!-- See COMMON.md §Version Metadata -->
+Deterministic linter for AI Task Lists (Spec v1.9; schema_version "1.7", three modes (template/plan/instantiated)). Code filename: `ai_task_list_linter_v1_9.py`. <!-- See COMMON.md §Version Metadata -->
 
 ## What this framework is for
 - **Specification**: `AI_TASK_LIST_SPEC_v1.md` (v1.9; schema_version 1.7; three modes) — contract for headings, evidence, runner/import hygiene, Clean Table, TDD/STOP gates.
@@ -16,7 +16,7 @@ Deterministic linter for AI Task Lists (Spec v1.9; schema_version "1.7", three m
 - Template/plan Baseline: fenced Evidence with `[[PH:OUTPUT]]`, Baseline tests fenced block required.
 - Instantiated Baseline: $-prefix enforced; existing non-empty/output checks retained.
 - STOP — Phase Gate: required checklist items enforced.
-- Prose Coverage Mapping: presence/structure check in plan/instantiated modes (loud errors when missing/malformed).
+- Prose Coverage Mapping: first table under the heading with an Implemented-by column; errors when missing/malformed or references point to missing/duplicate tasks.
 
 **UV/import hygiene/comment compliance (carried forward):**
 - Import hygiene (R-ATL-063): **$ command line required** (no comments).
