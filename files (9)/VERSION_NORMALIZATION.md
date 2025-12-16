@@ -1,5 +1,19 @@
 # VERSION_NORMALIZATION.md — Plan to Normalize Version Metadata
 
+## Precondition (COMPLETE)
+Historical content has been removed from SSOT docs:
+- AI_TASK_LIST_SPEC_v1.md: version change annotations removed from rule headings (no "— NEW/UPDATED/FIXED in vX.Y"), version change callout blocks deleted.
+- README_ai_task_list_linter_v1_9.md: changelog-style sections removed ("What's Fixed", "Key Changes", "Migration"), rewritten as current-state "Enforcement Features" and "Usage Examples".
+
+Confirmation (must return nothing):
+```bash
+rg '— (STRENGTHENED|NEW|UPDATED|FIXED) in v\d+' AI_TASK_LIST_SPEC_v1.md README_ai_task_list_linter_v1_9.md
+rg '\*\*v\d+\.\d+ (changes?|key change)\*\*:' AI_TASK_LIST_SPEC_v1.md
+rg '^## (What.s Fixed|Key Changes|Migration)' README_ai_task_list_linter_v1_9.md
+```
+
+---
+
 Goal: One consistent version story across all framework artifacts.
 SSOT policy (SSOT set for versions):
 - COMMON.md carries the canonical human-readable version tuple.
@@ -121,6 +135,7 @@ Conflicting strings policy (no guessing):
 
 ## Definition of Done
 - `rg 'schema_version: \"1\\.6\"|schema_version: 1\\.6|Spec v1\\.7|ai_task_list_linter_v1_8|README_ai_task_list_linter_v1_8|Spec 1\\.7|schema 1\\.6' . --glob '!*archive*' --glob '!task_list_archive/**' --glob '!work_folder/*' --glob '!**/archive/**' --glob '!validation/**' --glob '!canonical_examples/**'` returns nothing.
+- Historical content absent (precondition confirmation commands return nothing).
 - Guardrail passes: `uv run python tools/check_version_consistency.py` exits 0 (fail-fast on first violation).
 - COMMON.md contains the canonical tuple; other docs either reference COMMON or stay silent on concrete numbers (no conflicting strings).
 - Linter banner matches LINTER_VERSION; linter filename matches LINTER_VERSION major.minor.
@@ -134,3 +149,8 @@ Conflicting strings policy (no guessing):
 
 ## Rollback
 - If guardrail or DoD fails after edits: revert the normalization commit(s) as a unit; record offending files/regex matches in VERSION_DRIFT.md; fix and re-run.
+
+## Post-Execution
+After successful execution (all DoD criteria pass):
+- Move VERSION_NORMALIZATION.md to `task_list_archive/` as historical planning documentation.
+- This file becomes part of the historical record, not active framework documentation.

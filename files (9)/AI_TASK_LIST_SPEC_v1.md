@@ -148,14 +148,9 @@ In template/plan mode, the Baseline tests block may contain placeholders, but it
 
 If `mode: instantiated`, the linter MUST fail if any literal `[[PH:OUTPUT]]` or `[[PH:PASTE_*]]` tokens remain anywhere in the file.
 
-### R-ATL-023: Non-empty evidence required (instantiated mode) — STRENGTHENED in v1.3
+### R-ATL-023: Non-empty evidence required (instantiated mode)
 
 If `mode: instantiated`, every required evidence slot MUST contain real output lines (not just metadata headers).
-
-**v1.3 changes**:
-- STOP evidence labels are now ALWAYS required (not just when `--require-captured-evidence` is used)
-- Captured header lines (`# cmd:`, `# exit:`, `# ts_utc:`, `# cwd:`) do NOT count as "evidence content"
-- Each labeled section must contain at least one real output line
 
 This applies to:
 
@@ -171,7 +166,7 @@ This applies to:
 
 **Rationale**: Closes the "blank evidence" and "headers-only evidence" loopholes where structurally valid documents pass lint while containing no actual proof of execution.
 
-### R-ATL-024: Captured evidence headers (opt-in) — NEW in v1.3
+### R-ATL-024: Captured evidence headers (opt-in)
 
 When the linter is invoked with `--require-captured-evidence`, evidence blocks MUST include captured headers:
 
@@ -334,7 +329,7 @@ Non-Phase-0 tasks MUST include a **Preconditions** block with a fenced code bloc
 
 ## 6. Phase Unlock Artifacts and Phase Gate
 
-### R-ATL-050: Phase unlock artifact section required — UPDATED in v1.7
+### R-ATL-050: Phase unlock artifact section required
 
 The document MUST include a `## Phase Unlock Artifact` section that:
 
@@ -347,7 +342,7 @@ The document MUST include a `## Phase Unlock Artifact` section that:
   - Section MUST have `$ cat > .phase-N.complete.json` as an actual command line (not comment; `.json` suffix required)
   - Section MUST have `$ rg` command for placeholder rejection scan (not comment)
   - Trivial commands like `echo .phase-0.complete.json` do NOT satisfy this requirement
-  - **v1.7**: Comments containing these patterns do NOT satisfy the requirement
+  - Comments containing these patterns do NOT satisfy the requirement
 
 **Rationale**: The Phase Unlock Artifact is the gate between phases. Without explicit `$ cat >` artifact creation and `$ rg` placeholder verification as command lines, the phase gating contract becomes ceremonial and unenforceable.
 
@@ -387,7 +382,7 @@ $ rg 'TODO|FIXME|XXX' src/                    # No unfinished work markers
 $ rg '\[\[PH:' .                              # No placeholders in any file
 ```
 
-### R-ATL-063: Import hygiene enforcement (Python projects) — UPDATED in v1.7
+### R-ATL-063: Import hygiene enforcement (Python projects)
 
 When `runner: "uv"` (Python project) and `mode: instantiated`, the linter MUST verify that the Global Clean Table Scan section contains **actual `$` command lines** (not comments):
 
@@ -406,7 +401,7 @@ $ if rg 'import \*' src/; then
 > fi
 ```
 
-**v1.7 change**: Comments containing these patterns do NOT satisfy the requirement. The linter checks only lines starting with `$` inside fenced code blocks.
+Comments containing these patterns do NOT satisfy the requirement. The linter checks only lines starting with `$` inside fenced code blocks.
 
 **Rationale**: Import hygiene rules (absolute imports preferred, no multi-dot relative, no wildcards) are critical for Python projects. Comment compliance (putting patterns in comments to pass lint) undermines the enforcement.
 
@@ -443,7 +438,7 @@ If `mode: instantiated` and `runner_prefix` is non-empty, the linter MUST verify
 
 **Rationale**: Catches common mistakes like bare `pytest` instead of `uv run pytest`, which causes environment mismatches. The `$` prefix requirement ensures output mentioning these tools (e.g., "python version ok") doesn't trigger false positives.
 
-### R-ATL-072: UV-specific enforcement — FIXED in v1.3 (no false positives)
+### R-ATL-072: UV-specific enforcement
 
 If `runner: "uv"` and `mode: instantiated`:
 
@@ -466,7 +461,7 @@ $ uv run <command>
 
 **Rationale**: Prevents environment bypass while allowing truthful evidence pasting.
 
-### R-ATL-075: $ prefix mandatory for commands — NEW in v1.4
+### R-ATL-075: $ prefix mandatory for commands
 
 If `mode: plan` or `mode: instantiated`, command lines in key sections MUST start with `$` prefix.
 
@@ -505,7 +500,7 @@ Fully empty rows are allowed (for template structure preservation).
 
 **Rationale**: Prevents prose-only drift resolution ("looks good") by requiring a concrete code reference.
 
-### R-ATL-D4: search_tool enforcement — UPDATED in v1.7
+### R-ATL-D4: search_tool enforcement
 
 The YAML front matter MUST include the `search_tool` field (required since v1.4):
 
@@ -580,7 +575,7 @@ A document is **Spec v1.9 compliant** if:
 10. ✅ STOP evidence has BOTH labels with real output (R-ATL-023)
 11. ✅ No Weak Tests checklist: 4 required prompts (R-ATL-041)
 12. ✅ Clean Table checklist: 5 required prompts (R-ATL-042)
-13. ✅ **UPDATED**: Phase Unlock requires `$ cat > .phase-N.complete.json` and `$ rg` command lines (R-ATL-050)
+13. ✅ Phase Unlock requires `$ cat > .phase-N.complete.json` and `$ rg` command lines (R-ATL-050)
 14. ✅ $ prefix mandatory for command lines in key sections (R-ATL-075)
 15. ✅ Drift Ledger Evidence contains path:line witness in instantiated mode (R-ATL-D3)
 16. ✅ search_tool=rg forbids grep in code blocks only (R-ATL-D4)
@@ -598,10 +593,8 @@ A document is **Spec v1.9 compliant** if:
 
 **Python-specific (runner=uv) — LINTER ENFORCED**:
 
-22. ✅ **UPDATED**: Import hygiene: `$ rg 'from \.\.'` command line required (R-ATL-063)
-23. ✅ **UPDATED**: Import hygiene: `$ rg 'import \*'` command line required (R-ATL-063)
+22. ✅ Import hygiene: `$ rg 'from \.\.'` command line required (R-ATL-063)
+23. ✅ Import hygiene: `$ rg 'import \*'` command line required (R-ATL-063)
 24. ✅ Single status value required per task (R-ATL-090)
 25. ✅ Completed tasks must have checked No Weak Tests + Clean Table boxes (instantiated) (R-ATL-091)
 26. ✅ runner=uv requires `$ uv sync` and `$ uv run <command>` command lines in code blocks (R-ATL-072)
-
-**v1.7 key change**: Comments containing required patterns do NOT satisfy requirements. Actual `$` command lines are required.

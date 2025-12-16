@@ -9,27 +9,39 @@ Deterministic linter for AI Task Lists (modes: template/plan/instantiated). Code
 - **Manuals/Docs**: `USER_MANUAL.md`, `AI_ASSISTANT USER_MANUAL.md`, `COMMON.md` for shared rules, plus `INDEX.md` for orientation (planning docs in `task_list_archive/`).
 - **Goal**: produce task lists that (1) don’t drift, (2) stay close to reality, (3) are lintable, (4) bake in governance (TDD, No Weak Tests, Clean Table, runner/import/search rules), and (5) reduce iteration loops.
 
-## What's Fixed
+## Enforcement Features
 
-**Plan mode supported (see COMMON.md for versions/schema):**
-- Accepts `mode: plan` (real commands, evidence placeholders).
-- Template/plan Baseline: fenced Evidence with `[[PH:OUTPUT]]`, Baseline tests fenced block required.
-- Instantiated Baseline: $-prefix enforced; existing non-empty/output checks retained.
+**Three modes** (see COMMON.md §Mode Definitions):
+- `mode: template` — placeholders allowed (commands and evidence); generic scaffolds.
+- `mode: plan` — real commands required; evidence placeholders allowed.
+- `mode: instantiated` — no placeholders anywhere; real evidence required.
+
+**Baseline enforcement**:
+- Template/plan: fenced Evidence with `[[PH:OUTPUT]]`, Baseline tests fenced block required.
+- Instantiated: $-prefix enforced; non-empty output required after each command.
 - STOP — Phase Gate: required checklist items enforced.
-- Prose Coverage Mapping: first table under the heading with an Implemented-by column; errors when missing/malformed or references point to missing/duplicate tasks.
+- Prose Coverage Mapping: table with Implemented-by column required in plan/instantiated.
 
-**UV/import hygiene/comment compliance (carried forward):**
-- Import hygiene (R-ATL-063): **$ command line required** (no comments).
-- Phase Unlock scan (R-ATL-050): **$ rg command line required**; `.phase-N.complete.json` suffix enforced.
-- Runner/search_tool: **$ uv sync / $ uv run** required in code blocks; grep forbidden when `search_tool=rg`.
-- Checklist/status tightening: single status required; COMPLETE needs checked boxes.
-- Gate patterns: recommended fail-on-match (`! rg …` or `if rg …; then exit 1; fi`); linter enforces presence, not shell flow.
+**Command line enforcement** (actual `$` lines required, not comments):
+- Import hygiene (R-ATL-063): `$ rg 'from \.\.'` and `$ rg 'import \*'` command lines.
+- Phase Unlock scan (R-ATL-050): `$ cat > .phase-N.complete.json` and `$ rg` command lines.
+- Runner/search_tool: `$ uv sync` / `$ uv run` required in code blocks; grep forbidden when `search_tool=rg`.
 
-## Key Changes
+**Status and checklist enforcement**:
+- Single status value required per task (`📋 PLANNED`, `⏳ IN PROGRESS`, `✅ COMPLETE`, `❌ BLOCKED`).
+- `✅ COMPLETE` in instantiated mode requires all No Weak Tests + Clean Table checkboxes checked.
+- STOP evidence blocks required; missing fenced block fails lint.
+- Phase unlock commands must target `.phase-N.complete.json` (suffix enforced).
 
-**R-ATL-050: Phase Unlock Artifact (UPDATED)**
+**Validation suite**:
+- `canonical_examples/example_template.md` (template) — lint passes.
+- `canonical_examples/example_plan.md` (plan) — lint passes.
+- `canonical_examples/example_instantiated.md` (instantiated) — lint passes with `--require-captured-evidence`.
+- See `VALIDATION_SUITE.md` for full test list.
 
-Must have actual `$` command lines, not comments:
+## Usage Examples
+
+**Phase Unlock Artifact** (must be actual `$` command lines):
 ```bash
 $ cat > .phase-0.complete.json << EOF
 {"phase": 0}
@@ -41,31 +53,7 @@ $ if rg '\[\[PH:' .phase-0.complete.json; then
 > fi
 ```
 
-Comments like `# rg '\[\[PH:' ...` do NOT satisfy the requirement.
-
-**Migration**
-- If you have a project-specific task list with real commands and `mode: "template"`, flip to `mode: "plan"` and keep evidence placeholders.
-- Keep `mode: "template"` only for generic scaffolds (command placeholders intact).
-- Executed lists use `mode: "instantiated"` with real evidence and no placeholders.
-
-**Validation suite (examples)**
-- `canonical_examples/example_template.md` (template) — lint passes.
-- `canonical_examples/example_plan.md` (plan) — lint passes.
-- `canonical_examples/example_instantiated.md` (instantiated) — lint passes with `--require-captured-evidence`.
-
-See `VALIDATION_SUITE.md` for full test list (including negatives, doc-sync check, perf/backcompat notes).
-
-**Status + completion tightening (plan mode accepted)**
-
-- Each task must use a single status value (`📋 PLANNED`, `⏳ IN PROGRESS`, `✅ COMPLETE`, `❌ BLOCKED`).
-- If status is `✅ COMPLETE` in instantiated mode, all No Weak Tests + Clean Table checkboxes must be checked.
-- STOP evidence blocks are required even if the “Evidence/paste” marker is removed; missing fenced block fails lint.
-- Phase unlock commands must target `.phase-N.complete.json` (suffix enforced).
-- For runner=uv, `$ uv sync` and `$ uv run ...` must appear as command lines inside fenced code blocks (prose mentions no longer count).
-
-**R-ATL-063: Import hygiene (UPDATED)**
-
-Must have actual `$` command lines, not comments:
+**Import hygiene** (must be actual `$` command lines):
 ```bash
 $ if rg 'from \.\.' src/; then
 >   echo "ERROR: multi-dot relative import found"
@@ -77,11 +65,7 @@ $ if rg 'import \*' src/; then
 > fi
 ```
 
-Comments like `# rg 'from \.\.' ...` do NOT satisfy the requirement.
-
-**R-ATL-D4: search_tool (FIXED)**
-
-Spec now consistently says `search_tool` is REQUIRED (removed "MAY include" language).
+Comments containing these patterns do NOT satisfy the requirement.
 
 ## Run
 
@@ -117,25 +101,21 @@ ai_task_list:
 ✅ Instantiated example passes (--require-captured-evidence)
 ✅ Comment compliance REJECTED (import hygiene patterns in comments)
 ✅ Comment compliance REJECTED (Phase Unlock scan in comments)
-✅ Old schema versions rejected (older schemas rejected; requires current schema per COMMON.md)
+✅ schema_version enforcement: must match COMMON.md tuple; mismatches fail
 ✅ Spec search_tool consistency (MUST include, not MAY)
 ```
 
-## Migration (plan mode)
+## Mode usage
 
-1. For project-specific task lists with real commands: set `mode: "plan"`; keep evidence placeholders.
-2. For generic scaffolds: keep `mode: "template"` with command placeholders.
-3. For executed lists: use `mode: "instantiated"` with real evidence; no placeholders.
+1. Project-specific task lists with real commands: set `mode: "plan"`; keep evidence placeholders.
+2. Generic scaffolds: keep `mode: "template"` with command placeholders.
+3. Executed lists: use `mode: "instantiated"` with real evidence; no placeholders.
 4. Ensure import hygiene and Phase Unlock scans are actual `$` command lines (not comments).
 5. Add `## Prose Coverage Mapping` (plan/instantiated): missing/empty table is an error.
 
 ## Design Philosophy
 
-Prior release closed the "comment compliance" loophole identified by strict validation:
-
-> "Some enforcement can be satisfied via comments/prose because the linter checks for string presence in section text rather than requiring them as $ command lines."
-
-Now the linter verifies that required patterns appear in actual `$` command lines inside fenced code blocks, not just anywhere in the section text.
+The linter verifies that required patterns appear in actual `$` command lines inside fenced code blocks, not just anywhere in the section text. This prevents comment/prose-only compliance.
 
 ## Remaining Reality Limitations
 
