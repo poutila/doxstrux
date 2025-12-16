@@ -66,7 +66,7 @@ Conflicting strings policy (no guessing):
   - Lines matching (case-insensitive):
     - `\b(previously|formerly|originally)\b.*\bv?\d+\.\d+\b`
     - `\bmigrated\s+from\b.*\bv?\d+\.\d+\b`
-    - `\bwas\s+(version|v|schema_version)\s+\d+\.\d+\b`
+    - `\bwas\s+(version|v|schema_version)\s+\d+\.\d+\b` (allowed only when the version differs from the current tuple; current-version matches are violations)
 - All other version literals outside the SSOT set/allowed files are violations.
 
 ## Edits to perform (content-level)
@@ -99,13 +99,15 @@ Conflicting strings policy (no guessing):
    - Ensure v1.9 entry matches tuple.
 
 ## Guardrail (prevent re-drift)
-- Add/maintain the consistency check script `tools/check_version_consistency.py` (already added) that:
+- Add/maintain the consistency check script `tools/check_version_consistency.py` (present in repo) that:
   - Reads the tuple from COMMON.md (per parsing rules above).
   - Excludes: `**/archive/**`, `task_list_archive/**`, `work_folder/**`, `.git/**`.
-  - Allowed files to contain concrete version literals outside YAML:
+ - Allowed files to contain concrete version literals outside YAML:
     - COMMON.md
     - AI_TASK_LIST_SPEC_v1.md
     - ai_task_list_linter_v1_9.py
+  - YAML front matter rule: only `schema_version: "1.7"` is allowed; any other version-related fields in YAML are violations.
+  - Maintenance: when bumping linter version/filename, update this plan, allowed filename regex/allowlist, and the guardrail script to the new major.minor filename/version.
   - Fails if any non-archive file contains:
     - schema_version not equal to "1.7" in YAML front matter of any markdown file outside exclusion paths (archives/work_folder/task_list_archive/.git).
     - Spec v other than v1.9 in SSOT set (spec header, linter banner).
