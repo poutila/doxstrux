@@ -1,0 +1,9 @@
+# Invalid fixture for PIN-YML-007
+# Rule: search_tool MUST be one of: rg, grep
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-YML-007
+
+# VIOLATION: PIN-YML-007
+INVALID_PIN_YML_007 = True

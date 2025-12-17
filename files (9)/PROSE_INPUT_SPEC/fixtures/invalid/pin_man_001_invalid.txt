@@ -1,0 +1,13 @@
+# Invalid fixture for PIN-MAN-001
+# Rule: File Manifest table MUST have at least one file entry
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-MAN-001
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: PIN-MAN-001
+INVALID_PIN_MAN_001 = True

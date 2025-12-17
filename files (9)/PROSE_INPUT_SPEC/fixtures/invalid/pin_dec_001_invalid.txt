@@ -1,0 +1,16 @@
+# Invalid fixture for PIN-DEC-001
+# Rule: Decisions table MUST have at least one decision row (not just header/separator)
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-DEC-001
+
+# VIOLATION: Missing required header block
+# The header comment block is intentionally omitted
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: PIN-DEC-001
+INVALID_PIN_DEC_001 = True

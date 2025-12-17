@@ -1,0 +1,14 @@
+# Invalid fixture for PIN-SEC-007
+# Rule: Document MUST contain `## File Manifest` section
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-007
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: PIN-SEC-007
+INVALID_PIN_SEC_007 = True

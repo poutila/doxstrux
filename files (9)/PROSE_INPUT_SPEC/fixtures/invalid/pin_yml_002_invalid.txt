@@ -1,0 +1,12 @@
+# Invalid fixture for PIN-YML-002
+# Rule: YAML front matter MUST contain `prose_input:` block
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-YML-002
+
+# VIOLATION: Missing required header block
+# The header comment block is intentionally omitted
+
+# VIOLATION: PIN-YML-002
+INVALID_PIN_YML_002 = True

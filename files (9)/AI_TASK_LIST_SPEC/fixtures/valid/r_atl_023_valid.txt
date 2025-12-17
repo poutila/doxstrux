@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-023
+# Rule: In instantiated mode, required evidence slots MUST contain real output lines
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_023 = True

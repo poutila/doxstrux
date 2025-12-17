@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-021
+# Rule: Baseline Snapshot MUST include Evidence block with commands and output
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_021 = True

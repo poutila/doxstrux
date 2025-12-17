@@ -1,0 +1,14 @@
+# Invalid fixture for R-ATL-050
+# Rule: Task list MUST include `## Phase Unlock Artifact` section with .phase-N.complete.json generation
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-050
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: R-ATL-050
+INVALID_R_ATL_050 = True

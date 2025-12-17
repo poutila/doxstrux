@@ -1,0 +1,8 @@
+# Valid fixture for PIN-TSK-003
+# Rule: Phase 0 tasks MUST contain Objective, Paths; non-Phase-0 tasks MUST also contain Precondition, TDD Specification, Success Criteria
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_TSK_003 = True

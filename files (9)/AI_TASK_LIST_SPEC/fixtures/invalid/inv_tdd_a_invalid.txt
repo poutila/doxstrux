@@ -1,0 +1,9 @@
+# Invalid fixture for INV-TDD-A
+# Invariant: Non-Phase-0 tasks MUST follow RED-GREEN-REFACTOR structure
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: INV-TDD-A
+
+# VIOLATION: INV-TDD-A
+INVALID_INV_TDD_A = True

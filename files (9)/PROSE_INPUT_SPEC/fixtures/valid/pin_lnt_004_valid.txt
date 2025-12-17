@@ -1,0 +1,8 @@
+# Valid fixture for PIN-LNT-004
+# Rule: With --fix-hints, show suggested fixes for each error
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_LNT_004 = True

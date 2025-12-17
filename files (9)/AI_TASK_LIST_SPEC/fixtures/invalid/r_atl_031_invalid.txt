@@ -1,0 +1,18 @@
+# Invalid fixture for R-ATL-031
+# Rule: Task headings MUST match `^### Task (\d+)\.(\d+) — (.+)$`; Task IDs MUST be unique
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-031
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: Duplicate entries
+DUPLICATE_R_ATL_031 = True
+DUPLICATE_R_ATL_031 = True  # Intentional duplicate
+
+# VIOLATION: R-ATL-031
+INVALID_R_ATL_031 = True

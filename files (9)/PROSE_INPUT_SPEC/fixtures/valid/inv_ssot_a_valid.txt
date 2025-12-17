@@ -1,0 +1,8 @@
+# Valid fixture for INV-SSOT-A
+# Invariant: Spec is authoritative; linter implements spec
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_INV_SSOT_A = True

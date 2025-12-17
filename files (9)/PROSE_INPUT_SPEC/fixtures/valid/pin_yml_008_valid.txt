@@ -1,0 +1,8 @@
+# Valid fixture for PIN-YML-008
+# Rule: YAML field values MUST NOT contain `[[` or `]]` placeholder tokens
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_YML_008 = True

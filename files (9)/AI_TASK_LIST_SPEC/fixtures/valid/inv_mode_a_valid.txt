@@ -1,0 +1,8 @@
+# Valid fixture for INV-MODE-A
+# Invariant: Mode determines placeholder tolerance; no exceptions
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_INV_MODE_A = True

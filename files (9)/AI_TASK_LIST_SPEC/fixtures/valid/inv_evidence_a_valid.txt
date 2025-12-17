@@ -1,0 +1,8 @@
+# Valid fixture for INV-EVIDENCE-A
+# Invariant: Evidence in instantiated mode MUST be real output, not fabricated
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_INV_EVIDENCE_A = True

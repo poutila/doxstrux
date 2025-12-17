@@ -1,0 +1,12 @@
+# Invalid fixture for PIN-YML-001
+# Rule: Document MUST start with YAML front matter delimited by `---`
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-YML-001
+
+# VIOLATION: Missing required header block
+# The header comment block is intentionally omitted
+
+# VIOLATION: PIN-YML-001
+INVALID_PIN_YML_001 = True

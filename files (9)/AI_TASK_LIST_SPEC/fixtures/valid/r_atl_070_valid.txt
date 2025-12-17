@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-070
+# Rule: runner and runner_prefix MUST be non-empty strings (or runner_prefix explicitly empty)
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_070 = True

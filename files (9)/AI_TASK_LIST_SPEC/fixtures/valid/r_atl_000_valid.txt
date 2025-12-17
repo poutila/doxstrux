@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-000
+# Rule: If spec and linter diverge, linter MUST be updated to match spec
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_000 = True

@@ -1,0 +1,9 @@
+# Invalid fixture for R-ATL-000
+# Rule: If spec and linter diverge, linter MUST be updated to match spec
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-000
+
+# VIOLATION: R-ATL-000
+INVALID_R_ATL_000 = True

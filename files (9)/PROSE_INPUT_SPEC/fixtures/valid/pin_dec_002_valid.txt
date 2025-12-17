@@ -1,0 +1,12 @@
+# Valid fixture for PIN-DEC-002
+# Rule: Decisions table MUST contain columns: ID, Decision, Rationale
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| PIN-DEC-002 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_PIN_DEC_002 = True

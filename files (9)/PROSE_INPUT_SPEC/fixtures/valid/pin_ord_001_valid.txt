@@ -1,0 +1,12 @@
+# Valid fixture for PIN-ORD-001
+# Rule: Sections MUST appear in order PIN-SEC-001 to PIN-SEC-009; preceding section before succeeding
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# §1 VALID SECTION
+
+This section exists as required.
+
+# Valid content for this check
+VALID_PIN_ORD_001 = True

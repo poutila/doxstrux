@@ -1,0 +1,9 @@
+# Invalid fixture for PIN-LNT-004
+# Rule: With --fix-hints, show suggested fixes for each error
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-LNT-004
+
+# VIOLATION: PIN-LNT-004
+INVALID_PIN_LNT_004 = True

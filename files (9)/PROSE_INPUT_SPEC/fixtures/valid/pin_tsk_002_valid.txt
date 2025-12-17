@@ -1,0 +1,8 @@
+# Valid fixture for PIN-TSK-002
+# Rule: Task IDs (N.M format) MUST be unique across document
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_TSK_002 = True

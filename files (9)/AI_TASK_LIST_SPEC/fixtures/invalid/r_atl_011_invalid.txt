@@ -1,0 +1,18 @@
+# Invalid fixture for R-ATL-011
+# Rule: If mode is plan or instantiated, MUST include `## Prose Coverage Mapping` section with table
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-011
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: R-ATL-011
+INVALID_R_ATL_011 = True

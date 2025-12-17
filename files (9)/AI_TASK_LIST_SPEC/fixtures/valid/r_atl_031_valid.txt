@@ -1,0 +1,12 @@
+# Valid fixture for R-ATL-031
+# Rule: Task headings MUST match `^### Task (\d+)\.(\d+) — (.+)$`; Task IDs MUST be unique
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# §1 VALID SECTION
+
+This section exists as required.
+
+# Valid content for this check
+VALID_R_ATL_031 = True

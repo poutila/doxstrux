@@ -1,0 +1,8 @@
+# Valid fixture for R-LNT-003
+# Rule: With --json flag, emit JSON object with passed, error_count, errors, mode, runner, schema_version
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_LNT_003 = True

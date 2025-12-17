@@ -1,0 +1,12 @@
+# Valid fixture for PIN-SEC-007
+# Rule: Document MUST contain `## File Manifest` section
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# §1 VALID SECTION
+
+This section exists as required.
+
+# Valid content for this check
+VALID_PIN_SEC_007 = True

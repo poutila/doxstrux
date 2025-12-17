@@ -1,0 +1,8 @@
+# Valid fixture for PIN-LNT-001
+# Rule: Linter exit codes: 0=valid, 1=validation errors, 2=schema/parse error, 3=usage/file error
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_LNT_001 = True

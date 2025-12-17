@@ -1,0 +1,8 @@
+# Valid fixture for PIN-SSOT-001
+# Rule: This specification is the authoritative contract for prose input documents
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_SSOT_001 = True

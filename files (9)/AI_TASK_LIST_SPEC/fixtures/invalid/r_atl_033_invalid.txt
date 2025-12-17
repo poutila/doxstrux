@@ -1,0 +1,9 @@
+# Invalid fixture for R-ATL-033
+# Rule: Document MUST include naming rule linking Task ID N.M to array exactly once
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-033
+
+# VIOLATION: R-ATL-033
+INVALID_R_ATL_033 = True

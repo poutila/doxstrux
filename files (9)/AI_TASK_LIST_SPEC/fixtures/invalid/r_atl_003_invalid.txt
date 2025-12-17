@@ -1,0 +1,9 @@
+# Invalid fixture for R-ATL-003
+# Rule: Only `[[PH:NAME]]` placeholders recognized, NAME matching `[A-Z0-9_]+`
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-003
+
+# VIOLATION: R-ATL-003
+INVALID_R_ATL_003 = True

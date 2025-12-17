@@ -1,0 +1,8 @@
+# Valid fixture for INV-DECISION-A
+# Invariant: All decisions MUST be final before conversion
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_INV_DECISION_A = True

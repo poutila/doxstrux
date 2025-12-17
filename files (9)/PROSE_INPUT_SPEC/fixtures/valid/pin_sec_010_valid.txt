@@ -1,0 +1,8 @@
+# Valid fixture for PIN-SEC-010
+# Rule: External Dependencies MUST contain `### Required Files/Modules`
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_SEC_010 = True

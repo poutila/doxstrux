@@ -1,0 +1,8 @@
+# Valid fixture for PIN-CTX-001
+# Rule: Success Criteria MUST NOT contain subjective terms: good, nice, clean, proper, appropriate, reasonable, adequate
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_CTX_001 = True

@@ -1,0 +1,12 @@
+# Valid fixture for R-ATL-050
+# Rule: Task list MUST include `## Phase Unlock Artifact` section with .phase-N.complete.json generation
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# §1 VALID SECTION
+
+This section exists as required.
+
+# Valid content for this check
+VALID_R_ATL_050 = True

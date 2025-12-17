@@ -1,0 +1,14 @@
+# Invalid fixture for PIN-SEC-009
+# Rule: Document MUST contain `## Phase 0` section
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-009
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: PIN-SEC-009
+INVALID_PIN_SEC_009 = True

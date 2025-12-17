@@ -1,0 +1,16 @@
+# Valid fixture for R-ATL-011
+# Rule: If mode is plan or instantiated, MUST include `## Prose Coverage Mapping` section with table
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# §1 VALID SECTION
+
+This section exists as required.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| R-ATL-011 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_R_ATL_011 = True

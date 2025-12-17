@@ -1,0 +1,19 @@
+# Valid fixture for PIN-DEC-001
+# Rule: Decisions table MUST have at least one decision row (not just header/separator)
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+<!--
+SPEC_KIND: prose_input
+SPEC_ID: VALID_FIXTURE_PIN_DEC_001
+SPEC_VERSION: 1.0.0
+STATUS: active
+-->
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| PIN-DEC-001 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_PIN_DEC_001 = True

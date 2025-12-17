@@ -1,0 +1,8 @@
+# Valid fixture for R-LNT-001
+# Rule: Linter exit codes: 0=pass, 1=violations, 2=usage error
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_LNT_001 = True

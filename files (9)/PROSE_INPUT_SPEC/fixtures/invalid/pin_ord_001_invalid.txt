@@ -1,0 +1,18 @@
+# Invalid fixture for PIN-ORD-001
+# Rule: Sections MUST appear in order PIN-SEC-001 to PIN-SEC-009; preceding section before succeeding
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-ORD-001
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: Wrong order
+# §3 comes before §2 (wrong order)
+# §2 Section Two
+
+# VIOLATION: PIN-ORD-001
+INVALID_PIN_ORD_001 = True

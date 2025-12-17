@@ -1,0 +1,13 @@
+# Invalid fixture for R-ATL-041
+# Rule: Each non-Phase-0 task MUST include `### STOP — Clean Table` with evidence slots and checklists
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-041
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: R-ATL-041
+INVALID_R_ATL_041 = True

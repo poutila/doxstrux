@@ -1,0 +1,9 @@
+# Invalid fixture for R-ATL-090
+# Rule: Each task MUST contain `**Status**:` with exactly one of: PLANNED, IN PROGRESS, COMPLETE, BLOCKED
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-090
+
+# VIOLATION: R-ATL-090
+INVALID_R_ATL_090 = True

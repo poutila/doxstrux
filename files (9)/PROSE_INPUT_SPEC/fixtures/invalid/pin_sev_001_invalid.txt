@@ -1,0 +1,9 @@
+# Invalid fixture for PIN-SEV-001
+# Rule: ERROR severity blocks conversion (exit 1); WARNING does not block but may cause poor output
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEV-001
+
+# VIOLATION: PIN-SEV-001
+INVALID_PIN_SEV_001 = True

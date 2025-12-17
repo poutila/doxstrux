@@ -1,0 +1,12 @@
+# Invalid fixture for PIN-LNT-003
+# Rule: With --json, emit JSON with: file, valid, schema_version, error_count, warning_count, metadata, errors
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-LNT-003
+
+# VIOLATION: Missing required header block
+# The header comment block is intentionally omitted
+
+# VIOLATION: PIN-LNT-003
+INVALID_PIN_LNT_003 = True

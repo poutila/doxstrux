@@ -1,0 +1,14 @@
+# Invalid fixture for R-ATL-040
+# Rule: Each non-Phase-0 task MUST include TDD Step 1, 2, 3 headings
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-040
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: R-ATL-040
+INVALID_R_ATL_040 = True

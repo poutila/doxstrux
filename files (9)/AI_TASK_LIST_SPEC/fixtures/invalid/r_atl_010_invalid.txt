@@ -1,0 +1,17 @@
+# Invalid fixture for R-ATL-010
+# Rule: Task list MUST contain all required headings with exact text and case
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-010
+
+# VIOLATION: Required content is missing
+# This fixture intentionally omits required elements
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: R-ATL-010
+INVALID_R_ATL_010 = True

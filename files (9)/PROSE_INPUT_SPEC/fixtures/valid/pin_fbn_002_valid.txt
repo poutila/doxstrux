@@ -1,0 +1,8 @@
+# Valid fixture for PIN-FBN-002
+# Rule: Document MUST NOT contain `[[PLACEHOLDER]]` tokens (except `[[PH:...]]` reserved format)
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_FBN_002 = True

@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-033
+# Rule: Document MUST include naming rule linking Task ID N.M to array exactly once
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_033 = True

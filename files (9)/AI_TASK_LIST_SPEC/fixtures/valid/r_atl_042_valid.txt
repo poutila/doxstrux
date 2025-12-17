@@ -1,0 +1,12 @@
+# Valid fixture for R-ATL-042
+# Rule: Linter MUST verify presence of five Clean Table checklist items
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| R-ATL-042 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_R_ATL_042 = True

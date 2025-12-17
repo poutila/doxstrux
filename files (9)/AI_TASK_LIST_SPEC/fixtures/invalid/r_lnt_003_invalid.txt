@@ -1,0 +1,9 @@
+# Invalid fixture for R-LNT-003
+# Rule: With --json flag, emit JSON object with passed, error_count, errors, mode, runner, schema_version
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-LNT-003
+
+# VIOLATION: R-LNT-003
+INVALID_R_LNT_003 = True

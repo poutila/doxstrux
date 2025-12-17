@@ -1,0 +1,9 @@
+# Invalid fixture for INV-FACTS-A
+# Invariant: Facts are provided in input, not discovered during conversion
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: INV-FACTS-A
+
+# VIOLATION: INV-FACTS-A
+INVALID_INV_FACTS_A = True

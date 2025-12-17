@@ -1,0 +1,8 @@
+# Valid fixture for PIN-TSK-004
+# Rule: Precondition commands MUST use search_tool declared in YAML; if rg, grep forbidden
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_TSK_004 = True

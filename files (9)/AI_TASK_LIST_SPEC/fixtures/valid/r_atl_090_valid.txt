@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-090
+# Rule: Each task MUST contain `**Status**:` with exactly one of: PLANNED, IN PROGRESS, COMPLETE, BLOCKED
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_090 = True

@@ -1,0 +1,12 @@
+# Valid fixture for R-ATL-020
+# Rule: Baseline Snapshot MUST include table with Date, Repo, Branch, Commit, Runner, Runtime rows
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| R-ATL-020 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_R_ATL_020 = True

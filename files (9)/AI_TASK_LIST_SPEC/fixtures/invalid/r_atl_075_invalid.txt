@@ -1,0 +1,14 @@
+# Invalid fixture for R-ATL-075
+# Rule: In plan/instantiated mode, command lines in gated sections MUST start with `$`
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-075
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: R-ATL-075
+INVALID_R_ATL_075 = True

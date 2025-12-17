@@ -1,0 +1,12 @@
+# Valid fixture for PIN-MAN-001
+# Rule: File Manifest table MUST have at least one file entry
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| PIN-MAN-001 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_PIN_MAN_001 = True

@@ -1,0 +1,8 @@
+# Valid fixture for PIN-YML-005
+# Rule: schema_version MUST exactly match VERSION.yaml
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_YML_005 = True

@@ -1,0 +1,13 @@
+# Invalid fixture for R-ATL-020
+# Rule: Baseline Snapshot MUST include table with Date, Repo, Branch, Commit, Runner, Runtime rows
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-020
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: R-ATL-020
+INVALID_R_ATL_020 = True

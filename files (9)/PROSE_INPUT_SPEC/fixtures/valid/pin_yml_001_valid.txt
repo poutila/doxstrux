@@ -1,0 +1,15 @@
+# Valid fixture for PIN-YML-001
+# Rule: Document MUST start with YAML front matter delimited by `---`
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+<!--
+SPEC_KIND: prose_input
+SPEC_ID: VALID_FIXTURE_PIN_YML_001
+SPEC_VERSION: 1.0.0
+STATUS: active
+-->
+
+# Valid content for this check
+VALID_PIN_YML_001 = True

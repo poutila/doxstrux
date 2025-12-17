@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-071
+# Rule: In instantiated mode with non-empty runner_prefix, tool invocations MUST include prefix
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_071 = True

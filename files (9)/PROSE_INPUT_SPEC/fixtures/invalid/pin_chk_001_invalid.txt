@@ -1,0 +1,18 @@
+# Invalid fixture for PIN-CHK-001
+# Rule: Document MUST contain `## Checklist Before Submission` section
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-CHK-001
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: Wrong order
+# §3 comes before §2 (wrong order)
+# §2 Section Two
+
+# VIOLATION: PIN-CHK-001
+INVALID_PIN_CHK_001 = True

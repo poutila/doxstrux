@@ -1,0 +1,8 @@
+# Valid fixture for PIN-CHK-002
+# Rule: All checklist items MUST be checked `[x]` before document is valid
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_CHK_002 = True

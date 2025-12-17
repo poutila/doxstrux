@@ -1,0 +1,275 @@
+spec_id: AI_TASK_LIST_SPEC
+spec_version: 2.0.0
+domain: ai_task_list
+generated_at: '2025-12-17T02:47:50.223486'
+rules:
+- id: R-ATL-000
+  section: "\xA72 RULES"
+  description: If spec and linter diverge, linter MUST be updated to match spec
+  enforcement: enforce_r_atl_000
+- id: R-ATL-001
+  section: "\xA72 RULES"
+  description: Task list MUST start with YAML front matter containing ai_task_list
+    block with schema_version, mode, runner, runner_prefix, search_tool
+  enforcement: enforce_r_atl_001
+- id: R-ATL-002
+  section: "\xA72 RULES"
+  description: 'Mode semantics: template allows placeholders; plan requires real commands;
+    instantiated forbids all placeholders'
+  enforcement: enforce_r_atl_002
+- id: R-ATL-003
+  section: "\xA72 RULES"
+  description: Only `[[PH:NAME]]` placeholders recognized, NAME matching `[A-Z0-9_]+`
+  enforcement: enforce_r_atl_003
+- id: R-ATL-010
+  section: "\xA72 RULES"
+  description: Task list MUST contain all required headings with exact text and case
+  enforcement: enforce_r_atl_010
+- id: R-ATL-011
+  section: "\xA72 RULES"
+  description: If mode is plan or instantiated, MUST include `## Prose Coverage Mapping`
+    section with table
+  enforcement: enforce_r_atl_011
+- id: R-ATL-020
+  section: "\xA72 RULES"
+  description: Baseline Snapshot MUST include table with Date, Repo, Branch, Commit,
+    Runner, Runtime rows
+  enforcement: enforce_r_atl_020
+- id: R-ATL-021
+  section: "\xA72 RULES"
+  description: Baseline Snapshot MUST include Evidence block with commands and output
+  enforcement: enforce_r_atl_021
+- id: R-ATL-022
+  section: "\xA72 RULES"
+  description: In instantiated mode, linter MUST fail if any `[[PH:...]]` tokens remain
+  enforcement: enforce_r_atl_022
+- id: R-ATL-023
+  section: "\xA72 RULES"
+  description: In instantiated mode, required evidence slots MUST contain real output
+    lines
+  enforcement: enforce_r_atl_023
+- id: R-ATL-024
+  section: "\xA72 RULES"
+  description: With `--require-captured-evidence`, evidence blocks MUST include cmd
+    and exit headers
+  enforcement: enforce_r_atl_024
+- id: R-ATL-030
+  section: "\xA72 RULES"
+  description: "Phase headings MUST match `^## Phase (\\d+) \u2014 (.+)$`; Phase 0\
+    \ MUST exist"
+  enforcement: enforce_r_atl_030
+- id: R-ATL-031
+  section: "\xA72 RULES"
+  description: "Task headings MUST match `^### Task (\\d+)\\.(\\d+) \u2014 (.+)$`;\
+    \ Task IDs MUST be unique"
+  enforcement: enforce_r_atl_031
+- id: R-ATL-032
+  section: "\xA72 RULES"
+  description: Every task MUST contain `**Paths**:` block with `TASK_<N>_<M>_PATHS=(<quoted
+    paths>)`
+  enforcement: enforce_r_atl_032
+- id: R-ATL-033
+  section: "\xA72 RULES"
+  description: Document MUST include naming rule linking Task ID N.M to array exactly
+    once
+  enforcement: enforce_r_atl_033
+- id: R-ATL-040
+  section: "\xA72 RULES"
+  description: Each non-Phase-0 task MUST include TDD Step 1, 2, 3 headings
+  enforcement: enforce_r_atl_040
+- id: R-ATL-041
+  section: "\xA72 RULES"
+  description: "Each non-Phase-0 task MUST include `### STOP \u2014 Clean Table` with\
+    \ evidence slots and checklists"
+  enforcement: enforce_r_atl_041
+- id: R-ATL-042
+  section: "\xA72 RULES"
+  description: Linter MUST verify presence of five Clean Table checklist items
+  enforcement: enforce_r_atl_042
+- id: R-ATL-050
+  section: "\xA72 RULES"
+  description: Task list MUST include `## Phase Unlock Artifact` section with .phase-N.complete.json
+    generation
+  enforcement: enforce_r_atl_050
+- id: R-ATL-051
+  section: "\xA72 RULES"
+  description: "`## STOP \u2014 Phase Gate` MUST include checklist referencing unlock\
+    \ artifacts"
+  enforcement: enforce_r_atl_051
+- id: R-ATL-060
+  section: "\xA72 RULES"
+  description: '`## Global Clean Table Scan` MUST include command and evidence paste
+    slot'
+  enforcement: enforce_r_atl_060
+- id: R-ATL-061
+  section: "\xA72 RULES"
+  description: In instantiated mode, `[[PH:PASTE_CLEAN_TABLE_OUTPUT]]` MUST NOT remain
+  enforcement: enforce_r_atl_061
+- id: R-ATL-063
+  section: "\xA72 RULES"
+  description: When runner=uv and instantiated, Global Clean Table MUST include import
+    hygiene checks
+  enforcement: enforce_r_atl_063
+- id: R-ATL-070
+  section: "\xA72 RULES"
+  description: runner and runner_prefix MUST be non-empty strings (or runner_prefix
+    explicitly empty)
+  enforcement: enforce_r_atl_070
+- id: R-ATL-071
+  section: "\xA72 RULES"
+  description: In instantiated mode with non-empty runner_prefix, tool invocations
+    MUST include prefix
+  enforcement: enforce_r_atl_071
+- id: R-ATL-072
+  section: "\xA72 RULES"
+  description: 'When runner=uv and instantiated, forbidden: .venv/bin/python, python
+    -m, pip install'
+  enforcement: enforce_r_atl_072
+- id: R-ATL-075
+  section: "\xA72 RULES"
+  description: In plan/instantiated mode, command lines in gated sections MUST start
+    with `$`
+  enforcement: enforce_r_atl_075
+- id: R-ATL-080
+  section: "\xA72 RULES"
+  description: Drift Ledger MUST contain table with Date, Higher, Lower, Mismatch,
+    Resolution, Evidence columns
+  enforcement: enforce_r_atl_080
+- id: R-ATL-090
+  section: "\xA72 RULES"
+  description: 'Each task MUST contain `**Status**:` with exactly one of: PLANNED,
+    IN PROGRESS, COMPLETE, BLOCKED'
+  enforcement: enforce_r_atl_090
+- id: R-ATL-091
+  section: "\xA72 RULES"
+  description: If task is COMPLETE and instantiated, all checklist items in STOP block
+    MUST be checked
+  enforcement: enforce_r_atl_091
+- id: R-LNT-001
+  section: "\xA72 RULES"
+  description: 'Linter exit codes: 0=pass, 1=violations, 2=usage error'
+  enforcement: enforce_r_lnt_001
+- id: R-LNT-002
+  section: "\xA72 RULES"
+  description: 'Default diagnostics format: path:line:rule_id:message'
+  enforcement: enforce_r_lnt_002
+- id: R-LNT-003
+  section: "\xA72 RULES"
+  description: With --json flag, emit JSON object with passed, error_count, errors,
+    mode, runner, schema_version
+  enforcement: enforce_r_lnt_003
+invariants:
+- id: INV-MODE-A
+  section: "\xA73 INVARIANTS"
+  description: Mode determines placeholder tolerance; no exceptions
+  enforcement: enforce_inv_mode_a
+- id: INV-SSOT-A
+  section: "\xA73 INVARIANTS"
+  description: Spec is authoritative; linter implements spec
+  enforcement: enforce_inv_ssot_a
+- id: INV-EVIDENCE-A
+  section: "\xA73 INVARIANTS"
+  description: Evidence in instantiated mode MUST be real output, not fabricated
+  enforcement: enforce_inv_evidence_a
+- id: INV-TDD-A
+  section: "\xA73 INVARIANTS"
+  description: Non-Phase-0 tasks MUST follow RED-GREEN-REFACTOR structure
+  enforcement: enforce_inv_tdd_a
+- id: INV-CLEAN-A
+  section: "\xA73 INVARIANTS"
+  description: Clean Table gate MUST pass before phase completion
+  enforcement: enforce_inv_clean_a
+phases:
+- name: META
+  rules: []
+  invariants: []
+- name: DEFINITIONS
+  rules: []
+  invariants: []
+- name: Mode Variables
+  rules: []
+  invariants: []
+- name: Structural Terms
+  rules: []
+  invariants: []
+- name: Required Headings
+  rules: []
+  invariants: []
+- name: RULES
+  rules: []
+  invariants: []
+- name: INVARIANTS
+  rules: []
+  invariants: []
+- name: PHASES
+  rules: []
+  invariants: []
+- name: '1: Front Matter Validation'
+  rules:
+  - R-ATL-001
+  - R-ATL-002
+  - R-ATL-003
+  - R-ATL-070
+  invariants: []
+- name: '2: Structure Validation'
+  rules:
+  - R-ATL-010
+  - R-ATL-011
+  - R-ATL-020
+  - R-ATL-030
+  - R-ATL-050
+  - R-ATL-051
+  - R-ATL-060
+  - R-ATL-080
+  invariants: []
+- name: '3: Task Validation'
+  rules:
+  - R-ATL-031
+  - R-ATL-032
+  - R-ATL-033
+  - R-ATL-040
+  - R-ATL-041
+  - R-ATL-042
+  - R-ATL-090
+  invariants: []
+- name: '4: Mode-Specific Validation'
+  rules:
+  - R-ATL-021
+  - R-ATL-021
+  - R-ATL-022
+  - R-ATL-023
+  - R-ATL-061
+  - R-ATL-063
+  - R-ATL-071
+  - R-ATL-072
+  - R-ATL-075
+  - R-ATL-091
+  invariants: []
+- name: '5: Output Generation'
+  rules:
+  - R-LNT-001
+  - R-LNT-002
+  - R-LNT-003
+  invariants: []
+- name: SCHEMAS
+  rules: []
+  invariants: []
+- name: YAML Front Matter
+  rules: []
+  invariants: []
+- name: Task Structure
+  rules: []
+  invariants: []
+- name: Linter JSON Output
+  rules: []
+  invariants: []
+- name: CLI COMMANDS
+  rules: []
+  invariants: []
+- name: '`ai_task_list_linter.py <file.md>`'
+  rules: []
+  invariants: []
+- name: APPENDICES
+  rules: []
+  invariants: []
+patterns: {}

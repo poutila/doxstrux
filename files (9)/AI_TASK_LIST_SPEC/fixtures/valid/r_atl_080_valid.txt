@@ -1,0 +1,12 @@
+# Valid fixture for R-ATL-080
+# Rule: Drift Ledger MUST contain table with Date, Higher, Lower, Mismatch, Resolution, Evidence columns
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| R-ATL-080 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_R_ATL_080 = True

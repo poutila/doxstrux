@@ -1,0 +1,8 @@
+# Valid fixture for PIN-SSOT-002
+# Rule: If spec and linter diverge, linter MUST be updated to match spec
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_SSOT_002 = True

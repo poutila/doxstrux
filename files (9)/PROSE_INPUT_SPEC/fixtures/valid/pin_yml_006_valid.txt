@@ -1,0 +1,8 @@
+# Valid fixture for PIN-YML-006
+# Rule: runner MUST be one of: uv, npm, cargo, go, poetry, pipenv
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_YML_006 = True

@@ -1,0 +1,9 @@
+# Invalid fixture for PIN-FBN-007
+# Rule: Document MUST NOT contain pending decision phrases: pending, to be decided, TBD by
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-FBN-007
+
+# VIOLATION: PIN-FBN-007
+INVALID_PIN_FBN_007 = True

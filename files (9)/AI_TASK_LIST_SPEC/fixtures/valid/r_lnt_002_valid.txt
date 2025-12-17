@@ -1,0 +1,8 @@
+# Valid fixture for R-LNT-002
+# Rule: Default diagnostics format: path:line:rule_id:message
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_LNT_002 = True

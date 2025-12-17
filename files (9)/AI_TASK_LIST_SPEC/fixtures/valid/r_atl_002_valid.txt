@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-002
+# Rule: Mode semantics: template allows placeholders; plan requires real commands; instantiated forbids all placeholders
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_002 = True

@@ -1,0 +1,8 @@
+# Valid fixture for PIN-YML-003
+# Rule: prose_input block MUST contain: schema_version, project_name, runner, runner_prefix, search_tool
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_YML_003 = True

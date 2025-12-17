@@ -1,0 +1,9 @@
+# Invalid fixture for PIN-TSK-003
+# Rule: Phase 0 tasks MUST contain Objective, Paths; non-Phase-0 tasks MUST also contain Precondition, TDD Specification, Success Criteria
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-TSK-003
+
+# VIOLATION: PIN-TSK-003
+INVALID_PIN_TSK_003 = True

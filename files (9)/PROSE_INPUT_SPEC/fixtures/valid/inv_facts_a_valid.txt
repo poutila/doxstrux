@@ -1,0 +1,8 @@
+# Valid fixture for INV-FACTS-A
+# Invariant: Facts are provided in input, not discovered during conversion
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_INV_FACTS_A = True

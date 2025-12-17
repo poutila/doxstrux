@@ -1,0 +1,12 @@
+# Invalid fixture for R-ATL-001
+# Rule: Task list MUST start with YAML front matter containing ai_task_list block with schema_version, mode, runner, runner_prefix, search_tool
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-001
+
+# VIOLATION: Missing required header block
+# The header comment block is intentionally omitted
+
+# VIOLATION: R-ATL-001
+INVALID_R_ATL_001 = True

@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-032
+# Rule: Every task MUST contain `**Paths**:` block with `TASK_<N>_<M>_PATHS=(<quoted paths>)`
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_032 = True

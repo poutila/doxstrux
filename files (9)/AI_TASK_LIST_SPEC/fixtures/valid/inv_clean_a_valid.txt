@@ -1,0 +1,12 @@
+# Valid fixture for INV-CLEAN-A
+# Invariant: Clean Table gate MUST pass before phase completion
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| INV-CLEAN-A | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_INV_CLEAN_A = True

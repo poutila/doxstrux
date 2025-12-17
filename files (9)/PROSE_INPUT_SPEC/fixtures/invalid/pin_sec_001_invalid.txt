@@ -1,0 +1,14 @@
+# Invalid fixture for PIN-SEC-001
+# Rule: Document MUST contain `## SSOT Declaration` section
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-001
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: PIN-SEC-001
+INVALID_PIN_SEC_001 = True

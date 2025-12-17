@@ -1,0 +1,333 @@
+spec_id: PROSE_INPUT_SPEC
+spec_version: 2.0.0
+domain: prose_input
+generated_at: '2025-12-17T02:47:44.550227'
+rules:
+- id: PIN-SSOT-001
+  section: "\xA72 RULES"
+  description: This specification is the authoritative contract for prose input documents
+  enforcement: enforce_pin_ssot_001
+- id: PIN-SSOT-002
+  section: "\xA72 RULES"
+  description: If spec and linter diverge, linter MUST be updated to match spec
+  enforcement: enforce_pin_ssot_002
+- id: PIN-YML-001
+  section: "\xA72 RULES"
+  description: Document MUST start with YAML front matter delimited by `---`
+  enforcement: enforce_pin_yml_001
+- id: PIN-YML-002
+  section: "\xA72 RULES"
+  description: YAML front matter MUST contain `prose_input:` block
+  enforcement: enforce_pin_yml_002
+- id: PIN-YML-003
+  section: "\xA72 RULES"
+  description: 'prose_input block MUST contain: schema_version, project_name, runner,
+    runner_prefix, search_tool'
+  enforcement: enforce_pin_yml_003
+- id: PIN-YML-004
+  section: "\xA72 RULES"
+  description: All required YAML fields MUST be strings
+  enforcement: enforce_pin_yml_004
+- id: PIN-YML-005
+  section: "\xA72 RULES"
+  description: schema_version MUST exactly match VERSION.yaml
+  enforcement: enforce_pin_yml_005
+- id: PIN-YML-006
+  section: "\xA72 RULES"
+  description: 'runner MUST be one of: uv, npm, cargo, go, poetry, pipenv'
+  enforcement: enforce_pin_yml_006
+- id: PIN-YML-007
+  section: "\xA72 RULES"
+  description: 'search_tool MUST be one of: rg, grep'
+  enforcement: enforce_pin_yml_007
+- id: PIN-YML-008
+  section: "\xA72 RULES"
+  description: YAML field values MUST NOT contain `[[` or `]]` placeholder tokens
+  enforcement: enforce_pin_yml_008
+- id: PIN-SEC-001
+  section: "\xA72 RULES"
+  description: Document MUST contain `## SSOT Declaration` section
+  enforcement: enforce_pin_sec_001
+- id: PIN-SEC-002
+  section: "\xA72 RULES"
+  description: Document MUST contain `## Scope` section
+  enforcement: enforce_pin_sec_002
+- id: PIN-SEC-003
+  section: "\xA72 RULES"
+  description: Document MUST contain `### In Scope` subsection
+  enforcement: enforce_pin_sec_003
+- id: PIN-SEC-004
+  section: "\xA72 RULES"
+  description: Document MUST contain `### Out of Scope` subsection
+  enforcement: enforce_pin_sec_004
+- id: PIN-SEC-005
+  section: "\xA72 RULES"
+  description: Document MUST contain `## Decisions (Binding)` section
+  enforcement: enforce_pin_sec_005
+- id: PIN-SEC-006
+  section: "\xA72 RULES"
+  description: Document MUST contain `## External Dependencies` section
+  enforcement: enforce_pin_sec_006
+- id: PIN-SEC-007
+  section: "\xA72 RULES"
+  description: Document MUST contain `## File Manifest` section
+  enforcement: enforce_pin_sec_007
+- id: PIN-SEC-008
+  section: "\xA72 RULES"
+  description: Document MUST contain `## Test Strategy` section
+  enforcement: enforce_pin_sec_008
+- id: PIN-SEC-009
+  section: "\xA72 RULES"
+  description: Document MUST contain `## Phase 0` section
+  enforcement: enforce_pin_sec_009
+- id: PIN-SEC-010
+  section: "\xA72 RULES"
+  description: External Dependencies MUST contain `### Required Files/Modules`
+  enforcement: enforce_pin_sec_010
+- id: PIN-SEC-011
+  section: "\xA72 RULES"
+  description: External Dependencies MUST contain `### Required Libraries`
+  enforcement: enforce_pin_sec_011
+- id: PIN-SEC-012
+  section: "\xA72 RULES"
+  description: External Dependencies MUST contain `### Required Tools`
+  enforcement: enforce_pin_sec_012
+- id: PIN-ORD-001
+  section: "\xA72 RULES"
+  description: Sections MUST appear in order PIN-SEC-001 to PIN-SEC-009; preceding
+    section before succeeding
+  enforcement: enforce_pin_ord_001
+- id: PIN-FBN-001
+  section: "\xA72 RULES"
+  description: 'Document MUST NOT contain: TBD, TODO, TBC, FIXME, XXX (case-insensitive)'
+  enforcement: enforce_pin_fbn_001
+- id: PIN-FBN-002
+  section: "\xA72 RULES"
+  description: Document MUST NOT contain `[[PLACEHOLDER]]` tokens (except `[[PH:...]]`
+    reserved format)
+  enforcement: enforce_pin_fbn_002
+- id: PIN-FBN-003
+  section: "\xA72 RULES"
+  description: Lines MUST NOT end with single `?` (except `??` in code)
+  enforcement: enforce_pin_fbn_003
+- id: PIN-FBN-004
+  section: "\xA72 RULES"
+  description: 'Document MUST NOT contain tentative phrases: maybe, might, could,
+    possibly, potentially, consider'
+  enforcement: enforce_pin_fbn_004
+- id: PIN-FBN-005
+  section: "\xA72 RULES"
+  description: 'Document MUST NOT contain conditional statements: if we... then, if
+    you... then'
+  enforcement: enforce_pin_fbn_005
+- id: PIN-FBN-006
+  section: "\xA72 RULES"
+  description: 'Document MUST NOT contain time estimates: 2-3 hours, 1-2 days, etc.'
+  enforcement: enforce_pin_fbn_006
+- id: PIN-FBN-007
+  section: "\xA72 RULES"
+  description: 'Document MUST NOT contain pending decision phrases: pending, to be
+    decided, TBD by'
+  enforcement: enforce_pin_fbn_007
+- id: PIN-CTX-001
+  section: "\xA72 RULES"
+  description: 'Success Criteria MUST NOT contain subjective terms: good, nice, clean,
+    proper, appropriate, reasonable, adequate'
+  enforcement: enforce_pin_ctx_001
+- id: PIN-TSK-001
+  section: "\xA72 RULES"
+  description: "Document MUST contain at least one task matching `#### Task N.M \u2014\
+    \ Name`"
+  enforcement: enforce_pin_tsk_001
+- id: PIN-TSK-002
+  section: "\xA72 RULES"
+  description: Task IDs (N.M format) MUST be unique across document
+  enforcement: enforce_pin_tsk_002
+- id: PIN-TSK-003
+  section: "\xA72 RULES"
+  description: Phase 0 tasks MUST contain Objective, Paths; non-Phase-0 tasks MUST
+    also contain Precondition, TDD Specification, Success Criteria
+  enforcement: enforce_pin_tsk_003
+- id: PIN-TSK-004
+  section: "\xA72 RULES"
+  description: Precondition commands MUST use search_tool declared in YAML; if rg,
+    grep forbidden
+  enforcement: enforce_pin_tsk_004
+- id: PIN-DEC-001
+  section: "\xA72 RULES"
+  description: Decisions table MUST have at least one decision row (not just header/separator)
+  enforcement: enforce_pin_dec_001
+- id: PIN-DEC-002
+  section: "\xA72 RULES"
+  description: 'Decisions table MUST contain columns: ID, Decision, Rationale'
+  enforcement: enforce_pin_dec_002
+- id: PIN-MAN-001
+  section: "\xA72 RULES"
+  description: File Manifest table MUST have at least one file entry
+  enforcement: enforce_pin_man_001
+- id: PIN-CHK-001
+  section: "\xA72 RULES"
+  description: Document MUST contain `## Checklist Before Submission` section
+  enforcement: enforce_pin_chk_001
+- id: PIN-CHK-002
+  section: "\xA72 RULES"
+  description: All checklist items MUST be checked `[x]` before document is valid
+  enforcement: enforce_pin_chk_002
+- id: PIN-LNT-001
+  section: "\xA72 RULES"
+  description: 'Linter exit codes: 0=valid, 1=validation errors, 2=schema/parse error,
+    3=usage/file error'
+  enforcement: enforce_pin_lnt_001
+- id: PIN-LNT-002
+  section: "\xA72 RULES"
+  description: 'Default diagnostics format: `Line N: [RULE_ID] message`'
+  enforcement: enforce_pin_lnt_002
+- id: PIN-LNT-003
+  section: "\xA72 RULES"
+  description: 'With --json, emit JSON with: file, valid, schema_version, error_count,
+    warning_count, metadata, errors'
+  enforcement: enforce_pin_lnt_003
+- id: PIN-LNT-004
+  section: "\xA72 RULES"
+  description: With --fix-hints, show suggested fixes for each error
+  enforcement: enforce_pin_lnt_004
+- id: PIN-SEV-001
+  section: "\xA72 RULES"
+  description: ERROR severity blocks conversion (exit 1); WARNING does not block but
+    may cause poor output
+  enforcement: enforce_pin_sev_001
+invariants:
+- id: INV-SSOT-A
+  section: "\xA73 INVARIANTS"
+  description: Spec is authoritative; linter implements spec
+  enforcement: enforce_inv_ssot_a
+- id: INV-COMPLETE-A
+  section: "\xA73 INVARIANTS"
+  description: All placeholders MUST be replaced before conversion
+  enforcement: enforce_inv_complete_a
+- id: INV-DECISION-A
+  section: "\xA73 INVARIANTS"
+  description: All decisions MUST be final before conversion
+  enforcement: enforce_inv_decision_a
+- id: INV-FACTS-A
+  section: "\xA73 INVARIANTS"
+  description: Facts are provided in input, not discovered during conversion
+  enforcement: enforce_inv_facts_a
+- id: INV-DETERMINISM-A
+  section: "\xA73 INVARIANTS"
+  description: Validation is deterministic and repeatable
+  enforcement: enforce_inv_determinism_a
+phases:
+- name: META
+  rules: []
+  invariants: []
+- name: DEFINITIONS
+  rules: []
+  invariants: []
+- name: Document Terms
+  rules: []
+  invariants: []
+- name: Configuration Terms
+  rules: []
+  invariants: []
+- name: Required Sections
+  rules: []
+  invariants: []
+- name: RULES
+  rules: []
+  invariants: []
+- name: INVARIANTS
+  rules: []
+  invariants: []
+- name: PHASES
+  rules: []
+  invariants: []
+- name: '1: YAML Validation'
+  rules:
+  - PIN-YML-001
+  - PIN-YML-002
+  - PIN-YML-003
+  - PIN-YML-004
+  - PIN-YML-005
+  - PIN-YML-006
+  - PIN-YML-007
+  - PIN-YML-008
+  invariants: []
+- name: '2: Section Validation'
+  rules:
+  - PIN-SEC-001
+  - PIN-SEC-002
+  - PIN-SEC-003
+  - PIN-SEC-004
+  - PIN-SEC-005
+  - PIN-SEC-006
+  - PIN-SEC-007
+  - PIN-SEC-008
+  - PIN-SEC-009
+  - PIN-SEC-010
+  - PIN-SEC-011
+  - PIN-SEC-012
+  - PIN-ORD-001
+  invariants: []
+- name: '3: Forbidden Pattern Scan'
+  rules:
+  - PIN-FBN-001
+  - PIN-FBN-002
+  - PIN-FBN-003
+  - PIN-FBN-004
+  - PIN-FBN-005
+  - PIN-FBN-006
+  - PIN-FBN-007
+  invariants: []
+- name: '4: Context-Specific Validation'
+  rules:
+  - PIN-CTX-001
+  - PIN-TSK-001
+  - PIN-TSK-002
+  - PIN-TSK-003
+  - PIN-TSK-004
+  invariants: []
+- name: '5: Table Validation'
+  rules:
+  - PIN-DEC-001
+  - PIN-DEC-002
+  - PIN-MAN-001
+  invariants: []
+- name: '6: Checklist Validation'
+  rules:
+  - PIN-CHK-001
+  - PIN-CHK-002
+  invariants: []
+- name: '7: Output Generation'
+  rules:
+  - PIN-LNT-001
+  - PIN-LNT-002
+  - PIN-LNT-003
+  - PIN-LNT-004
+  - PIN-SEV-001
+  invariants: []
+- name: SCHEMAS
+  rules: []
+  invariants: []
+- name: YAML Front Matter
+  rules: []
+  invariants: []
+- name: Task Structure
+  rules: []
+  invariants: []
+- name: Decisions Table
+  rules: []
+  invariants: []
+- name: Linter JSON Output
+  rules: []
+  invariants: []
+- name: CLI COMMANDS
+  rules: []
+  invariants: []
+- name: '`prose_input_linter.py <file.md>`'
+  rules: []
+  invariants: []
+- name: APPENDICES
+  rules: []
+  invariants: []
+patterns: {}

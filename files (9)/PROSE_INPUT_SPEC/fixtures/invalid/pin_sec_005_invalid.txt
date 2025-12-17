@@ -1,0 +1,14 @@
+# Invalid fixture for PIN-SEC-005
+# Rule: Document MUST contain `## Decisions (Binding)` section
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-005
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: PIN-SEC-005
+INVALID_PIN_SEC_005 = True

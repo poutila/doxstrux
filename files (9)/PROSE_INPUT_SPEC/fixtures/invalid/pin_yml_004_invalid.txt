@@ -1,0 +1,12 @@
+# Invalid fixture for PIN-YML-004
+# Rule: All required YAML fields MUST be strings
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-YML-004
+
+# VIOLATION: Required content is missing
+# This fixture intentionally omits required elements
+
+# VIOLATION: PIN-YML-004
+INVALID_PIN_YML_004 = True

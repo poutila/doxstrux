@@ -1,0 +1,17 @@
+# Invalid fixture for R-ATL-030
+# Rule: Phase headings MUST match `^## Phase (\d+) — (.+)$`; Phase 0 MUST exist
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-030
+
+# VIOLATION: Required content is missing
+# This fixture intentionally omits required elements
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: R-ATL-030
+INVALID_R_ATL_030 = True

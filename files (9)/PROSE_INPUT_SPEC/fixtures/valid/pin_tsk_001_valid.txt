@@ -1,0 +1,8 @@
+# Valid fixture for PIN-TSK-001
+# Rule: Document MUST contain at least one task matching `#### Task N.M — Name`
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_TSK_001 = True

@@ -1,0 +1,9 @@
+# Invalid fixture for R-ATL-032
+# Rule: Every task MUST contain `**Paths**:` block with `TASK_<N>_<M>_PATHS=(<quoted paths>)`
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-032
+
+# VIOLATION: R-ATL-032
+INVALID_R_ATL_032 = True

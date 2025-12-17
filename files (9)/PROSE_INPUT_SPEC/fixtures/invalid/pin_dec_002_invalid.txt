@@ -1,0 +1,13 @@
+# Invalid fixture for PIN-DEC-002
+# Rule: Decisions table MUST contain columns: ID, Decision, Rationale
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-DEC-002
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: PIN-DEC-002
+INVALID_PIN_DEC_002 = True

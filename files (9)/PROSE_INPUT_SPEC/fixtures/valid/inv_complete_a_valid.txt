@@ -1,0 +1,8 @@
+# Valid fixture for INV-COMPLETE-A
+# Invariant: All placeholders MUST be replaced before conversion
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_INV_COMPLETE_A = True

@@ -1,0 +1,9 @@
+# Invalid fixture for PIN-YML-003
+# Rule: prose_input block MUST contain: schema_version, project_name, runner, runner_prefix, search_tool
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-YML-003
+
+# VIOLATION: PIN-YML-003
+INVALID_PIN_YML_003 = True

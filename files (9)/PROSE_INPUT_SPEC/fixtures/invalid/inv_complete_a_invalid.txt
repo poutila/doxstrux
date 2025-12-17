@@ -1,0 +1,13 @@
+# Invalid fixture for INV-COMPLETE-A
+# Invariant: All placeholders MUST be replaced before conversion
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: INV-COMPLETE-A
+
+# VIOLATION: Wrong order
+# §3 comes before §2 (wrong order)
+# §2 Section Two
+
+# VIOLATION: INV-COMPLETE-A
+INVALID_INV_COMPLETE_A = True

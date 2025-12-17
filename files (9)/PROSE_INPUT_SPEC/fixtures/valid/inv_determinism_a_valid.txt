@@ -1,0 +1,12 @@
+# Valid fixture for INV-DETERMINISM-A
+# Invariant: Validation is deterministic and repeatable
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| INV-DETERMINISM-A | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_INV_DETERMINISM_A = True

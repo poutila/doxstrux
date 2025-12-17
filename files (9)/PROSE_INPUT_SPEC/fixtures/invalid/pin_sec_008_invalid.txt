@@ -1,0 +1,14 @@
+# Invalid fixture for PIN-SEC-008
+# Rule: Document MUST contain `## Test Strategy` section
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-008
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: PIN-SEC-008
+INVALID_PIN_SEC_008 = True

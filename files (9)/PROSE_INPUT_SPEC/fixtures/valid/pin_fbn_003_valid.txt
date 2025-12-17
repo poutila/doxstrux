@@ -1,0 +1,8 @@
+# Valid fixture for PIN-FBN-003
+# Rule: Lines MUST NOT end with single `?` (except `??` in code)
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_FBN_003 = True

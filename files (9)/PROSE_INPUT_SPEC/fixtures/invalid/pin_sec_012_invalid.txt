@@ -1,0 +1,12 @@
+# Invalid fixture for PIN-SEC-012
+# Rule: External Dependencies MUST contain `### Required Tools`
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-012
+
+# VIOLATION: Required content is missing
+# This fixture intentionally omits required elements
+
+# VIOLATION: PIN-SEC-012
+INVALID_PIN_SEC_012 = True

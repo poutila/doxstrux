@@ -1,0 +1,8 @@
+# Valid fixture for PIN-SEC-012
+# Rule: External Dependencies MUST contain `### Required Tools`
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_SEC_012 = True

@@ -1,0 +1,14 @@
+# Invalid fixture for PIN-SEC-003
+# Rule: Document MUST contain `### In Scope` subsection
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-003
+
+# VIOLATION: Section is malformed or missing
+## Wrong Section Name
+
+This section has wrong name/format.
+
+# VIOLATION: PIN-SEC-003
+INVALID_PIN_SEC_003 = True

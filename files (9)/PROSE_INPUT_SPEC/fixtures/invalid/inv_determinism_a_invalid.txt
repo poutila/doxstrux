@@ -1,0 +1,13 @@
+# Invalid fixture for INV-DETERMINISM-A
+# Invariant: Validation is deterministic and repeatable
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: INV-DETERMINISM-A
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: INV-DETERMINISM-A
+INVALID_INV_DETERMINISM_A = True

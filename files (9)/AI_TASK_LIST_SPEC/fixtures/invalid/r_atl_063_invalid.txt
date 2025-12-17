@@ -1,0 +1,13 @@
+# Invalid fixture for R-ATL-063
+# Rule: When runner=uv and instantiated, Global Clean Table MUST include import hygiene checks
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-063
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: R-ATL-063
+INVALID_R_ATL_063 = True

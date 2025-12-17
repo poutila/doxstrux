@@ -1,0 +1,9 @@
+# Invalid fixture for PIN-FBN-001
+# Rule: Document MUST NOT contain: TBD, TODO, TBC, FIXME, XXX (case-insensitive)
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-FBN-001
+
+# VIOLATION: PIN-FBN-001
+INVALID_PIN_FBN_001 = True

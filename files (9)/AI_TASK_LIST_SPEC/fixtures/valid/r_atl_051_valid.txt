@@ -1,0 +1,8 @@
+# Valid fixture for R-ATL-051
+# Rule: `## STOP — Phase Gate` MUST include checklist referencing unlock artifacts
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_R_ATL_051 = True

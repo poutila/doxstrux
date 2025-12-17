@@ -1,0 +1,13 @@
+# Invalid fixture for INV-DECISION-A
+# Invariant: All decisions MUST be final before conversion
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: INV-DECISION-A
+
+# VIOLATION: Wrong order
+# §3 comes before §2 (wrong order)
+# §2 Section Two
+
+# VIOLATION: INV-DECISION-A
+INVALID_INV_DECISION_A = True

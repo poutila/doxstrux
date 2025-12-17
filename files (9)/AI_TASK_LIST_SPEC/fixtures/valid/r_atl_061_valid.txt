@@ -1,0 +1,12 @@
+# Valid fixture for R-ATL-061
+# Rule: In instantiated mode, `[[PH:PASTE_CLEAN_TABLE_OUTPUT]]` MUST NOT remain
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+| ID | Description | Enforcement |
+|-----|-------------|-------------|
+| R-ATL-061 | Valid entry | enforce_valid |
+
+# Valid content for this check
+VALID_R_ATL_061 = True

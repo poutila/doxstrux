@@ -1,0 +1,12 @@
+# Invalid fixture for PIN-SEC-010
+# Rule: External Dependencies MUST contain `### Required Files/Modules`
+# Domain: prose_input
+#
+# This file should FAIL the check.
+# Expected error code: PIN-SEC-010
+
+# VIOLATION: Required content is missing
+# This fixture intentionally omits required elements
+
+# VIOLATION: PIN-SEC-010
+INVALID_PIN_SEC_010 = True

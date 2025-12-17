@@ -1,0 +1,12 @@
+# Valid fixture for PIN-SEC-003
+# Rule: Document MUST contain `### In Scope` subsection
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# §1 VALID SECTION
+
+This section exists as required.
+
+# Valid content for this check
+VALID_PIN_SEC_003 = True

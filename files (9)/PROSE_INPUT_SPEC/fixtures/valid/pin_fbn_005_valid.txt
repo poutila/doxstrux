@@ -1,0 +1,8 @@
+# Valid fixture for PIN-FBN-005
+# Rule: Document MUST NOT contain conditional statements: if we... then, if you... then
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_FBN_005 = True

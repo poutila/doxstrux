@@ -1,0 +1,12 @@
+# Invalid fixture for R-ATL-024
+# Rule: With `--require-captured-evidence`, evidence blocks MUST include cmd and exit headers
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-024
+
+# VIOLATION: Missing required header block
+# The header comment block is intentionally omitted
+
+# VIOLATION: R-ATL-024
+INVALID_R_ATL_024 = True

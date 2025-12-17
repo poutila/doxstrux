@@ -1,0 +1,13 @@
+# Invalid fixture for R-ATL-042
+# Rule: Linter MUST verify presence of five Clean Table checklist items
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: R-ATL-042
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: R-ATL-042
+INVALID_R_ATL_042 = True

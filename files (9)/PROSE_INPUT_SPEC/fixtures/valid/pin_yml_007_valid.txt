@@ -1,0 +1,8 @@
+# Valid fixture for PIN-YML-007
+# Rule: search_tool MUST be one of: rg, grep
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_YML_007 = True

@@ -1,0 +1,8 @@
+# Valid fixture for PIN-FBN-006
+# Rule: Document MUST NOT contain time estimates: 2-3 hours, 1-2 days, etc.
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_FBN_006 = True

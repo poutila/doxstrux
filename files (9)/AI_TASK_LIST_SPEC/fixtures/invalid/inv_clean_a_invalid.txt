@@ -1,0 +1,17 @@
+# Invalid fixture for INV-CLEAN-A
+# Invariant: Clean Table gate MUST pass before phase completion
+# Domain: ai_task_list
+#
+# This file should FAIL the check.
+# Expected error code: INV-CLEAN-A
+
+# VIOLATION: Table is malformed
+| ID | Description |
+|-----|
+
+# VIOLATION: Wrong order
+# §3 comes before §2 (wrong order)
+# §2 Section Two
+
+# VIOLATION: INV-CLEAN-A
+INVALID_INV_CLEAN_A = True

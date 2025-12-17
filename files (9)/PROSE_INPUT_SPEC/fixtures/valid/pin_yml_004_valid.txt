@@ -1,0 +1,8 @@
+# Valid fixture for PIN-YML-004
+# Rule: All required YAML fields MUST be strings
+# Domain: prose_input
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_PIN_YML_004 = True

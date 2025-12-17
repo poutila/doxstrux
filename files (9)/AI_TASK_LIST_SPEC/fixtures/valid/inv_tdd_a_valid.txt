@@ -1,0 +1,8 @@
+# Valid fixture for INV-TDD-A
+# Invariant: Non-Phase-0 tasks MUST follow RED-GREEN-REFACTOR structure
+# Domain: ai_task_list
+#
+# This file should PASS the check.
+
+# Valid content for this check
+VALID_INV_TDD_A = True
