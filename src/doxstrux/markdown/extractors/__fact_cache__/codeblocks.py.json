@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4514096,
+    "size": 4523,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/codeblocks.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Code block extractor - Extract fenced and indented code blocks.\n\nThis module extracts code blocks from the markdown AST, including:\n- Fenced code blocks (``` or ~~~) with language detection\n- Indented code blocks (4 spaces or tab)\n- Content extraction with line ranges\n- Security: Skips code blocks nested in table cells\n\nFunctions:\n    extract_code_blocks: Extract all code blocks with caching",
+      "functions": [
+        {
+          "name": "extract_code_blocks",
+          "args": [
+            "tree",
+            "lines",
+            "process_tree_func",
+            "find_section_id_func",
+            "slice_lines_inclusive_func",
+            "cache"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract all code blocks (fenced and indented).\n\nNote: Fences inside table cells won't be parsed as fence nodes by markdown-it.\nThey'll appear as text and may be caught by the indented code scanner below.\nThis is expected behavior - markdown-it doesn't nest blocks in table cells.\n\nArgs:\n    tree: The markdown AST tree\n    lines: List of source lines\n    process_tree_func: Function to process tree nodes\n    find_section_id_func: Function to find section ID for a line number\n    slice_lines_inclusive_func: Function to slice lines inclusively\n    cache: Cache dict for storing results\n\nReturns:\n    List of code block dicts with metadata"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Code block extractor - Extract fenced and indented code blocks.\n\nThis module extracts code blocks from the markdown AST, including:\n- Fenced code blocks (``` or ~~~) with language detection\n- Indented code blocks (4 spaces or tab)\n- Content extraction with line ranges\n- Security: Skips code blocks nested in table cells\n\nFunctions:\n    extract_code_blocks: Extract all code blocks with caching",
+      "function:extract_code_blocks": "Extract all code blocks (fenced and indented).\n\nNote: Fences inside table cells won't be parsed as fence nodes by markdown-it.\nThey'll appear as text and may be caught by the indented code scanner below.\nThis is expected behavior - markdown-it doesn't nest blocks in table cells.\n\nArgs:\n    tree: The markdown AST tree\n    lines: List of source lines\n    process_tree_func: Function to process tree nodes\n    find_section_id_func: Function to find section ID for a line number\n    slice_lines_inclusive_func: Function to slice lines inclusively\n    cache: Cache dict for storing results\n\nReturns:\n    List of code block dicts with metadata",
+      "function:extract_code_blocks|function:code_processor": null
+    },
+    "presence": {
+      "module": true,
+      "function:extract_code_blocks": true,
+      "function:extract_code_blocks|function:code_processor": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/codeblocks.py",
+      "fingerprint": "f41da610fd5c82628724b499dadb3e25b59316fddb6d7170dcb7e2d3dc16525f",
+      "timestamp": "2025-12-17T03:56:25.296517Z",
+      "entity_count": 3,
+      "documented_count": 2,
+      "entities": [
+        "function:extract_code_blocks",
+        "function:extract_code_blocks|function:code_processor",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_code_blocks.code_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

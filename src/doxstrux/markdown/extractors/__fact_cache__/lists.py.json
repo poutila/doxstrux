@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4514096,
+    "size": 11487,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/lists.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "List and tasklist extractors - Nested lists with checkbox detection.\n\nThis module extracts list structures from the markdown AST, including:\n- Regular lists (bullet and ordered) with nested depth tracking\n- Task lists (GFM extension) with checkbox state detection\n- Recursive item extraction with depth limits (max 10 levels)\n\nFunctions:\n    extract_lists: Extract regular lists (non-task lists)\n    extract_tasklists: Extract GFM task lists with checkboxes\n    detect_task_checkbox: Detect checkbox state from plugin HTML\n    extract_list_items: Recursively extract regular list items\n    extract_tasklist_items: Recursively extract task list items",
+      "functions": [
+        {
+          "name": "extract_lists",
+          "args": [
+            "tree",
+            "process_tree_func",
+            "extract_list_items_func",
+            "find_section_id_func"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract regular lists (excludes task lists - those are in extract_tasklists).\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes\n    extract_list_items_func: Function to recursively extract list items\n    find_section_id_func: Function to find section ID for a line number\n\nReturns:\n    List of regular list dicts with items and metadata"
+        },
+        {
+          "name": "extract_tasklists",
+          "args": [
+            "tree",
+            "process_tree_func",
+            "extract_tasklist_items_func",
+            "find_section_id_func"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract GFM task lists with checkbox detection.\n\nTask lists are detected via the 'contains-task-list' class added by\nthe tasklists plugin.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes\n    extract_tasklist_items_func: Function to recursively extract task items\n    find_section_id_func: Function to find section ID for a line number\n\nReturns:\n    List of task list dicts with checkbox states"
+        },
+        {
+          "name": "detect_task_checkbox",
+          "args": [
+            "paragraph_node",
+            "walk_tokens_iter_func"
+          ],
+          "returns": "tuple[bool, bool]",
+          "raises": [],
+          "doc": "Detect checkbox state from tasklists plugin HTML injection.\n\nThe tasklists plugin adds HTML inline tokens with checkbox markup:\n- <input class=\"task-list-item-checkbox\" type=\"checkbox\" checked=\"\">\n- <input class=\"task-list-item-checkbox\" type=\"checkbox\">\n\nArgs:\n    paragraph_node: The paragraph node to check\n    walk_tokens_iter_func: Function to walk token tree iteratively\n\nReturns:\n    Tuple of (has_checkbox: bool, is_checked: bool)"
+        },
+        {
+          "name": "extract_list_items",
+          "args": [
+            "list_node",
+            "get_text_func",
+            "depth",
+            "max_depth"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Recursively extract regular list items (no checkbox detection) with depth limit.\n\nArgs:\n    list_node: The list node to extract items from\n    get_text_func: Function to extract text from node\n    depth: Current recursion depth (default 0)\n    max_depth: Maximum recursion depth to prevent stack overflow (default 10)\n\nReturns:\n    List of item dicts with text, children, and blocks"
+        },
+        {
+          "name": "extract_tasklist_items",
+          "args": [
+            "list_node",
+            "get_text_func",
+            "detect_task_checkbox_func",
+            "extract_list_items_func",
+            "depth",
+            "max_depth"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract task list items WITH checkbox detection and depth limit.\n\nArgs:\n    list_node: The task list node to extract items from\n    get_text_func: Function to extract text from node\n    detect_task_checkbox_func: Function to detect checkbox state\n    extract_list_items_func: Function to extract regular list items\n    depth: Current recursion depth (default 0)\n    max_depth: Maximum recursion depth to prevent stack overflow (default 10)\n\nReturns:\n    List of task item dicts with checked status, or empty list if depth exceeded"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "List and tasklist extractors - Nested lists with checkbox detection.\n\nThis module extracts list structures from the markdown AST, including:\n- Regular lists (bullet and ordered) with nested depth tracking\n- Task lists (GFM extension) with checkbox state detection\n- Recursive item extraction with depth limits (max 10 levels)\n\nFunctions:\n    extract_lists: Extract regular lists (non-task lists)\n    extract_tasklists: Extract GFM task lists with checkboxes\n    detect_task_checkbox: Detect checkbox state from plugin HTML\n    extract_list_items: Recursively extract regular list items\n    extract_tasklist_items: Recursively extract task list items",
+      "function:extract_lists": "Extract regular lists (excludes task lists - those are in extract_tasklists).\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes\n    extract_list_items_func: Function to recursively extract list items\n    find_section_id_func: Function to find section ID for a line number\n\nReturns:\n    List of regular list dicts with items and metadata",
+      "function:extract_lists|function:list_processor": null,
+      "function:extract_tasklists": "Extract GFM task lists with checkbox detection.\n\nTask lists are detected via the 'contains-task-list' class added by\nthe tasklists plugin.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes\n    extract_tasklist_items_func: Function to recursively extract task items\n    find_section_id_func: Function to find section ID for a line number\n\nReturns:\n    List of task list dicts with checkbox states",
+      "function:extract_tasklists|function:tasklist_processor": null,
+      "function:detect_task_checkbox": "Detect checkbox state from tasklists plugin HTML injection.\n\nThe tasklists plugin adds HTML inline tokens with checkbox markup:\n- <input class=\"task-list-item-checkbox\" type=\"checkbox\" checked=\"\">\n- <input class=\"task-list-item-checkbox\" type=\"checkbox\">\n\nArgs:\n    paragraph_node: The paragraph node to check\n    walk_tokens_iter_func: Function to walk token tree iteratively\n\nReturns:\n    Tuple of (has_checkbox: bool, is_checked: bool)",
+      "function:extract_list_items": "Recursively extract regular list items (no checkbox detection) with depth limit.\n\nArgs:\n    list_node: The list node to extract items from\n    get_text_func: Function to extract text from node\n    depth: Current recursion depth (default 0)\n    max_depth: Maximum recursion depth to prevent stack overflow (default 10)\n\nReturns:\n    List of item dicts with text, children, and blocks",
+      "function:extract_tasklist_items": "Extract task list items WITH checkbox detection and depth limit.\n\nArgs:\n    list_node: The task list node to extract items from\n    get_text_func: Function to extract text from node\n    detect_task_checkbox_func: Function to detect checkbox state\n    extract_list_items_func: Function to extract regular list items\n    depth: Current recursion depth (default 0)\n    max_depth: Maximum recursion depth to prevent stack overflow (default 10)\n\nReturns:\n    List of task item dicts with checked status, or empty list if depth exceeded"
+    },
+    "presence": {
+      "module": true,
+      "function:extract_lists": true,
+      "function:extract_lists|function:list_processor": true,
+      "function:extract_tasklists": true,
+      "function:extract_tasklists|function:tasklist_processor": true,
+      "function:detect_task_checkbox": true,
+      "function:extract_list_items": true,
+      "function:extract_tasklist_items": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/lists.py",
+      "fingerprint": "aefb953afc804fe7eaac1da011197f7625a0761ff4271e2c85589551dec4ff7f",
+      "timestamp": "2025-12-17T03:56:25.511784Z",
+      "entity_count": 8,
+      "documented_count": 6,
+      "entities": [
+        "function:detect_task_checkbox",
+        "function:extract_list_items",
+        "function:extract_lists",
+        "function:extract_lists|function:list_processor",
+        "function:extract_tasklist_items",
+        "function:extract_tasklists",
+        "function:extract_tasklists|function:tasklist_processor",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_lists.list_processor",
+      "Document nested function extract_tasklists.tasklist_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

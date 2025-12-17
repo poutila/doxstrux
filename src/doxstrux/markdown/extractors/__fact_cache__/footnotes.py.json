@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4514096,
+    "size": 4784,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/footnotes.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Footnote extractor - Definitions and references with rich metadata.\n\nThis module extracts footnote elements from the markdown AST, including:\n- Footnote definitions with content and metadata\n- Footnote references (inline citations)\n- Nested structures within footnotes\n\nFunctions:\n    extract_footnotes: Extract all footnote definitions and references",
+      "functions": [
+        {
+          "name": "extract_footnotes",
+          "args": [
+            "tree",
+            "process_tree_func",
+            "find_section_id_func",
+            "get_text_func"
+          ],
+          "returns": "dict[str, Any]",
+          "raises": [],
+          "doc": "Extract footnote definitions and back-references with rich metadata.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes (usually parser.process_tree)\n    find_section_id_func: Function to find section ID for a line number\n    get_text_func: Function to extract text from a node\n\nReturns:\n    Dictionary with 'definitions' and 'references' lists.\n    Definitions are deduplicated by label (last-writer-wins).\n    Both label and numeric ID are extracted for stability."
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Footnote extractor - Definitions and references with rich metadata.\n\nThis module extracts footnote elements from the markdown AST, including:\n- Footnote definitions with content and metadata\n- Footnote references (inline citations)\n- Nested structures within footnotes\n\nFunctions:\n    extract_footnotes: Extract all footnote definitions and references",
+      "function:extract_footnotes": "Extract footnote definitions and back-references with rich metadata.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes (usually parser.process_tree)\n    find_section_id_func: Function to find section ID for a line number\n    get_text_func: Function to extract text from a node\n\nReturns:\n    Dictionary with 'definitions' and 'references' lists.\n    Definitions are deduplicated by label (last-writer-wins).\n    Both label and numeric ID are extracted for stability.",
+      "function:extract_footnotes|function:get_footnote_ids": "Extract both label (stable) and numeric id from footnote node.\nPrefer label for stability, but include both.",
+      "function:extract_footnotes|function:footnote_processor": null
+    },
+    "presence": {
+      "module": true,
+      "function:extract_footnotes": true,
+      "function:extract_footnotes|function:get_footnote_ids": true,
+      "function:extract_footnotes|function:footnote_processor": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/footnotes.py",
+      "fingerprint": "cbe02b1ed16b16126294e7c2cd69a321ef7b209782928f3451121c56e883909d",
+      "timestamp": "2025-12-17T03:56:25.354562Z",
+      "entity_count": 4,
+      "documented_count": 3,
+      "entities": [
+        "function:extract_footnotes",
+        "function:extract_footnotes|function:footnote_processor",
+        "function:extract_footnotes|function:get_footnote_ids",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_footnotes.footnote_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

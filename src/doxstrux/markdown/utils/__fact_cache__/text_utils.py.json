@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4529548,
+    "size": 4946,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/text_utils.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Text extraction utilities for markdown-it tokens.\n\nThis module provides functions for extracting text content from markdown-it\ntoken trees, handling inline formatting, and checking token structure.\n\nFunctions:\n    collect_text_segments: Collect text segments from token stream with line ranges\n    extract_text_from_inline: Extract plain text from inline token children\n    has_child_type: Check if token has children of specified type(s)",
+      "functions": [
+        {
+          "name": "collect_text_segments",
+          "args": [
+            "tokens"
+          ],
+          "returns": "list[tuple[int, int, str]]",
+          "raises": [],
+          "doc": "Collect text-ish segments with proper line ranges for paragraph boundary detection.\n\nProcesses inline tokens which contain the actual text content, extracting\ntext from children and tracking line breaks.\n\nArgs:\n    tokens: List of markdown-it Token objects\n\nReturns:\n    List of tuples (start_line, end_line, text) where:\n    - start_line: Starting line number (0-based, inclusive)\n    - end_line: Ending line number (0-based, inclusive)\n    - text: Extracted text content\n\nExamples:\n    >>> # With tokens containing \"Hello\\nworld\"\n    >>> segments = collect_text_segments(tokens)\n    >>> segments[0]\n    (0, 1, 'Hello\\nworld')"
+        },
+        {
+          "name": "extract_text_from_inline",
+          "args": [
+            "inline_token"
+          ],
+          "returns": "str",
+          "raises": [],
+          "doc": "Extract plain text from inline token children.\n\nRecursively extracts text content from inline tokens, handling nested\nformatting like bold, italic, links, etc.\n\nArgs:\n    inline_token: markdown-it inline Token object with children\n\nReturns:\n    Concatenated plain text content from all text nodes\n\nExamples:\n    >>> # Token with children: [text(\"Hello \"), strong_open, text(\"world\"), strong_close]\n    >>> extract_text_from_inline(token)\n    'Hello world'"
+        },
+        {
+          "name": "has_child_type",
+          "args": [
+            "node",
+            "types"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Check if node has children of specified type(s).\n\nWalks the entire subtree of the node to find children matching\nthe specified type(s).\n\nArgs:\n    node: markdown-it SyntaxTreeNode or Token with walk() method\n    types: Single type string or list of type strings to search for\n\nReturns:\n    True if any child has a matching type, False otherwise\n\nExamples:\n    >>> has_child_type(node, \"code_block\")\n    True\n    >>> has_child_type(node, [\"image\", \"link\"])\n    False"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Text extraction utilities for markdown-it tokens.\n\nThis module provides functions for extracting text content from markdown-it\ntoken trees, handling inline formatting, and checking token structure.\n\nFunctions:\n    collect_text_segments: Collect text segments from token stream with line ranges\n    extract_text_from_inline: Extract plain text from inline token children\n    has_child_type: Check if token has children of specified type(s)",
+      "function:collect_text_segments": "Collect text-ish segments with proper line ranges for paragraph boundary detection.\n\nProcesses inline tokens which contain the actual text content, extracting\ntext from children and tracking line breaks.\n\nArgs:\n    tokens: List of markdown-it Token objects\n\nReturns:\n    List of tuples (start_line, end_line, text) where:\n    - start_line: Starting line number (0-based, inclusive)\n    - end_line: Ending line number (0-based, inclusive)\n    - text: Extracted text content\n\nExamples:\n    >>> # With tokens containing \"Hello\\nworld\"\n    >>> segments = collect_text_segments(tokens)\n    >>> segments[0]\n    (0, 1, 'Hello\\nworld')",
+      "function:extract_text_from_inline": "Extract plain text from inline token children.\n\nRecursively extracts text content from inline tokens, handling nested\nformatting like bold, italic, links, etc.\n\nArgs:\n    inline_token: markdown-it inline Token object with children\n\nReturns:\n    Concatenated plain text content from all text nodes\n\nExamples:\n    >>> # Token with children: [text(\"Hello \"), strong_open, text(\"world\"), strong_close]\n    >>> extract_text_from_inline(token)\n    'Hello world'",
+      "function:has_child_type": "Check if node has children of specified type(s).\n\nWalks the entire subtree of the node to find children matching\nthe specified type(s).\n\nArgs:\n    node: markdown-it SyntaxTreeNode or Token with walk() method\n    types: Single type string or list of type strings to search for\n\nReturns:\n    True if any child has a matching type, False otherwise\n\nExamples:\n    >>> has_child_type(node, \"code_block\")\n    True\n    >>> has_child_type(node, [\"image\", \"link\"])\n    False"
+    },
+    "presence": {
+      "module": true,
+      "function:collect_text_segments": true,
+      "function:extract_text_from_inline": true,
+      "function:has_child_type": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/text_utils.py",
+      "fingerprint": "ebc2b75164a9c876ea19cc7dfd0ad1baa283636c22a3666a51e95d03ff204a51",
+      "timestamp": "2025-12-17T03:56:26.072968Z",
+      "entity_count": 4,
+      "documented_count": 4,
+      "entities": [
+        "function:collect_text_segments",
+        "function:extract_text_from_inline",
+        "function:has_child_type",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

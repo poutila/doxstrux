@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4529548,
+    "size": 3486,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/line_utils.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Line slicing and manipulation utilities.\n\nThis module provides pure functions for working with line-based content,\nfollowing the markdown-it convention where end_line is the first line AFTER content.\n\nFunctions:\n    slice_lines: Slice lines from start to end (end-inclusive for markdown-it convention)\n    slice_lines_raw: Get raw string from line range\n    build_line_offsets: Build character offset map for each line start",
+      "functions": [
+        {
+          "name": "slice_lines",
+          "args": [
+            "lines",
+            "start_line",
+            "end_line"
+          ],
+          "returns": "list[str]",
+          "raises": [],
+          "doc": "Slice lines with end-inclusive convention for markdown-it compatibility.\n\nMarkdown-it's node.map[1] represents the line AFTER the content, so this\nfunction uses end-exclusive slicing to capture all content lines.\n\nArgs:\n    lines: List of all lines in the document\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    List of lines from start_line to end_line (inclusive of actual content)\n\nExamples:\n    >>> lines = [\"a\", \"b\", \"c\", \"d\"]\n    >>> slice_lines(lines, 1, 3)  # node.map = [1, 3]\n    ['b', 'c']  # lines 1, 2 (line 3 is AFTER content)"
+        },
+        {
+          "name": "slice_lines_raw",
+          "args": [
+            "lines",
+            "start_line",
+            "end_line"
+          ],
+          "returns": "str",
+          "raises": [],
+          "doc": "Get raw content string from line range using consistent slicing convention.\n\nArgs:\n    lines: List of all lines in the document\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    Joined string content with newlines preserved\n\nExamples:\n    >>> lines = [\"first\", \"second\", \"third\"]\n    >>> slice_lines_raw(lines, 0, 2)\n    'first\\nsecond'"
+        },
+        {
+          "name": "build_line_offsets",
+          "args": [
+            "lines"
+          ],
+          "returns": "tuple[list[int], int]",
+          "raises": [],
+          "doc": "Build array of character offsets for each line start.\n\nThis is useful for converting line numbers to character spans for\nbyte-level operations or span tracking.\n\nArgs:\n    lines: List of all lines in the document\n\nReturns:\n    Tuple of (line_start_offsets, total_chars_with_lf) where:\n    - line_start_offsets: List of character offsets for each line start\n    - total_chars_with_lf: Total character count including line feeds\n\nExamples:\n    >>> lines = [\"abc\", \"def\", \"ghi\"]\n    >>> offsets, total = build_line_offsets(lines)\n    >>> offsets\n    [0, 4, 8]  # 'abc\\n' = 4 chars, 'abc\\ndef\\n' = 8 chars\n    >>> total\n    11  # 'abc\\ndef\\nghi' = 11 chars"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Line slicing and manipulation utilities.\n\nThis module provides pure functions for working with line-based content,\nfollowing the markdown-it convention where end_line is the first line AFTER content.\n\nFunctions:\n    slice_lines: Slice lines from start to end (end-inclusive for markdown-it convention)\n    slice_lines_raw: Get raw string from line range\n    build_line_offsets: Build character offset map for each line start",
+      "function:slice_lines": "Slice lines with end-inclusive convention for markdown-it compatibility.\n\nMarkdown-it's node.map[1] represents the line AFTER the content, so this\nfunction uses end-exclusive slicing to capture all content lines.\n\nArgs:\n    lines: List of all lines in the document\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    List of lines from start_line to end_line (inclusive of actual content)\n\nExamples:\n    >>> lines = [\"a\", \"b\", \"c\", \"d\"]\n    >>> slice_lines(lines, 1, 3)  # node.map = [1, 3]\n    ['b', 'c']  # lines 1, 2 (line 3 is AFTER content)",
+      "function:slice_lines_raw": "Get raw content string from line range using consistent slicing convention.\n\nArgs:\n    lines: List of all lines in the document\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    Joined string content with newlines preserved\n\nExamples:\n    >>> lines = [\"first\", \"second\", \"third\"]\n    >>> slice_lines_raw(lines, 0, 2)\n    'first\\nsecond'",
+      "function:build_line_offsets": "Build array of character offsets for each line start.\n\nThis is useful for converting line numbers to character spans for\nbyte-level operations or span tracking.\n\nArgs:\n    lines: List of all lines in the document\n\nReturns:\n    Tuple of (line_start_offsets, total_chars_with_lf) where:\n    - line_start_offsets: List of character offsets for each line start\n    - total_chars_with_lf: Total character count including line feeds\n\nExamples:\n    >>> lines = [\"abc\", \"def\", \"ghi\"]\n    >>> offsets, total = build_line_offsets(lines)\n    >>> offsets\n    [0, 4, 8]  # 'abc\\n' = 4 chars, 'abc\\ndef\\n' = 8 chars\n    >>> total\n    11  # 'abc\\ndef\\nghi' = 11 chars"
+    },
+    "presence": {
+      "module": true,
+      "function:slice_lines": true,
+      "function:slice_lines_raw": true,
+      "function:build_line_offsets": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/line_utils.py",
+      "fingerprint": "224c4af9e12cb0a08941a767f86c62349f8fe44eb13224d7cddf1ad99cb678a3",
+      "timestamp": "2025-12-17T03:56:26.018226Z",
+      "entity_count": 4,
+      "documented_count": 4,
+      "entities": [
+        "function:build_line_offsets",
+        "function:slice_lines",
+        "function:slice_lines_raw",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

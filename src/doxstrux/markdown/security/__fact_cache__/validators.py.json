@@ -1,0 +1,164 @@
+{
+  "metadata": {
+    "mtime": 1765391452.0122104,
+    "size": 15277,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/security/validators.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Security Validators - Centralized security regex patterns and validation functions.\n\nPhase 6 (Task 6.1): All regex patterns here are RETAINED per REGEX_REFACTOR_EXECUTION_GUIDE \u00a76.\nThese patterns validate content security and cannot be replaced by markdown-it tokens\nbecause they operate on raw content, not parsed markdown structure.\n\nAll functions tagged with: # REGEX RETAINED (\u00a76 Security)",
+      "functions": [
+        {
+          "name": "_find_disallowed_scheme",
+          "args": [
+            "content"
+          ],
+          "returns": "str | None",
+          "raises": [],
+          "doc": "Find first disallowed scheme in content (case-insensitive)."
+        },
+        {
+          "name": "_extract_url_scheme",
+          "args": [
+            "url"
+          ],
+          "returns": "str | None",
+          "raises": [],
+          "doc": "Extract scheme from URL (e.g., 'https' from 'https://...')."
+        },
+        {
+          "name": "_parse_data_uri_parts",
+          "args": [
+            "uri"
+          ],
+          "returns": "tuple[bool, str | None, bool, str]",
+          "raises": [],
+          "doc": "Parse data URI into components.\n\nReturns:\n    (is_data_uri, mediatype, is_base64, data)"
+        },
+        {
+          "name": "scan_raw_for_disallowed_schemes",
+          "args": [
+            "content"
+          ],
+          "returns": "dict[str, Any]",
+          "raises": [],
+          "doc": "Scan raw content for disallowed schemes that markdown-it might not parse.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    content: Raw markdown content to scan\n\nReturns:\n    dict with 'found' (bool) and 'match' (str or None)"
+        },
+        {
+          "name": "validate_link_scheme",
+          "args": [
+            "url",
+            "allowed_schemes"
+          ],
+          "returns": "tuple[str | None, bool]",
+          "raises": [],
+          "doc": "Extract and validate URL scheme.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    url: URL string to validate\n    allowed_schemes: Set of allowed schemes (e.g., {\"http\", \"https\"})\n\nReturns:\n    Tuple of (scheme, is_allowed)\n    - scheme: The URL scheme or None for relative/anchor links\n    - is_allowed: True if scheme is in allowed_schemes or is relative/anchor"
+        },
+        {
+          "name": "parse_data_uri",
+          "args": [
+            "uri"
+          ],
+          "returns": "dict[str, Any]",
+          "raises": [],
+          "doc": "Parse data URI to extract media type, encoding, and size estimate.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    uri: Data URI string (e.g., \"data:image/png;base64,iVBORw0...\")\n\nReturns:\n    dict with:\n    - is_data_uri: bool\n    - mediatype: str (e.g., \"image/png\")\n    - encoding: str (\"base64\" or \"url\")\n    - size_bytes: int (estimated decoded size)\n    - data_preview: str (first 50 chars of data)"
+        },
+        {
+          "name": "detect_unicode_issues",
+          "args": [
+            "content",
+            "max_scan_bytes"
+          ],
+          "returns": "dict[str, Any]",
+          "raises": [],
+          "doc": "Detect Unicode spoofing attempts including confusables and mixed scripts.\n\n# REGEX RETAINED (\u00a76 Security)\nRationale: Character-level analysis requires iterating over Unicode codepoints,\nchecking character properties (script, category). Cannot be done with tokens.\n\nArgs:\n    content: Text content to analyze\n    max_scan_bytes: Maximum bytes to scan (performance limit)\n\nReturns:\n    dict with:\n    - has_bidi_override: bool (BiDi override characters present)\n    - has_confusables: bool (Latin lookalikes from other scripts)\n    - has_mixed_scripts: bool (Mixed scripts with Latin)\n    - has_rtl: bool (Right-to-left text present)\n    - has_zero_width: bool (Zero-width characters present)"
+        },
+        {
+          "name": "check_prompt_injection",
+          "args": [
+            "text",
+            "profile"
+          ],
+          "returns": "PromptInjectionCheck",
+          "raises": [
+            "ValueError"
+          ],
+          "doc": "Check for prompt injection patterns in text. FAIL-CLOSED on errors.\n\n# REGEX RETAINED (\u00a76 Security)\nRationale: Prompt injection detection requires pattern matching on content.\nThese patterns describe semantic attack vectors, not markdown structure.\n\nPer SECURITY_KERNEL_SPEC.md \u00a77.2:\n1. Resolve profile via SECURITY_PROFILES\n2. Determine max_len from profile's max_injection_scan_chars\n3. Truncate text to max_len\n4. Check patterns, return structured result\n5. On error, return suspected=True (fail-closed)\n\nArgs:\n    text: Text content to check\n    profile: Security profile name (strict/moderate/permissive)\n\nReturns:\n    PromptInjectionCheck with suspected=True if injection OR error\n\nRaises:\n    ValueError: If profile is unknown"
+        },
+        {
+          "name": "classify_link_type",
+          "args": [
+            "url"
+          ],
+          "returns": "str",
+          "raises": [],
+          "doc": "Classify URL into type: absolute, relative, anchor, malformed.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    url: URL string to classify\n\nReturns:\n    str: \"absolute\", \"relative\", \"anchor\", or \"malformed\""
+        }
+      ],
+      "classes": {
+        "PromptInjectionCheck": []
+      }
+    },
+    "node_map": {
+      "module": "Security Validators - Centralized security regex patterns and validation functions.\n\nPhase 6 (Task 6.1): All regex patterns here are RETAINED per REGEX_REFACTOR_EXECUTION_GUIDE \u00a76.\nThese patterns validate content security and cannot be replaced by markdown-it tokens\nbecause they operate on raw content, not parsed markdown structure.\n\nAll functions tagged with: # REGEX RETAINED (\u00a76 Security)",
+      "class:PromptInjectionCheck": "Result of prompt injection check - structured for traceability.\n\nPer SECURITY_KERNEL_SPEC.md \u00a77.1 (INV-SEC-5).\n\nAttributes:\n    suspected: True if injection found OR error occurred (fail-closed)\n    reason: 'pattern_match', 'validator_error', or 'no_match'\n    pattern: The matched pattern string (if any)\n    error: The exception that occurred (if any), for internal diagnostics",
+      "function:_find_disallowed_scheme": "Find first disallowed scheme in content (case-insensitive).",
+      "function:_extract_url_scheme": "Extract scheme from URL (e.g., 'https' from 'https://...').",
+      "function:_parse_data_uri_parts": "Parse data URI into components.\n\nReturns:\n    (is_data_uri, mediatype, is_base64, data)",
+      "function:scan_raw_for_disallowed_schemes": "Scan raw content for disallowed schemes that markdown-it might not parse.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    content: Raw markdown content to scan\n\nReturns:\n    dict with 'found' (bool) and 'match' (str or None)",
+      "function:validate_link_scheme": "Extract and validate URL scheme.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    url: URL string to validate\n    allowed_schemes: Set of allowed schemes (e.g., {\"http\", \"https\"})\n\nReturns:\n    Tuple of (scheme, is_allowed)\n    - scheme: The URL scheme or None for relative/anchor links\n    - is_allowed: True if scheme is in allowed_schemes or is relative/anchor",
+      "function:parse_data_uri": "Parse data URI to extract media type, encoding, and size estimate.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    uri: Data URI string (e.g., \"data:image/png;base64,iVBORw0...\")\n\nReturns:\n    dict with:\n    - is_data_uri: bool\n    - mediatype: str (e.g., \"image/png\")\n    - encoding: str (\"base64\" or \"url\")\n    - size_bytes: int (estimated decoded size)\n    - data_preview: str (first 50 chars of data)",
+      "function:detect_unicode_issues": "Detect Unicode spoofing attempts including confusables and mixed scripts.\n\n# REGEX RETAINED (\u00a76 Security)\nRationale: Character-level analysis requires iterating over Unicode codepoints,\nchecking character properties (script, category). Cannot be done with tokens.\n\nArgs:\n    content: Text content to analyze\n    max_scan_bytes: Maximum bytes to scan (performance limit)\n\nReturns:\n    dict with:\n    - has_bidi_override: bool (BiDi override characters present)\n    - has_confusables: bool (Latin lookalikes from other scripts)\n    - has_mixed_scripts: bool (Mixed scripts with Latin)\n    - has_rtl: bool (Right-to-left text present)\n    - has_zero_width: bool (Zero-width characters present)",
+      "function:check_prompt_injection": "Check for prompt injection patterns in text. FAIL-CLOSED on errors.\n\n# REGEX RETAINED (\u00a76 Security)\nRationale: Prompt injection detection requires pattern matching on content.\nThese patterns describe semantic attack vectors, not markdown structure.\n\nPer SECURITY_KERNEL_SPEC.md \u00a77.2:\n1. Resolve profile via SECURITY_PROFILES\n2. Determine max_len from profile's max_injection_scan_chars\n3. Truncate text to max_len\n4. Check patterns, return structured result\n5. On error, return suspected=True (fail-closed)\n\nArgs:\n    text: Text content to check\n    profile: Security profile name (strict/moderate/permissive)\n\nReturns:\n    PromptInjectionCheck with suspected=True if injection OR error\n\nRaises:\n    ValueError: If profile is unknown",
+      "function:classify_link_type": "Classify URL into type: absolute, relative, anchor, malformed.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    url: URL string to classify\n\nReturns:\n    str: \"absolute\", \"relative\", \"anchor\", or \"malformed\""
+    },
+    "presence": {
+      "module": true,
+      "class:PromptInjectionCheck": true,
+      "function:_find_disallowed_scheme": false,
+      "function:_extract_url_scheme": true,
+      "function:_parse_data_uri_parts": true,
+      "function:scan_raw_for_disallowed_schemes": true,
+      "function:validate_link_scheme": true,
+      "function:parse_data_uri": true,
+      "function:detect_unicode_issues": true,
+      "function:check_prompt_injection": true,
+      "function:classify_link_type": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/security/validators.py",
+      "fingerprint": "5a26ebf6716bc73b05bd4493615d54f210dd31fc4d2308e3fe6dd08799dc2411",
+      "timestamp": "2025-12-17T03:56:25.920809Z",
+      "entity_count": 11,
+      "documented_count": 11,
+      "entities": [
+        "class:PromptInjectionCheck",
+        "function:_extract_url_scheme",
+        "function:_find_disallowed_scheme",
+        "function:_parse_data_uri_parts",
+        "function:check_prompt_injection",
+        "function:classify_link_type",
+        "function:detect_unicode_issues",
+        "function:parse_data_uri",
+        "function:scan_raw_for_disallowed_schemes",
+        "function:validate_link_scheme",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

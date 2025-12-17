@@ -1,0 +1,229 @@
+{
+  "metadata": {
+    "mtime": 1765387350.9773006,
+    "size": 8902,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/budgets.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Resource budgets and enforcement for markdown parsing.\n\nThis module provides budget tracking and enforcement for various resource limits\nduring markdown parsing to prevent DoS attacks and resource exhaustion.\n\nClasses:\n    NodeBudget: Track node counts during parsing\n    CellBudget: Track table cell counts\n    URIBudget: Track URI counts and sizes\n\nAll budget violations raise MarkdownSizeError with embedding_blocked set.",
+      "functions": [
+        {
+          "name": "get_max_data_uri_size",
+          "args": [
+            "profile"
+          ],
+          "returns": "int",
+          "raises": [
+            "ValueError"
+          ],
+          "doc": "Get max data URI size from SECURITY_PROFILES (SSOT).\n\nPer SECURITY_KERNEL_SPEC.md \u00a78.2.\n\nArgs:\n    profile: Security profile name (strict/moderate/permissive)\n\nReturns:\n    Maximum data URI size in bytes for the profile\n\nRaises:\n    ValueError: If profile is unknown"
+        },
+        {
+          "name": "get_max_injection_scan_chars",
+          "args": [
+            "profile"
+          ],
+          "returns": "int",
+          "raises": [
+            "ValueError"
+          ],
+          "doc": "Get max injection scan chars from SECURITY_PROFILES (SSOT).\n\nPer SECURITY_KERNEL_SPEC.md \u00a78.2.\n\nArgs:\n    profile: Security profile name (strict/moderate/permissive)\n\nReturns:\n    Maximum characters to scan for prompt injection\n\nRaises:\n    ValueError: If profile is unknown"
+        }
+      ],
+      "classes": {
+        "NodeBudget": [
+          {
+            "name": "__init__",
+            "args": [
+              "security_profile"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": "Initialize node budget.\n\nArgs:\n    security_profile: Security profile ('strict', 'moderate', 'permissive')"
+          },
+          {
+            "name": "increment",
+            "args": [
+              "count"
+            ],
+            "returns": "None",
+            "raises": [
+              "MarkdownSizeError"
+            ],
+            "doc": "Increment node count and check budget.\n\nArgs:\n    count: Number of nodes to add\n\nRaises:\n    MarkdownSizeError: If budget exceeded"
+          },
+          {
+            "name": "check",
+            "args": [],
+            "returns": "bool",
+            "raises": [],
+            "doc": "Check if within budget without raising.\n\nReturns:\n    True if within budget, False otherwise"
+          },
+          {
+            "name": "reset",
+            "args": [],
+            "returns": "None",
+            "raises": [],
+            "doc": "Reset node count."
+          }
+        ],
+        "CellBudget": [
+          {
+            "name": "__init__",
+            "args": [
+              "security_profile"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": "Initialize cell budget.\n\nArgs:\n    security_profile: Security profile ('strict', 'moderate', 'permissive')"
+          },
+          {
+            "name": "add_table",
+            "args": [
+              "rows",
+              "cols"
+            ],
+            "returns": "None",
+            "raises": [
+              "MarkdownSizeError"
+            ],
+            "doc": "Add table cell count and check budget.\n\nArgs:\n    rows: Number of rows in table\n    cols: Number of columns in table\n\nRaises:\n    MarkdownSizeError: If budget exceeded"
+          },
+          {
+            "name": "check",
+            "args": [],
+            "returns": "bool",
+            "raises": [],
+            "doc": "Check if within budget without raising.\n\nReturns:\n    True if within budget, False otherwise"
+          },
+          {
+            "name": "reset",
+            "args": [],
+            "returns": "None",
+            "raises": [],
+            "doc": "Reset cell count."
+          }
+        ],
+        "URIBudget": [
+          {
+            "name": "__init__",
+            "args": [
+              "security_profile"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": "Initialize URI budget.\n\nArgs:\n    security_profile: Security profile ('strict', 'moderate', 'permissive')"
+          },
+          {
+            "name": "add_uri",
+            "args": [
+              "size"
+            ],
+            "returns": "None",
+            "raises": [
+              "MarkdownSizeError"
+            ],
+            "doc": "Add data URI and check budget.\n\nArgs:\n    size: Size of data URI in bytes\n\nRaises:\n    MarkdownSizeError: If budget exceeded"
+          },
+          {
+            "name": "check",
+            "args": [],
+            "returns": "bool",
+            "raises": [],
+            "doc": "Check if within budget without raising.\n\nReturns:\n    True if within budget, False otherwise"
+          },
+          {
+            "name": "reset",
+            "args": [],
+            "returns": "None",
+            "raises": [],
+            "doc": "Reset URI tracking."
+          }
+        ]
+      }
+    },
+    "node_map": {
+      "module": "Resource budgets and enforcement for markdown parsing.\n\nThis module provides budget tracking and enforcement for various resource limits\nduring markdown parsing to prevent DoS attacks and resource exhaustion.\n\nClasses:\n    NodeBudget: Track node counts during parsing\n    CellBudget: Track table cell counts\n    URIBudget: Track URI counts and sizes\n\nAll budget violations raise MarkdownSizeError with embedding_blocked set.",
+      "function:get_max_data_uri_size": "Get max data URI size from SECURITY_PROFILES (SSOT).\n\nPer SECURITY_KERNEL_SPEC.md \u00a78.2.\n\nArgs:\n    profile: Security profile name (strict/moderate/permissive)\n\nReturns:\n    Maximum data URI size in bytes for the profile\n\nRaises:\n    ValueError: If profile is unknown",
+      "function:get_max_injection_scan_chars": "Get max injection scan chars from SECURITY_PROFILES (SSOT).\n\nPer SECURITY_KERNEL_SPEC.md \u00a78.2.\n\nArgs:\n    profile: Security profile name (strict/moderate/permissive)\n\nReturns:\n    Maximum characters to scan for prompt injection\n\nRaises:\n    ValueError: If profile is unknown",
+      "class:NodeBudget": "Track node counts during parsing to prevent excessive memory usage.\n\nAttributes:\n    max_nodes: Maximum allowed nodes for this profile\n    current_count: Current node count\n    profile: Security profile name",
+      "class:NodeBudget|method:__init__": "Initialize node budget.\n\nArgs:\n    security_profile: Security profile ('strict', 'moderate', 'permissive')",
+      "class:NodeBudget|method:increment": "Increment node count and check budget.\n\nArgs:\n    count: Number of nodes to add\n\nRaises:\n    MarkdownSizeError: If budget exceeded",
+      "class:NodeBudget|method:check": "Check if within budget without raising.\n\nReturns:\n    True if within budget, False otherwise",
+      "class:NodeBudget|method:reset": "Reset node count.",
+      "class:CellBudget": "Track table cell counts to prevent matrix DoS attacks.\n\nLarge tables with many cells can cause memory exhaustion.\n\nAttributes:\n    max_cells: Maximum allowed total cells\n    current_count: Current total cell count across all tables\n    profile: Security profile name",
+      "class:CellBudget|method:__init__": "Initialize cell budget.\n\nArgs:\n    security_profile: Security profile ('strict', 'moderate', 'permissive')",
+      "class:CellBudget|method:add_table": "Add table cell count and check budget.\n\nArgs:\n    rows: Number of rows in table\n    cols: Number of columns in table\n\nRaises:\n    MarkdownSizeError: If budget exceeded",
+      "class:CellBudget|method:check": "Check if within budget without raising.\n\nReturns:\n    True if within budget, False otherwise",
+      "class:CellBudget|method:reset": "Reset cell count.",
+      "class:URIBudget": "Track URI counts and sizes to prevent data URI abuse.\n\nData URIs can embed large binary data in links/images. Track both\ncount and total size.\n\nAttributes:\n    max_uri_size: Maximum size for single data URI\n    max_total_size: Maximum total size for all data URIs\n    current_count: Number of data URIs encountered\n    current_size: Total size of all data URIs\n    profile: Security profile name",
+      "class:URIBudget|method:__init__": "Initialize URI budget.\n\nArgs:\n    security_profile: Security profile ('strict', 'moderate', 'permissive')",
+      "class:URIBudget|method:add_uri": "Add data URI and check budget.\n\nArgs:\n    size: Size of data URI in bytes\n\nRaises:\n    MarkdownSizeError: If budget exceeded",
+      "class:URIBudget|method:check": "Check if within budget without raising.\n\nReturns:\n    True if within budget, False otherwise",
+      "class:URIBudget|method:reset": "Reset URI tracking."
+    },
+    "presence": {
+      "module": true,
+      "function:get_max_data_uri_size": true,
+      "function:get_max_injection_scan_chars": true,
+      "class:NodeBudget": true,
+      "class:NodeBudget|method:__init__": false,
+      "class:NodeBudget|method:increment": true,
+      "class:NodeBudget|method:check": true,
+      "class:NodeBudget|method:reset": true,
+      "class:CellBudget": true,
+      "class:CellBudget|method:__init__": false,
+      "class:CellBudget|method:add_table": true,
+      "class:CellBudget|method:check": true,
+      "class:CellBudget|method:reset": true,
+      "class:URIBudget": true,
+      "class:URIBudget|method:__init__": false,
+      "class:URIBudget|method:add_uri": true,
+      "class:URIBudget|method:check": true,
+      "class:URIBudget|method:reset": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/budgets.py",
+      "fingerprint": "61c1d3802449706d5b44750c313b26a0a6f7ae80de1bd5d07b874c852bd5543d",
+      "timestamp": "2025-12-17T03:56:25.173324Z",
+      "entity_count": 18,
+      "documented_count": 18,
+      "entities": [
+        "class:CellBudget",
+        "class:CellBudget|method:__init__",
+        "class:CellBudget|method:add_table",
+        "class:CellBudget|method:check",
+        "class:CellBudget|method:reset",
+        "class:NodeBudget",
+        "class:NodeBudget|method:__init__",
+        "class:NodeBudget|method:check",
+        "class:NodeBudget|method:increment",
+        "class:NodeBudget|method:reset",
+        "class:URIBudget",
+        "class:URIBudget|method:__init__",
+        "class:URIBudget|method:add_uri",
+        "class:URIBudget|method:check",
+        "class:URIBudget|method:reset",
+        "function:get_max_data_uri_size",
+        "function:get_max_injection_scan_chars",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

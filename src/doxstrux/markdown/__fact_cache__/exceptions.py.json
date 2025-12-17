@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4512095,
+    "size": 515,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/exceptions.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": null,
+      "functions": [],
+      "classes": {
+        "MarkdownSecurityError": [
+          {
+            "name": "__init__",
+            "args": [
+              "message",
+              "security_profile",
+              "content_info"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": null
+          }
+        ],
+        "MarkdownSizeError": [],
+        "MarkdownPluginError": []
+      }
+    },
+    "node_map": {
+      "module": null,
+      "class:MarkdownSecurityError": "Raised when content fails security validation.",
+      "class:MarkdownSecurityError|method:__init__": null,
+      "class:MarkdownSizeError": "Raised when content exceeds size limits.",
+      "class:MarkdownPluginError": "Raised when plugins are not allowed."
+    },
+    "presence": {
+      "module": true,
+      "class:MarkdownSecurityError": true,
+      "class:MarkdownSecurityError|method:__init__": false,
+      "class:MarkdownSizeError": true,
+      "class:MarkdownPluginError": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/exceptions.py",
+      "fingerprint": "e05d7c797161eaaecc0887c6bbdb041c4d89c427100c5a148f6a2bebf21ab6f6",
+      "timestamp": "2025-12-17T03:56:25.242769Z",
+      "entity_count": 5,
+      "documented_count": 3,
+      "entities": [
+        "class:MarkdownPluginError",
+        "class:MarkdownSecurityError",
+        "class:MarkdownSecurityError|method:__init__",
+        "class:MarkdownSizeError",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document module docstring"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

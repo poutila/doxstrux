@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "mtime": 1765465983.7132204,
+    "size": 4565,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/encoding.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Robust encoding detection and decoding utilities.\n\nThis module provides encoding detection using charset-normalizer with\nBOM detection, confidence thresholds, and sanity checks.\n\nFunctions:\n    detect_and_decode: Detect encoding and decode bytes to string\n    read_file_robust: Read a file with automatic encoding detection",
+      "functions": [
+        {
+          "name": "_looks_reasonable",
+          "args": [
+            "text",
+            "max_replacement_ratio"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Check if decoded text looks reasonable (not garbled).\n\nArgs:\n    text: Decoded text to validate\n    max_replacement_ratio: Maximum allowed ratio of replacement characters\n\nReturns:\n    True if text passes sanity checks"
+        },
+        {
+          "name": "detect_and_decode",
+          "args": [
+            "data",
+            "default",
+            "confidence_threshold"
+          ],
+          "returns": "DecodeResult",
+          "raises": [],
+          "doc": "Detect encoding from bytes and decode to string.\n\nDetection order:\n1. BOM (Byte Order Mark) - highest confidence\n2. charset-normalizer auto-detection\n3. UTF-8 trial decode\n4. Fallback to latin-1 (never fails)\n\nArgs:\n    data: Raw bytes to decode\n    default: Default encoding if detection fails\n    confidence_threshold: Minimum confidence to trust detection\n\nReturns:\n    DecodeResult with text, detected encoding, and confidence score"
+        },
+        {
+          "name": "read_file_robust",
+          "args": [
+            "path",
+            "default",
+            "confidence_threshold"
+          ],
+          "returns": "DecodeResult",
+          "raises": [
+            "FileNotFoundError",
+            "IOError"
+          ],
+          "doc": "Read a file with automatic encoding detection.\n\nArgs:\n    path: Path to the file\n    default: Default encoding if detection fails\n    confidence_threshold: Minimum confidence to trust detection\n\nReturns:\n    DecodeResult with file content, detected encoding, and confidence\n\nRaises:\n    FileNotFoundError: If file doesn't exist\n    IOError: If file can't be read"
+        }
+      ],
+      "classes": {
+        "DecodeResult": []
+      }
+    },
+    "node_map": {
+      "module": "Robust encoding detection and decoding utilities.\n\nThis module provides encoding detection using charset-normalizer with\nBOM detection, confidence thresholds, and sanity checks.\n\nFunctions:\n    detect_and_decode: Detect encoding and decode bytes to string\n    read_file_robust: Read a file with automatic encoding detection",
+      "class:DecodeResult": "Result of encoding detection and decoding.",
+      "function:_looks_reasonable": "Check if decoded text looks reasonable (not garbled).\n\nArgs:\n    text: Decoded text to validate\n    max_replacement_ratio: Maximum allowed ratio of replacement characters\n\nReturns:\n    True if text passes sanity checks",
+      "function:detect_and_decode": "Detect encoding from bytes and decode to string.\n\nDetection order:\n1. BOM (Byte Order Mark) - highest confidence\n2. charset-normalizer auto-detection\n3. UTF-8 trial decode\n4. Fallback to latin-1 (never fails)\n\nArgs:\n    data: Raw bytes to decode\n    default: Default encoding if detection fails\n    confidence_threshold: Minimum confidence to trust detection\n\nReturns:\n    DecodeResult with text, detected encoding, and confidence score",
+      "function:read_file_robust": "Read a file with automatic encoding detection.\n\nArgs:\n    path: Path to the file\n    default: Default encoding if detection fails\n    confidence_threshold: Minimum confidence to trust detection\n\nReturns:\n    DecodeResult with file content, detected encoding, and confidence\n\nRaises:\n    FileNotFoundError: If file doesn't exist\n    IOError: If file can't be read"
+    },
+    "presence": {
+      "module": true,
+      "class:DecodeResult": true,
+      "function:_looks_reasonable": true,
+      "function:detect_and_decode": true,
+      "function:read_file_robust": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/encoding.py",
+      "fingerprint": "cf6fcf5867e537e7adf36f10ce2381cb0bc3d63fdb180d6684a1e50a5befe5a1",
+      "timestamp": "2025-12-17T03:56:25.993064Z",
+      "entity_count": 5,
+      "documented_count": 5,
+      "entities": [
+        "class:DecodeResult",
+        "function:_looks_reasonable",
+        "function:detect_and_decode",
+        "function:read_file_robust",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

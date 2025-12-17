@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "mtime": 1765370638.451645,
+    "size": 6697,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/media.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Media extractor - Images with metadata and security validation.\n\nThis module extracts image elements from markdown tokens, including:\n- External images (http/https URLs)\n- Local images (relative paths)\n- Data URI images (embedded base64)\n\nFunctions:\n    extract_images: Extract all images with enhanced metadata",
+      "functions": [
+        {
+          "name": "extract_images",
+          "args": [
+            "tokens",
+            "effective_allowed_schemes",
+            "cache"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract all images as first-class elements with enhanced metadata.\n\nArgs:\n    tokens: List of markdown-it Token objects\n    effective_allowed_schemes: Set of allowed URL schemes for validation\n    cache: Optional cache dict to store results\n\nReturns:\n    List of image records with stable IDs, metadata, and security info\n\nExample:\n    >>> images = extract_images(tokens, {\"http\", \"https\"})\n    >>> images[0]['image_id']\n    'a1b2c3d4e5f6g7h8'"
+        },
+        {
+          "name": "_process_inline_tokens_for_images",
+          "args": [
+            "tokens",
+            "images",
+            "line_map",
+            "seen_ids",
+            "effective_allowed_schemes"
+          ],
+          "returns": "None",
+          "raises": [],
+          "doc": "Process inline tokens to extract images with enhanced metadata.\n\nArgs:\n    tokens: List of inline Token objects\n    images: List to append image records to (modified in place)\n    line_map: Line range tuple (start, end) from parent token\n    seen_ids: Set of seen image IDs to avoid duplicates\n    effective_allowed_schemes: Set of allowed URL schemes"
+        },
+        {
+          "name": "_generate_image_id",
+          "args": [
+            "src",
+            "line"
+          ],
+          "returns": "str",
+          "raises": [],
+          "doc": "Generate stable image ID from source and line number.\n\nArgs:\n    src: Image source URL or path\n    line: Line number where image appears\n\nReturns:\n    16-character hex hash for stable identification"
+        },
+        {
+          "name": "_determine_image_metadata",
+          "args": [
+            "src"
+          ],
+          "returns": "dict[str, str]",
+          "raises": [],
+          "doc": "Determine image_kind and format from src URL for consistent metadata.\n\nArgs:\n    src: Image source URL or path\n\nReturns:\n    Dictionary with 'image_kind' and 'format' keys"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Media extractor - Images with metadata and security validation.\n\nThis module extracts image elements from markdown tokens, including:\n- External images (http/https URLs)\n- Local images (relative paths)\n- Data URI images (embedded base64)\n\nFunctions:\n    extract_images: Extract all images with enhanced metadata",
+      "function:extract_images": "Extract all images as first-class elements with enhanced metadata.\n\nArgs:\n    tokens: List of markdown-it Token objects\n    effective_allowed_schemes: Set of allowed URL schemes for validation\n    cache: Optional cache dict to store results\n\nReturns:\n    List of image records with stable IDs, metadata, and security info\n\nExample:\n    >>> images = extract_images(tokens, {\"http\", \"https\"})\n    >>> images[0]['image_id']\n    'a1b2c3d4e5f6g7h8'",
+      "function:_process_inline_tokens_for_images": "Process inline tokens to extract images with enhanced metadata.\n\nArgs:\n    tokens: List of inline Token objects\n    images: List to append image records to (modified in place)\n    line_map: Line range tuple (start, end) from parent token\n    seen_ids: Set of seen image IDs to avoid duplicates\n    effective_allowed_schemes: Set of allowed URL schemes",
+      "function:_generate_image_id": "Generate stable image ID from source and line number.\n\nArgs:\n    src: Image source URL or path\n    line: Line number where image appears\n\nReturns:\n    16-character hex hash for stable identification",
+      "function:_determine_image_metadata": "Determine image_kind and format from src URL for consistent metadata.\n\nArgs:\n    src: Image source URL or path\n\nReturns:\n    Dictionary with 'image_kind' and 'format' keys"
+    },
+    "presence": {
+      "module": true,
+      "function:extract_images": true,
+      "function:_process_inline_tokens_for_images": true,
+      "function:_generate_image_id": false,
+      "function:_determine_image_metadata": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/media.py",
+      "fingerprint": "5c3df0ae25dd867a71ace2c2fc9d08293104c2ad04521444b01bf2d549d036f9",
+      "timestamp": "2025-12-17T03:56:25.605923Z",
+      "entity_count": 5,
+      "documented_count": 5,
+      "entities": [
+        "function:_determine_image_metadata",
+        "function:_generate_image_id",
+        "function:_process_inline_tokens_for_images",
+        "function:extract_images",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

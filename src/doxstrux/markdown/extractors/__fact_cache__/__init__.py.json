@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4512095,
+    "size": 609,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/__init__.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Doxstrux Extractors Package\n\nFeature-specific extraction modules for markdown elements.\n\nEach extractor focuses on a single markdown feature:\n- sections: Heading hierarchy and section structure\n- paragraphs: Paragraph extraction\n- lists: Ordered and unordered lists\n- codeblocks: Fenced and indented code blocks\n- tables: Table structure and data\n- media: Images and other media\n- links: Link extraction and validation\n- footnotes: Footnote references\n- blockquotes: Blockquote extraction\n- html: HTML block and inline detection\n\nAll extractors follow the pattern:\n    extract(token, context) -> dict",
+      "functions": [],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Doxstrux Extractors Package\n\nFeature-specific extraction modules for markdown elements.\n\nEach extractor focuses on a single markdown feature:\n- sections: Heading hierarchy and section structure\n- paragraphs: Paragraph extraction\n- lists: Ordered and unordered lists\n- codeblocks: Fenced and indented code blocks\n- tables: Table structure and data\n- media: Images and other media\n- links: Link extraction and validation\n- footnotes: Footnote references\n- blockquotes: Blockquote extraction\n- html: HTML block and inline detection\n\nAll extractors follow the pattern:\n    extract(token, context) -> dict"
+    },
+    "presence": {
+      "module": false
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/__init__.py",
+      "fingerprint": "cb9e8155485c65648261820c2d2ccb4fac987d768309d1c5751be6d4cd157599",
+      "timestamp": "2025-12-17T03:56:25.247077Z",
+      "entity_count": 1,
+      "documented_count": 1,
+      "entities": [
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

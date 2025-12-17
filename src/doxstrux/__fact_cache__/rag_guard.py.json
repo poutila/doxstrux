@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "mtime": 1765517540.0855434,
+    "size": 10169,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/rag_guard.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "RAG guard module - Policy layer for RAG pipeline security decisions.\n\nThis module provides a thin policy wrapper around doxstrux parser output,\ntranslating raw security metadata into RAG-specific decisions:\n- Should this document be embedded?\n- Should this document be used in tool calls?\n- What severity level applies?\n\nThe guard makes NO network calls, NO external lookups - it only interprets\nthe security metadata already produced by MarkdownParserCore.\n\nUsage:\n    from doxstrux import parse_markdown_file\n    from doxstrux.rag_guard import guard_doxstrux_for_rag\n\n    result = parse_markdown_file(\"untrusted.md\", security_profile=\"strict\")\n    decision = guard_doxstrux_for_rag(result)\n\n    if decision.must_block():\n        log.warning(f\"Document blocked: {decision.reasons}\")\n    if not decision.safe_for_tools:\n        log.warning(f\"Document unsafe for tools: {decision.reasons}\")",
+      "functions": [
+        {
+          "name": "guard_doxstrux_for_rag",
+          "args": [
+            "result"
+          ],
+          "returns": "GuardDecision",
+          "raises": [
+            "ValueError"
+          ],
+          "doc": "Apply RAG-specific security policy to parsed document result.\n\nThis function interprets the security metadata from MarkdownParserCore.parse()\nand produces a RAG-focused decision. It does NOT re-analyze the document -\nit only interprets existing metadata.\n\nPolicy (opinionated, RAG-focused):\n1. If doxstrux blocked embedding or quarantined the document:\n   -> severity=\"critical\", blocked=True.\n2. If any prompt-injection flag is set:\n   -> severity=\"high\", blocks embedding and tools.\n3. If path traversal is detected:\n   -> severity=\"medium\", tools must not follow links.\n4. If Unicode risk is high or scan limit exceeded:\n   -> severity=\"medium\", adds warning.\n5. All doxstrux security warnings are propagated.\n\nArgs:\n    result: The dict returned by MarkdownParserCore.parse()\n\nReturns:\n    GuardDecision with severity, blocking, and safety assessments\n\nRaises:\n    ValueError: If result is missing required metadata structure"
+        },
+        {
+          "name": "_max_severity",
+          "args": [
+            "current",
+            "new"
+          ],
+          "returns": "DecisionSeverity",
+          "raises": [],
+          "doc": "Return the higher severity level.\n\nSeverity order: none < low < medium < high < critical"
+        }
+      ],
+      "classes": {
+        "GuardDecision": [
+          {
+            "name": "must_block",
+            "args": [],
+            "returns": "bool",
+            "raises": [],
+            "doc": "Convenience: True if this document must not be used automatically."
+          }
+        ]
+      }
+    },
+    "node_map": {
+      "module": "RAG guard module - Policy layer for RAG pipeline security decisions.\n\nThis module provides a thin policy wrapper around doxstrux parser output,\ntranslating raw security metadata into RAG-specific decisions:\n- Should this document be embedded?\n- Should this document be used in tool calls?\n- What severity level applies?\n\nThe guard makes NO network calls, NO external lookups - it only interprets\nthe security metadata already produced by MarkdownParserCore.\n\nUsage:\n    from doxstrux import parse_markdown_file\n    from doxstrux.rag_guard import guard_doxstrux_for_rag\n\n    result = parse_markdown_file(\"untrusted.md\", security_profile=\"strict\")\n    decision = guard_doxstrux_for_rag(result)\n\n    if decision.must_block():\n        log.warning(f\"Document blocked: {decision.reasons}\")\n    if not decision.safe_for_tools:\n        log.warning(f\"Document unsafe for tools: {decision.reasons}\")",
+      "class:GuardDecision": "RAG guard decision for a parsed document.\n\nAttributes:\n    severity: Risk level (none, low, medium, high, critical)\n    blocked: True if document should be completely rejected\n    safe_for_embedding: True if document can be embedded in vector store\n    safe_for_tools: True if document can be used in tool/function calls\n    reasons: List of reasons for any blocking/unsafe decisions\n    warnings: List of non-blocking warnings for logging",
+      "class:GuardDecision|method:must_block": "Convenience: True if this document must not be used automatically.",
+      "function:guard_doxstrux_for_rag": "Apply RAG-specific security policy to parsed document result.\n\nThis function interprets the security metadata from MarkdownParserCore.parse()\nand produces a RAG-focused decision. It does NOT re-analyze the document -\nit only interprets existing metadata.\n\nPolicy (opinionated, RAG-focused):\n1. If doxstrux blocked embedding or quarantined the document:\n   -> severity=\"critical\", blocked=True.\n2. If any prompt-injection flag is set:\n   -> severity=\"high\", blocks embedding and tools.\n3. If path traversal is detected:\n   -> severity=\"medium\", tools must not follow links.\n4. If Unicode risk is high or scan limit exceeded:\n   -> severity=\"medium\", adds warning.\n5. All doxstrux security warnings are propagated.\n\nArgs:\n    result: The dict returned by MarkdownParserCore.parse()\n\nReturns:\n    GuardDecision with severity, blocking, and safety assessments\n\nRaises:\n    ValueError: If result is missing required metadata structure",
+      "function:_max_severity": "Return the higher severity level.\n\nSeverity order: none < low < medium < high < critical"
+    },
+    "presence": {
+      "module": true,
+      "class:GuardDecision": true,
+      "class:GuardDecision|method:must_block": true,
+      "function:guard_doxstrux_for_rag": true,
+      "function:_max_severity": false
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/rag_guard.py",
+      "fingerprint": "5b218bb45f659b1352cbcb07d38b0b904d01779b20d7fffc8a5d03517e010b74",
+      "timestamp": "2025-12-17T03:56:26.818753Z",
+      "entity_count": 5,
+      "documented_count": 5,
+      "entities": [
+        "class:GuardDecision",
+        "class:GuardDecision|method:must_block",
+        "function:_max_severity",
+        "function:guard_doxstrux_for_rag",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "mtime": 1765389397.914446,
+    "size": 652,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/__init__.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Doxstrux Markdown Package - Modular Architecture\n\nPhase 7: Modularization of the markdown parser into focused modules.\n\nThis package contains the modular components of the markdown parser:\n- core: Main parser orchestrator\n- extractors: Feature-specific extraction modules\n- security: Security validation and policies\n- utils: Utility functions for tokens, lines, and text\n- ir: Document intermediate representation\n- exceptions: Error hierarchy\n- config: Security profiles and patterns\n- normalize: Text normalization\n- serialize: Output serialization\n\nAll modules use absolute imports: from doxstrux.markdown.X import Y",
+      "functions": [],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Doxstrux Markdown Package - Modular Architecture\n\nPhase 7: Modularization of the markdown parser into focused modules.\n\nThis package contains the modular components of the markdown parser:\n- core: Main parser orchestrator\n- extractors: Feature-specific extraction modules\n- security: Security validation and policies\n- utils: Utility functions for tokens, lines, and text\n- ir: Document intermediate representation\n- exceptions: Error hierarchy\n- config: Security profiles and patterns\n- normalize: Text normalization\n- serialize: Output serialization\n\nAll modules use absolute imports: from doxstrux.markdown.X import Y"
+    },
+    "presence": {
+      "module": false
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/__init__.py",
+      "fingerprint": "78b242e3fc16a4603c77c396643a07bfa96252d7313b2cc5f1a011546980fd9f",
+      "timestamp": "2025-12-17T03:56:25.153805Z",
+      "entity_count": 1,
+      "documented_count": 1,
+      "entities": [
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

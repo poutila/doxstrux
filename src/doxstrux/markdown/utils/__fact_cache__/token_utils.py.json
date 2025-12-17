@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "mtime": 1765513594.2750726,
+    "size": 9545,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/token_utils.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Token utility functions for traversing and extracting data from markdown-it token streams.\n\nThis module provides helpers for working with markdown-it-py tokens during the\nzero-regex refactoring project. These utilities enable token-based parsing without\nrecursion depth issues.\n\nFunctions:\n    walk_tokens_iter: Iterative DFS traversal of token tree (no recursion)\n    collect_text_between_tokens: Extract text content between token pairs\n    extract_code_blocks: Extract all code blocks from token stream\n    iter_blocks: Legacy block iterator (markdown text \u2192 blocks)\n    extract_links_and_images: Legacy link/image extractor (markdown text \u2192 links/images)\n\nClasses:\n    TokenAdapter: Wrapper for safe dual-shape token handling",
+      "functions": [
+        {
+          "name": "walk_tokens_iter",
+          "args": [
+            "tokens"
+          ],
+          "returns": "Generator[Token, None, None]",
+          "raises": [],
+          "doc": "Iterative DFS traversal of token tree (no recursion).\n\nThis function replaces recursive token walking to avoid RecursionError\non deeply nested documents. Uses a stack-based approach for depth-first\ntraversal.\n\nArgs:\n    tokens: List of markdown-it Token objects to traverse\n\nYields:\n    Token objects in depth-first order\n\nExample:\n    >>> tokens = md.parse(\"# Hello\\n\\nWorld\")\n    >>> for token in walk_tokens_iter(tokens):\n    ...     print(token.type)"
+        },
+        {
+          "name": "collect_text_between_tokens",
+          "args": [
+            "tokens",
+            "start_idx",
+            "open_type",
+            "close_type"
+          ],
+          "returns": "str",
+          "raises": [],
+          "doc": "Collect text content between matching open/close token pairs.\n\nThis function traverses tokens between a matched pair (e.g., link_open/link_close)\nand extracts all text content, including from nested children. Handles depth\ntracking to find the matching close token.\n\nArgs:\n    tokens: List of markdown-it Token objects\n    start_idx: Index to start searching from\n    open_type: Token type that opens the pair (default: \"link_open\")\n    close_type: Token type that closes the pair (default: \"link_close\")\n\nReturns:\n    Concatenated text content from all text tokens within the pair\n\nExample:\n    >>> tokens = md.parse(\"[**bold** text](url)\")\n    >>> # Find link_open token at some index i\n    >>> text = collect_text_between_tokens(tokens, i)\n    >>> # Returns: \"bold text\""
+        },
+        {
+          "name": "extract_code_blocks",
+          "args": [
+            "tokens"
+          ],
+          "returns": "list[dict[str, Any]]",
+          "raises": [],
+          "doc": "Extract all code blocks from token stream.\n\nThis function walks the token tree and collects all fence and code_block\ntokens, returning structured information about each block.\n\nArgs:\n    tokens: List of markdown-it Token objects\n\nReturns:\n    List of dictionaries with code block information:\n    - language: Language identifier (or None if not specified)\n    - content: Code block content\n    - line: Starting line number (or None if not available)\n    - line_end: Ending line number (or None if not available)\n\nExample:\n    >>> tokens = md.parse(\"```python\\nprint('hello')\\n```\")\n    >>> blocks = extract_code_blocks(tokens)\n    >>> blocks[0]['language']\n    'python'\n    >>> blocks[0]['content']\n    \"print('hello')\\n\""
+        },
+        {
+          "name": "iter_blocks",
+          "args": [
+            "text"
+          ],
+          "returns": "Generator[dict[str, Any], None, None]",
+          "raises": [],
+          "doc": "Legacy block iterator using markdown text as input.\n\nNOTE: This function will be replaced by token-based iteration in Phase 1.\n\nArgs:\n    text: Markdown text to parse\n\nYields:\n    Block dictionaries with 'kind', and type-specific fields"
+        },
+        {
+          "name": "extract_links_and_images",
+          "args": [
+            "text"
+          ],
+          "returns": "tuple[list[str], list[tuple[str, str]]]",
+          "raises": [],
+          "doc": "Legacy link/image extractor using markdown text as input.\n\nNOTE: This function will be replaced by token-based extraction in Phase 3.\n\nArgs:\n    text: Markdown text to parse\n\nReturns:\n    Tuple of (links, images) where:\n    - links: List of href strings\n    - images: List of (src, alt) tuples"
+        }
+      ],
+      "classes": {
+        "TokenAdapter": [
+          {
+            "name": "__init__",
+            "args": [
+              "token"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": "Initialize TokenAdapter.\n\nArgs:\n    token: Token object or dictionary to wrap"
+          },
+          {
+            "name": "__getattr__",
+            "args": [
+              "name"
+            ],
+            "returns": "Any",
+            "raises": [
+              "AttributeError"
+            ],
+            "doc": "Get attribute from underlying token.\n\nArgs:\n    name: Attribute name\n\nReturns:\n    Attribute value\n\nRaises:\n    AttributeError: If attribute not found"
+          },
+          {
+            "name": "get",
+            "args": [
+              "name",
+              "default"
+            ],
+            "returns": "Any",
+            "raises": [],
+            "doc": "Get attribute with default value.\n\nArgs:\n    name: Attribute name\n    default: Default value if attribute not found\n\nReturns:\n    Attribute value or default"
+          },
+          {
+            "name": "type",
+            "args": [],
+            "returns": "str",
+            "raises": [],
+            "doc": "Get token type."
+          },
+          {
+            "name": "content",
+            "args": [],
+            "returns": "str",
+            "raises": [],
+            "doc": "Get token content."
+          },
+          {
+            "name": "children",
+            "args": [],
+            "returns": "list | None",
+            "raises": [],
+            "doc": "Get token children."
+          }
+        ]
+      }
+    },
+    "node_map": {
+      "module": "Token utility functions for traversing and extracting data from markdown-it token streams.\n\nThis module provides helpers for working with markdown-it-py tokens during the\nzero-regex refactoring project. These utilities enable token-based parsing without\nrecursion depth issues.\n\nFunctions:\n    walk_tokens_iter: Iterative DFS traversal of token tree (no recursion)\n    collect_text_between_tokens: Extract text content between token pairs\n    extract_code_blocks: Extract all code blocks from token stream\n    iter_blocks: Legacy block iterator (markdown text \u2192 blocks)\n    extract_links_and_images: Legacy link/image extractor (markdown text \u2192 links/images)\n\nClasses:\n    TokenAdapter: Wrapper for safe dual-shape token handling",
+      "function:walk_tokens_iter": "Iterative DFS traversal of token tree (no recursion).\n\nThis function replaces recursive token walking to avoid RecursionError\non deeply nested documents. Uses a stack-based approach for depth-first\ntraversal.\n\nArgs:\n    tokens: List of markdown-it Token objects to traverse\n\nYields:\n    Token objects in depth-first order\n\nExample:\n    >>> tokens = md.parse(\"# Hello\\n\\nWorld\")\n    >>> for token in walk_tokens_iter(tokens):\n    ...     print(token.type)",
+      "function:collect_text_between_tokens": "Collect text content between matching open/close token pairs.\n\nThis function traverses tokens between a matched pair (e.g., link_open/link_close)\nand extracts all text content, including from nested children. Handles depth\ntracking to find the matching close token.\n\nArgs:\n    tokens: List of markdown-it Token objects\n    start_idx: Index to start searching from\n    open_type: Token type that opens the pair (default: \"link_open\")\n    close_type: Token type that closes the pair (default: \"link_close\")\n\nReturns:\n    Concatenated text content from all text tokens within the pair\n\nExample:\n    >>> tokens = md.parse(\"[**bold** text](url)\")\n    >>> # Find link_open token at some index i\n    >>> text = collect_text_between_tokens(tokens, i)\n    >>> # Returns: \"bold text\"",
+      "function:extract_code_blocks": "Extract all code blocks from token stream.\n\nThis function walks the token tree and collects all fence and code_block\ntokens, returning structured information about each block.\n\nArgs:\n    tokens: List of markdown-it Token objects\n\nReturns:\n    List of dictionaries with code block information:\n    - language: Language identifier (or None if not specified)\n    - content: Code block content\n    - line: Starting line number (or None if not available)\n    - line_end: Ending line number (or None if not available)\n\nExample:\n    >>> tokens = md.parse(\"```python\\nprint('hello')\\n```\")\n    >>> blocks = extract_code_blocks(tokens)\n    >>> blocks[0]['language']\n    'python'\n    >>> blocks[0]['content']\n    \"print('hello')\\n\"",
+      "class:TokenAdapter": "Wrapper for safe dual-shape token handling.\n\nThis class provides a consistent interface for accessing token properties\nwhether working with Token objects or dictionaries, enabling safe refactoring\nfrom dict-based to Token-based code.\n\nAttributes:\n    token: The underlying Token object or dict\n\nExample:\n    >>> token = Token(type=\"text\", tag=\"\", nesting=0)\n    >>> adapter = TokenAdapter(token)\n    >>> adapter.type\n    'text'\n    >>> adapter.get('content', '')\n    ''",
+      "class:TokenAdapter|method:__init__": "Initialize TokenAdapter.\n\nArgs:\n    token: Token object or dictionary to wrap",
+      "class:TokenAdapter|method:__getattr__": "Get attribute from underlying token.\n\nArgs:\n    name: Attribute name\n\nReturns:\n    Attribute value\n\nRaises:\n    AttributeError: If attribute not found",
+      "class:TokenAdapter|method:get": "Get attribute with default value.\n\nArgs:\n    name: Attribute name\n    default: Default value if attribute not found\n\nReturns:\n    Attribute value or default",
+      "class:TokenAdapter|method:type": "Get token type.",
+      "class:TokenAdapter|method:content": "Get token content.",
+      "class:TokenAdapter|method:children": "Get token children.",
+      "function:iter_blocks": "Legacy block iterator using markdown text as input.\n\nNOTE: This function will be replaced by token-based iteration in Phase 1.\n\nArgs:\n    text: Markdown text to parse\n\nYields:\n    Block dictionaries with 'kind', and type-specific fields",
+      "function:extract_links_and_images": "Legacy link/image extractor using markdown text as input.\n\nNOTE: This function will be replaced by token-based extraction in Phase 3.\n\nArgs:\n    text: Markdown text to parse\n\nReturns:\n    Tuple of (links, images) where:\n    - links: List of href strings\n    - images: List of (src, alt) tuples"
+    },
+    "presence": {
+      "module": true,
+      "function:walk_tokens_iter": true,
+      "function:collect_text_between_tokens": true,
+      "function:extract_code_blocks": true,
+      "class:TokenAdapter": true,
+      "class:TokenAdapter|method:__init__": false,
+      "class:TokenAdapter|method:__getattr__": false,
+      "class:TokenAdapter|method:get": true,
+      "class:TokenAdapter|method:type": true,
+      "class:TokenAdapter|method:content": true,
+      "class:TokenAdapter|method:children": true,
+      "function:iter_blocks": true,
+      "function:extract_links_and_images": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/token_utils.py",
+      "fingerprint": "2728091d022b12075338794507fd40ceaf134168aa0764c223cc86a04ad6f1c0",
+      "timestamp": "2025-12-17T03:56:26.119460Z",
+      "entity_count": 13,
+      "documented_count": 13,
+      "entities": [
+        "class:TokenAdapter",
+        "class:TokenAdapter|method:__getattr__",
+        "class:TokenAdapter|method:__init__",
+        "class:TokenAdapter|method:children",
+        "class:TokenAdapter|method:content",
+        "class:TokenAdapter|method:get",
+        "class:TokenAdapter|method:type",
+        "function:collect_text_between_tokens",
+        "function:extract_code_blocks",
+        "function:extract_links_and_images",
+        "function:iter_blocks",
+        "function:walk_tokens_iter",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

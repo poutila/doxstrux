@@ -1,0 +1,625 @@
+{
+  "metadata": {
+    "mtime": 1765513856.16222,
+    "size": 84241,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown_parser_core.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Markdown Parser Core - Clean, efficient markdown structure extraction.\n\nThis is the foundation for all markdown processing tools.\nNo backward compatibility burden - fresh architecture.",
+      "functions": [],
+      "classes": {
+        "MarkdownParserCore": [
+          {
+            "name": "get_available_features",
+            "args": [],
+            "returns": "dict[str, bool]",
+            "raises": [],
+            "doc": "Return dict of available features (all required now).\n\nPhase 6: content_context removed - pure token-based classification."
+          },
+          {
+            "name": "validate_content",
+            "args": [
+              "content",
+              "security_profile"
+            ],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Quick validation without full parsing - for CLI --validate-only mode.\n\nNote: This is an internal method. Use parse_markdown_file() for the public API.\n\nArgs:\n    content: Markdown content as string\n    security_profile: Security profile to validate against\n\nReturns:\n    Dict with 'valid' bool and 'issues' list"
+          },
+          {
+            "name": "__init__",
+            "args": [
+              "content",
+              "config",
+              "security_profile"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": "Initialize parser with markdown content.\n\nNote: This is an internal class. Use parse_markdown_file() for the public API,\nwhich handles encoding detection automatically.\n\nArgs:\n    content: Raw markdown content as string\n    config: Optional configuration dict with keys:\n        - 'plugins': list of markdown-it plugins to enable\n        - 'allows_html': bool, whether HTML blocks are allowed\n        - 'preset': str, markdown-it preset ('commonmark', 'gfm', etc.)\n    security_profile: Optional security profile ('strict', 'moderate', 'permissive')"
+          },
+          {
+            "name": "_validate_content_security",
+            "args": [
+              "content"
+            ],
+            "returns": "None",
+            "raises": [],
+            "doc": "Comprehensive content security validation.\n\nPerforms size validation and malicious pattern detection based on security profile."
+          },
+          {
+            "name": "_normalize_content",
+            "args": [
+              "content"
+            ],
+            "returns": "str",
+            "raises": [],
+            "doc": "Normalize content for consistent parsing.\n\nPhase 8 (THREE_ADDITIONS.md) content normalization:\n- INV-1.1: CRLF/LF equivalence - normalize all line endings to LF\n- INV-1.3: Bare CR handling - treat bare CR as line separator\n- INV-1.4: Unicode NFC normalization for consistent text comparison\n- INV-1.7: Idempotent - calling twice produces same result\n\nOrder: CRLF \u2192 LF, then bare CR \u2192 LF, then NFC normalization.\nThis ensures all line ending styles become LF before Unicode normalization.\n\nArgs:\n    content: Raw markdown content\n\nReturns:\n    Normalized content with LF line endings and NFC Unicode"
+          },
+          {
+            "name": "_validate_plugins",
+            "args": [
+              "plugins",
+              "external_plugins"
+            ],
+            "returns": "tuple[list[str], list[str], list[str]]",
+            "raises": [],
+            "doc": "Validate plugins against security profile.\n\nArgs:\n    plugins: Builtin plugins to validate\n    external_plugins: External plugins to validate\n\nReturns:\n    Tuple of (allowed_builtin, allowed_external, rejected)"
+          },
+          {
+            "name": "process_tree",
+            "args": [
+              "node",
+              "processor",
+              "context",
+              "level"
+            ],
+            "returns": "Any",
+            "raises": [],
+            "doc": "Universal tree processor with pluggable logic.\n\nThis is the heart of the parser - one recursion pattern for all needs.\n\nArgs:\n    node: Current node to process\n    processor: Function(node, context, level) -> bool (should recurse)\n    context: Mutable context object to collect results\n    level: Current depth in tree\n\nReturns:\n    The context object with accumulated results"
+          },
+          {
+            "name": "parse",
+            "args": [],
+            "returns": "dict[str, Any]",
+            "raises": [
+              "MarkdownSizeError",
+              "MarkdownSecurityError"
+            ],
+            "doc": "Parse document and extract all structure with enhanced security validation.\n\nReturns:\n    Dictionary with all extracted information\n\nRaises:\n    MarkdownSizeError: If token count exceeds limit\n    MarkdownSecurityError: If parsing fails due to security issues"
+          },
+          {
+            "name": "_apply_security_policy",
+            "args": [
+              "result"
+            ],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Apply security policy enforcement based on metadata signals.\n\nThis method enforces security policies by:\n1. Blocking embedding if has_script or disallowed link schemes\n2. Stripping HTML blocks when allows_html=False\n3. Dropping unsafe links/images\n4. Quarantining documents with risky features\n\nArgs:\n    result: The parsed result dictionary\n\nReturns:\n    Modified result with policy enforcement applied"
+          },
+          {
+            "name": "sanitize",
+            "args": [
+              "policy",
+              "security_profile"
+            ],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "DEPRECATED (Phase 3): Non-mutating wrapper. Use parse() results instead.\n\nThis method no longer modifies the source text. It emits:\n  - sanitized_text: the original, unmodified content\n  - blocked: whether embedding should be blocked\n  - reasons: high-level reasons derived from parse() metadata\n\nRationale:\n  - Align with fail-closed policy and single-source-of-truth security enforcement\n  - Avoid hybrid regex + token approaches inside validation\n  - Eliminate heavy second parse (performance improvement)\n\nArgs:\n    policy: Optional policy dict (ignored, for API compatibility)\n    security_profile: Optional security profile name ('strict', 'moderate', 'permissive')\n\nReturns:\n    Dictionary with:\n    - sanitized_text: The original content (UNCHANGED)\n    - blocked: Whether document should be blocked\n    - reasons: List of validation issues/warnings"
+          },
+          {
+            "name": "_extract_metadata",
+            "args": [
+              "structure"
+            ],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Extract document-level metadata with single-pass node type counting and security summary."
+          },
+          {
+            "name": "_generate_security_metadata",
+            "args": [
+              "structure"
+            ],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Generate security metadata summarizing potential issues found.\n\nReturns:\n    Dictionary with security warnings and statistics"
+          },
+          {
+            "name": "_get_cached",
+            "args": [
+              "key",
+              "extractor"
+            ],
+            "returns": "Any",
+            "raises": [],
+            "doc": "Get cached result or extract and cache."
+          },
+          {
+            "name": "_slice_lines_inclusive",
+            "args": [
+              "start_line",
+              "end_line"
+            ],
+            "returns": "list[str]",
+            "raises": [],
+            "doc": "Centralized line slicing with end-inclusive convention.\n\nThis method enforces the codebase standard: markdown-it's node.map[1] represents\nthe line AFTER the content, so we use end-inclusive slicing (end_line+1) to\ncapture all content lines.\n\nArgs:\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    List of lines from start_line to end_line (inclusive of actual content)\n\nExamples:\n    # node.map = [5, 8] means lines 5, 6, 7 contain content\n    _slice_lines_inclusive(5, 8) -> self.lines[5:8] -> lines 5, 6, 7"
+          },
+          {
+            "name": "_slice_lines_raw",
+            "args": [
+              "start_line",
+              "end_line"
+            ],
+            "returns": "str",
+            "raises": [],
+            "doc": "Get raw content string from line range using consistent slicing convention.\n\nArgs:\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    Joined string content with newlines preserved"
+          },
+          {
+            "name": "_extract_frontmatter",
+            "args": [],
+            "returns": "dict | None",
+            "raises": [],
+            "doc": "Extract YAML frontmatter from tokens (Phase 5: plugin-based).\n\nThe front_matter plugin creates a 'front_matter' token with YAML content.\nWe parse the YAML content from the token.\n\nReturns:\n    Frontmatter dict or None if not present"
+          },
+          {
+            "name": "_extract_sections",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract document sections with preserved content.\n\nSections are defined by headings and contain all content\nuntil the next heading of equal or higher level.\n\nPhase 7.6.1: Delegated to extractors/sections.py"
+          },
+          {
+            "name": "_extract_paragraphs",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract all paragraphs with metadata.\n\nPhase 7.6.2: Delegated to extractors/paragraphs.py"
+          },
+          {
+            "name": "_extract_lists",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract regular lists (excludes task lists - those are in _extract_tasklists).\n\nPhase 7.6.3: Delegated to extractors/lists.py"
+          },
+          {
+            "name": "_extract_tasklists",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract task lists (GFM extension with checkbox items).\n\nPhase 7.6.3: Delegated to extractors/lists.py"
+          },
+          {
+            "name": "_detect_task_checkbox",
+            "args": [
+              "paragraph_node"
+            ],
+            "returns": "tuple[bool, bool]",
+            "raises": [],
+            "doc": "Detect task list checkbox from tasklists plugin.\n\nPhase 7.6.3: Delegated to extractors/lists.detect_task_checkbox()"
+          },
+          {
+            "name": "_extract_list_items",
+            "args": [
+              "list_node",
+              "depth",
+              "max_depth"
+            ],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract regular list items (no checkbox detection) with depth limit.\n\nPhase 7.6.3: Delegated to extractors/lists.extract_list_items()"
+          },
+          {
+            "name": "_extract_tasklist_items",
+            "args": [
+              "list_node",
+              "depth",
+              "max_depth"
+            ],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract task list items WITH checkbox detection and depth limit.\n\nPhase 7.6.3: Delegated to extractors/lists.extract_tasklist_items()"
+          },
+          {
+            "name": "_extract_tables",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract all tables with structure preserved and security validation.\n\nPhase 7.6.5: Delegated to extractors/tables.py"
+          },
+          {
+            "name": "_extract_code_blocks",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract all code blocks (fenced and indented).\n\nPhase 7.6.4: Delegated to extractors/codeblocks.py"
+          },
+          {
+            "name": "_extract_headings",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract all headings with hierarchy using stable slug-based IDs.\n\nSECURITY: Only extracts top-level headings (not nested in lists/blockquotes)\nto prevent heading creepage vulnerabilities.\n\nPhase 7.6.1: Delegated to extractors/sections.py"
+          },
+          {
+            "name": "_extract_links",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract links robustly using token parsing.\n\nPhase 7.6.6: Delegated to extractors/links.py"
+          },
+          {
+            "name": "_process_inline_tokens",
+            "args": [
+              "tokens",
+              "links_list",
+              "line_map"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": "Process inline tokens to extract links with improved line attribution.\n\nPhase 7.6.6: Delegated to extractors/links.process_inline_tokens()"
+          },
+          {
+            "name": "_extract_images",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract all images as first-class elements with enhanced metadata.\n\nReturns unified image records with stable IDs that can be joined\nwith image references in links."
+          },
+          {
+            "name": "_extract_blockquotes",
+            "args": [],
+            "returns": "list[dict]",
+            "raises": [],
+            "doc": "Extract all blockquotes from the document.\n\nNote: For richer nested data extraction, existing extractors can be reused\nwith line-range filters on the children_blocks ranges.\n\nPhase 7.5.3: Delegated to extractors/blockquotes.py"
+          },
+          {
+            "name": "_extract_footnotes",
+            "args": [],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Extract footnote definitions and back-references with rich metadata.\n\nReturns:\n    Dictionary with 'definitions' and 'references' lists.\n    Definitions are deduplicated by label (last-writer-wins).\n    Both label and numeric ID are extracted for stability.\n\nPhase 7.5.2: Delegated to extractors/footnotes.py"
+          },
+          {
+            "name": "_extract_html",
+            "args": [],
+            "returns": "dict[str, list[dict]]",
+            "raises": [],
+            "doc": "Extract both HTML blocks and inline HTML (always, for security scanning).\n\nRAG Safety: Always extracts HTML but marks with 'allowed' flag based on config.\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists.\n    Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs.\n\nPhase 7.5.4: Delegated to extractors/html.py"
+          },
+          {
+            "name": "_extract_math",
+            "args": [],
+            "returns": "dict[str, list[dict]]",
+            "raises": [],
+            "doc": "Extract both HTML blocks and inline HTML (always, for security scanning).\n\nRAG Safety: Always extracts HTML but marks with 'allowed' flag based on config.\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists.\n    Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs.\n\nPhase 7.5.4: Delegated to extractors/html.py"
+          },
+          {
+            "name": "_build_mappings",
+            "args": [],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Build line-to-content mappings.\n\nPhase 6: Pure token-based classification using AST code blocks.\nNo ContentContext - classification derived entirely from markdown-it tokens."
+          },
+          {
+            "name": "_plain_text_in_range",
+            "args": [
+              "start_line",
+              "end_line"
+            ],
+            "returns": "str",
+            "raises": [],
+            "doc": "Extract plain text from a line range with proper paragraph boundaries.\n\n        Behavior: Detects blank lines between segments and inserts '\n\n'\n        for paragraph boundaries. Consecutive segments are joined with a space.\n        This preserves paragraph structure in the plain text output.\n        "
+          },
+          {
+            "name": "_collect_text_segments",
+            "args": [],
+            "returns": "None",
+            "raises": [],
+            "doc": "Collect text-ish segments with proper line ranges for better paragraph boundary detection."
+          },
+          {
+            "name": "_heading_level",
+            "args": [
+              "node"
+            ],
+            "returns": "int",
+            "raises": [],
+            "doc": "Robust heading level detection (ATX + Setext)."
+          },
+          {
+            "name": "_get_text",
+            "args": [
+              "node"
+            ],
+            "returns": "str",
+            "raises": [],
+            "doc": "Get all text content from a node and its children, preserving breaks and alt text."
+          },
+          {
+            "name": "_check_path_traversal",
+            "args": [
+              "target"
+            ],
+            "returns": "bool",
+            "raises": [],
+            "doc": "Return True if the string looks like a path traversal attempt.\n\nPer SECURITY_KERNEL_SPEC.md \u00a76.2:\n- Parse URLs using urlparse for benign schemes\n- Only inspect path component for http/https/mailto/tel\n- Normalize slashes and decode URL-encoded segments\n- Flag traversal (..), file://, Windows drives, UNC paths\n\nPer SECURITY_KERNEL_SPEC.md \u00a76.3:\n- MUST NOT treat '//' as sufficient evidence of traversal\n\nArgs:\n    target: URL or path to check\n\nReturns:\n    True if path traversal detected, False otherwise"
+          },
+          {
+            "name": "_check_unicode_spoofing",
+            "args": [
+              "text"
+            ],
+            "returns": "dict[str, bool]",
+            "raises": [],
+            "doc": "Detect Unicode spoofing attempts including BiDi and confusables with size limits.\n\nPhase 6 Task 6.1: Wrapper around security_validators.detect_unicode_issues()\nwith additional BiDi controls check and legacy field names for backward compatibility.\n\nArgs:\n    text: Text to check\n\nReturns:\n    Dictionary with spoofing indicators (legacy field names for backward compatibility)"
+          },
+          {
+            "name": "_check_footnote_injection",
+            "args": [
+              "footnotes"
+            ],
+            "returns": "bool",
+            "raises": [],
+            "doc": "Check for prompt injection in footnote definitions.\n\nArgs:\n    footnotes: Dictionary containing footnote definitions\n\nReturns:\n    True if injection detected in footnotes, False otherwise"
+          },
+          {
+            "name": "_slugify_base",
+            "args": [
+              "text"
+            ],
+            "returns": "str",
+            "raises": [],
+            "doc": "Convert text to base slug format without de-duplication for stable IDs.\n\nPhase 7.6.1: Delegated to extractors/sections.slugify_base()"
+          },
+          {
+            "name": "_find_section_id",
+            "args": [
+              "line_number"
+            ],
+            "returns": "str | None",
+            "raises": [],
+            "doc": "Find which section a line belongs to.\n\nOptimized to use line mappings when available (O(1) lookup),\nfalls back to section iteration for early/unmapped lookups."
+          },
+          {
+            "name": "_has_child_type",
+            "args": [
+              "node",
+              "types"
+            ],
+            "returns": "bool",
+            "raises": [],
+            "doc": "Check if node has children of specified type(s)."
+          },
+          {
+            "name": "_build_line_offsets",
+            "args": [],
+            "returns": "None",
+            "raises": [],
+            "doc": "Build array of character offsets for each line start."
+          },
+          {
+            "name": "_span_from_lines",
+            "args": [
+              "start_line",
+              "end_line"
+            ],
+            "returns": "tuple[int | None, int | None]",
+            "raises": [],
+            "doc": "Convert line numbers to character offsets.\n\nArgs:\n    start_line: Starting line number (0-based)\n    end_line: Ending line number (inclusive, 0-based)\n\nReturns:\n    Tuple of (start_char, end_char) positions"
+          },
+          {
+            "name": "to_ir",
+            "args": [
+              "source_id"
+            ],
+            "returns": "DocumentIR",
+            "raises": [],
+            "doc": "Convert parsed document to Document IR for RAG chunking.\n\nThe Document IR is a source-agnostic representation that serves as\nthe contract between parsers (Markdown, HTML, PDF) and chunkers.\n\nSchema Version: md-ir@1.0.0\n\nArgs:\n    source_id: Source identifier (file path, URL, or hash)\n\nReturns:\n    DocumentIR object ready for chunking\n\nExample:\n    ```python\n    parser = MarkdownParserCore(content)\n    result = parser.parse()\n    ir = parser.to_ir(source_id=\"docs/intro.md\")\n\n    # Later: pass to chunker\n    chunks = chunker.chunk(ir, policy)\n    ```"
+          },
+          {
+            "name": "_build_ir_nodes",
+            "args": [],
+            "returns": "list[DocNode]",
+            "raises": [],
+            "doc": "Build DocNode tree from parsed structures."
+          },
+          {
+            "name": "_build_link_graph",
+            "args": [],
+            "returns": "dict[str, list[str]]",
+            "raises": [],
+            "doc": "Build internal link adjacency list for retrieval expansion."
+          }
+        ]
+      }
+    },
+    "node_map": {
+      "module": "Markdown Parser Core - Clean, efficient markdown structure extraction.\n\nThis is the foundation for all markdown processing tools.\nNo backward compatibility burden - fresh architecture.",
+      "class:MarkdownParserCore": "Core markdown parser with universal recursion engine.\n\nPrinciples:\n- Single parse of document\n- Universal recursion pattern\n- Extract everything, analyze nothing\n- Preserve original formatting\n- No file I/O (takes content string)\n- No Pydantic models (plain dicts)",
+      "class:MarkdownParserCore|method:get_available_features": "Return dict of available features (all required now).\n\nPhase 6: content_context removed - pure token-based classification.",
+      "class:MarkdownParserCore|method:validate_content": "Quick validation without full parsing - for CLI --validate-only mode.\n\nNote: This is an internal method. Use parse_markdown_file() for the public API.\n\nArgs:\n    content: Markdown content as string\n    security_profile: Security profile to validate against\n\nReturns:\n    Dict with 'valid' bool and 'issues' list",
+      "class:MarkdownParserCore|method:__init__": "Initialize parser with markdown content.\n\nNote: This is an internal class. Use parse_markdown_file() for the public API,\nwhich handles encoding detection automatically.\n\nArgs:\n    content: Raw markdown content as string\n    config: Optional configuration dict with keys:\n        - 'plugins': list of markdown-it plugins to enable\n        - 'allows_html': bool, whether HTML blocks are allowed\n        - 'preset': str, markdown-it preset ('commonmark', 'gfm', etc.)\n    security_profile: Optional security profile ('strict', 'moderate', 'permissive')",
+      "class:MarkdownParserCore|method:_validate_content_security": "Comprehensive content security validation.\n\nPerforms size validation and malicious pattern detection based on security profile.",
+      "class:MarkdownParserCore|method:_normalize_content": "Normalize content for consistent parsing.\n\nPhase 8 (THREE_ADDITIONS.md) content normalization:\n- INV-1.1: CRLF/LF equivalence - normalize all line endings to LF\n- INV-1.3: Bare CR handling - treat bare CR as line separator\n- INV-1.4: Unicode NFC normalization for consistent text comparison\n- INV-1.7: Idempotent - calling twice produces same result\n\nOrder: CRLF \u2192 LF, then bare CR \u2192 LF, then NFC normalization.\nThis ensures all line ending styles become LF before Unicode normalization.\n\nArgs:\n    content: Raw markdown content\n\nReturns:\n    Normalized content with LF line endings and NFC Unicode",
+      "class:MarkdownParserCore|method:_validate_plugins": "Validate plugins against security profile.\n\nArgs:\n    plugins: Builtin plugins to validate\n    external_plugins: External plugins to validate\n\nReturns:\n    Tuple of (allowed_builtin, allowed_external, rejected)",
+      "class:MarkdownParserCore|method:process_tree": "Universal tree processor with pluggable logic.\n\nThis is the heart of the parser - one recursion pattern for all needs.\n\nArgs:\n    node: Current node to process\n    processor: Function(node, context, level) -> bool (should recurse)\n    context: Mutable context object to collect results\n    level: Current depth in tree\n\nReturns:\n    The context object with accumulated results",
+      "class:MarkdownParserCore|method:parse": "Parse document and extract all structure with enhanced security validation.\n\nReturns:\n    Dictionary with all extracted information\n\nRaises:\n    MarkdownSizeError: If token count exceeds limit\n    MarkdownSecurityError: If parsing fails due to security issues",
+      "class:MarkdownParserCore|method:_apply_security_policy": "Apply security policy enforcement based on metadata signals.\n\nThis method enforces security policies by:\n1. Blocking embedding if has_script or disallowed link schemes\n2. Stripping HTML blocks when allows_html=False\n3. Dropping unsafe links/images\n4. Quarantining documents with risky features\n\nArgs:\n    result: The parsed result dictionary\n\nReturns:\n    Modified result with policy enforcement applied",
+      "class:MarkdownParserCore|method:sanitize": "DEPRECATED (Phase 3): Non-mutating wrapper. Use parse() results instead.\n\nThis method no longer modifies the source text. It emits:\n  - sanitized_text: the original, unmodified content\n  - blocked: whether embedding should be blocked\n  - reasons: high-level reasons derived from parse() metadata\n\nRationale:\n  - Align with fail-closed policy and single-source-of-truth security enforcement\n  - Avoid hybrid regex + token approaches inside validation\n  - Eliminate heavy second parse (performance improvement)\n\nArgs:\n    policy: Optional policy dict (ignored, for API compatibility)\n    security_profile: Optional security profile name ('strict', 'moderate', 'permissive')\n\nReturns:\n    Dictionary with:\n    - sanitized_text: The original content (UNCHANGED)\n    - blocked: Whether document should be blocked\n    - reasons: List of validation issues/warnings",
+      "class:MarkdownParserCore|method:_extract_metadata": "Extract document-level metadata with single-pass node type counting and security summary.",
+      "class:MarkdownParserCore|method:_generate_security_metadata": "Generate security metadata summarizing potential issues found.\n\nReturns:\n    Dictionary with security warnings and statistics",
+      "class:MarkdownParserCore|method:_get_cached": "Get cached result or extract and cache.",
+      "class:MarkdownParserCore|method:_slice_lines_inclusive": "Centralized line slicing with end-inclusive convention.\n\nThis method enforces the codebase standard: markdown-it's node.map[1] represents\nthe line AFTER the content, so we use end-inclusive slicing (end_line+1) to\ncapture all content lines.\n\nArgs:\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    List of lines from start_line to end_line (inclusive of actual content)\n\nExamples:\n    # node.map = [5, 8] means lines 5, 6, 7 contain content\n    _slice_lines_inclusive(5, 8) -> self.lines[5:8] -> lines 5, 6, 7",
+      "class:MarkdownParserCore|method:_slice_lines_raw": "Get raw content string from line range using consistent slicing convention.\n\nArgs:\n    start_line: Start line number (inclusive, 0-based)\n    end_line: End line number (markdown-it convention: first line AFTER content)\n\nReturns:\n    Joined string content with newlines preserved",
+      "class:MarkdownParserCore|method:_extract_frontmatter": "Extract YAML frontmatter from tokens (Phase 5: plugin-based).\n\nThe front_matter plugin creates a 'front_matter' token with YAML content.\nWe parse the YAML content from the token.\n\nReturns:\n    Frontmatter dict or None if not present",
+      "class:MarkdownParserCore|method:_extract_sections": "Extract document sections with preserved content.\n\nSections are defined by headings and contain all content\nuntil the next heading of equal or higher level.\n\nPhase 7.6.1: Delegated to extractors/sections.py",
+      "class:MarkdownParserCore|method:_extract_paragraphs": "Extract all paragraphs with metadata.\n\nPhase 7.6.2: Delegated to extractors/paragraphs.py",
+      "class:MarkdownParserCore|method:_extract_lists": "Extract regular lists (excludes task lists - those are in _extract_tasklists).\n\nPhase 7.6.3: Delegated to extractors/lists.py",
+      "class:MarkdownParserCore|method:_extract_tasklists": "Extract task lists (GFM extension with checkbox items).\n\nPhase 7.6.3: Delegated to extractors/lists.py",
+      "class:MarkdownParserCore|method:_detect_task_checkbox": "Detect task list checkbox from tasklists plugin.\n\nPhase 7.6.3: Delegated to extractors/lists.detect_task_checkbox()",
+      "class:MarkdownParserCore|method:_extract_list_items": "Extract regular list items (no checkbox detection) with depth limit.\n\nPhase 7.6.3: Delegated to extractors/lists.extract_list_items()",
+      "class:MarkdownParserCore|method:_extract_tasklist_items": "Extract task list items WITH checkbox detection and depth limit.\n\nPhase 7.6.3: Delegated to extractors/lists.extract_tasklist_items()",
+      "class:MarkdownParserCore|method:_extract_tables": "Extract all tables with structure preserved and security validation.\n\nPhase 7.6.5: Delegated to extractors/tables.py",
+      "class:MarkdownParserCore|method:_extract_code_blocks": "Extract all code blocks (fenced and indented).\n\nPhase 7.6.4: Delegated to extractors/codeblocks.py",
+      "class:MarkdownParserCore|method:_extract_headings": "Extract all headings with hierarchy using stable slug-based IDs.\n\nSECURITY: Only extracts top-level headings (not nested in lists/blockquotes)\nto prevent heading creepage vulnerabilities.\n\nPhase 7.6.1: Delegated to extractors/sections.py",
+      "class:MarkdownParserCore|method:_extract_links": "Extract links robustly using token parsing.\n\nPhase 7.6.6: Delegated to extractors/links.py",
+      "class:MarkdownParserCore|method:_process_inline_tokens": "Process inline tokens to extract links with improved line attribution.\n\nPhase 7.6.6: Delegated to extractors/links.process_inline_tokens()",
+      "class:MarkdownParserCore|method:_extract_images": "Extract all images as first-class elements with enhanced metadata.\n\nReturns unified image records with stable IDs that can be joined\nwith image references in links.",
+      "class:MarkdownParserCore|method:_extract_blockquotes": "Extract all blockquotes from the document.\n\nNote: For richer nested data extraction, existing extractors can be reused\nwith line-range filters on the children_blocks ranges.\n\nPhase 7.5.3: Delegated to extractors/blockquotes.py",
+      "class:MarkdownParserCore|method:_extract_footnotes": "Extract footnote definitions and back-references with rich metadata.\n\nReturns:\n    Dictionary with 'definitions' and 'references' lists.\n    Definitions are deduplicated by label (last-writer-wins).\n    Both label and numeric ID are extracted for stability.\n\nPhase 7.5.2: Delegated to extractors/footnotes.py",
+      "class:MarkdownParserCore|method:_extract_html": "Extract both HTML blocks and inline HTML (always, for security scanning).\n\nRAG Safety: Always extracts HTML but marks with 'allowed' flag based on config.\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists.\n    Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs.\n\nPhase 7.5.4: Delegated to extractors/html.py",
+      "class:MarkdownParserCore|method:_extract_math": "Extract both HTML blocks and inline HTML (always, for security scanning).\n\nRAG Safety: Always extracts HTML but marks with 'allowed' flag based on config.\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists.\n    Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs.\n\nPhase 7.5.4: Delegated to extractors/html.py",
+      "class:MarkdownParserCore|method:_build_mappings": "Build line-to-content mappings.\n\nPhase 6: Pure token-based classification using AST code blocks.\nNo ContentContext - classification derived entirely from markdown-it tokens.",
+      "class:MarkdownParserCore|method:_plain_text_in_range": "Extract plain text from a line range with proper paragraph boundaries.\n\n        Behavior: Detects blank lines between segments and inserts '\n\n'\n        for paragraph boundaries. Consecutive segments are joined with a space.\n        This preserves paragraph structure in the plain text output.\n        ",
+      "class:MarkdownParserCore|method:_collect_text_segments": "Collect text-ish segments with proper line ranges for better paragraph boundary detection.",
+      "class:MarkdownParserCore|method:_heading_level": "Robust heading level detection (ATX + Setext).",
+      "class:MarkdownParserCore|method:_get_text": "Get all text content from a node and its children, preserving breaks and alt text.",
+      "class:MarkdownParserCore|method:_get_text|function:text_collector": null,
+      "class:MarkdownParserCore|method:_check_path_traversal": "Return True if the string looks like a path traversal attempt.\n\nPer SECURITY_KERNEL_SPEC.md \u00a76.2:\n- Parse URLs using urlparse for benign schemes\n- Only inspect path component for http/https/mailto/tel\n- Normalize slashes and decode URL-encoded segments\n- Flag traversal (..), file://, Windows drives, UNC paths\n\nPer SECURITY_KERNEL_SPEC.md \u00a76.3:\n- MUST NOT treat '//' as sufficient evidence of traversal\n\nArgs:\n    target: URL or path to check\n\nReturns:\n    True if path traversal detected, False otherwise",
+      "class:MarkdownParserCore|method:_check_unicode_spoofing": "Detect Unicode spoofing attempts including BiDi and confusables with size limits.\n\nPhase 6 Task 6.1: Wrapper around security_validators.detect_unicode_issues()\nwith additional BiDi controls check and legacy field names for backward compatibility.\n\nArgs:\n    text: Text to check\n\nReturns:\n    Dictionary with spoofing indicators (legacy field names for backward compatibility)",
+      "class:MarkdownParserCore|method:_check_footnote_injection": "Check for prompt injection in footnote definitions.\n\nArgs:\n    footnotes: Dictionary containing footnote definitions\n\nReturns:\n    True if injection detected in footnotes, False otherwise",
+      "class:MarkdownParserCore|method:_slugify_base": "Convert text to base slug format without de-duplication for stable IDs.\n\nPhase 7.6.1: Delegated to extractors/sections.slugify_base()",
+      "class:MarkdownParserCore|method:_find_section_id": "Find which section a line belongs to.\n\nOptimized to use line mappings when available (O(1) lookup),\nfalls back to section iteration for early/unmapped lookups.",
+      "class:MarkdownParserCore|method:_has_child_type": "Check if node has children of specified type(s).",
+      "class:MarkdownParserCore|method:_build_line_offsets": "Build array of character offsets for each line start.",
+      "class:MarkdownParserCore|method:_span_from_lines": "Convert line numbers to character offsets.\n\nArgs:\n    start_line: Starting line number (0-based)\n    end_line: Ending line number (inclusive, 0-based)\n\nReturns:\n    Tuple of (start_char, end_char) positions",
+      "class:MarkdownParserCore|method:to_ir": "Convert parsed document to Document IR for RAG chunking.\n\nThe Document IR is a source-agnostic representation that serves as\nthe contract between parsers (Markdown, HTML, PDF) and chunkers.\n\nSchema Version: md-ir@1.0.0\n\nArgs:\n    source_id: Source identifier (file path, URL, or hash)\n\nReturns:\n    DocumentIR object ready for chunking\n\nExample:\n    ```python\n    parser = MarkdownParserCore(content)\n    result = parser.parse()\n    ir = parser.to_ir(source_id=\"docs/intro.md\")\n\n    # Later: pass to chunker\n    chunks = chunker.chunk(ir, policy)\n    ```",
+      "class:MarkdownParserCore|method:_build_ir_nodes": "Build DocNode tree from parsed structures.",
+      "class:MarkdownParserCore|method:_build_link_graph": "Build internal link adjacency list for retrieval expansion."
+    },
+    "presence": {
+      "module": true,
+      "class:MarkdownParserCore": true,
+      "class:MarkdownParserCore|method:get_available_features": true,
+      "class:MarkdownParserCore|method:validate_content": true,
+      "class:MarkdownParserCore|method:__init__": true,
+      "class:MarkdownParserCore|method:_validate_content_security": true,
+      "class:MarkdownParserCore|method:_normalize_content": false,
+      "class:MarkdownParserCore|method:_validate_plugins": true,
+      "class:MarkdownParserCore|method:process_tree": true,
+      "class:MarkdownParserCore|method:parse": true,
+      "class:MarkdownParserCore|method:_apply_security_policy": true,
+      "class:MarkdownParserCore|method:sanitize": true,
+      "class:MarkdownParserCore|method:_extract_metadata": true,
+      "class:MarkdownParserCore|method:_generate_security_metadata": true,
+      "class:MarkdownParserCore|method:_get_cached": false,
+      "class:MarkdownParserCore|method:_slice_lines_inclusive": false,
+      "class:MarkdownParserCore|method:_slice_lines_raw": false,
+      "class:MarkdownParserCore|method:_extract_frontmatter": true,
+      "class:MarkdownParserCore|method:_extract_sections": false,
+      "class:MarkdownParserCore|method:_extract_paragraphs": false,
+      "class:MarkdownParserCore|method:_extract_lists": false,
+      "class:MarkdownParserCore|method:_extract_tasklists": false,
+      "class:MarkdownParserCore|method:_detect_task_checkbox": false,
+      "class:MarkdownParserCore|method:_extract_list_items": false,
+      "class:MarkdownParserCore|method:_extract_tasklist_items": false,
+      "class:MarkdownParserCore|method:_extract_tables": false,
+      "class:MarkdownParserCore|method:_extract_code_blocks": false,
+      "class:MarkdownParserCore|method:_extract_headings": false,
+      "class:MarkdownParserCore|method:_extract_links": false,
+      "class:MarkdownParserCore|method:_process_inline_tokens": false,
+      "class:MarkdownParserCore|method:_extract_images": false,
+      "class:MarkdownParserCore|method:_extract_blockquotes": false,
+      "class:MarkdownParserCore|method:_extract_footnotes": false,
+      "class:MarkdownParserCore|method:_extract_html": false,
+      "class:MarkdownParserCore|method:_extract_math": false,
+      "class:MarkdownParserCore|method:_build_mappings": true,
+      "class:MarkdownParserCore|method:_plain_text_in_range": true,
+      "class:MarkdownParserCore|method:_collect_text_segments": false,
+      "class:MarkdownParserCore|method:_heading_level": false,
+      "class:MarkdownParserCore|method:_get_text": true,
+      "class:MarkdownParserCore|method:_get_text|function:text_collector": true,
+      "class:MarkdownParserCore|method:_check_path_traversal": true,
+      "class:MarkdownParserCore|method:_check_unicode_spoofing": true,
+      "class:MarkdownParserCore|method:_check_footnote_injection": true,
+      "class:MarkdownParserCore|method:_slugify_base": false,
+      "class:MarkdownParserCore|method:_find_section_id": true,
+      "class:MarkdownParserCore|method:_has_child_type": false,
+      "class:MarkdownParserCore|method:_build_line_offsets": false,
+      "class:MarkdownParserCore|method:_span_from_lines": true,
+      "class:MarkdownParserCore|method:to_ir": true,
+      "class:MarkdownParserCore|method:_build_ir_nodes": false,
+      "class:MarkdownParserCore|method:_build_link_graph": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown_parser_core.py",
+      "fingerprint": "d86d9b8643777809e86b25ea4ab4cf1ef8529ab79ed0f7371947ff3f6422f957",
+      "timestamp": "2025-12-17T03:56:26.397180Z",
+      "entity_count": 52,
+      "documented_count": 51,
+      "entities": [
+        "class:MarkdownParserCore",
+        "class:MarkdownParserCore|method:__init__",
+        "class:MarkdownParserCore|method:_apply_security_policy",
+        "class:MarkdownParserCore|method:_build_ir_nodes",
+        "class:MarkdownParserCore|method:_build_line_offsets",
+        "class:MarkdownParserCore|method:_build_link_graph",
+        "class:MarkdownParserCore|method:_build_mappings",
+        "class:MarkdownParserCore|method:_check_footnote_injection",
+        "class:MarkdownParserCore|method:_check_path_traversal",
+        "class:MarkdownParserCore|method:_check_unicode_spoofing",
+        "class:MarkdownParserCore|method:_collect_text_segments",
+        "class:MarkdownParserCore|method:_detect_task_checkbox",
+        "class:MarkdownParserCore|method:_extract_blockquotes",
+        "class:MarkdownParserCore|method:_extract_code_blocks",
+        "class:MarkdownParserCore|method:_extract_footnotes",
+        "class:MarkdownParserCore|method:_extract_frontmatter",
+        "class:MarkdownParserCore|method:_extract_headings",
+        "class:MarkdownParserCore|method:_extract_html",
+        "class:MarkdownParserCore|method:_extract_images",
+        "class:MarkdownParserCore|method:_extract_links",
+        "class:MarkdownParserCore|method:_extract_list_items",
+        "class:MarkdownParserCore|method:_extract_lists",
+        "class:MarkdownParserCore|method:_extract_math",
+        "class:MarkdownParserCore|method:_extract_metadata",
+        "class:MarkdownParserCore|method:_extract_paragraphs",
+        "class:MarkdownParserCore|method:_extract_sections",
+        "class:MarkdownParserCore|method:_extract_tables",
+        "class:MarkdownParserCore|method:_extract_tasklist_items",
+        "class:MarkdownParserCore|method:_extract_tasklists",
+        "class:MarkdownParserCore|method:_find_section_id",
+        "class:MarkdownParserCore|method:_generate_security_metadata",
+        "class:MarkdownParserCore|method:_get_cached",
+        "class:MarkdownParserCore|method:_get_text",
+        "class:MarkdownParserCore|method:_get_text|function:text_collector",
+        "class:MarkdownParserCore|method:_has_child_type",
+        "class:MarkdownParserCore|method:_heading_level",
+        "class:MarkdownParserCore|method:_normalize_content",
+        "class:MarkdownParserCore|method:_plain_text_in_range",
+        "class:MarkdownParserCore|method:_process_inline_tokens",
+        "class:MarkdownParserCore|method:_slice_lines_inclusive",
+        "class:MarkdownParserCore|method:_slice_lines_raw",
+        "class:MarkdownParserCore|method:_slugify_base",
+        "class:MarkdownParserCore|method:_span_from_lines",
+        "class:MarkdownParserCore|method:_validate_content_security",
+        "class:MarkdownParserCore|method:_validate_plugins",
+        "class:MarkdownParserCore|method:get_available_features",
+        "class:MarkdownParserCore|method:parse",
+        "class:MarkdownParserCore|method:process_tree",
+        "class:MarkdownParserCore|method:sanitize",
+        "class:MarkdownParserCore|method:to_ir",
+        "class:MarkdownParserCore|method:validate_content",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document method MarkdownParserCore._get_text"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

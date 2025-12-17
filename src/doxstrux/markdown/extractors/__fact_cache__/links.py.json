@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "mtime": 1765513357.985,
+    "size": 7357,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/links.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Link extractor - Extract links with security validation and embedded image detection.\n\nThis module extracts link structures from markdown tokens, including:\n- Regular links with href, text, and line attribution\n- Link scheme validation (security: disallowed schemes flagged)\n- Link type classification (internal/external/anchor/email/tel/image)\n- Embedded images in links (e.g., [![alt](img.jpg)](link.url))\n- Standalone images as link references\n- Softbreak tracking for accurate line numbers\n\nFunctions:\n    extract_links: Extract all links from tokens with security metadata\n    process_inline_tokens: Process inline tokens to extract links and images",
+      "functions": [
+        {
+          "name": "extract_links",
+          "args": [
+            "tokens",
+            "process_inline_tokens_func"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract links robustly using token parsing.\n\nArgs:\n    tokens: List of markdown-it Token objects\n    process_inline_tokens_func: Function to process inline tokens\n\nReturns:\n    List of link dicts with security metadata"
+        },
+        {
+          "name": "process_inline_tokens",
+          "args": [
+            "tokens",
+            "links",
+            "line_map",
+            "effective_allowed_schemes",
+            "security_validators",
+            "media_module"
+          ],
+          "returns": "None",
+          "raises": [],
+          "doc": "Process inline tokens to extract links with improved line attribution.\n\nArgs:\n    tokens: List of inline tokens to process\n    links: Mutable list to collect link dicts\n    line_map: Line map from parent token\n    effective_allowed_schemes: Set of allowed URL schemes\n    security_validators: Security validators module\n    media_module: Media extractor module for image metadata"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Link extractor - Extract links with security validation and embedded image detection.\n\nThis module extracts link structures from markdown tokens, including:\n- Regular links with href, text, and line attribution\n- Link scheme validation (security: disallowed schemes flagged)\n- Link type classification (internal/external/anchor/email/tel/image)\n- Embedded images in links (e.g., [![alt](img.jpg)](link.url))\n- Standalone images as link references\n- Softbreak tracking for accurate line numbers\n\nFunctions:\n    extract_links: Extract all links from tokens with security metadata\n    process_inline_tokens: Process inline tokens to extract links and images",
+      "function:extract_links": "Extract links robustly using token parsing.\n\nArgs:\n    tokens: List of markdown-it Token objects\n    process_inline_tokens_func: Function to process inline tokens\n\nReturns:\n    List of link dicts with security metadata",
+      "function:process_inline_tokens": "Process inline tokens to extract links with improved line attribution.\n\nArgs:\n    tokens: List of inline tokens to process\n    links: Mutable list to collect link dicts\n    line_map: Line map from parent token\n    effective_allowed_schemes: Set of allowed URL schemes\n    security_validators: Security validators module\n    media_module: Media extractor module for image metadata"
+    },
+    "presence": {
+      "module": true,
+      "function:extract_links": true,
+      "function:process_inline_tokens": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/links.py",
+      "fingerprint": "7e63ddcffc23f44a787fc83a905b217ca3c1a3b53597291605e7c7afb4869ed2",
+      "timestamp": "2025-12-17T03:56:25.447144Z",
+      "entity_count": 3,
+      "documented_count": 3,
+      "entities": [
+        "function:extract_links",
+        "function:process_inline_tokens",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "mtime": 1765391274.4672732,
+    "size": 8578,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/config.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Configuration constants and security profiles.\n\nThis module contains all configuration constants, security patterns, and\nsecurity profiles for the markdown parser. Single source of truth for\nsecurity policies and resource limits.\n\nConstants:\n    SECURITY_PROFILES: Security profile configurations (strict/moderate/permissive)\n    SECURITY_LIMITS: Content size and recursion limits by profile\n    ALLOWED_PLUGINS: Allowed markdown-it plugins by profile\n\nSecurity Detection Functions (zero-regex):\n    has_style_js_injection: CSS injection detection (javascript: in style)\n    has_meta_refresh: Meta refresh redirect detection\n    has_framelike_tag: Frame-like tags (iframe/object/embed)\n    _BIDI_CONTROLS: BiDi control characters for text direction manipulation",
+      "functions": [
+        {
+          "name": "has_style_js_injection",
+          "args": [
+            "content"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Detect style-based JavaScript injection (url(javascript:) or expression()).\n\nChecks for CSS-based script injection patterns in style attributes."
+        },
+        {
+          "name": "has_meta_refresh",
+          "args": [
+            "content"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Detect <meta http-equiv='refresh'> tags."
+        },
+        {
+          "name": "has_framelike_tag",
+          "args": [
+            "content"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Detect frame-like tags: <iframe>, <object>, <embed>."
+        }
+      ],
+      "classes": {
+        "_PatternWrapper": [
+          {
+            "name": "__init__",
+            "args": [
+              "func"
+            ],
+            "returns": null,
+            "raises": [],
+            "doc": null
+          },
+          {
+            "name": "search",
+            "args": [
+              "content"
+            ],
+            "returns": "bool",
+            "raises": [],
+            "doc": null
+          }
+        ]
+      }
+    },
+    "node_map": {
+      "module": "Configuration constants and security profiles.\n\nThis module contains all configuration constants, security patterns, and\nsecurity profiles for the markdown parser. Single source of truth for\nsecurity policies and resource limits.\n\nConstants:\n    SECURITY_PROFILES: Security profile configurations (strict/moderate/permissive)\n    SECURITY_LIMITS: Content size and recursion limits by profile\n    ALLOWED_PLUGINS: Allowed markdown-it plugins by profile\n\nSecurity Detection Functions (zero-regex):\n    has_style_js_injection: CSS injection detection (javascript: in style)\n    has_meta_refresh: Meta refresh redirect detection\n    has_framelike_tag: Frame-like tags (iframe/object/embed)\n    _BIDI_CONTROLS: BiDi control characters for text direction manipulation",
+      "function:has_style_js_injection": "Detect style-based JavaScript injection (url(javascript:) or expression()).\n\nChecks for CSS-based script injection patterns in style attributes.",
+      "function:has_meta_refresh": "Detect <meta http-equiv='refresh'> tags.",
+      "function:has_framelike_tag": "Detect frame-like tags: <iframe>, <object>, <embed>.",
+      "class:_PatternWrapper": "Wrapper to provide .search() interface for string-based detection.",
+      "class:_PatternWrapper|method:__init__": null,
+      "class:_PatternWrapper|method:search": null
+    },
+    "presence": {
+      "module": true,
+      "function:has_style_js_injection": true,
+      "function:has_meta_refresh": true,
+      "function:has_framelike_tag": true,
+      "class:_PatternWrapper": true,
+      "class:_PatternWrapper|method:__init__": false,
+      "class:_PatternWrapper|method:search": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/config.py",
+      "fingerprint": "0ffbaf84ce79d574acd4deba123ec9b8a77e8b9a9bfc6ba5eb3edd24bc54a14f",
+      "timestamp": "2025-12-17T03:56:25.220726Z",
+      "entity_count": 7,
+      "documented_count": 5,
+      "entities": [
+        "class:_PatternWrapper",
+        "class:_PatternWrapper|method:__init__",
+        "class:_PatternWrapper|method:search",
+        "function:has_framelike_tag",
+        "function:has_meta_refresh",
+        "function:has_style_js_injection",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document method _PatternWrapper.search"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

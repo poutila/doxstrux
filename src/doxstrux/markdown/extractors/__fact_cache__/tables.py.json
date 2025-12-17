@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "mtime": 1765516381.0568268,
+    "size": 10938,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/tables.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Table extractor - Extract GFM tables with structure and validation.\n\nThis module extracts table structures from the markdown AST, including:\n- Headers with alignment detection\n- Body rows with content extraction\n- Ragged table detection (security: inconsistent column counts)\n- Malformed row detection (rows not following |...| format)\n- Pure table validation (strict GFM compliance)\n- Raw markdown preservation\n\nFunctions:\n    extract_tables: Extract all tables with validation metadata\n    parse_gfm_table_line: Parse a single GFM table line using polars",
+      "functions": [
+        {
+          "name": "parse_gfm_table_line",
+          "args": [
+            "line"
+          ],
+          "returns": "tuple[int, list[str]] | None",
+          "raises": [],
+          "doc": "Parse a GFM table line into columns.\n\nA valid GFM table line must:\n- Start with |\n- End with |\n- Be parseable as pipe-separated values\n\nArgs:\n    line: A single line from a markdown table\n\nReturns:\n    Tuple of (column_count, cell_values) or None if invalid format"
+        },
+        {
+          "name": "extract_tables",
+          "args": [
+            "tree",
+            "lines",
+            "process_tree_func",
+            "find_section_id_func"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract all tables with structure preserved and security validation.\n\nArgs:\n    tree: The markdown AST tree\n    lines: List of source lines\n    process_tree_func: Function to process tree nodes\n    find_section_id_func: Function to find section ID for a line number\n\nReturns:\n    List of table dicts with headers, rows, alignment, and validation metadata"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Table extractor - Extract GFM tables with structure and validation.\n\nThis module extracts table structures from the markdown AST, including:\n- Headers with alignment detection\n- Body rows with content extraction\n- Ragged table detection (security: inconsistent column counts)\n- Malformed row detection (rows not following |...| format)\n- Pure table validation (strict GFM compliance)\n- Raw markdown preservation\n\nFunctions:\n    extract_tables: Extract all tables with validation metadata\n    parse_gfm_table_line: Parse a single GFM table line using polars",
+      "function:parse_gfm_table_line": "Parse a GFM table line into columns.\n\nA valid GFM table line must:\n- Start with |\n- End with |\n- Be parseable as pipe-separated values\n\nArgs:\n    line: A single line from a markdown table\n\nReturns:\n    Tuple of (column_count, cell_values) or None if invalid format",
+      "function:extract_tables": "Extract all tables with structure preserved and security validation.\n\nArgs:\n    tree: The markdown AST tree\n    lines: List of source lines\n    process_tree_func: Function to process tree nodes\n    find_section_id_func: Function to find section ID for a line number\n\nReturns:\n    List of table dicts with headers, rows, alignment, and validation metadata",
+      "function:extract_tables|function:table_processor": null
+    },
+    "presence": {
+      "module": true,
+      "function:parse_gfm_table_line": true,
+      "function:extract_tables": true,
+      "function:extract_tables|function:table_processor": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/tables.py",
+      "fingerprint": "d58994902d4e1ab4731c8977fc933b93bcab698ce58ae58b6958214f8e371aae",
+      "timestamp": "2025-12-17T03:56:25.793338Z",
+      "entity_count": 4,
+      "documented_count": 3,
+      "entities": [
+        "function:extract_tables",
+        "function:extract_tables|function:table_processor",
+        "function:parse_gfm_table_line",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_tables.table_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

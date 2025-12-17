@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "mtime": 1765370638.451645,
+    "size": 519,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/security/__init__.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Doxstrux Security Package\n\nSecurity validation and policy enforcement modules.\n\nModules:\n- validators: Content validation functions (URL schemes, BiDi, confusables)\n- policies: Security policy application (fail-closed approach)\n- unicode: Unicode security (BiDi controls, confusable characters)\n\nSecurity is layered throughout:\n- Content size limits\n- Recursion depth limits\n- Link scheme validation\n- HTML sanitization\n- Script/event handler detection\n- BiDi control detection\n- Confusable character detection",
+      "functions": [],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Doxstrux Security Package\n\nSecurity validation and policy enforcement modules.\n\nModules:\n- validators: Content validation functions (URL schemes, BiDi, confusables)\n- policies: Security policy application (fail-closed approach)\n- unicode: Unicode security (BiDi controls, confusable characters)\n\nSecurity is layered throughout:\n- Content size limits\n- Recursion depth limits\n- Link scheme validation\n- HTML sanitization\n- Script/event handler detection\n- BiDi control detection\n- Confusable character detection"
+    },
+    "presence": {
+      "module": false
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/security/__init__.py",
+      "fingerprint": "42fc8c122c9a12e0207c3d435cfd11754d68664cb4094a1a1bf9fc8d42b8ad6d",
+      "timestamp": "2025-12-17T03:56:25.892079Z",
+      "entity_count": 1,
+      "documented_count": 1,
+      "entities": [
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

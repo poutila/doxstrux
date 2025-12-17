@@ -13,7 +13,7 @@ prose_input:
 > **STATUS: DESIGN DOCUMENT** - This describes a target state. None of the Pydantic
 > models, tooling, or tests described below exist yet.
 
-## SSOT Declaration
+## ⚠️ SSOT Rule (Read This First)
 
 **Until `output_models.py` exists, this file is DESIGN ONLY.**
 
@@ -23,104 +23,6 @@ Once code exists:
 - This file becomes **historical reference only** - do not update it
 
 **Do not treat any section of this file as "the truth" once implementation begins.**
-
----
-
-## Scope
-
-### In Scope
-
-- [x] Pydantic models for parser output validation
-- [x] Schema export tooling (JSON Schema generation)
-- [x] Test fixture validation
-- [x] RAG safety semantics testing
-- [x] CI integration for schema enforcement
-
-### Out of Scope
-
-- Parser implementation changes — Deferred to: separate parser refactor
-- Backwards compatibility with pre-schema consumers — Reason: schema defines correct behavior
-
----
-
-## Decisions (Binding)
-
-| ID | Decision | Rationale | Alternatives Rejected |
-|----|----------|-----------|----------------------|
-| D1 | Use Pydantic v2 for schema | Type safety, JSON Schema export, validation | dataclasses (no validation), attrs (less ecosystem) |
-| D2 | Milestone-based incremental rollout | Reduces risk, allows early testing | Big bang release (too risky) |
-| D3 | `extra="forbid"` as final state | Strict contract enforcement | `extra="allow"` (allows drift) |
-
----
-
-## External Dependencies
-
-### Required Files/Modules
-
-| Path | Required Symbol(s) | Purpose |
-|------|-------------------|---------|
-| `src/doxstrux/markdown_parser_core.py` | `MarkdownParserCore` | Parser to validate against |
-| `pyproject.toml` | — | Configuration file |
-
-### Required Libraries
-
-| Package | Version | Purpose |
-|---------|---------|---------|
-| `pydantic` | `>=2,<3` | Schema validation and JSON Schema export |
-
-### Required Tools
-
-| Tool | Version | Verification Command |
-|------|---------|---------------------|
-| `uv` | `>=0.1` | `uv --version` |
-| `rg` | `>=13` | `rg --version` |
-
----
-
-## File Manifest
-
-| Path | Action | Phase | Description |
-|------|--------|-------|-------------|
-| `src/doxstrux/markdown/output_models.py` | CREATE | A | Pydantic models for parser output |
-| `tests/test_output_models_minimal.py` | CREATE | A | Minimal schema validation tests |
-| `tests/test_output_models_security.py` | CREATE | A | RAG safety semantic tests |
-| `tools/export_schema.py` | CREATE | B | JSON Schema export tool |
-| `tools/validate_test_pairs.py` | CREATE | C | Fixture validation tool |
-
----
-
-## Test Strategy
-
-| Layer | Tool | Location | Trigger |
-|-------|------|----------|---------|
-| Unit tests | pytest | `tests/test_output_models_*.py` | Pre-commit, CI |
-| Type checking | mypy | `src/doxstrux/` | Pre-commit, CI |
-| Schema validation | Pydantic | `tests/` | CI |
-| Linting | ruff | `src/`, `tests/` | Pre-commit |
-
----
-
-## Phase 0
-
-See detailed Phase 0 tasks in the implementation section below.
-
-### Required Files/Modules
-
-| Path | Required Symbol(s) | Purpose |
-|------|-------------------|---------|
-| `src/doxstrux/markdown_parser_core.py` | `MarkdownParserCore` | Parser under test |
-
-### Required Libraries
-
-| Package | Version | Purpose |
-|---------|---------|---------|
-| `markdown-it-py` | `>=3` | Parser dependency |
-
-### Required Tools
-
-| Tool | Version | Verification Command |
-|------|---------|---------------------|
-| `uv` | `>=0.1` | `uv --version` |
 
 ---
 
@@ -161,7 +63,7 @@ Create a **single source of truth (SSOT) schema** for parser output using Pydant
 
 | Area | What to Check | Notes |
 |------|---------------|-------|
-| `structure.*` | Sections, lists, links exist | Shape determined at implementation time |
+| `structure.*` | Sections, lists, links, etc. exist | Shape TBD by implementation |
 | `structure.footnotes` | Present under permissive | **ABSENT under strict profile** |
 | `structure.math` | Present under permissive | May be empty |
 | `metadata.*` | Security, embedding flags exist | Top-level location |
@@ -354,7 +256,7 @@ These behaviors MUST hold in the final implementation:
 |-------|-----------------|
 | `<script>alert('xss')</script>` | `metadata.security.statistics.has_script=True`, `summary.has_dangerous_content=True` |
 | `[link](javascript:evil())` | Link flagged in warnings OR `disallowed_link_schemes` contains "javascript" |
-| Safe markdown (no threats) | `metadata.embedding_blocked=False`, `summary.has_dangerous_content=False` |
+| Clean markdown (no threats) | `metadata.embedding_blocked=False`, `summary.has_dangerous_content=False` |
 | Oversized data URI | `metadata.embedding_blocked=True` with reason |
 
 ### Milestone → Final State Mapping
@@ -476,14 +378,14 @@ if __name__ == "__main__":
 
 **Success Criteria:**
 
-> **Note:** This is sampling (~50 files), NOT a census. It provides sufficient confidence
+> **Note:** This is sampling (~50 files), NOT a census. It provides reasonable confidence
 > about parser shape but may miss edge-case fields. That's acceptable - Milestone A uses
 > `extra="allow"` to catch any remaining unknowns.
 
-- [x] `all_keys.txt` generated with field paths observed in sample outputs
-- [x] Expected top-level keys (metadata, content, structure, mappings) are present
-- [x] Any unexpected keys noted for investigation (not blocking)
-- [x] **Security fields verified in `sample_outputs.json`** (see below)
+- [ ] `all_keys.txt` generated with field paths observed in sample outputs
+- [ ] Expected top-level keys (metadata, content, structure, mappings) are present
+- [ ] Any unexpected keys noted for investigation (not blocking)
+- [ ] **Security fields verified in `sample_outputs.json`** (see below)
 
 #### Phase 0.1.1: Security Field Verification (REQUIRED)
 
@@ -608,9 +510,9 @@ class TestPluginPolicyConsistency:
 ```
 
 **Success Criteria (for Milestone B):**
-- [x] Tests verify `ALLOWED_PLUGINS["permissive"]` includes all schema-required plugins
-- [x] NO new plugin list created - use `config.py:ALLOWED_PLUGINS` as SSOT
-- [x] Parser output includes `math` and `footnotes` with permissive profile
+- [ ] Tests verify `ALLOWED_PLUGINS["permissive"]` includes all schema-required plugins
+- [ ] NO new plugin list created - use `config.py:ALLOWED_PLUGINS` as SSOT
+- [ ] Parser output includes `math` and `footnotes` with permissive profile
 
 #### Phase 0.4: Embedding Invariant Tests (DEFERRED to Milestone B)
 
@@ -653,37 +555,37 @@ class TestEmbeddingInvariants:
                 "but metadata.embedding_blocked=False"
             )
 
-    def test_safe_document_not_blocked(self):
-        """Safe document must not have embedding blocked."""
+    def test_clean_document_not_blocked(self):
+        """Clean document must not have embedding blocked."""
         md = "# Hello\n\nClean markdown."
         parser = MarkdownParserCore(md, security_profile="permissive")
         result = parser.parse()
 
         assert not result.get("metadata", {}).get("embedding_blocked"), \
-            "Safe document should not be blocked"
+            "Clean document should not be blocked"
 ```
 
 **Success Criteria (for Milestone B):**
-- [x] Invariant tests pass against real parser output
-- [x] Tests run AFTER Milestone A schema is validated
+- [ ] Invariant tests pass against real parser output
+- [ ] Tests run AFTER Milestone A schema is validated
 
 #### Phase 0 Completion Checklist
 
 **Phase 0 is now minimal:** Only shape discovery (0.1) and security field verification (0.1.1)
 run before Milestone A. Phase 0.2 (Key Path Lister) was deleted. Phases 0.3, 0.4 are deferred to Milestone B.
 
-**Sampling disclaimer:** Phase 0 provides _sufficient confidence_, not certainty.
+**Sampling disclaimer:** Phase 0 provides _reasonable confidence_, not certainty.
 We sample ~50 files to identify obvious shape issues. Milestone A's `extra="allow"`
 catches anything missed. Do NOT block on "complete coverage" - that's impossible
 without running every fixture, which defeats the purpose of sampling.
 
 Before proceeding to Milestone A:
 
-- [x] `tools/discover_parser_shape.py` executed successfully
-- [x] `all_keys.txt` generated - spot-check for obvious gaps (not exhaustive review)
-- [x] **Security field verification passed** (Phase 0.1.1 script shows no critical missing paths)
-- [x] NO requirement for "0 unknown fields" yet (that's Milestone B)
-- [x] Proceed to Milestone A to create minimal schema
+- [ ] `tools/discover_parser_shape.py` executed successfully
+- [ ] `all_keys.txt` generated - spot-check for obvious gaps (not exhaustive review)
+- [ ] **Security field verification passed** (Phase 0.1.1 script shows no critical missing paths)
+- [ ] NO requirement for "0 unknown fields" yet (that's Milestone B)
+- [ ] Proceed to Milestone A to create minimal schema
 
 ---
 
@@ -695,7 +597,7 @@ Before proceeding to Milestone A:
 
 > **What gets locked in:**
 > - Script tag detection (`has_script`, `has_dangerous_content`)
-> - Safe document safety (`embedding_blocked`)
+> - Clean document safety (`embedding_blocked`)
 > - Dangerous link scheme detection (`javascript:` links)
 >
 > **Implication:** If parser output uses different field names than these tests expect,
@@ -725,7 +627,7 @@ SCOPE: Top-level structure only. Nested models added in Milestone B.
 
 This file will grow incrementally:
 - Milestone A: ParserOutput with 4 top-level keys (dict placeholders)
-- Milestone B: Add nested models (Section, Paragraph, List, Table)
+- Milestone B: Add nested models (Section, Paragraph, etc.)
 - Milestone C: Full validation
 """
 
@@ -830,7 +732,7 @@ class ParserOutput(DoxBaseModel):
 >
 > **Rationale:** The parser's actual behavior for empty input may include profile-specific
 > defaults, metadata fields, or other legitimate variations. Forcing equality would require
-> parser changes that break existing consumers.
+> parser changes that could break existing consumers.
 
 #### Task A.3: Create Minimal Test
 
@@ -936,13 +838,13 @@ class TestEarlyRAGSafety:
         assert summary.get("has_dangerous_content") is True, \
             "CRITICAL: Dangerous content not flagged - RAG safety compromised"
 
-    def test_safe_document_not_blocked(self):
+    def test_clean_document_not_blocked(self):
         """
-        Safe document MUST NOT be blocked for embedding.
+        Clean document MUST NOT be blocked for embedding.
 
         False positives here would block legitimate RAG content.
         """
-        md = "# Hello\n\nThis is safe markdown with no dangerous content."
+        md = "# Hello\n\nThis is clean markdown with no dangerous content."
         parser = MarkdownParserCore(md, security_profile="permissive")
         raw = parser.parse()
 
@@ -950,7 +852,7 @@ class TestEarlyRAGSafety:
 
         # Access embedding_blocked via dict (top-level metadata field)
         assert validated.metadata.get("embedding_blocked") in (None, False), \
-            "Safe document should NOT be blocked for embedding"
+            "Clean document should NOT be blocked for embedding"
 
     def test_javascript_link_detected_and_disallowed(self):
         """
@@ -984,12 +886,12 @@ class TestEarlyRAGSafety:
 
 #### Milestone A Completion Checklist
 
-- [x] `uv add "pydantic>=2,<3"` executed
-- [x] `src/doxstrux/markdown/output_models.py` created with minimal schema
-- [x] `tests/test_output_models_minimal.py` passes (both classes)
-- [x] `ParserOutput.model_validate(parser.parse())` works on at least 5 sample files
-- [x] **RAG safety tests pass**: `test_script_tag_detected_early`, `test_safe_document_not_blocked`, `test_javascript_link_detected_and_disallowed`
-- [x] Any extra fields logged for review (will be addressed in Milestone B)
+- [ ] `uv add "pydantic>=2,<3"` executed
+- [ ] `src/doxstrux/markdown/output_models.py` created with minimal schema
+- [ ] `tests/test_output_models_minimal.py` passes (both classes)
+- [ ] `ParserOutput.model_validate(parser.parse())` works on at least 5 sample files
+- [ ] **RAG safety tests pass**: `test_script_tag_detected_early`, `test_clean_document_not_blocked`, `test_javascript_link_detected_and_disallowed`
+- [ ] Any extra fields logged for review (will be addressed in Milestone B)
 
 **EXIT CRITERIA:** Proceed to Milestone B when tests pass. Do NOT add nested models yet.
 
@@ -1145,15 +1047,15 @@ class Mappings(DoxBaseModel):
 
 #### B1.5 Completion Checklist
 
-- [x] B1.5a: `Content`, `Mappings` typed and validated
-- [x] B1.5b: `Section`, `Heading`, `Paragraph` typed and validated
-- [x] B1.5c: `List`, `Tasklist` with recursive items typed and validated
-- [x] B1.5d: `Table`, `CodeBlock`, `Blockquote` typed and validated
-- [x] B1.5e: `Link`, `Image`, `Math`, `Footnotes`, `HTML` typed and validated
-- [x] **DoxBaseModel switched to `extra="forbid"`** (enforcement branch ready for main)
-- [x] `extra="forbid"` on ALL models (no more `dict[str, Any]`)
-- [x] Full schema export works
-- [x] **DocumentIR regression test passes** (see below)
+- [ ] B1.5a: `Content`, `Mappings` typed and validated
+- [ ] B1.5b: `Section`, `Heading`, `Paragraph` typed and validated
+- [ ] B1.5c: `List`, `Tasklist` with recursive items typed and validated
+- [ ] B1.5d: `Table`, `CodeBlock`, `Blockquote` typed and validated
+- [ ] B1.5e: `Link`, `Image`, `Math`, `Footnotes`, `HTML` typed and validated
+- [ ] **DoxBaseModel switched to `extra="forbid"`** (enforcement branch ready for main)
+- [ ] `extra="forbid"` on ALL models (no more `dict[str, Any]`)
+- [ ] Full schema export works
+- [ ] **DocumentIR regression test passes** (see below)
 
 #### B1.5f: DocumentIR Regression Test (REQUIRED)
 
@@ -1271,11 +1173,11 @@ if __name__ == "__main__":
 
 #### Milestone B1 Completion Checklist
 
-- [x] `Metadata`, `Security`, `SecurityStatistics`, `SecuritySummary`, `SecurityWarning`, `Encoding` models added
-- [x] `extra="forbid"` on Metadata and Security models
-- [x] `tools/export_schema.py` created (partial schema - Structure/Mappings still dict)
-- [x] Spot-check: `ParserOutput.model_validate()` passes on 5 diverse fixture files
-- [x] RAG safety tests still pass (script detection, safe doc, javascript: links)
+- [ ] `Metadata`, `Security`, `SecurityStatistics`, `SecuritySummary`, `SecurityWarning`, `Encoding` models added
+- [ ] `extra="forbid"` on Metadata and Security models
+- [ ] `tools/export_schema.py` created (partial schema - Structure/Mappings still dict)
+- [ ] Spot-check: `ParserOutput.model_validate()` passes on 5 diverse fixture files
+- [ ] RAG safety tests still pass (script detection, clean doc, javascript: links)
 
 **EXIT CRITERIA:** Metadata/Security typed and validated. Proceed to B1.5.
 
@@ -1283,11 +1185,11 @@ if __name__ == "__main__":
 
 #### Milestone B1.5 Completion Checklist
 
-- [x] All remaining models added (`Content`, `Structure`, `Mappings`, and sub-models)
-- [x] `extra="forbid"` on ALL models (no more `dict[str, Any]` at top level)
-- [x] Schema export now covers full structure
-- [x] Spot-check: `ParserOutput.model_validate()` passes on 10+ diverse fixture files
-- [x] **DocumentIR regression test passes** (B1.5f)
+- [ ] All remaining models added (`Content`, `Structure`, `Mappings`, and sub-models)
+- [ ] `extra="forbid"` on ALL models (no more `dict[str, Any]` at top level)
+- [ ] Schema export now covers full structure
+- [ ] Spot-check: `ParserOutput.model_validate()` passes on 10+ diverse fixture files
+- [ ] **DocumentIR regression test passes** (B1.5f)
 
 **EXIT CRITERIA:** Full schema typed and validated. Proceed to B2.
 
@@ -1377,11 +1279,11 @@ def regenerate_fixture(md_path, json_path, bucket, review) -> bool: ...
 
 #### Milestone B2 Completion Checklist
 
-- [x] `tools/validate_curated_fixtures.py` passes (pattern-based discovery)
-- [x] `tools/regenerate_fixtures.py` created with bucket-aware classification
-- [x] NO hand-maintained fixture lists (patterns only)
-- [x] **Legacy field audit completed** (B2.4)
-- [x] **Legacy field audit test passes** (B2.5 - enforced by code)
+- [ ] `tools/validate_curated_fixtures.py` passes (pattern-based discovery)
+- [ ] `tools/regenerate_fixtures.py` created with bucket-aware classification
+- [ ] NO hand-maintained fixture lists (patterns only)
+- [ ] **Legacy field audit completed** (B2.4)
+- [ ] **Legacy field audit test passes** (B2.5 - enforced by code)
 
 #### B2.4: Legacy Field Audit (REQUIRED before fixture regeneration)
 
@@ -1546,7 +1448,7 @@ Use pytest markers to control this.
 
 2. **`TestSecuritySemantics`** - behavioral security tests
    - `test_script_tag_detected` - `<script>` → `has_script=True`
-   - `test_safe_document_is_safe` - safe markdown → no warnings
+   - `test_clean_document_is_safe` - clean markdown → no warnings
    - `test_event_handler_detected` - `onclick` → `has_event_handlers=True`
    - `test_data_uri_image_detected` - `data:` URI → `has_data_uri_images=True`
 
@@ -1570,11 +1472,11 @@ Use pytest markers to control this.
 
 #### Milestone C Completion Checklist
 
-- [x] `tools/validate_test_pairs.py` created with `--report` mode
-- [x] All fixtures run through validation in report-only mode
-- [x] JSON report generated with failure inventory
-- [x] Known failures triaged into: schema fix, parser fix, or legacy
-- [x] Report-only CI job runs on every PR (informational)
+- [ ] `tools/validate_test_pairs.py` created with `--report` mode
+- [ ] All fixtures run through validation in report-only mode
+- [ ] JSON report generated with failure inventory
+- [ ] Known failures triaged into: schema fix, parser fix, or legacy
+- [ ] Report-only CI job runs on every PR (informational)
 
 ---
 
@@ -1692,11 +1594,11 @@ repos:
 
 #### Milestone D Completion Checklist
 
-- [x] CI job created with 100% threshold (blocking)
-- [x] Schema version test passes
-- [x] Schema drift detection works (git diff check)
-- [x] Pre-commit hook installed (optional but recommended)
-- [x] All existing fixtures pass validation
+- [ ] CI job created with 100% threshold (blocking)
+- [ ] Schema version test passes
+- [ ] Schema drift detection works (git diff check)
+- [ ] Pre-commit hook installed (optional but recommended)
+- [ ] All existing fixtures pass validation
 
 ---
 
@@ -1734,7 +1636,7 @@ repos:
 
 **Legend:** ✅ = Tested | ❌ = Shape only (not behavior)
 
-**Important:** Extended security fields (prompt injection, BiDi controls, confusable chars) are **reserved**
+**Important:** Extended security fields (prompt injection, BiDi controls, etc.) are **reserved**
 and **not behaviorally tested**. Do not build downstream logic on them until tests exist.
 
 ---
@@ -1890,7 +1792,7 @@ Bucket assignment is determined by file path - no tribal knowledge required.
 ### Content-Based Safety Heuristic (Secondary Check)
 
 **Problem:** Path-based bucketing can miss security-sensitive fixtures in "structural" directories.
-A file named `basic_paragraph.md` in `01_edge_cases/` can contain `<script>` tags as edge case content.
+A file named `basic_paragraph.md` in `01_edge_cases/` might contain `<script>` tags as edge case content.
 
 **Solution:** After path-based classification, run a content-based safety check on structural fixtures:
 
@@ -1924,7 +1826,7 @@ security features but aren't in security directories.
 
 **Rule:** Any fixture NOT matching security or legacy patterns, AND not flagged by content heuristic.
 
-**Location:** `tools/test_mds/01_edge_cases/`, `tools/test_mds/02_*/`, and similar numbered directories.
+**Location:** `tools/test_mds/01_edge_cases/`, `tools/test_mds/02_*/`, etc.
 
 **Strategy:**
 - Regenerate wholesale using current parser + schema
@@ -1999,7 +1901,7 @@ tests/
 2. **100% test pairs valid**: All 620+ JSON test files pass validation
 3. **CI gate**: Schema violations fail the build (Milestone D)
 4. **Single source of truth**: Pydantic models define the contract, JSON Schema is derived
-5. **Security semantics tested**: Script tags, event handlers, and dangerous URLs are correctly detected
+5. **Security semantics tested**: Script tags, event handlers, etc. are correctly detected
 
 ### Escape Paths (When Things Go Wrong)
 
@@ -2184,24 +2086,3 @@ one that lives next to the schema code and is updated atomically with schema cha
 > - Changelog cutover to `SCHEMA_CHANGELOG.md` after implementation
 >
 > See git history for full design rationale on any specific change.
-
----
-
-## Checklist Before Submission
-
-- [x] All placeholder tokens replaced with real values
-- [x] No incomplete markers remain
-- [x] No questions remain
-- [x] All decisions in Decisions table are final
-- [x] External Dependencies section lists all prerequisites
-- [x] Required libraries match pyproject.toml requirements
-- [x] Required tools have verification commands
-- [x] All paths in File Manifest are specified
-- [x] All test cases have concrete assertions
-- [x] All success criteria are measurable
-- [x] Dependencies between phases are explicit
-- [x] Glossary defines project-specific terms
-
----
-
-**End of Specification**

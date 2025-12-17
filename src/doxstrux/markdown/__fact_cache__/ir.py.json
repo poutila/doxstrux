@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "mtime": 1765370638.451645,
+    "size": 7536,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/ir.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Document IR (Intermediate Representation) - Universal format for RAG chunking.\n\nThis module defines a source-agnostic document structure that serves as the\nboundary between parsers (Markdown, HTML, PDF) and the chunker.\n\nDesign Goals:\n- Source-agnostic: Works for Markdown, HTML, PDF, DOCX, etc.\n- Stable contract: Parsers emit IR; chunker consumes IR\n- Versioned schema: Breaking changes increment version\n- Security-aware: Carries security metadata from validation\n- RAG-optimized: Includes spans, IDs, and link graph for retrieval\n\nSchema Version: md-ir@1.0.0",
+      "functions": [],
+      "classes": {
+        "DocNode": [],
+        "DocumentIR": [
+          {
+            "name": "to_dict",
+            "args": [],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Serialize to dict for JSON export."
+          },
+          {
+            "name": "_node_to_dict",
+            "args": [
+              "node"
+            ],
+            "returns": "dict[str, Any]",
+            "raises": [],
+            "doc": "Recursively serialize node tree."
+          }
+        ],
+        "ChunkPolicy": [],
+        "Chunk": [],
+        "ChunkResult": []
+      }
+    },
+    "node_map": {
+      "module": "Document IR (Intermediate Representation) - Universal format for RAG chunking.\n\nThis module defines a source-agnostic document structure that serves as the\nboundary between parsers (Markdown, HTML, PDF) and the chunker.\n\nDesign Goals:\n- Source-agnostic: Works for Markdown, HTML, PDF, DOCX, etc.\n- Stable contract: Parsers emit IR; chunker consumes IR\n- Versioned schema: Breaking changes increment version\n- Security-aware: Carries security metadata from validation\n- RAG-optimized: Includes spans, IDs, and link graph for retrieval\n\nSchema Version: md-ir@1.0.0",
+      "class:DocNode": "A node in the document tree.\n\nRepresents a semantic unit: section, paragraph, list, code block, table, etc.\nForms a tree structure via the `children` field.\n\nAttributes:\n    id: Stable identifier within document (e.g., \"section_intro-1\", \"para_5\")\n    type: Node type (section, para, list, code, table, image, link)\n    text: Raw visible text content (None for containers)\n    meta: Type-specific metadata (lang, fence, alt, url, table_dims, etc.)\n    span: Character span in original source (start_char, end_char)\n    line_span: Line span in original source (start_line, end_line)\n    children: Child nodes (for sections, lists, etc.)",
+      "class:DocumentIR": "Universal Document Intermediate Representation for RAG pipelines.\n\nThis is the contract between parsers and chunkers:\n- Parsers (Markdown, HTML, PDF) emit DocumentIR\n- Chunkers consume DocumentIR to produce chunks\n\nSchema Version: md-ir@1.0.0\n\nAttributes:\n    schema_version: IR schema version (e.g., \"md-ir@1.0.0\")\n    source_id: Source identifier (file path, URL, hash)\n    source_type: Source format (markdown, html, pdf, docx)\n    content_hash: SHA256 of normalized content (for deduplication)\n    allows_html: Whether HTML is allowed in content\n    security: Security metadata from validation\n    frontmatter: Document-level metadata (title, author, tags, etc.)\n    root: Root node of document tree\n    link_graph: Internal link adjacency list for retrieval expansion",
+      "class:DocumentIR|method:to_dict": "Serialize to dict for JSON export.",
+      "class:DocumentIR|method:_node_to_dict": "Recursively serialize node tree.",
+      "class:ChunkPolicy": "Configuration for chunking strategy.\n\nAttributes:\n    mode: Chunking strategy (\"semantic\", \"fixed\", \"code_aware\")\n    target_tokens: Target tokens per chunk\n    overlap_tokens: Overlap between chunks for context\n    min_chunk_tokens: Minimum tokens to emit a chunk\n    max_chunk_tokens: Hard maximum (split if exceeded)\n    respect_boundaries: Don't split across sections/code/tables\n    include_code: Include code blocks in chunks\n    include_tables: Include tables in chunks\n    normalize_whitespace: Collapse consecutive whitespace\n    normalize_unicode: Normalize to NFC\n    redact_urls: Remove query parameters from URLs\n    token_estimator: How to estimate tokens (\"bytes\", \"chars\", \"tiktoken\")\n    base_url: Base URL for resolving relative links",
+      "class:Chunk": "A chunk suitable for embedding in RAG pipelines.\n\nAttributes:\n    chunk_id: Unique identifier (stable across re-chunking)\n    section_path: Breadcrumb of section IDs ([\"intro\", \"background\"])\n    text: Normalized text for embedding\n    normalized_text: Cleaned text (whitespace, unicode, redactions)\n    span: Character span in original source\n    line_span: Line span in original source\n    token_estimate: Estimated tokens (depends on estimator)\n    chunk_hash: SHA256(section_path + normalized_text)\n    risk_flags: Security warnings ([\"prompt_injection\", \"confusables\"])\n    links: Links present in chunk\n    images: Images present in chunk\n    meta: Additional metadata",
+      "class:ChunkResult": "Result of chunking a document.\n\nAttributes:\n    chunks: List of chunks\n    link_graph: Internal link adjacency list\n    stats: Statistics (total_chunks, avg_tokens, etc.)\n    errors: Errors encountered during chunking"
+    },
+    "presence": {
+      "module": true,
+      "class:DocNode": true,
+      "class:DocumentIR": true,
+      "class:DocumentIR|method:to_dict": true,
+      "class:DocumentIR|method:_node_to_dict": false,
+      "class:ChunkPolicy": true,
+      "class:Chunk": true,
+      "class:ChunkResult": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/ir.py",
+      "fingerprint": "801d431162586266c011d04e1a8957f7e4bd9a0c64cb6b6ed44fe8115c85c593",
+      "timestamp": "2025-12-17T03:56:25.877787Z",
+      "entity_count": 8,
+      "documented_count": 8,
+      "entities": [
+        "class:Chunk",
+        "class:ChunkPolicy",
+        "class:ChunkResult",
+        "class:DocNode",
+        "class:DocumentIR",
+        "class:DocumentIR|method:_node_to_dict",
+        "class:DocumentIR|method:to_dict",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

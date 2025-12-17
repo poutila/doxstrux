@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "mtime": 1765513336.9940794,
+    "size": 3144,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/math.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Math extractor - Extract mathematical expressions from markdown AST.\n\nThis module extracts math elements from the markdown AST, including:\n- Inline math: $E = mc^2$ (via texmath plugin)\n- Display math: $$...$$  (via texmath plugin)\n- Fenced math blocks: ```math ... ``` (standard fence with math info string)\n\nThe texmath plugin must be enabled in the parser for inline/display math detection.\n\nFunctions:\n    extract_math: Extract all math expressions with metadata",
+      "functions": [
+        {
+          "name": "extract_math",
+          "args": [
+            "tokens"
+          ],
+          "returns": "dict[str, list[dict]]",
+          "raises": [],
+          "doc": "Extract all math expressions from tokens.\n\nReturns both block-level and inline math expressions with line attribution.\n\nArgs:\n    tokens: Token list from markdown-it parser (must have texmath plugin enabled)\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists:\n    {\n        'blocks': [\n            {\n                'id': 'math_block_0',\n                'kind': 'display' | 'fenced',  # $$...$$ or ```math\n                'content': 'a^2 + b^2 = c^2',\n                'start_line': 10,\n                'end_line': 12\n            }\n        ],\n        'inline': [\n            {\n                'id': 'math_inline_0',\n                'content': 'E = mc^2',\n                'line': 5\n            }\n        ]\n    }\n\nExamples:\n    >>> tokens = parser.tokens  # Parser with texmath_plugin enabled\n    >>> math_data = extract_math(tokens)\n    >>> math_data['blocks'][0]['content']\n    '\\int_0^1 x^2\\,dx = \\tfrac{1}{3}'"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Math extractor - Extract mathematical expressions from markdown AST.\n\nThis module extracts math elements from the markdown AST, including:\n- Inline math: $E = mc^2$ (via texmath plugin)\n- Display math: $$...$$  (via texmath plugin)\n- Fenced math blocks: ```math ... ``` (standard fence with math info string)\n\nThe texmath plugin must be enabled in the parser for inline/display math detection.\n\nFunctions:\n    extract_math: Extract all math expressions with metadata",
+      "function:extract_math": "Extract all math expressions from tokens.\n\nReturns both block-level and inline math expressions with line attribution.\n\nArgs:\n    tokens: Token list from markdown-it parser (must have texmath plugin enabled)\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists:\n    {\n        'blocks': [\n            {\n                'id': 'math_block_0',\n                'kind': 'display' | 'fenced',  # $$...$$ or ```math\n                'content': 'a^2 + b^2 = c^2',\n                'start_line': 10,\n                'end_line': 12\n            }\n        ],\n        'inline': [\n            {\n                'id': 'math_inline_0',\n                'content': 'E = mc^2',\n                'line': 5\n            }\n        ]\n    }\n\nExamples:\n    >>> tokens = parser.tokens  # Parser with texmath_plugin enabled\n    >>> math_data = extract_math(tokens)\n    >>> math_data['blocks'][0]['content']\n    '\\int_0^1 x^2\\,dx = \\tfrac{1}{3}'"
+    },
+    "presence": {
+      "module": true,
+      "function:extract_math": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/math.py",
+      "fingerprint": "7471d4ad3cd965bdd0e88e38e05c0621e523f765c90efd6cfc77fe04561a13d5",
+      "timestamp": "2025-12-17T03:56:25.576600Z",
+      "entity_count": 2,
+      "documented_count": 2,
+      "entities": [
+        "function:extract_math",
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

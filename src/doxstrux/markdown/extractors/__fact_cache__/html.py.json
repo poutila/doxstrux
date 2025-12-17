@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "mtime": 1765391554.0105996,
+    "size": 5295,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/html.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "HTML extractor - Extract HTML blocks and inline HTML for security scanning.\n\nThis module extracts HTML elements from markdown, including:\n- HTML blocks (full-line HTML tags)\n- Inline HTML (tags within paragraphs)\n- Tag hints for downstream sanitizers\n\nFunctions:\n    extract_html: Extract all HTML with security metadata\n    extract_html_tag_hints: Extract tag names from HTML content",
+      "functions": [
+        {
+          "name": "extract_html",
+          "args": [
+            "tree",
+            "tokens",
+            "config",
+            "process_tree_func",
+            "find_section_id_func",
+            "slice_lines_raw_func"
+          ],
+          "returns": "dict[str, list[dict]]",
+          "raises": [],
+          "doc": "Extract both HTML blocks and inline HTML (always, for security scanning).\n\nRAG Safety: Always extracts HTML but marks with 'allowed' flag based on config.\n\nArgs:\n    tree: The markdown AST tree\n    tokens: List of markdown-it Token objects\n    config: Parser configuration dict\n    process_tree_func: Function to process tree nodes\n    find_section_id_func: Function to find section ID for a line number\n    slice_lines_raw_func: Function to extract raw lines from source\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists.\n    Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs."
+        },
+        {
+          "name": "extract_html_tag_hints",
+          "args": [
+            "html_content"
+          ],
+          "returns": "list[str]",
+          "raises": [],
+          "doc": "Extract HTML tag names for downstream sanitizer hints.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    html_content: HTML content string\n\nReturns:\n    List of tag names found in the HTML (deduplicated)"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "HTML extractor - Extract HTML blocks and inline HTML for security scanning.\n\nThis module extracts HTML elements from markdown, including:\n- HTML blocks (full-line HTML tags)\n- Inline HTML (tags within paragraphs)\n- Tag hints for downstream sanitizers\n\nFunctions:\n    extract_html: Extract all HTML with security metadata\n    extract_html_tag_hints: Extract tag names from HTML content",
+      "function:extract_html": "Extract both HTML blocks and inline HTML (always, for security scanning).\n\nRAG Safety: Always extracts HTML but marks with 'allowed' flag based on config.\n\nArgs:\n    tree: The markdown AST tree\n    tokens: List of markdown-it Token objects\n    config: Parser configuration dict\n    process_tree_func: Function to process tree nodes\n    find_section_id_func: Function to find section ID for a line number\n    slice_lines_raw_func: Function to extract raw lines from source\n\nReturns:\n    Dictionary with 'blocks' and 'inline' lists.\n    Inline HTML includes <span>, <em>, <strong>, etc. that appear in paragraphs.",
+      "function:extract_html|function:html_processor": null,
+      "function:extract_html_tag_hints": "Extract HTML tag names for downstream sanitizer hints.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    html_content: HTML content string\n\nReturns:\n    List of tag names found in the HTML (deduplicated)"
+    },
+    "presence": {
+      "module": true,
+      "function:extract_html": true,
+      "function:extract_html|function:html_processor": true,
+      "function:extract_html_tag_hints": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/html.py",
+      "fingerprint": "317244b747852fc4d094ae4a92f24a35f4417907e6836084fd107a893dbd83e5",
+      "timestamp": "2025-12-17T03:56:25.402147Z",
+      "entity_count": 4,
+      "documented_count": 3,
+      "entities": [
+        "function:extract_html",
+        "function:extract_html_tag_hints",
+        "function:extract_html|function:html_processor",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_html.html_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

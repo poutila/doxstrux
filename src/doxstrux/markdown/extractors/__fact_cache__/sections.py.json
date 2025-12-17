@@ -1,0 +1,104 @@
+{
+  "metadata": {
+    "mtime": 1765391490.979977,
+    "size": 9508,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/sections.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Section and heading extractors - Document structure with hierarchy.\n\nThis module extracts sections and headings from the markdown AST, including:\n- Sections defined by headings with content ranges\n- Heading hierarchy with parent relationships\n- Stable slug-based IDs for linking\n\nFunctions:\n    extract_sections: Extract document sections with preserved content\n    extract_headings: Extract all headings with hierarchy\n    slugify_base: Convert text to base slug format",
+      "functions": [
+        {
+          "name": "extract_sections",
+          "args": [
+            "tree",
+            "lines",
+            "process_tree_func",
+            "heading_level_func",
+            "get_text_func",
+            "slice_lines_raw_func",
+            "plain_text_in_range_func",
+            "span_from_lines_func",
+            "cache"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract document sections with preserved content.\n\nSections are defined by headings and contain all content\nuntil the next heading of equal or higher level.\n\nArgs:\n    tree: The markdown AST tree\n    lines: List of source lines\n    process_tree_func: Function to process tree nodes\n    heading_level_func: Function to get heading level from node\n    get_text_func: Function to extract text from node\n    slice_lines_raw_func: Function to slice raw lines\n    plain_text_in_range_func: Function to get plain text in range\n    span_from_lines_func: Function to get character spans\n    cache: Optional cache dict\n\nReturns:\n    List of section dicts with hierarchy and content"
+        },
+        {
+          "name": "extract_headings",
+          "args": [
+            "tree",
+            "tokens",
+            "process_tree_func",
+            "heading_level_func",
+            "get_text_func",
+            "span_from_lines_func"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract all headings with hierarchy using stable slug-based IDs.\n\nSECURITY: Only extracts top-level headings (not nested in lists/blockquotes)\nto prevent heading creepage vulnerabilities.\n\nArgs:\n    tree: The markdown AST tree\n    tokens: List of markdown-it Token objects\n    process_tree_func: Function to process tree nodes\n    heading_level_func: Function to get heading level from node\n    get_text_func: Function to extract text from node\n    span_from_lines_func: Function to get character spans\n\nReturns:\n    List of heading dicts with hierarchy"
+        },
+        {
+          "name": "slugify_base",
+          "args": [
+            "text"
+          ],
+          "returns": "str",
+          "raises": [],
+          "doc": "Convert text to base slug format without de-duplication for stable IDs.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    text: Text to slugify\n\nReturns:\n    Slugified text or \"untitled\" if empty"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Section and heading extractors - Document structure with hierarchy.\n\nThis module extracts sections and headings from the markdown AST, including:\n- Sections defined by headings with content ranges\n- Heading hierarchy with parent relationships\n- Stable slug-based IDs for linking\n\nFunctions:\n    extract_sections: Extract document sections with preserved content\n    extract_headings: Extract all headings with hierarchy\n    slugify_base: Convert text to base slug format",
+      "function:extract_sections": "Extract document sections with preserved content.\n\nSections are defined by headings and contain all content\nuntil the next heading of equal or higher level.\n\nArgs:\n    tree: The markdown AST tree\n    lines: List of source lines\n    process_tree_func: Function to process tree nodes\n    heading_level_func: Function to get heading level from node\n    get_text_func: Function to extract text from node\n    slice_lines_raw_func: Function to slice raw lines\n    plain_text_in_range_func: Function to get plain text in range\n    span_from_lines_func: Function to get character spans\n    cache: Optional cache dict\n\nReturns:\n    List of section dicts with hierarchy and content",
+      "function:extract_sections|function:section_processor": null,
+      "function:extract_headings": "Extract all headings with hierarchy using stable slug-based IDs.\n\nSECURITY: Only extracts top-level headings (not nested in lists/blockquotes)\nto prevent heading creepage vulnerabilities.\n\nArgs:\n    tree: The markdown AST tree\n    tokens: List of markdown-it Token objects\n    process_tree_func: Function to process tree nodes\n    heading_level_func: Function to get heading level from node\n    get_text_func: Function to extract text from node\n    span_from_lines_func: Function to get character spans\n\nReturns:\n    List of heading dicts with hierarchy",
+      "function:extract_headings|function:heading_processor": null,
+      "function:slugify_base": "Convert text to base slug format without de-duplication for stable IDs.\n\nPhase 8: Zero-regex implementation using string operations.\n\nArgs:\n    text: Text to slugify\n\nReturns:\n    Slugified text or \"untitled\" if empty"
+    },
+    "presence": {
+      "module": true,
+      "function:extract_sections": true,
+      "function:extract_sections|function:section_processor": true,
+      "function:extract_headings": true,
+      "function:extract_headings|function:heading_processor": true,
+      "function:slugify_base": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/sections.py",
+      "fingerprint": "9d4a8afc0ae8b781d88a6ae8a66a3e5f6d8ff106940e1e97c37cf3b0a1eb6549",
+      "timestamp": "2025-12-17T03:56:25.690170Z",
+      "entity_count": 6,
+      "documented_count": 4,
+      "entities": [
+        "function:extract_headings",
+        "function:extract_headings|function:heading_processor",
+        "function:extract_sections",
+        "function:extract_sections|function:section_processor",
+        "function:slugify_base",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_headings.heading_processor",
+      "Document nested function extract_sections.section_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

@@ -1,0 +1,96 @@
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-YML-001] Document must start with: ---
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-YML-002] Required block 'prose_input' not found in document
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'schema_version' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'project_name' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'runner' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'runner_prefix' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'search_tool' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-006] YAML field 'runner' not found in front matter
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-007] YAML field 'search_tool' not found in front matter
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-001] Required heading not found: ## SSOT Declaration
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-002] Required heading not found: ## Scope
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-003] Required heading not found: ### In Scope
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-004] Required heading not found: ### Out of Scope
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-005] Required heading not found: ## Decisions (Binding)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-006] Required heading not found: ## External Dependencies
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-007] Required heading not found: ## File Manifest
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-008] Required heading not found: ## Test Strategy
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-009] Required heading not found: ## Phase 0
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-010] Required heading not found: ### Required Files/Modules
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-011] Required heading not found: ### Required Libraries
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-012] Required heading not found: ### Required Tools
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:56: [PIN-FBN-001] Forbidden pattern 'TBD' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:725: [PIN-FBN-004] Forbidden pattern 'could' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1785: [PIN-FBN-004] Forbidden pattern 'might' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:56: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:620: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1629: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1819: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1894: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:56: [PIN-FBN-007] Forbidden pattern 'TBD by' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:249: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:371: [PIN-CTX-001] Forbidden pattern 'reasonable' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:549: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:555: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:590: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:833: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:837: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:845: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1170: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1441: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1597: [PIN-DEC-002] Table missing required columns: ID, Decision, Rationale
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-CHK-001] Required heading not found: ## Checklist Before Submission
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:375: [PIN-CHK-002] Checkbox must be checked: `all_keys.txt` generated with field paths observed
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:376: [PIN-CHK-002] Checkbox must be checked: Expected top-level keys (metadata, content, struct
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:377: [PIN-CHK-002] Checkbox must be checked: Any unexpected keys noted for investigation (not b
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:378: [PIN-CHK-002] Checkbox must be checked: **Security fields verified in `sample_outputs.json
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:503: [PIN-CHK-002] Checkbox must be checked: Tests verify `ALLOWED_PLUGINS["permissive"]` inclu
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:504: [PIN-CHK-002] Checkbox must be checked: NO new plugin list created - use `config.py:ALLOWE
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:505: [PIN-CHK-002] Checkbox must be checked: Parser output includes `math` and `footnotes` with
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:559: [PIN-CHK-002] Checkbox must be checked: Invariant tests pass against real parser output
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:560: [PIN-CHK-002] Checkbox must be checked: Tests run AFTER Milestone A schema is validated
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:574: [PIN-CHK-002] Checkbox must be checked: `tools/discover_parser_shape.py` executed successf
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:575: [PIN-CHK-002] Checkbox must be checked: `all_keys.txt` generated - spot-check for obvious 
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:576: [PIN-CHK-002] Checkbox must be checked: **Security field verification passed** (Phase 0.1.
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:577: [PIN-CHK-002] Checkbox must be checked: NO requirement for "0 unknown fields" yet (that's 
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:578: [PIN-CHK-002] Checkbox must be checked: Proceed to Milestone A to create minimal schema
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:879: [PIN-CHK-002] Checkbox must be checked: `uv add "pydantic>=2,<3"` executed
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:880: [PIN-CHK-002] Checkbox must be checked: `src/doxstrux/markdown/output_models.py` created w
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:881: [PIN-CHK-002] Checkbox must be checked: `tests/test_output_models_minimal.py` passes (both
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:882: [PIN-CHK-002] Checkbox must be checked: `ParserOutput.model_validate(parser.parse())` work
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:883: [PIN-CHK-002] Checkbox must be checked: **RAG safety tests pass**: `test_script_tag_detect
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:884: [PIN-CHK-002] Checkbox must be checked: Any extra fields logged for review (will be addres
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1040: [PIN-CHK-002] Checkbox must be checked: B1.5a: `Content`, `Mappings` typed and validated
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1041: [PIN-CHK-002] Checkbox must be checked: B1.5b: `Section`, `Heading`, `Paragraph` typed and
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1042: [PIN-CHK-002] Checkbox must be checked: B1.5c: `List`, `Tasklist` with recursive items typ
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1043: [PIN-CHK-002] Checkbox must be checked: B1.5d: `Table`, `CodeBlock`, `Blockquote` typed an
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1044: [PIN-CHK-002] Checkbox must be checked: B1.5e: `Link`, `Image`, `Math`, `Footnotes`, `HTML
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1045: [PIN-CHK-002] Checkbox must be checked: **DoxBaseModel switched to `extra="forbid"`** (enf
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1046: [PIN-CHK-002] Checkbox must be checked: `extra="forbid"` on ALL models (no more `dict[str,
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1047: [PIN-CHK-002] Checkbox must be checked: Full schema export works
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1048: [PIN-CHK-002] Checkbox must be checked: **DocumentIR regression test passes** (see below)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1166: [PIN-CHK-002] Checkbox must be checked: `Metadata`, `Security`, `SecurityStatistics`, `Sec
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1167: [PIN-CHK-002] Checkbox must be checked: `extra="forbid"` on Metadata and Security models
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1168: [PIN-CHK-002] Checkbox must be checked: `tools/export_schema.py` created (partial schema -
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1169: [PIN-CHK-002] Checkbox must be checked: Spot-check: `ParserOutput.model_validate()` passes
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1170: [PIN-CHK-002] Checkbox must be checked: RAG safety tests still pass (script detection, cle
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1178: [PIN-CHK-002] Checkbox must be checked: All remaining models added (`Content`, `Structure`
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1179: [PIN-CHK-002] Checkbox must be checked: `extra="forbid"` on ALL models (no more `dict[str,
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1180: [PIN-CHK-002] Checkbox must be checked: Schema export now covers full structure
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1181: [PIN-CHK-002] Checkbox must be checked: Spot-check: `ParserOutput.model_validate()` passes
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1182: [PIN-CHK-002] Checkbox must be checked: **DocumentIR regression test passes** (B1.5f)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1272: [PIN-CHK-002] Checkbox must be checked: `tools/validate_curated_fixtures.py` passes (patte
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1273: [PIN-CHK-002] Checkbox must be checked: `tools/regenerate_fixtures.py` created with bucket
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1274: [PIN-CHK-002] Checkbox must be checked: NO hand-maintained fixture lists (patterns only)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1275: [PIN-CHK-002] Checkbox must be checked: **Legacy field audit completed** (B2.4)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1276: [PIN-CHK-002] Checkbox must be checked: **Legacy field audit test passes** (B2.5 - enforce
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1465: [PIN-CHK-002] Checkbox must be checked: `tools/validate_test_pairs.py` created with `--rep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1466: [PIN-CHK-002] Checkbox must be checked: All fixtures run through validation in report-only
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1467: [PIN-CHK-002] Checkbox must be checked: JSON report generated with failure inventory
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1468: [PIN-CHK-002] Checkbox must be checked: Known failures triaged into: schema fix, parser fi
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1469: [PIN-CHK-002] Checkbox must be checked: Report-only CI job runs on every PR (informational
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1587: [PIN-CHK-002] Checkbox must be checked: CI job created with 100% threshold (blocking)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1588: [PIN-CHK-002] Checkbox must be checked: Schema version test passes
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1589: [PIN-CHK-002] Checkbox must be checked: Schema drift detection works (git diff check)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1590: [PIN-CHK-002] Checkbox must be checked: Pre-commit hook installed (optional but recommende
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1591: [PIN-CHK-002] Checkbox must be checked: All existing fixtures pass validation

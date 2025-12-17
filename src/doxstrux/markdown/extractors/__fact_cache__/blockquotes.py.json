@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "mtime": 1765370638.4514096,
+    "size": 2994,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/blockquotes.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Blockquote extractor - Extract blockquotes with nested structure analysis.\n\nThis module extracts blockquote elements from the markdown AST, including:\n- Blockquote content and line ranges\n- Nested structure summaries (lists, tables, code blocks)\n- Section attribution for context\n\nFunctions:\n    extract_blockquotes: Extract all blockquotes with metadata",
+      "functions": [
+        {
+          "name": "extract_blockquotes",
+          "args": [
+            "tree",
+            "process_tree_func",
+            "find_section_id_func",
+            "get_text_func"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract all blockquotes from the document.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes (usually parser.process_tree)\n    find_section_id_func: Function to find section ID for a line number\n    get_text_func: Function to extract text from a node\n\nReturns:\n    List of blockquote records with content and metadata.\n\nNote: For richer nested data extraction, existing extractors can be reused\nwith line-range filters on the children_blocks ranges."
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Blockquote extractor - Extract blockquotes with nested structure analysis.\n\nThis module extracts blockquote elements from the markdown AST, including:\n- Blockquote content and line ranges\n- Nested structure summaries (lists, tables, code blocks)\n- Section attribution for context\n\nFunctions:\n    extract_blockquotes: Extract all blockquotes with metadata",
+      "function:extract_blockquotes": "Extract all blockquotes from the document.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes (usually parser.process_tree)\n    find_section_id_func: Function to find section ID for a line number\n    get_text_func: Function to extract text from a node\n\nReturns:\n    List of blockquote records with content and metadata.\n\nNote: For richer nested data extraction, existing extractors can be reused\nwith line-range filters on the children_blocks ranges.",
+      "function:extract_blockquotes|function:blockquote_processor": null
+    },
+    "presence": {
+      "module": true,
+      "function:extract_blockquotes": true,
+      "function:extract_blockquotes|function:blockquote_processor": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/blockquotes.py",
+      "fingerprint": "94c49c7e716838c25d72f9d565c534a4d50a36ce6943d5f5a9b4d10ef1e83715",
+      "timestamp": "2025-12-17T03:56:25.259175Z",
+      "entity_count": 3,
+      "documented_count": 2,
+      "entities": [
+        "function:extract_blockquotes",
+        "function:extract_blockquotes|function:blockquote_processor",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_blockquotes.blockquote_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

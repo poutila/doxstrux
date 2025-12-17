@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "mtime": 1765370638.451645,
+    "size": 2161,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/paragraphs.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Paragraph extractor - Extract paragraphs with metadata.\n\nThis module extracts paragraph elements from the markdown AST, including:\n- Paragraph text content\n- Line ranges\n- Word counts\n- Presence of links, emphasis, and inline code\n\nFunctions:\n    extract_paragraphs: Extract all paragraphs with metadata",
+      "functions": [
+        {
+          "name": "extract_paragraphs",
+          "args": [
+            "tree",
+            "process_tree_func",
+            "get_text_func",
+            "find_section_id_func",
+            "has_child_type_func"
+          ],
+          "returns": "list[dict]",
+          "raises": [],
+          "doc": "Extract all paragraphs with metadata.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes\n    get_text_func: Function to extract text from node\n    find_section_id_func: Function to find section ID for a line number\n    has_child_type_func: Function to check if node has child of type\n\nReturns:\n    List of paragraph dicts with metadata"
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Paragraph extractor - Extract paragraphs with metadata.\n\nThis module extracts paragraph elements from the markdown AST, including:\n- Paragraph text content\n- Line ranges\n- Word counts\n- Presence of links, emphasis, and inline code\n\nFunctions:\n    extract_paragraphs: Extract all paragraphs with metadata",
+      "function:extract_paragraphs": "Extract all paragraphs with metadata.\n\nArgs:\n    tree: The markdown AST tree\n    process_tree_func: Function to process tree nodes\n    get_text_func: Function to extract text from node\n    find_section_id_func: Function to find section ID for a line number\n    has_child_type_func: Function to check if node has child of type\n\nReturns:\n    List of paragraph dicts with metadata",
+      "function:extract_paragraphs|function:paragraph_processor": null
+    },
+    "presence": {
+      "module": true,
+      "function:extract_paragraphs": true,
+      "function:extract_paragraphs|function:paragraph_processor": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/extractors/paragraphs.py",
+      "fingerprint": "0bfd3e3d8f991aa7abb22a7c8f433f660da9f1a29f33033a37b0e905631dfb26",
+      "timestamp": "2025-12-17T03:56:25.643208Z",
+      "entity_count": 3,
+      "documented_count": 2,
+      "entities": [
+        "function:extract_paragraphs",
+        "function:extract_paragraphs|function:paragraph_processor",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document nested function extract_paragraphs.paragraph_processor"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

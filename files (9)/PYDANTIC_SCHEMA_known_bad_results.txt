@@ -1,0 +1,496 @@
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-YML-001] Document must start with: YAML front matter delimited by `---
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-YML-002] Required block 'prose_input:' not found in document
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'schema_version' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'project_name' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'runner' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'runner_prefix' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:17: [PIN-YML-003] Required YAML field 'search_tool' not found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:3: [PIN-YML-006] Invalid value 'DESIGN'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:25: [PIN-YML-006] Invalid value 'We'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:26: [PIN-YML-006] Invalid value 'Current'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:27: [PIN-YML-006] Invalid value 'Parser'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:28: [PIN-YML-006] Invalid value 'Pydantic'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:50: [PIN-YML-006] Invalid value 'This'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:61: [PIN-YML-006] Invalid value 'field'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:63: [PIN-YML-006] Invalid value 'field'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:102: [PIN-YML-006] Invalid value 'RESOLVED'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:103: [PIN-YML-006] Invalid value 'RESOLVED'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:104: [PIN-YML-006] Invalid value 'Update'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:146: [PIN-YML-006] Invalid value 'ParserOutput'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:161: [PIN-YML-006] Invalid value 'str'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:163: [PIN-YML-006] Invalid value 'Metadata'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:164: [PIN-YML-006] Invalid value 'Content'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:165: [PIN-YML-006] Invalid value 'Structure'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:166: [PIN-YML-006] Invalid value 'Mappings'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:179: [PIN-YML-006] Invalid value 'Returns'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:209: [PIN-YML-006] Invalid value 'field'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:248: [PIN-YML-006] Invalid value 'evil'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:268: [PIN-YML-006] Invalid value 'This'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:274: [PIN-YML-006] Invalid value 'Discovery'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:280: [PIN-YML-006] Invalid value 'Shape'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:302: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:323: [PIN-YML-006] Invalid value '3'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:326: [PIN-YML-006] Invalid value 'set'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:329: [PIN-YML-006] Invalid value '50'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:335: [PIN-YML-006] Invalid value 'str'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:350: [PIN-YML-006] Invalid value '10'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:355: [PIN-YML-006] Invalid value 'Compare'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:365: [PIN-YML-006] Invalid value 'tools'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:366: [PIN-YML-006] Invalid value 'tools'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:380: [PIN-YML-006] Invalid value 'Security'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:399: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:413: [PIN-YML-006] Invalid value 'missing'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:438: [PIN-YML-006] Invalid value 'Key'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:447: [PIN-YML-006] Invalid value 'Plugin'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:449: [PIN-YML-006] Invalid value 'ALLOWED_PLUGINS'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:453: [PIN-YML-006] Invalid value 'ALLOWED_PLUGINS'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:504: [PIN-YML-006] Invalid value 'ALLOWED_PLUGINS'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:507: [PIN-YML-006] Invalid value 'Embedding'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:529: [PIN-YML-006] Invalid value 'If'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:535: [PIN-YML-006] Invalid value 'image'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:544: [PIN-YML-006] Invalid value 'security'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:582: [PIN-YML-006] Invalid value 'RAG'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:599: [PIN-YML-006] Invalid value 'RAG'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:602: [PIN-YML-006] Invalid value 'Add'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:608: [PIN-YML-006] Invalid value 'Create'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:616: [PIN-YML-006] Invalid value 'Top'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:619: [PIN-YML-006] Invalid value 'ParserOutput'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:620: [PIN-YML-006] Invalid value 'Add'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:621: [PIN-YML-006] Invalid value 'Full'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:635: [PIN-YML-006] Invalid value 'extra'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:636: [PIN-YML-006] Invalid value 'DoxBaseModel'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:638: [PIN-YML-006] Invalid value 'Switch'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:639: [PIN-YML-006] Invalid value 'DoxBaseModel'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:651: [PIN-YML-006] Invalid value 'str'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:654: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:655: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:656: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:657: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:668: [PIN-YML-006] Invalid value '0'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:669: [PIN-YML-006] Invalid value '0'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:670: [PIN-YML-006] Invalid value 'False'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:671: [PIN-YML-006] Invalid value 'False'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:672: [PIN-YML-006] Invalid value 'False'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:673: [PIN-YML-006] Invalid value 'False'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:674: [PIN-YML-006] Invalid value 'False'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:689: [PIN-YML-006] Invalid value 'None'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:727: [PIN-YML-006] Invalid value 'Create'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:733: [PIN-YML-006] Invalid value 'Minimal'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:749: [PIN-YML-006] Invalid value 'Top'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:800: [PIN-YML-006] Invalid value 'Early'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:827: [PIN-YML-006] Invalid value 'Script'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:829: [PIN-YML-006] Invalid value 'Dangerous'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:849: [PIN-YML-006] Invalid value 'links'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:853: [PIN-YML-006] Invalid value 'alert'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:863: [PIN-YML-006] Invalid value 'should'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:874: [PIN-YML-006] Invalid value 'javascript'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:903: [PIN-YML-006] Invalid value 'Metadata'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:920: [PIN-YML-006] Invalid value 'Add'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:930: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:931: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:932: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:942: [PIN-YML-006] Invalid value 'Metadata'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:943: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:944: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:945: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:950: [PIN-YML-006] Invalid value 'Structure'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:960: [PIN-YML-006] Invalid value 'Content'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:967: [PIN-YML-006] Invalid value 'str'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:968: [PIN-YML-006] Invalid value 'list'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:971: [PIN-YML-006] Invalid value 'int'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:972: [PIN-YML-006] Invalid value 'int'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:973: [PIN-YML-006] Invalid value 'str'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:976: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:977: [PIN-YML-006] Invalid value 'dict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:978: [PIN-YML-006] Invalid value 'list'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:979: [PIN-YML-006] Invalid value 'list'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:980: [PIN-YML-006] Invalid value 'list'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:988: [PIN-YML-006] Invalid value 'Sections'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:998: [PIN-YML-006] Invalid value 'Lists'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1010: [PIN-YML-006] Invalid value 'Tables'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1020: [PIN-YML-006] Invalid value 'Links'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1050: [PIN-YML-006] Invalid value 'DocumentIR'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1088: [PIN-YML-006] Invalid value 'str'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1102: [PIN-YML-006] Invalid value 'heading'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1123: [PIN-YML-006] Invalid value 'Schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1131: [PIN-YML-006] Invalid value 'F401'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1170: [PIN-YML-006] Invalid value 'links'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1188: [PIN-YML-006] Invalid value 'Validation'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1196: [PIN-YML-006] Invalid value 'Curated'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1217: [PIN-YML-006] Invalid value 'Curated'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1226: [PIN-YML-006] Invalid value 'Path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1238: [PIN-YML-006] Invalid value 'Fixture'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1253: [PIN-YML-006] Invalid value 'Path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1259: [PIN-YML-006] Invalid value 'path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1260: [PIN-YML-006] Invalid value 'path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1261: [PIN-YML-006] Invalid value 'everything'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1278: [PIN-YML-006] Invalid value 'Legacy'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1287: [PIN-YML-006] Invalid value 'Only'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1288: [PIN-YML-006] Invalid value 'DO'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1301: [PIN-YML-006] Invalid value 'Legacy'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1329: [PIN-YML-006] Invalid value 'str'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1365: [PIN-YML-006] Invalid value 'Full'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1371: [PIN-YML-006] Invalid value 'Full'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1386: [PIN-YML-006] Invalid value 'Path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1393: [PIN-YML-006] Invalid value '100'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1398: [PIN-YML-006] Invalid value 'CI'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1427: [PIN-YML-006] Invalid value 'Schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1468: [PIN-YML-006] Invalid value 'schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1473: [PIN-YML-006] Invalid value 'CI'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1479: [PIN-YML-006] Invalid value 'Version'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1484: [PIN-YML-006] Invalid value 'Schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1490: [PIN-YML-006] Invalid value 'ubuntu'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1492: [PIN-YML-006] Invalid value 'actions'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1493: [PIN-YML-006] Invalid value 'astral'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1497: [PIN-YML-006] Invalid value 'Check'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1508: [PIN-YML-006] Invalid value 'Validate'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1512: [PIN-YML-006] Invalid value 'export_schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1513: [PIN-YML-006] Invalid value 'Export'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1520: [PIN-YML-006] Invalid value 'Version'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1551: [PIN-YML-006] Invalid value 'parser'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1569: [PIN-YML-006] Invalid value 'Pre'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1575: [PIN-YML-006] Invalid value 'local'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1577: [PIN-YML-006] Invalid value 'schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1578: [PIN-YML-006] Invalid value 'Validate'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1580: [PIN-YML-006] Invalid value 'system'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1581: [PIN-YML-006] Invalid value 'false'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1615: [PIN-YML-006] Invalid value 'This'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1623: [PIN-YML-006] Invalid value 'link'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1656: [PIN-YML-006] Invalid value 'capture'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1657: [PIN-YML-006] Invalid value 'unknown'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1671: [PIN-YML-006] Invalid value 'identify'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1686: [PIN-YML-006] Invalid value 'typed'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1693: [PIN-YML-006] Invalid value 'Add'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1694: [PIN-YML-006] Invalid value 'Switch'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1711: [PIN-YML-006] Invalid value 'Ensure'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1749: [PIN-YML-006] Invalid value 'DoxBaseModel'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1758: [PIN-YML-006] Invalid value 'DoxBaseModel'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1778: [PIN-YML-006] Invalid value 'Path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1779: [PIN-YML-006] Invalid value 'Path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1780: [PIN-YML-006] Invalid value 'Everything'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1792: [PIN-YML-006] Invalid value 'URLs'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1793: [PIN-YML-006] Invalid value 'image'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1799: [PIN-YML-006] Invalid value 'Path'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1815: [PIN-YML-006] Invalid value 'Structural'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1826: [PIN-YML-006] Invalid value 'Security'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1838: [PIN-YML-006] Invalid value 'Legacy'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1845: [PIN-YML-006] Invalid value 'is'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1846: [PIN-YML-006] Invalid value 'move'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1847: [PIN-YML-006] Invalid value 'either'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1866: [PIN-YML-006] Invalid value 'Pydantic'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1874: [PIN-YML-006] Invalid value 'Schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1875: [PIN-YML-006] Invalid value 'Test'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1876: [PIN-YML-006] Invalid value 'Fixture'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1881: [PIN-YML-006] Invalid value 'Top'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1882: [PIN-YML-006] Invalid value 'Full'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1883: [PIN-YML-006] Invalid value 'CI'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1890: [PIN-YML-006] Invalid value 'All'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1891: [PIN-YML-006] Invalid value 'All'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1892: [PIN-YML-006] Invalid value 'Schema'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1893: [PIN-YML-006] Invalid value 'Pydantic'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1894: [PIN-YML-006] Invalid value 'Script'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1910: [PIN-YML-006] Invalid value 'Set'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1911: [PIN-YML-006] Invalid value 'Generate'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1912: [PIN-YML-006] Invalid value 'Classify'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1913: [PIN-YML-006] Invalid value 'Address'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1914: [PIN-YML-006] Invalid value 'Only'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1962: [PIN-YML-006] Invalid value 'This'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2008: [PIN-YML-006] Invalid value 'DecodeResult'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2009: [PIN-YML-006] Invalid value 'SectionIndex'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2018: [PIN-YML-006] Invalid value 'Test'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2022: [PIN-YML-006] Invalid value 'Chunker'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2029: [PIN-YML-006] Invalid value 'These'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2066: [PIN-YML-006] Invalid value 'Initial'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2067: [PIN-YML-006] Invalid value 'Alignment'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2068: [PIN-YML-006] Invalid value 'Full'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2069: [PIN-YML-006] Invalid value 'Strict'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2070: [PIN-YML-006] Invalid value 'Ultra'. Must be one of: uv, npm, cargo, go, poetry, pipenv
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:3: [PIN-YML-007] Invalid value 'DESIGN'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:25: [PIN-YML-007] Invalid value 'We'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:26: [PIN-YML-007] Invalid value 'Current'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:27: [PIN-YML-007] Invalid value 'Parser'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:28: [PIN-YML-007] Invalid value 'Pydantic'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:50: [PIN-YML-007] Invalid value 'This'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:61: [PIN-YML-007] Invalid value 'field'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:63: [PIN-YML-007] Invalid value 'field'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:102: [PIN-YML-007] Invalid value 'RESOLVED'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:103: [PIN-YML-007] Invalid value 'RESOLVED'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:104: [PIN-YML-007] Invalid value 'Update'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:146: [PIN-YML-007] Invalid value 'ParserOutput'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:161: [PIN-YML-007] Invalid value 'str'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:163: [PIN-YML-007] Invalid value 'Metadata'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:164: [PIN-YML-007] Invalid value 'Content'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:165: [PIN-YML-007] Invalid value 'Structure'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:166: [PIN-YML-007] Invalid value 'Mappings'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:179: [PIN-YML-007] Invalid value 'Returns'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:209: [PIN-YML-007] Invalid value 'field'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:248: [PIN-YML-007] Invalid value 'evil'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:268: [PIN-YML-007] Invalid value 'This'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:274: [PIN-YML-007] Invalid value 'Discovery'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:280: [PIN-YML-007] Invalid value 'Shape'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:302: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:323: [PIN-YML-007] Invalid value '3'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:326: [PIN-YML-007] Invalid value 'set'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:329: [PIN-YML-007] Invalid value '50'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:335: [PIN-YML-007] Invalid value 'str'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:350: [PIN-YML-007] Invalid value '10'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:355: [PIN-YML-007] Invalid value 'Compare'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:365: [PIN-YML-007] Invalid value 'tools'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:366: [PIN-YML-007] Invalid value 'tools'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:380: [PIN-YML-007] Invalid value 'Security'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:399: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:413: [PIN-YML-007] Invalid value 'missing'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:438: [PIN-YML-007] Invalid value 'Key'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:447: [PIN-YML-007] Invalid value 'Plugin'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:449: [PIN-YML-007] Invalid value 'ALLOWED_PLUGINS'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:453: [PIN-YML-007] Invalid value 'ALLOWED_PLUGINS'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:504: [PIN-YML-007] Invalid value 'ALLOWED_PLUGINS'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:507: [PIN-YML-007] Invalid value 'Embedding'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:529: [PIN-YML-007] Invalid value 'If'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:535: [PIN-YML-007] Invalid value 'image'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:544: [PIN-YML-007] Invalid value 'security'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:582: [PIN-YML-007] Invalid value 'RAG'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:599: [PIN-YML-007] Invalid value 'RAG'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:602: [PIN-YML-007] Invalid value 'Add'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:608: [PIN-YML-007] Invalid value 'Create'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:616: [PIN-YML-007] Invalid value 'Top'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:619: [PIN-YML-007] Invalid value 'ParserOutput'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:620: [PIN-YML-007] Invalid value 'Add'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:621: [PIN-YML-007] Invalid value 'Full'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:635: [PIN-YML-007] Invalid value 'extra'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:636: [PIN-YML-007] Invalid value 'DoxBaseModel'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:638: [PIN-YML-007] Invalid value 'Switch'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:639: [PIN-YML-007] Invalid value 'DoxBaseModel'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:651: [PIN-YML-007] Invalid value 'str'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:654: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:655: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:656: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:657: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:668: [PIN-YML-007] Invalid value '0'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:669: [PIN-YML-007] Invalid value '0'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:670: [PIN-YML-007] Invalid value 'False'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:671: [PIN-YML-007] Invalid value 'False'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:672: [PIN-YML-007] Invalid value 'False'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:673: [PIN-YML-007] Invalid value 'False'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:674: [PIN-YML-007] Invalid value 'False'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:689: [PIN-YML-007] Invalid value 'None'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:727: [PIN-YML-007] Invalid value 'Create'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:733: [PIN-YML-007] Invalid value 'Minimal'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:749: [PIN-YML-007] Invalid value 'Top'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:800: [PIN-YML-007] Invalid value 'Early'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:827: [PIN-YML-007] Invalid value 'Script'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:829: [PIN-YML-007] Invalid value 'Dangerous'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:849: [PIN-YML-007] Invalid value 'links'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:853: [PIN-YML-007] Invalid value 'alert'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:863: [PIN-YML-007] Invalid value 'should'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:874: [PIN-YML-007] Invalid value 'javascript'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:903: [PIN-YML-007] Invalid value 'Metadata'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:920: [PIN-YML-007] Invalid value 'Add'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:930: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:931: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:932: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:942: [PIN-YML-007] Invalid value 'Metadata'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:943: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:944: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:945: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:950: [PIN-YML-007] Invalid value 'Structure'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:960: [PIN-YML-007] Invalid value 'Content'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:967: [PIN-YML-007] Invalid value 'str'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:968: [PIN-YML-007] Invalid value 'list'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:971: [PIN-YML-007] Invalid value 'int'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:972: [PIN-YML-007] Invalid value 'int'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:973: [PIN-YML-007] Invalid value 'str'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:976: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:977: [PIN-YML-007] Invalid value 'dict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:978: [PIN-YML-007] Invalid value 'list'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:979: [PIN-YML-007] Invalid value 'list'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:980: [PIN-YML-007] Invalid value 'list'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:988: [PIN-YML-007] Invalid value 'Sections'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:998: [PIN-YML-007] Invalid value 'Lists'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1010: [PIN-YML-007] Invalid value 'Tables'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1020: [PIN-YML-007] Invalid value 'Links'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1050: [PIN-YML-007] Invalid value 'DocumentIR'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1088: [PIN-YML-007] Invalid value 'str'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1102: [PIN-YML-007] Invalid value 'heading'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1123: [PIN-YML-007] Invalid value 'Schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1131: [PIN-YML-007] Invalid value 'F401'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1170: [PIN-YML-007] Invalid value 'links'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1188: [PIN-YML-007] Invalid value 'Validation'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1196: [PIN-YML-007] Invalid value 'Curated'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1217: [PIN-YML-007] Invalid value 'Curated'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1226: [PIN-YML-007] Invalid value 'Path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1238: [PIN-YML-007] Invalid value 'Fixture'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1253: [PIN-YML-007] Invalid value 'Path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1259: [PIN-YML-007] Invalid value 'path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1260: [PIN-YML-007] Invalid value 'path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1261: [PIN-YML-007] Invalid value 'everything'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1278: [PIN-YML-007] Invalid value 'Legacy'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1287: [PIN-YML-007] Invalid value 'Only'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1288: [PIN-YML-007] Invalid value 'DO'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1301: [PIN-YML-007] Invalid value 'Legacy'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1329: [PIN-YML-007] Invalid value 'str'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1365: [PIN-YML-007] Invalid value 'Full'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1371: [PIN-YML-007] Invalid value 'Full'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1386: [PIN-YML-007] Invalid value 'Path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1393: [PIN-YML-007] Invalid value '100'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1398: [PIN-YML-007] Invalid value 'CI'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1427: [PIN-YML-007] Invalid value 'Schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1468: [PIN-YML-007] Invalid value 'schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1473: [PIN-YML-007] Invalid value 'CI'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1479: [PIN-YML-007] Invalid value 'Version'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1484: [PIN-YML-007] Invalid value 'Schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1490: [PIN-YML-007] Invalid value 'ubuntu'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1492: [PIN-YML-007] Invalid value 'actions'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1493: [PIN-YML-007] Invalid value 'astral'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1494: [PIN-YML-007] Invalid value 'uv'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1497: [PIN-YML-007] Invalid value 'Check'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1508: [PIN-YML-007] Invalid value 'Validate'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1512: [PIN-YML-007] Invalid value 'export_schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1513: [PIN-YML-007] Invalid value 'Export'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1520: [PIN-YML-007] Invalid value 'Version'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1551: [PIN-YML-007] Invalid value 'parser'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1569: [PIN-YML-007] Invalid value 'Pre'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1575: [PIN-YML-007] Invalid value 'local'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1577: [PIN-YML-007] Invalid value 'schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1578: [PIN-YML-007] Invalid value 'Validate'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1580: [PIN-YML-007] Invalid value 'system'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1581: [PIN-YML-007] Invalid value 'false'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1615: [PIN-YML-007] Invalid value 'This'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1623: [PIN-YML-007] Invalid value 'link'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1656: [PIN-YML-007] Invalid value 'capture'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1657: [PIN-YML-007] Invalid value 'unknown'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1671: [PIN-YML-007] Invalid value 'identify'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1686: [PIN-YML-007] Invalid value 'typed'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1693: [PIN-YML-007] Invalid value 'Add'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1694: [PIN-YML-007] Invalid value 'Switch'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1711: [PIN-YML-007] Invalid value 'Ensure'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1749: [PIN-YML-007] Invalid value 'DoxBaseModel'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1758: [PIN-YML-007] Invalid value 'DoxBaseModel'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1778: [PIN-YML-007] Invalid value 'Path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1779: [PIN-YML-007] Invalid value 'Path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1780: [PIN-YML-007] Invalid value 'Everything'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1792: [PIN-YML-007] Invalid value 'URLs'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1793: [PIN-YML-007] Invalid value 'image'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1799: [PIN-YML-007] Invalid value 'Path'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1815: [PIN-YML-007] Invalid value 'Structural'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1826: [PIN-YML-007] Invalid value 'Security'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1838: [PIN-YML-007] Invalid value 'Legacy'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1845: [PIN-YML-007] Invalid value 'is'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1846: [PIN-YML-007] Invalid value 'move'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1847: [PIN-YML-007] Invalid value 'either'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1866: [PIN-YML-007] Invalid value 'Pydantic'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1874: [PIN-YML-007] Invalid value 'Schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1875: [PIN-YML-007] Invalid value 'Test'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1876: [PIN-YML-007] Invalid value 'Fixture'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1881: [PIN-YML-007] Invalid value 'Top'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1882: [PIN-YML-007] Invalid value 'Full'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1883: [PIN-YML-007] Invalid value 'CI'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1890: [PIN-YML-007] Invalid value 'All'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1891: [PIN-YML-007] Invalid value 'All'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1892: [PIN-YML-007] Invalid value 'Schema'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1893: [PIN-YML-007] Invalid value 'Pydantic'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1894: [PIN-YML-007] Invalid value 'Script'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1910: [PIN-YML-007] Invalid value 'Set'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1911: [PIN-YML-007] Invalid value 'Generate'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1912: [PIN-YML-007] Invalid value 'Classify'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1913: [PIN-YML-007] Invalid value 'Address'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1914: [PIN-YML-007] Invalid value 'Only'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1962: [PIN-YML-007] Invalid value 'This'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2008: [PIN-YML-007] Invalid value 'DecodeResult'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2009: [PIN-YML-007] Invalid value 'SectionIndex'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2018: [PIN-YML-007] Invalid value 'Test'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2022: [PIN-YML-007] Invalid value 'Chunker'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2029: [PIN-YML-007] Invalid value 'These'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2066: [PIN-YML-007] Invalid value 'Initial'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2067: [PIN-YML-007] Invalid value 'Alignment'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2068: [PIN-YML-007] Invalid value 'Full'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2069: [PIN-YML-007] Invalid value 'Strict'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:2070: [PIN-YML-007] Invalid value 'Ultra'. Must be one of: rg, grep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-001] Required heading not found: ## SSOT Declaration
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-002] Required heading not found: ## Scope
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-003] Required heading not found: ### In Scope
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-004] Required heading not found: ### Out of Scope
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-005] Required heading not found: ## Decisions (Binding)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-006] Required heading not found: ## External Dependencies
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-007] Required heading not found: ## File Manifest
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-008] Required heading not found: ## Test Strategy
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-009] Required heading not found: ## Phase 0
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-010] Required heading not found: ### Required Files/Modules
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-011] Required heading not found: ### Required Libraries
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-SEC-012] Required heading not found: ### Required Tools
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:56: [PIN-FBN-001] Forbidden pattern 'TBD' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:725: [PIN-FBN-004] Forbidden pattern 'could' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1785: [PIN-FBN-004] Forbidden pattern 'might' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:56: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:620: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1629: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1819: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1894: [PIN-FBN-006] Forbidden pattern 'etc' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:56: [PIN-FBN-007] Forbidden pattern 'TBD by' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:249: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:371: [PIN-CTX-001] Forbidden pattern 'reasonable' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:549: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:555: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:590: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:833: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:837: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:845: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1170: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1441: [PIN-CTX-001] Forbidden pattern 'clean' found
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:36: [PIN-DEC-002] Table missing required columns: ID
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1597: [PIN-DEC-002] Table missing required columns: ID, Decision, Rationale
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1: [PIN-CHK-001] Required heading not found: ## Checklist Before Submission
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:375: [PIN-CHK-002] Checkbox must be checked: `all_keys.txt` generated with field paths observed
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:376: [PIN-CHK-002] Checkbox must be checked: Expected top-level keys (metadata, content, struct
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:377: [PIN-CHK-002] Checkbox must be checked: Any unexpected keys noted for investigation (not b
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:378: [PIN-CHK-002] Checkbox must be checked: **Security fields verified in `sample_outputs.json
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:503: [PIN-CHK-002] Checkbox must be checked: Tests verify `ALLOWED_PLUGINS["permissive"]` inclu
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:504: [PIN-CHK-002] Checkbox must be checked: NO new plugin list created - use `config.py:ALLOWE
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:505: [PIN-CHK-002] Checkbox must be checked: Parser output includes `math` and `footnotes` with
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:559: [PIN-CHK-002] Checkbox must be checked: Invariant tests pass against real parser output
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:560: [PIN-CHK-002] Checkbox must be checked: Tests run AFTER Milestone A schema is validated
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:574: [PIN-CHK-002] Checkbox must be checked: `tools/discover_parser_shape.py` executed successf
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:575: [PIN-CHK-002] Checkbox must be checked: `all_keys.txt` generated - spot-check for obvious 
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:576: [PIN-CHK-002] Checkbox must be checked: **Security field verification passed** (Phase 0.1.
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:577: [PIN-CHK-002] Checkbox must be checked: NO requirement for "0 unknown fields" yet (that's 
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:578: [PIN-CHK-002] Checkbox must be checked: Proceed to Milestone A to create minimal schema
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:879: [PIN-CHK-002] Checkbox must be checked: `uv add "pydantic>=2,<3"` executed
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:880: [PIN-CHK-002] Checkbox must be checked: `src/doxstrux/markdown/output_models.py` created w
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:881: [PIN-CHK-002] Checkbox must be checked: `tests/test_output_models_minimal.py` passes (both
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:882: [PIN-CHK-002] Checkbox must be checked: `ParserOutput.model_validate(parser.parse())` work
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:883: [PIN-CHK-002] Checkbox must be checked: **RAG safety tests pass**: `test_script_tag_detect
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:884: [PIN-CHK-002] Checkbox must be checked: Any extra fields logged for review (will be addres
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1040: [PIN-CHK-002] Checkbox must be checked: B1.5a: `Content`, `Mappings` typed and validated
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1041: [PIN-CHK-002] Checkbox must be checked: B1.5b: `Section`, `Heading`, `Paragraph` typed and
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1042: [PIN-CHK-002] Checkbox must be checked: B1.5c: `List`, `Tasklist` with recursive items typ
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1043: [PIN-CHK-002] Checkbox must be checked: B1.5d: `Table`, `CodeBlock`, `Blockquote` typed an
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1044: [PIN-CHK-002] Checkbox must be checked: B1.5e: `Link`, `Image`, `Math`, `Footnotes`, `HTML
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1045: [PIN-CHK-002] Checkbox must be checked: **DoxBaseModel switched to `extra="forbid"`** (enf
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1046: [PIN-CHK-002] Checkbox must be checked: `extra="forbid"` on ALL models (no more `dict[str,
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1047: [PIN-CHK-002] Checkbox must be checked: Full schema export works
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1048: [PIN-CHK-002] Checkbox must be checked: **DocumentIR regression test passes** (see below)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1166: [PIN-CHK-002] Checkbox must be checked: `Metadata`, `Security`, `SecurityStatistics`, `Sec
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1167: [PIN-CHK-002] Checkbox must be checked: `extra="forbid"` on Metadata and Security models
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1168: [PIN-CHK-002] Checkbox must be checked: `tools/export_schema.py` created (partial schema -
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1169: [PIN-CHK-002] Checkbox must be checked: Spot-check: `ParserOutput.model_validate()` passes
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1170: [PIN-CHK-002] Checkbox must be checked: RAG safety tests still pass (script detection, cle
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1178: [PIN-CHK-002] Checkbox must be checked: All remaining models added (`Content`, `Structure`
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1179: [PIN-CHK-002] Checkbox must be checked: `extra="forbid"` on ALL models (no more `dict[str,
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1180: [PIN-CHK-002] Checkbox must be checked: Schema export now covers full structure
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1181: [PIN-CHK-002] Checkbox must be checked: Spot-check: `ParserOutput.model_validate()` passes
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1182: [PIN-CHK-002] Checkbox must be checked: **DocumentIR regression test passes** (B1.5f)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1272: [PIN-CHK-002] Checkbox must be checked: `tools/validate_curated_fixtures.py` passes (patte
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1273: [PIN-CHK-002] Checkbox must be checked: `tools/regenerate_fixtures.py` created with bucket
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1274: [PIN-CHK-002] Checkbox must be checked: NO hand-maintained fixture lists (patterns only)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1275: [PIN-CHK-002] Checkbox must be checked: **Legacy field audit completed** (B2.4)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1276: [PIN-CHK-002] Checkbox must be checked: **Legacy field audit test passes** (B2.5 - enforce
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1465: [PIN-CHK-002] Checkbox must be checked: `tools/validate_test_pairs.py` created with `--rep
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1466: [PIN-CHK-002] Checkbox must be checked: All fixtures run through validation in report-only
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1467: [PIN-CHK-002] Checkbox must be checked: JSON report generated with failure inventory
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1468: [PIN-CHK-002] Checkbox must be checked: Known failures triaged into: schema fix, parser fi
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1469: [PIN-CHK-002] Checkbox must be checked: Report-only CI job runs on every PR (informational
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1587: [PIN-CHK-002] Checkbox must be checked: CI job created with 100% threshold (blocking)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1588: [PIN-CHK-002] Checkbox must be checked: Schema version test passes
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1589: [PIN-CHK-002] Checkbox must be checked: Schema drift detection works (git diff check)
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1590: [PIN-CHK-002] Checkbox must be checked: Pre-commit hook installed (optional but recommende
+/home/lasse/Dropbox/python/omat/doxstrux/PYDANTIC_SCHEMA.md:1591: [PIN-CHK-002] Checkbox must be checked: All existing fixtures pass validation

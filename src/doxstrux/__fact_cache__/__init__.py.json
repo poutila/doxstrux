@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "mtime": 1765517389.570472,
+    "size": 562,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/__init__.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Doxstrux - Markdown parsing for RAG pipelines.",
+      "functions": [],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Doxstrux - Markdown parsing for RAG pipelines."
+    },
+    "presence": {
+      "module": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/__init__.py",
+      "fingerprint": "ddb3b5db92fc377388b545ca4830eb5e031b3cfa0450da3b4216de84a49aac21",
+      "timestamp": "2025-12-17T03:56:25.135426Z",
+      "entity_count": 1,
+      "documented_count": 1,
+      "entities": [
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

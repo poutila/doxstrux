@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "mtime": 1765509498.9050076,
+    "size": 758,
+    "path": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/__init__.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "Doxstrux Utilities Package\n\nUtility modules for common operations.\n\nModules:\n- token_utils: Token traversal and manipulation (walk_tokens_iter, TokenAdapter)\n- line_utils: Line slicing and manipulation\n- text_utils: Text extraction from tokens\n- encoding: Robust encoding detection (detect_and_decode, read_file_robust)\n- section_utils: Section lookup utilities (SectionIndex, section_of_line)\n\nAll utilities are stateless functions with clear interfaces.\nNo dependencies on parser internals.",
+      "functions": [],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "Doxstrux Utilities Package\n\nUtility modules for common operations.\n\nModules:\n- token_utils: Token traversal and manipulation (walk_tokens_iter, TokenAdapter)\n- line_utils: Line slicing and manipulation\n- text_utils: Text extraction from tokens\n- encoding: Robust encoding detection (detect_and_decode, read_file_robust)\n- section_utils: Section lookup utilities (SectionIndex, section_of_line)\n\nAll utilities are stateless functions with clear interfaces.\nNo dependencies on parser internals."
+    },
+    "presence": {
+      "module": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/doxstrux/src/doxstrux/markdown/utils/__init__.py",
+      "fingerprint": "c6f16d9d785ffbd01c4140e7a10d8e33b50f94082232cbe8c004827cbeb81b9e",
+      "timestamp": "2025-12-17T03:56:25.981856Z",
+      "entity_count": 1,
+      "documented_count": 1,
+      "entities": [
+        "module"
+      ]
+    },
+    "requirements": [],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}
