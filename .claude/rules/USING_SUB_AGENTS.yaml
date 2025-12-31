@@ -1,0 +1,701 @@
+# USING_SUB_AGENTS.yaml - Sub-agent Orchestration and TOCTOU Protection Rules
+# Version: 1.0.0
+# Last Updated: 2025-12-23
+# Purpose: Define how to safely use sub-agents with freshness verification and metadata validation
+
+metadata:
+  scope: "Sub-agent orchestration, TOCTOU protection, result verification"
+  enforcement: ["pre-use-verification", "metadata-validation", "staleness-detection"]
+  principle: "Compare metadata.facts_file across agent results to detect TOCTOU"
+  applies_to:
+    agent_outputs: "All 23 agents in .claude/agents/"
+    orchestrators: "Any code/agent using sub-agent results"
+    fact_queries: "All fact-file-query-tool commands returning JSON"
+
+# =============================================================================
+# METADATA SCHEMA (Required in All Agent Outputs)
+# =============================================================================
+
+metadata_schema:
+  description: "Every sub-agent output MUST include these 6 fields"
+  reference: "FDP_AI_WORKFLOW.md lines 499-505"
+
+  required_fields:
+    facts_file:
+      type: string
+      format: "FACTS-YYYYMMDD-HHMMSS.parquet"
+      purpose: "Timestamped filename for staleness detection"
+      example: "FACTS-20251222-163851.parquet"
+      validation: "Must match pattern FACTS-\\d{8}-\\d{6}\\.parquet"
+
+    facts_mtime:
+      type: string
+      format: "ISO 8601 datetime with microseconds"
+      purpose: "File modification timestamp"
+      example: "2025-12-22T18:38:56.507106"
+      validation: "Must be valid ISO 8601 format"
+
+    commit_sha:
+      type: string
+      format: "7-character hex or null"
+      purpose: "Git commit identification for reproducibility"
+      example: "67c6db1"
+      nullable: true
+      note: "Null if not in git repository"
+
+    generator_version:
+      type: string
+      format: "semver or 'unknown'"
+      purpose: "Package version tracking for compatibility"
+      example: "0.1.0"
+      validation: "Must be semver or literal 'unknown'"
+
+    file_count:
+      type: integer
+      minimum: 0
+      purpose: "Sanity check for analysis scope"
+      example: 43
+      validation: "Must be non-negative integer"
+
+    query_timestamp:
+      type: string
+      format: "ISO 8601 datetime with microseconds"
+      purpose: "When query was executed (for audit trail)"
+      example: "2025-12-22T18:39:08.857397"
+      validation: "Must be valid ISO 8601 format"
+
+  output_structure:
+    json_path: "$.metadata"
+    required_location: "Top-level key in JSON output"
+    example: |
+      {
+        "violations": [...],
+        "compliance": {...},
+        "metadata": {
+          "facts_file": "FACTS-20251222-163851.parquet",
+          "facts_mtime": "2025-12-22T18:38:56.507106",
+          "commit_sha": "67c6db1",
+          "generator_version": "0.1.0",
+          "file_count": 43,
+          "query_timestamp": "2025-12-22T18:39:08.857397"
+        }
+      }
+
+# =============================================================================
+# TOCTOU PROTECTION (Time-Of-Check-Time-Of-Use Vulnerabilities)
+# =============================================================================
+
+toctou_protection:
+  description: "Prevent using stale agent results when code has changed"
+  reference: "FDP_AI_WORKFLOW.md lines 510-529"
+
+  vulnerability_scenario:
+    T1: "Sub-agent executes with FACTS-A (old code state)"
+    T2: "Code changes, FACTS regenerate to FACTS-B (new code state)"
+    T3: "Orchestrator receives T1 results (now stale)"
+    risk: "Decisions based on old code state → incorrect actions"
+    mitigation: "Metadata verification catches staleness → re-run agent"
+
+  hard_stops:
+    - name: "Stale results usage"
+      severity: ERROR
+      condition: "agent_metadata.facts_file != current_FACTS.parquet"
+      message: "⚠️ STALE: Agent results are from old FACTS - DISCARD and re-run"
+      enforcement: MANDATORY
+      verification_command: |
+        # Extract metadata from agent JSON output
+        agent_facts=$(echo "$agent_output" | uv run python -c "import json, sys; print(json.load(sys.stdin)['metadata']['facts_file'])")
+
+        # Get current FACTS file (symlink target)
+        current_facts=$(readlink FACTS.parquet)
+
+        # Verify match (exit 1 if stale)
+        if [ "$current_facts" != "$agent_facts" ]; then
+            echo "⚠️ STALE: Agent analyzed $agent_facts but current is $current_facts" >&2
+            echo "   Action: Re-run agent to get fresh results" >&2
+            exit 1
+        fi
+
+        echo "✅ FRESH: Results are current"
+
+    - name: "Missing metadata section"
+      severity: ERROR
+      condition: "JSON output lacks .metadata key"
+      message: "Agent output missing required metadata section"
+      enforcement: MANDATORY
+      verification_command: |
+        echo "$agent_output" | uv run python -c "
+        import json, sys
+        data = json.load(sys.stdin)
+        if 'metadata' not in data:
+            print('❌ ERROR: Missing metadata section', file=sys.stderr)
+            sys.exit(1)
+        print('✅ Metadata section present')
+        "
+
+    - name: "Incomplete metadata fields"
+      severity: ERROR
+      condition: "Missing any of 6 required fields"
+      message: "Metadata incomplete - cannot verify snapshot consistency"
+      enforcement: MANDATORY
+      required_fields: ["facts_file", "facts_mtime", "commit_sha", "generator_version", "file_count", "query_timestamp"]
+      verification_command: |
+        echo "$agent_output" | uv run python -c "
+        import json, sys
+        required = ['facts_file', 'facts_mtime', 'commit_sha', 'generator_version', 'file_count', 'query_timestamp']
+        data = json.load(sys.stdin)
+        metadata = data.get('metadata', {})
+        missing = [f for f in required if f not in metadata]
+        if missing:
+            print(f'❌ ERROR: Missing metadata fields: {missing}', file=sys.stderr)
+            sys.exit(1)
+        print('✅ All 6 metadata fields present')
+        "
+
+  soft_warnings:
+    - name: "Old query timestamp"
+      severity: WARNING
+      condition: "query_timestamp > 1 hour old"
+      message: "Results are more than 1 hour old - consider re-running"
+      note: "Not a hard stop but indicates potentially stale analysis"
+
+# =============================================================================
+# SUB-AGENT REGISTRY (All 23 Agents)
+# =============================================================================
+
+agent_registry:
+  total_agents: 23
+  last_updated: "2025-12-23"
+
+  governance:
+    governance-report:
+      purpose: "Comprehensive governance compliance dashboard"
+      output_format: ["summary", "json"]
+      use_when: "Need overall codebase health check"
+      dimensions: ["complexity", "documentation", "error_handling", "types", "security", "SOLID"]
+      command: "uv run fact-file-query-tool governance-report --format json"
+
+    governance-check:
+      purpose: "Detailed violation checks with line numbers"
+      output_format: ["summary", "json"]
+      use_when: "Need specific violations for fixing"
+      provides: "File paths, line numbers, rule IDs"
+      command: "uv run fact-file-query-tool governance --format json"
+
+  security:
+    security-audit:
+      purpose: "Comprehensive security scan"
+      output_format: ["summary", "json"]
+      use_when: "Pre-release security review"
+      checks: ["hardcoded_secrets", "dangerous_calls", "shell_execution", "sql_injection"]
+      command: "uv run fact-file-query-tool security --format json"
+
+    hardcoding-detector:
+      purpose: "Detect hardcoded paths, URLs, credentials"
+      output_format: ["summary", "json"]
+      use_when: "Prevent credential leaks before commits"
+      finds: ["hardcoded_paths", "hardcoded_secrets", "connection_strings"]
+      command: "uv run fact-file-query-tool hardcoding --format json"
+
+  architecture:
+    architecture-map:
+      purpose: "Generate architecture overview (clusters, layers, coupling)"
+      output_format: ["json"]
+      use_when: "Understand codebase structure"
+      provides: ["layers", "clusters", "dependencies", "coupling_metrics"]
+      command: "uv run fact-file-query-tool architecture --format json"
+
+    blast-radius:
+      purpose: "Analyze blast radius for function/class changes"
+      output_format: ["summary", "json"]
+      use_when: "Planning refactoring or incident response"
+      provides: ["callers", "callees", "side_effects", "risk_score"]
+      command: "uv run fact-file-query-tool blast-radius --file <file> --entity <entity> --format json"
+
+  performance:
+    performance-hotspots:
+      purpose: "Find performance issues without profiling"
+      output_format: ["summary", "json"]
+      use_when: "Optimization planning"
+      finds: ["nested_loops", "io_in_loops", "blocking_in_async", "regex_in_loops"]
+      command: "uv run fact-file-query-tool performance --format json"
+
+  testing:
+    test-gap-analysis:
+      purpose: "Identify high-risk code needing tests"
+      output_format: ["summary", "json"]
+      use_when: "Prioritize test writing for maximum ROI"
+      ranks_by: ["complexity", "coupling", "security_concerns", "side_effects"]
+      command: "uv run fact-file-query-tool test-gaps --format json"
+
+    weak-test-detector:
+      purpose: "Detect weak tests (import-only, no assertions)"
+      output_format: ["summary", "json"]
+      use_when: "Ensure test quality"
+      finds: ["import_only_tests", "no_assertion_tests", "exit_code_only_tests"]
+      command: "uv run fact-file-query-tool weak-tests --format json"
+
+  code_quality:
+    magic-number-detector:
+      purpose: "Detect magic numbers that should be constants"
+      output_format: ["summary", "json"]
+      use_when: "Code review or refactoring"
+      allowed_literals: [0, 1, -1, 2]
+      command: "uv run fact-file-query-tool magic-numbers --format json"
+
+    naming-validator:
+      purpose: "Validate naming conventions"
+      output_format: ["summary", "json"]
+      use_when: "Enforce style consistency"
+      checks: ["SCREAMING_SNAKE_CASE", "snake_case", "PascalCase"]
+      command: "uv run fact-file-query-tool naming --format json"
+
+    doc-quality-validator:
+      purpose: "Check docstring quality (Args, Returns, Raises)"
+      output_format: ["summary", "json"]
+      use_when: "Documentation review"
+      checks: ["missing_sections", "incomplete_params", "no_return_doc"]
+      command: "uv run fact-file-query-tool doc-quality --format json"
+
+    modern-syntax-validator:
+      purpose: "Enforce modern type syntax (PEP 604, PEP 585)"
+      output_format: ["summary", "json"]
+      use_when: "Modernize codebase"
+      enforces: ["list[T] vs List[T]", "X | None vs Optional[X]"]
+      command: "uv run fact-file-query-tool modern-syntax --format json"
+
+  error_handling:
+    error-pattern-audit:
+      purpose: "Detect error handling anti-patterns"
+      output_format: ["summary", "json"]
+      use_when: "Improve error handling robustness"
+      finds: ["bare_except", "silent_exceptions", "swallowed_errors"]
+      command: "uv run fact-file-query-tool error-patterns --format json"
+
+    logging-audit:
+      purpose: "Detect logging anti-patterns"
+      output_format: ["summary", "json"]
+      use_when: "Prevent print() in production"
+      finds: ["print_in_production", "missing_log_levels"]
+      command: "uv run fact-file-query-tool logging-audit --format json"
+
+  imports:
+    import-audit:
+      purpose: "Check import style violations"
+      output_format: ["summary", "json"]
+      use_when: "Enforce import consistency"
+      finds: ["multi_dot_relative", "wildcard_imports"]
+      command: "uv run fact-file-query-tool import-audit --format json"
+
+    module-purity-check:
+      purpose: "Detect import-time side effects"
+      output_format: ["summary", "json"]
+      use_when: "Prevent slow/flaky imports"
+      finds: ["io_at_import", "network_at_import", "db_at_import"]
+      command: "uv run fact-file-query-tool module-purity --format json"
+
+  solid_principles:
+    solid-srp-validator:
+      purpose: "Detect Single Responsibility Principle violations"
+      output_format: ["summary", "json"]
+      use_when: "Prevent god classes"
+      finds: ["high_coupling", "too_many_methods", "mixed_concerns"]
+      command: "uv run fact-file-query-tool solid-srp --format json"
+
+    solid-lsp-validator:
+      purpose: "Detect Liskov Substitution Principle violations"
+      output_format: ["summary", "json"]
+      use_when: "Prevent broken inheritance"
+      finds: ["NotImplementedError_in_subclass", "contract_violations"]
+      command: "uv run fact-file-query-tool solid-lsp --format json"
+
+  type_safety:
+    type-coverage-enforcer:
+      purpose: "Enforce strict type coverage (100% for public APIs)"
+      output_format: ["summary", "json"]
+      use_when: "Ensure type safety"
+      checks: ["typed_param_ratio", "return_typed", "type_complete"]
+      command: "uv run fact-file-query-tool type-coverage --format json"
+
+    mutable-defaults-detector:
+      purpose: "Detect mutable default arguments (critical bug)"
+      output_format: ["summary", "json"]
+      use_when: "Prevent shared state mutations"
+      finds: ["list_defaults", "dict_defaults", "set_defaults"]
+      severity: CRITICAL
+      command: "uv run fact-file-query-tool mutable-defaults --format json"
+
+  analysis:
+    drift-detector:
+      purpose: "Detect drift between FACTS snapshots"
+      output_format: ["summary", "json"]
+      use_when: "CI/CD gating, release validation"
+      finds: ["breaking_changes", "behavioral_changes", "doc_drift"]
+      command: "uv run fact-file-query-tool drift --baseline <old> --current <new> --format json"
+
+    query-pack:
+      purpose: "Execute pre-built query packs (scorecards, docs, architecture)"
+      output_format: ["json"]
+      use_when: "Comprehensive entity profiles"
+      packs: ["scorecard", "documentation", "architecture", "security"]
+      command: "uv run fact-file-query-tool query-pack --pack <name> --format json"
+
+# =============================================================================
+# USAGE DECISION TREE
+# =============================================================================
+
+usage_patterns:
+  when_to_use_sub_agents:
+    - condition: "Need comprehensive analysis (>5 fact families)"
+      reason: "Sub-agents aggregate multiple queries efficiently"
+      example: "governance-report combines 8 quality dimensions"
+      benefit: "Single command vs 8 separate queries"
+
+    - condition: "Analysis is heavy/complex (>100 entities)"
+      reason: "Keeps main context clean (§2.6 context hygiene)"
+      example: "architecture-map analyzes entire codebase"
+      benefit: "Avoid polluting main context with 1000s of lines"
+
+    - condition: "Need specialized logic/scoring"
+      reason: "Agents have domain-specific interpretation"
+      example: "blast-radius computes risk scores with weights"
+      benefit: "Don't reimplement scoring logic"
+
+    - condition: "Need formatted output for humans"
+      reason: "Agents provide summary format"
+      example: "performance-hotspots creates ranked list"
+      benefit: "Ready-to-read reports"
+
+  when_to_use_direct_queries:
+    - condition: "Need 1-2 simple facts"
+      reason: "Direct query is faster (no agent overhead)"
+      example: "fact-file-query-tool query --file X --entity Y --keys signature"
+      benefit: "<100ms vs agent setup time"
+
+    - condition: "Need raw fact values (no interpretation)"
+      reason: "Avoid agent scoring/filtering overhead"
+      example: "Get exact LOC count: query --keys loc"
+      benefit: "Pure data, no processing"
+
+    - condition: "Building custom analysis"
+      reason: "Need granular control over fact selection"
+      example: "Query multiple entities with custom logic"
+      benefit: "Full flexibility"
+
+# =============================================================================
+# ORCHESTRATOR REQUIREMENTS (MANDATORY)
+# =============================================================================
+
+orchestrator_requirements:
+  description: "Steps every orchestrator MUST follow when using sub-agent results"
+  enforcement: MANDATORY
+  reference: "FDP_AI_WORKFLOW.md lines 510-522"
+
+  mandatory_steps:
+    1_extract_metadata:
+      description: "Extract metadata.facts_file from agent JSON output"
+      command: |
+        agent_facts=$(echo "$agent_output" | uv run python -c "import json, sys; print(json.load(sys.stdin)['metadata']['facts_file'])")
+      validates: "Agent output has metadata.facts_file field"
+
+    2_get_current_facts:
+      description: "Get current FACTS.parquet symlink target"
+      command: |
+        current_facts=$(readlink FACTS.parquet)
+      validates: "FACTS.parquet exists and is a symlink"
+
+    3_verify_freshness:
+      description: "Compare agent FACTS with current FACTS"
+      command: |
+        if [ "$current_facts" != "$agent_facts" ]; then
+            echo "⚠️ STALE: Agent results from $agent_facts, current is $current_facts" >&2
+            echo "   Action: Re-run agent with fresh FACTS" >&2
+            exit 1
+        fi
+      validates: "Results are from current FACTS version"
+
+    4_use_results_safely:
+      description: "Only after verification, use agent results"
+      allowed_actions:
+        - "Extract violations/metrics from verified output"
+        - "Make decisions based on verified data"
+        - "Include in evidence blocks with metadata reference"
+      forbidden_actions:
+        - "Use results from different snapshots (TOCTOU)"
+        - "Cache results without metadata"
+        - "Combine results if metadata.facts_file differs"
+
+  complete_example:
+    bash_script: |
+      #!/bin/bash
+      set -Eeuo pipefail
+
+      # Run sub-agent
+      agent_output=$(uv run fact-file-query-tool governance-report --format json)
+
+      # Extract metadata
+      agent_facts=$(echo "$agent_output" | uv run python -c "import json, sys; print(json.load(sys.stdin)['metadata']['facts_file'])")
+      current_facts=$(readlink FACTS.parquet)
+
+      # Verify snapshot consistency (for TOCTOU protection when combining multiple agents)
+      # Note: Single agent calls don't need this - tool is internally protected
+      # Only needed when combining results from multiple agents
+
+      # If combining with other agent results, compare snapshots:
+      # if [ "$current_facts" != "$agent_facts" ]; then
+      #     echo "⚠️ TOCTOU: Different snapshots - re-running..." >&2
+      #     agent_output=$(uv run fact-file-query-tool governance-report --format json)
+      # fi
+
+      # Safe to use results now
+      echo "$agent_output" | uv run python -c "
+      import json, sys
+      data = json.load(sys.stdin)
+      print(f'Compliance Score: {data[\"compliance_score\"]}')
+      print(f'Violations: {data[\"total_violations\"]}')
+      "
+
+# =============================================================================
+# BEST PRACTICES
+# =============================================================================
+
+best_practices:
+  - rule: "Compare metadata.facts_file across agent results for TOCTOU protection"
+    rationale: "When combining multiple agent results, verify they used same snapshot"
+    consequence_if_violated: "Inconsistent analysis from different code states"
+    note: "Single agent calls don't need verification - tool is internally protected"
+    enforcement: "Only when combining results from multiple agents"
+
+  - rule: "Include metadata in evidence blocks"
+    rationale: "Future readers can verify evidence was fresh at planning time"
+    example: |
+      ## Evidence Block FQ-0042
+
+      **Method**: sub-agent (governance-check)
+
+      **Result**:
+      - Violations: 97
+      - Security critical: 0
+
+      **Metadata**:
+      - facts_file: FACTS-20251222-163851.parquet
+      - commit_sha: 67c6db1
+      - query_timestamp: 2025-12-22T18:39:08
+
+  - rule: "Re-run agent if FACTS changed"
+    rationale: "Stale results lead to incorrect decisions"
+    detection: "Freshness verification fails"
+    action: "Regenerate FACTS, re-run agent, verify again"
+
+  - rule: "Use sub-agents for context hygiene (>100 lines output)"
+    rationale: "Heavy analysis in main context wastes tokens"
+    reference: "FDP_AI_WORKFLOW.md §2.6"
+    benefit: "Main context stays focused on high-level planning"
+
+  - rule: "CRITICAL: Use minimal delegation prompts - agents are command executors, not reasoners"
+    applies_to: "Main Claude when delegating to agents (NOT user requests)"
+    rationale: "Agent files already contain the full command - adding context makes them explore"
+
+    user_requests_are_fine:
+      - "Analyze codebase in /path/to/dir" → OK, user can ask this
+      - "Check code quality" → OK, user can ask this
+      - "Generate architecture overview" → OK, user can ask this
+
+    orchestrator_must_translate_to_minimal_prompts:
+      forbidden_delegation:
+        - "Task(subagent_type='security-audit', prompt='Analyze codebase in DIR and provide feedback')"
+        - "Task(subagent_type='governance-report', prompt='Check code quality in src/ directory')"
+        - "Task(subagent_type='architecture-map', prompt='Generate architecture overview from FACTS')"
+      correct_delegation:
+        - "Task(subagent_type='security-audit', prompt='Execute')"
+        - "Task(subagent_type='governance-report', prompt='Execute')"
+        - "Task(subagent_type='architecture-map', prompt='Execute')"
+
+    workflow:
+      user_says: "Analyze codebase in /path/to/src"
+      orchestrator_thinks: "This needs governance-report, security-audit, architecture-map agents"
+      orchestrator_does: "Task(subagent_type='governance-report', prompt='Execute')"
+      agent_receives: "Execute"
+      agent_runs: "uv run fact-file-query-tool governance-report --format json"
+      result: "Zero exploration, minimal tokens, no permission prompts"
+
+    why_this_matters: |
+      Agents are 16-line files containing ONE command like:
+        ```bash
+        uv run fact-file-query-tool security --format json
+        ```
+
+      If orchestrator adds "analyze codebase in DIR" to the delegation prompt, the agent will:
+      1. Ignore its minimal instructions
+      2. Start exploring (reading files, creating custom scripts)
+      3. Write to /tmp/ (triggers permission prompts)
+      4. Use 10x more tokens than needed
+
+      The correct delegation is just "Execute" - let the agent file do its job.
+      The user can ask anything - orchestrator must translate to minimal delegation.
+
+  - rule: "Prefer --format json for programmatic use"
+    rationale: "JSON output is parseable, summary is for humans"
+    use_json_when: "Need to extract specific metrics or violations"
+    use_summary_when: "Need human-readable report"
+
+# =============================================================================
+# ERROR HANDLING
+# =============================================================================
+
+error_handling:
+  missing_metadata:
+    error: "Agent output lacks .metadata section"
+    cause: "Agent not following USING_SUB_AGENTS.yaml spec"
+    action: "Report bug - all agents must include metadata"
+    workaround: "None - cannot verify freshness without metadata"
+
+  stale_results:
+    error: "agent_facts != current_facts"
+    cause: "Code changed between agent execution and result use"
+    action: "Re-run agent with current FACTS"
+    prevention: "Run agents just-in-time, not in advance"
+
+  facts_not_symlink:
+    error: "readlink FACTS.parquet fails"
+    cause: "FACTS.parquet is regular file, not symlink"
+    action: "Check fact-file-query-tool installation"
+    note: "Tool should create symlink to timestamped file"
+
+  incomplete_metadata:
+    error: "Missing one or more of 6 required fields"
+    cause: "Agent implementation bug"
+    action: "Report bug with agent name and missing fields"
+    workaround: "Cannot safely use results - re-run or skip"
+
+# =============================================================================
+# CROSS-REFERENCES
+# =============================================================================
+
+cross_references:
+  related_rules:
+    - file: AGENT_CONTRACT.md
+      purpose: "Agent metadata schema, exit codes, output format standards"
+      defines: ["6 standard metadata fields", "exit code 0/1", "prerequisite verification"]
+      referenced_by: "All agents must follow this contract"
+
+    - file: HARD_STOP_CONDITIONS.md
+      purpose: "Error conditions and remediation steps"
+      defines: ["16 hard stop conditions", "error message format", "remediation workflow"]
+      referenced_by: "All agents must handle these error conditions"
+
+    - file: JSON_PROCESSING_RULES.yaml
+      purpose: "JSON processing standards (jq vs python)"
+      defines: ["Hard stops for bare python3", "Required patterns for jq"]
+      referenced_by: "Orchestrators must follow JSON processing rules"
+
+    - file: FDP_RULES.yaml
+      purpose: "Planning protocol enforcement"
+      uses_sub_agents: "Yes - for evidence collection"
+
+    - file: GOVERNANCE_RULES.yaml
+      purpose: "Code quality standards definition"
+      enforced_by_agents: ["governance-report", "governance-check"]
+
+    - file: TOOL_REFERENCE.yaml
+      purpose: "Command reference for fact-file-query-tool"
+      lists_agents: "Yes - all 23 agent commands documented"
+
+  related_docs:
+    - directory: .claude/agents/
+      files: "All 23 agent definition files"
+      each_contains: "Output Metadata (TOCTOU Protection) section"
+
+  tool_integration:
+    fact-file-query-tool:
+      all_commands_provide_metadata: true
+      metadata_location: "JSON output at top-level .metadata key"
+      verification_command: "readlink FACTS.parquet"
+
+    fdp-lint:
+      planned_checks:
+        - "Verify orchestrators call freshness verification"
+        - "Validate metadata schema in agent outputs"
+        - "Check evidence blocks include metadata"
+
+# =============================================================================
+# VALIDATION CHECKLIST
+# =============================================================================
+
+validation_checklist:
+  for_agent_developers:
+    - check: "Agent includes 'Output Metadata (TOCTOU Protection)' section in .md file"
+      location: ".claude/agents/<agent-name>.md"
+
+    - check: "Agent documents all 6 metadata fields"
+      required: ["facts_file", "facts_mtime", "commit_sha", "generator_version", "file_count", "query_timestamp"]
+
+    - check: "Agent provides JSON output with .metadata top-level key"
+      command: "uv run fact-file-query-tool <agent> --format json"
+
+    - check: "Agent references FDP_AI_WORKFLOW.md §2.6"
+      purpose: "Link to full context hygiene guidance"
+
+  for_orchestrators:
+    - check: "Extract metadata.facts_file from agent output"
+      fail_if: "Field missing or not accessible"
+
+    - check: "Get current FACTS file (readlink FACTS.parquet)"
+      fail_if: "FACTS.parquet doesn't exist or not a symlink"
+
+    - check: "Verify agent_facts == current_facts"
+      fail_if: "Mismatch - results are stale"
+
+    - check: "Only use results after successful verification"
+      fail_if: "Using results before or without verification"
+
+  for_evidence_blocks:
+    - check: "Include metadata section from agent output"
+      required_fields: ["facts_file", "commit_sha", "query_timestamp"]
+
+    - check: "Reference FDP_AI_WORKFLOW.md §2.6 in evidence block"
+      purpose: "Document verification was performed"
+
+# =============================================================================
+# VERSION HISTORY
+# =============================================================================
+
+version_history:
+  "1.0.0":
+    date: "2025-12-23"
+    changes:
+      - "Initial release"
+      - "Defined metadata schema (6 required fields)"
+      - "Documented all 23 agents in registry"
+      - "Specified TOCTOU protection rules"
+      - "Created orchestrator requirements"
+      - "Added usage decision tree"
+      - "Defined validation checklist"
+    migration: "N/A - new file"
+
+# =============================================================================
+# FUTURE ENHANCEMENTS
+# =============================================================================
+
+future_enhancements:
+  planned:
+    - name: "Automated metadata validation tool"
+      description: "fdp-lint command to verify metadata compliance"
+      priority: HIGH
+
+    - name: "Agent output schema validation"
+      description: "JSON Schema for each agent's output format"
+      priority: MEDIUM
+
+    - name: "Metadata caching strategy"
+      description: "Cache agent results with metadata for reuse"
+      priority: LOW
+      note: "Only if metadata shows results are still fresh"
+
+---
+
+# End of USING_SUB_AGENTS.yaml
+# Total agents: 23
+# Total metadata fields: 6
+# Hard stops: 3
+# Last updated: 2025-12-23

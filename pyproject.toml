@@ -214,3 +214,24 @@ existing_file_1 = "src/ptool_test/important_file.some"
 
 [tool.project_paths.file_validators]
 some_file_validator = "some_file_validator.py"
+
+[tool.golden-validator-hybrid]
+default_source_dir = "src/doxstrux"
+
+# Input validation limits
+max_file_size = 10_485_760        # 10MB
+max_file_size_cap = 52_428_800    # 50MB absolute cap
+max_ast_nodes = 100_000
+max_ast_depth = 500
+max_ast_width = 10_000
+
+# Collector limits
+max_list_items = 50
+
+# Sandbox execution
+sandbox_timeout = 3
+
+# Fact caching
+cache_version = "1.0"
+
+

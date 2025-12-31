@@ -1,0 +1,31 @@
+Getting Started:
+  - overview, quickstart, setup, interactive-mode
+
+  Integrations:
+  - vs-code, jetbrains, chrome, desktop, slack
+
+  Enterprise & Cloud:
+  - amazon-bedrock, google-vertex-ai, microsoft-foundry, llm-gateway
+
+  CI/CD:
+  - github-actions, gitlab-ci-cd, devcontainer, headless
+
+  Configuration:
+  - cli-reference, settings, model-config, network-config, terminal-config, statusline, output-styles
+
+  Features:
+  - hooks, hooks-guide, skills, slash-commands, mcp, memory, checkpointing, sub-agents
+
+  Plugins:
+  - plugins, plugins-reference, discover-plugins, plugin-marketplaces
+
+  Security & Compliance:
+  - security, sandboxing, data-usage, iam, legal-and-compliance
+
+  Usage & Costs:
+  - costs, analytics, monitoring-usage
+
+  Other:
+  - common-workflows, third-party-integrations, troubleshooting, changelog, claude-code-on-the-web
+
+

@@ -73,9 +73,9 @@ def test_downstream_renderer_escapes_templates():
         assert "{" not in escaped or "&lbrace;" in escaped, \
             f"Template '{template_input}' not properly escaped"
         assert "{{" not in escaped, \
-            f"Jinja2 syntax '{{{{' found in escaped output: {escaped}"
+            f"Jinja2 syntax '{{{{{{{{' found in escaped output: {escaped}"
         assert "{%" not in escaped, \
-            f"Jinja2 control '{%' found in escaped output: {escaped}"
+            f"Jinja2 control '{{%' found in escaped output: {escaped}"
 
 
 def test_heading_with_template_marked_unsafe():

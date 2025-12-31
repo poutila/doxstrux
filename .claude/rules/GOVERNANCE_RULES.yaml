@@ -1,0 +1,1453 @@
+# Project Governance Rules - Consolidated Schema
+# Machine-readable format - eliminates verbose examples and overlaps
+# Version: 1.1.0 (Added FDP principles section)
+
+metadata:
+  scope: "General Python projects - language-agnostic governance principles"
+  enforcement: ["code_review", "ci_gates", "automated_checks"]
+  principle: "Clean Table - only ship fully correct, verified, stable work"
+  notes: |
+    These rules apply to any Python codebase. Adjust severity levels and
+    specific thresholds based on your project's maturity and requirements.
+
+# =============================================================================
+# OVERARCHING PRINCIPLES
+# =============================================================================
+
+clean_table:
+  description: "No impurities in delivered work"
+  gates:
+    - no_unresolved_errors
+    - no_warnings
+    - no_todos_or_placeholders
+    - no_unverified_assumptions
+    - no_workarounds_or_temp_fixes
+    - no_conflicting_logic
+    - there_is_no_optional_fixes
+    - if_a_bug_is_found_it_must_be_fixed
+  silent_errors_forbidden: true  # No strict mode toggles, no conditional error raising
+  required_before_delivery:
+    - all_tests_pass
+    - all_linters_pass
+    - all_type_checks_pass
+    - no_todo_fixme_xxx_in_code
+
+# =============================================================================
+# CODE QUALITY
+# =============================================================================
+
+code_quality:
+  
+  no_magic_numbers:
+    severity: ERROR
+    allowed_literals: [0, 1, -1, 2]  # In trivial contexts only
+    require_named_constants:
+      - thresholds_and_limits
+      - array_slicing_indices
+      - timeouts_and_delays
+      - multipliers_and_factors
+      - buffer_sizes
+    constant_naming: SCREAMING_SNAKE_CASE
+    must_document:
+      - what_the_number_means
+      - why_this_specific_value
+      - source_or_origin
+      - units_if_applicable
+  
+  no_hardcoding:
+    severity: ERROR
+    forbidden:
+      - file_paths
+      - urls_and_endpoints
+      - credentials_and_keys
+      - email_addresses
+      - database_connection_strings
+      - feature_flags_without_config
+    require_config_sources:
+      - environment_variables
+      - config_files
+      - dependency_injection
+    exceptions_allowed:
+      - test_fixtures
+      - example_data_in_tests
+  
+  naming_conventions:
+    severity: ERROR
+    rules:
+      constants: SCREAMING_SNAKE_CASE
+      functions: snake_case
+      classes: PascalCase
+      private_members: _leading_underscore
+      modules: snake_case
+    forbidden:
+      - single_letter_names_except_loop_vars
+      - abbreviated_names_without_context
+      - misleading_names
+      - generic_names_like_data_temp_var
+  
+  complexity_limits:
+    severity: WARNING
+    cyclomatic_complexity_max: 10
+    cognitive_complexity_max: 15
+    function_length_max: 50
+    file_length_max: 500
+    max_nesting_depth: 4
+    max_arguments: 5
+    enforcement: ["ruff", "pylint", "code_review"]
+
+# =============================================================================
+# ERROR HANDLING
+# =============================================================================
+
+error_handling:
+  
+  fail_fast_principle:
+    severity: ERROR
+    required:
+      - fail_loudly_with_clear_context
+      - no_silent_exceptions
+      - exception_messages_must_be_actionable
+      - use_custom_exception_hierarchy
+    
+  custom_exceptions:
+    base_class: ProjectError
+    required_types:
+      - ValidationError
+      - ResourceNotFoundError
+      - ConfigurationError
+      - DataCorruptionError
+    exception_info_required:
+      - what_failed
+      - why_it_failed
+      - context_inputs_state
+      - actionable_remedy
+  
+  no_silent_fallbacks:
+    severity: ERROR
+    forbidden_patterns:
+      - silent_empty_returns
+      - swallowed_exceptions
+      - default_values_for_required_config
+      - continuing_after_critical_failure
+    required:
+      - fail_immediately_if_required_missing
+      - no_guessing_or_substitution
+      - no_strict_mode_toggles
+  
+  exception_handling:
+    required_patterns:
+      - use_exception_chaining_with_from
+      - only_catch_specific_exceptions
+      - log_and_raise_for_context
+      - no_bare_except
+      - all_exceptions_must_raise_eventually
+    forbidden_patterns:
+      - exceptions_for_flow_control
+      - swallowing_without_logging
+      - generic_exception_messages
+      - raising_without_context
+      - recovery_without_eventual_raise
+    recovery_strategies_allowed:
+      - retry_with_backoff_then_raise
+      - circuit_breaker_with_raise
+    recovery_strategy_rules:
+      - retries_are_allowed_but_must_raise_if_all_fail
+      - circuit_breaker_must_raise_when_open
+      - log_each_retry_attempt
+      - no_silent_fallbacks_ever
+
+# =============================================================================
+# TESTING
+# =============================================================================
+
+testing:
+  
+  no_weak_tests:
+    severity: ERROR
+    weak_test_patterns_forbidden:
+      - import_only_tests
+      - exit_code_zero_only
+      - no_exception_thrown_only
+      - output_non_empty_only
+    required_assertions:
+      - exact_outputs_for_inputs
+      - error_cases_with_specific_exceptions
+      - invariants
+      - side_effects_and_state_changes
+    test_categories:
+      pure_functions:
+        - assert_exact_outputs
+        - assert_error_cases
+        - assert_invariants
+      cli_tools:
+        - assert_exit_code_and_output
+        - use_fixtures_as_input
+        - assert_generated_artifacts
+      linters_validators:
+        - use_fixtures_that_violate_rules
+        - assert_rule_ids_and_messages
+        - assert_clean_fixtures_produce_no_errors
+      orchestrators:
+        - assert_outputs_created
+        - assert_failure_behavior
+  
+  tdd_governance:
+    severity: ERROR
+    workflow:
+      - red_write_failing_test_first
+      - green_implement_minimum_code
+      - refactor_keep_tests_passing
+    rules:
+      - no_new_behavior_without_tests
+      - every_bug_fix_needs_regression_test
+      - refactors_must_keep_tests_green
+    enforcement: code_review
+
+# =============================================================================
+# TYPE SAFETY
+# =============================================================================
+
+type_checking:
+  
+  type_hints_required:
+    severity: ERROR
+    must_type:
+      - all_function_signatures
+      - all_method_signatures
+      - all_class_attributes
+      - public_module_constants
+    optional_but_recommended:
+      - local_variables_when_not_obvious
+      - lambda_functions_in_complex_contexts
+    exceptions:
+      - test_functions
+      - private_test_helpers
+  
+  type_checker:
+    tool: mypy
+    config_location: pyproject.toml
+    baseline_strictness:
+      - disallow_untyped_defs
+      - warn_return_any
+      - no_implicit_optional
+    ci_enforcement: zero_errors_required
+  
+  forbidden:
+    - overuse_of_any
+    - blanket_type_ignore
+    - skipping_return_types
+    - per_file_type_ignore
+  
+  modern_syntax:
+    use: ["list[T]", "dict[K,V]", "X | None"]  # Python 3.9+
+    avoid: ["List[T]", "Dict[K,V]", "Optional[X]"]  # Old style
+
+# =============================================================================
+# ARCHITECTURE
+# =============================================================================
+
+architecture:
+  
+  kiss_principle:
+    severity: BLOCKER
+    rules:
+      - must_document_simpler_alternatives
+      - complexity_requires_concrete_justification
+      - choose_simpler_over_elegant_complex
+      - explainable_in_2_3_sentences
+  
+  yagni_principle:
+    severity: BLOCKER
+    rules:
+      - features_need_current_requirement_with_ticket
+      - features_must_be_used_immediately
+      - no_speculative_abstractions
+      - no_future_proofing_without_evidence
+    decision_tree:
+      questions:
+        q1:
+          text: "Is there a real, current requirement for this?"
+          if_no: "Do not add it (YAGNI triggered)"
+          if_yes: "Continue to Q2"
+          risk_score: 5  # Very high risk
+          severity: blocker
+        q2:
+          text: "Will it be used immediately after it's built?"
+          if_no: "Do not add it (YAGNI triggered)"
+          if_yes: "Continue to Q3"
+          risk_score: 4  # High risk
+          severity: blocker
+        q3:
+          text: "Is there exactly one concrete use case?"
+          if_no: "If multiple use cases, continue to Q4"
+          if_yes: "Proceed with implementation (YAGNI satisfied)"
+          risk_score: 3  # Medium risk
+          severity: warning
+        q4:
+          text: "Are there ≥2 real consumers today (not future/hypothetical)?"
+          if_no: "Implement for one case, generalize when second appears"
+          if_yes: "Generalization justified (SOLID applies)"
+          risk_score: 2  # Low risk
+          severity: note
+    
+  solid_principles:
+    severity: WARNING
+    rules:
+      single_responsibility:
+        - one_reason_to_change
+        - cohesive_functionality
+        - no_god_classes
+      open_closed:
+        - extend_via_composition_or_inheritance
+        - avoid_modifying_stable_interfaces
+      liskov_substitution:
+        - subtypes_must_honor_contracts
+        - no_surprising_behavior_in_subclasses
+      interface_segregation:
+        - no_fat_interfaces
+        - clients_depend_on_minimal_contracts
+      dependency_inversion:
+        - depend_on_abstractions_not_concretions
+        - inject_dependencies
+    enforcement:
+      - code_review
+      - architecture_review
+    yagni_override:
+      description: "SOLID applies only after YAGNI is satisfied"
+      rule: "Do not generalize until ≥2 real consumers exist"
+  
+  module_design:
+    severity: WARNING
+    rules:
+      - minimize_coupling
+      - maximize_cohesion
+      - explicit_dependencies
+      - no_circular_imports
+    metrics:
+      coupling:
+        fan_in_max: 10
+        fan_out_max: 7
+      cohesion:
+        lcom_max: 0.8  # Lack of cohesion metric
+
+# =============================================================================
+# FACT-DRIVEN PLANNING PRINCIPLES (FDP-LITE)
+# =============================================================================
+# Full FDP protocol: Can be implemented in separate FDP-specific rules file
+# This section: Core principles applicable to general Python development
+
+fdp_principles:
+  description: "Evidence-based decision making for code - FDP philosophy distilled"
+  philosophy: "Query before claim, verify before assume, measure before estimate"
+  severity: WARNING  # Guidance level, not blockers
+  scope: "All development work, especially architectural decisions and refactoring"
+  
+  query_before_claim:
+    severity: WARNING
+    principle: "No claim about code without queryable evidence"
+    trigger_phrases:
+      - "The API probably has..."
+      - "This seems to be called in..."
+      - "There are around N..."
+      - "The schema appears to..."
+    required_replacement:
+      - use_exact_counts: "grep/find/wc returns exact number"
+      - use_verification: "ls/cat/query confirms structure"
+      - use_measurement: "tool output shows actual value"
+    examples:
+      bad:
+        - claim: "The API probably has ~20 endpoints"
+          issue: "Unverified approximation"
+        - claim: "This function seems to be called in about 5 places"
+          issue: "Guessed call count"
+        - claim: "The schema appears to be flat YAML"
+          issue: "Assumed structure without verification"
+      good:
+        - claim: "The API has 47 endpoints"
+          evidence: "grep -r '@app.route' | wc -l → 47"
+        - claim: "Function has 12 call sites across 3 files"
+          evidence: "ast analysis or grep shows exact locations"
+        - claim: "Config uses 3-level nested structure"
+          evidence: "python -c 'import yaml; print(yaml.safe_load(open(\"config.yaml\")))'"
+    enforcement:
+      automated_checks:
+        - grep_for_probably: "grep -rn '\\bprobably\\b' --include='*.py'"
+        - grep_for_seems: "grep -rn '\\bseems\\b' --include='*.py'"
+        - grep_for_around: "grep -rn '\\baround [0-9]\\b' --include='*.py'"
+      manual_review:
+        - flag_unverified_claims_in_comments
+        - flag_unverified_claims_in_docstrings
+  
+  evidence_over_intuition:
+    severity: WARNING
+    principle: "When memory and verification disagree, trust verification"
+    rule: "If you think you know X, verify X before using X in decisions"
+    examples:
+      - scenario: "I remember 5 generators"
+        verification: "find . -name '*generator*.py' | wc -l → 27"
+        decision: "Trust the 27, update mental model"
+      - scenario: "Looks like ~100 LOC"
+        verification: "wc -l module.py → 340"
+        decision: "Use 340 for estimates"
+      - scenario: "Should be O(n) complexity"
+        verification: "timeit shows O(n²) behavior"
+        decision: "Trust measurement, investigate algorithm"
+    guidelines:
+      - always_verify_assumptions: "Before architectural decisions"
+      - measure_dont_guess: "For complexity, scope, impact"
+      - update_mental_models: "When verification contradicts memory"
+  
+  precision_over_approximation:
+    severity: WARNING
+    principle: "Use exact numbers when they're easily obtainable"
+    forbidden_vagueness:
+      patterns:
+        - 'around X - when exact count available'
+        - '~N files - when ls/find gives exact list'
+        - 'several - when specific number is queryable'
+        - 'a handful - when count is deterministic'
+        - 'many - when precise count is trivial'
+        - 'some - when enumeration is simple'
+      detection:
+        automated: "grep -E '\\b(around|several|handful|many|some)\\b' code"
+    exceptions:
+      allowed_contexts:
+        - estimates_for_future_work:
+            reason: "Future inherently uncertain"
+            requirement: "Mark as estimate, state assumptions"
+        - genuine_uncertainty:
+            reason: "External system behavior unknown"
+            requirement: "Flag explicitly with uncertainty bounds"
+        - performance_ranges:
+            reason: "Depends on input characteristics"
+            requirement: "Provide measurement basis and conditions"
+    examples:
+      bad:
+        - "Affects around 20 files" 
+        - "Several tests need updating"
+        - "A handful of edge cases"
+      good:
+        - "Affects 23 files (find result)"
+        - "12 tests need updating (grep -c 'def test_old_api')"
+        - "3 edge cases identified: EOF, empty, null"
+  
+  no_probabilistic_language:
+    severity: WARNING
+    description: "Avoid hedging words when facts are verifiable"
+    forbidden_without_evidence:
+      - word: "probably"
+        alternative: |
+          verified: X
+          assumption: X (verify before delivery)
+      - word: "seems"
+        alternative: |
+          observed: X
+          measured: X
+      - word: "appears to"
+        alternative: |
+          confirmed: X
+          test shows: X
+      - word: "likely"
+        alternative: |
+          profiling indicates: X
+          measured probability: X%
+      - word: "might be"
+        alternative: |
+          two possibilities: X or Y (test to determine)
+      - word: "should" # when descriptive, not normative
+        alternative: |
+          does
+          must
+          verify behavior
+    allowed_contexts:
+      with_evidence_reference:
+        - "Profiling suggests O(n log n) (see benchmark_results.txt)"
+        - "Load testing indicates 500 req/s limit (test_load_2024-12-24.log)"
+      genuine_uncertainty:
+        - "External API behavior unspecified in documentation"
+        - "Network latency varies (measured range: 10-150ms)"
+      future_predictions:
+        - "Estimated 3 days based on historical velocity"
+        - "Projected 20% growth (extrapolating from 6-month trend)"
+      normative_should:
+        - "Function should raise ValueError for invalid input" # specification
+    validation:
+      automated_check: |
+        #!/bin/bash
+        # Detect probabilistic language in code/docs
+        grep -rn --include='*.py' --include='*.md' \
+          -E '\b(probably|seems|appears to|likely|might be)\b' \
+          | grep -v 'ALLOWED:' \
+          | grep -v '# normative'
+      manual_review:
+        - check_comments_for_hedging
+        - check_docstrings_for_vagueness
+        - check_commit_messages_for_assumptions
+  
+  verifiable_decisions:
+    severity: WARNING
+    principle: "Architectural choices should trace to measurable facts"
+    decision_template: |
+      # Decision: [what we chose]
+      
+      ## Evidence
+      [what we measured/queried - with commands/outputs]
+      
+      ## Alternatives Considered
+      [what we rejected - with quantified reasons]
+      
+      ## Trade-offs
+      [quantified differences - metrics, not opinions]
+      
+      ## Verification
+      [how to validate this decision holds - measurable criteria]
+    
+    required_elements:
+      - decision_statement: "Clear, actionable choice"
+      - evidence_basis: "Queryable facts that support decision"
+      - alternatives: "At least 1 alternative considered"
+      - trade_offs: "Quantified comparison where possible"
+      - verification_criteria: "How to know if decision was right"
+    
+    examples:
+      good: |
+        Decision: Extend BaseGenerator instead of creating new base class
+        
+        Evidence:
+        - Query shows 27 existing generators extend BaseGenerator
+          (find . -name '*generator.py' -exec grep -l 'BaseGenerator' {} \;)
+        - BaseGenerator provides 12 methods we need: [list from inspection]
+          (python -c "import inspect; print([m for m in dir(BaseGenerator) if not m.startswith('_')])")
+        - No generator has needed a different base (git log search)
+          (git log --all --grep='new base class' -- '*generator*')
+        
+        Alternatives Considered:
+        1. Custom base class
+           - Would duplicate 12 methods from BaseGenerator
+           - No additional methods needed beyond BaseGenerator's API
+           - Maintenance cost: 2x (maintain both bases)
+        
+        Trade-offs:
+        - ✓ Inherit 3 unused methods (acceptable overhead: total 50 LOC)
+        - ✓ Consistency with 27 existing generators
+        - ✗ Coupled to BaseGenerator changes (acceptable: stable API, 2 changes/year)
+        
+        Verification:
+        - Test that new generator passes same test suite as other 27
+        - Verify no unused methods are called (coverage report)
+        - Monitor BaseGenerator change frequency (git log --since='1 year ago')
+      
+      bad: |
+        Decision: Use BaseGenerator
+        
+        Rationale: It seems like the right choice and other code does it.
+  
+  copy_paste_executable:
+    severity: WARNING
+    principle: "Verification commands should be runnable without modification"
+    standards:
+      no_placeholder_values:
+        description: "No <TODO>, <FILL_IN>, [your_value_here]"
+        severity: ERROR
+        examples:
+          bad:
+            - "grep <pattern> <file>  # fill in pattern and file"
+            - "python script.py --config <path_to_config>"
+          good:
+            - "grep 'def query' src/mypackage/query_tool.py"
+            - "python script.py --config ./configs/production.yaml"
+      
+      no_interactive_prompts:
+        description: "Commands must run without user input"
+        severity: ERROR
+        examples:
+          bad:
+            - "python setup.py  # (will prompt for configuration)"
+            - "npm install  # (may prompt for optional dependencies)"
+          good:
+            - "python setup.py --config=defaults.ini"
+            - "npm install --yes"
+      
+      deterministic_output:
+        description: "Same command, same result (modulo timestamps)"
+        severity: WARNING
+        acceptable_variance:
+          - timestamps_in_logs: allowed
+          - process_ids: allowed
+          - random_seeds_if_documented: allowed
+        unacceptable_variance:
+          - different_file_counts: "indicates stale command"
+          - different_structure: "indicates incorrect assumptions"
+      
+      exit_code_zero_on_success:
+        description: "Successful verification should exit 0"
+        severity: WARNING
+        examples:
+          bad:
+            - "grep 'pattern' file  # exits 1 if not found, ambiguous"
+          good:
+            - "grep -q 'pattern' file && echo 'Found' || echo 'Not found'"
+            - "test -f file && echo 'Exists' || echo 'Missing'"
+      
+      relative_paths_preferred:
+        description: "Use repo-relative paths when possible"
+        severity: NOTE
+        examples:
+          bad:
+            - "/home/user/project/src/module.py"
+          good:
+            - "./src/module.py"
+            - "src/module.py"
+      
+      self_contained:
+        description: "Command should not rely on hidden setup"
+        severity: WARNING
+        require:
+          - explicit_working_directory: "cd /path && command"
+          - explicit_environment: "ENV_VAR=value command"
+          - explicit_prerequisites: "# Requires: pip install X"
+  
+  freshness_awareness:
+    severity: NOTE
+    principle: "Be aware when working with stale information"
+    guidelines:
+      check_modification_times:
+        - "ls -lt for file age awareness"
+        - "git log -1 --format=%ci <file> for last commit time"
+        - "stat -c %Y <file> for Unix timestamp"
+      
+      regenerate_when_stale:
+        - "If code changed, re-verify assumptions"
+        - "If dependencies updated, re-measure performance"
+        - "If data schema changed, re-validate queries"
+      
+      timestamp_evidence:
+        - "Note when facts were collected"
+        - "Include in evidence blocks: collected_utc"
+        - "Flag evidence older than N days for review"
+    
+    automated_checks:
+      facts_newer_than_code:
+        description: "Verify generated artifacts are fresh"
+        recommended: true
+        example: |
+          # Check if FACTS.parquet is newer than all .py files
+          newest_py=$(find src -name '*.py' -printf '%T@\n' | sort -n | tail -1)
+          facts_mtime=$(stat -c %Y FACTS.parquet)
+          [ $facts_mtime -ge $newest_py ] || echo "STALE: Regenerate FACTS.parquet"
+      
+      periodic_reverification:
+        description: "Re-run verification commands periodically"
+        recommended_for: "Long-running projects (>1 month)"
+        cadence: "Weekly for active development, monthly for maintenance"
+  
+  assumption_vs_fact:
+    severity: WARNING
+    principle: "Clearly distinguish assumptions from verified facts"
+    required_labeling:
+      assumptions:
+        must_be_marked: '"ASSUMPTION:" or "UNVERIFIED:" prefix'
+        must_include_risk: "Impact if wrong: [statement]"
+        should_be_verified: "Before delivery or before dependent work"
+        examples:
+          - "ASSUMPTION: Config files use consistent key naming (snake_case)"
+          - "Impact if wrong: Parser will fail on 20% of configs"
+          - "Verification plan: Parse all configs in test_config_parsing.py"
+      
+      facts:
+        must_have_source: "WHERE verified (command/tool/observation)"
+        should_be_reproducible: "HOW to re-verify (copy-paste command)"
+        should_be_timestamped: "WHEN verified (ISO date or commit SHA)"
+        examples:
+          - "VERIFIED: All 12 config files use snake_case keys"
+          - "Source: grep -h '^[a-z_]*:' configs/*.yaml | sort -u"
+          - "Verified: 2024-12-24 12:34 UTC (commit abc123f)"
+    
+    template_for_assumptions: |
+      ## ASSUMPTION: [statement]
+      
+      **Confidence**: [high|medium|low]
+      **Impact if wrong**: [consequences]
+      **Verification plan**: [how to verify before delivery]
+      **Blocking**: [what work depends on this]
+    
+    template_for_facts: |
+      ## VERIFIED: [statement]
+      
+      **Source**: [command or tool that verified]
+      **Command**: `[copy-paste executable command]`
+      **Result**: [actual output or measurement]
+      **Timestamp**: [YYYY-MM-DD HH:MM UTC or commit SHA]
+  
+  integration_with_other_principles:
+    description: "How FDP principles connect to existing governance"
+    
+    yagni_connection:
+      verify_the_need:
+        - "Before: 'We probably need this feature'"
+        - "After: 'grep shows 0 call sites → YAGNI violation'"
+      measure_the_impact:
+        - "Before: 'Refactor affects some files'"
+        - "After: 'grep -r shows 47 call sites across 12 files'"
+      example: |
+        # YAGNI decision enhanced with FDP
+        Question: Should we add caching layer?
+        FDP approach:
+        1. Query: Current performance (measure actual latency)
+        2. Query: Call frequency (count actual usage)
+        3. Decision: If <100 calls/day and <100ms latency → YAGNI
+                    If >10k calls/day and >500ms latency → Add cache
+    
+    fail_fast_connection:
+      verify_assumptions_early:
+        - "Don't build on unverified assumptions"
+        - "Query before implementing, not after"
+      validate_before_commit:
+        - "Test claims before locking in design"
+        - "Evidence blocks before implementation plan"
+      example: |
+        # Fail fast enhanced with FDP
+        Bad: Implement feature → Test → Discover wrong assumption → Redesign
+        Good: Query assumptions → Verify → Design → Implement
+    
+    clean_table_connection:
+      no_unverified_claims:
+        - "All assertions must be verifiable"
+        - "No 'probably' in delivered code comments"
+      no_assumption_debt:
+        - "Verify before delivery, not after"
+        - "Flag assumptions as technical debt if unverifiable"
+      example: |
+        # Clean table enhanced with FDP
+        Forbidden: # TODO: Verify this assumption later
+        Required: VERIFIED: [statement] (command output: ...)
+    
+    kiss_connection:
+      measure_complexity:
+        - "Before: 'This seems complex'"
+        - "After: 'Cyclomatic complexity: 24 (wily report)'"
+      verify_simplicity_claim:
+        - "Before: 'Simple 2-step process'"
+        - "After: 'Call graph shows 7 dependencies (measured)'"
+    
+    solid_connection:
+      verify_coupling:
+        - "Before: 'Loosely coupled'"
+        - "After: 'fan_in=3, fan_out=2 (dependency analysis)'"
+      measure_before_generalizing:
+        - "Count actual consumers before creating abstraction"
+        - "SOLID applies only after YAGNI (≥2 real consumers verified)"
+
+# =============================================================================
+# FDP ADOPTION PATH
+# =============================================================================
+
+fdp_adoption:
+  description: "Gradual adoption of fact-driven practices"
+  
+  level_0_baseline:
+    description: "Current practice (no FDP)"
+    characteristics:
+      - assumptions_in_planning: "Common and accepted"
+      - verification_manual: "Optional, often skipped"
+      - estimates_gut_based: "Experience and intuition"
+      - probabilistic_language: "Frequent ('probably', 'seems')"
+      - precision: "Approximations accepted ('around 20')"
+    risk_level: HIGH
+    effort: ZERO
+  
+  level_1_awareness:
+    description: "FDP-aware development (minimal overhead)"
+    practices:
+      - flag_assumptions: "Mark them as ASSUMPTION:"
+      - verify_critical_claims: "At least the high-risk ones"
+      - measure_when_easy: "If query is simple, do it"
+      - timestamp_evidence: "Note when facts collected"
+      - avoid_probabilistic: "Prefer 'verified' over 'probably'"
+    adoption_steps:
+      - add_assumption_markers: "Search for 'probably', add ASSUMPTION: prefix"
+      - verify_on_review: "Code review checks critical claims"
+      - low_hanging_fruit: "Replace approximations with exact counts"
+    risk_level: MEDIUM
+    effort: LOW
+    roi: "Catches 50% of assumption bugs with 10% overhead"
+  
+  level_2_systematic:
+    description: "FDP-systematic development (moderate overhead)"
+    practices:
+      - query_before_major_decisions: "Required for architecture/refactoring"
+      - copy_paste_verification: "All verification commands executable"
+      - no_probabilistic_without_evidence: "Enforced via automated checks"
+      - measure_impact: "Blast radius, complexity, coupling"
+      - document_alternatives: "What was considered and why rejected"
+    adoption_steps:
+      - pre_commit_checks: "Automated grep for probabilistic language"
+      - decision_templates: "Use verifiable decision template"
+      - verification_commands: "Include in all design docs"
+      - evidence_review: "Dedicated review phase for major changes"
+    risk_level: LOW
+    effort: MEDIUM
+    roi: "Prevents 80% of assumption bugs with 25% overhead"
+    recommended_for:
+      - refactoring_projects: true
+      - new_features: true
+      - performance_work: true
+      - breaking_changes: true
+  
+  level_3_fdp_full:
+    description: "Full FDP protocol (optional advanced methodology)"
+    characteristics:
+      - evidence_blocks: "Required (YAML with FQ-IDs)"
+      - quality_gates: "9am implementer test, probably detector"
+      - tool_enforcement: "fact-query tools preferred for code facts"
+      - hard_stops: "7 mandatory triggers"
+      - automated_validation: "Linters and validators"
+    adoption_steps:
+      - see: "FDP documentation (if implementing full protocol)"
+      - requires: "Evidence blocks, registry, linters"
+      - scope: "Major planning documents, design decisions"
+    risk_level: MINIMAL
+    effort: HIGH
+    roi: "Prevents 95% of assumption bugs with 50% upfront overhead"
+    recommended_for:
+      - critical_systems: true
+      - large_refactorings: true
+      - multi_month_projects: true
+      - compliance_requirements: true
+  
+  transition_strategy:
+    phase_1_weeks_1_2:
+      - introduce_concept: "Team meeting on FDP principles"
+      - start_marking_assumptions: "Add ASSUMPTION: to comments"
+      - measure_baseline: "Count 'probably' occurrences"
+    
+    phase_2_weeks_3_4:
+      - add_automated_checks: "Pre-commit hook for probabilistic language"
+      - require_verification: "For architectural decisions"
+      - template_adoption: "Use decision template for major changes"
+    
+    phase_3_month_2:
+      - systematic_adoption: "All refactoring uses level 2"
+      - training: "Workshop on evidence blocks"
+      - tool_setup: "fact-file-query-tool or similar"
+    
+    phase_4_month_3_plus:
+      - evaluate_full_fdp: "For critical projects"
+      - measure_impact: "Track assumption bugs before/after"
+      - refine_process: "Adjust based on team feedback"
+
+# =============================================================================
+# FACTS BEFORE FILES (FDP Integration)
+# =============================================================================
+
+facts_before_files:
+  description: "When to query facts vs reading files directly"
+  severity: NOTE
+  
+  prefer_facts_for:
+    - code_structure: "Classes, functions, signatures, complexity"
+    - dependencies: "Imports, call graphs, coupling"
+    - metrics: "LOC, cyclomatic complexity, test coverage"
+    - patterns: "Naming conventions, error handling patterns"
+  
+  prefer_files_for:
+    - implementation_details: "Specific algorithm logic"
+    - documentation: "Docstrings, comments"
+    - literals: "Specific error messages, constants"
+    - context: "Why decisions were made (git history)"
+  
+  decision_tree:
+    question: "What do I need to know?"
+    branches:
+      structural_info:
+        questions:
+          - "How many X exist?"
+          - "What are signatures of Y?"
+          - "What calls Z?"
+        decision: "USE fact query (faster, more accurate)"
+
+      implementation_logic:
+        questions:
+          - "How does X implement Y?"
+          - "What's the algorithm for Z?"
+          - "What are exact error messages?"
+        decision: "READ file (need full context)"
+      
+      unsure:
+        decision: |
+          1. Try fact query first (might be sufficient)
+          2. If insufficient → read file
+          3. If repeatedly reading → consider adding to fact schema
+
+# =============================================================================
+# IMPORT GOVERNANCE
+# =============================================================================
+
+import_governance:
+  
+  import_style:
+    severity: ERROR
+    
+    relative_imports_within_package:
+      description: "Use relative imports for intra-package references"
+      severity: ERROR
+      rule: "Always use relative imports when importing from the same package"
+      rationale: |
+        Relative imports make code more portable and refactorable.
+        They clearly indicate package-internal dependencies vs external ones.
+      
+      examples:
+        correct:
+          - description: "Import from sibling module"
+            code: "from .utils import helper_function"
+            location: "mypackage/submodule/module.py"
+          
+          - description: "Import from parent package"
+            code: "from ..core import BaseClass"
+            location: "mypackage/submodule/module.py"
+          
+          - description: "Import from sibling subpackage"
+            code: "from ..other_submodule import helper"
+            location: "mypackage/submodule/module.py"
+          
+          - description: "Import from deeper submodule"
+            code: "from .validators.schema import validate_config"
+            location: "mypackage/module.py"
+        
+        incorrect:
+          - description: "Absolute import to own package"
+            bad_code: "from mypackage.utils import helper_function"
+            correct_code: "from .utils import helper_function"
+            reason: "Should use relative import within same package"
+            location: "mypackage/submodule/module.py"
+          
+          - description: "Absolute import to parent package module"
+            bad_code: "from mypackage.core import BaseClass"
+            correct_code: "from ..core import BaseClass"
+            reason: "Should use relative import for intra-package reference"
+            location: "mypackage/submodule/module.py"
+      
+      enforcement:
+        automated: "ruff check --select TID252"  # ban-relative-imports OFF, prefer relative
+        manual: "Code review checks for absolute imports to own package"
+    
+    absolute_imports_for_external:
+      description: "Use absolute imports for external dependencies"
+      severity: ERROR
+      rule: "Always use absolute imports for stdlib and third-party packages"
+      
+      examples:
+        correct:
+          - "import os"
+          - "from pathlib import Path"
+          - "from typing import Dict, List"
+          - "import pandas as pd"
+          - "from pydantic import BaseModel"
+        
+        incorrect:
+          - bad_code: "from . import os"  # Never relative for stdlib
+            correct_code: "import os"
+          - bad_code: "from ..typing import Dict"  # Never relative for stdlib
+            correct_code: "from typing import Dict"
+    
+    general_rules:
+      - no_star_imports: "from module import *"
+      - explicit_imports_preferred: "from x import y, z"
+      - alphabetize_imports: "Use ruff/isort"
+    
+  import_organization:
+    order:
+      - stdlib
+      - third_party
+      - first_party  # Absolute imports to other internal packages
+      - local  # Relative imports (same package)
+    separator: blank_line_between_groups
+    
+    example_structure: |
+      # Standard library
+      import os
+      from pathlib import Path
+      from typing import Dict, List
+      
+      # Third-party
+      import pandas as pd
+      from pydantic import BaseModel
+      
+      # First-party (other packages in monorepo)
+      from other_internal_package import something
+      
+      # Local (same package, use relative)
+      from .utils import helper
+      from ..core import BaseClass
+      from .validators.schema import validate_config
+  
+  module_import_purity:
+    severity: ERROR
+    forbidden:
+      - side_effects_on_import: "No module-level execution of business logic"
+      - circular_imports: "Indicates design problem"
+      - dynamic_path_manipulation: "sys.path.append forbidden"
+      - absolute_imports_to_own_package: "Use relative imports within same package"
+    allowed:
+      - logger_configuration: "If purely declarative"
+      - constants_definition: "Module-level constants OK"
+      - class_decorator_application: "If no side effects"
+    
+  migration_guide:
+    description: "How to refactor from absolute to relative imports"
+    steps:
+      - step: 1
+        action: "Identify package structure"
+        command: "find src/ -name '__init__.py' | xargs dirname"
+        purpose: "Map out package hierarchy"
+      
+      - step: 2
+        action: "Find absolute imports to own package"
+        command: "grep -r 'from mypackage' src/mypackage/ --include='*.py'"
+        purpose: "Locate imports that should be relative"
+      
+      - step: 3
+        action: "Calculate relative import path"
+        method: |
+          From: src/mypackage/submodule/file.py
+          Import: from mypackage.utils import helper
+          
+          Calculation:
+          - Current location: mypackage/submodule/
+          - Target location: mypackage/utils
+          - Relative path: ../utils
+          - Result: from ..utils import helper
+      
+      - step: 4
+        action: "Apply transformation"
+        examples:
+          same_level: "from mypackage.x import y → from .x import y"
+          parent_level: "from mypackage.x import y → from ..x import y (if in subpackage)"
+          nested: "from mypackage.a.b import y → from .a.b import y"
+      
+      - step: 5
+        action: "Verify with ruff"
+        command: "ruff check --select TID --fix"
+        purpose: "Auto-fix and validate import organization"
+    
+    exceptions:
+      __init__py_reexports:
+        description: "Package __init__.py may use absolute imports for re-exports"
+        allowed: true
+        example: |
+          # In src/mypackage/__init__.py
+          from mypackage.core import BaseClass  # OK for re-export
+          __all__ = ['BaseClass']
+        rationale: "Public API definition, not internal usage"
+      
+      __main__py:
+        description: "Entry point files may use absolute imports"
+        allowed: true
+        example: |
+          # In src/mypackage/__main__.py
+          from mypackage.cli import main  # OK
+          if __name__ == '__main__':
+              main()
+        rationale: "Entry points are special, not typical package modules"
+
+# =============================================================================
+# DOCUMENTATION
+# =============================================================================
+
+documentation:
+  
+  docstring_standards:
+    severity: WARNING
+    required_for:
+      - public_functions
+      - public_classes
+      - public_methods
+      - complex_algorithms
+    
+    format: google_style  # or numpy_style
+    
+    must_include:
+      - description: "What it does"
+      - args: "Parameters with types and meaning"
+      - returns: "Return value with type"
+      - raises: "Exceptions that may be raised"
+    
+    optional_but_recommended:
+      - examples: "Usage examples for complex APIs"
+      - notes: "Important caveats or gotchas"
+      - see_also: "Related functions"
+  
+  inline_comments:
+    severity: NOTE
+    when_to_use:
+      - complex_logic: "Algorithm explanation"
+      - workarounds: "Why unusual approach taken"
+      - gotchas: "Non-obvious behavior"
+    when_not_to_use:
+      - obvious_code: "# Increment counter (for i += 1)"
+      - redundant: "Repeat what code says"
+  
+  architectural_docs:
+    severity: WARNING
+    required:
+      - readme: "Project overview, setup, usage"
+      - architecture_decision_records: "For major decisions"
+      - api_reference: "For public libraries"
+    recommended:
+      - contributing_guide: "For open source"
+      - changelog: "Track user-facing changes"
+
+# =============================================================================
+# LOGGING AND OBSERVABILITY
+# =============================================================================
+
+logging_governance:
+  
+  log_levels:
+    severity: WARNING
+    standards:
+      DEBUG:
+        use_for: "Detailed diagnostic info"
+        examples: ["Variable values", "Loop iterations", "Internal state"]
+      INFO:
+        use_for: "General informational messages"
+        examples: ["Service started", "Request received", "Task completed"]
+      WARNING:
+        use_for: "Recoverable issues"
+        examples: ["Deprecated API used", "Retry attempted", "Fallback activated"]
+      ERROR:
+        use_for: "Failures requiring attention"
+        examples: ["Request failed", "Resource unavailable", "Data corruption"]
+      CRITICAL:
+        use_for: "System-level failures"
+        examples: ["Service down", "Data loss", "Security breach"]
+  
+  logging_practices:
+    severity: WARNING
+    required:
+      - structured_logging: "Use JSON or key-value pairs"
+      - context_preservation: "Include request ID, user ID, etc."
+      - no_sensitive_data: "No passwords, tokens, PII"
+      - actionable_messages: "What went wrong + what to do"
+    
+    forbidden:
+      - print_statements: "Use logger instead"
+      - log_and_raise: "Choose log OR raise, not both"
+      - generic_messages: "'Error occurred' without context"
+
+# =============================================================================
+# FACTS BEFORE FILES (CONTINUED)
+# =============================================================================
+
+facts_query_patterns:
+  description: "Query facts (FACTS.parquet) before reading files"
+  severity: NOTE
+  recommended: true
+  
+  when_facts_sufficient:
+    - entity_discovery: "What modules/classes/functions exist?"
+    - signature_lookup: "What are function signatures?"
+    - dependency_analysis: "What imports what?"
+    - complexity_metrics: "Cyclomatic complexity, LOC"
+    - call_graph: "What calls what?"
+  
+  when_files_needed:
+    - algorithm_details: "How is calculation performed?"
+    - error_messages: "Exact wording of exceptions"
+    - comments: "Why was it done this way?"
+    - control_flow_logic: "Detailed if/else/loop structure"
+  
+  workflow:
+    step_1: "Query FACTS.parquet for structural info"
+    step_2: "If insufficient → read specific files"
+    step_3: "If pattern repeats → enhance fact extraction"
+
+# =============================================================================
+# ENFORCEMENT & CI
+# =============================================================================
+
+enforcement:
+  
+  ci_gates:
+    - all_tests_pass
+    - type_checking_passes
+    - linters_pass
+    - no_todos_in_src
+    - facts_are_fresh
+  
+  pr_checklist:
+    yagni_enforcement:
+      - id: PR_CHECK_REQ_ID
+        text: "Current requirement ID is referenced"
+        severity: blocker
+        automated: false
+      - id: PR_CHECK_IMMEDIATE_USE
+        text: "Feature is used immediately by at least one code path"
+        severity: blocker
+        automated: false
+      - id: PR_CHECK_NO_SPECULATIVE
+        text: "No speculative flags, hooks, or abstractions added"
+        severity: blocker
+        automated: false
+    
+    solid_enforcement:
+      - id: PR_CHECK_REAL_CONSUMERS
+        text: "Generalizations have ≥2 real consumers today"
+        severity: warning
+        automated: false
+    
+    tdd_enforcement:
+      - id: PR_CHECK_TESTS
+        text: "Tests prove current necessity (fail-before, pass-after)"
+        severity: blocker
+        automated: true
+    
+    kiss_enforcement:
+      - id: PR_CHECK_KISS
+        text: "Simpler alternative considered and documented"
+        severity: blocker
+        automated: false
+    
+    fdp_enforcement:
+      - id: PR_CHECK_NO_PROBABLY
+        text: "No probabilistic language without evidence"
+        severity: warning
+        automated: true
+        check: "grep -rn '\\b(probably|seems|appears to)\\b' src/"
+      - id: PR_CHECK_VERIFIABLE
+        text: "Major decisions have verification commands"
+        severity: warning
+        automated: false
+  
+  waiver_policy:
+    description: "Formal process for temporary exceptions to governance rules"
+    required_fields:
+      - ticket_id
+      - approver
+      - expires_at
+      - justification
+      - risk_assessment
+    constraints:
+      max_duration_days: 30
+      auto_expire: true
+    approval_levels:
+      blocker: tech_lead
+      warning: senior_dev
+      note: peer_review
+    tracking:
+      waiver_log: waivers.jsonl
+      metrics:
+        - total_waivers
+        - expired_waivers
+        - violation_types
+        - waiver_usage_rate
+  
+  code_review_checklist:
+    weak_tests_identified: true
+    magic_numbers_eliminated: true
+    silent_fallbacks_removed: true
+    error_messages_actionable: true
+    type_hints_present: true
+    simpler_alternatives_documented: true
+    yagni_violations_caught: true
+    unverified_claims_flagged: true  # FDP addition
+    probabilistic_language_removed: true  # FDP addition
+  
+  automated_checks:
+    ruff:
+      - import_style
+      - complexity_limits
+      - naming_conventions
+    mypy:
+      - type_coverage
+      - strict_mode
+    pytest:
+      - test_coverage
+      - no_weak_tests
+    ripgrep:
+      - no_todos
+      - no_legacy_fields
+      - no_magic_strings
+      - no_probabilistic_language  # FDP addition
+    custom_fdp_checks:
+      - check_for_assumptions: "grep -rn 'ASSUMPTION:' src/ | wc -l"
+      - check_for_probably: "grep -rn '\\bprobably\\b' src/ --include='*.py'"
+      - check_for_seems: "grep -rn '\\bseems\\b' src/ --include='*.py'"
+
+# =============================================================================
+# CROSS-CUTTING CONCERNS
+# =============================================================================
+
+cross_cutting:
+  
+  all_rules_must:
+    - fail_fast_not_silent
+    - provide_clear_error_messages
+    - be_testable
+    - be_documentable
+    - support_incremental_adoption
+  
+  overlaps_eliminated:
+    error_handling:
+      combines: [fail_fast, no_silent_fallbacks, error_governance]
+    code_quality:
+      combines: [magic_numbers, hardcoding, naming, complexity]
+    testing:
+      combines: [no_weak_tests, tdd_governance]
+    architecture:
+      combines: [kiss, yagni, solid_principles]
+    fdp:
+      enhances: [yagni, fail_fast, clean_table, kiss]
+      adds: [query_before_claim, precision_over_approximation, verifiable_decisions]
+  
+  priority:
+    p0_blockers: [clean_table, fail_fast, no_silent_fallbacks, yagni, kiss]
+    p1_errors: [type_checking, no_weak_tests, import_governance, module_import_purity]
+    p2_warnings: [complexity_limits, documentation, logging, solid_principles, fdp_principles]
+
+# =============================================================================
+# AI REASONING & DECISION-MAKING GOVERNANCE
+# =============================================================================
+
+reasoning_governance:
+  description: "Structured Chain-of-Thought validation for AI-assisted development"
+  note: "Can be extended with project-specific reasoning schema if needed"
+  version: "2.1.0"
+  
+  semantic_types:
+    required_structure:
+      assumption:
+        must_have: [id, statement, confidence, impact_if_wrong]
+        id_pattern: "^assumption_[a-z0-9_]+$"
+        min_statement_length: 10
+        min_impact_length: 20
+      
+      claim:
+        must_have: [id, statement, evidence_ids, confidence]
+        id_pattern: "^claim_[a-z0-9_]+$"
+        min_evidence_count: 1
+        requirement_level: MUST
+      
+      fact:
+        must_have: [id, statement, source_id, verification_status]
+        id_pattern: "^fact_[a-z0-9_]+$"
+        allowed_verification: [verified, unverified, disputed]
+        requirement_level: MUST
+      
+      decision:
+        must_have: [id, chosen_option, rationale_id, alternatives_considered]
+        id_pattern: "^decision_[a-z0-9_]+$"
+        min_alternatives: 1
+        must_assess_reversibility: SHOULD
+        requirement_level: MUST
+      
+      evidence:
+        must_have: [id, type, content, supports_claim_ids]
+        id_pattern: "^evidence_[a-z0-9_]+$"
+        allowed_types: [observation, measurement, citation, test_result, simulation]
+        requirement_level: MUST
+  
+  evidence_requirements:
+    by_task_complexity:
+      simple:
+        min_sources: 1
+        requirement_level: MUST
+      
+      medium:
+        min_sources: 2
+        min_alternatives: 1
+        requirement_level: MUST
+      
+      complex:
+        min_sources: 3
+        min_alternatives: 2
+        risk_assessment: MUST
+        requirement_level: MUST
+  
+  claim_validation:
+    fact_vs_assumption:
+      rule: "Facts MUST have source_id; Assumptions MUST NOT"
+      requirement_level: MUST
+    
+    evidence_linkage:
+      rule: "Claims MUST reference evidence_ids"
+      requirement_level: MUST
+    
+    confidence_assessment:
+      rule: "Claims SHOULD include confidence level"
+      requirement_level: SHOULD
+      allowed_levels: [high, medium, low]
+  
+  decision_validation:
+    alternatives:
+      rule: "Decisions MUST consider alternatives"
+      min_alternatives: 1
+      requirement_level: MUST
+    
+    rationale:
+      rule: "Decisions MUST have rationale_id"
+      requirement_level: MUST
+    
+    reversibility:
+      rule: "Decisions SHOULD assess reversibility"
+      requirement_level: SHOULD
+  
+  risk_assessment:
+    critical_impact:
+      rule: "Critical risks MUST have mitigation"
+      requirement_level: MUST
+    
+    likelihood_impact:
+      rule: "Risks MUST specify both likelihood and impact"
+      requirement_level: MUST
+  
+  prohibited_patterns:
+    circular_reasoning:
+      rule: "Evidence MUST_NOT reference claims it supports"
+      requirement_level: MUST_NOT
+      severity: ERROR
+    
+    unanchored_claims:
+      rule: "Claims MUST_NOT exist without evidence"
+      requirement_level: MUST_NOT
+      severity: ERROR
+    
+    unsourced_facts:
+      rule: "Facts MUST_NOT exist without source_id"
+      requirement_level: MUST_NOT
+      severity: ERROR
+    
+    assumption_as_fact:
+      rule: "Assumptions MUST_NOT be presented as facts"
+      requirement_level: MUST_NOT
+      severity: ERROR
+  
+  optional_enhancements:
+    pattern_recognition:
+      rule: "MAY identify recurring patterns in reasoning"
+      requirement_level: MAY
+    
+    validation_tests:
+      rule: "Complex tasks SHOULD include validation elements"
+      requirement_level: SHOULD
+  
+  integration_with_code_governance:
+    facts_before_files:
+      relation: "FACTS.parquet = verified facts with source_id"
+      reasoning: "Query facts (verified) before assumptions (unverified)"
+    
+    clean_table:
+      relation: "No unverified assumptions in delivered work"
+      reasoning: "Assumptions must be validated or documented as risks"
+    
+    no_silent_fallbacks:
+      relation: "Unanchored claims = silent failures in reasoning"
+      reasoning: "Claims without evidence are reasoning errors"
+    
+    tdd_governance:
+      relation: "Tests are evidence for code behavior claims"
+      reasoning: "Test results validate or refute implementation claims"
+    
+    fdp_principles:
+      relation: "FDP provides methodology for fact collection"
+      reasoning: "Evidence blocks = structured fact gathering for decisions"

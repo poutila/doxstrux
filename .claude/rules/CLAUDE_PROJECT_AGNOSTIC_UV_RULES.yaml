@@ -1,0 +1,634 @@
+# CLAUDE.md - AI Assistant Guidelines (Project-Agnostic)
+
+meta:
+  purpose: "Guidance for AI assistants working with Python projects using uv"
+  format: "YAML for machine readability"
+  last_updated: "2025-12-26"
+  reference_docs:
+    - "UV_COMPLETE_GUIDE.md - Comprehensive uv documentation"
+    - "UV_PROJECT_AGNOSTIC_AI.md - Detailed AI assistant rules"
+
+# =============================================================================
+# CRITICAL SAFETY RULES - NEVER VIOLATE THESE
+# =============================================================================
+
+critical_safety_rules:
+  priority: "HIGHEST - Read this first"
+  violation_severity: "Breaks reproducibility, creates drift, causes version mismatches"
+  total_rules: 3
+  
+  rule_1_never_use_system_python:
+    summary: "NEVER use system Python - ALWAYS use 'uv run'"
+    
+    forbidden:
+      - command: "python3 script.py"
+        reason: "Uses system Python (wrong version/packages)"
+      - command: "python script.py"
+        reason: "Uses system Python (wrong version/packages)"
+      - command: ".venv/bin/python script.py"
+        reason: "Bypasses uv management"
+      - command: "/usr/bin/python3 script.py"
+        reason: "Uses system Python directly"
+    
+    required:
+      - command: "uv run python script.py"
+        note: "ONLY correct way"
+      - command: "uv run script.py"
+        note: "Also correct if script has shebang"
+    
+    why_critical:
+      - "System Python may be Python 3.11 when project needs 3.12"
+      - "System Python may have pydantic 1.x when project needs 2.x"
+      - "System Python is missing project dependencies"
+      - "Script may 'work' but won't reproduce elsewhere"
+    
+    to_check_if_installed:
+      correct:
+        - "cat pyproject.toml | grep <package>"
+        - "uv tree | grep <package>"
+      wrong:
+        - "python3 -c 'import <package>'"
+          reason: "Tests wrong environment"
+  
+  rule_2_never_use_uv_pip_install:
+    summary: "NEVER use 'uv pip install' in project mode - ALWAYS use 'uv add'"
+    
+    forbidden:
+      - command: "uv pip install <package>"
+        reason: "Creates drift - not in pyproject.toml"
+      - command: "uv pip install -r requirements.txt"
+        reason: "Creates drift"
+      - command: "pip install <package>"
+        reason: "Creates drift"
+    
+    required:
+      - command: "uv add <package>"
+        note: "Updates pyproject.toml + uv.lock"
+    
+    why_critical:
+      - "'uv pip install' modifies .venv but NOT pyproject.toml"
+      - "Next 'uv sync' will remove the package (not in lockfile)"
+      - "Team members won't have the package (not declared)"
+      - "Creates 'works on my machine' syndrome"
+    
+    repair_if_violated:
+      - "1. Identify what was installed"
+      - "2. Persist it: uv add <package>"
+      - "3. Re-align: uv lock && uv sync"
+      - "4. Verify: git diff pyproject.toml uv.lock"
+  
+  rule_3_no_editable_install_confusion:
+    summary: "NEVER manually install project as editable - uv does this automatically"
+    
+    forbidden:
+      - command: "uv pip install -e ."
+        reason: "Creates drift (covered by Rule 2), redundant"
+        note: "Does NOT update pyproject.toml, removed by next 'uv sync'"
+      
+      - command: "uv pip install . -e"
+        reason: "Creates drift (covered by Rule 2), redundant"
+        note: "Does NOT update pyproject.toml, removed by next 'uv sync'"
+      
+      - command: "uv add . --editable"
+        reason: "DOESN'T WORK - circular dependency error"
+        note: "Tries to add to [project.dependencies] - package can't depend on itself"
+      
+      - command: "uv add . --editable --dev"
+        reason: "POLLUTES [dependency-groups].dev with self-reference"
+        note: "THIS IS THE MAIN POLLUTION COMMAND - works but creates self-reference!"
+      
+      - command: "pip install -e ."
+        reason: "Bypasses uv management, creates drift"
+    
+    correct_behavior:
+      - "uv sync automatically installs the project in editable mode"
+      - "No manual editable install needed"
+      - "Project is already available for import after 'uv sync'"
+    
+    why_forbidden:
+      uv_pip_install_e:
+        - "Creates drift (environment changes not in pyproject.toml)"
+        - "Next 'uv sync' removes the editable install"
+        - "Team members won't have it (not declared)"
+        - "Already covered by Rule 2 (never use uv pip install)"
+      
+      uv_add_editable_without_dev:
+        - "Doesn't even work - tries to add to [project.dependencies]"
+        - "Results in circular dependency error"
+        - "Package cannot depend on itself in runtime dependencies"
+      
+      uv_add_editable_dev:
+        - "Adds self-reference to [dependency-groups].dev"
+        - "Pollutes dev dependencies with package name"
+        - "Redundant - uv sync already handles editable install"
+        - "Confuses dependency resolution"
+        - "THIS IS THE SPECIFIC COMMAND THAT CREATES POLLUTION"
+    
+    how_it_works:
+      - "uv sync reads [project] metadata from pyproject.toml"
+      - "Automatically installs project package in editable mode"
+      - "Project code immediately available for import"
+      - "Changes to source code instantly reflected (no reinstall needed)"
+    
+    if_confused:
+      verify_project_installed: "uv run python -c 'import <your_package>'"
+      check_for_pollution: "cat pyproject.toml | grep -A 10 '\\[project.dependencies\\]'"
+      expected: "Your package name should NOT appear in dependencies or dev groups"
+
+# =============================================================================
+# CORE UV WORKFLOW - Essential Commands
+# =============================================================================
+
+core_workflow:
+  philosophy: "Keep repository reproducible and drift-free"
+  
+  three_files:
+    pyproject_toml:
+      role: "Declared intent (dependencies, extras, groups)"
+      managed_by: "uv add, uv remove, manual edits"
+      commit_to_git: true
+    
+    uv_lock:
+      role: "Pinned resolution (exact versions for all platforms)"
+      managed_by: "uv automatically (updated by uv add, uv sync, uv run)"
+      commit_to_git: true
+      note: "Universal lockfile - works on Linux, macOS, Windows"
+    
+    .venv:
+      role: "Disposable output (virtual environment)"
+      managed_by: "uv sync"
+      commit_to_git: false
+      note: "Always recreatable from pyproject.toml + uv.lock"
+  
+  essential_commands:
+    setup_refresh:
+      - command: "uv sync"
+        purpose: "Create/update .venv from pyproject.toml + uv.lock"
+        when: "Initial setup, after pulling changes, after dependency changes"
+        note: "Installs 'dev' group by default, NOT extras"
+    
+    run_commands:
+      - command: "uv run <command>"
+        purpose: "Run commands in project environment"
+        when: "Always (instead of direct python invocation)"
+        auto_behavior: "Locks + syncs automatically before running"
+      
+      - command: "uv run --with <package> <command>"
+        purpose: "Add temporary dependency for single invocation"
+        when: "Testing different versions, one-off scripts"
+        example: "uv run --with httpx==0.26.0 python script.py"
+    
+    manage_dependencies:
+      - command: "uv add <package>"
+        purpose: "Add runtime dependency"
+        updates: ["pyproject.toml", "uv.lock", ".venv"]
+      
+      - command: "uv add --dev <package>"
+        purpose: "Add dev dependency (linters, test tools)"
+        updates: ["pyproject.toml [dependency-groups]", "uv.lock", ".venv"]
+      
+      - command: "uv add --optional <extra> <package>"
+        purpose: "Add optional feature (for published packages)"
+        updates: ["pyproject.toml [project.optional-dependencies]", "uv.lock"]
+      
+      - command: "uv remove <package>"
+        purpose: "Remove dependency"
+        updates: ["pyproject.toml", "uv.lock", ".venv"]
+    
+    inspect:
+      - command: "uv tree"
+        purpose: "Show dependency tree"
+      
+      - command: "uv lock"
+        purpose: "Explicitly re-resolve lockfile"
+        when: "Rarely needed (happens automatically)"
+
+# =============================================================================
+# DEPENDENCY ORGANIZATION - Where to put dependencies
+# =============================================================================
+
+dependency_placement:
+  decision_tree:
+    runtime_dependency:
+      location: "[project.dependencies]"
+      command: "uv add <package>"
+      use_when: "Package required for application/library to function"
+      example: "requests, polars, fastapi"
+    
+    dev_tools:
+      location: "[dependency-groups].dev"
+      command: "uv add --dev <package>"
+      use_when: "Package only needed for development"
+      example: "ruff, mypy, pytest, ipython"
+      note: "dev group is synced by default"
+    
+    optional_features:
+      location: "[project.optional-dependencies].<extra_name>"
+      command: "uv add --optional <extra_name> <package>"
+      use_when:
+        - "Publishing to PyPI"
+        - "End users might want feature but it's not required"
+      example: "plotly (for viz extra), prometheus-client (for metrics)"
+      note: "Extras are NOT synced by default - need --extra flag"
+    
+    custom_groups:
+      location: "[dependency-groups].<group_name>"
+      command: "uv add --group <group_name> <package>"
+      use_when: "Organizing dev dependencies beyond just 'dev'"
+      example:
+        test: "pytest-playwright, httpx (for testing)"
+        docs: "mkdocs, mkdocs-material"
+        lint: "ruff, mypy"
+  
+  sync_behavior:
+    default:
+      - "uv sync → installs [project.dependencies] + [dependency-groups].dev"
+      - "Extras are NOT installed unless explicitly requested"
+    
+    with_extras:
+      - "uv sync --extra viz → also install viz extra"
+      - "uv sync --all-extras → install all extras"
+    
+    with_groups:
+      - "uv sync --group test → also install test group"
+      - "uv sync --no-dev → exclude dev group"
+      - "uv sync --all-groups → install all groups"
+
+# =============================================================================
+# REPRODUCIBILITY - CI/Docker patterns
+# =============================================================================
+
+reproducibility:
+  lockfile_modes:
+    development:
+      command: "uv sync"
+      behavior: "Checks lockfile freshness, updates if needed"
+      use_case: "Local development"
+    
+    ci_cd:
+      command: "uv sync --locked"
+      behavior: "Fails if lockfile is stale (catches forgotten commits)"
+      use_case: "Continuous integration"
+    
+    production:
+      command: "uv sync --frozen"
+      behavior: "Uses lockfile as-is, no checks (fastest)"
+      use_case: "Docker builds, production deployments"
+  
+  what_to_commit:
+    required:
+      - file: "pyproject.toml"
+        reason: "Declares dependencies and project metadata"
+      - file: "uv.lock"
+        reason: "Ensures everyone gets identical versions"
+      - file: ".python-version"
+        reason: "Documents required Python version"
+    
+    forbidden:
+      - file: ".venv/"
+        reason: "Environment-specific, always recreatable"
+        note: "Automatically excluded by uv's internal .gitignore"
+
+# =============================================================================
+# VERIFICATION CHECKLIST - Before saying "done"
+# =============================================================================
+
+verification_checklist:
+  after_any_dependency_change:
+    - check: "Files changed as expected"
+      verify:
+        - "pyproject.toml updated in correct section"
+        - "uv.lock updated (unless intentionally frozen)"
+    
+    - check: "Clean rebuild succeeds"
+      commands:
+        - "rm -rf .venv"
+        - "uv sync"
+    
+    - check: "Commands run through uv"
+      commands:
+        - "uv run python -c 'import <module_name>'"
+        - "uv run pytest  # if tests exist"
+    
+    - check: "Git diff is explainable"
+      verify:
+        - "Only intended changes present"
+        - "No unexpected dependency additions/removals"
+
+# =============================================================================
+# COMMON MISTAKES - AI Assistants must avoid these
+# =============================================================================
+
+common_mistakes:
+  mistake_1_using_system_python:
+    symptom: "Script works with 'python3 script.py' but fails with 'uv run'"
+    diagnosis:
+      - "Wrong Python version (system 3.11, project needs 3.12)"
+      - "Wrong package versions (system pydantic 1.x, project needs 2.x)"
+      - "Missing dependencies"
+    prevention: "Always use 'uv run python' instead of 'python3'"
+  
+  mistake_2_uv_pip_install:
+    symptom: "Package works but disappears after 'uv sync'"
+    diagnosis: "Used 'uv pip install' instead of 'uv add'"
+    repair:
+      - "uv add <package>"
+      - "uv lock && uv sync"
+  
+  mistake_3_confusing_extras_and_groups:
+    symptom: "'uv sync --group dev' does nothing"
+    diagnosis: "Dependency is in [project.optional-dependencies] not [dependency-groups]"
+    fix: "Move to correct section or use --extra instead of --group"
+  
+  mistake_4_self_reference:
+    wrong: "Adding package name to its own [dependency-groups].dev"
+    why_wrong: "Package is automatically installed by uv sync"
+    correct: "Only list external tools in dependency groups"
+  
+  mistake_5_not_committing_lockfile:
+    symptom: "Team members get different package versions"
+    diagnosis: "uv.lock not committed to git"
+    fix: "git add uv.lock && git commit"
+  
+  mistake_6_manual_editable_install:
+    symptom: "Package name appears in [project.dependencies] or [dependency-groups]"
+    diagnosis: "Used 'uv add . --editable' (creates pyproject.toml pollution)"
+    why_wrong: "uv sync already installs project in editable mode automatically"
+    
+    pollution_explanation:
+      what_pollutes: "uv add . --editable"
+      what_creates_drift: "uv pip install -e ."
+      difference:
+        - "uv add . --editable → POLLUTES pyproject.toml with self-reference"
+        - "uv pip install -e . → Creates DRIFT (not in pyproject.toml, removed by uv sync)"
+    
+    pollution_example:
+      before: |
+        [project]
+        name = "myproject"
+        dependencies = []
+        
+        [dependency-groups]
+        dev = ["ruff", "pytest"]
+      
+      after_uv_add_editable_dev: |
+        [project]
+        name = "myproject"
+        dependencies = []
+        
+        [dependency-groups]
+        dev = [
+          "myproject",  # ❌ Self-reference pollution!
+          "ruff",
+          "pytest"
+        ]
+      
+      after_uv_pip_install_e:
+        pyproject_toml: "No changes (but .venv modified - creates drift)"
+        next_uv_sync: "Removes editable install (not in lockfile)"
+    
+    fix_if_polluted:
+      - "Remove self-reference from pyproject.toml manually"
+      - "Run: uv lock"
+      - "Run: uv sync"
+      - "Verify: uv run python -c 'import myproject'"
+    
+    prevention: "Never manually install project - uv sync handles it automatically"
+
+# =============================================================================
+# PROJECT DISCOVERY - How uv finds your project
+# =============================================================================
+
+project_discovery:
+  search_order:
+    - "Current directory (looks for pyproject.toml)"
+    - "Parent directories (walks up until finding pyproject.toml)"
+    - "Stops at first pyproject.toml found"
+  
+  implications:
+    - "Can run uv commands from anywhere inside project tree"
+    - ".venv created at project root (where pyproject.toml is)"
+    - "Don't need to cd to project root for most commands"
+  
+  python_version_pinning:
+    file: ".python-version"
+    command: "uv python pin 3.12"
+    behavior: "uv uses this version when creating/syncing environment"
+    auto_install: "If version not installed, uv downloads it automatically"
+
+# =============================================================================
+# STANDALONE SCRIPTS - PEP 723 inline metadata
+# =============================================================================
+
+standalone_scripts:
+  purpose: "Self-contained scripts with embedded dependencies"
+  format: "PEP 723 inline metadata"
+  
+  example: |
+    #!/usr/bin/env -S uv run
+    # /// script
+    # requires-python = ">=3.12"
+    # dependencies = [
+    #   "httpx",
+    #   "rich",
+    # ]
+    # ///
+    
+    import httpx
+    from rich import print
+    
+    response = httpx.get("https://example.com")
+    print(response.json())
+  
+  usage:
+    create: "uv init --script my_script.py"
+    add_deps: "uv add --script my_script.py httpx rich"
+    run: "uv run my_script.py"
+  
+  behavior:
+    - "Scripts with inline metadata are ISOLATED from project"
+    - "Even if run inside project directory, project dependencies ignored"
+    - "Only dependencies in script metadata are used"
+  
+  use_cases:
+    good:
+      - "Standalone utilities and tools"
+      - "One-off data processing scripts"
+      - "Scripts shared across projects"
+      - "Educational examples and demos"
+    bad:
+      - "Code that's part of a larger project (use project dependencies)"
+
+# =============================================================================
+# EXCEPTION POLICY - When (if ever) uv pip is allowed
+# =============================================================================
+
+exception_policy:
+  default_stance: "Do NOT use 'uv pip' in repositories using pyproject.toml"
+  
+  only_allowed_when:
+    condition: "User explicitly requests pip-mode workflow"
+    example: "Managing standalone requirements.txt"
+    required_warning: |
+      "This will NOT update pyproject.toml.
+      Project metadata will become stale unless we also use 'uv add' or manual edits + re-lock."
+  
+  recovery_from_violation:
+    - "Identify what was installed: uv pip list"
+    - "Persist properly: uv add <package>"
+    - "Re-align: uv lock && uv sync"
+    - "Verify: git diff pyproject.toml uv.lock"
+
+# =============================================================================
+# WHAT UV DOES AUTOMATICALLY - No manual intervention needed
+# =============================================================================
+
+automatic_behavior:
+  summary: "uv handles many things automatically - don't duplicate them manually"
+  
+  editable_project_install:
+    what_uv_does: "uv sync automatically installs project in editable mode"
+    no_need_for:
+      - "pip install -e ."
+      - "uv pip install -e ."
+      - "uv add . --editable"
+    verification: "uv run python -c 'import <your_package>'"
+    how_it_works:
+      - "Reads [project] metadata from pyproject.toml"
+      - "Installs package in editable mode in .venv"
+      - "Source code changes instantly reflected (no reinstall)"
+  
+  lockfile_management:
+    what_uv_does: "uv automatically updates uv.lock when needed"
+    triggered_by:
+      - "uv add <package>"
+      - "uv remove <package>"
+      - "uv sync (if dependencies changed)"
+      - "uv run (if dependencies changed)"
+    no_need_for: "Manual 'uv lock' unless forcing re-resolution"
+  
+  environment_sync:
+    what_uv_does: "uv run ensures environment is up-to-date before execution"
+    behavior: "Automatically locks + syncs before running command"
+    override: "Use --no-sync to skip (advanced usage only)"
+  
+  python_installation:
+    what_uv_does: "uv downloads Python if required version not found"
+    specified_in: ".python-version or pyproject.toml requires-python"
+    no_need_for: "Manual Python installation (though system install is fine too)"
+
+# =============================================================================
+# QUICK REFERENCE - Most common commands
+# =============================================================================
+
+quick_reference:
+  installation:
+    - "uv sync                    # Core + dev group"
+    - "uv sync --extra viz        # + viz extra"
+    - "uv sync --all-extras       # + all extras"
+    - "uv sync --no-dev           # Exclude dev group"
+    - "uv sync --frozen           # Production (exact lockfile)"
+  
+  adding_dependencies:
+    - "uv add <package>           # Runtime dependency"
+    - "uv add --dev <pkg>         # Dev tool"
+    - "uv add --optional viz <pkg> # Optional extra"
+    - "uv remove <package>        # Remove dependency"
+  
+  running_commands:
+    - "uv run <command>           # Run in project environment"
+    - "uv run --with <pkg> <cmd>  # Temporary dependency"
+    - "uv run --locked pytest     # CI mode (fail if stale)"
+  
+  inspection:
+    - "uv tree                    # Show dependency tree"
+    - "uv lock                    # Update lockfile"
+    - "rm -rf .venv && uv sync    # Fresh install"
+
+# =============================================================================
+# REFERENCE DOCUMENTATION
+# =============================================================================
+
+reference_documentation:
+  primary: "UV_COMPLETE_GUIDE.md"
+  detailed_ai_rules: "UV_PROJECT_AGNOSTIC_AI.md"
+  
+  topics:
+    comprehensive_guide:
+      file: "UV_COMPLETE_GUIDE.md"
+      covers:
+        - "Complete uv workflow documentation"
+        - "Real-world examples"
+        - "Troubleshooting guide"
+        - "CI/CD patterns"
+        - "Best practices"
+    
+    ai_assistant_rules:
+      file: "UV_PROJECT_AGNOSTIC_AI.md"
+      covers:
+        - "Detailed hard-stop rules"
+        - "Decision trees for dependency placement"
+        - "Sync semantics and switches"
+        - "Completion checklists"
+        - "Exception policies"
+
+# =============================================================================
+# BEST PRACTICES - Summary
+# =============================================================================
+
+best_practices:
+  critical:
+    - "Always use 'uv run' for executing Python (NEVER python3/python)"
+    - "Always use 'uv add' for dependencies (NEVER uv pip install)"
+    - "Never manually install project as editable (uv sync does this automatically)"
+    - "Always commit uv.lock to version control"
+    - "Never add package to its own dependencies"
+  
+  recommended:
+    - "Use --frozen in CI/Docker for reproducibility"
+    - "Test with clean installs regularly (rm -rf .venv && uv sync)"
+    - "Use extras for published features, groups for dev tools"
+    - "Document which extras/groups needed for different scenarios"
+  
+  workflow:
+    - "Start simple: core dependencies only"
+    - "Add extras for optional features (if publishing)"
+    - "Use groups for dev tools organization"
+    - "Verify with 'uv sync' after any changes"
+
+# =============================================================================
+# NOTES FOR AI ASSISTANTS
+# =============================================================================
+
+ai_assistant_notes:
+  when_user_asks_about_dependencies:
+    - "Check if project uses uv (look for pyproject.toml + uv.lock)"
+    - "If yes: follow these rules strictly"
+    - "If no: may need to initialize with 'uv init'"
+  
+  when_suggesting_package_installation:
+    - "NEVER suggest: pip install, python3 -m pip, uv pip install"
+    - "ALWAYS suggest: uv add <package>"
+    - "Specify correct flag: --dev, --optional, --group"
+  
+  when_running_code:
+    - "NEVER suggest: python3 script.py, python script.py"
+    - "ALWAYS suggest: uv run python script.py"
+    - "For temporary deps: uv run --with <package> script.py"
+  
+  when_troubleshooting:
+    - "First check: Is environment clean? (rm -rf .venv && uv sync)"
+    - "Check lockfile: Is it committed? Is it stale?"
+    - "Check dependencies: Are they in correct section of pyproject.toml?"
+  
+  self_check_before_responding:
+    questions:
+      - "Did I suggest any forbidden commands (python3, uv pip install, pip install -e)?"
+      - "Did I suggest manual editable install (it's automatic with uv sync)?"
+      - "Did I put dependencies in the correct section?"
+      - "Did I explain sync behavior for extras vs groups?"
+      - "Did I verify the package name matches import name?"
+      - "Did I avoid adding project to its own dependencies?"
+
+---
+# End of project-agnostic CLAUDE.md

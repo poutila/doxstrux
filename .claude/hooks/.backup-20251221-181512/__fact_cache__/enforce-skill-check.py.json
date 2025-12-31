@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "mtime": 1766286560.5293124,
+    "size": 3868,
+    "path": "/home/lasse/Dropbox/python/omat/hybrid_validate/.claude/hooks/.backup-20251221-181512/enforce-skill-check.py",
+    "version": "1.0"
+  },
+  "facts": {
+    "code_truth": {
+      "module_doc": "PreToolUse hook: Enforce reading SKILL.md before manual analysis.\n\nThis hook prevents Claude from using analysis tools (Read, Grep, Glob, Task)\nwithout first checking the available skills in SKILL.md.\n\nEnforcement strategy:\n1. Track whether SKILL.md has been read in this session\n2. Block \"analysis\" tools if SKILL.md hasn't been read yet\n3. Provide clear guidance on what to do instead",
+      "functions": [
+        {
+          "name": "get_state_file",
+          "args": [
+            "session_id"
+          ],
+          "returns": "Path",
+          "raises": [],
+          "doc": "Get state file path for this session."
+        },
+        {
+          "name": "has_read_skills",
+          "args": [
+            "session_id"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Check if SKILL.md has been read in this session."
+        },
+        {
+          "name": "mark_skills_read",
+          "args": [
+            "session_id"
+          ],
+          "returns": "None",
+          "raises": [],
+          "doc": "Mark that SKILL.md has been read in this session."
+        },
+        {
+          "name": "is_reading_skills",
+          "args": [
+            "tool_name",
+            "tool_input"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Check if this tool call is reading SKILL.md."
+        },
+        {
+          "name": "should_enforce",
+          "args": [
+            "tool_name",
+            "session_id"
+          ],
+          "returns": "bool",
+          "raises": [],
+          "doc": "Determine if we should enforce the skill check."
+        },
+        {
+          "name": "main",
+          "args": [],
+          "returns": "None",
+          "raises": [],
+          "doc": null
+        }
+      ],
+      "classes": {}
+    },
+    "node_map": {
+      "module": "PreToolUse hook: Enforce reading SKILL.md before manual analysis.\n\nThis hook prevents Claude from using analysis tools (Read, Grep, Glob, Task)\nwithout first checking the available skills in SKILL.md.\n\nEnforcement strategy:\n1. Track whether SKILL.md has been read in this session\n2. Block \"analysis\" tools if SKILL.md hasn't been read yet\n3. Provide clear guidance on what to do instead",
+      "function:get_state_file": "Get state file path for this session.",
+      "function:has_read_skills": "Check if SKILL.md has been read in this session.",
+      "function:mark_skills_read": "Mark that SKILL.md has been read in this session.",
+      "function:is_reading_skills": "Check if this tool call is reading SKILL.md.",
+      "function:should_enforce": "Determine if we should enforce the skill check.",
+      "function:main": null
+    },
+    "presence": {
+      "module": true,
+      "function:get_state_file": true,
+      "function:has_read_skills": true,
+      "function:mark_skills_read": true,
+      "function:is_reading_skills": true,
+      "function:should_enforce": true,
+      "function:main": true
+    },
+    "fingerprint": {
+      "file": "/home/lasse/Dropbox/python/omat/hybrid_validate/.claude/hooks/.backup-20251221-181512/enforce-skill-check.py",
+      "fingerprint": "d3cd90647a43cb6343a1ab589b9077ab0962105abd869a239f99a98ab62190b7",
+      "timestamp": "2025-12-25T05:19:34.839632Z",
+      "entity_count": 7,
+      "documented_count": 6,
+      "entities": [
+        "function:get_state_file",
+        "function:has_read_skills",
+        "function:is_reading_skills",
+        "function:main",
+        "function:mark_skills_read",
+        "function:should_enforce",
+        "module"
+      ]
+    },
+    "requirements": [
+      "Document function main"
+    ],
+    "semantic_tags": {},
+    "behavior_contracts": {},
+    "semantic_summary": {
+      "total_entities": 0,
+      "tag_distribution": {},
+      "pure_function_count": 0,
+      "pure_function_pct": 0,
+      "idempotent_count": 0,
+      "thread_safe_count": 0,
+      "mutation_count": 0,
+      "blocking_count": 0,
+      "most_common_tags": []
+    }
+  }
+}

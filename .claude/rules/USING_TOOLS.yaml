@@ -1,0 +1,502 @@
+---
+meta:
+  title: "USING_TOOLS - How Claude Should Use the Tools We've Built"
+  status: "MANDATORY"
+  last_updated: "2025-12-21"
+  audience: "Claude Code instances working on this project"
+  purpose: "Define WHEN and HOW to use fact-query skill, 28 specialized agents, and GOVERNANCE_RULES.yaml"
+  reference: "Link this from CLAUDE.md for automatic awareness"
+
+# =============================================================================
+# THE PROBLEM
+# =============================================================================
+
+problem:
+  summary: "Tools are USELESS if not used"
+  
+  tools_available:
+    - name: "fact-query skill"
+      purpose: "Query FACTS.parquet instead of reading files"
+      coverage: "230 fact keys, 99% of analysis needs"
+    
+    - name: "28 specialized agents"
+      purpose: "Automated quality checks"
+      types: "governance, security, performance, SOLID, types"
+    
+    - name: "GOVERNANCE_RULES.yaml"
+      purpose: "Quality rules and thresholds"
+      size: "831 lines of defined standards"
+  
+  current_risks:
+    - "Claude reads Python files when facts exist in FACTS.parquet"
+    - "Claude misses available agents and does manual analysis"
+    - "Claude ignores or guesses governance rules instead of reading them"
+  
+  document_purpose: "Define MANDATORY workflows to ensure tools are used proactively"
+
+# =============================================================================
+# MANDATORY WORKFLOW #1: Query Facts Before Reading Files
+# =============================================================================
+
+workflow_1_query_facts_first:
+  name: "Query Facts Before Reading Files"
+  priority: "MANDATORY"
+  
+  trigger:
+    condition: "ANY question about code in src/your_project/"
+    decision_point: "Am I about to Read a Python file?"
+  
+  decision_tree:
+    question: "Is this information in FACTS.parquet?"
+    yes_99_percent:
+      action: "Use Skill('fact-query')"
+      step_1: "Skill('fact-query')"
+      step_2: "Use commands shown in skill output"
+    no_1_percent:
+      action: "Read file"
+      when: "Only for implementation logic, comments, string literals"
+  
+  what_is_in_facts:
+    - item: "Signature"
+      command: "fact-file-query-tool query --keys signature"
+    - item: "Complexity"
+      command: "fact-file-query-tool query --keys cyclomatic_complexity"
+    - item: "Call graph"
+      command: "fact-file-query-tool query --keys callers callees"
+    - item: "Exceptions"
+      command: "fact-file-query-tool query --keys raised_exceptions"
+    - item: "Type coverage"
+      command: "fact-file-query-tool type-coverage"
+    - item: "Security issues"
+      command: "fact-file-query-tool security"
+    - item: "Performance"
+      command: "fact-file-query-tool performance"
+    - item: "Magic numbers"
+      command: "fact-file-query-tool magic-numbers"
+    - item: "SOLID violations"
+      command: "fact-file-query-tool solid-srp"
+    - item: "Documentation"
+      command: "fact-file-query-tool doc-quality"
+  
+  only_read_files_for:
+    - "Implementation logic (algorithm details)"
+    - "Comment content (TODO/FIXME text)"
+    - "String literal values (error message text)"
+    note: "Less than 1% of cases"
+  
+  how_to_invoke:
+    step_1:
+      action: "Invoke the skill"
+      command: "Skill('fact-query')"
+    
+    step_2:
+      action: "Use commands from skill output"
+      examples:
+        - description: "Get function signature"
+          command: "uv run fact-file-query-tool query --file validator.py --entity function.validate_file --keys signature"
+        
+        - description: "Run security audit"
+          command: "uv run fact-file-query-tool security"
+        
+        - description: "Check type coverage"
+          command: "uv run fact-file-query-tool type-coverage --file module.py"
+  
+  anti_patterns:
+    - wrong: "Read('src/your_project/validator.py') then manually search for 'def validate_file('"
+      right: "Skill('fact-query') then use fact-file-query-tool query command"
+      reason: "Facts exist, no need to read file"
+    
+    - wrong: "Read('src/your_project/recursive_extractor.py') then manually count if/for/while"
+      right: "Skill('fact-query') then query cyclomatic_complexity"
+      reason: "Complexity already calculated in FACTS.parquet"
+    
+    - wrong: "Grep('build_tree') then check each match manually"
+      right: "Skill('fact-query') then use blast-radius command"
+      reason: "Call graph already exists in FACTS.parquet"
+
+# =============================================================================
+# MANDATORY WORKFLOW #2: Use Specialized Agents for Quality Checks
+# =============================================================================
+
+workflow_2_use_specialized_agents:
+  name: "Use Specialized Agents for Quality Checks"
+  priority: "MANDATORY"
+  
+  trigger:
+    condition: "ANY code quality question"
+    questions:
+      - "Analyzing code quality?"
+      - "Checking security?"
+      - "Evaluating performance?"
+      - "Reviewing architecture?"
+      - "Checking compliance?"
+  
+  decision_tree:
+    question: "Does an agent exist for this task?"
+    yes_28_agents:
+      action: "Use Task(subagent_type='...', prompt='Execute')"
+      critical_note: "ALWAYS use prompt='Execute' - agents are command executors, not reasoners"
+    no_rare:
+      action: "Manual analysis"
+      when: "Only if truly no agent exists"
+  
+  available_agents:
+    quality_and_architecture:
+      count: 6
+      agents:
+        - name: "governance-check"
+          task: "Overall compliance check"
+          usage: "Task(subagent_type='governance-check', prompt='Check compliance with GOVERNANCE_RULES.yaml')"
+        
+        - name: "governance-report"
+          task: "Comprehensive quality dashboard"
+          usage: "Task(subagent_type='governance-report', prompt='Generate quality report')"
+        
+        - name: "blast-radius"
+          task: "Impact analysis before refactoring"
+          usage: "Task(subagent_type='blast-radius', prompt='Analyze blast radius of function X')"
+        
+        - name: "architecture-map"
+          task: "System architecture overview"
+          usage: "Task(subagent_type='architecture-map', prompt='Show architecture clusters and coupling')"
+        
+        - name: "drift-detector"
+          task: "Documentation drift detection"
+          usage: "Task(subagent_type='drift-detector', prompt='Detect documentation drift')"
+        
+        - name: "query-pack"
+          task: "Pre-built query recipes"
+          usage: "Task(subagent_type='query-pack', prompt='Execute query pack for entity X')"
+    
+    security_and_performance:
+      count: 3
+      agents:
+        - name: "security-audit"
+          task: "Security audit"
+          usage: "Task(subagent_type='security-audit', prompt='Find hardcoded secrets, dangerous calls, shell injection')"
+        
+        - name: "performance-hotspots"
+          task: "Performance hotspots"
+          usage: "Task(subagent_type='performance-hotspots', prompt='Find nested loops, I/O in loops, complexity issues')"
+        
+        - name: "test-gap-analysis"
+          task: "Test gap analysis"
+          usage: "Task(subagent_type='test-gap-analysis', prompt='Identify where tests are most needed')"
+    
+    code_quality:
+      count: 10
+      agents:
+        - name: "magic-number-detector"
+          task: "Magic numbers"
+          usage: "Task(subagent_type='magic-number-detector', prompt='Find magic numbers that should be constants')"
+        
+        - name: "naming-validator"
+          task: "Naming conventions"
+          usage: "Task(subagent_type='naming-validator', prompt='Validate PascalCase/snake_case/SCREAMING_SNAKE_CASE')"
+        
+        - name: "weak-test-detector"
+          task: "Weak tests"
+          usage: "Task(subagent_type='weak-test-detector', prompt='Find import-only tests, no assertions')"
+        
+        - name: "import-audit"
+          task: "Import violations"
+          usage: "Task(subagent_type='import-audit', prompt='Check for wildcard imports, multi-dot relative')"
+        
+        - name: "doc-quality-validator"
+          task: "Docstring quality"
+          usage: "Task(subagent_type='doc-quality-validator', prompt='Check for Args/Returns/Raises sections')"
+        
+        - name: "modern-syntax-validator"
+          task: "Modern type syntax"
+          usage: "Task(subagent_type='modern-syntax-validator', prompt='Enforce list[T] vs List[T]')"
+        
+        - name: "error-pattern-audit"
+          task: "Error patterns"
+          usage: "Task(subagent_type='error-pattern-audit', prompt='Find bare except, silent exceptions')"
+        
+        - name: "logging-audit"
+          task: "Logging audit"
+          usage: "Task(subagent_type='logging-audit', prompt='Detect print() in production code')"
+        
+        - name: "module-purity-check"
+          task: "Module purity"
+          usage: "Task(subagent_type='module-purity-check', prompt='Detect I/O at import time')"
+        
+        - name: "hardcoding-detector"
+          task: "Hardcoding"
+          usage: "Task(subagent_type='hardcoding-detector', prompt='Find hardcoded paths/URLs/credentials')"
+    
+    solid_principles:
+      count: 2
+      agents:
+        - name: "solid-srp-validator"
+          task: "Single Responsibility"
+          usage: "Task(subagent_type='solid-srp-validator', prompt='Find god classes, high coupling')"
+        
+        - name: "solid-lsp-validator"
+          task: "Liskov Substitution"
+          usage: "Task(subagent_type='solid-lsp-validator', prompt='Find NotImplementedError in subclasses')"
+    
+    type_safety:
+      count: 2
+      agents:
+        - name: "type-coverage-enforcer"
+          task: "Type coverage"
+          usage: "Task(subagent_type='type-coverage-enforcer', prompt='Enforce 100% type coverage for public APIs')"
+        
+        - name: "mutable-defaults-detector"
+          task: "Mutable defaults"
+          usage: "Task(subagent_type='mutable-defaults-detector', prompt='Find mutable default arguments')"
+    
+    aggregate_analysis:
+      count: 5
+      agents:
+        - name: "aggregate-facts"
+          task: "Aggregate facts across entities"
+          usage: "Task(subagent_type='aggregate-facts', prompt='Aggregate metrics for module/package')"
+        
+        - name: "families-drift-detector"
+          task: "Detect drift in fact families"
+          usage: "Task(subagent_type='families-drift-detector', prompt='Check for schema changes')"
+        
+        - name: "governance-validator"
+          task: "Comprehensive governance validation"
+          usage: "Task(subagent_type='governance-validator', prompt='Validate all governance rules')"
+        
+        - name: "blast-radius-analyzer"
+          task: "Detailed blast radius analysis"
+          usage: "Task(subagent_type='blast-radius-analyzer', prompt='Full impact analysis')"
+        
+        - name: "architecture-analyzer"
+          task: "Architecture quality metrics"
+          usage: "Task(subagent_type='architecture-analyzer', prompt='Analyze architecture quality')"
+  
+  agent_documentation:
+    location: ".claude/agents/*.md"
+    how_to_read: "Read('.claude/agents/governance-check.md')"
+    contents:
+      - "When to use it"
+      - "What it detects"
+      - "How to fix violations"
+      - "CI/CD integration examples"
+      - "Pre-commit hook templates"
+  
+  anti_patterns:
+    - wrong: "Read('config.py') then manually search for numeric literals"
+      right: "Task(subagent_type='magic-number-detector', prompt='Find magic numbers in config.py')"
+      reason: "Agent automates this analysis"
+    
+    - wrong: "Read('api.py') then manually check for type annotations"
+      right: "Task(subagent_type='type-coverage-enforcer', prompt='Check type coverage for api.py')"
+      reason: "Agent already calculates type coverage"
+    
+    - wrong: "Read('client.py') then manually search for hardcoded secrets"
+      right: "Task(subagent_type='security-audit', prompt='Security audit of client.py')"
+      reason: "Security agent has comprehensive checks"
+  
+  critical_note_on_prompts:
+    rule: "ALWAYS use prompt='Execute'"
+    wrong_prompts:
+      - "Analyze codebase in DIR"
+      - "Please check the code"
+      - "Review the security"
+    correct_prompt: "Execute"
+    reason: "Agents are command executors, not reasoners - they execute pre-defined checks"
+
+# =============================================================================
+# MANDATORY WORKFLOW #3: Reference GOVERNANCE_RULES.yaml
+# =============================================================================
+
+workflow_3_reference_governance_rules:
+  name: "Reference GOVERNANCE_RULES.yaml for Quality Rules"
+  priority: "MANDATORY"
+  
+  trigger:
+    condition: "ANY discussion about code quality standards"
+    topics:
+      - "Complexity limits (cyclomatic, LOC, params)"
+      - "SOLID principles"
+      - "Type coverage requirements"
+      - "Error handling standards"
+      - "Naming conventions"
+      - "Documentation requirements"
+      - "Security rules"
+  
+  action:
+    step_1: "Read('.claude/rules/GOVERNANCE_RULES.yaml') FIRST"
+    step_2: "Reference specific sections"
+    step_3: "Use agents to enforce rules (they read GOVERNANCE_RULES.yaml automatically)"
+  
+  whats_inside:
+    size: "831 lines"
+    sections:
+      - category: "Code complexity limits"
+        rules:
+          cyclomatic_complexity_max: 10
+          function_length_max: 50
+          max_arguments: 5
+          max_nesting_depth: 4
+      
+      - category: "SOLID principles enforcement"
+        rules: "SRP, OCP, LSP, ISP, DIP"
+      
+      - category: "Type checking requirements"
+        rules: "100% coverage for public APIs"
+      
+      - category: "Error handling standards"
+        rules: "No bare except, no silent fallbacks"
+      
+      - category: "Security rules"
+        rules: "No hardcoded secrets, validate inputs"
+      
+      - category: "Naming conventions"
+        rules: "PascalCase, snake_case, SCREAMING_SNAKE_CASE"
+      
+      - category: "Documentation standards"
+        rules: "All public APIs must have docstrings"
+      
+      - category: "Import governance"
+        rules: "No wildcard, no multi-dot relative"
+      
+      - category: "Module purity"
+        rules: "No I/O at import time"
+      
+      - category: "Testing standards"
+        rules: "No weak tests, TDD workflow"
+  
+  how_to_use:
+    step_1:
+      action: "Read the file"
+      command: "Read('.claude/rules/GOVERNANCE_RULES.yaml')"
+    
+    step_2:
+      action: "Reference specific sections"
+      example: |
+        code_quality:
+          complexity_limits:
+            cyclomatic_complexity_max: 10
+            function_length_max: 50
+            max_arguments: 5
+            max_nesting_depth: 4
+    
+    step_3:
+      action: "Use agents to enforce rules"
+      note: "Agents read GOVERNANCE_RULES.yaml automatically"
+      command: "Task(subagent_type='governance-check', prompt='Check compliance with GOVERNANCE_RULES.yaml')"
+  
+  anti_patterns:
+    - wrong: "Functions should be less than 100 lines"
+      right: "Read GOVERNANCE_RULES.yaml: function_length_max: 50"
+      reason: "Don't guess limits - they're defined"
+    
+    - wrong: "Classes can have up to 20 methods"
+      right: "Read GOVERNANCE_RULES.yaml: max_class_methods: 10"
+      reason: "Specific rules exist, reference them"
+
+# =============================================================================
+# WORKFLOW CHECKLIST
+# =============================================================================
+
+workflow_checklist:
+  title: "Before ANY work on this project, ask yourself:"
+  
+  code_analysis_checklist:
+    - question: "Am I about to Read a Python file in src/your_project/?"
+      if_yes: "Use Skill('fact-query') instead (99% of cases)"
+      if_no: "Proceed with Read (only for comments/implementation logic)"
+    
+    - question: "Am I analyzing code quality, security, or performance?"
+      if_yes: "Check agent list, use Task(subagent_type='...')"
+      if_no: "Proceed with manual analysis (only if no agent exists)"
+    
+    - question: "Am I discussing quality standards or rules?"
+      if_yes: "Read('.claude/rules/GOVERNANCE_RULES.yaml') first"
+      if_no: "Proceed (but still reference when making claims)"
+  
+  tools_available:
+    - tool: "fact-query skill"
+      location: ".claude/skills/fact-query/SKILL.md"
+    
+    - tool: "28 specialized agents"
+      location: ".claude/agents/*.md"
+    
+    - tool: "Governance rules"
+      location: ".claude/rules/GOVERNANCE_RULES.yaml"
+    
+    - tool: "fact-file-query-tool CLI"
+      commands: "30 commands (query, governance, security, etc.)"
+
+# =============================================================================
+# KEY PRINCIPLES
+# =============================================================================
+
+key_principles:
+  analogy: "These tools are an instrument - you must PLAY IT"
+  sheet_music: "This document tells you WHEN and HOW to play it"
+  
+  without_tools:
+    - "❌ Waste time reading files when facts exist"
+    - "❌ Miss available agents that automate analysis"
+    - "❌ Make up rules instead of referencing GOVERNANCE_RULES.yaml"
+    - "❌ Provide slower, less accurate results"
+  
+  with_tools:
+    - "✅ Instant, accurate answers from FACTS.parquet (230 fact keys)"
+    - "✅ Comprehensive analysis from specialized agents (28 agents)"
+    - "✅ Consistent quality standards from GOVERNANCE_RULES.yaml (831 lines)"
+    - "✅ Faster, more reliable results"
+
+# =============================================================================
+# WORKFLOW SUMMARY
+# =============================================================================
+
+workflow_summary:
+  step_1:
+    trigger: "BEFORE reading Python files"
+    action: "Check if info is in FACTS.parquet (99% yes)"
+    tool: "Use Skill('fact-query')"
+  
+  step_2:
+    trigger: "BEFORE manual code quality analysis"
+    action: "Check if agent exists (28 agents available)"
+    tool: "Use Task(subagent_type='...')"
+  
+  step_3:
+    trigger: "BEFORE discussing quality rules"
+    action: "Read GOVERNANCE_RULES.yaml first (831 lines)"
+    principle: "Reference specific sections, don't guess"
+  
+  step_4:
+    principle: "ALWAYS"
+    priorities:
+      - "Tools first, manual work second"
+      - "Automated agents first, manual analysis second"
+      - "Defined rules first, assumptions second"
+
+# =============================================================================
+# QUICK REFERENCE
+# =============================================================================
+
+quick_reference:
+  fact_query_skill:
+    when: "Need info about code structure, complexity, calls, types"
+    command: "Skill('fact-query')"
+    coverage: "99% of code analysis needs"
+  
+  specialized_agents:
+    when: "Need quality checks, security audit, performance analysis"
+    command: "Task(subagent_type='agent-name', prompt='Execute')"
+    count: "28 agents available"
+  
+  governance_rules:
+    when: "Discussing standards, limits, best practices"
+    command: "Read('.claude/rules/GOVERNANCE_RULES.yaml')"
+    size: "831 lines of rules"
+  
+  agent_prompt_rule:
+    critical: "ALWAYS use prompt='Execute'"
+    never: "Don't use 'Analyze codebase in DIR' or similar reasoning prompts"
+    reason: "Agents are command executors, not reasoners"
+
+---
+# End of USING_TOOLS.yaml

@@ -1,0 +1,177 @@
+fact_query_tool_guide:
+  introduction:
+    title: "Read this FIRST to understand why to use the fact-file-query-tool"
+
+    proof_commands:
+      productivity_evidence:
+        description: "See the proof: 60x productivity multiplier, 185 files in 12H vs 3 files manually"
+        command: "fact-file-query-tool parquet-help --section productivity_evidence --item real_world_sprint"
+
+      speed_comparison:
+        description: "See the speed: 100-3000x faster than reading files (0.1-0.5s vs 1-5 minutes per query)"
+        command: "fact-file-query-tool parquet-help --section key_takeaways --item speed_comparison"
+
+    note: "The productivity_evidence section converts skepticism into adoption with hard numbers."
+
+  validation_exercises:
+    title: "🧪 Validate It Yourself (60 seconds)"
+    subtitle: "Don't just read the statistics - experience the difference"
+    
+    exercise_1:
+      name: "Find High-Complexity Functions"
+      traditional_approach:
+        description: "Reading files manually"
+        steps:
+          - "Read 50+ source files in your project directory"
+          - "Parse AST, calculate cyclomatic complexity per function"
+          - "Filter and format results"
+        estimated_time: "15-30 minutes"
+      
+      with_tool:
+        command: "fact-file-query-tool governance --format json | jq '.complexity.violations[] | select(.cyclomatic_complexity > 10)'"
+        actual_time: "3 seconds"
+        output: "Complete results with file paths, line numbers, and metrics"
+    
+    exercise_2:
+      name: "Get Method Signature"
+      task: "What's the signature of FactStore.query method?"
+
+      traditional_approach:
+        steps:
+          - "Read fact_file_query_tool.py (4,300+ lines)"
+          - "Search for class FactStore"
+          - "Find def query method"
+          - "Parse parameters, types, return type"
+        time: "2-5 minutes"
+
+      with_tool:
+        # Real runnable example (try this NOW)
+        example_command: |
+          uv run fact-file-query-tool query \
+            --file fact_file_query_tool.py \
+            --entity "class.FactStore.method.query" \
+            --keys signature
+        time: "0.3 seconds"
+        example_output:
+          signature: "def query(self, file: str, entity: str, families: list[str] | None, keys: list[str] | None) -> dict[str, Any]"
+
+        # Pattern for your own code
+        pattern: |
+          uv run fact-file-query-tool query \
+            --file <your_file>.py \
+            --entity "class.<YourClass>.method.<your_method>" \
+            --keys signature
+    
+    exercise_3:
+      name: "Security Audit"
+      task: "Find all security issues in the codebase"
+      
+      traditional_approach:
+        steps:
+          - "Read all source files"
+          - "Search for patterns: eval(), exec(), shell=True, hardcoded secrets"
+          - "Manual analysis of each occurrence"
+        time: "30-60 minutes"
+      
+      with_tool:
+        command: "fact-file-query-tool security --format json"
+        time: "2 seconds"
+        output: "Complete report with severity levels, file locations, and remediation guidance"
+    
+    exercise_4:
+      name: "Architecture Overview"
+      task: "Understand the module structure and dependencies"
+      
+      traditional_approach:
+        steps:
+          - "Read module docstrings and imports across all files"
+          - "Map dependencies manually"
+          - "Identify clusters and coupling"
+        time: "2-4 hours"
+      
+      with_tool:
+        command: "fact-file-query-tool architecture --format json"
+        time: "1 second"
+        output: "Complete dependency graph with clusters, coupling metrics, and architectural patterns"
+
+  key_learnings:
+    title: "🎯 What You Just Learned"
+    summary: "You just experienced 100-3000x speedup on real tasks"
+    
+    speedups:
+      - task: "Complexity analysis"
+        before: "15 min"
+        after: "3 sec"
+      
+      - task: "Signature lookup"
+        before: "2 min"
+        after: "0.3 sec"
+      
+      - task: "Security audit"
+        before: "30 min"
+        after: "2 sec"
+      
+      - task: "Architecture map"
+        before: "2 hours"
+        after: "1 sec"
+    
+    core_principle: "Query facts first, reason second. Never infer what can be queried."
+
+  common_mistakes:
+    title: "📚 Quick Reference: Common Mistakes"
+    source: "From key_takeaways.common_mistakes"
+    
+    mistakes:
+      - error: "Guessing entity names"
+        consequence: "90% empty results"
+        solution: "Check entities first"
+      
+      - error: "Skipping manifest check"
+        consequence: "Wasted time on empty families"
+        solution: "Always check manifest"
+      
+      - error: "Inferring facts from code"
+        consequence: "Hallucination risk"
+        solution: "Query facts instead"
+      
+      - error: "Reading files for analysis"
+        consequence: "100-3000x slower"
+        solution: "Use fact queries"
+    
+    correct_workflow: "entities → manifest → query (see three_step_workflow)"
+
+  next_steps:
+    title: "🚀 Next Steps"
+    subtitle: "Now that you've validated the tool's value"
+    
+    steps:
+      - step: 1
+        action: "Before reading ANY file: Check if the info is in the fact database"
+        command: "fact-file-query-tool parquet-help --list-families"
+        note: "See all available data families"
+      
+      - step: 2
+        action: "Learn the available commands"
+        command: "fact-file-query-tool parquet-help --section commands"
+      
+      - step: 3
+        action: "Follow the 3-step workflow"
+        command: "fact-file-query-tool parquet-help --section three_step_workflow"
+    
+    reminder: "These exercises aren't hypothetical - you just ran them. The tool works, the speedup is real, and reading files is now your LAST resort, not first instinct."
+
+  substitution_guide:
+    note: "When implementing this guide for your project, replace the following placeholders:"
+    placeholders:
+      
+      - placeholder: "<your_file>.py"
+        replace_with: "Your actual file names"
+      
+      - placeholder: "<YourClass>"
+        replace_with: "Your actual class names"
+      
+      - placeholder: "<your_method>"
+        replace_with: "Your actual method names"
+      
+      - placeholder: "your project directory"
+        replace_with: "Your actual project source directory path

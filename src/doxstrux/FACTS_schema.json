@@ -1,0 +1,3364 @@
+{
+  "keys": [
+    "all_async_context_managers",
+    "all_creates_asyncio_tasks",
+    "all_decorators",
+    "all_ffi_calls",
+    "all_global_keyword_names",
+    "all_module_globals_written",
+    "all_module_scoped_objects",
+    "all_nonlocal_keyword_names",
+    "all_subprocess_calls",
+    "arg_details",
+    "arg_types",
+    "arg_writes",
+    "args",
+    "assertion_triggers",
+    "assertions",
+    "assignments",
+    "attrs_read",
+    "attrs_written",
+    "bases",
+    "blocking_in_async",
+    "branch_count",
+    "broad_exception_catch",
+    "builtins_called",
+    "callees",
+    "callers",
+    "calls",
+    "calls_raw",
+    "class_count",
+    "cluster_count",
+    "config_file_literals",
+    "constants",
+    "context_managed_calls",
+    "context_manager_names",
+    "count",
+    "coverage",
+    "coverage_detail",
+    "coverage_ratio",
+    "cr_cyclomatic_complexity",
+    "cr_has_bare_except",
+    "cr_has_pass_except",
+    "cr_magic_numbers",
+    "cr_max_nesting_depth",
+    "cr_shadowed_builtins",
+    "creates_asyncio_tasks",
+    "cyclomatic_complexity",
+    "dangerous_calls",
+    "data_pipelines",
+    "decorators",
+    "descriptions",
+    "detected",
+    "directory",
+    "doc",
+    "doc_sections",
+    "docstring_length",
+    "documented_count",
+    "entities_async",
+    "entities_referenced_in_tests",
+    "entities_using_asyncio_tasks",
+    "entities_using_cffi",
+    "entities_using_concurrent_futures",
+    "entities_using_ctypes",
+    "entities_using_global_keyword",
+    "entities_using_multiprocessing",
+    "entities_using_nonlocal_keyword",
+    "entities_using_subprocess",
+    "entities_using_sync_primitives",
+    "entities_using_threads",
+    "entities_writing_module_globals",
+    "entity_count",
+    "entry_points",
+    "env_var_keys",
+    "env_var_keys_read",
+    "env_var_keys_written",
+    "env_vars_read",
+    "exception_conditions",
+    "exception_count",
+    "exception_guard_types",
+    "exception_messages",
+    "exception_swallowing",
+    "exception_trigger_map",
+    "exception_triggers",
+    "exception_types",
+    "executors_used",
+    "exports",
+    "extraction_status",
+    "fan_in",
+    "fan_out",
+    "ffi_calls",
+    "file_count",
+    "filepath",
+    "fixture_hints",
+    "function_count",
+    "global_keyword_names",
+    "global_writes",
+    "guard_triggers",
+    "guards",
+    "hardcoded_paths",
+    "hardcoded_secrets",
+    "has_ai_block",
+    "has_anti_patterns",
+    "has_bare_except",
+    "has_composition",
+    "has_deprecation_decorator",
+    "has_deprecation_warning",
+    "has_early_exit",
+    "has_env_vars",
+    "has_error_contract",
+    "has_mental_model",
+    "has_mutable_defaults",
+    "has_native_bindings",
+    "has_pass_except",
+    "has_quickstart",
+    "has_side_effects",
+    "has_varargs",
+    "has_varkw",
+    "heavy_top_level_work",
+    "import_fan_out",
+    "import_from",
+    "import_graph",
+    "import_work_units",
+    "imported_by",
+    "imports",
+    "imports_from",
+    "insecure_random_apis",
+    "io_in_loop",
+    "is_abstract",
+    "is_async",
+    "is_classmethod",
+    "is_entrypoint",
+    "is_generator",
+    "is_in_all",
+    "is_overload",
+    "is_property",
+    "is_public",
+    "is_recursive",
+    "is_staticmethod",
+    "keys",
+    "kind",
+    "layering",
+    "lineno_end",
+    "lineno_start",
+    "loc",
+    "local_type_annotations",
+    "magic_numbers",
+    "max_nesting_depth",
+    "mock_targets",
+    "module_count",
+    "module_globals_written",
+    "module_scoped_objects_written",
+    "module_secrets",
+    "modules",
+    "modules_called",
+    "mutable_default_params",
+    "mutation_count",
+    "n_locals",
+    "name",
+    "nested_loops",
+    "nonlocal_keyword_names",
+    "nonlocal_writes",
+    "num_imports",
+    "num_top_level_comprehensions",
+    "num_top_level_function_calls",
+    "num_top_level_io_calls",
+    "open_calls",
+    "parameters_used",
+    "params",
+    "parent_qualname",
+    "path_count",
+    "perf_blocking_in_async",
+    "perf_io_in_loop",
+    "perf_nested_loops",
+    "perf_regex_in_loop",
+    "perf_sleep_calls",
+    "perf_string_concat_in_loop",
+    "plugin_entry_points",
+    "present",
+    "pydantic_config_classes",
+    "qualname",
+    "quickstart_lines_ok",
+    "raised_exceptions",
+    "raw",
+    "reads_env_vars",
+    "referenced_in_tests",
+    "regex_in_loop",
+    "requires_self",
+    "resource_context_managed_calls",
+    "resource_open_calls",
+    "resource_unmanaged_calls",
+    "return_annotation",
+    "return_construction",
+    "return_keys",
+    "return_pattern",
+    "return_shape_stable",
+    "return_type",
+    "return_typed",
+    "return_value_types",
+    "returns",
+    "role",
+    "security_eval_exec_lines",
+    "security_hardcoded_secrets",
+    "security_insecure_random_calls",
+    "security_pickle_load_lines",
+    "security_shell_call_lines",
+    "security_sql_concat_lines",
+    "sha256",
+    "shadowed_builtins",
+    "shell_calls",
+    "signature",
+    "sleep_calls",
+    "sql_concat_lines",
+    "string_concat_in_loop",
+    "subprocess_calls",
+    "sync_primitives",
+    "test_files",
+    "test_files_referencing",
+    "test_reference_count",
+    "top_level_calls",
+    "top_level_io_patterns",
+    "total_entities",
+    "total_facts",
+    "total_param_count",
+    "transformation_count",
+    "type_complete",
+    "typed_param_count",
+    "typed_param_ratio",
+    "unmanaged_calls",
+    "unreferenced_public_entities",
+    "unused_variables",
+    "uses_argparse",
+    "uses_cffi",
+    "uses_click",
+    "uses_concurrent_futures",
+    "uses_context_manager",
+    "uses_ctypes",
+    "uses_cython",
+    "uses_env_vars",
+    "uses_executors",
+    "uses_global_keyword",
+    "uses_global_keyword_anywhere",
+    "uses_ini_config",
+    "uses_json_config",
+    "uses_multiprocessing",
+    "uses_nonlocal_keyword",
+    "uses_nonlocal_keyword_anywhere",
+    "uses_pybind11",
+    "uses_pydantic_models",
+    "uses_pydantic_settings",
+    "uses_subprocess",
+    "uses_swig",
+    "uses_sync_primitives",
+    "uses_threads",
+    "uses_toml_config",
+    "uses_typer",
+    "uses_yaml_config",
+    "valid",
+    "variable_count",
+    "version",
+    "violation_count",
+    "visibility",
+    "writes_env_vars",
+    "writes_module_globals",
+    "writes_module_scoped_objects"
+  ],
+  "total_keys": 262,
+  "generated_at": "2025-12-31T16:55:44.403921+00:00",
+  "metadata": {
+    "all_async_context_managers": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "all_creates_asyncio_tasks": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "all_decorators": {
+      "total_occurrences": 144,
+      "non_empty_count": 6,
+      "coverage_ratio": 0.042,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "aggregation"
+    },
+    "all_ffi_calls": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "all_global_keyword_names": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "all_module_globals_written": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "all_module_scoped_objects": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "all_nonlocal_keyword_names": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "all_subprocess_calls": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "arg_details": {
+      "total_occurrences": 144,
+      "non_empty_count": 110,
+      "coverage_ratio": 0.764,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "argument_info"
+    },
+    "arg_types": {
+      "total_occurrences": 144,
+      "non_empty_count": 93,
+      "coverage_ratio": 0.646,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "argument_info"
+    },
+    "arg_writes": {
+      "total_occurrences": 335,
+      "non_empty_count": 26,
+      "coverage_ratio": 0.078,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "argument_info"
+    },
+    "args": {
+      "total_occurrences": 144,
+      "non_empty_count": 110,
+      "coverage_ratio": 0.764,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "signature"
+    },
+    "assertion_triggers": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "assertions": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "assignments": {
+      "total_occurrences": 29,
+      "non_empty_count": 5,
+      "coverage_ratio": 0.172,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "attrs_read": {
+      "total_occurrences": 211,
+      "non_empty_count": 118,
+      "coverage_ratio": 0.559,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "attrs_written": {
+      "total_occurrences": 211,
+      "non_empty_count": 38,
+      "coverage_ratio": 0.18,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "bases": {
+      "total_occurrences": 18,
+      "non_empty_count": 4,
+      "coverage_ratio": 0.222,
+      "entity_types": [
+        "class"
+      ],
+      "file_count": 10,
+      "inferred_category": "inheritance"
+    },
+    "blocking_in_async": {
+      "total_occurrences": 282,
+      "non_empty_count": 138,
+      "coverage_ratio": 0.489,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "branch_count": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "count_metric"
+    },
+    "broad_exception_catch": {
+      "total_occurrences": 4,
+      "non_empty_count": 4,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method"
+      ],
+      "file_count": 3,
+      "inferred_category": "uncategorized"
+    },
+    "builtins_called": {
+      "total_occurrences": 335,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "callees": {
+      "total_occurrences": 55,
+      "non_empty_count": 16,
+      "coverage_ratio": 0.291,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "call_graph"
+    },
+    "callers": {
+      "total_occurrences": 55,
+      "non_empty_count": 15,
+      "coverage_ratio": 0.273,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "call_graph"
+    },
+    "calls": {
+      "total_occurrences": 16,
+      "non_empty_count": 16,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 9,
+      "inferred_category": "call_graph"
+    },
+    "calls_raw": {
+      "total_occurrences": 144,
+      "non_empty_count": 16,
+      "coverage_ratio": 0.111,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "class_count": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "file_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "count_metric"
+    },
+    "cluster_count": {
+      "total_occurrences": 1,
+      "non_empty_count": 1,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "count_metric"
+    },
+    "config_file_literals": {
+      "total_occurrences": 191,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "constants": {
+      "total_occurrences": 29,
+      "non_empty_count": 4,
+      "coverage_ratio": 0.138,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "context_managed_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "context_manager_names": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "count": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:circular_imports"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "coverage": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "file_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "metrics"
+    },
+    "coverage_detail": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "coverage_ratio": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "ratio_metric"
+    },
+    "cr_cyclomatic_complexity": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "code_review"
+    },
+    "cr_has_bare_except": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "code_review"
+    },
+    "cr_has_pass_except": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "code_review"
+    },
+    "cr_magic_numbers": {
+      "total_occurrences": 144,
+      "non_empty_count": 9,
+      "coverage_ratio": 0.062,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "code_review"
+    },
+    "cr_max_nesting_depth": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "code_review"
+    },
+    "cr_shadowed_builtins": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "code_review"
+    },
+    "creates_asyncio_tasks": {
+      "total_occurrences": 138,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "cyclomatic_complexity": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "complexity"
+    },
+    "dangerous_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "data_pipelines": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "decorators": {
+      "total_occurrences": 162,
+      "non_empty_count": 13,
+      "coverage_ratio": 0.08,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "metadata"
+    },
+    "descriptions": {
+      "total_occurrences": 1,
+      "non_empty_count": 1,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "detected": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:circular_imports"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "directory": {
+      "total_occurrences": 5,
+      "non_empty_count": 5,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "doc": {
+      "total_occurrences": 176,
+      "non_empty_count": 176,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "documentation"
+    },
+    "doc_sections": {
+      "total_occurrences": 148,
+      "non_empty_count": 148,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "documentation"
+    },
+    "docstring_length": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "documentation"
+    },
+    "documented_count": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:fingerprint"
+      ],
+      "file_count": 29,
+      "inferred_category": "documentation"
+    },
+    "entities_async": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_referenced_in_tests": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_asyncio_tasks": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_cffi": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_concurrent_futures": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_ctypes": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_global_keyword": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_multiprocessing": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_nonlocal_keyword": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_subprocess": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_sync_primitives": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_using_threads": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entities_writing_module_globals": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "aggregation"
+    },
+    "entity_count": {
+      "total_occurrences": 58,
+      "non_empty_count": 58,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "file_summary",
+        "summary:fingerprint"
+      ],
+      "file_count": 29,
+      "inferred_category": "count_metric"
+    },
+    "entry_points": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:package"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "env_var_keys": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "environment"
+    },
+    "env_var_keys_read": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "environment"
+    },
+    "env_var_keys_written": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "environment"
+    },
+    "env_vars_read": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "environment"
+    },
+    "exception_conditions": {
+      "total_occurrences": 144,
+      "non_empty_count": 9,
+      "coverage_ratio": 0.062,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "exception_count": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "count_metric"
+    },
+    "exception_guard_types": {
+      "total_occurrences": 144,
+      "non_empty_count": 11,
+      "coverage_ratio": 0.076,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "exception_messages": {
+      "total_occurrences": 144,
+      "non_empty_count": 11,
+      "coverage_ratio": 0.076,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "exception_swallowing": {
+      "total_occurrences": 6,
+      "non_empty_count": 6,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method"
+      ],
+      "file_count": 4,
+      "inferred_category": "uncategorized"
+    },
+    "exception_trigger_map": {
+      "total_occurrences": 144,
+      "non_empty_count": 8,
+      "coverage_ratio": 0.056,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "exception_triggers": {
+      "total_occurrences": 144,
+      "non_empty_count": 8,
+      "coverage_ratio": 0.056,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "exception_types": {
+      "total_occurrences": 144,
+      "non_empty_count": 11,
+      "coverage_ratio": 0.076,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "executors_used": {
+      "total_occurrences": 167,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "exports": {
+      "total_occurrences": 29,
+      "non_empty_count": 4,
+      "coverage_ratio": 0.138,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "dependencies"
+    },
+    "extraction_status": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "fan_in": {
+      "total_occurrences": 55,
+      "non_empty_count": 55,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "coupling"
+    },
+    "fan_out": {
+      "total_occurrences": 55,
+      "non_empty_count": 55,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "coupling"
+    },
+    "ffi_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "file_count": {
+      "total_occurrences": 1,
+      "non_empty_count": 1,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "count_metric"
+    },
+    "filepath": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "identity"
+    },
+    "fixture_hints": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "function_count": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "file_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "count_metric"
+    },
+    "global_keyword_names": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "global_writes": {
+      "total_occurrences": 335,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "guard_triggers": {
+      "total_occurrences": 144,
+      "non_empty_count": 8,
+      "coverage_ratio": 0.056,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "guards": {
+      "total_occurrences": 144,
+      "non_empty_count": 8,
+      "coverage_ratio": 0.056,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "hardcoded_paths": {
+      "total_occurrences": 144,
+      "non_empty_count": 8,
+      "coverage_ratio": 0.056,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "hardcoded_secrets": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "has_ai_block": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_anti_patterns": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_bare_except": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "has_composition": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_deprecation_decorator": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "has_deprecation_warning": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "has_early_exit": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "has_env_vars": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_error_contract": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_mental_model": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_mutable_defaults": {
+      "total_occurrences": 335,
+      "non_empty_count": 335,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_native_bindings": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_pass_except": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "has_quickstart": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_side_effects": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "has_varargs": {
+      "total_occurrences": 55,
+      "non_empty_count": 55,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "boolean_flag"
+    },
+    "has_varkw": {
+      "total_occurrences": 55,
+      "non_empty_count": 55,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "boolean_flag"
+    },
+    "heavy_top_level_work": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "import_fan_out": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "import_from": {
+      "total_occurrences": 29,
+      "non_empty_count": 24,
+      "coverage_ratio": 0.828,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "import_graph": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "import_work_units": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "imported_by": {
+      "total_occurrences": 5,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "imports": {
+      "total_occurrences": 29,
+      "non_empty_count": 6,
+      "coverage_ratio": 0.207,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "dependencies"
+    },
+    "imports_from": {
+      "total_occurrences": 5,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "insecure_random_apis": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "io_in_loop": {
+      "total_occurrences": 144,
+      "non_empty_count": 23,
+      "coverage_ratio": 0.16,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "is_abstract": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "is_async": {
+      "total_occurrences": 282,
+      "non_empty_count": 282,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "is_classmethod": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "is_entrypoint": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "is_generator": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "is_in_all": {
+      "total_occurrences": 55,
+      "non_empty_count": 55,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "boolean_flag"
+    },
+    "is_overload": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "is_property": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "is_public": {
+      "total_occurrences": 55,
+      "non_empty_count": 55,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 21,
+      "inferred_category": "boolean_flag"
+    },
+    "is_recursive": {
+      "total_occurrences": 16,
+      "non_empty_count": 16,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 9,
+      "inferred_category": "boolean_flag"
+    },
+    "is_staticmethod": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "keys": {
+      "total_occurrences": 1,
+      "non_empty_count": 1,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "kind": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "identity"
+    },
+    "layering": {
+      "total_occurrences": 1,
+      "non_empty_count": 1,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "lineno_end": {
+      "total_occurrences": 162,
+      "non_empty_count": 162,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "location"
+    },
+    "lineno_start": {
+      "total_occurrences": 162,
+      "non_empty_count": 162,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "location"
+    },
+    "loc": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "size_metric"
+    },
+    "local_type_annotations": {
+      "total_occurrences": 144,
+      "non_empty_count": 3,
+      "coverage_ratio": 0.021,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "magic_numbers": {
+      "total_occurrences": 144,
+      "non_empty_count": 9,
+      "coverage_ratio": 0.062,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "max_nesting_depth": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "depth_metric"
+    },
+    "mock_targets": {
+      "total_occurrences": 144,
+      "non_empty_count": 105,
+      "coverage_ratio": 0.729,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "module_count": {
+      "total_occurrences": 5,
+      "non_empty_count": 5,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "module_level"
+    },
+    "module_globals_written": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "module_level"
+    },
+    "module_scoped_objects_written": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "module_level"
+    },
+    "module_secrets": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "module"
+      ],
+      "file_count": 29,
+      "inferred_category": "module_level"
+    },
+    "modules": {
+      "total_occurrences": 5,
+      "non_empty_count": 5,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "modules_called": {
+      "total_occurrences": 335,
+      "non_empty_count": 33,
+      "coverage_ratio": 0.099,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "mutable_default_params": {
+      "total_occurrences": 335,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "mutation_count": {
+      "total_occurrences": 14,
+      "non_empty_count": 14,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "file_summary"
+      ],
+      "file_count": 14,
+      "inferred_category": "count_metric"
+    },
+    "n_locals": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "name": {
+      "total_occurrences": 220,
+      "non_empty_count": 191,
+      "coverage_ratio": 0.868,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function",
+        "summary:package"
+      ],
+      "file_count": 29,
+      "inferred_category": "identity"
+    },
+    "nested_loops": {
+      "total_occurrences": 144,
+      "non_empty_count": 13,
+      "coverage_ratio": 0.09,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "nonlocal_keyword_names": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "nonlocal_writes": {
+      "total_occurrences": 335,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "num_imports": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "num_top_level_comprehensions": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "num_top_level_function_calls": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "call_info"
+    },
+    "num_top_level_io_calls": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "call_info"
+    },
+    "open_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "parameters_used": {
+      "total_occurrences": 144,
+      "non_empty_count": 143,
+      "coverage_ratio": 0.993,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "params": {
+      "total_occurrences": 144,
+      "non_empty_count": 110,
+      "coverage_ratio": 0.764,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "signature"
+    },
+    "parent_qualname": {
+      "total_occurrences": 191,
+      "non_empty_count": 89,
+      "coverage_ratio": 0.466,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "path_count": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "count_metric"
+    },
+    "perf_blocking_in_async": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "performance"
+    },
+    "perf_io_in_loop": {
+      "total_occurrences": 144,
+      "non_empty_count": 23,
+      "coverage_ratio": 0.16,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "performance"
+    },
+    "perf_nested_loops": {
+      "total_occurrences": 144,
+      "non_empty_count": 13,
+      "coverage_ratio": 0.09,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "performance"
+    },
+    "perf_regex_in_loop": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "performance"
+    },
+    "perf_sleep_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "performance"
+    },
+    "perf_string_concat_in_loop": {
+      "total_occurrences": 144,
+      "non_empty_count": 10,
+      "coverage_ratio": 0.069,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "performance"
+    },
+    "plugin_entry_points": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "summary:package"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "present": {
+      "total_occurrences": 205,
+      "non_empty_count": 205,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function",
+        "summary:quickstart"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "pydantic_config_classes": {
+      "total_occurrences": 162,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "qualname": {
+      "total_occurrences": 191,
+      "non_empty_count": 162,
+      "coverage_ratio": 0.848,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "identity"
+    },
+    "quickstart_lines_ok": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "namespaced:parsed",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "raised_exceptions": {
+      "total_occurrences": 144,
+      "non_empty_count": 11,
+      "coverage_ratio": 0.076,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "raw": {
+      "total_occurrences": 176,
+      "non_empty_count": 176,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "reads_env_vars": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "access"
+    },
+    "referenced_in_tests": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "regex_in_loop": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "requires_self": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "resource_context_managed_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "resource_open_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "resource_unmanaged_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "return_annotation": {
+      "total_occurrences": 124,
+      "non_empty_count": 124,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method"
+      ],
+      "file_count": 23,
+      "inferred_category": "return_info"
+    },
+    "return_construction": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "return_info"
+    },
+    "return_keys": {
+      "total_occurrences": 144,
+      "non_empty_count": 12,
+      "coverage_ratio": 0.083,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "return_info"
+    },
+    "return_pattern": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "return_info"
+    },
+    "return_shape_stable": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "return_info"
+    },
+    "return_type": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "return_info"
+    },
+    "return_typed": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "return_info"
+    },
+    "return_value_types": {
+      "total_occurrences": 144,
+      "non_empty_count": 12,
+      "coverage_ratio": 0.083,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "return_info"
+    },
+    "returns": {
+      "total_occurrences": 124,
+      "non_empty_count": 124,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method"
+      ],
+      "file_count": 23,
+      "inferred_category": "uncategorized"
+    },
+    "role": {
+      "total_occurrences": 5,
+      "non_empty_count": 5,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "security_eval_exec_lines": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "security"
+    },
+    "security_hardcoded_secrets": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "security"
+    },
+    "security_insecure_random_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "security"
+    },
+    "security_pickle_load_lines": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "security"
+    },
+    "security_shell_call_lines": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "security"
+    },
+    "security_sql_concat_lines": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "security"
+    },
+    "sha256": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:fingerprint"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "shadowed_builtins": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "shell_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "signature": {
+      "total_occurrences": 162,
+      "non_empty_count": 162,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "identity"
+    },
+    "sleep_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "sql_concat_lines": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "line_reference"
+    },
+    "string_concat_in_loop": {
+      "total_occurrences": 144,
+      "non_empty_count": 10,
+      "coverage_ratio": 0.069,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "subprocess_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "sync_primitives": {
+      "total_occurrences": 167,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "function",
+        "summary:concurrency_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "test_files": {
+      "total_occurrences": 191,
+      "non_empty_count": 87,
+      "coverage_ratio": 0.455,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "test_files_referencing": {
+      "total_occurrences": 29,
+      "non_empty_count": 22,
+      "coverage_ratio": 0.759,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "test_reference_count": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "count_metric"
+    },
+    "top_level_calls": {
+      "total_occurrences": 29,
+      "non_empty_count": 3,
+      "coverage_ratio": 0.103,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "call_info"
+    },
+    "top_level_io_patterns": {
+      "total_occurrences": 29,
+      "non_empty_count": 0,
+      "coverage_ratio": 0.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "total_entities": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "total_facts": {
+      "total_occurrences": 1,
+      "non_empty_count": 1,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "uncategorized"
+    },
+    "total_param_count": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "count_metric"
+    },
+    "transformation_count": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "count_metric"
+    },
+    "type_complete": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "typed_param_count": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "type_info"
+    },
+    "typed_param_ratio": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "type_info"
+    },
+    "unmanaged_calls": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "call_info"
+    },
+    "unreferenced_public_entities": {
+      "total_occurrences": 29,
+      "non_empty_count": 15,
+      "coverage_ratio": 0.517,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "unused_variables": {
+      "total_occurrences": 144,
+      "non_empty_count": 2,
+      "coverage_ratio": 0.014,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "uncategorized"
+    },
+    "uses_argparse": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_cffi": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_click": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_concurrent_futures": {
+      "total_occurrences": 138,
+      "non_empty_count": 138,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_context_manager": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_ctypes": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_cython": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_env_vars": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_executors": {
+      "total_occurrences": 138,
+      "non_empty_count": 138,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_global_keyword": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_global_keyword_anywhere": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_ini_config": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_json_config": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_multiprocessing": {
+      "total_occurrences": 138,
+      "non_empty_count": 138,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_nonlocal_keyword": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_nonlocal_keyword_anywhere": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:global_state_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_pybind11": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_pydantic_models": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_pydantic_settings": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_subprocess": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_swig": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_sync_primitives": {
+      "total_occurrences": 138,
+      "non_empty_count": 138,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_threads": {
+      "total_occurrences": 138,
+      "non_empty_count": 138,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function"
+      ],
+      "file_count": 24,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_toml_config": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_typer": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "uses_yaml_config": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "nested_function",
+        "summary:config_summary"
+      ],
+      "file_count": 29,
+      "inferred_category": "boolean_flag"
+    },
+    "valid": {
+      "total_occurrences": 2,
+      "non_empty_count": 2,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:quickstart"
+      ],
+      "file_count": 2,
+      "inferred_category": "uncategorized"
+    },
+    "variable_count": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "count_metric"
+    },
+    "version": {
+      "total_occurrences": 29,
+      "non_empty_count": 29,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "summary:package"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "violation_count": {
+      "total_occurrences": 1,
+      "non_empty_count": 1,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "other"
+      ],
+      "file_count": 1,
+      "inferred_category": "count_metric"
+    },
+    "visibility": {
+      "total_occurrences": 191,
+      "non_empty_count": 191,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "class",
+        "function",
+        "method",
+        "module",
+        "nested_function"
+      ],
+      "file_count": 29,
+      "inferred_category": "uncategorized"
+    },
+    "writes_env_vars": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "mutation"
+    },
+    "writes_module_globals": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "mutation"
+    },
+    "writes_module_scoped_objects": {
+      "total_occurrences": 144,
+      "non_empty_count": 144,
+      "coverage_ratio": 1.0,
+      "entity_types": [
+        "function",
+        "method",
+        "nested_function"
+      ],
+      "file_count": 24,
+      "inferred_category": "mutation"
+    }
+  },
+  "statistics": {
+    "total_facts": 30706,
+    "total_files": 30,
+    "entity_type_counts": {
+      "class": 46,
+      "file_summary": 5,
+      "function": 186,
+      "method": 168,
+      "module": 26,
+      "namespaced:parsed": 9,
+      "nested_function": 164,
+      "other": 37,
+      "summary:circular_imports": 2,
+      "summary:concurrency_summary": 10,
+      "summary:config_summary": 10,
+      "summary:fingerprint": 3,
+      "summary:global_state_summary": 11,
+      "summary:package": 4,
+      "summary:quickstart": 2
+    },
+    "category_counts": {
+      "access": 1,
+      "aggregation": 22,
+      "argument_info": 3,
+      "boolean_flag": 54,
+      "call_graph": 3,
+      "call_info": 14,
+      "code_review": 6,
+      "complexity": 1,
+      "count_metric": 14,
+      "coupling": 2,
+      "dependencies": 2,
+      "depth_metric": 1,
+      "documentation": 4,
+      "environment": 4,
+      "identity": 5,
+      "inheritance": 1,
+      "line_reference": 1,
+      "location": 2,
+      "metadata": 1,
+      "metrics": 1,
+      "module_level": 4,
+      "mutation": 3,
+      "performance": 6,
+      "ratio_metric": 1,
+      "return_info": 8,
+      "security": 6,
+      "signature": 2,
+      "size_metric": 1,
+      "type_info": 2,
+      "uncategorized": 87
+    }
+  }
+}

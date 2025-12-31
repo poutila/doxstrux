@@ -1,0 +1,716 @@
+# Fact-Driven Planning Principles (FDP-LITE)
+# Lightweight version - Core philosophy without full protocol machinery
+# Version: 1.0.0
+# Applicable to: General software development, architecture decisions, refactoring
+
+metadata:
+  name: "FDP-LITE"
+  description: "Evidence-based decision making for software development"
+  philosophy: "Query before claim, verify before assume, measure before estimate"
+  full_protocol: "See FDP_RULES.yaml for strict enforcement version"
+  scope: "Architectural decisions, refactoring, planning, design reviews"
+  severity: WARNING  # Guidance level, not hard blockers
+  adoption_effort: LOW_TO_MEDIUM
+  roi: "Prevents 60-80% of assumption-based bugs with 10-25% overhead"
+
+# =============================================================================
+# CORE PHILOSOPHY
+# =============================================================================
+
+philosophy:
+  tagline: "The shift from 'I think...' to 'I verified...'"
+  
+  core_transformation:
+    before: "Assumption-based development"
+    after: "Evidence-based development"
+    
+  key_shifts:
+    - from: "probably around 20"
+      to: "grep shows exactly 47"
+    
+    - from: "seems to be O(n)"
+      to: "timeit measurement confirms O(n²)"
+    
+    - from: "should work for most cases"
+      to: "test matrix covers 12 edge cases"
+    
+    - from: "the schema appears flat"
+      to: "parsed 15 files: 3-level nesting confirmed"
+  
+  inspiration:
+    - "Evidence-based medicine: Clinical trials over intuition"
+    - "Legal reasoning: Precedent over memory"
+    - "Scientific method: Measurement over philosophy"
+    - "Fact-driven planning: Queries over assumptions"
+
+# =============================================================================
+# PRINCIPLE 1: QUERY BEFORE CLAIM
+# =============================================================================
+
+query_before_claim:
+  tagline: "No statement about code without queryable evidence"
+  severity: WARNING
+  
+  trigger_phrases:
+    high_confidence_claims_without_evidence:
+      - "The API has ~N endpoints"
+      - "There are around X files"
+      - "This is called in about Y places"
+      - "The schema is probably Z"
+      - "We have several instances of..."
+    
+  required_replacement:
+    pattern: "[Vague claim] → [Exact measurement] ([verification command])"
+    examples:
+      - before: "around 20 endpoints"
+        after: "47 endpoints (grep -r '@app.route' | wc -l)"
+      
+      - before: "several config files"
+        after: "12 config files (find configs/ -name '*.yaml' | wc -l)"
+      
+      - before: "called in about 5 places"
+        after: "12 call sites (grep -rn 'function_name(' src/)"
+  
+  verification_command_standards:
+    must_be:
+      - copy_paste_executable: "No placeholders or <TODO>"
+      - deterministic: "Same command, same result"
+      - self_contained: "No hidden dependencies"
+      - documented: "What it proves"
+    
+    examples:
+      good:
+        - "grep -r 'def.*endpoint' src/ | wc -l  # Count endpoint definitions"
+        - "find . -name '*.py' -exec wc -l {} + | tail -1  # Total LOC"
+        - "python -c 'import ast; ...'  # Parse and analyze"
+      
+      bad:
+        - "grep <pattern> <file>  # Fill in values"
+        - "python script.py  # Requires interactive input"
+        - "see commit abc123  # Not executable"
+  
+  automation:
+    pre_commit_check: |
+      #!/bin/bash
+      # Detect unverified claims in code comments
+      violations=$(grep -rn --include='*.py' \
+        -E '\b(probably|around [0-9]+|about [0-9]+|several)\b' \
+        src/ | grep -v 'VERIFIED:')
+      
+      if [ -n "$violations" ]; then
+        echo "❌ Unverified claims found:"
+        echo "$violations"
+        exit 1
+      fi
+
+# =============================================================================
+# PRINCIPLE 2: EVIDENCE OVER INTUITION
+# =============================================================================
+
+evidence_over_intuition:
+  tagline: "When memory and verification disagree, trust verification"
+  severity: WARNING
+  
+  rule: "If you think you know X, verify X before using X in decisions"
+  
+  examples:
+    example_1:
+      memory: "I remember implementing about 5 generators"
+      verification: "find . -name '*generator*.py' | wc -l → 27"
+      decision: "Use 27 for planning, investigate why memory was off"
+    
+    example_2:
+      memory: "Function looks simple, maybe 50 lines"
+      verification: "wc -l module.py → 340 lines"
+      decision: "Revise estimate, plan accordingly"
+    
+    example_3:
+      memory: "Should be O(n) complexity"
+      verification: "timeit shows quadratic growth"
+      decision: "Investigate algorithm, may need optimization"
+  
+  workflow:
+    step_1: "Notice assumption in thinking"
+    step_2: "Formulate verification query"
+    step_3: "Execute verification command"
+    step_4: "Compare result with assumption"
+    step_5: "Update mental model if mismatch"
+    step_6: "Use verified fact in decision"
+  
+  mental_triggers:
+    - "When you think 'I remember...' → Verify first"
+    - "When you think 'It should be...' → Measure first"
+    - "When you think 'Probably...' → Query first"
+    - "When you think 'About N...' → Count first"
+
+# =============================================================================
+# PRINCIPLE 3: PRECISION OVER APPROXIMATION
+# =============================================================================
+
+precision_over_approximation:
+  tagline: "Use exact numbers when they're easily obtainable"
+  severity: WARNING
+  
+  forbidden_vagueness:
+    patterns_to_avoid:
+      - "around X" when exact count is trivial
+      - "~N files" when ls/find gives exact list
+      - "several" when specific number is one command away
+      - "a handful" when count is deterministic
+      - "many" when precise count costs <5 seconds
+      - "some" when enumeration is simple
+    
+    detection_regex: '\b(around|~|approximately|several|handful|many|some)\s+\d+'
+  
+  exceptions:
+    genuine_uncertainty:
+      - "External API latency varies (measured range: 10-150ms)"
+      - "Network conditions unpredictable (historical: 95th percentile 200ms)"
+    
+    future_estimates:
+      - "Estimated 3-5 days based on historical velocity"
+      - "Projected ~30% growth (extrapolating from Q1-Q3 trend)"
+    
+    performance_ranges:
+      - "Processes 1000-5000 items/sec (depends on complexity)"
+      - "Memory usage 100-500MB (varies with input size)"
+  
+  transformation_guide:
+    vague_to_precise:
+      - vague: "affects around 20 files"
+        precise: "affects 23 files (git diff --stat)"
+      
+      - vague: "several tests need updating"
+        precise: "12 tests need updating (grep -c 'def test_old_api')"
+      
+      - vague: "a handful of edge cases"
+        precise: "3 edge cases: EOF, empty input, null reference"
+      
+      - vague: "many dependencies"
+        precise: "47 dependencies (pip freeze | wc -l)"
+
+# =============================================================================
+# PRINCIPLE 4: NO PROBABILISTIC LANGUAGE
+# =============================================================================
+
+no_probabilistic_language:
+  tagline: "Avoid hedging words when facts are verifiable"
+  severity: WARNING
+  
+  forbidden_hedging:
+    words_to_avoid:
+      probably:
+        issue: "Implies guessing when you could verify"
+        replacement: "verified:" or "measured:" or "ASSUMPTION: (verify before delivery)"
+      
+      seems:
+        issue: "Subjective observation without confirmation"
+        replacement: "observed:" or "test shows:" or "profiling indicates:"
+      
+      appears_to:
+        issue: "Visual inspection is not verification"
+        replacement: "confirmed:" or "analysis proves:" or "static check passed:"
+      
+      likely:
+        issue: "Probability without measurement"
+        replacement: "95% of samples show" or "historical data indicates"
+      
+      might_be:
+        issue: "Uncertainty that could be resolved"
+        replacement: "two possibilities: A or B (test to determine)"
+      
+      should:  # when descriptive, not normative
+        issue: "Expectation without verification"
+        replacement: "does" or "specification requires" or "test confirms"
+  
+  allowed_contexts:
+    with_measurement:
+      - "Profiling suggests O(n log n) - see benchmark_results.txt (1000 samples)"
+      - "Load testing indicates 500 req/s limit - 99th percentile at 450 req/s"
+    
+    genuine_uncertainty:
+      - "External API behavior unspecified in documentation"
+      - "Customer behavior varies by region (no data for APAC)"
+    
+    normative_should:
+      - "Function should raise ValueError for invalid input"  # specification
+      - "System should log all authentication attempts"  # requirement
+  
+  automated_detection:
+    grep_pattern: '\b(probably|seems|appears to|likely|might be)\b'
+    exceptions_pattern: 'ALLOWED:|# normative|# specification'
+    command: |
+      grep -rn --include='*.py' --include='*.md' \
+        -E '\b(probably|seems|appears to|likely|might be)\b' \
+        | grep -v 'ALLOWED:' \
+        | grep -v '# normative'
+
+# =============================================================================
+# PRINCIPLE 5: VERIFIABLE DECISIONS
+# =============================================================================
+
+verifiable_decisions:
+  tagline: "Architectural choices should trace to measurable facts"
+  severity: WARNING
+  
+  decision_template: |
+    # Decision: [What we chose]
+    
+    ## Evidence
+    [What we measured/queried - with commands and outputs]
+    
+    ## Alternatives Considered
+    [What we rejected - with quantified reasons]
+    
+    ## Trade-offs
+    [Quantified differences - metrics, not opinions]
+    
+    ## Verification
+    [How to validate this decision holds - measurable criteria]
+  
+  required_elements:
+    decision_statement:
+      description: "Clear, actionable choice"
+      format: "We will [action] because [measurable reason]"
+    
+    evidence_basis:
+      description: "Queryable facts supporting the decision"
+      requirements:
+        - include_commands: "How evidence was obtained"
+        - include_results: "What was measured"
+        - include_timestamp: "When evidence was collected"
+    
+    alternatives:
+      description: "At least 1 alternative explicitly considered"
+      requirements:
+        - quantified_comparison: "Not just 'better', but 'better by X%'"
+        - trade_off_analysis: "What you gain and lose"
+    
+    verification_criteria:
+      description: "How to know if decision was correct"
+      requirements:
+        - measurable_outcomes: "Not 'better performance' but '< 100ms p95'"
+        - test_strategy: "How to validate"
+        - drift_triggers: "What invalidates this decision"
+  
+  example_good_decision: |
+    # Decision: Extend BaseGenerator instead of creating new base class
+    
+    ## Evidence
+    - 27 existing generators extend BaseGenerator
+      Command: find . -name '*generator.py' -exec grep -l 'BaseGenerator' {} \;
+      Result: 27 files listed
+      Collected: 2024-12-24 10:30 UTC
+    
+    - BaseGenerator provides 12 methods we need
+      Command: python -c "import inspect; print([m for m in dir(BaseGenerator) if not m.startswith('_')])"
+      Result: ['init_context', 'validate_schema', 'generate_output', ...]
+      Collected: 2024-12-24 10:32 UTC
+    
+    - No generator has needed a different base class
+      Command: git log --all --grep='new base class' -- '*generator*'
+      Result: 0 commits found
+      Collected: 2024-12-24 10:35 UTC
+    
+    ## Alternatives Considered
+    1. Custom base class
+       - Would duplicate 12 methods (measured: 340 LOC)
+       - Maintenance cost: 2x (two base classes to update)
+       - Benefit: No coupling to BaseGenerator
+       - Rejected: Cost > Benefit
+    
+    2. Composition instead of inheritance
+       - Would require wrapper methods (measured: ~15 methods)
+       - Complexity increase: +25% LOC
+       - Benefit: More flexible coupling
+       - Rejected: YAGNI - no current need for flexibility
+    
+    ## Trade-offs
+    ✓ Consistency with 27 existing generators
+    ✓ Inherit 12 needed methods (0 LOC to implement)
+    ✗ Coupled to BaseGenerator (acceptable: API stable, 2 changes/year per git log)
+    ✗ Inherit 3 unused methods (acceptable overhead: 50 LOC total)
+    
+    ## Verification
+    - Test passes same test suite as other 27 generators
+    - Coverage report shows no calls to the 3 unused inherited methods
+    - Monitor BaseGenerator change frequency: git log --since='1 year ago' base_generator.py
+    - Drift trigger: If BaseGenerator changes >1x per quarter → reconsider coupling
+  
+  example_bad_decision: |
+    # Decision: Use BaseGenerator
+    
+    Rationale: It seems like the right choice and other code does it.
+    
+    [Missing: evidence, alternatives, quantified trade-offs, verification criteria]
+
+# =============================================================================
+# PRINCIPLE 6: COPY-PASTE EXECUTABLE COMMANDS
+# =============================================================================
+
+copy_paste_executable:
+  tagline: "Verification commands should run without modification"
+  severity: WARNING
+  
+  standards:
+    no_placeholders:
+      forbidden:
+        - "grep <pattern> <file>"
+        - "python script.py --config <path>"
+        - "cd <directory> && make"
+      
+      required:
+        - "grep 'def query' src/fact_store.py"
+        - "python script.py --config ./configs/prod.yaml"
+        - "cd /project/root && make test"
+    
+    no_interactive:
+      forbidden:
+        - "python setup.py  # prompts for input"
+        - "npm install  # may prompt"
+      
+      required:
+        - "python setup.py --non-interactive"
+        - "npm install --yes"
+    
+    deterministic:
+      acceptable_variance:
+        - timestamps: "Date/time in output"
+        - process_ids: "PID in logs"
+        - random_with_seed: "If documented: 'Run with SEED=42'"
+      
+      unacceptable_variance:
+        - file_counts: "Indicates stale command or wrong directory"
+        - structure_changes: "Command assumes outdated schema"
+    
+    exit_zero:
+      requirement: "Success should exit 0"
+      examples:
+        - "test -f file && echo 'Found' || echo 'Missing'"
+        - "grep -q pattern file && echo 'Match' || echo 'No match'"
+  
+  best_practices:
+    use_relative_paths:
+      good: "./src/module.py"
+      bad: "/home/user/project/src/module.py"
+    
+    explicit_context:
+      good: "cd /project && command"
+      bad: "command  # assumes you're in project root"
+    
+    document_prerequisites:
+      good: "# Requires: pip install polars\npython analyze.py"
+      bad: "python analyze.py  # fails if polars not installed"
+
+# =============================================================================
+# PRINCIPLE 7: ASSUMPTION VS FACT DISTINCTION
+# =============================================================================
+
+assumption_vs_fact:
+  tagline: "Clearly distinguish what you verified from what you assumed"
+  severity: WARNING
+  
+  assumption_template: |
+    ASSUMPTION: [statement]
+    Confidence: [high|medium|low]
+    Impact if wrong: [consequences]
+    Verification plan: [how to verify before delivery]
+    Blocking: [what work depends on this]
+  
+  fact_template: |
+    VERIFIED: [statement]
+    Source: [command or tool that verified]
+    Command: `[copy-paste executable]`
+    Result: [actual output]
+    Timestamp: [YYYY-MM-DD HH:MM UTC or commit SHA]
+  
+  examples:
+    assumption_example: |
+      ASSUMPTION: Config files use consistent snake_case key naming
+      Confidence: medium
+      Impact if wrong: Parser will fail on ~20% of configs, requiring schema changes
+      Verification plan: grep '^[a-z_]*:' configs/*.yaml | grep -v '^[a-z_]*:' (should be empty)
+      Blocking: Config parser implementation in module_x.py
+    
+    fact_example: |
+      VERIFIED: All 12 config files use snake_case keys exclusively
+      Source: Pattern analysis on all config files
+      Command: `find configs/ -name '*.yaml' -exec grep -h '^[^#]*:' {} \; | grep -v '^[a-z_]*:' | wc -l`
+      Result: 0 (no violations)
+      Timestamp: 2024-12-24 14:20 UTC (commit f3a8c21)
+  
+  workflow:
+    start_with_assumption:
+      - "Document assumption explicitly"
+      - "Rate confidence and impact"
+      - "Plan verification method"
+    
+    verify_before_delivery:
+      - "Run verification command"
+      - "Document result"
+      - "Convert ASSUMPTION → VERIFIED or mark as risk"
+    
+    track_unverified:
+      - "Keep list of unverified assumptions"
+      - "Prioritize verification by impact"
+      - "Block delivery on high-impact assumptions"
+
+# =============================================================================
+# PRINCIPLE 8: FRESHNESS AWARENESS
+# =============================================================================
+
+freshness_awareness:
+  tagline: "Know when your evidence is stale"
+  severity: NOTE
+  
+  guidelines:
+    check_age:
+      - "ls -lt file  # See modification time"
+      - "git log -1 --format=%ci file  # Last commit"
+      - "stat -c %Y file  # Unix timestamp"
+    
+    regenerate_when_stale:
+      - "Code changed → re-verify assumptions"
+      - "Dependencies updated → re-measure performance"
+      - "Schema changed → re-validate queries"
+    
+    timestamp_everything:
+      - "Include collection time in evidence"
+      - "Note code version (commit SHA)"
+      - "Flag old evidence for review"
+  
+  automated_freshness_check: |
+    #!/bin/bash
+    # Check if FACTS.parquet is newer than source code
+    newest_py=$(find src -name '*.py' -printf '%T@\n' | sort -n | tail -1)
+    facts_time=$(stat -c %Y FACTS.parquet)
+    
+    if (( $(echo "$facts_time < $newest_py" | bc -l) )); then
+      echo "⚠️  STALE: FACTS.parquet older than source code"
+      echo "Run: regenerate_facts.py"
+      exit 1
+    fi
+
+# =============================================================================
+# INTEGRATION WITH DEVELOPMENT PRACTICES
+# =============================================================================
+
+integration:
+  yagni:
+    connection: "Verify the need before building"
+    examples:
+      - before: "We might need caching"
+        after: "Profiled: 20 calls/day, 50ms latency → YAGNI"
+      
+      - before: "Could support multiple formats"
+        after: "grep shows 0 requests for other formats → YAGNI"
+  
+  fail_fast:
+    connection: "Verify assumptions early, not late"
+    examples:
+      - bad: "Implement → Test → Discover wrong assumption → Redesign"
+      - good: "Query assumptions → Verify → Design → Implement"
+  
+  kiss:
+    connection: "Measure complexity, don't guess"
+    examples:
+      - before: "Seems complex"
+        after: "Cyclomatic complexity: 24 (wily report) → Refactor"
+      
+      - before: "Simple 2-step process"
+        after: "Call graph shows 7 dependencies → Not simple"
+  
+  solid:
+    connection: "Measure coupling before generalizing"
+    examples:
+      - before: "Loosely coupled"
+        after: "fan_in=15, fan_out=8 → Tightly coupled"
+      
+      - before: "Could abstract this"
+        after: "Only 1 consumer → Wait for 2nd (YAGNI + SOLID)"
+  
+  clean_table:
+    connection: "No unverified claims in delivery"
+    examples:
+      - forbidden: "# TODO: Verify this assumption later"
+      - required: "VERIFIED: [statement] (command: ...)"
+
+# =============================================================================
+# ADOPTION LEVELS
+# =============================================================================
+
+adoption_levels:
+  level_0_baseline:
+    description: "Current practice (no FDP)"
+    characteristics:
+      - "Assumptions common in planning"
+      - "Verification optional, manual"
+      - "Estimates gut-based"
+      - "Probabilistic language frequent"
+    risk: HIGH
+    effort: ZERO
+  
+  level_1_aware:
+    description: "FDP-aware (10% overhead)"
+    practices:
+      - "Mark assumptions as ASSUMPTION:"
+      - "Verify critical claims"
+      - "Replace 'probably' with measurements when easy"
+      - "Timestamp evidence"
+    adoption:
+      - "Add grep checks to code review"
+      - "Flag 'probably' in PRs"
+      - "Measure when trivial"
+    risk: MEDIUM
+    effort: LOW
+    roi: "50% bug reduction, 10% overhead"
+  
+  level_2_systematic:
+    description: "FDP-systematic (25% overhead)"
+    practices:
+      - "Query before major decisions (required)"
+      - "Copy-paste executable verification commands"
+      - "No probabilistic without evidence (enforced)"
+      - "Measure impact/complexity/coupling"
+      - "Document alternatives with trade-offs"
+    adoption:
+      - "Pre-commit hooks for probabilistic language"
+      - "Decision template required"
+      - "Evidence review in design docs"
+    risk: LOW
+    effort: MEDIUM
+    roi: "80% bug reduction, 25% overhead"
+  
+  level_3_full_fdp:
+    description: "Full FDP protocol (see FDP_RULES.yaml)"
+    practices:
+      - "Evidence blocks with FQ-IDs"
+      - "Quality gates (9am test, probably detector)"
+      - "Tool-first enforcement"
+      - "SPEKSI linters"
+    adoption:
+      - "See FDP_RULES.yaml for full spec"
+    risk: MINIMAL
+    effort: HIGH
+    roi: "95% bug reduction, 50% overhead"
+
+# =============================================================================
+# QUICK REFERENCE
+# =============================================================================
+
+quick_reference:
+  cheat_sheet:
+    query_before_claim: "grep shows exactly N (not 'around N')"
+    evidence_over_intuition: "Trust verification, update mental model"
+    precision_over_approximation: "23 files (not 'several files')"
+    no_probabilistic: "'verified:' not 'probably'"
+    verifiable_decisions: "Evidence + Alternatives + Trade-offs + Verification"
+    copy_paste_executable: "No <placeholders>, works as-is"
+    assumption_vs_fact: "ASSUMPTION: (plan) → VERIFIED: (test)"
+    freshness_awareness: "Check age, regenerate when stale"
+  
+  trigger_questions:
+    - "Did I verify this or assume it?"
+    - "Can I measure this instead of guessing?"
+    - "Is this 'probably' backed by evidence?"
+    - "Is this command copy-paste executable?"
+    - "Have I considered alternatives?"
+    - "How will I know if this is wrong?"
+    - "Is this evidence still fresh?"
+  
+  automated_checks:
+    pre_commit: |
+      # FDP-LITE Pre-commit Hook
+      
+      echo "Checking for unverified probabilistic language..."
+      violations=$(grep -rn --include='*.py' --include='*.md' \
+        -E '\b(probably|seems|appears to|around [0-9]+)\b' . \
+        | grep -v 'VERIFIED:' | grep -v 'ALLOWED:')
+      
+      if [ -n "$violations" ]; then
+        echo "❌ Found probabilistic language without evidence:"
+        echo "$violations"
+        echo ""
+        echo "Fix: Either verify the claim or mark as ASSUMPTION:"
+        exit 1
+      fi
+      
+      echo "✓ FDP-LITE checks passed"
+  
+  one_pager: |
+    FDP-LITE: Evidence-Based Development
+    =====================================
+    
+    Core idea: Query before claim, measure before estimate
+    
+    8 Principles:
+    1. Query before claim - No unverified statements
+    2. Evidence over intuition - Trust measurement
+    3. Precision over approximation - Exact counts
+    4. No probabilistic language - "verified" not "probably"
+    5. Verifiable decisions - Evidence → Alternatives → Trade-offs
+    6. Copy-paste executable - Commands work as-is
+    7. Assumption vs fact - Clearly labeled
+    8. Freshness awareness - Check age, regenerate
+    
+    Quick wins:
+    - Replace "around 20" with "grep | wc -l → 47"
+    - Replace "probably" with actual measurement
+    - Add verification commands to decisions
+    - Mark assumptions explicitly
+    
+    Adoption: Start at Level 1 (10% effort), grow to Level 2 (25% effort)
+
+# =============================================================================
+# EXAMPLES
+# =============================================================================
+
+examples:
+  before_fdp: |
+    # Refactoring Plan (Before FDP)
+    
+    We need to refactor the API module. It's getting complex and probably 
+    has around 20 endpoints. The functions seem loosely coupled. This should 
+    take about 3 days. We'll extract common logic into a base class.
+  
+  after_fdp: |
+    # Refactoring Plan (After FDP)
+    
+    ## Goal
+    Refactor API module to reduce complexity
+    
+    ## Evidence
+    
+    VERIFIED: API module has 47 endpoints (not 20)
+    Command: grep -r '@app.route' src/api/ | wc -l
+    Result: 47
+    Timestamp: 2024-12-24 15:00 UTC
+    
+    VERIFIED: High coupling detected
+    Command: python -m radon cc src/api/ -a
+    Result: Average complexity 12.3 (threshold: 10)
+    Files: 8 above threshold
+    Timestamp: 2024-12-24 15:05 UTC
+    
+    VERIFIED: Common pattern in 34 endpoints
+    Command: grep -A5 '@app.route' | grep 'validate_token' | wc -l
+    Result: 34/47 endpoints call validate_token
+    Timestamp: 2024-12-24 15:10 UTC
+    
+    ## Decision: Extract TokenValidationMixin
+    
+    Evidence: 34 endpoints share validate_token pattern
+    Alternative 1: Decorator (cleaner but more magic)
+    Alternative 2: Middleware (affects all routes, too broad)
+    Trade-offs: Mixin adds inheritance but keeps explicit control
+    
+    ## Estimate: 5 days (not 3)
+    Basis: 47 endpoints (not 20) × 15 min/endpoint = 12 hours
+          Testing: 47 test updates × 10 min = 8 hours
+          Buffer: 20% = 4 hours
+          Total: 24 hours ≈ 5 days
+    
+    ## Verification
+    - All 47 endpoint tests pass
+    - Complexity drops to <10 (radon cc check)
+    - validate_token appears 1x in codebase (grep count)

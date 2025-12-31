@@ -1,0 +1,418 @@
+# AI Package Documentation Discovery Protocol
+# Status: MANDATORY for AI assistants
+# Version: 1.0.0
+# Created: 2025-12-27
+# Purpose: Auto-discover AI-friendly documentation bundled in Python packages
+
+name: "AI Package Documentation Discovery"
+status: "MANDATORY"
+scope: "All AI assistants working with Python packages that may contain bundled documentation"
+
+# ============================================================================
+# CORE PRINCIPLE
+# ============================================================================
+
+principle: |
+  Before reading source code or guessing API behavior, AI assistants MUST check
+  for bundled documentation files that explain architecture and list public APIs.
+
+  This prevents:
+  - Hallucinating method names or signatures
+  - Misunderstanding architectural patterns
+  - Ignoring critical gotchas or performance constraints
+  - Using training data instead of actual package behavior
+
+# ============================================================================
+# MANDATORY DISCOVERY WORKFLOW
+# ============================================================================
+
+workflow:
+  trigger: "User asks you to help with a Python package (import, use, debug, extend)"
+
+  step_1_check_for_docs:
+    priority: "CRITICAL - Do this BEFORE any other analysis"
+    code: |
+      import importlib.resources
+
+      try:
+          files = importlib.resources.files('PACKAGE_NAME')  # Replace with actual package
+
+          # Check for START_HERE_FOR_AI.md (architecture guide)
+          start_here = files / 'START_HERE_FOR_AI.md'
+          if start_here.is_file():
+              content = start_here.read_text()
+              # READ THIS FIRST to understand architecture, patterns, gotchas
+
+          # Check for AI_INDEX.json (structured API index)
+          ai_index_file = files / 'AI_INDEX.json'
+          if ai_index_file.is_file():
+              import json
+              ai_index = json.loads(ai_index_file.read_text())
+              # Use this to discover exact APIs without hallucinating
+
+      except (ModuleNotFoundError, FileNotFoundError, AttributeError):
+          # No bundled AI documentation found - proceed with default behavior
+          pass
+
+    actions_if_found:
+      - "Read START_HERE_FOR_AI.md fully (if present)"
+      - "Parse AI_INDEX.json structure (if present)"
+      - "Use this information as PRIMARY source of truth about the package"
+      - "Only read source code if documentation doesn't answer the question"
+
+    actions_if_not_found:
+      - "Proceed with standard code analysis (read files, infer behavior)"
+      - "Be more cautious about API assumptions (higher hallucination risk)"
+
+  step_2_read_start_here:
+    when: "START_HERE_FOR_AI.md exists"
+    priority: "HIGH"
+    read_for:
+      - "Architecture overview (how components fit together)"
+      - "Key concepts and design patterns"
+      - "Public API surface summary"
+      - "Quick start examples"
+      - "Usage patterns and best practices"
+      - "Gotchas and caveats (CRITICAL - prevents user errors)"
+      - "Performance constraints and limitations"
+
+    output: "Mental model of how the package works"
+
+  step_3_use_ai_index:
+    when: "AI_INDEX.json exists"
+    priority: "HIGH"
+    schema:
+      ai_index:
+        type: "array"
+        description: "List of all public symbols"
+        items:
+          name: "Symbol name (class, function, method)"
+          type: "Symbol type (class|function|method|module)"
+          path: "Fully qualified import path (e.g., package.module.ClassName)"
+          signature: "Exact function/method signature with types"
+          summary: "One-sentence description (fact-grounded)"
+          parameters: "List of params with types and descriptions"
+          returns: "Return type and description"
+          examples: "Usage examples (only if present in source)"
+          related: "Related symbols (only if explicitly documented)"
+
+      dod_llm:
+        type: "object"
+        description: "Quality metadata (Definition of Done for LLM)"
+        fields:
+          - fact_coverage: "How well symbols are documented from facts"
+          - zero_invention: "Whether any details were hallucinated"
+          - schema_compliance: "Whether output matches expected schema"
+          - precision: "Detail level of descriptions"
+          - completeness: "Whether all public symbols are included"
+
+    usage:
+      - "Discover available APIs without guessing"
+      - "Get exact signatures (parameter types, return types)"
+      - "Understand symbol relationships (what calls what)"
+      - "Verify API exists before suggesting it to user"
+
+    output: "Verified list of callable APIs"
+
+  step_4_only_then_code:
+    priority: "MEDIUM"
+    description: "After reading bundled docs, you may read source code if needed"
+    when_to_read_source:
+      - "Documentation doesn't answer the specific question"
+      - "Need to understand implementation details (not just API)"
+      - "Debugging requires seeing actual code paths"
+
+    when_NOT_to_read_source:
+      - "START_HERE already explains the architecture → Don't re-infer it from code"
+      - "AI_INDEX lists the API → Don't scan files to discover methods"
+      - "Documentation explains gotchas → Don't assume from code structure"
+
+# ============================================================================
+# FILE SPECIFICATIONS
+# ============================================================================
+
+bundled_files:
+  start_here_for_ai_md:
+    filename: "START_HERE_FOR_AI.md"
+    location: "Top-level package directory (e.g., site-packages/package_name/START_HERE_FOR_AI.md)"
+    format: "Markdown (human-readable)"
+    generated_by: "Thin prompt template: cli/03_create_start_here_thin.md"
+    size: "Typically 2-5 KB (70-150 lines)"
+
+    sections:
+      - "# START_HERE_FOR_AI"
+      - "## Purpose (what this module does)"
+      - "## Key Concepts (main abstractions)"
+      - "## Public API Surface (classes, functions exposed)"
+      - "## Quick Start (minimal usage example)"
+      - "## Usage Patterns (common workflows)"
+      - "## Gotchas and Caveats (CRITICAL failures to avoid)"
+      - "## Constraints (performance, compatibility, limitations)"
+
+    validation:
+      - "Must be valid markdown"
+      - "Must have 5+ sections"
+      - "Must include 'Gotchas' section (prevents user errors)"
+      - "Must be based on extracted facts (zero invention)"
+
+  ai_index_json:
+    filename: "AI_INDEX.json"
+    location: "Top-level package directory (e.g., site-packages/package_name/AI_INDEX.json)"
+    format: "JSON (machine-readable)"
+    generated_by: "Thin prompt template: cli/02_create_ai_index_thin.md"
+    size: "Typically 5-50 KB depending on API surface"
+
+    top_level_keys:
+      ai_index: "Array of symbol objects (classes, functions, methods)"
+      dod_llm: "Quality metadata (DOD5 scores)"
+
+    symbol_object:
+      required_fields:
+        - name
+        - type
+        - path
+        - signature
+        - summary
+        - parameters
+        - returns
+        - examples
+        - related
+
+      constraints:
+        - "Only public symbols (visibility: public in facts)"
+        - "No invented APIs (must exist in source)"
+        - "Signatures must match actual code"
+        - "Fallback to 'Not documented.' when info missing"
+
+    validation:
+      - "Must be valid JSON"
+      - "Must have 'ai_index' and 'dod_llm' keys"
+      - "Each symbol must have all required fields"
+      - "DOD5 scores must be 1-5"
+
+# ============================================================================
+# PACKAGE DISTRIBUTION
+# ============================================================================
+
+distribution:
+  how_files_are_included:
+    pyproject_toml: |
+      [tool.setuptools.package-data]
+      your_package = [
+          "py.typed",
+          "START_HERE_FOR_AI.md",
+          "AI_INDEX.json",
+      ]
+
+  verification:
+    command: "unzip -l dist/*.whl | grep -E '(START_HERE|AI_INDEX)'"
+    expected_output: |
+      2782  2025-12-27 02:57   your_package/START_HERE_FOR_AI.md
+      10331 2025-12-27 02:57   your_package/AI_INDEX.json
+
+  access_after_install:
+    method: "importlib.resources (Python 3.9+)"
+    example: |
+      import importlib.resources
+
+      files = importlib.resources.files('your_package')
+      start_here_content = (files / 'START_HERE_FOR_AI.md').read_text()
+
+      import json
+      ai_index_data = json.loads((files / 'AI_INDEX.json').read_text())
+
+    backwards_compatible: |
+      # Python 3.7-3.8 (deprecated but works)
+      import importlib.resources
+      content = importlib.resources.read_text('your_package', 'START_HERE_FOR_AI.md')
+
+# ============================================================================
+# ERROR HANDLING
+# ============================================================================
+
+error_handling:
+  package_not_installed:
+    exception: "ModuleNotFoundError"
+    action: "Cannot check for docs - package not installed"
+    user_message: "Package 'X' is not installed. Install with: pip install X"
+
+  file_not_found:
+    exception: "FileNotFoundError"
+    action: "Package doesn't bundle AI documentation - use standard analysis"
+    user_message: "This package doesn't include AI-friendly docs (no START_HERE or AI_INDEX)"
+
+  import_errors:
+    exception: "AttributeError (importlib.resources missing)"
+    action: "Python version too old or importlib not available"
+    fallback: |
+      # Fallback: Find site-packages manually
+      import sysconfig
+      from pathlib import Path
+      site_packages = Path(sysconfig.get_paths()["purelib"])
+      start_here = site_packages / 'your_package' / 'START_HERE_FOR_AI.md'
+
+# ============================================================================
+# BENEFITS & ROI
+# ============================================================================
+
+benefits:
+  for_ai_assistants:
+    - "Eliminate API hallucination (use verified symbol list from AI_INDEX)"
+    - "Understand architecture without reading code (START_HERE explains patterns)"
+    - "Avoid suggesting deprecated or internal APIs (only public symbols indexed)"
+    - "Learn gotchas before suggesting code (prevents user errors)"
+    - "Faster assistance (read 3KB doc instead of scanning 50+ source files)"
+
+  for_users:
+    - "AI suggestions are accurate (based on actual APIs, not training data)"
+    - "Fewer hallucinated method names (AI reads symbol index first)"
+    - "Better code quality (AI knows best practices from START_HERE)"
+    - "Avoid common pitfalls (gotchas section prevents errors)"
+    - "Faster onboarding (AI reads docs once, helps correctly forever)"
+
+  for_package_authors:
+    - "AI assistants use package correctly (reduces support burden)"
+    - "Documentation travels with code (no external hosting needed)"
+    - "Version-specific docs (each release has matching START_HERE)"
+    - "Low maintenance (generated from code facts, not manually written)"
+
+# ============================================================================
+# COMPARISON: WITH vs WITHOUT BUNDLED DOCS
+# ============================================================================
+
+comparison:
+  without_docs:
+    discovery_method: "Scan source files or guess from training data"
+    api_accuracy: "60-80% (hallucination risk)"
+    architecture_understanding: "Inferred from code structure (error-prone)"
+    gotchas_awareness: "Only if seen in training data (misses package-specific issues)"
+    time_to_first_suggestion: "2-5 minutes (must read multiple files)"
+
+  with_docs:
+    discovery_method: "Read START_HERE + AI_INDEX (verified facts)"
+    api_accuracy: "95-100% (from actual symbol list)"
+    architecture_understanding: "Explicit from documentation (accurate)"
+    gotchas_awareness: "100% (explicitly documented in START_HERE)"
+    time_to_first_suggestion: "10-30 seconds (read 3-10KB docs)"
+
+# ============================================================================
+# INTEGRATION WITH OTHER RULES
+# ============================================================================
+
+related_rules:
+  - "USING_TOOLS.yaml: Use fact-file-query-tool for codebase analysis (complements bundled docs)"
+  - "GOVERNANCE_RULES.yaml: Code quality standards that ensure docs stay in sync with code"
+  - "FDP_LITE.yaml: Evidence-based development (bundled docs ARE evidence)"
+  - "USING_SUB_AGENTS.yaml: Agents can use bundled docs as context"
+
+cross_references:
+  when_to_use_fact_file_query_tool_vs_bundled_docs:
+    bundled_docs: "For understanding INSTALLED packages from PyPI"
+    fact_file_query_tool: "For analyzing LOCAL codebase under development"
+
+  workflow_integration:
+    step_1: "Check for bundled docs (AI_INDEX, START_HERE)"
+    step_2: "If not found, use fact-file-query-tool to query FACTS.parquet"
+    step_3: "If FACTS.parquet doesn't exist, read source files directly"
+
+# ============================================================================
+# EXAMPLES
+# ============================================================================
+
+examples:
+  discovery_and_usage:
+    scenario: "User asks: 'How do I use the YourMainClass class?'"
+
+    step_1_check: |
+      import importlib.resources
+      files = importlib.resources.files('your_project')
+
+      # Found: START_HERE_FOR_AI.md and AI_INDEX.json
+
+    step_2_read_start_here: |
+      # From START_HERE_FOR_AI.md:
+      ## Key Concepts
+      - **YourMainClass**: Main class for data processing
+      - **Caching strategy**: In-memory cache with configurable size
+
+      ## Gotchas
+      - NOT thread-safe by default (use separate instances per thread)
+      - Cache invalidation requires manual clear() call
+
+    step_3_check_ai_index: |
+      # From AI_INDEX.json:
+      {
+        "name": "YourMainClass",
+        "type": "class",
+        "path": "your_project.your_module.YourMainClass",
+        "signature": "YourMainClass(cache_size: int = 100)",
+        "parameters": [
+          {"name": "cache_size", "type": "int", "description": "Max cache entries"}
+        ]
+      }
+
+    step_4_accurate_response: |
+      Based on the bundled documentation:
+
+      ```python
+      from your_project.your_module import YourMainClass
+
+      # Create instance with cache (default 100 entries)
+      instance = YourMainClass(cache_size=100)
+
+      # GOTCHA: NOT thread-safe - use separate instances per thread
+      result = instance.process('data.csv')
+      ```
+
+      Key points from START_HERE:
+      - Uses caching strategy (configurable cache size)
+      - Cache invalidation requires manual clear() call
+      - Not thread-safe by default
+
+    without_bundled_docs_response: |
+      # Likely hallucinated response (no docs to verify):
+      ```python
+      from your_project import YourClass  # ❌ Wrong class name
+
+      instance = YourClass()  # ❌ Guessed constructor
+      result = instance.run('data.csv')  # ❌ Guessed method name
+      ```
+
+      # Missed critical gotchas:
+      - Didn't know about thread-safety issue
+      - Didn't mention manual cache invalidation
+      - Hallucinated method names (run vs process)
+
+# ============================================================================
+# VALIDATION CHECKLIST
+# ============================================================================
+
+validation_checklist:
+  for_ai_assistants:
+    - "[ ] Checked for bundled docs BEFORE reading source code"
+    - "[ ] Read START_HERE_FOR_AI.md fully (if present)"
+    - "[ ] Parsed AI_INDEX.json structure (if present)"
+    - "[ ] Verified API exists in index before suggesting it"
+    - "[ ] Mentioned gotchas from START_HERE in response (if relevant)"
+
+  for_package_authors:
+    - "[ ] Generated START_HERE_FOR_AI.md from thin prompt template"
+    - "[ ] Generated AI_INDEX.json from thin prompt template"
+    - "[ ] Added both files to package-data in pyproject.toml"
+    - "[ ] Verified files are included in wheel (unzip -l dist/*.whl)"
+    - "[ ] Tested retrieval with importlib.resources"
+    - "[ ] Added discovery instructions to .claude/CLAUDE.md or docs"
+
+# ============================================================================
+# VERSION HISTORY
+# ============================================================================
+
+version_history:
+  v1_0_0:
+    date: "2025-12-27"
+    changes:
+      - "Initial version"
+      - "Defined discovery workflow (check → read → use)"
+      - "Specified file formats (START_HERE.md, AI_INDEX.json)"
+      - "Added package distribution instructions"
+      - "Included error handling and fallbacks"
